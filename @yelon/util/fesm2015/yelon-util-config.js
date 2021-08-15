@@ -1,0 +1,50 @@
+import * as i0 from '@angular/core';
+import { InjectionToken, Injectable, Optional, Inject } from '@angular/core';
+import { deepMergeKey } from '@yelon/util/other';
+
+class YunzaiSVConfig {
+}
+
+const YUNZAI_CONFIG = new InjectionToken('yunzai-config', {
+    providedIn: 'root',
+    factory: YUNZAI_CONFIG_FACTORY
+});
+function YUNZAI_CONFIG_FACTORY() {
+    return {};
+}
+
+class YunzaiConfigService {
+    constructor(defaultConfig) {
+        this.config = Object.assign({}, defaultConfig);
+    }
+    get(componentName, key) {
+        const res = (this.config[componentName] || {});
+        return key ? { [key]: res[key] } : res;
+    }
+    merge(componentName, ...defaultValues) {
+        return deepMergeKey({}, true, ...defaultValues, this.get(componentName));
+    }
+    attach(componentThis, componentName, defaultValues) {
+        Object.assign(componentThis, this.merge(componentName, defaultValues));
+    }
+    attachKey(componentThis, componentName, key) {
+        Object.assign(componentThis, this.get(componentName, key));
+    }
+    set(componentName, value) {
+        this.config[componentName] = Object.assign(Object.assign({}, this.config[componentName]), value);
+    }
+}
+YunzaiConfigService.ɵprov = i0.ɵɵdefineInjectable({ factory: function YunzaiConfigService_Factory() { return new YunzaiConfigService(i0.ɵɵinject(YUNZAI_CONFIG, 8)); }, token: YunzaiConfigService, providedIn: "root" });
+YunzaiConfigService.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] }
+];
+YunzaiConfigService.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [YUNZAI_CONFIG,] }] }
+];
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+export { YUNZAI_CONFIG, YUNZAI_CONFIG_FACTORY, YunzaiConfigService, YunzaiSVConfig };
+//# sourceMappingURL=yelon-util-config.js.map

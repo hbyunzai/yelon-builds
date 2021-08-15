@@ -1,0 +1,18 @@
+{
+  "name": "@yelon/auth",
+  "version": "12.0.2",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@yelon/util": "^12.0.2",
+    "tslib": "^2.2.0"
+  },
+  "main": "bundles/auth.umd.js",
+  "module": "fesm2015/auth.js",
+  "es2015": "fesm2015/auth.js",
+  "esm2015": "esm2015/auth.js",
+  "fesm2015": "fesm2015/auth.js",
+  "typings": "auth.d.ts",
+  "metadata": "auth.metadata.json",
+  "sideEffects": false
+}

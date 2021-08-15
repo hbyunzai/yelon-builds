@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-decorator.umd.js",
+  "module": "../fesm2015/yelon-util-decorator.js",
+  "es2015": "../fesm2015/yelon-util-decorator.js",
+  "esm2015": "../esm2015/decorator/yelon-util-decorator.js",
+  "fesm2015": "../fesm2015/yelon-util-decorator.js",
+  "typings": "yelon-util-decorator.d.ts",
+  "metadata": "yelon-util-decorator.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/decorator"
+}

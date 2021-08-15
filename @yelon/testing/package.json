@@ -1,0 +1,17 @@
+{
+  "name": "@yelon/testing",
+  "version": "12.0.2",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "main": "bundles/testing.umd.js",
+  "module": "fesm2015/testing.js",
+  "es2015": "fesm2015/testing.js",
+  "esm2015": "esm2015/testing.js",
+  "fesm2015": "fesm2015/testing.js",
+  "typings": "testing.d.ts",
+  "metadata": "testing.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.2.0"
+  }
+}

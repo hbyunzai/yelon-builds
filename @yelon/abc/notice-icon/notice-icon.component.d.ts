@@ -1,0 +1,30 @@
+import { ChangeDetectorRef, EventEmitter, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import type { NgClassType } from 'ng-zorro-antd/core/types';
+import { YelonLocaleService, LocaleData } from '@yelon/theme';
+import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
+export declare class NoticeIconComponent implements OnInit, OnChanges, OnDestroy {
+    private i18n;
+    private cdr;
+    static ngAcceptInputType_count: NumberInput;
+    static ngAcceptInputType_loading: BooleanInput;
+    static ngAcceptInputType_popoverVisible: BooleanInput;
+    private i18n$;
+    locale: LocaleData;
+    data: NoticeItem[];
+    count: number;
+    loading: boolean;
+    popoverVisible: boolean;
+    btnClass?: NgClassType;
+    btnIconClass?: NgClassType;
+    readonly select: EventEmitter<NoticeIconSelect>;
+    readonly clear: EventEmitter<string>;
+    readonly popoverVisibleChange: EventEmitter<boolean>;
+    constructor(i18n: YelonLocaleService, cdr: ChangeDetectorRef);
+    onVisibleChange(result: boolean): void;
+    onSelect(i: NoticeIconSelect): void;
+    onClear(title: string): void;
+    ngOnInit(): void;
+    ngOnChanges(): void;
+    ngOnDestroy(): void;
+}

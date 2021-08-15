@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-array.umd.js",
+  "module": "../fesm2015/yelon-util-array.js",
+  "es2015": "../fesm2015/yelon-util-array.js",
+  "esm2015": "../esm2015/array/yelon-util-array.js",
+  "fesm2015": "../fesm2015/yelon-util-array.js",
+  "typings": "yelon-util-array.d.ts",
+  "metadata": "yelon-util-array.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/array"
+}

@@ -1,0 +1,11 @@
+{
+  "main": "../../bundles/yelon-util-pipes-format.umd.js",
+  "module": "../../fesm2015/yelon-util-pipes-format.js",
+  "es2015": "../../fesm2015/yelon-util-pipes-format.js",
+  "esm2015": "../../esm2015/pipes/format/yelon-util-pipes-format.js",
+  "fesm2015": "../../fesm2015/yelon-util-pipes-format.js",
+  "typings": "yelon-util-pipes-format.d.ts",
+  "metadata": "yelon-util-pipes-format.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/pipes/format"
+}

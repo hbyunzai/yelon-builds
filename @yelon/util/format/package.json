@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-format.umd.js",
+  "module": "../fesm2015/yelon-util-format.js",
+  "es2015": "../fesm2015/yelon-util-format.js",
+  "esm2015": "../esm2015/format/yelon-util-format.js",
+  "fesm2015": "../fesm2015/yelon-util-format.js",
+  "typings": "yelon-util-format.d.ts",
+  "metadata": "yelon-util-format.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/format"
+}

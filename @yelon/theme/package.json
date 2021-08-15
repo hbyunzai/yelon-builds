@@ -1,0 +1,20 @@
+{
+  "name": "@yelon/theme",
+  "version": "12.0.2",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ng-zorro-antd": "^12.0.1",
+    "@yelon/acl": "^12.0.2",
+    "@yelon/util": "^12.0.2",
+    "tslib": "^2.2.0"
+  },
+  "main": "bundles/theme.umd.js",
+  "module": "fesm2015/theme.js",
+  "es2015": "fesm2015/theme.js",
+  "esm2015": "esm2015/theme.js",
+  "fesm2015": "fesm2015/theme.js",
+  "typings": "theme.d.ts",
+  "metadata": "theme.metadata.json",
+  "sideEffects": false
+}

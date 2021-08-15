@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-form.umd.js",
+  "module": "../fesm2015/yelon-util-form.js",
+  "es2015": "../fesm2015/yelon-util-form.js",
+  "esm2015": "../esm2015/form/yelon-util-form.js",
+  "fesm2015": "../fesm2015/yelon-util-form.js",
+  "typings": "yelon-util-form.d.ts",
+  "metadata": "yelon-util-form.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/form"
+}

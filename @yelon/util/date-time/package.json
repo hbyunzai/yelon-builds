@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-date-time.umd.js",
+  "module": "../fesm2015/yelon-util-date-time.js",
+  "es2015": "../fesm2015/yelon-util-date-time.js",
+  "esm2015": "../esm2015/date-time/yelon-util-date-time.js",
+  "fesm2015": "../fesm2015/yelon-util-date-time.js",
+  "typings": "yelon-util-date-time.d.ts",
+  "metadata": "yelon-util-date-time.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/date-time"
+}

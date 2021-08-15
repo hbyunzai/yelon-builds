@@ -1,0 +1,37 @@
+import { Platform } from '@angular/cdk/platform';
+import { AfterViewInit, ChangeDetectorRef, EventEmitter, OnChanges, OnDestroy } from '@angular/core';
+import { YunzaiConfigService } from '@yelon/util/config';
+import { NumberInput } from '@yelon/util/decorator';
+import { LazyService } from '@yelon/util/other';
+export declare class QRComponent implements OnChanges, AfterViewInit, OnDestroy {
+    private cdr;
+    private lazySrv;
+    private platform;
+    static ngAcceptInputType_padding: NumberInput;
+    static ngAcceptInputType_size: NumberInput;
+    static ngAcceptInputType_delay: NumberInput;
+    private lazy$;
+    private qr;
+    private cog;
+    private option;
+    private inited;
+    dataURL: string;
+    background: string;
+    backgroundAlpha: number;
+    foreground: string;
+    foregroundAlpha: number;
+    level: string;
+    mime: string;
+    padding: number;
+    size: number;
+    value: string;
+    delay: number;
+    readonly change: EventEmitter<string>;
+    constructor(cdr: ChangeDetectorRef, configSrv: YunzaiConfigService, lazySrv: LazyService, platform: Platform);
+    private init;
+    private initDelay;
+    ngAfterViewInit(): void;
+    ngOnChanges(): void;
+    private toUtf8ByteArray;
+    ngOnDestroy(): void;
+}

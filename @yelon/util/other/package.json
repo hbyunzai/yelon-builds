@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-other.umd.js",
+  "module": "../fesm2015/yelon-util-other.js",
+  "es2015": "../fesm2015/yelon-util-other.js",
+  "esm2015": "../esm2015/other/yelon-util-other.js",
+  "fesm2015": "../fesm2015/yelon-util-other.js",
+  "typings": "yelon-util-other.d.ts",
+  "metadata": "yelon-util-other.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/other"
+}

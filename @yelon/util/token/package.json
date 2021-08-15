@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/yelon-util-token.umd.js",
+  "module": "../fesm2015/yelon-util-token.js",
+  "es2015": "../fesm2015/yelon-util-token.js",
+  "esm2015": "../esm2015/token/yelon-util-token.js",
+  "fesm2015": "../fesm2015/yelon-util-token.js",
+  "typings": "yelon-util-token.d.ts",
+  "metadata": "yelon-util-token.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/util/token"
+}
