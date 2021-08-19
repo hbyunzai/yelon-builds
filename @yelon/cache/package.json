@@ -1,10 +1,10 @@
 {
   "name": "@yelon/cache",
-  "version": "12.0.2",
+  "version": "12.0.2-b86c3a2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "@yelon/util": "^12.0.2",
+    "@yelon/util": "^12.0.2-b86c3a2",
     "tslib": "^2.2.0"
   },
   "main": "bundles/cache.umd.js",

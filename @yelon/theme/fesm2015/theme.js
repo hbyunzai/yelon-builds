@@ -1,13 +1,13 @@
 import * as i0 from '@angular/core';
-import { InjectionToken, Injectable, Optional, Inject, Injector, SkipSelf, NgModule, Pipe, Version } from '@angular/core';
+import { InjectionToken, inject, Injectable, Optional, Inject, Injector, SkipSelf, NgModule, Pipe, Version } from '@angular/core';
 import { BehaviorSubject, Subject, Observable, of, throwError } from 'rxjs';
 import { filter, share, map, delay, tap, switchMap, finalize, catchError } from 'rxjs/operators';
 import * as i2 from '@yelon/acl';
 import { ACLService } from '@yelon/acl';
-import * as i1 from '@angular/cdk/platform';
-import { Platform } from '@angular/cdk/platform';
-import * as i1$1 from '@yelon/util/config';
+import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService } from '@yelon/util/config';
+import * as i1$1 from '@angular/cdk/platform';
+import { Platform } from '@angular/cdk/platform';
 import * as i1$2 from '@angular/cdk/bidi';
 import { Directionality } from '@angular/cdk/bidi';
 import * as i6 from '@angular/common';
@@ -54,14 +54,17 @@ function preloaderFinished() {
 
 const YUNZAI_I18N_TOKEN = new InjectionToken('yunzaiI18nToken', {
     providedIn: 'root',
-    factory: () => new YunzaiI18NServiceFake()
+    factory: () => new YunzaiI18NServiceFake(inject(YunzaiConfigService))
 });
 class YunzaiI18nBaseService {
-    constructor() {
+    constructor(cogSrv) {
         this._change$ = new BehaviorSubject(null);
         this._currentLang = '';
         this._defaultLang = '';
         this._data = {};
+        this.cog = cogSrv.merge('themeI18n', {
+            interpolation: ['{{', '}}']
+        });
     }
     get change() {
         return this._change$.asObservable().pipe(filter(w => w != null));
@@ -80,13 +83,17 @@ class YunzaiI18nBaseService {
         if (!content)
             return path;
         if (params) {
-            Object.keys(params).forEach(key => (content = content.replace(new RegExp(`{{${key}}}`, 'g'), `${params[key]}`)));
+            const interpolation = this.cog.interpolation;
+            Object.keys(params).forEach(key => (content = content.replace(new RegExp(`${interpolation[0]}\s?${key}\s?${interpolation[1]}`, 'g'), `${params[key]}`)));
         }
         return content;
     }
 }
 YunzaiI18nBaseService.decorators = [
     { type: Injectable }
+];
+YunzaiI18nBaseService.ctorParameters = () => [
+    { type: YunzaiConfigService }
 ];
 class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     use(lang, data) {
@@ -98,7 +105,7 @@ class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
         return [];
     }
 }
-YunzaiI18NServiceFake.ɵprov = i0.ɵɵdefineInjectable({ factory: function YunzaiI18NServiceFake_Factory() { return new YunzaiI18NServiceFake(); }, token: YunzaiI18NServiceFake, providedIn: "root" });
+YunzaiI18NServiceFake.ɵprov = i0.ɵɵdefineInjectable({ factory: function YunzaiI18NServiceFake_Factory() { return new YunzaiI18NServiceFake(i0.ɵɵinject(i1.YunzaiConfigService)); }, token: YunzaiI18NServiceFake, providedIn: "root" });
 YunzaiI18NServiceFake.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -415,7 +422,7 @@ class SettingsService {
         this.notify$.next({ type: 'user', value });
     }
 }
-SettingsService.ɵprov = i0.ɵɵdefineInjectable({ factory: function SettingsService_Factory() { return new SettingsService(i0.ɵɵinject(i1.Platform), i0.ɵɵinject(YUNZAI_SETTING_KEYS)); }, token: SettingsService, providedIn: "root" });
+SettingsService.ɵprov = i0.ɵɵdefineInjectable({ factory: function SettingsService_Factory() { return new SettingsService(i0.ɵɵinject(i1$1.Platform), i0.ɵɵinject(YUNZAI_SETTING_KEYS)); }, token: SettingsService, providedIn: "root" });
 SettingsService.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -460,7 +467,7 @@ class ResponsiveService {
         return clsMap;
     }
 }
-ResponsiveService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ResponsiveService_Factory() { return new ResponsiveService(i0.ɵɵinject(i1$1.YunzaiConfigService)); }, token: ResponsiveService, providedIn: "root" });
+ResponsiveService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ResponsiveService_Factory() { return new ResponsiveService(i0.ɵɵinject(i1.YunzaiConfigService)); }, token: ResponsiveService, providedIn: "root" });
 ResponsiveService.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -550,7 +557,7 @@ class RTLService {
         });
     }
 }
-RTLService.ɵprov = i0.ɵɵdefineInjectable({ factory: function RTLService_Factory() { return new RTLService(i0.ɵɵinject(i1$2.Directionality), i0.ɵɵinject(SettingsService), i0.ɵɵinject(i3.NzConfigService), i0.ɵɵinject(i1$1.YunzaiConfigService), i0.ɵɵinject(i1.Platform), i0.ɵɵinject(i6.DOCUMENT)); }, token: RTLService, providedIn: "root" });
+RTLService.ɵprov = i0.ɵɵdefineInjectable({ factory: function RTLService_Factory() { return new RTLService(i0.ɵɵinject(i1$2.Directionality), i0.ɵɵinject(SettingsService), i0.ɵɵinject(i3.NzConfigService), i0.ɵɵinject(i1.YunzaiConfigService), i0.ɵɵinject(i1$1.Platform), i0.ɵɵinject(i6.DOCUMENT)); }, token: RTLService, providedIn: "root" });
 RTLService.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -1988,7 +1995,7 @@ class _HttpClient {
         delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
     }
 }
-_HttpClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function _HttpClient_Factory() { return new _HttpClient(i0.ɵɵinject(i1$6.HttpClient), i0.ɵɵinject(i1$1.YunzaiConfigService)); }, token: _HttpClient, providedIn: "root" });
+_HttpClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function _HttpClient_Factory() { return new _HttpClient(i0.ɵɵinject(i1$6.HttpClient), i0.ɵɵinject(i1.YunzaiConfigService)); }, token: _HttpClient, providedIn: "root" });
 _HttpClient.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -2360,10 +2367,10 @@ YunzaiThemeModule.ctorParameters = () => [
     { type: NzIconService }
 ];
 
-const VERSION = new Version('12.0.2');
+const VERSION = new Version('12.0.2-b86c3a2');
 
 /**
- * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-alain/blob/master/src/app/routes/routes-routing.module.ts).
+ * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
  *
  * 可选预加载模块，当需要对某些懒路由在第一次页面加载时也一并加载该资源时，[示例](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts)。
  *

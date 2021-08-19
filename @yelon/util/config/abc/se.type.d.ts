@@ -28,5 +28,5 @@ export interface YunzaiSEConfig {
     /**
      * 是否忽略 `dirty` 校验，默认：`false`
      */
-    ingoreDirty?: boolean;
+    ignoreDirty?: boolean;
 }

@@ -6,7 +6,7 @@ import { SFValue } from './interface';
 import { SFSchema } from './schema';
 export declare abstract class SchemaValidatorFactory {
     abstract createValidatorFn(schema: SFSchema, extraOptions: {
-        ingoreKeywords: string[];
+        ignoreKeywords: string[];
         debug: boolean;
     }): (value: SFValue) => ErrorData[];
 }
@@ -16,7 +16,7 @@ export declare class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
     protected options: YunzaiSFConfig;
     constructor(cogSrv: YunzaiConfigService, ngZone: NgZone);
     createValidatorFn(schema: SFSchema, extraOptions: {
-        ingoreKeywords: string[];
+        ignoreKeywords: string[];
         debug: boolean;
     }): (value: SFValue) => ErrorData[];
 }

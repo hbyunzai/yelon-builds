@@ -4,9 +4,9 @@
  * License: MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/acl'), require('@angular/cdk/platform'), require('@yelon/util/config'), require('@angular/cdk/bidi'), require('@angular/common'), require('ng-zorro-antd/core/config'), require('@angular/platform-browser'), require('@angular/router'), require('ng-zorro-antd/modal'), require('@yelon/util/other'), require('ng-zorro-antd/drawer'), require('@angular/common/http'), require('date-fns'), require('ng-zorro-antd/i18n'), require('@yelon/util/date-time'), require('@angular/cdk/overlay'), require('@ant-design/icons-angular/icons'), require('ng-zorro-antd/icon')) :
-    typeof define === 'function' && define.amd ? define('@yelon/theme', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/acl', '@angular/cdk/platform', '@yelon/util/config', '@angular/cdk/bidi', '@angular/common', 'ng-zorro-antd/core/config', '@angular/platform-browser', '@angular/router', 'ng-zorro-antd/modal', '@yelon/util/other', 'ng-zorro-antd/drawer', '@angular/common/http', 'date-fns', 'ng-zorro-antd/i18n', '@yelon/util/date-time', '@angular/cdk/overlay', '@ant-design/icons-angular/icons', 'ng-zorro-antd/icon'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.yelon.acl, global.ng.cdk.platform, global.yelon.util.config, global.ng.cdk.bidi, global.ng.common, global.i3, global.ng.platformBrowser, global.ng.router, global['ng-zorro-antd/modal'], global.yelon.util.other, global['ng-zorro-antd/drawer'], global.ng.common.http, global.DateFns, global['ng-zorro-antd/i18n'], global.yelon.util['date-time'], global.ng.cdk.overlay, global.icons, global['ng-zorro-antd/icon']));
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/acl'), require('@yelon/util/config'), require('@angular/cdk/platform'), require('@angular/cdk/bidi'), require('@angular/common'), require('ng-zorro-antd/core/config'), require('@angular/platform-browser'), require('@angular/router'), require('ng-zorro-antd/modal'), require('@yelon/util/other'), require('ng-zorro-antd/drawer'), require('@angular/common/http'), require('date-fns'), require('ng-zorro-antd/i18n'), require('@yelon/util/date-time'), require('@angular/cdk/overlay'), require('@ant-design/icons-angular/icons'), require('ng-zorro-antd/icon')) :
+    typeof define === 'function' && define.amd ? define('@yelon/theme', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/acl', '@yelon/util/config', '@angular/cdk/platform', '@angular/cdk/bidi', '@angular/common', 'ng-zorro-antd/core/config', '@angular/platform-browser', '@angular/router', 'ng-zorro-antd/modal', '@yelon/util/other', 'ng-zorro-antd/drawer', '@angular/common/http', 'date-fns', 'ng-zorro-antd/i18n', '@yelon/util/date-time', '@angular/cdk/overlay', '@ant-design/icons-angular/icons', 'ng-zorro-antd/icon'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.yelon.acl, global.yelon.util.config, global.ng.cdk.platform, global.ng.cdk.bidi, global.ng.common, global.i3, global.ng.platformBrowser, global.ng.router, global['ng-zorro-antd/modal'], global.yelon.util.other, global['ng-zorro-antd/drawer'], global.ng.common.http, global.DateFns, global['ng-zorro-antd/i18n'], global.yelon.util['date-time'], global.ng.cdk.overlay, global.icons, global['ng-zorro-antd/icon']));
 }(this, (function (exports, i0, rxjs, operators, i2, i1, i1$1, i1$2, i6, i3, i1$3, router, i1$4, other, i1$5, i1$6, dateFns, i18n, dateTime, overlay, icons, icon) { 'use strict';
 
     function _interopNamespace(e) {
@@ -382,14 +382,17 @@
 
     var YUNZAI_I18N_TOKEN = new i0.InjectionToken('yunzaiI18nToken', {
         providedIn: 'root',
-        factory: function () { return new YunzaiI18NServiceFake(); }
+        factory: function () { return new YunzaiI18NServiceFake(i0.inject(i1.YunzaiConfigService)); }
     });
     var YunzaiI18nBaseService = /** @class */ (function () {
-        function YunzaiI18nBaseService() {
+        function YunzaiI18nBaseService(cogSrv) {
             this._change$ = new rxjs.BehaviorSubject(null);
             this._currentLang = '';
             this._defaultLang = '';
             this._data = {};
+            this.cog = cogSrv.merge('themeI18n', {
+                interpolation: ['{{', '}}']
+            });
         }
         Object.defineProperty(YunzaiI18nBaseService.prototype, "change", {
             get: function () {
@@ -424,7 +427,8 @@
             if (!content)
                 return path;
             if (params) {
-                Object.keys(params).forEach(function (key) { return (content = content.replace(new RegExp("{{" + key + "}}", 'g'), "" + params[key])); });
+                var interpolation_1 = this.cog.interpolation;
+                Object.keys(params).forEach(function (key) { return (content = content.replace(new RegExp(interpolation_1[0] + "s?" + key + "s?" + interpolation_1[1], 'g'), "" + params[key])); });
             }
             return content;
         };
@@ -433,6 +437,9 @@
     YunzaiI18nBaseService.decorators = [
         { type: i0.Injectable }
     ];
+    YunzaiI18nBaseService.ctorParameters = function () { return [
+        { type: i1.YunzaiConfigService }
+    ]; };
     var YunzaiI18NServiceFake = /** @class */ (function (_super) {
         __extends(YunzaiI18NServiceFake, _super);
         function YunzaiI18NServiceFake() {
@@ -448,7 +455,7 @@
         };
         return YunzaiI18NServiceFake;
     }(YunzaiI18nBaseService));
-    YunzaiI18NServiceFake.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YunzaiI18NServiceFake_Factory() { return new YunzaiI18NServiceFake(); }, token: YunzaiI18NServiceFake, providedIn: "root" });
+    YunzaiI18NServiceFake.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YunzaiI18NServiceFake_Factory() { return new YunzaiI18NServiceFake(i0__namespace.ɵɵinject(i1__namespace.YunzaiConfigService)); }, token: YunzaiI18NServiceFake, providedIn: "root" });
     YunzaiI18NServiceFake.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
@@ -808,12 +815,12 @@
         };
         return SettingsService;
     }());
-    SettingsService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function SettingsService_Factory() { return new SettingsService(i0__namespace.ɵɵinject(i1__namespace.Platform), i0__namespace.ɵɵinject(YUNZAI_SETTING_KEYS)); }, token: SettingsService, providedIn: "root" });
+    SettingsService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function SettingsService_Factory() { return new SettingsService(i0__namespace.ɵɵinject(i1__namespace$1.Platform), i0__namespace.ɵɵinject(YUNZAI_SETTING_KEYS)); }, token: SettingsService, providedIn: "root" });
     SettingsService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
     SettingsService.ctorParameters = function () { return [
-        { type: i1.Platform },
+        { type: i1$1.Platform },
         { type: undefined, decorators: [{ type: i0.Inject, args: [YUNZAI_SETTING_KEYS,] }] }
     ]; };
 
@@ -854,12 +861,12 @@
         };
         return ResponsiveService;
     }());
-    ResponsiveService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function ResponsiveService_Factory() { return new ResponsiveService(i0__namespace.ɵɵinject(i1__namespace$1.YunzaiConfigService)); }, token: ResponsiveService, providedIn: "root" });
+    ResponsiveService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function ResponsiveService_Factory() { return new ResponsiveService(i0__namespace.ɵɵinject(i1__namespace.YunzaiConfigService)); }, token: ResponsiveService, providedIn: "root" });
     ResponsiveService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
     ResponsiveService.ctorParameters = function () { return [
-        { type: i1$1.YunzaiConfigService }
+        { type: i1.YunzaiConfigService }
     ]; };
 
     var HTML_DIR = 'dir';
@@ -959,7 +966,7 @@
         };
         return RTLService;
     }());
-    RTLService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function RTLService_Factory() { return new RTLService(i0__namespace.ɵɵinject(i1__namespace$2.Directionality), i0__namespace.ɵɵinject(SettingsService), i0__namespace.ɵɵinject(i3__namespace.NzConfigService), i0__namespace.ɵɵinject(i1__namespace$1.YunzaiConfigService), i0__namespace.ɵɵinject(i1__namespace.Platform), i0__namespace.ɵɵinject(i6__namespace.DOCUMENT)); }, token: RTLService, providedIn: "root" });
+    RTLService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function RTLService_Factory() { return new RTLService(i0__namespace.ɵɵinject(i1__namespace$2.Directionality), i0__namespace.ɵɵinject(SettingsService), i0__namespace.ɵɵinject(i3__namespace.NzConfigService), i0__namespace.ɵɵinject(i1__namespace.YunzaiConfigService), i0__namespace.ɵɵinject(i1__namespace$1.Platform), i0__namespace.ɵɵinject(i6__namespace.DOCUMENT)); }, token: RTLService, providedIn: "root" });
     RTLService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
@@ -967,8 +974,8 @@
         { type: i1$2.Directionality },
         { type: SettingsService },
         { type: i3.NzConfigService },
-        { type: i1$1.YunzaiConfigService },
-        { type: i1.Platform },
+        { type: i1.YunzaiConfigService },
+        { type: i1$1.Platform },
         { type: undefined, decorators: [{ type: i0.Inject, args: [i6.DOCUMENT,] }] }
     ]; };
 
@@ -2449,13 +2456,13 @@
         };
         return _HttpClient;
     }());
-    _HttpClient.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function _HttpClient_Factory() { return new _HttpClient(i0__namespace.ɵɵinject(i1__namespace$6.HttpClient), i0__namespace.ɵɵinject(i1__namespace$1.YunzaiConfigService)); }, token: _HttpClient, providedIn: "root" });
+    _HttpClient.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function _HttpClient_Factory() { return new _HttpClient(i0__namespace.ɵɵinject(i1__namespace$6.HttpClient), i0__namespace.ɵɵinject(i1__namespace.YunzaiConfigService)); }, token: _HttpClient, providedIn: "root" });
     _HttpClient.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
     _HttpClient.ctorParameters = function () { return [
         { type: i1$6.HttpClient },
-        { type: i1$1.YunzaiConfigService }
+        { type: i1.YunzaiConfigService }
     ]; };
 
     /**
@@ -2842,7 +2849,7 @@
     var VERSION = new i0.Version('12.0.2');
 
     /**
-     * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-alain/blob/master/src/app/routes/routes-routing.module.ts).
+     * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
      *
      * 可选预加载模块，当需要对某些懒路由在第一次页面加载时也一并加载该资源时，[示例](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts)。
      *

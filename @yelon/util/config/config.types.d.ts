@@ -6,7 +6,9 @@ import { YunzaiCacheConfig } from './cache/cache.type';
 import { YunzaiChartConfig } from './chart/chart.type';
 import { YunzaiMockConfig } from './mock/mock.type';
 import { YunzaiSFConfig } from './sf/sf.type';
-import { YunzaiThemeHttpClientConfig, YunzaiThemeResponsiveConfig } from './theme/index';
+import { YunzaiThemeHttpClientConfig } from './theme/http.type';
+import { YunzaiThemeI18nConfig } from './theme/i18n.type';
+import { YunzaiThemeResponsiveConfig } from './theme/responsive.type';
 import { YunzaiUtilArrayConfig } from './util/array.type';
 import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 export interface YunzaiConfig {
@@ -36,6 +38,7 @@ export interface YunzaiConfig {
     utilCurrency?: YunzaiUtilCurrencyConfig;
     themeHttp?: YunzaiThemeHttpClientConfig;
     themeResponsive?: YunzaiThemeResponsiveConfig;
+    themeI18n?: YunzaiThemeI18nConfig;
 }
 export declare type YunzaiConfigKey = keyof YunzaiConfig;
 export declare const YUNZAI_CONFIG: InjectionToken<YunzaiConfig>;

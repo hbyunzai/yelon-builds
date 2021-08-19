@@ -61,7 +61,7 @@ const SF_DEFAULT_CONFIG = {
         color: { widget: 'string', type: 'color' },
         '': { widget: 'string' }
     },
-    ingoreKeywords: ['type', 'enum'],
+    ignoreKeywords: ['type', 'enum'],
     liveValidate: true,
     autocomplete: null,
     firstVisual: false,
@@ -85,8 +85,7 @@ function isBlank(o) {
     return o == null;
 }
 function toBool(value, defaultValue) {
-    value = toBoolean(value, true);
-    return value == null ? defaultValue : value;
+    return toBoolean(value, defaultValue);
 }
 function di(ui, ...args) {
     if (ui.debug) {
@@ -261,7 +260,7 @@ class FormProperty {
         this.schema = schema;
         this.ui = ui;
         this.schemaValidator = schemaValidatorFactory.createValidatorFn(schema, {
-            ingoreKeywords: this.ui.ingoreKeywords,
+            ignoreKeywords: this.ui.ignoreKeywords,
             debug: ui.debug
         });
         this.formData = formData || schema.default;
@@ -856,9 +855,9 @@ class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
         });
     }
     createValidatorFn(schema, extraOptions) {
-        const ingoreKeywords = [
-            ...this.options.ingoreKeywords,
-            ...(extraOptions.ingoreKeywords || [])
+        const ignoreKeywords = [
+            ...this.options.ignoreKeywords,
+            ...(extraOptions.ignoreKeywords || [])
         ];
         return (value) => {
             try {
@@ -872,8 +871,8 @@ class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
                 }
             }
             let errors = this.ajv.errors;
-            if (this.options && ingoreKeywords && errors) {
-                errors = errors.filter(w => ingoreKeywords.indexOf(w.keyword) === -1);
+            if (this.options && ignoreKeywords && errors) {
+                errors = errors.filter(w => ignoreKeywords.indexOf(w.keyword) === -1);
             }
             return errors;
         };
@@ -2428,17 +2427,11 @@ class SelectWidget extends ControlUIWidget {
         this.setValue(values == null ? undefined : values);
     }
     getOrgData(values) {
+        const srv = this.injector.get(ArrayService);
         if (!Array.isArray(values)) {
-            return this.injector.get(ArrayService).findTree(this.data, item => item.value === values);
+            return srv.findTree(this.data, (item) => item.value === values);
         }
-        return values.map(value => {
-            let item = null;
-            this.data.forEach(list => {
-                var _a;
-                item = (_a = list.children) === null || _a === void 0 ? void 0 : _a.find(w => w.value === value);
-            });
-            return item;
-        });
+        return values.map(value => srv.findTree(this.data, (item) => item.value === value));
     }
     openChange(status) {
         if (this.ui.openChange) {

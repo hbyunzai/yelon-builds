@@ -32,7 +32,7 @@
             color: { widget: 'string', type: 'color' },
             '': { widget: 'string' }
         },
-        ingoreKeywords: ['type', 'enum'],
+        ignoreKeywords: ['type', 'enum'],
         liveValidate: true,
         autocomplete: null,
         firstVisual: false,
@@ -374,8 +374,7 @@
         return o == null;
     }
     function toBool(value, defaultValue) {
-        value = decorator.toBoolean(value, true);
-        return value == null ? defaultValue : value;
+        return decorator.toBoolean(value, defaultValue);
     }
     function di(ui) {
         var args = [];
@@ -566,7 +565,7 @@
             this.schema = schema;
             this.ui = ui;
             this.schemaValidator = schemaValidatorFactory.createValidatorFn(schema, {
-                ingoreKeywords: this.ui.ingoreKeywords,
+                ignoreKeywords: this.ui.ignoreKeywords,
                 debug: ui.debug
             });
             this.formData = formData || schema.default;
@@ -1267,7 +1266,7 @@
         }
         AjvSchemaValidatorFactory.prototype.createValidatorFn = function (schema, extraOptions) {
             var _this = this;
-            var ingoreKeywords = __spreadArray(__spreadArray([], __read(this.options.ingoreKeywords)), __read((extraOptions.ingoreKeywords || [])));
+            var ignoreKeywords = __spreadArray(__spreadArray([], __read(this.options.ignoreKeywords)), __read((extraOptions.ignoreKeywords || [])));
             return function (value) {
                 try {
                     _this.ngZone.runOutsideAngular(function () { return _this.ajv.validate(schema, value); });
@@ -1280,8 +1279,8 @@
                     }
                 }
                 var errors = _this.ajv.errors;
-                if (_this.options && ingoreKeywords && errors) {
-                    errors = errors.filter(function (w) { return ingoreKeywords.indexOf(w.keyword) === -1; });
+                if (_this.options && ignoreKeywords && errors) {
+                    errors = errors.filter(function (w) { return ignoreKeywords.indexOf(w.keyword) === -1; });
                 }
                 return errors;
             };
@@ -2961,7 +2960,7 @@
         };
         SelectWidget.prototype.ngOnInit = function () {
             var _this = this;
-            var _b = this.ui, autoClearSearchValue = _b.autoClearSearchValue, borderless = _b.borderless, autoFocus = _b.autoFocus, dropdownMatchSelectWidth = _b.dropdownMatchSelectWidth, serverSearch = _b.serverSearch, maxMultipleCount = _b.maxMultipleCount, mode = _b.mode, showSearch = _b.showSearch, tokenSeparators = _b.tokenSeparators, maxTagCount = _b.maxTagCount, compareWith = _b.compareWith, optionHeightPx = _b.optionHeightPx, optionOverflowSize = _b.optionOverflowSize, showArrow = _b.showArrow;
+            var _a = this.ui, autoClearSearchValue = _a.autoClearSearchValue, borderless = _a.borderless, autoFocus = _a.autoFocus, dropdownMatchSelectWidth = _a.dropdownMatchSelectWidth, serverSearch = _a.serverSearch, maxMultipleCount = _a.maxMultipleCount, mode = _a.mode, showSearch = _a.showSearch, tokenSeparators = _a.tokenSeparators, maxTagCount = _a.maxTagCount, compareWith = _a.compareWith, optionHeightPx = _a.optionHeightPx, optionOverflowSize = _a.optionOverflowSize, showArrow = _a.showArrow;
             this.i = {
                 autoClearSearchValue: toBool(autoClearSearchValue, true),
                 borderless: toBool(borderless, false),
@@ -3007,17 +3006,11 @@
         };
         SelectWidget.prototype.getOrgData = function (values) {
             var _this = this;
+            var srv = this.injector.get(array.ArrayService);
             if (!Array.isArray(values)) {
-                return this.injector.get(array.ArrayService).findTree(this.data, function (item) { return item.value === values; });
+                return srv.findTree(this.data, function (item) { return item.value === values; });
             }
-            return values.map(function (value) {
-                var item = null;
-                _this.data.forEach(function (list) {
-                    var _a;
-                    item = (_a = list.children) === null || _a === void 0 ? void 0 : _a.find(function (w) { return w.value === value; });
-                });
-                return item;
-            });
+            return values.map(function (value) { return srv.findTree(_this.data, function (item) { return item.value === value; }); });
         };
         SelectWidget.prototype.openChange = function (status) {
             if (this.ui.openChange) {

@@ -734,24 +734,24 @@
                     finally { if (e_1) throw e_1.error; }
                 }
             }
-            var ingoreKey = options.allow_anonymous_key;
-            var ingored = false;
+            var ignoreKey = options.allow_anonymous_key;
+            var ignored = false;
             var params = req.params;
             var url = req.url;
-            if (req.params.has(ingoreKey)) {
-                params = req.params.delete(ingoreKey);
-                ingored = true;
+            if (req.params.has(ignoreKey)) {
+                params = req.params.delete(ignoreKey);
+                ignored = true;
             }
             var urlArr = req.url.split('?');
             if (urlArr.length > 1) {
                 var queryStringParams = new http.HttpParams({ fromString: urlArr[1] });
-                if (queryStringParams.has(ingoreKey)) {
-                    var queryString = queryStringParams.delete(ingoreKey).toString();
+                if (queryStringParams.has(ignoreKey)) {
+                    var queryString = queryStringParams.delete(ignoreKey).toString();
                     url = queryString.length > 0 ? urlArr[0] + "?" + queryString : urlArr[0];
-                    ingored = true;
+                    ignored = true;
                 }
             }
-            if (ingored) {
+            if (ignored) {
                 return next.handle(req.clone({ params: params, url: url }));
             }
             if (this.isAuth(options)) {

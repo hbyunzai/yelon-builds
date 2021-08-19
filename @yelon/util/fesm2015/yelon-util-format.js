@@ -158,7 +158,7 @@ class CurrencyService {
             startingUnit: 'yuan',
             megaUnit: { Q: '京', T: '兆', B: '亿', M: '万', K: '千' },
             precision: 2,
-            ingoreZeroPrecision: true
+            ignoreZeroPrecision: true
         });
     }
     /**
@@ -171,7 +171,7 @@ class CurrencyService {
      * ```
      */
     format(value, options) {
-        options = Object.assign({ startingUnit: this.c.startingUnit, precision: this.c.precision, ingoreZeroPrecision: this.c.ingoreZeroPrecision, ngCurrency: this.c.ngCurrency }, options);
+        options = Object.assign({ startingUnit: this.c.startingUnit, precision: this.c.precision, ignoreZeroPrecision: this.c.ignoreZeroPrecision, ngCurrency: this.c.ngCurrency }, options);
         let truthValue = Number(value);
         if (value == null || isNaN(truthValue)) {
             return '';
@@ -183,8 +183,8 @@ class CurrencyService {
             const cur = options.ngCurrency;
             return this.currencyPipe.transform(truthValue, cur.currencyCode, cur.display, cur.digitsInfo, cur.locale || this.locale);
         }
-        const res = formatNumber(truthValue, this.locale, `.${options.ingoreZeroPrecision ? 1 : options.precision}-${options.precision}`);
-        return options.ingoreZeroPrecision ? res.replace(/(?:\.[0]+)$/g, '') : res;
+        const res = formatNumber(truthValue, this.locale, `.${options.ignoreZeroPrecision ? 1 : options.precision}-${options.precision}`);
+        return options.ignoreZeroPrecision ? res.replace(/(?:\.[0]+)$/g, '') : res;
     }
     /**
      * Large number format filter
