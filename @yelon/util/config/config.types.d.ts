@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { YunzaiDateRangePickerConfig, YunzaiErrorCollectConfig, YunzaiImageConfig, YunzaiLoadingConfig, YunzaiLodopConfig, YunzaiMediaConfig, YunzaiOnboardingConfig, YunzaiPageHeaderConfig, YunzaiPdfConfig, YunzaiQRConfig, YunzaiSEConfig, YunzaiSGConfig, YunzaiSTConfig, YunzaiSVConfig, YunzaiXlsxConfig, YunzaiZipConfig } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
+import { YunzaiBusinessConfig } from './bis/bis.type';
 import { YunzaiCacheConfig } from './cache/cache.type';
 import { YunzaiChartConfig } from './chart/chart.type';
 import { YunzaiMockConfig } from './mock/mock.type';
@@ -12,6 +13,7 @@ import { YunzaiThemeResponsiveConfig } from './theme/responsive.type';
 import { YunzaiUtilArrayConfig } from './util/array.type';
 import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 export interface YunzaiConfig {
+    bis?: YunzaiBusinessConfig;
     dataRange?: YunzaiDateRangePickerConfig;
     errorCollect?: YunzaiErrorCollectConfig;
     image?: YunzaiImageConfig;

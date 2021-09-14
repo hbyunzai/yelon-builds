@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.2
+ * @license ng-yunzai(devcui@outlook.com) v12.0.8
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -1258,7 +1258,7 @@
                 this.router.navigateByUrl(ls[toPos].url);
             }
             if (addCurrent) {
-                ls.push(this.genCurItem());
+                ls.splice(this.pos + 1, 0, this.genCurItem());
             }
             ls.forEach(function (item, index) { return (item.index = index); });
             if (ls.length === 1) {

@@ -9,16 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const spinner_1 = require("@angular-devkit/build-angular/src/utils/spinner");
 const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
-const tasks_1 = require("@angular-devkit/schematics/tasks");
 const workspace_1 = require("@schematics/angular/utility/workspace");
 const lang_config_1 = require("../core/lang.config");
 const utils_1 = require("../utils");
 const versions_1 = require("../utils/versions");
 let project;
-const spinner = new spinner_1.Spinner();
 /** Remove files to be overwrite */
 function removeOrginalFiles() {
     return (tree) => {
@@ -180,8 +177,8 @@ function forceLess() {
 }
 function addStyle() {
     return (tree) => {
-        utils_1.addHeadStyle(tree, project, `  <style type='text/css'>.preloader{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;background:#49a9ee;z-index:9999;transition:opacity .65s}.preloader-hidden-add{opacity:1;display:block}.preloader-hidden-add-active{opacity:0}.preloader-hidden{display:none}.cs-loader{position:absolute;top:0;left:0;height:100%;width:100%}.cs-loader-inner{transform:translateY(-50%);top:50%;position:absolute;width:100%;color:#fff;text-align:center}.cs-loader-inner label{font-size:20px;opacity:0;display:inline-block}@keyframes lol{0%{opacity:0;transform:translateX(-300px)}33%{opacity:1;transform:translateX(0)}66%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(300px)}}.cs-loader-inner label:nth-child(6){animation:lol 3s infinite ease-in-out}.cs-loader-inner label:nth-child(5){animation:lol 3s .1s infinite ease-in-out}.cs-loader-inner label:nth-child(4){animation:lol 3s .2s infinite ease-in-out}.cs-loader-inner label:nth-child(3){animation:lol 3s .3s infinite ease-in-out}.cs-loader-inner label:nth-child(2){animation:lol 3s .4s infinite ease-in-out}.cs-loader-inner label:nth-child(1){animation:lol 3s .5s infinite ease-in-out}</style>`);
-        utils_1.addHtmlToBody(tree, project, `  <div class='preloader'><div class='cs-loader'><div class='cs-loader-inner'><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label></div></div></div>\n`);
+        utils_1.addHeadStyle(tree, project, `  <style type="text/css">.preloader{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;background:#49a9ee;z-index:9999;transition:opacity .65s}.preloader-hidden-add{opacity:1;display:block}.preloader-hidden-add-active{opacity:0}.preloader-hidden{display:none}.cs-loader{position:absolute;top:0;left:0;height:100%;width:100%}.cs-loader-inner{transform:translateY(-50%);top:50%;position:absolute;width:100%;color:#fff;text-align:center}.cs-loader-inner label{font-size:20px;opacity:0;display:inline-block}@keyframes lol{0%{opacity:0;transform:translateX(-300px)}33%{opacity:1;transform:translateX(0)}66%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(300px)}}.cs-loader-inner label:nth-child(6){animation:lol 3s infinite ease-in-out}.cs-loader-inner label:nth-child(5){animation:lol 3s .1s infinite ease-in-out}.cs-loader-inner label:nth-child(4){animation:lol 3s .2s infinite ease-in-out}.cs-loader-inner label:nth-child(3){animation:lol 3s .3s infinite ease-in-out}.cs-loader-inner label:nth-child(2){animation:lol 3s .4s infinite ease-in-out}.cs-loader-inner label:nth-child(1){animation:lol 3s .5s infinite ease-in-out}</style>`);
+        utils_1.addHtmlToBody(tree, project, `  <div class="preloader"><div class="cs-loader"><div class="cs-loader-inner"><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label></div></div></div>\n`);
         // // add styles
         // [`${project.sourceRoot}/styles/index.less`, `${project.sourceRoot}/styles/theme.less`].forEach(p => {
         //   overwriteFile({ tree, filePath: p, content: path.join(overwriteDataFileRoot, p), overwrite: true });
@@ -208,13 +205,13 @@ function addFilesToRoot(options) {
     ]);
 }
 function fixLang(options) {
-    return (tree) => {
+    return (tree, context) => {
         if (options.i18n)
             return;
         const langs = lang_config_1.getLangData(options.defaultLanguage);
         if (!langs)
             return;
-        spinner.text = `Translating template into ${options.defaultLanguage} language, please wait...`;
+        context.logger.info(`Translating template into ${options.defaultLanguage} language, please wait...`);
         tree.visit(p => {
             if (~p.indexOf(`/node_modules/`))
                 return;
@@ -253,9 +250,9 @@ function fixLangInHtml(tree, p, langs) {
         return langs[key] || key;
     });
     // removed `header-i18n`
-    if (~html.indexOf(`<header-i18n [showLang]='false' class='langs'></header-i18n>`)) {
+    if (~html.indexOf(`<header-i18n [showLang]="false" class="langs"></header-i18n>`)) {
         ++matchCount;
-        html = html.replace(`<header-i18n [showLang]='false' class='langs'></header-i18n>`, ``);
+        html = html.replace(`<header-i18n [showLang]="false" class="langs"></header-i18n>`, ``);
     }
     if (matchCount > 0) {
         tree.overwrite(p, html);
@@ -273,37 +270,31 @@ function fixVsCode() {
         utils_1.writeJSON(tree, filePath, json);
     };
 }
-function install() {
-    return (_host, context) => {
-        context.addTask(new tasks_1.NodePackageInstallTask());
-    };
-}
-function finished() {
-    return () => {
-        spinner.succeed(`Congratulations, NG-YUNZAI scaffold generation complete.`);
-    };
-}
 function default_1(options) {
     return (tree, context) => __awaiter(this, void 0, void 0, function* () {
         project = (yield utils_1.getProject(tree, options.project)).project;
-        spinner.start(`Generating NG-YUNZAI scaffold...`);
+        context.logger.info(`Generating NG-YUNZAI scaffold...`);
         return schematics_1.chain([
+            // @yelon/* dependencies
             addDependenciesToPackageJson(options),
+            // Configuring CommonJS dependencies
+            // https://angular.io/guide/build#configuring-commonjs-dependencies
             utils_1.addAllowedCommonJsDependencies([]),
+            // ci
             addRunScriptToPackageJson(),
             addPathsToTsConfig(),
+            // code style
             addCodeStylesToPackageJson(),
             addSchematics(options),
             versions_1.addESLintRule(context, false),
+            // files
             removeOrginalFiles(),
             addFilesToRoot(options),
             forceLess(),
             addStyle(),
             fixLang(options),
-            // fixVsCode(),
-            fixAngularJson(options),
-            install(),
-            finished()
+            fixVsCode(),
+            fixAngularJson(options)
         ]);
     });
 }

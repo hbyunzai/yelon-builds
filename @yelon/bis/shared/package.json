@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/shared.umd.js",
+  "module": "../fesm2015/shared.js",
+  "es2015": "../fesm2015/shared.js",
+  "esm2015": "../esm2015/shared/shared.js",
+  "fesm2015": "../fesm2015/shared.js",
+  "typings": "shared.d.ts",
+  "metadata": "shared.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/bis/shared"
+}

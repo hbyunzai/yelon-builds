@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.2
+ * @license ng-yunzai(devcui@outlook.com) v12.0.8
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -2846,7 +2846,7 @@
         { type: icon.NzIconService }
     ]; };
 
-    var VERSION = new i0.Version('12.0.2');
+    var VERSION = new i0.Version('12.0.8');
 
     /**
      * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).

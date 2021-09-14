@@ -1,0 +1,27 @@
+{
+  "name": "@yelon/bis",
+  "version": "12.0.8",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ng-zorro-antd": "^12.0.1",
+    "@yelon/acl": "^12.0.8",
+    "@yelon/auth": "^12.0.8",
+    "@yelon/theme": "^12.0.8",
+    "@yelon/mock": "^12.0.8",
+    "@yelon/cache": "^12.0.8",
+    "@yelon/chart": "^12.0.8",
+    "@yelon/form": "^12.0.8",
+    "@yelon/testing": "^12.0.8",
+    "@yelon/util": "^12.0.8",
+    "tslib": "^2.2.0"
+  },
+  "main": "bundles/bis.umd.js",
+  "module": "fesm2015/bis.js",
+  "es2015": "fesm2015/bis.js",
+  "esm2015": "esm2015/bis.js",
+  "fesm2015": "fesm2015/bis.js",
+  "typings": "bis.d.ts",
+  "metadata": "bis.metadata.json",
+  "sideEffects": false
+}

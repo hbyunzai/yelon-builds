@@ -26590,9 +26590,6 @@ a:focus {
 .ant-table-rep__hide-header-footer .ant-table-footer {
   display: none;
 }
-.ant-table-tbody > tr:nth-child(4n + 3) {
-  background: transparent;
-}
 [dir='rtl'] .ant-table td > img,
 [dir='rtl'] .ant-table td .img {
   margin-right: inherit;
@@ -30845,11 +30842,14 @@ body {
 .st .nz-resizable-handle > i {
   width: 1px;
   height: 60%;
-  background: #f0f0f0;
+  background: #d9d9d9;
 }
 .st .nz-resizable-preview {
   border-width: 0;
   border-right-width: 1px;
+}
+.st .nz-resizable.ant-table-column-has-sorters .nz-resizable-handle {
+  margin-right: 8px;
 }
 .st .ant-table ~ nz-pagination > .ant-pagination {
   margin-bottom: 0;
@@ -32313,4 +32313,105 @@ g2-tag-cloud {
 }
 .trend__reverse .trend__down {
   color: #f5222d;
+}
+.yz-application {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 10px 10px 10px 0 #888;
+}
+.yz-application-topic {
+  background-color: #4ba6ff;
+}
+.yz-application-text {
+  display: block;
+  margin-left: -12px;
+  padding: 3px 40px;
+  overflow: hidden;
+  color: #fff;
+  font-weight: bold;
+  line-height: 32px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+.yz-application-text:hover {
+  color: #4ba6ff;
+  font-weight: bold;
+  background: #fff;
+}
+.yz-application-container {
+  height: 480px;
+  overflow: auto;
+}
+.yz-application-list {
+  padding: 20px;
+}
+.yz-application-list ul {
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  -moz-column-count: 4;
+  -webkit-column-count: 4;
+  column-count: 4;
+}
+.yz-application-list ul li {
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0;
+  list-style: none;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
+}
+.yz-application-list ul li h5 {
+  margin-top: 0;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+.yz-application-list ul li a {
+  display: block;
+  padding: 0 4px;
+  overflow: hidden;
+  color: #000;
+  font-size: 12px;
+  line-height: 25px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.yz-application-list ul li a:hover {
+  color: #fff;
+  background: #4ba6ff;
+}
+.yz-application-list-search {
+  margin: 10px;
+  padding: 10px;
+}
+.yz-application-list-item h4,
+.yz-application-list-item p {
+  margin: 0;
+  overflow: hidden;
+  color: #000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.yz-application-list-item h4 {
+  font-weight: 500;
+  line-height: 24px;
+}
+.yz-application-list-item p {
+  color: #000;
+  line-height: 20px;
+}
+.yz-application-list-item li:hover {
+  background: #2E3E56;
 }

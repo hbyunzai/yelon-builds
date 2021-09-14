@@ -1,4 +1,4 @@
-// 请参考：https://ng-yunzai.com/docs/i18n
+// 请参考：https://ng.yunzainfo.com/docs/i18n
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
@@ -14,6 +14,7 @@ import {
   _HttpClient,
   YunzaiI18nBaseService
 } from '@yelon/theme';
+import { YunzaiConfigService } from '@yelon/util/config';
 import { enUS as dfEn, zhCN as dfZhCn, zhTW as dfZhTw } from 'date-fns/locale';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { en_US as zorroEnUS, NzI18nService, zh_CN as zorroZhCN, zh_TW as zorroZhTW } from 'ng-zorro-antd/i18n';
@@ -69,9 +70,10 @@ export class I18NService extends YunzaiI18nBaseService {
     private settings: SettingsService,
     private nzI18nService: NzI18nService,
     private yelonLocaleService: YelonLocaleService,
-    private platform: Platform
+    private platform: Platform,
+    cogSrv: YunzaiConfigService
   ) {
-    super();
+    super(cogSrv);
 
     const defaultLang = this.getDefaultLang();
     if (this._langs.findIndex(w => w.code === defaultLang)) {
@@ -86,7 +88,9 @@ export class I18NService extends YunzaiI18nBaseService {
     if (this.settings.layout.lang) {
       return this.settings.layout.lang;
     }
-    return (navigator.languages ? navigator.languages[0] : null) || navigator.language;
+    let res = (navigator.languages ? navigator.languages[0] : null) || navigator.language;
+    const arr = res.split('-');
+    return arr.length <= 1 ? res : `${arr[0]}-${arr[1].toUpperCase()}`;
   }
 
   loadLangData(lang: string): Observable<NzSafeAny> {

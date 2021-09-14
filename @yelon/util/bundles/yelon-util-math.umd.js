@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.2
+ * @license ng-yunzai(devcui@outlook.com) v12.0.8
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */

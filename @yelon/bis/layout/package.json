@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/layout.umd.js",
+  "module": "../fesm2015/layout.js",
+  "es2015": "../fesm2015/layout.js",
+  "esm2015": "../esm2015/layout/layout.js",
+  "fesm2015": "../fesm2015/layout.js",
+  "typings": "layout.d.ts",
+  "metadata": "layout.metadata.json",
+  "sideEffects": false,
+  "name": "@yelon/bis/layout"
+}

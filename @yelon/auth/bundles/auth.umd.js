@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.2
+ * @license ng-yunzai(devcui@outlook.com) v12.0.8
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -125,8 +125,9 @@
             configurable: true
         });
         TokenService.prototype.set = function (data) {
+            var res = this.store.set(this._options.store_key, data);
             this.change$.next(data);
-            return this.store.set(this._options.store_key, data);
+            return res;
         };
         TokenService.prototype.get = function (type) {
             var data = this.store.get(this._options.store_key);

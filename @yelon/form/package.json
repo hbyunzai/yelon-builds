@@ -1,14 +1,14 @@
 {
   "name": "@yelon/form",
-  "version": "12.0.2-b86c3a2",
+  "version": "12.0.8",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "ajv": "^8.6.2",
-    "ajv-formats": "^2.1.0",
-    "@yelon/theme": "^12.0.2-b86c3a2",
-    "@yelon/acl": "^12.0.2-b86c3a2",
-    "@yelon/util": "^12.0.2-b86c3a2",
+    "ajv-formats": "^2.1.1",
+    "@yelon/theme": "^12.0.8",
+    "@yelon/acl": "^12.0.8",
+    "@yelon/util": "^12.0.8",
     "tslib": "^2.2.0"
   },
   "main": "bundles/form.umd.js",
