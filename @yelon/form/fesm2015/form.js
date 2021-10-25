@@ -1104,9 +1104,9 @@ class SFComponent {
             Object.keys(schema.properties).forEach(key => {
                 const uiKey = `$${key}`;
                 const property = retrieveSchema(schema.properties[key], definitions);
-                const ui = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ widget: property.type }, (property.format && this.options.formatMap[property.format])), (typeof property.ui === 'string' ? { widget: property.ui } : null)), (!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
+                const ui = deepCopy(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ widget: property.type }, (property.format && this.options.formatMap[property.format])), (typeof property.ui === 'string' ? { widget: property.ui } : null)), (!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
                     ? { widget: 'select' }
-                    : null)), this._defUi), property.ui), uiSchema[uiKey]);
+                    : null)), this._defUi), property.ui), uiSchema[uiKey]));
                 // 继承父节点布局属性
                 if (isHorizontal) {
                     if (parentUiSchema.spanLabelFixed) {
@@ -1818,6 +1818,7 @@ class AutoCompleteWidget extends ControlUIWidget {
         this.typing = '';
         this.isAsync = false;
         this.fixData = [];
+        this.updateTyping = true;
     }
     updateValue(item) {
         this.typing = item.nzLabel;
@@ -1849,10 +1850,19 @@ class AutoCompleteWidget extends ControlUIWidget {
         this.isAsync = !!asyncData;
         const orgTime = +(this.ui.debounceTime || 0);
         const time = Math.max(0, this.isAsync ? Math.max(50, orgTime) : orgTime);
-        this.list = this.ngModel.valueChanges.pipe(debounceTime(time), startWith(''), mergeMap(input => (this.isAsync ? asyncData(input) : this.filterData(input))), map(res => getEnum(res, null, this.schema.readOnly)));
+        this.list = this.ngModel.valueChanges.pipe(debounceTime(time), startWith(''), mergeMap(input => (this.isAsync ? asyncData(input) : this.filterData(input))), map(res => {
+            var _a, _b;
+            const data = getEnum(res, null, this.schema.readOnly);
+            if (this.updateTyping) {
+                this.updateTyping = false;
+                this.typing = (_b = (_a = data.find(w => w.value === this.value)) === null || _a === void 0 ? void 0 : _a.label) !== null && _b !== void 0 ? _b : '';
+            }
+            return data;
+        }));
     }
     reset(value) {
-        this.typing = this.value;
+        this.typing = value;
+        this.updateTyping = true;
         if (this.isAsync)
             return;
         switch (this.ui.type) {
@@ -3086,5 +3096,5 @@ const ERRORSDEFAULT = {
  * Generated bundle index. Do not edit.
  */
 
-export { AjvSchemaValidatorFactory, ArrayLayoutWidget, ArrayProperty, ArrayWidget, AtomicProperty, AutoCompleteWidget, BooleanProperty, BooleanWidget, CascaderWidget, CheckboxWidget, ControlUIWidget, ControlWidget, CustomWidget, DateWidget, ERRORSDEFAULT, FormProperty, FormPropertyFactory, MentionWidget, NumberProperty, NumberWidget, NzWidgetRegistry, ObjectLayoutWidget, ObjectProperty, ObjectWidget, PropertyGroup, RadioWidget, RateWidget, SFComponent, SFFixedDirective, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SF_DEFAULT_CONFIG, SchemaValidatorFactory, SelectWidget, SliderWidget, StringProperty, StringWidget, TagWidget, TextWidget, TextareaWidget, TimeWidget, TransferWidget, TreeSelectWidget, UploadWidget, Widget, WidgetFactory, WidgetRegistry, YelonFormModule, di, getCopyEnum, getData, getEnum, isBlank, isDateFns, mergeConfig, orderProperties, resolveIfSchema, retrieveSchema, toBool, useFactory, TerminatorService as ɵa };
+export { AjvSchemaValidatorFactory, ArrayLayoutWidget, ArrayProperty, ArrayWidget, AtomicProperty, AutoCompleteWidget, BooleanProperty, BooleanWidget, CascaderWidget, CheckboxWidget, ControlUIWidget, ControlWidget, CustomWidget, DateWidget, ERRORSDEFAULT, FormProperty, FormPropertyFactory, MentionWidget, NumberProperty, NumberWidget, NzWidgetRegistry, ObjectLayoutWidget, ObjectProperty, ObjectWidget, PropertyGroup, RadioWidget, RateWidget, SFComponent, SFFixedDirective, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SF_DEFAULT_CONFIG, SchemaValidatorFactory, SelectWidget, SliderWidget, StringProperty, StringWidget, TagWidget, TextWidget, TextareaWidget, TimeWidget, TransferWidget, TreeSelectWidget, UploadWidget, Widget, WidgetFactory, WidgetRegistry, YelonFormModule, di, getCopyEnum, getData, getEnum, isBlank, isDateFns, mergeConfig, orderProperties, resolveIfSchema, retrieveSchema, toBool, useFactory, TerminatorService as ɵa, NzWidgetRegistry as ɵb };
 //# sourceMappingURL=form.js.map

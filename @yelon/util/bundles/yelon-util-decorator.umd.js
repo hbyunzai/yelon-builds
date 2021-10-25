@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@yelon/util/other')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/decorator', ['exports', '@yelon/util/other'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.decorator = {}), global.yelon.util.other));
-}(this, (function (exports, other) { 'use strict';
+})(this, (function (exports, other) { 'use strict';
 
     function propDecoratorFactory(name, fallback, defaultValue) {
         function propDecorator(target, propName, originalDescriptor) {
@@ -458,5 +458,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-decorator.umd.js.map

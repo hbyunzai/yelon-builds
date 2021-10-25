@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@yelon/util/other')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/math', ['exports', '@yelon/util/other'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.math = {}), global.yelon.util.other));
-}(this, (function (exports, other) { 'use strict';
+})(this, (function (exports, other) { 'use strict';
 
     /**
      * Checks if `value` is between `start` and `end` to, but not including `end`. If `end` is not specified, it's set to start with `start` then set to `0`. If `start` is greater than `end` the params are swapped to support negative ranges.
@@ -100,5 +100,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-math.umd.js.map

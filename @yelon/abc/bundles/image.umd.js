@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('ng-zorro-antd/modal'), require('@yelon/theme'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@angular/common')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/image', ['exports', '@angular/cdk/platform', '@angular/core', 'rxjs', 'rxjs/operators', 'ng-zorro-antd/modal', '@yelon/theme', '@yelon/util/config', '@yelon/util/decorator', '@angular/common'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.image = {}), global.ng.cdk.platform, global.ng.core, global.rxjs, global.rxjs.operators, global.modal, global.yelon.theme, global.config, global.decorator, global.ng.common));
-}(this, (function (exports, platform, core, rxjs, operators, modal, theme, config, decorator, common) { 'use strict';
+})(this, (function (exports, platform, core, rxjs, operators, modal, theme, config, decorator, common) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -478,5 +478,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=image.umd.js.map

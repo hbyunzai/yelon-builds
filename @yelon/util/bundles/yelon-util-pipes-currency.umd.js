@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/util/format')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/pipes/currency', ['exports', '@angular/core', '@yelon/util/format'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.pipes = global.yelon.util.pipes || {}, global.yelon.util.pipes.currency = {}), global.ng.core, global.yelon.util.format));
-}(this, (function (exports, core, format) { 'use strict';
+})(this, (function (exports, core, format) { 'use strict';
 
     var CurrencyMegaPipe = /** @class */ (function () {
         function CurrencyMegaPipe(srv, locale) {
@@ -100,9 +100,9 @@
     exports.CurrencyMegaPipe = CurrencyMegaPipe;
     exports.CurrencyPipeModule = CurrencyPipeModule;
     exports.CurrencyPricePipe = CurrencyPricePipe;
-    exports.ɵa = CurrencyCNYPipe;
+    exports["ɵa"] = CurrencyCNYPipe;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-pipes-currency.umd.js.map

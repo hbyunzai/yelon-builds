@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/pipes/filter', ['exports', '@angular/core'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.pipes = global.yelon.util.pipes || {}, global.yelon.util.pipes.filter = {}), global.ng.core));
-}(this, (function (exports, core) { 'use strict';
+})(this, (function (exports, core) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -370,5 +370,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-pipes-filter.umd.js.map

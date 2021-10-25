@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/util/config'), require('ng-zorro-antd/dropdown'), require('ng-zorro-antd/tooltip')) :
     typeof define === 'function' && define.amd ? define('@yelon/theme/theme-btn', ['exports', '@angular/cdk/bidi', '@angular/cdk/platform', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/util/config', 'ng-zorro-antd/dropdown', 'ng-zorro-antd/tooltip'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = global.yelon.theme || {}, global.yelon.theme['theme-btn'] = {}), global.ng.cdk.bidi, global.ng.cdk.platform, global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators, global.config, global.dropdown, global.tooltip));
-}(this, (function (exports, bidi, platform, common, core, rxjs, operators, config, dropdown, tooltip) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = global.yelon.theme || {}, global.yelon.theme["theme-btn"] = {}), global.ng.cdk.bidi, global.ng.cdk.platform, global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators, global.config, global.dropdown, global.tooltip));
+})(this, (function (exports, bidi, platform, common, core, rxjs, operators, config, dropdown, tooltip) { 'use strict';
 
     var YUNZAI_THEME_BTN_KEYS = new core.InjectionToken('YUNZAI_THEME_BTN_KEYS');
     var ThemeBtnComponent = /** @class */ (function () {
@@ -137,5 +137,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=layout-theme-btn.umd.js.map

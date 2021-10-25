@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/cdk/platform'), require('@angular/core'), require('@angular/router'), require('rxjs'), require('rxjs/operators'), require('@yelon/abc/reuse-tab'), require('@yelon/theme'), require('@yelon/util/browser'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@angular/cdk/observers'), require('@angular/common'), require('ng-zorro-antd/affix'), require('ng-zorro-antd/breadcrumb'), require('ng-zorro-antd/skeleton')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/page-header', ['exports', '@angular/cdk/bidi', '@angular/cdk/platform', '@angular/core', '@angular/router', 'rxjs', 'rxjs/operators', '@yelon/abc/reuse-tab', '@yelon/theme', '@yelon/util/browser', '@yelon/util/config', '@yelon/util/decorator', '@angular/cdk/observers', '@angular/common', 'ng-zorro-antd/affix', 'ng-zorro-antd/breadcrumb', 'ng-zorro-antd/skeleton'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['page-header'] = {}), global.ng.cdk.bidi, global.ng.cdk.platform, global.ng.core, global.ng.router, global.rxjs, global.rxjs.operators, global.yelon.abc['reuse-tab'], global.yelon.theme, global.browser, global.config, global.decorator, global.ng.cdk.observers, global.ng.common, global['ng-zorro-antd/affix'], global['ng-zorro-antd/breadcrumb'], global['ng-zorro-antd/skeleton']));
-}(this, (function (exports, bidi, platform, core, router, rxjs, operators, reuseTab, theme, browser, config, decorator, observers, common, affix, breadcrumb, skeleton) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["page-header"] = {}), global.ng.cdk.bidi, global.ng.cdk.platform, global.ng.core, global.ng.router, global.rxjs, global.rxjs.operators, global.yelon.abc["reuse-tab"], global.yelon.theme, global.browser, global.config, global.decorator, global.ng.cdk.observers, global.ng.common, global["ng-zorro-antd/affix"], global["ng-zorro-antd/breadcrumb"], global["ng-zorro-antd/skeleton"]));
+})(this, (function (exports, bidi, platform, core, router, rxjs, operators, reuseTab, theme, browser, config, decorator, observers, common, affix, breadcrumb, skeleton) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -566,5 +566,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=pageHeader.umd.js.map

@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/theme'), require('@yelon/util/decorator'), require('@angular/common'), require('ng-zorro-antd/badge'), require('ng-zorro-antd/core/outlet'), require('ng-zorro-antd/dropdown'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/list'), require('ng-zorro-antd/spin'), require('ng-zorro-antd/tabs'), require('ng-zorro-antd/tag')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/notice-icon', ['exports', '@angular/core', '@yelon/theme', '@yelon/util/decorator', '@angular/common', 'ng-zorro-antd/badge', 'ng-zorro-antd/core/outlet', 'ng-zorro-antd/dropdown', 'ng-zorro-antd/icon', 'ng-zorro-antd/list', 'ng-zorro-antd/spin', 'ng-zorro-antd/tabs', 'ng-zorro-antd/tag'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['notice-icon'] = {}), global.ng.core, global.yelon.theme, global.decorator, global.ng.common, global['ng-zorro-antd/badge'], global.outlet, global['ng-zorro-antd/dropdown'], global['ng-zorro-antd/icon'], global['ng-zorro-antd/list'], global['ng-zorro-antd/spin'], global['ng-zorro-antd/tabs'], global['ng-zorro-antd/tag']));
-}(this, (function (exports, core, theme, decorator, common, badge, outlet, dropdown, icon, list, spin, tabs, tag) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["notice-icon"] = {}), global.ng.core, global.yelon.theme, global.decorator, global.ng.common, global["ng-zorro-antd/badge"], global.outlet, global["ng-zorro-antd/dropdown"], global["ng-zorro-antd/icon"], global["ng-zorro-antd/list"], global["ng-zorro-antd/spin"], global["ng-zorro-antd/tabs"], global["ng-zorro-antd/tag"]));
+})(this, (function (exports, core, theme, decorator, common, badge, outlet, dropdown, icon, list, spin, tabs, tag) { 'use strict';
 
     var NoticeIconTabComponent = /** @class */ (function () {
         function NoticeIconTabComponent() {
@@ -464,5 +464,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=noticeIcon.umd.js.map

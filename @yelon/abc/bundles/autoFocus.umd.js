@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/util/decorator')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/auto-focus', ['exports', '@angular/core', '@yelon/util/decorator'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['auto-focus'] = {}), global.ng.core, global.decorator));
-}(this, (function (exports, core, decorator) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["auto-focus"] = {}), global.ng.core, global.decorator));
+})(this, (function (exports, core, decorator) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -390,5 +390,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=autoFocus.umd.js.map

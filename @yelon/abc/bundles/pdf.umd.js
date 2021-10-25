@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@yelon/util/other'), require('ng-zorro-antd/skeleton')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/pdf', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/util/config', '@yelon/util/decorator', '@yelon/util/other', 'ng-zorro-antd/skeleton'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.pdf = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators, global.config, global.decorator, global.other, global['ng-zorro-antd/skeleton']));
-}(this, (function (exports, platform, common, core, rxjs, operators, config, decorator, other, skeleton) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.pdf = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators, global.config, global.decorator, global.other, global["ng-zorro-antd/skeleton"]));
+})(this, (function (exports, platform, common, core, rxjs, operators, config, decorator, other, skeleton) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -859,5 +859,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=pdf.umd.js.map

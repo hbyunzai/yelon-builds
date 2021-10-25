@@ -40,7 +40,8 @@ function UpgradeMainVersions(tree, version = lib_versions_1.VERSION) {
         `ng-yunzai-plugin-theme@^12.0.1`,
         `source-map-explorer@^2.5.2`,
         `@angular/language-service@~12.2.0`,
-        `@yelon/testing@${version}`
+        `@yelon/testing@${version}`,
+        `@stomp/rx-stomp@^1.1.4`
     ], 'devDependencies');
     package_1.addPackage(tree, ['ajv@^8.6.2', 'ajv-formats@^2.1.1']);
 }

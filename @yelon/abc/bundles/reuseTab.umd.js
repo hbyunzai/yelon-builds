@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/theme'), require('rxjs'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/router'), require('rxjs/operators'), require('@yelon/util/decorator'), require('@yelon/util/browser'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/menu'), require('ng-zorro-antd/tabs')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/reuse-tab', ['exports', '@angular/core', '@yelon/theme', 'rxjs', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/cdk/platform', '@angular/common', '@angular/router', 'rxjs/operators', '@yelon/util/decorator', '@yelon/util/browser', 'ng-zorro-antd/icon', 'ng-zorro-antd/menu', 'ng-zorro-antd/tabs'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['reuse-tab'] = {}), global.ng.core, global.yelon.theme, global.rxjs, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.cdk.platform, global.ng.common, global.ng.router, global.rxjs.operators, global.decorator, global.browser, global['ng-zorro-antd/icon'], global['ng-zorro-antd/menu'], global['ng-zorro-antd/tabs']));
-}(this, (function (exports, i0, i1, rxjs, overlay, portal, platform, common, router, operators, decorator, browser, icon, menu, tabs) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["reuse-tab"] = {}), global.ng.core, global.yelon.theme, global.rxjs, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.cdk.platform, global.ng.common, global.ng.router, global.rxjs.operators, global.decorator, global.browser, global["ng-zorro-antd/icon"], global["ng-zorro-antd/menu"], global["ng-zorro-antd/tabs"]));
+})(this, (function (exports, i0, i1, rxjs, overlay, portal, platform, common, router, operators, decorator, browser, icon, menu, tabs) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -18,14 +18,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -1529,5 +1527,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=reuseTab.umd.js.map

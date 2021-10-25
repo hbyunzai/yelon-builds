@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/util/format')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/pipes/format', ['exports', '@angular/core', '@yelon/util/format'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.pipes = global.yelon.util.pipes || {}, global.yelon.util.pipes.format = {}), global.ng.core, global.yelon.util.format));
-}(this, (function (exports, core, format) { 'use strict';
+})(this, (function (exports, core, format) { 'use strict';
 
     var FormatMaskPipe = /** @class */ (function () {
         function FormatMaskPipe() {
@@ -16,8 +16,19 @@
          * Format mask
          *
          * 格式化掩码
+         *
+         * | 字符 | 描述 |
+         * | --- | --- |
+         * | `0` | 任意数字，若该位置字符不符合，则默认为 `0` 填充 |
+         * | `9` | 任意数字 |
+         * | `#` | 任意字符 |
+         * | `U` | 转换大写 |
+         * | `L` | 转换小写 |
+         * | `*` | 转换为 `*` 字符 |
+         *
          * ```ts
          * formatMask('123', '(###)') => (123)
+         * formatMask('15900000000', '999****9999') => 159****0000
          * ```
          */
         FormatMaskPipe.prototype.transform = function (value, mask) {
@@ -51,5 +62,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-pipes-format.umd.js.map

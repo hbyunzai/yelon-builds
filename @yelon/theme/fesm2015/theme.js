@@ -1223,8 +1223,8 @@ var elGR = {
         }
     },
     onboarding: {
-        skip: `Παραλείπω`,
-        prev: `Προηγ`,
+        skip: `Παράλειψη`,
+        prev: `Προηγούμενο`,
         next: `Επόμενο`,
         done: `Ολοκληρώθηκε`
     }
@@ -1688,6 +1688,89 @@ var esES = {
         prev: `Previo`,
         next: `Siguiente`,
         done: `Terminado`
+    }
+};
+
+var itIT = {
+    abbr: 'it-IT',
+    exception: {
+        403: `Spiacenti, non hai accesso a questa pagina`,
+        404: `Spiacenti, la pagina che hai visitato non esiste`,
+        500: `Spiacenti, il server sta riscontrando un errore`,
+        backToHome: 'Torna alla Home'
+    },
+    noticeIcon: {
+        emptyText: 'Nessun dato',
+        clearText: 'Cancella memoria locale'
+    },
+    reuseTab: {
+        close: 'Chiudi la scheda',
+        closeOther: 'Chiudi le altre schede',
+        closeRight: 'Chiudi le schede a destra',
+        refresh: 'Aggiorna'
+    },
+    tagSelect: {
+        expand: 'Espandi',
+        collapse: 'Comprimi'
+    },
+    miniProgress: {
+        target: 'Obiettivo: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} di {{total}}',
+        filterConfirm: 'OK',
+        filterReset: 'Reimposta'
+    },
+    sf: {
+        submit: 'Invia',
+        reset: 'Reimposta',
+        search: 'Cerca',
+        edit: 'Salva',
+        addText: 'Aggiungi',
+        removeText: 'Rimuovi',
+        checkAllText: 'Seleziona tutto',
+        error: {
+            'false schema': `Lo schema booleano è falso`,
+            $ref: `Impossibile risolvere il riferimento {ref}`,
+            additionalItems: `Non deve avere più di {limit} elementi`,
+            additionalProperties: `Non deve avere proprietà aggiuntive`,
+            anyOf: `Deve corrispondere a uno schema in "anyOf"`,
+            dependencies: `Deve avere una proprietà {deps} quando è presente la proprietà {property}`,
+            enum: `Deve essere uguale a uno dei valori predefiniti`,
+            format: `Deve corrispondere al formato "{format}"`,
+            type: `Deve essere {type}`,
+            required: `Obbligatorio`,
+            maxLength: `Non deve essere superiore a {limit} caratteri`,
+            minLength: `Non deve essere superiore a {limit} caratteri`,
+            minimum: `Deve essere {comparison} {limit}`,
+            formatMinimum: `Deve essere {comparison} {limit}`,
+            maximum: `Deve essere {comparison} {limit}`,
+            formatMaximum: `Deve essere {comparison} {limit}`,
+            maxItems: `Non deve avere più di {limit} elementi`,
+            minItems: `Non deve avere meno di {limit} elementi`,
+            maxProperties: `Non deve avere più di {limit} proprietà`,
+            minProperties: `Non deve avere meno di {limit} proprietà`,
+            multipleOf: `Deve essere un multiplo di {multipleOf}`,
+            not: `Non deve essere valido secondo lo schema in "not"`,
+            oneOf: `Deve corrispondere esattamente a uno schema in "oneOf"`,
+            pattern: `Deve corrispondere al modello "{pattern}"`,
+            uniqueItems: `Non deve avere elementi duplicati (gli elementi ## {j} e {i} sono identici)`,
+            custom: `Deve corrispondere al formato "{format}"`,
+            propertyNames: `Il nome della proprietà "{propertyName}" non è valido`,
+            patternRequired: `Deve avere una proprietà corrispondete al modello "{missingPattern}"`,
+            switch: `Deve superare la convalida della parola chiave "switch", il caso {caseIndex} non è riuscito`,
+            const: `Deve essere uguale alla costante`,
+            contains: `Deve contenere un elemento valido`,
+            formatExclusiveMaximum: `formatExclusiveMaximum deve essere booleano`,
+            formatExclusiveMinimum: `formatExclusiveMaximum deve essere booleano`,
+            if: `Deve corrispondere allo schema "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `Salta`,
+        prev: `Precedente`,
+        next: `Successivo`,
+        done: `Fatto`
     }
 };
 
@@ -2367,7 +2450,7 @@ YunzaiThemeModule.ctorParameters = () => [
     { type: NzIconService }
 ];
 
-const VERSION = new Version('12.0.8');
+const VERSION = new Version('12.0.11');
 
 /**
  * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
@@ -2394,5 +2477,5 @@ class PreloadOptionalModules {
  * Generated bundle index. Do not edit.
  */
 
-export { BaseApi, BaseHeaders, BaseUrl, Body, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, elGR as el_GR, enUS as en_US, esES as es_ES, frFR as fr_FR, hrHR as hr_HR, jaJP as ja_JP, koKR as ko_KR, plPL as pl_PL, preloaderFinished, slSI as sl_SI, trTR as tr_TR, zhCN as zh_CN, zhTW as zh_TW, I18nPipe as ɵa };
+export { BaseApi, BaseHeaders, BaseUrl, Body, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, elGR as el_GR, enUS as en_US, esES as es_ES, frFR as fr_FR, hrHR as hr_HR, itIT as it_IT, jaJP as ja_JP, koKR as ko_KR, plPL as pl_PL, preloaderFinished, slSI as sl_SI, trTR as tr_TR, zhCN as zh_CN, zhTW as zh_TW, I18nPipe as ɵa };
 //# sourceMappingURL=theme.js.map

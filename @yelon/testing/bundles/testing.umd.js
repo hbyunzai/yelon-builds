@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core/testing'), require('@angular/platform-browser'), require('ng-zorro-antd/dropdown')) :
     typeof define === 'function' && define.amd ? define('@yelon/testing', ['exports', '@angular/core/testing', '@angular/platform-browser', 'ng-zorro-antd/dropdown'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.testing = {}), global.ng.core.testing, global.ng.platformBrowser, global['ng-zorro-antd/dropdown']));
-}(this, (function (exports, testing, platformBrowser, dropdown) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.testing = {}), global.ng.core.testing, global.ng.platformBrowser, global["ng-zorro-antd/dropdown"]));
+})(this, (function (exports, testing, platformBrowser, dropdown) { 'use strict';
 
     /**
      * @license
@@ -410,5 +410,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=testing.umd.js.map

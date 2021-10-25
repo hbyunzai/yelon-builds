@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/common'), require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('ng-zorro-antd/icon')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/error-collect', ['exports', '@angular/cdk/bidi', '@angular/common', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/util/config', '@yelon/util/decorator', 'ng-zorro-antd/icon'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['error-collect'] = {}), global.ng.cdk.bidi, global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators, global.config, global.decorator, global['ng-zorro-antd/icon']));
-}(this, (function (exports, bidi, common, core, rxjs, operators, config, decorator, icon) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["error-collect"] = {}), global.ng.cdk.bidi, global.ng.common, global.ng.core, global.rxjs, global.rxjs.operators, global.config, global.decorator, global["ng-zorro-antd/icon"]));
+})(this, (function (exports, bidi, common, core, rxjs, operators, config, decorator, icon) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -457,5 +457,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=errorCollect.umd.js.map

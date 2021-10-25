@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/platform-browser'), require('rxjs'), require('rxjs/operators'), require('@yelon/theme'), require('@yelon/util/browser'), require('@angular/common'), require('@angular/router'), require('ng-zorro-antd/button')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/exception', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/platform-browser', 'rxjs', 'rxjs/operators', '@yelon/theme', '@yelon/util/browser', '@angular/common', '@angular/router', 'ng-zorro-antd/button'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.exception = {}), global.ng.cdk.bidi, global.ng.core, global.ng.platformBrowser, global.rxjs, global.rxjs.operators, global.yelon.theme, global.browser, global.ng.common, global.ng.router, global['ng-zorro-antd/button']));
-}(this, (function (exports, bidi, core, platformBrowser, rxjs, operators, theme, browser, common, router, button) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.exception = {}), global.ng.cdk.bidi, global.ng.core, global.ng.platformBrowser, global.rxjs, global.rxjs.operators, global.yelon.theme, global.browser, global.ng.common, global.ng.router, global["ng-zorro-antd/button"]));
+})(this, (function (exports, bidi, core, platformBrowser, rxjs, operators, theme, browser, common, router, button) { 'use strict';
 
     var ExceptionComponent = /** @class */ (function () {
         function ExceptionComponent(i18n, dom, directionality) {
@@ -143,5 +143,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=exception.umd.js.map

@@ -31036,7 +31036,8 @@ body {
   margin-right: 8px;
   transition: font-size 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.sidebar-nav__item-img {
+.sidebar-nav__item-img,
+.sidebar-nav__item-svg {
   width: 14px;
   height: 14px;
 }
@@ -32884,17 +32885,17 @@ g2-tag-cloud {
   height: 480px;
   overflow: hidden;
   background-color: #000;
-  box-shadow: 10px 10px 10px 0 #888;
+  box-shadow: 10px 10px 10px 0 #303030;
 }
 .yz-application-topic {
-  background-color: #000;
+  background-color: #141414;
 }
 .yz-application-text {
   display: block;
   margin-left: -12px;
   padding: 3px 40px;
   overflow: hidden;
-  color: #000;
+  color: #fff;
   font-weight: bold;
   line-height: 32px;
   white-space: nowrap;
@@ -32905,9 +32906,9 @@ g2-tag-cloud {
   transition: 0.2s;
 }
 .yz-application-text:hover {
-  color: #fff;
+  color: #1890ff;
   font-weight: bold;
-  background: #fff;
+  background: #000;
 }
 .yz-application-container {
   height: 480px;
@@ -32935,7 +32936,7 @@ g2-tag-cloud {
 }
 .yz-application-list ul li h5 {
   margin-top: 0;
-  color: #000;
+  color: #fff;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -32944,15 +32945,15 @@ g2-tag-cloud {
   display: block;
   padding: 0 4px;
   overflow: hidden;
-  color: #000;
+  color: #eae8e8;
   font-size: 12px;
   line-height: 25px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .yz-application-list ul li a:hover {
-  color: #000;
-  background: #fff;
+  color: #1890ff;
+  background: #141414;
 }
 .yz-application-list-search {
   margin: 10px;
@@ -32962,7 +32963,7 @@ g2-tag-cloud {
 .yz-application-list-item p {
   margin: 0;
   overflow: hidden;
-  color: #000;
+  color: #fff;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -32971,9 +32972,14 @@ g2-tag-cloud {
   line-height: 24px;
 }
 .yz-application-list-item p {
-  color: #000;
   line-height: 20px;
 }
 .yz-application-list-item li:hover {
-  background: #fff;
+  background: #141414;
+}
+.yz-application-list-item li:hover p {
+  color: #1890ff;
+}
+.yz-application-list-item li:hover h4 {
+  color: #1890ff;
 }

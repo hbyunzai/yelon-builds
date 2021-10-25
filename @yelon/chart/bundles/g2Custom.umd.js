@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/chart/core'), require('@yelon/util/decorator'), require('@angular/common'), require('ng-zorro-antd/skeleton')) :
     typeof define === 'function' && define.amd ? define('@yelon/chart/custom', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/chart/core', '@yelon/util/decorator', '@angular/common', 'ng-zorro-antd/skeleton'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.chart = global.yelon.chart || {}, global.yelon.chart.custom = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.yelon.chart.core, global.decorator, global.ng.common, global.skeleton));
-}(this, (function (exports, core, rxjs, operators, core$1, decorator, common, skeleton) { 'use strict';
+})(this, (function (exports, core, rxjs, operators, core$1, decorator, common, skeleton) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -403,5 +403,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=g2Custom.umd.js.map

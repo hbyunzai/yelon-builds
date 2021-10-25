@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('date-fns')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/date-time', ['exports', 'date-fns'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util['date-time'] = {}), global.dateFns));
-}(this, (function (exports, dateFns) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util["date-time"] = {}), global.dateFns));
+})(this, (function (exports, dateFns) { 'use strict';
 
     /**
      * Get the time range, return `[ Date, Date]` for the start and end dates
@@ -234,5 +234,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-date-time.umd.js.map

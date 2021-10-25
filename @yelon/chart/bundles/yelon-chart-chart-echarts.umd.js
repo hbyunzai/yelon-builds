@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('@yelon/util/config'), require('@yelon/util/other'), require('@angular/cdk/platform'), require('rxjs/operators'), require('@yelon/util/decorator'), require('@angular/common'), require('ng-zorro-antd/skeleton')) :
     typeof define === 'function' && define.amd ? define('@yelon/chart/chart-echarts', ['exports', '@angular/core', 'rxjs', '@yelon/util/config', '@yelon/util/other', '@angular/cdk/platform', 'rxjs/operators', '@yelon/util/decorator', '@angular/common', 'ng-zorro-antd/skeleton'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.chart = global.yelon.chart || {}, global.yelon.chart['chart-echarts'] = {}), global.ng.core, global.rxjs, global.i1, global.i2, global.ng.cdk.platform, global.rxjs.operators, global.decorator, global.ng.common, global.skeleton));
-}(this, (function (exports, i0, rxjs, i1, i2, platform, operators, decorator, common, skeleton) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.chart = global.yelon.chart || {}, global.yelon.chart["chart-echarts"] = {}), global.ng.core, global.rxjs, global.i1, global.i2, global.ng.cdk.platform, global.rxjs.operators, global.decorator, global.ng.common, global.skeleton));
+})(this, (function (exports, i0, rxjs, i1, i2, platform, operators, decorator, common, skeleton) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -18,14 +18,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -429,6 +427,7 @@
             this._chart = null;
             this._width = '100%';
             this._height = '400px';
+            this.on = [];
             this.events = new i0.EventEmitter();
             this.loaded = false;
             this.srv.notify
@@ -501,9 +500,18 @@
         };
         ChartEChartsComponent.prototype.install = function () {
             this.destroy();
-            this._chart = window.echarts.init(this.node.nativeElement, this._theme, this._initOpt);
+            var chart = (this._chart = window.echarts.init(this.node.nativeElement, this._theme, this._initOpt));
             this.emit('init');
             this.setOption(this._option);
+            // on
+            this.on.forEach(function (item) {
+                if (item.query != null) {
+                    chart.on(item.eventName, item.query, function (event) { return item.handler({ event: event, chart: chart }); });
+                }
+                else {
+                    chart.on(item.eventName, function (event) { return item.handler({ event: event, chart: chart }); });
+                }
+            });
             return this;
         };
         ChartEChartsComponent.prototype.destroy = function () {
@@ -538,6 +546,8 @@
                 .subscribe(function () { return _this._chart.resize(); });
         };
         ChartEChartsComponent.prototype.ngOnDestroy = function () {
+            var _this = this;
+            this.on.forEach(function (item) { var _a; return (_a = _this._chart) === null || _a === void 0 ? void 0 : _a.off(item.eventName); });
             this.destroy$.next();
             this.destroy$.complete();
             this.destroy();
@@ -572,6 +582,7 @@
         theme: [{ type: i0.Input }],
         initOpt: [{ type: i0.Input }],
         option: [{ type: i0.Input }],
+        on: [{ type: i0.Input }],
         events: [{ type: i0.Output }]
     };
     __decorate([
@@ -602,5 +613,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-chart-chart-echarts.umd.js.map

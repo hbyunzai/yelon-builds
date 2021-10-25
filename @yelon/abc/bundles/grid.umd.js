@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@yelon/theme'), require('@angular/common')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/sg', ['exports', '@angular/core', '@yelon/util/config', '@yelon/util/decorator', '@yelon/theme', '@angular/common'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.sg = {}), global.ng.core, global.config, global.decorator, global.yelon.theme, global.ng.common));
-}(this, (function (exports, core, config, decorator, theme, common) { 'use strict';
+})(this, (function (exports, core, config, decorator, theme, common) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -466,5 +466,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=grid.umd.js.map

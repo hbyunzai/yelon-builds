@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/platform-browser'), require('@yelon/acl'), require('@yelon/theme'), require('@yelon/util/other'), require('@angular/common'), require('@angular/common/http'), require('rxjs'), require('rxjs/operators'), require('@yelon/util/format'), require('@yelon/abc/xlsx'), require('@angular/router'), require('ng-zorro-antd/dropdown'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@angular/forms'), require('ng-zorro-antd/badge'), require('ng-zorro-antd/checkbox'), require('ng-zorro-antd/divider'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/input'), require('ng-zorro-antd/menu'), require('ng-zorro-antd/popconfirm'), require('ng-zorro-antd/radio'), require('ng-zorro-antd/resizable'), require('ng-zorro-antd/table'), require('ng-zorro-antd/tag'), require('ng-zorro-antd/tooltip'), require('@yelon/abc/let')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/st', ['exports', '@angular/core', '@angular/platform-browser', '@yelon/acl', '@yelon/theme', '@yelon/util/other', '@angular/common', '@angular/common/http', 'rxjs', 'rxjs/operators', '@yelon/util/format', '@yelon/abc/xlsx', '@angular/router', 'ng-zorro-antd/dropdown', '@yelon/util/config', '@yelon/util/decorator', '@angular/forms', 'ng-zorro-antd/badge', 'ng-zorro-antd/checkbox', 'ng-zorro-antd/divider', 'ng-zorro-antd/icon', 'ng-zorro-antd/input', 'ng-zorro-antd/menu', 'ng-zorro-antd/popconfirm', 'ng-zorro-antd/radio', 'ng-zorro-antd/resizable', 'ng-zorro-antd/table', 'ng-zorro-antd/tag', 'ng-zorro-antd/tooltip', '@yelon/abc/let'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.st = {}), global.ng.core, global.ng.platformBrowser, global.yelon.acl, global.yelon.theme, global.other, global.ng.common, global.ng.common.http, global.rxjs, global.rxjs.operators, global.format, global.yelon.abc.xlsx, global.ng.router, global['ng-zorro-antd/dropdown'], global.config, global.decorator, global.ng.forms, global['ng-zorro-antd/badge'], global['ng-zorro-antd/checkbox'], global['ng-zorro-antd/divider'], global['ng-zorro-antd/icon'], global['ng-zorro-antd/input'], global['ng-zorro-antd/menu'], global['ng-zorro-antd/popconfirm'], global['ng-zorro-antd/radio'], global.resizable, global['ng-zorro-antd/table'], global['ng-zorro-antd/tag'], global['ng-zorro-antd/tooltip'], global.yelon.abc.let));
-}(this, (function (exports, i0, platformBrowser, acl, theme, other, common, http, rxjs, operators, format, xlsx, router, dropdown, config, decorator, forms, badge, checkbox, divider, icon, input, menu, popconfirm, radio, resizable, table, tag, tooltip, _let) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.st = {}), global.ng.core, global.ng.platformBrowser, global.yelon.acl, global.yelon.theme, global.other, global.ng.common, global.ng.common.http, global.rxjs, global.rxjs.operators, global.format, global.yelon.abc.xlsx, global.ng.router, global["ng-zorro-antd/dropdown"], global.config, global.decorator, global.ng.forms, global["ng-zorro-antd/badge"], global["ng-zorro-antd/checkbox"], global["ng-zorro-antd/divider"], global["ng-zorro-antd/icon"], global["ng-zorro-antd/input"], global["ng-zorro-antd/menu"], global["ng-zorro-antd/popconfirm"], global["ng-zorro-antd/radio"], global.resizable, global["ng-zorro-antd/table"], global["ng-zorro-antd/tag"], global["ng-zorro-antd/tooltip"], global.yelon.abc["let"]));
+})(this, (function (exports, i0, platformBrowser, acl, theme, other, common, http, rxjs, operators, format, xlsx, router, dropdown, config, decorator, forms, badge, checkbox, divider, icon, input, menu, popconfirm, radio, resizable, table, tag, tooltip, _let) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -18,14 +18,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -689,6 +687,9 @@
                     }
                     if (this.acl && item.acl && !this.acl.can(item.acl)) {
                         continue;
+                    }
+                    if (Array.isArray(item.children) && item.children.length > 0) {
+                        item.children = this.cleanCond(item.children);
                     }
                     res.push(item);
                 }
@@ -2480,9 +2481,9 @@
     exports.STWidgetHostDirective = STWidgetHostDirective;
     exports.STWidgetRegistry = STWidgetRegistry;
     exports.ST_DEFAULT_CONFIG = ST_DEFAULT_CONFIG;
-    exports.ɵa = STRowSource;
+    exports["ɵa"] = STRowSource;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=table.umd.js.map

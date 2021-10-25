@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/core'), require('@angular/platform-browser'), require('rxjs'), require('rxjs/operators'), require('@yelon/acl'), require('@yelon/theme'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@yelon/util/other'), require('ajv'), require('ajv-formats'), require('@yelon/util/format'), require('ng-zorro-antd/core/animation'), require('@angular/common'), require('@angular/forms'), require('ng-zorro-antd/auto-complete'), require('ng-zorro-antd/button'), require('ng-zorro-antd/card'), require('ng-zorro-antd/cascader'), require('ng-zorro-antd/checkbox'), require('ng-zorro-antd/date-picker'), require('ng-zorro-antd/form'), require('ng-zorro-antd/grid'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/input'), require('ng-zorro-antd/input-number'), require('ng-zorro-antd/mention'), require('ng-zorro-antd/modal'), require('ng-zorro-antd/radio'), require('ng-zorro-antd/rate'), require('ng-zorro-antd/select'), require('ng-zorro-antd/slider'), require('ng-zorro-antd/switch'), require('ng-zorro-antd/tag'), require('ng-zorro-antd/time-picker'), require('ng-zorro-antd/tooltip'), require('ng-zorro-antd/transfer'), require('ng-zorro-antd/tree-select'), require('ng-zorro-antd/upload'), require('date-fns'), require('@yelon/util/date-time'), require('@yelon/util/array')) :
     typeof define === 'function' && define.amd ? define('@yelon/form', ['exports', '@angular/cdk/platform', '@angular/core', '@angular/platform-browser', 'rxjs', 'rxjs/operators', '@yelon/acl', '@yelon/theme', '@yelon/util/config', '@yelon/util/decorator', '@yelon/util/other', 'ajv', 'ajv-formats', '@yelon/util/format', 'ng-zorro-antd/core/animation', '@angular/common', '@angular/forms', 'ng-zorro-antd/auto-complete', 'ng-zorro-antd/button', 'ng-zorro-antd/card', 'ng-zorro-antd/cascader', 'ng-zorro-antd/checkbox', 'ng-zorro-antd/date-picker', 'ng-zorro-antd/form', 'ng-zorro-antd/grid', 'ng-zorro-antd/icon', 'ng-zorro-antd/input', 'ng-zorro-antd/input-number', 'ng-zorro-antd/mention', 'ng-zorro-antd/modal', 'ng-zorro-antd/radio', 'ng-zorro-antd/rate', 'ng-zorro-antd/select', 'ng-zorro-antd/slider', 'ng-zorro-antd/switch', 'ng-zorro-antd/tag', 'ng-zorro-antd/time-picker', 'ng-zorro-antd/tooltip', 'ng-zorro-antd/transfer', 'ng-zorro-antd/tree-select', 'ng-zorro-antd/upload', 'date-fns', '@yelon/util/date-time', '@yelon/util/array'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.form = {}), global.ng.cdk.platform, global.ng.core, global.ng.platformBrowser, global.rxjs, global.rxjs.operators, global.yelon.acl, global.yelon.theme, global.config, global.decorator, global.other, global.Ajv, global.addFormats, global.format, global['ng-zorro-antd/core/animation'], global.ng.common, global.ng.forms, global['ng-zorro-antd/auto-complete'], global['ng-zorro-antd/button'], global['ng-zorro-antd/card'], global['ng-zorro-antd/cascader'], global['ng-zorro-antd/checkbox'], global['ng-zorro-antd/date-picker'], global['ng-zorro-antd/form'], global['ng-zorro-antd/grid'], global['ng-zorro-antd/icon'], global['ng-zorro-antd/input'], global['ng-zorro-antd/input-number'], global['ng-zorro-antd/mention'], global['ng-zorro-antd/modal'], global['ng-zorro-antd/radio'], global['ng-zorro-antd/rate'], global['ng-zorro-antd/select'], global['ng-zorro-antd/slider'], global['ng-zorro-antd/switch'], global['ng-zorro-antd/tag'], global['ng-zorro-antd/time-picker'], global['ng-zorro-antd/tooltip'], global['ng-zorro-antd/transfer'], global['ng-zorro-antd/tree-select'], global['ng-zorro-antd/upload'], global.dateFns, global.dateTime, global.array));
-}(this, (function (exports, platform, core, platformBrowser, rxjs, operators, acl, theme, config, decorator, other, Ajv, addFormats, format, animation, common, forms, autoComplete, button, card, cascader, checkbox, datePicker, form, grid, icon, input, inputNumber, mention, modal, radio, rate, select, slider, _switch, tag, timePicker, tooltip, transfer, treeSelect, upload, dateFns, dateTime, array) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.form = {}), global.ng.cdk.platform, global.ng.core, global.ng.platformBrowser, global.rxjs, global.rxjs.operators, global.yelon.acl, global.yelon.theme, global.config, global.decorator, global.other, global.Ajv, global.addFormats, global.format, global["ng-zorro-antd/core/animation"], global.ng.common, global.ng.forms, global["ng-zorro-antd/auto-complete"], global["ng-zorro-antd/button"], global["ng-zorro-antd/card"], global["ng-zorro-antd/cascader"], global["ng-zorro-antd/checkbox"], global["ng-zorro-antd/date-picker"], global["ng-zorro-antd/form"], global["ng-zorro-antd/grid"], global["ng-zorro-antd/icon"], global["ng-zorro-antd/input"], global["ng-zorro-antd/input-number"], global["ng-zorro-antd/mention"], global["ng-zorro-antd/modal"], global["ng-zorro-antd/radio"], global["ng-zorro-antd/rate"], global["ng-zorro-antd/select"], global["ng-zorro-antd/slider"], global["ng-zorro-antd/switch"], global["ng-zorro-antd/tag"], global["ng-zorro-antd/time-picker"], global["ng-zorro-antd/tooltip"], global["ng-zorro-antd/transfer"], global["ng-zorro-antd/tree-select"], global["ng-zorro-antd/upload"], global.dateFns, global.dateTime, global.array));
+})(this, (function (exports, platform, core, platformBrowser, rxjs, operators, acl, theme, config, decorator, other, Ajv, addFormats, format, animation, common, forms, autoComplete, button, card, cascader, checkbox, datePicker, form, grid, icon, input, inputNumber, mention, modal, radio, rate, select, slider, _switch, tag, timePicker, tooltip, transfer, treeSelect, upload, dateFns, dateTime, array) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -1259,8 +1259,8 @@
             _this.options = mergeConfig(cogSrv);
             var customOptions = _this.options.ajv || {};
             _this.ngZone.runOutsideAngular(function () {
-                _this.ajv = new Ajv__default['default'](Object.assign(Object.assign({ allErrors: true, loopEnum: 50 }, customOptions), { formats: Object.assign({ 'data-url': /^data:([a-z]+\/[a-z0-9-+.]+)?;name=(.*);base64,(.*)$/, color: format.REGEX.color, mobile: format.REGEX.mobile, 'id-card': format.REGEX.idCard }, customOptions.formats) }));
-                addFormats__default['default'](_this.ajv);
+                _this.ajv = new Ajv__default["default"](Object.assign(Object.assign({ allErrors: true, loopEnum: 50 }, customOptions), { formats: Object.assign({ 'data-url': /^data:([a-z]+\/[a-z0-9-+.]+)?;name=(.*);base64,(.*)$/, color: format.REGEX.color, mobile: format.REGEX.mobile, 'id-card': format.REGEX.idCard }, customOptions.formats) }));
+                addFormats__default["default"](_this.ajv);
             });
             return _this;
         }
@@ -1537,9 +1537,9 @@
                 Object.keys(schema.properties).forEach(function (key) {
                     var uiKey = "$" + key;
                     var property = retrieveSchema(schema.properties[key], definitions);
-                    var ui = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ widget: property.type }, (property.format && _this.options.formatMap[property.format])), (typeof property.ui === 'string' ? { widget: property.ui } : null)), (!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
+                    var ui = other.deepCopy(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ widget: property.type }, (property.format && _this.options.formatMap[property.format])), (typeof property.ui === 'string' ? { widget: property.ui } : null)), (!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
                         ? { widget: 'select' }
-                        : null)), _this._defUi), property.ui), uiSchema[uiKey]);
+                        : null)), _this._defUi), property.ui), uiSchema[uiKey]));
                     // 继承父节点布局属性
                     if (isHorizontal) {
                         if (parentUiSchema.spanLabelFixed) {
@@ -2339,6 +2339,7 @@
             _this.typing = '';
             _this.isAsync = false;
             _this.fixData = [];
+            _this.updateTyping = true;
             return _this;
         }
         AutoCompleteWidget.prototype.updateValue = function (item) {
@@ -2358,7 +2359,7 @@
         };
         AutoCompleteWidget.prototype.afterViewInit = function () {
             var _this = this;
-            var _a = this.ui, backfill = _a.backfill, defaultActiveFirstOption = _a.defaultActiveFirstOption, nzWidth = _a.nzWidth, filterOption = _a.filterOption, asyncData = _a.asyncData;
+            var _c = this.ui, backfill = _c.backfill, defaultActiveFirstOption = _c.defaultActiveFirstOption, nzWidth = _c.nzWidth, filterOption = _c.filterOption, asyncData = _c.asyncData;
             this.i = {
                 backfill: toBool(backfill, false),
                 defaultActiveFirstOption: toBool(defaultActiveFirstOption, true),
@@ -2372,10 +2373,19 @@
             this.isAsync = !!asyncData;
             var orgTime = +(this.ui.debounceTime || 0);
             var time = Math.max(0, this.isAsync ? Math.max(50, orgTime) : orgTime);
-            this.list = this.ngModel.valueChanges.pipe(operators.debounceTime(time), operators.startWith(''), operators.mergeMap(function (input) { return (_this.isAsync ? asyncData(input) : _this.filterData(input)); }), operators.map(function (res) { return getEnum(res, null, _this.schema.readOnly); }));
+            this.list = this.ngModel.valueChanges.pipe(operators.debounceTime(time), operators.startWith(''), operators.mergeMap(function (input) { return (_this.isAsync ? asyncData(input) : _this.filterData(input)); }), operators.map(function (res) {
+                var _a, _b;
+                var data = getEnum(res, null, _this.schema.readOnly);
+                if (_this.updateTyping) {
+                    _this.updateTyping = false;
+                    _this.typing = (_b = (_a = data.find(function (w) { return w.value === _this.value; })) === null || _a === void 0 ? void 0 : _a.label) !== null && _b !== void 0 ? _b : '';
+                }
+                return data;
+            }));
         };
         AutoCompleteWidget.prototype.reset = function (value) {
-            this.typing = this.value;
+            this.typing = value;
+            this.updateTyping = true;
             if (this.isAsync)
                 return;
             switch (this.ui.type) {
@@ -3771,9 +3781,10 @@
     exports.retrieveSchema = retrieveSchema;
     exports.toBool = toBool;
     exports.useFactory = useFactory;
-    exports.ɵa = TerminatorService;
+    exports["ɵa"] = TerminatorService;
+    exports["ɵb"] = NzWidgetRegistry;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=form.umd.js.map

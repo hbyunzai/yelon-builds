@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/chart/core'), require('@yelon/util/decorator'), require('@angular/common'), require('ng-zorro-antd/core/outlet'), require('ng-zorro-antd/divider'), require('ng-zorro-antd/skeleton')) :
     typeof define === 'function' && define.amd ? define('@yelon/chart/pie', ['exports', '@angular/core', '@yelon/chart/core', '@yelon/util/decorator', '@angular/common', 'ng-zorro-antd/core/outlet', 'ng-zorro-antd/divider', 'ng-zorro-antd/skeleton'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.chart = global.yelon.chart || {}, global.yelon.chart.pie = {}), global.ng.core, global.yelon.chart.core, global.decorator, global.ng.common, global['ng-zorro-antd/core/outlet'], global['ng-zorro-antd/divider'], global.skeleton));
-}(this, (function (exports, core, core$1, decorator, common, outlet, divider, skeleton) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.chart = global.yelon.chart || {}, global.yelon.chart.pie = {}), global.ng.core, global.yelon.chart.core, global.decorator, global.ng.common, global["ng-zorro-antd/core/outlet"], global["ng-zorro-antd/divider"], global.skeleton));
+})(this, (function (exports, core, core$1, decorator, common, outlet, divider, skeleton) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -563,5 +563,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=pie.umd.js.map

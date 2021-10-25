@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@yelon/acl'), require('@yelon/util/config'), require('@angular/cdk/platform'), require('@angular/cdk/bidi'), require('@angular/common'), require('ng-zorro-antd/core/config'), require('@angular/platform-browser'), require('@angular/router'), require('ng-zorro-antd/modal'), require('@yelon/util/other'), require('ng-zorro-antd/drawer'), require('@angular/common/http'), require('date-fns'), require('ng-zorro-antd/i18n'), require('@yelon/util/date-time'), require('@angular/cdk/overlay'), require('@ant-design/icons-angular/icons'), require('ng-zorro-antd/icon')) :
     typeof define === 'function' && define.amd ? define('@yelon/theme', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@yelon/acl', '@yelon/util/config', '@angular/cdk/platform', '@angular/cdk/bidi', '@angular/common', 'ng-zorro-antd/core/config', '@angular/platform-browser', '@angular/router', 'ng-zorro-antd/modal', '@yelon/util/other', 'ng-zorro-antd/drawer', '@angular/common/http', 'date-fns', 'ng-zorro-antd/i18n', '@yelon/util/date-time', '@angular/cdk/overlay', '@ant-design/icons-angular/icons', 'ng-zorro-antd/icon'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.yelon.acl, global.yelon.util.config, global.ng.cdk.platform, global.ng.cdk.bidi, global.ng.common, global.i3, global.ng.platformBrowser, global.ng.router, global['ng-zorro-antd/modal'], global.yelon.util.other, global['ng-zorro-antd/drawer'], global.ng.common.http, global.DateFns, global['ng-zorro-antd/i18n'], global.yelon.util['date-time'], global.ng.cdk.overlay, global.icons, global['ng-zorro-antd/icon']));
-}(this, (function (exports, i0, rxjs, operators, i2, i1, i1$1, i1$2, i6, i3, i1$3, router, i1$4, other, i1$5, i1$6, dateFns, i18n, dateTime, overlay, icons, icon) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.yelon.acl, global.yelon.util.config, global.ng.cdk.platform, global.ng.cdk.bidi, global.ng.common, global.i3, global.ng.platformBrowser, global.ng.router, global["ng-zorro-antd/modal"], global.yelon.util.other, global["ng-zorro-antd/drawer"], global.ng.common.http, global.DateFns, global["ng-zorro-antd/i18n"], global.yelon.util["date-time"], global.ng.cdk.overlay, global.icons, global["ng-zorro-antd/icon"]));
+})(this, (function (exports, i0, rxjs, operators, i2, i1, i1$1, i1$2, i6, i3, i1$3, router, i1$4, other, i1$5, i1$6, dateFns, i18n, dateTime, overlay, icons, icon) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -18,14 +18,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -1663,8 +1661,8 @@
             }
         },
         onboarding: {
-            skip: "\u03A0\u03B1\u03C1\u03B1\u03BB\u03B5\u03AF\u03C0\u03C9",
-            prev: "\u03A0\u03C1\u03BF\u03B7\u03B3",
+            skip: "\u03A0\u03B1\u03C1\u03AC\u03BB\u03B5\u03B9\u03C8\u03B7",
+            prev: "\u03A0\u03C1\u03BF\u03B7\u03B3\u03BF\u03CD\u03BC\u03B5\u03BD\u03BF",
             next: "\u0395\u03C0\u03CC\u03BC\u03B5\u03BD\u03BF",
             done: "\u039F\u03BB\u03BF\u03BA\u03BB\u03B7\u03C1\u03CE\u03B8\u03B7\u03BA\u03B5"
         }
@@ -2128,6 +2126,89 @@
             prev: "Previo",
             next: "Siguiente",
             done: "Terminado"
+        }
+    };
+
+    var itIT = {
+        abbr: 'it-IT',
+        exception: {
+            403: "Spiacenti, non hai accesso a questa pagina",
+            404: "Spiacenti, la pagina che hai visitato non esiste",
+            500: "Spiacenti, il server sta riscontrando un errore",
+            backToHome: 'Torna alla Home'
+        },
+        noticeIcon: {
+            emptyText: 'Nessun dato',
+            clearText: 'Cancella memoria locale'
+        },
+        reuseTab: {
+            close: 'Chiudi la scheda',
+            closeOther: 'Chiudi le altre schede',
+            closeRight: 'Chiudi le schede a destra',
+            refresh: 'Aggiorna'
+        },
+        tagSelect: {
+            expand: 'Espandi',
+            collapse: 'Comprimi'
+        },
+        miniProgress: {
+            target: 'Obiettivo: '
+        },
+        st: {
+            total: '{{range[0]}} - {{range[1]}} di {{total}}',
+            filterConfirm: 'OK',
+            filterReset: 'Reimposta'
+        },
+        sf: {
+            submit: 'Invia',
+            reset: 'Reimposta',
+            search: 'Cerca',
+            edit: 'Salva',
+            addText: 'Aggiungi',
+            removeText: 'Rimuovi',
+            checkAllText: 'Seleziona tutto',
+            error: {
+                'false schema': "Lo schema booleano \u00E8 falso",
+                $ref: "Impossibile risolvere il riferimento {ref}",
+                additionalItems: "Non deve avere pi\u00F9 di {limit} elementi",
+                additionalProperties: "Non deve avere propriet\u00E0 aggiuntive",
+                anyOf: "Deve corrispondere a uno schema in \"anyOf\"",
+                dependencies: "Deve avere una propriet\u00E0 {deps} quando \u00E8 presente la propriet\u00E0 {property}",
+                enum: "Deve essere uguale a uno dei valori predefiniti",
+                format: "Deve corrispondere al formato \"{format}\"",
+                type: "Deve essere {type}",
+                required: "Obbligatorio",
+                maxLength: "Non deve essere superiore a {limit} caratteri",
+                minLength: "Non deve essere superiore a {limit} caratteri",
+                minimum: "Deve essere {comparison} {limit}",
+                formatMinimum: "Deve essere {comparison} {limit}",
+                maximum: "Deve essere {comparison} {limit}",
+                formatMaximum: "Deve essere {comparison} {limit}",
+                maxItems: "Non deve avere pi\u00F9 di {limit} elementi",
+                minItems: "Non deve avere meno di {limit} elementi",
+                maxProperties: "Non deve avere pi\u00F9 di {limit} propriet\u00E0",
+                minProperties: "Non deve avere meno di {limit} propriet\u00E0",
+                multipleOf: "Deve essere un multiplo di {multipleOf}",
+                not: "Non deve essere valido secondo lo schema in \"not\"",
+                oneOf: "Deve corrispondere esattamente a uno schema in \"oneOf\"",
+                pattern: "Deve corrispondere al modello \"{pattern}\"",
+                uniqueItems: "Non deve avere elementi duplicati (gli elementi ## {j} e {i} sono identici)",
+                custom: "Deve corrispondere al formato \"{format}\"",
+                propertyNames: "Il nome della propriet\u00E0 \"{propertyName}\" non \u00E8 valido",
+                patternRequired: "Deve avere una propriet\u00E0 corrispondete al modello \"{missingPattern}\"",
+                switch: "Deve superare la convalida della parola chiave \"switch\", il caso {caseIndex} non \u00E8 riuscito",
+                const: "Deve essere uguale alla costante",
+                contains: "Deve contenere un elemento valido",
+                formatExclusiveMaximum: "formatExclusiveMaximum deve essere booleano",
+                formatExclusiveMinimum: "formatExclusiveMaximum deve essere booleano",
+                if: "Deve corrispondere allo schema \"{failingKeyword}\""
+            }
+        },
+        onboarding: {
+            skip: "Salta",
+            prev: "Precedente",
+            next: "Successivo",
+            done: "Fatto"
         }
     };
 
@@ -2846,7 +2927,7 @@
         { type: icon.NzIconService }
     ]; };
 
-    var VERSION = new i0.Version('12.0.8');
+    var VERSION = new i0.Version('12.0.11');
 
     /**
      * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
@@ -2930,6 +3011,7 @@
     exports.es_ES = esES;
     exports.fr_FR = frFR;
     exports.hr_HR = hrHR;
+    exports.it_IT = itIT;
     exports.ja_JP = jaJP;
     exports.ko_KR = koKR;
     exports.pl_PL = plPL;
@@ -2938,9 +3020,9 @@
     exports.tr_TR = trTR;
     exports.zh_CN = zhCN;
     exports.zh_TW = zhTW;
-    exports.ɵa = I18nPipe;
+    exports["ɵa"] = I18nPipe;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=theme.umd.js.map

@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('date-fns'), require('@angular/common'), require('ngx-countdown')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/count-down', ['exports', '@angular/core', 'date-fns', '@angular/common', 'ngx-countdown'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['count-down'] = {}), global.ng.core, global.DateFns, global.ng.common, global.ngxCountDown));
-}(this, (function (exports, core, dateFns, common, ngxCountdown) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["count-down"] = {}), global.ng.core, global.DateFns, global.ng.common, global.ngxCountDown));
+})(this, (function (exports, core, dateFns, common, ngxCountdown) { 'use strict';
 
     var CountDownComponent = /** @class */ (function () {
         function CountDownComponent() {
@@ -71,5 +71,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=count-down.umd.js.map

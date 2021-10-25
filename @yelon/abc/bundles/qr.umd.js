@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/core'), require('rxjs/operators'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('@yelon/util/other'), require('@angular/common')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/qr', ['exports', '@angular/cdk/platform', '@angular/core', 'rxjs/operators', '@yelon/util/config', '@yelon/util/decorator', '@yelon/util/other', '@angular/common'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.qr = {}), global.ng.cdk.platform, global.ng.core, global.rxjs.operators, global.config, global.decorator, global.other, global.ng.common));
-}(this, (function (exports, platform, core, operators, config, decorator, other, common) { 'use strict';
+})(this, (function (exports, platform, core, operators, config, decorator, other, common) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -487,5 +487,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=qr.umd.js.map

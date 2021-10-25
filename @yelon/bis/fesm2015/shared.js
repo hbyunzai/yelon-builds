@@ -996,20 +996,9 @@ const ICONS = [
     YahooFill
 ];
 
-const BUSINESS_DEFAULT_CONFIG = {
-    baseUrl: '/backstage',
-    systemCode: 'portal',
-    loginForm: null,
-    refreshTokenEnabled: true,
-    refreshTokenType: 're-request'
-};
-function mergeConfig(srv) {
-    return srv.merge('bis', BUSINESS_DEFAULT_CONFIG);
-}
-
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BUSINESS_DEFAULT_CONFIG, ICONS, YZ_SHARED_YELON_MODULES, YZ_SHARED_ZORRO_MODULES, YzSharedModule, mergeConfig };
+export { ICONS, YZ_SHARED_YELON_MODULES, YZ_SHARED_ZORRO_MODULES, YzSharedModule };
 //# sourceMappingURL=shared.js.map

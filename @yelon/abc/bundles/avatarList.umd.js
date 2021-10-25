@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/bidi'), require('rxjs'), require('rxjs/operators'), require('@yelon/util/decorator'), require('@angular/common'), require('ng-zorro-antd/avatar'), require('ng-zorro-antd/tooltip')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/avatar-list', ['exports', '@angular/core', '@angular/cdk/bidi', 'rxjs', 'rxjs/operators', '@yelon/util/decorator', '@angular/common', 'ng-zorro-antd/avatar', 'ng-zorro-antd/tooltip'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['avatar-list'] = {}), global.ng.core, global.ng.cdk.bidi, global.rxjs, global.rxjs.operators, global.decorator, global.ng.common, global['ng-zorro-antd/avatar'], global['ng-zorro-antd/tooltip']));
-}(this, (function (exports, core, bidi, rxjs, operators, decorator, common, avatar, tooltip) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["avatar-list"] = {}), global.ng.core, global.ng.cdk.bidi, global.rxjs, global.rxjs.operators, global.decorator, global.ng.common, global["ng-zorro-antd/avatar"], global["ng-zorro-antd/tooltip"]));
+})(this, (function (exports, core, bidi, rxjs, operators, decorator, common, avatar, tooltip) { 'use strict';
 
     var AvatarListItemComponent = /** @class */ (function () {
         function AvatarListItemComponent() {
@@ -461,5 +461,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=avatarList.umd.js.map

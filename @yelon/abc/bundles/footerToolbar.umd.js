@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@yelon/util/decorator'), require('ng-zorro-antd/core/outlet'), require('@yelon/abc/error-collect')) :
     typeof define === 'function' && define.amd ? define('@yelon/abc/footer-toolbar', ['exports', '@angular/common', '@angular/core', '@yelon/util/decorator', 'ng-zorro-antd/core/outlet', '@yelon/abc/error-collect'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc['footer-toolbar'] = {}), global.ng.common, global.ng.core, global.decorator, global['ng-zorro-antd/core/outlet'], global.yelon.abc['error-collect']));
-}(this, (function (exports, common, core, decorator, outlet, errorCollect) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc["footer-toolbar"] = {}), global.ng.common, global.ng.core, global.decorator, global["ng-zorro-antd/core/outlet"], global.yelon.abc["error-collect"]));
+})(this, (function (exports, common, core, decorator, outlet, errorCollect) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -397,5 +397,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=footerToolbar.umd.js.map

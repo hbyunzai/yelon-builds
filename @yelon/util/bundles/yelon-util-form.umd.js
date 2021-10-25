@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -7,7 +7,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@yelon/util/format')) :
     typeof define === 'function' && define.amd ? define('@yelon/util/form', ['exports', '@yelon/util/format'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.form = {}), global.yelon.util.format));
-}(this, (function (exports, format) { 'use strict';
+})(this, (function (exports, format) { 'use strict';
 
     /**
      * A set of validators for reactive forms
@@ -131,5 +131,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=yelon-util-form.umd.js.map

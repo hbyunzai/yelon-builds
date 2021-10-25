@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.8
+ * @license ng-yunzai(devcui@outlook.com) v12.0.11
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/cache'), require('@yelon/theme'), require('@yelon/util'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/common/locales/en'), require('@angular/common/locales/zh'), require('@angular/common/locales/zh-Hant'), require('date-fns/locale'), require('ng-zorro-antd/i18n'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('rxjs'), require('rxjs/operators'), require('date-fns'), require('ng-zorro-antd/message'), require('@yelon/util/other'), require('@angular/cdk/bidi'), require('@yelon/theme/theme-btn'), require('@yelon/auth'), require('@yelon/bis/shared'), require('ng-zorro-antd/modal'), require('screenfull'), require('@angular/common/http'), require('@angular/forms'), require('@angular/router'), require('ng-zorro-antd/notification'), require('ng-zorro-antd/icon'), require('@yelon/acl')) :
-    typeof define === 'function' && define.amd ? define('@yelon/bis/layout', ['exports', '@angular/core', '@yelon/cache', '@yelon/theme', '@yelon/util', '@angular/cdk/platform', '@angular/common', '@angular/common/locales/en', '@angular/common/locales/zh', '@angular/common/locales/zh-Hant', 'date-fns/locale', 'ng-zorro-antd/i18n', '@yelon/util/config', '@yelon/util/decorator', 'rxjs', 'rxjs/operators', 'date-fns', 'ng-zorro-antd/message', '@yelon/util/other', '@angular/cdk/bidi', '@yelon/theme/theme-btn', '@yelon/auth', '@yelon/bis/shared', 'ng-zorro-antd/modal', 'screenfull', '@angular/common/http', '@angular/forms', '@angular/router', 'ng-zorro-antd/notification', 'ng-zorro-antd/icon', '@yelon/acl'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.bis = global.yelon.bis || {}, global.yelon.bis.layout = {}), global.ng.core, global.yelon.cache, global.yelon.theme, global.yelon.util, global.ng.cdk.platform, global.ng.common, global.ng.common.locales.en, global.ng.common.locales.zh, global.ng.common.locales.zhHant, global.locale, global['ng-zorro-antd/i18n'], global.yelon.util.config, global.decorator, global.rxjs, global.rxjs.operators, global.DateFns, global.message, global.yelon.util.other, global.ng.cdk.bidi, global.themeBtn, global.yelon.auth, global.yelon.bis.shared, global['ng-zorro-antd/modal'], global.screenfull, global.ng.common.http, global.ng.forms, global.ng.router, global.notification, global['ng-zorro-antd/icon'], global.yelon.acl));
-}(this, (function (exports, i0, cache, i1, util, i3, common, ngEn, ngZh, ngZhTw, locale, i2, i4, decorator, rxjs, operators, dateFns, message, other, bidi, themeBtn, auth, shared, modal, screenfull, http, forms, router, notification, icon, acl) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/cache'), require('@yelon/theme'), require('@yelon/util'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/common/locales/en'), require('@angular/common/locales/zh'), require('@angular/common/locales/zh-Hant'), require('date-fns/locale'), require('ng-zorro-antd/i18n'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('rxjs'), require('rxjs/operators'), require('date-fns'), require('ng-zorro-antd/message'), require('@yelon/util/other'), require('@angular/cdk/bidi'), require('@yelon/theme/theme-btn'), require('@yelon/auth'), require('ng-zorro-antd/modal'), require('screenfull'), require('@angular/common/http'), require('@angular/forms'), require('@angular/router'), require('@yelon/bis/shared'), require('@stomp/rx-stomp'), require('ng-zorro-antd/notification'), require('ng-zorro-antd/icon'), require('@yelon/acl')) :
+    typeof define === 'function' && define.amd ? define('@yelon/bis/layout', ['exports', '@angular/core', '@yelon/cache', '@yelon/theme', '@yelon/util', '@angular/cdk/platform', '@angular/common', '@angular/common/locales/en', '@angular/common/locales/zh', '@angular/common/locales/zh-Hant', 'date-fns/locale', 'ng-zorro-antd/i18n', '@yelon/util/config', '@yelon/util/decorator', 'rxjs', 'rxjs/operators', 'date-fns', 'ng-zorro-antd/message', '@yelon/util/other', '@angular/cdk/bidi', '@yelon/theme/theme-btn', '@yelon/auth', 'ng-zorro-antd/modal', 'screenfull', '@angular/common/http', '@angular/forms', '@angular/router', '@yelon/bis/shared', '@stomp/rx-stomp', 'ng-zorro-antd/notification', 'ng-zorro-antd/icon', '@yelon/acl'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.bis = global.yelon.bis || {}, global.yelon.bis.layout = {}), global.ng.core, global.yelon.cache, global.yelon.theme, global.yelon.util, global.ng.cdk.platform, global.ng.common, global.ng.common.locales.en, global.ng.common.locales.zh, global.ng.common.locales.zhHant, global.locale, global["ng-zorro-antd/i18n"], global.yelon.util.config, global.decorator, global.rxjs, global.rxjs.operators, global.DateFns, global.message, global.yelon.util.other, global.ng.cdk.bidi, global.themeBtn, global.yelon.auth, global["ng-zorro-antd/modal"], global.screenfull, global.ng.common.http, global.ng.forms, global.ng.router, global.yelon.bis.shared, global.rxStomp, global.i3$1, global["ng-zorro-antd/icon"], global.yelon.acl));
+})(this, (function (exports, i0, i2$1, i1, util, i3, common, ngEn, ngZh, ngZhTw, locale, i2, i4, decorator, rxjs, operators, dateFns, message, other, bidi, themeBtn, auth, modal, screenfull, http, forms, router, shared, rxStomp, i3$1, icon, acl) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -20,18 +20,17 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i2__namespace$1 = /*#__PURE__*/_interopNamespace(i2$1);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
     var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
     var ngEn__default = /*#__PURE__*/_interopDefaultLegacy(ngEn);
@@ -40,6 +39,7 @@
     var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
     var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
     var screenfull__namespace = /*#__PURE__*/_interopNamespace(screenfull);
+    var i3__namespace$1 = /*#__PURE__*/_interopNamespace(i3$1);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -363,7 +363,7 @@
     var LANGS = {
         'zh-CN': {
             text: '简体中文',
-            ng: ngZh__default['default'],
+            ng: ngZh__default["default"],
             zorro: i2.zh_CN,
             date: locale.zhCN,
             yelon: i1.zh_CN,
@@ -371,7 +371,7 @@
         },
         'zh-TW': {
             text: '繁体中文',
-            ng: ngZhTw__default['default'],
+            ng: ngZhTw__default["default"],
             zorro: i2.zh_TW,
             date: locale.zhTW,
             yelon: i1.zh_TW,
@@ -379,7 +379,7 @@
         },
         'en-US': {
             text: 'English',
-            ng: ngEn__default['default'],
+            ng: ngEn__default["default"],
             zorro: i2.en_US,
             date: locale.enUS,
             yelon: i1.en_US,
@@ -569,13 +569,13 @@
     YzHeaderApplicationComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'yz-header-application',
-                    template: "\n    <!--      template start-->\n    <ng-template #search>\n      <div nz-row class=\"yz-application-list-search\">\n        <nz-input-group [nzPrefix]=\"prefixTemplate\">\n          <input\n            type=\"text\"\n            nz-input\n            [placeholder]=\"'\u8BF7\u8F93\u5165\u8981\u641C\u7D22\u7684\u5E94\u7528\u540D\u79F0!'\"\n            [(ngModel)]=\"searchValue\"\n            (ngModelChange)=\"onSearch()\"\n          />\n          <ng-template #prefixTemplate>\n            <i nz-icon nzType=\"search\" nzTheme=\"outline\"></i>\n          </ng-template>\n        </nz-input-group>\n      </div>\n    </ng-template>\n    <ng-template #ld>\n      <div class=\"yz-application-list\">\n        <ul>\n          <li *ngFor=\"let d of listData\">\n            <h5>{{ d.name }}</h5>\n            <a href=\"javascript:;\" *ngFor=\"let cd of d.children\" (click)=\"open(cd)\">{{ cd.name }}</a>\n          </li>\n        </ul>\n      </div>\n    </ng-template>\n    <!--      template end-->\n\n    <!--      button start-->\n    <div class=\"yunzai-default__nav-item\" (click)=\"diffChange()\"> \u5E94\u7528\u4E0E\u670D\u52A1</div>\n    <!--      button end-->\n\n    <!--      header start-->\n    <div class=\"yz-application\" nz-row *ngIf=\"active\">\n      <div nz-col [nzSpan]=\"3\" class=\"yz-application-topic\">\n        <div class=\"yz-application-text\" (click)=\"full()\">\u5168\u90E8\u5E94\u7528</div>\n        <div class=\"yz-application-text\" (click)=\"own()\">\u6211\u7684\u5E94\u7528</div>\n        <div class=\"yz-application-text\" *ngFor=\"let d of topicData\" (click)=\"every(d)\">\n          {{ d.name }}\n        </div>\n      </div>\n      <div nz-col [nzSpan]=\"21\" [ngSwitch]=\"topic\" class=\"yz-application-container\">\n        <div *ngSwitchCase=\"T.FULL\">\n          <ng-template [ngTemplateOutlet]=\"search\"></ng-template>\n          <ng-template [ngTemplateOutlet]=\"ld\"></ng-template>\n        </div>\n        <div *ngSwitchCase=\"T.OWN\">\n          <ng-template [ngTemplateOutlet]=\"search\"></ng-template>\n          <ng-template [ngTemplateOutlet]=\"ld\"></ng-template>\n        </div>\n        <div *ngSwitchCase=\"T.EVERY\" class=\"yz-application-list\">\n          <div class=\"yz-application-list-item\">\n            <ul>\n              <li *ngFor=\"let d of listData\" (click)=\"open(d)\">\n                <a href=\"javascript:;\">\n                  <h4>{{ d.name }}</h4>\n                  <p>{{ d.intro }}</p>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n    <!--      header end-->\n  ",
+                    template: "\n    <!--      template start-->\n    <ng-template #search>\n      <div nz-row class=\"yz-application-list-search\">\n        <nz-input-group [nzPrefix]=\"prefixTemplate\">\n          <input\n            type=\"text\"\n            nz-input\n            placeholder=\"{{ 'application.search' | i18n }}\"\n            [(ngModel)]=\"searchValue\"\n            (ngModelChange)=\"onSearch()\"\n          />\n          <ng-template #prefixTemplate>\n            <i nz-icon nzType=\"search\" nzTheme=\"outline\"></i>\n          </ng-template>\n        </nz-input-group>\n      </div>\n    </ng-template>\n    <ng-template #ld>\n      <div class=\"yz-application-list\">\n        <ul>\n          <li *ngFor=\"let d of listData\">\n            <h5>{{ d.name }}</h5>\n            <a href=\"javascript:;\" *ngFor=\"let cd of d.children\" (click)=\"open(cd)\">{{ cd.name }}</a>\n          </li>\n        </ul>\n      </div>\n    </ng-template>\n    <!--      template end-->\n\n    <!--      button start-->\n    <div class=\"yunzai-default__nav-item\" (click)=\"diffChange()\"> {{ 'application.button' | i18n }}</div>\n    <!--      button end-->\n\n    <!--      header start-->\n    <div class=\"yz-application\" nz-row *ngIf=\"active\">\n      <div nz-col [nzSpan]=\"3\" class=\"yz-application-topic\">\n        <div class=\"yz-application-text\" (click)=\"full()\">{{ 'application.all' | i18n }}</div>\n        <div class=\"yz-application-text\" (click)=\"own()\">{{ 'application.mine' | i18n }}</div>\n        <div class=\"yz-application-text\" *ngFor=\"let d of topicData\" (click)=\"every(d)\">\n          {{ d.name }}\n        </div>\n      </div>\n      <div nz-col [nzSpan]=\"21\" [ngSwitch]=\"topic\" class=\"yz-application-container\">\n        <div *ngSwitchCase=\"T.FULL\">\n          <ng-template [ngTemplateOutlet]=\"search\"></ng-template>\n          <ng-template [ngTemplateOutlet]=\"ld\"></ng-template>\n        </div>\n        <div *ngSwitchCase=\"T.OWN\">\n          <ng-template [ngTemplateOutlet]=\"search\"></ng-template>\n          <ng-template [ngTemplateOutlet]=\"ld\"></ng-template>\n        </div>\n        <div *ngSwitchCase=\"T.EVERY\" class=\"yz-application-list\">\n          <div class=\"yz-application-list-item\">\n            <ul>\n              <li *ngFor=\"let d of listData\" (click)=\"open(d)\">\n                <a href=\"javascript:;\">\n                  <h4>{{ d.name }}</h4>\n                  <p>{{ d.intro }}</p>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n    <!--      header end-->\n  ",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     YzHeaderApplicationComponent.ctorParameters = function () { return [
         { type: i0.Injector },
-        { type: cache.CacheService },
+        { type: i2$1.CacheService },
         { type: YzI18NService },
         { type: i1._HttpClient }
     ]; };
@@ -706,7 +706,7 @@
                 .pipe(operators.map(function (response) {
                 var viewMessage = _this.data.filter(function (d) { return d.key === 'msg'; })[0];
                 viewMessage.list = response.data.list.map(function (m) {
-                    return Object.assign(Object.assign({}, m), { avatar: './assets/tmp/img/message.png', title: m.systemName, description: m.content, extra: formatMessageStatus(m.status).extra, color: formatMessageStatus(m.status).color, datetime: dateFns.formatDistanceToNow(new Date(m.date), { locale: _this.nzI18n.getDateLocale() }) });
+                    return Object.assign(Object.assign({}, m), { avatar: (m === null || m === void 0 ? void 0 : m.imgUrl) || './assets/tmp/img/message.png', title: m.systemName, description: m.content, extra: formatMessageStatus(m.status).extra, color: formatMessageStatus(m.status).color, datetime: dateFns.formatDistanceToNow(new Date(m.date), { locale: _this.nzI18n.getDateLocale() }) });
                 });
                 _this.count += viewMessage.list.length;
             }));
@@ -733,7 +733,7 @@
                 .pipe(operators.map(function (response) {
                 var viewTodo = _this.data.filter(function (d) { return d.key === 'todo'; })[0];
                 viewTodo.list = response.data.list.map(function (t) {
-                    return Object.assign(Object.assign({}, t), { avatar: './assets/tmp/img/todo.png', title: t.systemName, description: t.content, datetime: dateFns.formatDistanceToNow(new Date(t.date), { locale: _this.nzI18n.getDateLocale() }), extra: formatTodoStatus(t.status).extra, color: formatTodoStatus(t.status).color });
+                    return Object.assign(Object.assign({}, t), { avatar: (t === null || t === void 0 ? void 0 : t.imgUrl) || './assets/tmp/img/todo.png', title: t.systemName, description: t.content, datetime: dateFns.formatDistanceToNow(new Date(t.date), { locale: _this.nzI18n.getDateLocale() }), extra: formatTodoStatus(t.status).extra, color: formatTodoStatus(t.status).color });
                 });
                 _this.count += viewTodo.list.length;
             }));
@@ -785,9 +785,18 @@
             this.KEYS = KEYS;
             this.theme = 'default';
             this.types = [
-                { key: 'default', text: 'Default Theme', color: '#2163ff' },
-                { key: 'compact', text: 'Compact Theme', color: '#2163ff' },
-                { key: 'dark', text: 'Dark Theme', color: '#020202' }
+                { key: 'default', text: 'theme.default', color: '#2163ff' },
+                { key: 'compact', text: 'theme.compact', color: '#2163ff' },
+                { key: 'dark', text: 'theme.dark', color: '#020202' },
+                { key: 'yuhong', text: 'theme.yuhong', color: '#C04851' },
+                { key: 'danjuhuang', text: 'theme.danjuhuang', color: '#FBA414' },
+                { key: 'xinghuang', text: 'theme.xinghuang', color: '#F28E16' },
+                { key: 'shilv', text: 'theme.shilv', color: '#57C3C2' },
+                { key: 'zhulv', text: 'theme.zhulv', color: '#1BA784' },
+                { key: 'youlan', text: 'theme.youlan', color: '#1781B5' },
+                { key: 'dianqing', text: 'theme.dianqing', color: '#1661AB' },
+                { key: 'shangengzi', text: 'theme.shangengzi', color: '#61649F' },
+                { key: 'shuiniuhui', text: 'theme.shuiniuhui', color: '#2F2F35' }
             ];
             this.devTips = "When the dark.css file can't be found, you need to run it once: npm run theme";
             this.deployUrl = '';
@@ -849,7 +858,7 @@
     YzHeaderThemBtnComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'yz-header-theme-btn',
-                    template: "\n    <div\n      class=\"yunzai-default__nav-item\"\n      nz-dropdown\n      [nzDropdownMenu]=\"iconMenu\"\n      nzTrigger=\"click\"\n      nzPlacement=\"bottomRight\"\n    >\n      <svg nz-tooltip class=\"anticon\" role=\"img\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\" fill=\"currentColor\">\n        <g fill-rule=\"evenodd\">\n          <g fill-rule=\"nonzero\">\n            <path\n              d=\"M7.02 3.635l12.518 12.518a1.863 1.863 0 010 2.635l-1.317 1.318a1.863 1.863 0 01-2.635 0L3.068 7.588A2.795 2.795 0 117.02 3.635zm2.09 14.428a.932.932 0 110 1.864.932.932 0 010-1.864zm-.043-9.747L7.75 9.635l9.154 9.153 1.318-1.317-9.154-9.155zM3.52 12.473c.514 0 .931.417.931.931v.932h.932a.932.932 0 110 1.864h-.932v.931a.932.932 0 01-1.863 0l-.001-.931h-.93a.932.932 0 010-1.864h.93v-.932c0-.514.418-.931.933-.931zm15.374-3.727a1.398 1.398 0 110 2.795 1.398 1.398 0 010-2.795zM4.385 4.953a.932.932 0 000 1.317l2.046 2.047L7.75 7 5.703 4.953a.932.932 0 00-1.318 0zM14.701.36a.932.932 0 01.931.932v.931h.932a.932.932 0 010 1.864h-.933l.001.932a.932.932 0 11-1.863 0l-.001-.932h-.93a.932.932 0 110-1.864h.93v-.931a.932.932 0 01.933-.932z\"\n            ></path>\n          </g>\n        </g>\n      </svg>\n    </div>\n    <nz-dropdown-menu #iconMenu=\"nzDropdownMenu\">\n      <div nz-menu class=\"wd-xl animated jello\">\n        <div nz-row [nzJustify]=\"'space-between'\" [nzAlign]=\"'middle'\" class=\"app-icons\">\n          <div nz-col [nzSpan]=\"6\" *ngFor=\"let theme of types\" (click)=\"onThemeChange(theme.key)\">\n            <i nz-icon nzType=\"bg-colors\" class=\"text-white\" [style]=\"{ backgroundColor: theme.color }\"></i>\n            <span [ngStyle]=\"{ color: theme.color }\">{{ theme.key }}</span>\n          </div>\n        </div>\n      </div>\n    </nz-dropdown-menu>\n  ",
+                    template: "\n    <div\n      class=\"yunzai-default__nav-item\"\n      nz-dropdown\n      [nzDropdownMenu]=\"iconMenu\"\n      nzTrigger=\"click\"\n      nzPlacement=\"bottomRight\"\n    >\n      <svg nz-tooltip class=\"anticon\" role=\"img\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\" fill=\"currentColor\">\n        <g fill-rule=\"evenodd\">\n          <g fill-rule=\"nonzero\">\n            <path\n              d=\"M7.02 3.635l12.518 12.518a1.863 1.863 0 010 2.635l-1.317 1.318a1.863 1.863 0 01-2.635 0L3.068 7.588A2.795 2.795 0 117.02 3.635zm2.09 14.428a.932.932 0 110 1.864.932.932 0 010-1.864zm-.043-9.747L7.75 9.635l9.154 9.153 1.318-1.317-9.154-9.155zM3.52 12.473c.514 0 .931.417.931.931v.932h.932a.932.932 0 110 1.864h-.932v.931a.932.932 0 01-1.863 0l-.001-.931h-.93a.932.932 0 010-1.864h.93v-.932c0-.514.418-.931.933-.931zm15.374-3.727a1.398 1.398 0 110 2.795 1.398 1.398 0 010-2.795zM4.385 4.953a.932.932 0 000 1.317l2.046 2.047L7.75 7 5.703 4.953a.932.932 0 00-1.318 0zM14.701.36a.932.932 0 01.931.932v.931h.932a.932.932 0 010 1.864h-.933l.001.932a.932.932 0 11-1.863 0l-.001-.932h-.93a.932.932 0 110-1.864h.93v-.931a.932.932 0 01.933-.932z\"\n            ></path>\n          </g>\n        </g>\n      </svg>\n    </div>\n    <nz-dropdown-menu #iconMenu=\"nzDropdownMenu\">\n      <ul nz-menu>\n        <li\n          nz-menu-item\n          *ngFor=\"let theme of types\"\n          (click)=\"onThemeChange(theme.key)\"\n          [style]=\"{ color: theme.color }\"\n        >\n          <i nz-icon nzType=\"bg-colors\"></i>\n          {{ theme.text | i18n }}\n        </li>\n      </ul>\n      <!--      <div nz-menu class=\"wd-xl animated jello\">-->\n      <!--        <div nz-row [nzJustify]=\"'space-between'\" [nzAlign]=\"'middle'\" class=\"app-icons\">-->\n      <!--          <div nz-col [nzSpan]=\"4\" *ngFor=\"let theme of types\" (click)=\"onThemeChange(theme.key)\">-->\n      <!--            <i nz-icon nzType=\"bg-colors\" class=\"text-white\" [style]=\"{ backgroundColor: theme.color }\"></i>-->\n      <!--            <span [ngStyle]=\"{ color: theme.color }\">{{ theme.text | i18n }}</span>-->\n      <!--          </div>-->\n      <!--        </div>-->\n      <!--      </div>-->\n    </nz-dropdown-menu>\n  ",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -867,6 +876,17 @@
         deployUrl: [{ type: i0.Input }]
     };
 
+    var BUSINESS_DEFAULT_CONFIG = {
+        baseUrl: '/backstage',
+        systemCode: 'portal',
+        loginForm: null,
+        refreshTokenEnabled: true,
+        refreshTokenType: 're-request'
+    };
+    function mergeBisConfig(srv) {
+        return srv.merge('bis', BUSINESS_DEFAULT_CONFIG);
+    }
+
     var YzHeaderUserComponent = /** @class */ (function () {
         function YzHeaderUserComponent(injector, msg, tokenService, 
         // @ts-ignore
@@ -879,7 +899,7 @@
             this.icon = '';
             this.username = '';
             this.menus = [];
-            this.config = shared.mergeConfig(configService);
+            this.config = mergeBisConfig(configService);
         }
         YzHeaderUserComponent.prototype.ngOnInit = function () {
             var projectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
@@ -917,7 +937,7 @@
         { type: message.NzMessageService },
         { type: undefined, decorators: [{ type: i0.Inject, args: [auth.YA_SERVICE_TOKEN,] }] },
         { type: util.YunzaiConfigService },
-        { type: cache.CacheService }
+        { type: i2$1.CacheService }
     ]; };
 
     var YzHeaderClearStorageComponent = /** @class */ (function () {
@@ -991,9 +1011,110 @@
         _click: [{ type: i0.HostListener, args: ['click',] }]
     };
 
+    var ɵ0 = function (msg) {
+        util.log(msg);
+    };
+    var STOMP_DEFAULT_CONFIG = {
+        connectHeaders: {
+            login: 'guest',
+            passcode: 'guest'
+        },
+        brokerURL: '/websocket/ws/',
+        heartbeatIncoming: 1000 * 60,
+        heartbeatOutgoing: 1000 * 60,
+        reconnectDelay: 30000000,
+        debug: ɵ0
+    };
+    function mergeStompConfig(srv) {
+        return srv.merge('stomp', STOMP_DEFAULT_CONFIG);
+    }
+
+    var YzStompService = /** @class */ (function () {
+        function YzStompService(csr, cache, injector, notification) {
+            this.csr = csr;
+            this.cache = cache;
+            this.injector = injector;
+            this.notification = notification;
+            this.subs = [];
+            if (!this.user) {
+                this.user = this.cache.get('_yz_user', { mode: 'none' });
+            }
+            if (!this.config) {
+                this.config = mergeStompConfig(this.csr);
+            }
+            if (!this.bisConfig) {
+                this.bisConfig = mergeBisConfig(csr);
+            }
+            if (!this.rxStomp) {
+                this.rxStomp = new rxStomp.RxStomp();
+                if (i0.isDevMode()) {
+                    util.log('yz.stomp.service: is dev mode');
+                    util.log('yz.stomp.service: ', "config is " + this.config);
+                    this.rxStomp.configure(this.config);
+                    return;
+                }
+                var location = this.injector.get(common.DOCUMENT).location;
+                var protocol = location.protocol, host = location.host;
+                util.log('yz.stomp.service: ', "protocol is " + protocol + ",host is " + host);
+                if (protocol.includes('http') && !protocol.includes('https')) {
+                    this.config.brokerURL = "ws://" + host + this.config.brokerURL;
+                }
+                if (protocol.includes('https')) {
+                    this.config.brokerURL = "wss://" + host + this.config.brokerURL;
+                }
+                util.log('yz.stomp.service: ', "config is " + this.config);
+                this.rxStomp.configure(this.config);
+            }
+        }
+        YzStompService.prototype.listen = function () {
+            var _this = this;
+            this.subs.push(this.rxStomp.watch("/topic/layout_" + this.user.username).subscribe(function (message) {
+                _this.createNotification(JSON.parse(message.body));
+            }));
+            this.subs.push(this.rxStomp.watch("/topic/layout_xx_" + this.user.username).subscribe(function (message) {
+                _this.logoutNotification(JSON.parse(message.body));
+            }));
+            this.rxStomp.activate();
+        };
+        YzStompService.prototype.createNotification = function (message) {
+            this.notification.create(message.type, message.title, "<a href=" + message.href + ">" + message.content + "</a>");
+        };
+        YzStompService.prototype.logoutNotification = function (message) {
+            var _this = this;
+            this.notification.create(message.type, message.title, message.content + ",\u5269\u4F59\u65F6\u95F45\u79D2");
+            setTimeout(function () {
+                _this.cache.clear();
+                localStorage.clear();
+                _this.injector.get(util.WINDOW).location.href = _this.bisConfig.baseUrl + "/cas-proxy/app/logout";
+            }, 5000);
+        };
+        YzStompService.prototype.unListen = function () {
+            this.subs.forEach(function (s) { return s.unsubscribe(); });
+            this.rxStomp.deactivate().then();
+        };
+        YzStompService.prototype.publish = function (parameters) {
+            this.rxStomp.publish(parameters);
+        };
+        YzStompService.prototype.watch = function (destination, headers) {
+            return this.rxStomp.watch(destination, headers);
+        };
+        return YzStompService;
+    }());
+    YzStompService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YzStompService_Factory() { return new YzStompService(i0__namespace.ɵɵinject(i4__namespace.YunzaiConfigService), i0__namespace.ɵɵinject(i2__namespace$1.CacheService), i0__namespace.ɵɵinject(i0__namespace.INJECTOR), i0__namespace.ɵɵinject(i3__namespace$1.NzNotificationService)); }, token: YzStompService, providedIn: "root" });
+    YzStompService.decorators = [
+        { type: i0.Injectable, args: [{ providedIn: 'root' },] }
+    ];
+    YzStompService.ctorParameters = function () { return [
+        { type: util.YunzaiConfigService },
+        { type: i2$1.CacheService },
+        { type: i0.Injector },
+        { type: i3$1.NzNotificationService }
+    ]; };
+
     var YzLayoutBasicComponent = /** @class */ (function () {
-        function YzLayoutBasicComponent(cacheService) {
+        function YzLayoutBasicComponent(cacheService, yzStompService) {
             this.cacheService = cacheService;
+            this.yzStompService = yzStompService;
             this.options = {
                 logoExpanded: "./assets/logo-full.svg",
                 logoCollapsed: "./assets/logo.svg"
@@ -1010,18 +1131,23 @@
             this.icon = current.icon ? current.icon : "./assets/tmp/img/avatar.jpg";
             this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : "./assets/logo-full.svg";
             this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : "./assets/logo.svg";
+            this.yzStompService.listen();
+        };
+        YzLayoutBasicComponent.prototype.ngOnDestroy = function () {
+            this.yzStompService.unListen();
         };
         return YzLayoutBasicComponent;
     }());
     YzLayoutBasicComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'yz-layout-basic',
-                    template: "\n    <layout-default [options]=\"options\" [asideUser]=\"asideUserTpl\" [content]=\"contentTpl\">\n      <layout-default-header-item direction=\"left\">\n        <yz-header-application></yz-header-application>\n      </layout-default-header-item>\n\n      <layout-default-header-item direction=\"right\" hidden=\"mobile\">\n        <yz-header-notify></yz-header-notify>\n      </layout-default-header-item>\n\n      <layout-default-header-item direction=\"right\" hidden=\"mobile\">\n        <yz-header-theme-btn></yz-header-theme-btn>\n      </layout-default-header-item>\n\n      <layout-default-header-item direction=\"right\" hidden=\"mobile\">\n        <div\n          layout-default-header-item-trigger\n          nz-dropdown\n          [nzDropdownMenu]=\"settingsMenu\"\n          nzTrigger=\"click\"\n          nzPlacement=\"bottomRight\"\n        >\n          <i nz-icon nzType=\"setting\"></i>\n        </div>\n        <nz-dropdown-menu #settingsMenu=\"nzDropdownMenu\">\n          <div nz-menu style=\"width: 200px;\">\n            <div nz-menu-item>\n              <yz-header-fullscreen></yz-header-fullscreen>\n            </div>\n            <div nz-menu-item>\n              <yz-header-clear-storage></yz-header-clear-storage>\n            </div>\n            <div nz-menu-item>\n              <yz-header-i18n></yz-header-i18n>\n            </div>\n          </div>\n        </nz-dropdown-menu>\n      </layout-default-header-item>\n      <layout-default-header-item direction=\"right\">\n        <yz-header-user></yz-header-user>\n      </layout-default-header-item>\n      <ng-template #asideUserTpl>\n        <div nz-dropdown nzTrigger=\"click\" [nzDropdownMenu]=\"userMenu\" class=\"yunzai-default__aside-user\">\n          <nz-avatar class=\"yunzai-default__aside-user-avatar\" [nzSrc]=\"icon\"></nz-avatar>\n          <div class=\"yunzai-default__aside-user-info\">\n            <strong>{{ text }}</strong>\n            <p class=\"mb0\">{{ intro }}</p>\n          </div>\n        </div>\n        <nz-dropdown-menu #userMenu=\"nzDropdownMenu\">\n          <ul nz-menu>\n            <li nz-menu-item routerLink=\"/\">\u56DE\u5230\u9996\u9875</li>\n          </ul>\n        </nz-dropdown-menu>\n      </ng-template>\n      <ng-template #contentTpl>\n        <reuse-tab #reuseTab></reuse-tab>\n        <router-outlet (activate)=\"reuseTab.activate($event)\"></router-outlet>\n      </ng-template>\n    </layout-default>\n  ",
+                    template: "\n    <layout-default [options]=\"options\" [asideUser]=\"asideUserTpl\" [content]=\"contentTpl\">\n      <layout-default-header-item direction=\"left\">\n        <yz-header-application></yz-header-application>\n      </layout-default-header-item>\n\n      <layout-default-header-item direction=\"right\" hidden=\"mobile\">\n        <yz-header-notify></yz-header-notify>\n      </layout-default-header-item>\n\n      <layout-default-header-item direction=\"right\" hidden=\"mobile\">\n        <yz-header-theme-btn></yz-header-theme-btn>\n      </layout-default-header-item>\n\n      <layout-default-header-item direction=\"right\" hidden=\"mobile\">\n        <div\n          layout-default-header-item-trigger\n          nz-dropdown\n          [nzDropdownMenu]=\"settingsMenu\"\n          nzTrigger=\"click\"\n          nzPlacement=\"bottomRight\"\n        >\n          <i nz-icon nzType=\"setting\"></i>\n        </div>\n        <nz-dropdown-menu #settingsMenu=\"nzDropdownMenu\">\n          <div nz-menu style=\"width: 200px;\">\n            <div nz-menu-item>\n              <yz-header-fullscreen></yz-header-fullscreen>\n            </div>\n            <div nz-menu-item>\n              <yz-header-clear-storage></yz-header-clear-storage>\n            </div>\n            <div nz-menu-item>\n              <yz-header-i18n></yz-header-i18n>\n            </div>\n          </div>\n        </nz-dropdown-menu>\n      </layout-default-header-item>\n      <layout-default-header-item direction=\"right\">\n        <yz-header-user></yz-header-user>\n      </layout-default-header-item>\n      <ng-template #asideUserTpl>\n        <div nz-dropdown nzTrigger=\"click\" [nzDropdownMenu]=\"userMenu\" class=\"yunzai-default__aside-user\">\n          <nz-avatar class=\"yunzai-default__aside-user-avatar\" [nzSrc]=\"icon\"></nz-avatar>\n          <div class=\"yunzai-default__aside-user-info\">\n            <strong>{{ text }}</strong>\n            <p class=\"mb0\">{{ intro }}</p>\n          </div>\n        </div>\n        <nz-dropdown-menu #userMenu=\"nzDropdownMenu\">\n          <ul nz-menu>\n            <li nz-menu-item routerLink=\"/\">{{ 'menu.backtohome' | i18n }}</li>\n          </ul>\n        </nz-dropdown-menu>\n      </ng-template>\n      <ng-template #contentTpl>\n        <reuse-tab #reuseTab></reuse-tab>\n        <router-outlet (activate)=\"reuseTab.activate($event)\"></router-outlet>\n      </ng-template>\n    </layout-default>\n  ",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     YzLayoutBasicComponent.ctorParameters = function () { return [
-        { type: cache.CacheService }
+        { type: i2$1.CacheService },
+        { type: YzStompService }
     ]; };
 
     var COMPONENTS = [
@@ -1057,7 +1183,7 @@
         function YzAuthService(injector) {
             this.injector = injector;
             this.option = auth.mergeConfig(this.csr);
-            this.bis = shared.mergeConfig(this.csr);
+            this.bis = mergeBisConfig(this.csr);
         }
         Object.defineProperty(YzAuthService.prototype, "csr", {
             get: function () {
@@ -1082,7 +1208,7 @@
         });
         Object.defineProperty(YzAuthService.prototype, "cacheService", {
             get: function () {
-                return this.injector.get(cache.CacheService);
+                return this.injector.get(i2$1.CacheService);
             },
             enumerable: false,
             configurable: true
@@ -1252,7 +1378,7 @@
         }
         Object.defineProperty(YzDefaultInterceptor.prototype, "notification", {
             get: function () {
-                return this.injector.get(notification.NzNotificationService);
+                return this.injector.get(i3$1.NzNotificationService);
             },
             enumerable: false,
             configurable: true
@@ -1273,7 +1399,7 @@
         });
         Object.defineProperty(YzDefaultInterceptor.prototype, "config", {
             get: function () {
-                return shared.mergeConfig(this.injector.get(i4.YunzaiConfigService));
+                return mergeBisConfig(this.injector.get(i4.YunzaiConfigService));
             },
             enumerable: false,
             configurable: true
@@ -1462,8 +1588,8 @@
             this.yzAuthService = yzAuthService;
             this.cacheService = cacheService;
             this.configService = configService;
-            this.bis = shared.BUSINESS_DEFAULT_CONFIG;
-            this.bis = shared.mergeConfig(this.configService);
+            this.bis = BUSINESS_DEFAULT_CONFIG;
+            this.bis = mergeBisConfig(this.configService);
             iconSrv.addIcon.apply(iconSrv, __spreadArray([], __read(shared.ICONS)));
         }
         YzStartupService.prototype.load = function () {
@@ -1534,7 +1660,7 @@
         { type: acl.ACLService },
         { type: i1.TitleService },
         { type: YzAuthService },
-        { type: cache.CacheService },
+        { type: i2$1.CacheService },
         { type: util.YunzaiConfigService }
     ]; };
     function YzStartupServiceFactory(startupService) {
@@ -1555,6 +1681,8 @@
      * Generated bundle index. Do not edit.
      */
 
+    exports.BUSINESS_DEFAULT_CONFIG = BUSINESS_DEFAULT_CONFIG;
+    exports.STOMP_DEFAULT_CONFIG = STOMP_DEFAULT_CONFIG;
     exports.YZ_APPINIT_PROVIDES = YZ_APPINIT_PROVIDES;
     exports.YunzaiLayoutModule = YunzaiLayoutModule;
     exports.YzAuthService = YzAuthService;
@@ -1570,17 +1698,21 @@
     exports.YzLayoutBasicComponent = YzLayoutBasicComponent;
     exports.YzStartupService = YzStartupService;
     exports.YzStartupServiceFactory = YzStartupServiceFactory;
+    exports.YzStompService = YzStompService;
     exports.generateAbility = generateAbility;
     exports.mapYzSideToYelonMenu = mapYzSideToYelonMenu;
-    exports.ɵa = YzHeaderApplicationComponent;
-    exports.ɵb = YzHeaderNotifyComponent;
-    exports.ɵc = YzHeaderThemBtnComponent;
-    exports.ɵd = YzHeaderUserComponent;
-    exports.ɵe = YzHeaderFullScreenComponent;
-    exports.ɵf = YzHeaderClearStorageComponent;
-    exports.ɵg = YzHeaderI18NComponent;
+    exports.mergeBisConfig = mergeBisConfig;
+    exports.mergeStompConfig = mergeStompConfig;
+    exports["ɵ0"] = ɵ0;
+    exports["ɵa"] = YzHeaderApplicationComponent;
+    exports["ɵb"] = YzHeaderNotifyComponent;
+    exports["ɵc"] = YzHeaderThemBtnComponent;
+    exports["ɵd"] = YzHeaderUserComponent;
+    exports["ɵe"] = YzHeaderFullScreenComponent;
+    exports["ɵf"] = YzHeaderClearStorageComponent;
+    exports["ɵg"] = YzHeaderI18NComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=layout.umd.js.map

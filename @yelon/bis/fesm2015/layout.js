@@ -1,5 +1,6 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, ChangeDetectionStrategy, Injector, Inject, Input, ChangeDetectorRef, Renderer2, Optional, HostListener, NgModule, APP_INITIALIZER } from '@angular/core';
+import { Injectable, Component, ChangeDetectionStrategy, Injector, Inject, Input, ChangeDetectorRef, Renderer2, Optional, HostListener, isDevMode, NgModule, APP_INITIALIZER } from '@angular/core';
+import * as i2$1 from '@yelon/cache';
 import { CacheService } from '@yelon/cache';
 import * as i1 from '@yelon/theme';
 import { zh_CN as zh_CN$1, zh_TW as zh_TW$1, en_US as en_US$1, YunzaiI18nBaseService, _HttpClient, SettingsService, YelonLocaleService, YUNZAI_I18N_TOKEN, MenuService, TitleService } from '@yelon/theme';
@@ -24,13 +25,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { log } from '@yelon/util/other';
 import { Directionality } from '@angular/cdk/bidi';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
-import { YA_SERVICE_TOKEN, mergeConfig as mergeConfig$1 } from '@yelon/auth';
-import { mergeConfig, YzSharedModule, BUSINESS_DEFAULT_CONFIG, ICONS } from '@yelon/bis/shared';
+import { YA_SERVICE_TOKEN, mergeConfig } from '@yelon/auth';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import * as screenfull from 'screenfull';
 import { HttpClientModule, HttpResponse, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { YzSharedModule, ICONS } from '@yelon/bis/shared';
+import { RxStomp } from '@stomp/rx-stomp';
+import * as i3$1 from 'ng-zorro-antd/notification';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { ACLService } from '@yelon/acl';
@@ -249,7 +252,7 @@ YzHeaderApplicationComponent.decorators = [
           <input
             type="text"
             nz-input
-            [placeholder]="'请输入要搜索的应用名称!'"
+            placeholder="{{ 'application.search' | i18n }}"
             [(ngModel)]="searchValue"
             (ngModelChange)="onSearch()"
           />
@@ -272,14 +275,14 @@ YzHeaderApplicationComponent.decorators = [
     <!--      template end-->
 
     <!--      button start-->
-    <div class="yunzai-default__nav-item" (click)="diffChange()"> 应用与服务</div>
+    <div class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'application.button' | i18n }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" nz-row *ngIf="active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div class="yz-application-text" (click)="full()">全部应用</div>
-        <div class="yz-application-text" (click)="own()">我的应用</div>
+        <div class="yz-application-text" (click)="full()">{{ 'application.all' | i18n }}</div>
+        <div class="yz-application-text" (click)="own()">{{ 'application.mine' | i18n }}</div>
         <div class="yz-application-text" *ngFor="let d of topicData" (click)="every(d)">
           {{ d.name }}
         </div>
@@ -460,7 +463,7 @@ class YzHeaderNotifyComponent {
             .pipe(map((response) => {
             const viewMessage = this.data.filter(d => d.key === 'msg')[0];
             viewMessage.list = response.data.list.map((m) => {
-                return Object.assign(Object.assign({}, m), { avatar: './assets/tmp/img/message.png', title: m.systemName, description: m.content, extra: formatMessageStatus(m.status).extra, color: formatMessageStatus(m.status).color, datetime: formatDistanceToNow(new Date(m.date), { locale: this.nzI18n.getDateLocale() }) });
+                return Object.assign(Object.assign({}, m), { avatar: (m === null || m === void 0 ? void 0 : m.imgUrl) || './assets/tmp/img/message.png', title: m.systemName, description: m.content, extra: formatMessageStatus(m.status).extra, color: formatMessageStatus(m.status).color, datetime: formatDistanceToNow(new Date(m.date), { locale: this.nzI18n.getDateLocale() }) });
             });
             this.count += viewMessage.list.length;
         }));
@@ -486,7 +489,7 @@ class YzHeaderNotifyComponent {
             .pipe(map((response) => {
             const viewTodo = this.data.filter(d => d.key === 'todo')[0];
             viewTodo.list = response.data.list.map((t) => {
-                return Object.assign(Object.assign({}, t), { avatar: './assets/tmp/img/todo.png', title: t.systemName, description: t.content, datetime: formatDistanceToNow(new Date(t.date), { locale: this.nzI18n.getDateLocale() }), extra: formatTodoStatus(t.status).extra, color: formatTodoStatus(t.status).color });
+                return Object.assign(Object.assign({}, t), { avatar: (t === null || t === void 0 ? void 0 : t.imgUrl) || './assets/tmp/img/todo.png', title: t.systemName, description: t.content, datetime: formatDistanceToNow(new Date(t.date), { locale: this.nzI18n.getDateLocale() }), extra: formatTodoStatus(t.status).extra, color: formatTodoStatus(t.status).color });
             });
             this.count += viewTodo.list.length;
         }));
@@ -546,9 +549,18 @@ class YzHeaderThemBtnComponent {
         this.KEYS = KEYS;
         this.theme = 'default';
         this.types = [
-            { key: 'default', text: 'Default Theme', color: '#2163ff' },
-            { key: 'compact', text: 'Compact Theme', color: '#2163ff' },
-            { key: 'dark', text: 'Dark Theme', color: '#020202' }
+            { key: 'default', text: 'theme.default', color: '#2163ff' },
+            { key: 'compact', text: 'theme.compact', color: '#2163ff' },
+            { key: 'dark', text: 'theme.dark', color: '#020202' },
+            { key: 'yuhong', text: 'theme.yuhong', color: '#C04851' },
+            { key: 'danjuhuang', text: 'theme.danjuhuang', color: '#FBA414' },
+            { key: 'xinghuang', text: 'theme.xinghuang', color: '#F28E16' },
+            { key: 'shilv', text: 'theme.shilv', color: '#57C3C2' },
+            { key: 'zhulv', text: 'theme.zhulv', color: '#1BA784' },
+            { key: 'youlan', text: 'theme.youlan', color: '#1781B5' },
+            { key: 'dianqing', text: 'theme.dianqing', color: '#1661AB' },
+            { key: 'shangengzi', text: 'theme.shangengzi', color: '#61649F' },
+            { key: 'shuiniuhui', text: 'theme.shuiniuhui', color: '#2F2F35' }
         ];
         this.devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
         this.deployUrl = '';
@@ -627,14 +639,25 @@ YzHeaderThemBtnComponent.decorators = [
       </svg>
     </div>
     <nz-dropdown-menu #iconMenu="nzDropdownMenu">
-      <div nz-menu class="wd-xl animated jello">
-        <div nz-row [nzJustify]="'space-between'" [nzAlign]="'middle'" class="app-icons">
-          <div nz-col [nzSpan]="6" *ngFor="let theme of types" (click)="onThemeChange(theme.key)">
-            <i nz-icon nzType="bg-colors" class="text-white" [style]="{ backgroundColor: theme.color }"></i>
-            <span [ngStyle]="{ color: theme.color }">{{ theme.key }}</span>
-          </div>
-        </div>
-      </div>
+      <ul nz-menu>
+        <li
+          nz-menu-item
+          *ngFor="let theme of types"
+          (click)="onThemeChange(theme.key)"
+          [style]="{ color: theme.color }"
+        >
+          <i nz-icon nzType="bg-colors"></i>
+          {{ theme.text | i18n }}
+        </li>
+      </ul>
+      <!--      <div nz-menu class="wd-xl animated jello">-->
+      <!--        <div nz-row [nzJustify]="'space-between'" [nzAlign]="'middle'" class="app-icons">-->
+      <!--          <div nz-col [nzSpan]="4" *ngFor="let theme of types" (click)="onThemeChange(theme.key)">-->
+      <!--            <i nz-icon nzType="bg-colors" class="text-white" [style]="{ backgroundColor: theme.color }"></i>-->
+      <!--            <span [ngStyle]="{ color: theme.color }">{{ theme.text | i18n }}</span>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </nz-dropdown-menu>
   `,
                 changeDetection: ChangeDetectionStrategy.OnPush
@@ -654,6 +677,17 @@ YzHeaderThemBtnComponent.propDecorators = {
     deployUrl: [{ type: Input }]
 };
 
+const BUSINESS_DEFAULT_CONFIG = {
+    baseUrl: '/backstage',
+    systemCode: 'portal',
+    loginForm: null,
+    refreshTokenEnabled: true,
+    refreshTokenType: 're-request'
+};
+function mergeBisConfig(srv) {
+    return srv.merge('bis', BUSINESS_DEFAULT_CONFIG);
+}
+
 class YzHeaderUserComponent {
     constructor(injector, msg, tokenService, 
     // @ts-ignore
@@ -666,7 +700,7 @@ class YzHeaderUserComponent {
         this.icon = '';
         this.username = '';
         this.menus = [];
-        this.config = mergeConfig(configService);
+        this.config = mergeBisConfig(configService);
     }
     ngOnInit() {
         const projectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
@@ -799,9 +833,107 @@ YzHeaderFullScreenComponent.propDecorators = {
     _click: [{ type: HostListener, args: ['click',] }]
 };
 
+const ɵ0 = msg => {
+    log$1(msg);
+};
+const STOMP_DEFAULT_CONFIG = {
+    connectHeaders: {
+        login: 'guest',
+        passcode: 'guest'
+    },
+    brokerURL: '/websocket/ws/',
+    heartbeatIncoming: 1000 * 60,
+    heartbeatOutgoing: 1000 * 60,
+    reconnectDelay: 30000000,
+    debug: ɵ0
+};
+function mergeStompConfig(srv) {
+    return srv.merge('stomp', STOMP_DEFAULT_CONFIG);
+}
+
+class YzStompService {
+    constructor(csr, cache, injector, notification) {
+        this.csr = csr;
+        this.cache = cache;
+        this.injector = injector;
+        this.notification = notification;
+        this.subs = [];
+        if (!this.user) {
+            this.user = this.cache.get('_yz_user', { mode: 'none' });
+        }
+        if (!this.config) {
+            this.config = mergeStompConfig(this.csr);
+        }
+        if (!this.bisConfig) {
+            this.bisConfig = mergeBisConfig(csr);
+        }
+        if (!this.rxStomp) {
+            this.rxStomp = new RxStomp();
+            if (isDevMode()) {
+                log$1('yz.stomp.service: is dev mode');
+                log$1('yz.stomp.service: ', `config is ${this.config}`);
+                this.rxStomp.configure(this.config);
+                return;
+            }
+            const { location } = this.injector.get(DOCUMENT);
+            const { protocol, host } = location;
+            log$1('yz.stomp.service: ', `protocol is ${protocol},host is ${host}`);
+            if (protocol.includes('http') && !protocol.includes('https')) {
+                this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;
+            }
+            if (protocol.includes('https')) {
+                this.config.brokerURL = `wss://${host}${this.config.brokerURL}`;
+            }
+            log$1('yz.stomp.service: ', `config is ${this.config}`);
+            this.rxStomp.configure(this.config);
+        }
+    }
+    listen() {
+        this.subs.push(this.rxStomp.watch(`/topic/layout_${this.user.username}`).subscribe(message => {
+            this.createNotification(JSON.parse(message.body));
+        }));
+        this.subs.push(this.rxStomp.watch(`/topic/layout_xx_${this.user.username}`).subscribe((message) => {
+            this.logoutNotification(JSON.parse(message.body));
+        }));
+        this.rxStomp.activate();
+    }
+    createNotification(message) {
+        this.notification.create(message.type, message.title, `<a href=${message.href}>${message.content}</a>`);
+    }
+    logoutNotification(message) {
+        this.notification.create(message.type, message.title, `${message.content},剩余时间5秒`);
+        setTimeout(() => {
+            this.cache.clear();
+            localStorage.clear();
+            this.injector.get(WINDOW).location.href = `${this.bisConfig.baseUrl}/cas-proxy/app/logout`;
+        }, 5000);
+    }
+    unListen() {
+        this.subs.forEach(s => s.unsubscribe());
+        this.rxStomp.deactivate().then();
+    }
+    publish(parameters) {
+        this.rxStomp.publish(parameters);
+    }
+    watch(destination, headers) {
+        return this.rxStomp.watch(destination, headers);
+    }
+}
+YzStompService.ɵprov = i0.ɵɵdefineInjectable({ factory: function YzStompService_Factory() { return new YzStompService(i0.ɵɵinject(i4.YunzaiConfigService), i0.ɵɵinject(i2$1.CacheService), i0.ɵɵinject(i0.INJECTOR), i0.ɵɵinject(i3$1.NzNotificationService)); }, token: YzStompService, providedIn: "root" });
+YzStompService.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] }
+];
+YzStompService.ctorParameters = () => [
+    { type: YunzaiConfigService$1 },
+    { type: CacheService },
+    { type: Injector },
+    { type: NzNotificationService }
+];
+
 class YzLayoutBasicComponent {
-    constructor(cacheService) {
+    constructor(cacheService, yzStompService) {
         this.cacheService = cacheService;
+        this.yzStompService = yzStompService;
         this.options = {
             logoExpanded: `./assets/logo-full.svg`,
             logoCollapsed: `./assets/logo.svg`
@@ -818,6 +950,10 @@ class YzLayoutBasicComponent {
         this.icon = current.icon ? current.icon : `./assets/tmp/img/avatar.jpg`;
         this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
         this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
+        this.yzStompService.listen();
+    }
+    ngOnDestroy() {
+        this.yzStompService.unListen();
     }
 }
 YzLayoutBasicComponent.decorators = [
@@ -874,7 +1010,7 @@ YzLayoutBasicComponent.decorators = [
         </div>
         <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item routerLink="/">回到首页</li>
+            <li nz-menu-item routerLink="/">{{ 'menu.backtohome' | i18n }}</li>
           </ul>
         </nz-dropdown-menu>
       </ng-template>
@@ -888,7 +1024,8 @@ YzLayoutBasicComponent.decorators = [
             },] }
 ];
 YzLayoutBasicComponent.ctorParameters = () => [
-    { type: CacheService }
+    { type: CacheService },
+    { type: YzStompService }
 ];
 
 const COMPONENTS = [
@@ -920,8 +1057,8 @@ YunzaiLayoutModule.decorators = [
 class YzAuthService {
     constructor(injector) {
         this.injector = injector;
-        this.option = mergeConfig$1(this.csr);
-        this.bis = mergeConfig(this.csr);
+        this.option = mergeConfig(this.csr);
+        this.bis = mergeBisConfig(this.csr);
     }
     get csr() {
         return this.injector.get(YunzaiConfigService);
@@ -1103,7 +1240,7 @@ class YzDefaultInterceptor {
         return this.injector.get(_HttpClient);
     }
     get config() {
-        return mergeConfig(this.injector.get(YunzaiConfigService));
+        return mergeBisConfig(this.injector.get(YunzaiConfigService));
     }
     goTo(url) {
         setTimeout(() => this.injector.get(Router).navigateByUrl(url));
@@ -1285,7 +1422,7 @@ class YzStartupService {
         this.cacheService = cacheService;
         this.configService = configService;
         this.bis = BUSINESS_DEFAULT_CONFIG;
-        this.bis = mergeConfig(this.configService);
+        this.bis = mergeBisConfig(this.configService);
         iconSrv.addIcon(...ICONS);
     }
     load() {
@@ -1374,5 +1511,5 @@ const YZ_APPINIT_PROVIDES = [
  * Generated bundle index. Do not edit.
  */
 
-export { TOPIC, YZ_APPINIT_PROVIDES, YunzaiLayoutModule, YzAuthService, YzDefaultInterceptor, YzHeaderApplicationComponent, YzHeaderClearStorageComponent, YzHeaderFullScreenComponent, YzHeaderI18NComponent, YzHeaderNotifyComponent, YzHeaderThemBtnComponent, YzHeaderUserComponent, YzI18NService, YzLayoutBasicComponent, YzStartupService, YzStartupServiceFactory, generateAbility, mapYzSideToYelonMenu, YzHeaderApplicationComponent as ɵa, YzHeaderNotifyComponent as ɵb, YzHeaderThemBtnComponent as ɵc, YzHeaderUserComponent as ɵd, YzHeaderFullScreenComponent as ɵe, YzHeaderClearStorageComponent as ɵf, YzHeaderI18NComponent as ɵg };
+export { BUSINESS_DEFAULT_CONFIG, STOMP_DEFAULT_CONFIG, TOPIC, YZ_APPINIT_PROVIDES, YunzaiLayoutModule, YzAuthService, YzDefaultInterceptor, YzHeaderApplicationComponent, YzHeaderClearStorageComponent, YzHeaderFullScreenComponent, YzHeaderI18NComponent, YzHeaderNotifyComponent, YzHeaderThemBtnComponent, YzHeaderUserComponent, YzI18NService, YzLayoutBasicComponent, YzStartupService, YzStartupServiceFactory, YzStompService, generateAbility, mapYzSideToYelonMenu, mergeBisConfig, mergeStompConfig, ɵ0, YzHeaderApplicationComponent as ɵa, YzHeaderNotifyComponent as ɵb, YzHeaderThemBtnComponent as ɵc, YzHeaderUserComponent as ɵd, YzHeaderFullScreenComponent as ɵe, YzHeaderClearStorageComponent as ɵf, YzHeaderI18NComponent as ɵg };
 //# sourceMappingURL=layout.js.map
