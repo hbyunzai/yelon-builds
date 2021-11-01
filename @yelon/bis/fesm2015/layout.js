@@ -871,7 +871,7 @@ class YzStompService {
             this.rxStomp = new RxStomp();
             if (isDevMode()) {
                 log$1('yz.stomp.service: is dev mode');
-                log$1('yz.stomp.service: ', `config is ${this.config}`);
+                log$1('yz.stomp.service: ', `config is ${JSON.stringify(this.config)}`);
                 this.rxStomp.configure(this.config);
                 return;
             }
@@ -1224,6 +1224,7 @@ const CODEMESSAGE = {
 class YzDefaultInterceptor {
     constructor(injector) {
         this.injector = injector;
+        this.jump = false;
         this.refreshToking = false;
         this.refreshToken$ = new BehaviorSubject(null);
         if (this.config.refreshTokenType === 'auth-refresh') {
@@ -1337,7 +1338,9 @@ class YzDefaultInterceptor {
             case 403:
             case 404:
             case 500:
-                this.goTo(`/exception/${ev.status}`);
+                if (this.jump) {
+                    this.goTo(`/exception/${ev.status}`);
+                }
                 break;
             default:
                 if (ev instanceof HttpErrorResponse) {

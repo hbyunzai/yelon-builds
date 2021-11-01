@@ -1,12 +1,12 @@
 {
   "name": "@yelon/mock",
-  "version": "12.0.11",
+  "version": "12.0.12",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "mockjs": "^1.1.0",
     "@types/mockjs": "^1.0.4",
-    "@yelon/util": "^12.0.11",
+    "@yelon/util": "^12.0.12",
     "tslib": "^2.2.0"
   },
   "main": "bundles/mock.umd.js",

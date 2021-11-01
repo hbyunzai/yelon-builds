@@ -1,10 +1,10 @@
 {
   "name": "@yelon/auth",
-  "version": "12.0.11",
+  "version": "12.0.12",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "@yelon/util": "^12.0.11",
+    "@yelon/util": "^12.0.12",
     "tslib": "^2.2.0"
   },
   "main": "bundles/auth.umd.js",

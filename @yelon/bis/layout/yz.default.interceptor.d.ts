@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
  */
 export declare class YzDefaultInterceptor implements HttpInterceptor {
     private injector;
+    private jump;
     private refreshToking;
     private refreshToken$;
     private get notification();
