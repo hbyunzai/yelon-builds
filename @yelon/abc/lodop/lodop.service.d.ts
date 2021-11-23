@@ -1,8 +1,8 @@
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { LodopPrintResult, LodopResult } from './lodop.types';
 export declare class LodopService implements OnDestroy {
     private scriptSrv;

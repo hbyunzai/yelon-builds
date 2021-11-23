@@ -78,6 +78,38 @@ class YunzaiI18nBaseService {
     get data() {
         return this._data;
     }
+    /**
+     * Flattened data source
+     *
+     * @example
+     * {
+     *   "name": "Name",
+     *   "sys": {
+     *     "": "System",
+     *     "title": "Title"
+     *   }
+     * }
+     * =>
+     * {
+     *   "name": "Name",
+     *   "sys": "System",
+     *   "sys.title": "Title"
+     * }
+     */
+    flatData(data, parentKey) {
+        const res = {};
+        for (const key of Object.keys(data)) {
+            const value = data[key];
+            if (typeof value === 'object') {
+                const child = this.flatData(value, parentKey.concat(key));
+                Object.keys(child).forEach(childKey => (res[childKey] = child[childKey]));
+            }
+            else {
+                res[(key ? parentKey.concat(key) : parentKey).join('.')] = `${value}`;
+            }
+        }
+        return res;
+    }
     fanyi(path, params) {
         let content = this._data[path] || '';
         if (!content)
@@ -97,7 +129,7 @@ YunzaiI18nBaseService.ctorParameters = () => [
 ];
 class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     use(lang, data) {
-        this._data = data;
+        this._data = this.flatData(data, []);
         this._currentLang = lang;
         this._change$.next(lang);
     }
@@ -2450,7 +2482,7 @@ YunzaiThemeModule.ctorParameters = () => [
     { type: NzIconService }
 ];
 
-const VERSION = new Version('12.0.12');
+const VERSION = new Version('12.0.16');
 
 /**
  * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).

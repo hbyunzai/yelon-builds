@@ -1,8 +1,33 @@
 {
   "name": "ng-yunzai",
-  "version": "12.0.12",
+  "version": "12.0.16",
   "description": "Schematics specific to ng-yunzai",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
-  "schematics": "./collection.json"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbyunzai/ng-yunzai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hbyunzai/ng-yunzai/issues"
+  },
+  "homepage": "https://ngsite.yunzainfo.com/",
+  "keywords": [
+    "ng-yunzai",
+    "ng-zorro-antd",
+    "antd",
+    "blueprints",
+    "code generation",
+    "schematics"
+  ],
+  "schematics": "./collection.json",
+  "dependencies": {
+    "swagger-typescript-api": "^9.3.1"
+  },
+  "ng-update": {
+    "migrations": "./migration.json",
+    "packageGroup": [
+      "ng-yunzai"
+    ]
+  }
 }

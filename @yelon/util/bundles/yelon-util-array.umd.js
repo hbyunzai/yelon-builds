@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.12
+ * @license ng-yunzai(devcui@outlook.com) v12.0.16
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('ng-zorro-antd/core/tree'), require('@yelon/util/config')) :
-    typeof define === 'function' && define.amd ? define('@yelon/util/array', ['exports', '@angular/core', 'ng-zorro-antd/core/tree', '@yelon/util/config'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.array = {}), global.ng.core, global.tree, global.yelon.util.config));
-})(this, (function (exports, i0, tree, i1) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/util/config'), require('ng-zorro-antd/core/tree')) :
+    typeof define === 'function' && define.amd ? define('@yelon/util/array', ['exports', '@angular/core', '@yelon/util/config', 'ng-zorro-antd/core/tree'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.util = global.yelon.util || {}, global.yelon.util.array = {}), global.ng.core, global.yelon.util.config, global.tree));
+})(this, (function (exports, i0, i1, tree) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;

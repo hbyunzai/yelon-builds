@@ -11,13 +11,48 @@ type: Documents
 
 ng-yunzai 在此基础上增加了很多很酷的骚操作。
 
+默认情况下所有的代码统一存放于 `app/routes` 下面，可通过 `ng-yunzai.json` 指向其他目录，例如：
+
+```json
+{
+  "$schema": "./node_modules/ng-yunzai/schema.json",
+  "projects": {
+    // 表示 ng-yunzai 项目都存放于 `app/pages` 下
+    "ng-yunzai": {
+      "routesRoot": "app/pages"
+    }
+  }
+}
+```
+
 ## 命令格式
 
 ```bash
 ng g ng-yunzai:[command name] [name] [options]
 ```
 
+示例：
+
+```bash
+# 生成一个 trade 模块
+ng g ng-yunzai:trade
+# trade 模块下生成一个 TradeListComponent List组件
+ng g ng-yunzai:list list -m=trade
+# trade 模块下生成一个 ListComponent List组件
+ng g ng-yunzai:list list -m=trade -withoutModulePrefixInComponentName=true
+# trade 模块下生成一个 TradeEditComponent Edit组件
+ng g ng-yunzai:edit edit -m=trade
+```
+
 > ng-yunzai 有自己的一套文件组织结构，当你破坏这些结构时，可能会导致下列指令产生异常。
+
+| 参数 | 描述 |
+| ---- | --- |
+| `-m` | 指定目标模块 |
+| `-target` | 指定目标路径，支持 `bus/list` 写法 |
+| `-modal` | 指定是否使用模态框 |
+| `-withoutPrefix` | 指定选择器名不加前缀 |
+| `-withoutModulePrefixInComponentName` | 组件名不加模块名前缀 |
 
 ## Module 模块
 

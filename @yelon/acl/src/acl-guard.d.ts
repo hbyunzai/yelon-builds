@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, 
 import { Observable } from 'rxjs';
 import { ACLService } from './acl.service';
 /**
- * Routing guard prevent unauthorized users visit the page, [ACL Document](https://ng-alain.com/acl).
+ * Routing guard prevent unauthorized users visit the page, [ACL Document](https://ng.yunzainfo.com/acl).
  *
  * ```ts
  * data: {

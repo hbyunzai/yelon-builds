@@ -1,19 +1,20 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.12
+ * @license ng-yunzai(devcui@outlook.com) v12.0.16
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/platform-browser'), require('rxjs'), require('rxjs/operators'), require('@yelon/theme'), require('@yelon/util/browser'), require('@angular/common'), require('@angular/router'), require('ng-zorro-antd/button')) :
-    typeof define === 'function' && define.amd ? define('@yelon/abc/exception', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/platform-browser', 'rxjs', 'rxjs/operators', '@yelon/theme', '@yelon/util/browser', '@angular/common', '@angular/router', 'ng-zorro-antd/button'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.exception = {}), global.ng.cdk.bidi, global.ng.core, global.ng.platformBrowser, global.rxjs, global.rxjs.operators, global.yelon.theme, global.browser, global.ng.common, global.ng.router, global["ng-zorro-antd/button"]));
-})(this, (function (exports, bidi, core, platformBrowser, rxjs, operators, theme, browser, common, router, button) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/platform-browser'), require('rxjs'), require('rxjs/operators'), require('@yelon/theme'), require('@yelon/util/browser'), require('@angular/cdk/observers'), require('@angular/common'), require('@angular/router'), require('ng-zorro-antd/button')) :
+    typeof define === 'function' && define.amd ? define('@yelon/abc/exception', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/platform-browser', 'rxjs', 'rxjs/operators', '@yelon/theme', '@yelon/util/browser', '@angular/cdk/observers', '@angular/common', '@angular/router', 'ng-zorro-antd/button'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.abc = global.yelon.abc || {}, global.yelon.abc.exception = {}), global.ng.cdk.bidi, global.ng.core, global.ng.platformBrowser, global.rxjs, global.rxjs.operators, global.yelon.theme, global.browser, global.ng.cdk.observers, global.ng.common, global.ng.router, global["ng-zorro-antd/button"]));
+})(this, (function (exports, bidi, core, platformBrowser, rxjs, operators, theme, browser, observers, common, router, button) { 'use strict';
 
     var ExceptionComponent = /** @class */ (function () {
-        function ExceptionComponent(i18n, dom, directionality) {
+        function ExceptionComponent(i18n, dom, directionality, cdr) {
             this.i18n = i18n;
             this.dom = dom;
             this.directionality = directionality;
+            this.cdr = cdr;
             this.destroy$ = new rxjs.Subject();
             this.locale = {};
             this.hasCon = false;
@@ -75,6 +76,7 @@
         });
         ExceptionComponent.prototype.checkContent = function () {
             this.hasCon = !browser.isEmpty(this.conTpl.nativeElement);
+            this.cdr.detectChanges();
         };
         ExceptionComponent.prototype.ngOnInit = function () {
             var _this = this;
@@ -109,7 +111,8 @@
     ExceptionComponent.ctorParameters = function () { return [
         { type: theme.YelonLocaleService },
         { type: platformBrowser.DomSanitizer },
-        { type: bidi.Directionality, decorators: [{ type: core.Optional }] }
+        { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
+        { type: core.ChangeDetectorRef }
     ]; };
     ExceptionComponent.propDecorators = {
         conTpl: [{ type: core.ViewChild, args: ['conTpl', { static: true },] }],
@@ -128,7 +131,7 @@
     }());
     ExceptionModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, router.RouterModule, theme.YelonLocaleModule, button.NzButtonModule],
+                    imports: [common.CommonModule, observers.ObserversModule, router.RouterModule, theme.YelonLocaleModule, button.NzButtonModule],
                     declarations: COMPONENTS,
                     exports: COMPONENTS
                 },] }

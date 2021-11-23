@@ -55,9 +55,12 @@ function createYunzaiApp(ngAddOptions) {
     });
 }
 exports.createYunzaiApp = createYunzaiApp;
-function createYunzaiAndModuleApp(name = 'trade', ngAddOptions) {
+function createYunzaiAndModuleApp(name = 'trade', ngAddOptions, yunzaiData) {
     return __awaiter(this, void 0, void 0, function* () {
         const res = yield createYunzaiApp(ngAddOptions);
+        if (yunzaiData != null) {
+            res.tree.create('ng-yunzai.json', JSON.stringify(yunzaiData));
+        }
         res.tree = yield res.runner
             .runSchematicAsync('module', { name, project: exports.APPNAME, routing: true }, res.tree)
             .toPromise();

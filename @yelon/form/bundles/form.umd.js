@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.12
+ * @license ng-yunzai(devcui@outlook.com) v12.0.16
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -2814,6 +2814,8 @@
         };
         NumberWidget.prototype._setValue = function (val) {
             this.setValue(this.schema.type === 'integer' ? Math.floor(val) : val);
+            if (this.ui.change)
+                this.ui.change(this.value);
         };
         return NumberWidget;
     }(ControlUIWidget));

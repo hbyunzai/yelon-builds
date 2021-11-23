@@ -1,12 +1,12 @@
 {
   "name": "@yelon/theme",
-  "version": "12.0.12",
+  "version": "12.0.16",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "ng-zorro-antd": "^12.0.1",
-    "@yelon/acl": "^12.0.12",
-    "@yelon/util": "^12.0.12",
+    "@yelon/acl": "^12.0.16",
+    "@yelon/util": "^12.0.16",
     "tslib": "^2.2.0"
   },
   "main": "bundles/theme.umd.js",

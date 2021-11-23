@@ -12,10 +12,10 @@ import ngEn from '@angular/common/locales/en';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
 import { zhCN, zhTW, enUS } from 'date-fns/locale';
+import * as i1$1 from '@yelon/util/config';
+import { YunzaiConfigService } from '@yelon/util/config';
 import * as i2 from 'ng-zorro-antd/i18n';
 import { zh_CN, zh_TW, en_US, NzI18nService } from 'ng-zorro-antd/i18n';
-import * as i4 from '@yelon/util/config';
-import { YunzaiConfigService } from '@yelon/util/config';
 import { __decorate } from 'tslib';
 import { InputBoolean } from '@yelon/util/decorator';
 import { forkJoin, Subject, of, BehaviorSubject, throwError } from 'rxjs';
@@ -28,8 +28,9 @@ import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 import { YA_SERVICE_TOKEN, mergeConfig } from '@yelon/auth';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import * as screenfull from 'screenfull';
-import { HttpClientModule, HttpResponse, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
+import { HttpClientModule, HttpErrorResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as i4 from '@angular/router';
 import { RouterModule, Router } from '@angular/router';
 import { YzSharedModule, ICONS } from '@yelon/bis/shared';
 import { RxStomp } from '@stomp/rx-stomp';
@@ -80,9 +81,7 @@ class YzI18NService extends YunzaiI18nBaseService {
             return { code, text: item.text, abbr: item.abbr };
         });
         const defaultLang = this.getDefaultLang();
-        if (this._langs.findIndex(w => w.code === defaultLang)) {
-            this._defaultLang = defaultLang;
-        }
+        this._defaultLang = this._langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
     }
     getDefaultLang() {
         if (!this.platform.isBrowser) {
@@ -101,7 +100,7 @@ class YzI18NService extends YunzaiI18nBaseService {
     use(lang, data) {
         if (this._currentLang === lang)
             return;
-        this._data = data;
+        this._data = this.flatData(data, []);
         const item = LANGS[lang];
         registerLocaleData(item.ng);
         this.nzI18nService.setLocale(item.zorro);
@@ -114,7 +113,7 @@ class YzI18NService extends YunzaiI18nBaseService {
         return this._langs;
     }
 }
-YzI18NService.ɵprov = i0.ɵɵdefineInjectable({ factory: function YzI18NService_Factory() { return new YzI18NService(i0.ɵɵinject(i1._HttpClient), i0.ɵɵinject(i1.SettingsService), i0.ɵɵinject(i2.NzI18nService), i0.ɵɵinject(i1.YelonLocaleService), i0.ɵɵinject(i3.Platform), i0.ɵɵinject(i4.YunzaiConfigService)); }, token: YzI18NService, providedIn: "root" });
+YzI18NService.ɵprov = i0.ɵɵdefineInjectable({ factory: function YzI18NService_Factory() { return new YzI18NService(i0.ɵɵinject(i1._HttpClient), i0.ɵɵinject(i1.SettingsService), i0.ɵɵinject(i2.NzI18nService), i0.ɵɵinject(i1.YelonLocaleService), i0.ɵɵinject(i3.Platform), i0.ɵɵinject(i1$1.YunzaiConfigService)); }, token: YzI18NService, providedIn: "root" });
 YzI18NService.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -919,7 +918,7 @@ class YzStompService {
         return this.rxStomp.watch(destination, headers);
     }
 }
-YzStompService.ɵprov = i0.ɵɵdefineInjectable({ factory: function YzStompService_Factory() { return new YzStompService(i0.ɵɵinject(i4.YunzaiConfigService), i0.ɵɵinject(i2$1.CacheService), i0.ɵɵinject(i0.INJECTOR), i0.ɵɵinject(i3$1.NzNotificationService)); }, token: YzStompService, providedIn: "root" });
+YzStompService.ɵprov = i0.ɵɵdefineInjectable({ factory: function YzStompService_Factory() { return new YzStompService(i0.ɵɵinject(i1$1.YunzaiConfigService), i0.ɵɵinject(i2$1.CacheService), i0.ɵɵinject(i0.INJECTOR), i0.ɵɵinject(i3$1.NzNotificationService)); }, token: YzStompService, providedIn: "root" });
 YzStompService.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -1029,6 +1028,7 @@ YzLayoutBasicComponent.ctorParameters = () => [
 ];
 
 const COMPONENTS = [
+    // ContactComponent,
     YzLayoutBasicComponent,
     YzHeaderApplicationComponent,
     YzHeaderNotifyComponent,
@@ -1248,6 +1248,15 @@ class YzDefaultInterceptor {
     }
     checkStatus(ev) {
         if ((ev.status >= 200 && ev.status < 300) || ev.status === 401) {
+            return;
+        }
+        if (ev instanceof HttpErrorResponse && (ev.error.message || ev.error.errorMessage)) {
+            if (ev.error.errorMessage) {
+                this.notification.error(`发生了一些错误 `, ev.error.errorMessage);
+            }
+            else {
+                this.notification.error(`发生了一些错误 `, ev.error.message);
+            }
             return;
         }
         if (ev instanceof HttpResponse && ev.body.errorMessage) {
@@ -1510,9 +1519,351 @@ const YZ_APPINIT_PROVIDES = [
     }
 ];
 
+class PathToRegexpService {
+    constructor() {
+        this.DEFAULT_DELIMITER = '/';
+        this.PATH_REGEXP = new RegExp(['(\\\\.)', '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'].join('|'), 'g');
+    }
+    parse(str, options) {
+        const tokens = [];
+        let key = 0;
+        let index = 0;
+        let path = '';
+        const defaultDelimiter = (options && options.delimiter) || this.DEFAULT_DELIMITER;
+        const whitelist = (options && options.whitelist) || undefined;
+        let pathEscaped = false;
+        let res;
+        while ((res = this.PATH_REGEXP.exec(str)) !== null) {
+            const m = res[0];
+            const escaped = res[1];
+            const offset = res.index;
+            path += str.slice(index, offset);
+            index = offset + m.length;
+            // Ignore already escaped sequences.
+            if (escaped) {
+                path += escaped[1];
+                pathEscaped = true;
+                continue;
+            }
+            let prev = '';
+            const name = res[2];
+            const capture = res[3];
+            const group = res[4];
+            const modifier = res[5];
+            if (!pathEscaped && path.length) {
+                const k = path.length - 1;
+                const c = path[k];
+                const matches = whitelist ? whitelist.indexOf(c) > -1 : true;
+                if (matches) {
+                    prev = c;
+                    path = path.slice(0, k);
+                }
+            }
+            // Push the current path onto the tokens.
+            if (path) {
+                tokens.push(path);
+                path = '';
+                pathEscaped = false;
+            }
+            const repeat = modifier === '+' || modifier === '*';
+            const optional = modifier === '?' || modifier === '*';
+            const pattern = capture || group;
+            const delimiter = prev || defaultDelimiter;
+            tokens.push({
+                name: name || key++,
+                prefix: prev,
+                delimiter: delimiter,
+                optional: optional,
+                repeat: repeat,
+                pattern: pattern
+                    ? this.escapeGroup(pattern)
+                    : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
+            });
+        }
+        // Push any remaining characters.
+        if (path || index < str.length) {
+            tokens.push(path + str.substr(index));
+        }
+        return tokens;
+    }
+    compile(str, options) {
+        return this.tokensToFunction(this.parse(str, options), options);
+    }
+    tokensToFunction(tokens, options) {
+        const matches = new Array(tokens.length);
+        for (let i = 0; i < tokens.length; i++) {
+            if (typeof tokens[i] === 'object') {
+                matches[i] = new RegExp(`^(?:${tokens[i].pattern})$`, this.flags(options));
+            }
+        }
+        return function (data, options) {
+            let path = '';
+            const encode = (options && options.encode) || encodeURIComponent;
+            const validate = options ? options.validate !== false : true;
+            for (let i = 0; i < tokens.length; i++) {
+                const token = tokens[i];
+                if (typeof token === 'string') {
+                    path += token;
+                    continue;
+                }
+                const value = data ? data[token.name] : undefined;
+                let segment;
+                if (Array.isArray(value)) {
+                    if (!token.repeat) {
+                        throw new TypeError(`Expected "${token.name}" to not repeat, but got array`);
+                    }
+                    if (value.length === 0) {
+                        if (token.optional) {
+                            continue;
+                        }
+                        throw new TypeError(`Expected "${token.name}" to not be empty`);
+                    }
+                    for (let j = 0; j < value.length; j++) {
+                        segment = encode(value[j], token);
+                        if (validate && !matches[i].test(segment)) {
+                            throw new TypeError(`Expected all "${token.name}" to match "${token.pattern}"`);
+                        }
+                        path += (j === 0 ? token.prefix : token.delimiter) + segment;
+                    }
+                    continue;
+                }
+                if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+                    segment = encode(String(value), token);
+                    if (validate && !matches[i].test(segment)) {
+                        throw new TypeError(`Expected "${token.name}" to match "${token.pattern}", but got "${segment}"`);
+                    }
+                    path += token.prefix + segment;
+                    continue;
+                }
+                if (token.optional) {
+                    continue;
+                }
+                throw new TypeError(`Expected "${token.name}" to be ${token.repeat ? 'an array' : 'a string'}`);
+            }
+            return path;
+        };
+    }
+    escapeString(str) {
+        return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
+    }
+    escapeGroup(group) {
+        return group.replace(/([=!:$/()])/g, '\\$1');
+    }
+    flags(options) {
+        return options && options.sensitive ? '' : 'i';
+    }
+    regexpToRegexp(path, keys) {
+        if (!keys) {
+            return path;
+        }
+        const groups = path.source.match(/\((?!\?)/g);
+        if (groups) {
+            for (let i = 0; i < groups.length; i++) {
+                keys.push({
+                    name: i,
+                    prefix: null,
+                    delimiter: null,
+                    optional: false,
+                    repeat: false,
+                    pattern: null
+                });
+            }
+        }
+        return path;
+    }
+    arrayToRegexp(path, keys, options) {
+        const parts = [];
+        for (let i = 0; i < path.length; i++) {
+            parts.push(this.pathToRegexp(path[i], keys, options).source);
+        }
+        return new RegExp(`(?:${parts.join('|')})`, this.flags(options));
+    }
+    stringToRegexp(path, keys, options) {
+        return this.tokensToRegExp(this.parse(path, options), keys, options);
+    }
+    tokensToRegExp(tokens, keys, options) {
+        options = options || {};
+        const strict = options.strict;
+        const start = options.start !== false;
+        const end = options.end !== false;
+        const delimiter = options.delimiter || this.DEFAULT_DELIMITER;
+        const endsWith = []
+            .concat(options.endsWith || [])
+            .map(this.escapeString)
+            .concat('$')
+            .join('|');
+        let route = start ? '^' : '';
+        for (let i = 0; i < tokens.length; i++) {
+            const token = tokens[i];
+            if (typeof token === 'string') {
+                route += this.escapeString(token);
+            }
+            else {
+                const capture = token.repeat
+                    ? `(?:${token.pattern})(?:${this.escapeString(token.delimiter)}(?:${token.pattern}))*`
+                    : token.pattern;
+                if (keys) {
+                    keys.push(token);
+                }
+                if (token.optional) {
+                    if (!token.prefix) {
+                        route += `(${capture})?`;
+                    }
+                    else {
+                        route += `(?:${this.escapeString(token.prefix)}(${capture}))?`;
+                    }
+                }
+                else {
+                    route += `${this.escapeString(token.prefix)}(${capture})`;
+                }
+            }
+        }
+        if (end) {
+            if (!strict) {
+                route += `(?:${this.escapeString(delimiter)})?`;
+            }
+            route += endsWith === '$' ? '$' : `(?=${endsWith})`;
+        }
+        else {
+            const endToken = tokens[tokens.length - 1];
+            const isEndDelimited = typeof endToken === 'string' ? endToken[endToken.length - 1] === delimiter : endToken === undefined;
+            if (!strict) {
+                route += `(?:${this.escapeString(delimiter)}(?=${endsWith}))?`;
+            }
+            if (!isEndDelimited) {
+                route += `(?=${this.escapeString(delimiter)}|${endsWith})`;
+            }
+        }
+        return new RegExp(route, this.flags(options));
+    }
+    pathToRegexp(path, keys, options) {
+        if (path instanceof RegExp) {
+            return this.regexpToRegexp(path, keys);
+        }
+        if (Array.isArray(path)) {
+            return this.arrayToRegexp(/** @type {!Array} */ path, keys, options);
+        }
+        return this.stringToRegexp(/** @type {string} */ path, keys, options);
+    }
+}
+PathToRegexpService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PathToRegexpService_Factory() { return new PathToRegexpService(); }, token: PathToRegexpService, providedIn: "root" });
+PathToRegexpService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+PathToRegexpService.ctorParameters = () => [];
+
+class ActGuard {
+    constructor(configService, cacheService, pathToRegexp, router) {
+        this.configService = configService;
+        this.cacheService = cacheService;
+        this.pathToRegexp = pathToRegexp;
+        this.router = router;
+        this.bis = BUSINESS_DEFAULT_CONFIG;
+        this.menus = [];
+        this.links = [];
+        log$1('act: ');
+        this.bis = mergeBisConfig(this.configService);
+        log$1('act: config ', this.bis);
+        const user = this.cacheService.get('_yz_user', { mode: 'none' });
+        log$1('act: user ', user);
+        this.menus = deepCopy(user.menu).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
+        log$1('act: menus ', this.menus);
+        this.getAllLinks(this.menus, this.links);
+        log$1('act: links ', this.links);
+    }
+    canActivate(_, state) {
+        log$1('act: can activate ', state);
+        if (this.preHandle(state)) {
+            return true;
+        }
+        log$1('act: can activate child prehandle success');
+        let canactivate = false;
+        this.links.forEach((link) => {
+            const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
+            log$1(`act: ${link} test ${state.url.split('?')[0]}`);
+            if (regexp.test(state.url.split('?')[0])) {
+                canactivate = true;
+                log$1(`act: test value ${canactivate}`);
+                return;
+            }
+        });
+        if (canactivate) {
+            log$1(`act: test sucess`);
+            return true;
+        }
+        else {
+            log$1(`act: test error`);
+            this.router.navigate(['displayIndex']);
+            return false;
+        }
+    }
+    canActivateChild(_, state) {
+        log$1('act: can activate child ', state);
+        if (this.preHandle(state)) {
+            return true;
+        }
+        log$1('act: can activate child prehandle success');
+        let canactivate = false;
+        this.links.forEach((link) => {
+            const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
+            if (regexp.test(state.url.split('?')[0])) {
+                log$1(`act: ${link} test ${state.url.split('?')[0]}`);
+                canactivate = true;
+                log$1(`act: test value ${canactivate}`);
+                return;
+            }
+        });
+        if (canactivate) {
+            log$1(`act: test sucess`);
+            return true;
+        }
+        else {
+            log$1(`act: test error`);
+            this.router.navigate(['displayIndex']);
+            return false;
+        }
+    }
+    preHandle(state) {
+        return (state.url.includes('error') ||
+            state.url.includes('exception') ||
+            state.url.includes('displayIndex') ||
+            state.url === '' ||
+            state.url === null ||
+            state.url === '/' ||
+            state.url.includes('iframePage'));
+    }
+    getAllLinks(menu, links) {
+        menu.forEach((sider) => {
+            if (sider.link) {
+                links.push(sider.link);
+            }
+            if (sider.children && sider.children.length > 0) {
+                this.getAllLinks(sider.children, links);
+            }
+        });
+    }
+}
+ActGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ActGuard_Factory() { return new ActGuard(i0.ɵɵinject(i1$1.YunzaiConfigService), i0.ɵɵinject(i2$1.CacheService), i0.ɵɵinject(PathToRegexpService), i0.ɵɵinject(i4.Router)); }, token: ActGuard, providedIn: "root" });
+ActGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ActGuard.ctorParameters = () => [
+    { type: YunzaiConfigService$1 },
+    { type: CacheService },
+    { type: PathToRegexpService },
+    { type: Router }
+];
+
+// export * from './contact/contact.component';
+// export * from './contact/contact.service';
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BUSINESS_DEFAULT_CONFIG, STOMP_DEFAULT_CONFIG, TOPIC, YZ_APPINIT_PROVIDES, YunzaiLayoutModule, YzAuthService, YzDefaultInterceptor, YzHeaderApplicationComponent, YzHeaderClearStorageComponent, YzHeaderFullScreenComponent, YzHeaderI18NComponent, YzHeaderNotifyComponent, YzHeaderThemBtnComponent, YzHeaderUserComponent, YzI18NService, YzLayoutBasicComponent, YzStartupService, YzStartupServiceFactory, YzStompService, generateAbility, mapYzSideToYelonMenu, mergeBisConfig, mergeStompConfig, ɵ0, YzHeaderApplicationComponent as ɵa, YzHeaderNotifyComponent as ɵb, YzHeaderThemBtnComponent as ɵc, YzHeaderUserComponent as ɵd, YzHeaderFullScreenComponent as ɵe, YzHeaderClearStorageComponent as ɵf, YzHeaderI18NComponent as ɵg };
+export { ActGuard, BUSINESS_DEFAULT_CONFIG, PathToRegexpService, STOMP_DEFAULT_CONFIG, TOPIC, YZ_APPINIT_PROVIDES, YunzaiLayoutModule, YzAuthService, YzDefaultInterceptor, YzHeaderApplicationComponent, YzHeaderClearStorageComponent, YzHeaderFullScreenComponent, YzHeaderI18NComponent, YzHeaderNotifyComponent, YzHeaderThemBtnComponent, YzHeaderUserComponent, YzI18NService, YzLayoutBasicComponent, YzStartupService, YzStartupServiceFactory, YzStompService, generateAbility, mapYzSideToYelonMenu, mergeBisConfig, mergeStompConfig, ɵ0, YzHeaderApplicationComponent as ɵa, YzHeaderNotifyComponent as ɵb, YzHeaderThemBtnComponent as ɵc, YzHeaderUserComponent as ɵd, YzHeaderFullScreenComponent as ɵe, YzHeaderClearStorageComponent as ɵf, YzHeaderI18NComponent as ɵg };
 //# sourceMappingURL=layout.js.map

@@ -1,13 +1,33 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.12
+ * @license ng-yunzai(devcui@outlook.com) v12.0.16
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/router'), require('rxjs'), require('rxjs/operators'), require('ng-zorro-antd/message'), require('@yelon/theme'), require('@yelon/util/browser'), require('ng-zorro-antd/avatar'), require('ng-zorro-antd/dropdown'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/tooltip'), require('@angular/cdk/bidi'), require('@angular/platform-browser'), require('@yelon/util/decorator'), require('@yelon/util/token')) :
-  typeof define === 'function' && define.amd ? define('@yelon/theme/layout-default', ['exports', '@angular/common', '@angular/core', '@angular/router', 'rxjs', 'rxjs/operators', 'ng-zorro-antd/message', '@yelon/theme', '@yelon/util/browser', 'ng-zorro-antd/avatar', 'ng-zorro-antd/dropdown', 'ng-zorro-antd/icon', 'ng-zorro-antd/tooltip', '@angular/cdk/bidi', '@angular/platform-browser', '@yelon/util/decorator', '@yelon/util/token'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = global.yelon.theme || {}, global.yelon.theme["layout-default"] = {}), global.ng.common, global.ng.core, global.ng.router, global.rxjs, global.rxjs.operators, global.message, global.yelon.theme, global.browser, global.avatar, global.dropdown, global.icon, global.tooltip, global.ng.cdk.bidi, global.ng.platformBrowser, global.decorator, global.token));
-})(this, (function (exports, common, core, router, rxjs, operators, message, theme, browser, avatar, dropdown, icon, tooltip, bidi, platformBrowser, decorator, token) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/router'), require('rxjs'), require('rxjs/operators'), require('ng-zorro-antd/message'), require('@yelon/theme'), require('@yelon/util/browser'), require('ng-zorro-antd/avatar'), require('ng-zorro-antd/badge'), require('ng-zorro-antd/dropdown'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/tooltip'), require('@angular/cdk/bidi'), require('@angular/platform-browser'), require('@yelon/util/decorator'), require('@yelon/util/token')) :
+  typeof define === 'function' && define.amd ? define('@yelon/theme/layout-default', ['exports', '@angular/common', '@angular/core', '@angular/router', 'rxjs', 'rxjs/operators', 'ng-zorro-antd/message', '@yelon/theme', '@yelon/util/browser', 'ng-zorro-antd/avatar', 'ng-zorro-antd/badge', 'ng-zorro-antd/dropdown', 'ng-zorro-antd/icon', 'ng-zorro-antd/tooltip', '@angular/cdk/bidi', '@angular/platform-browser', '@yelon/util/decorator', '@yelon/util/token'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = global.yelon.theme || {}, global.yelon.theme["layout-default"] = {}), global.ng.common, global.ng.core, global.ng.router, global.rxjs, global.rxjs.operators, global.message, global.yelon.theme, global.browser, global.avatar, global.badge, global.dropdown, global.icon, global.tooltip, global.ng.cdk.bidi, global.ng.platformBrowser, global.decorator, global.token));
+})(this, (function (exports, common, i0, router, rxjs, operators, message, theme, browser, avatar, badge, dropdown, icon, tooltip, bidi, platformBrowser, decorator, token) { 'use strict';
+
+  function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+      Object.keys(e).forEach(function (k) {
+        if (k !== 'default') {
+          var d = Object.getOwnPropertyDescriptor(e, k);
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: function () { return e[k]; }
+          });
+        }
+      });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+  }
+
+  var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
 
   var LayoutDefaultHeaderItemComponent = /** @class */ (function () {
       function LayoutDefaultHeaderItemComponent() {
@@ -17,65 +37,104 @@
       return LayoutDefaultHeaderItemComponent;
   }());
   LayoutDefaultHeaderItemComponent.decorators = [
-      { type: core.Component, args: [{
+      { type: i0.Component, args: [{
                   selector: 'layout-default-header-item',
                   template: "\n    <ng-template #host>\n      <ng-content></ng-content>\n    </ng-template>\n  "
               },] }
   ];
   LayoutDefaultHeaderItemComponent.propDecorators = {
-      host: [{ type: core.ViewChild, args: ['host', { static: true },] }],
-      hidden: [{ type: core.Input }],
-      direction: [{ type: core.Input }]
+      host: [{ type: i0.ViewChild, args: ['host', { static: true },] }],
+      hidden: [{ type: i0.Input }],
+      direction: [{ type: i0.Input }]
   };
 
+  var LayoutService = /** @class */ (function () {
+      function LayoutService() {
+          this.header = new rxjs.BehaviorSubject(true);
+          this.sidebar = new rxjs.BehaviorSubject(true);
+      }
+      LayoutService.prototype.hideSidebar = function () {
+          this.sidebar.next(false);
+      };
+      LayoutService.prototype.hideHeader = function () {
+          this.header.next(false);
+      };
+      LayoutService.prototype.showSidebar = function () {
+          this.sidebar.next(true);
+      };
+      LayoutService.prototype.showHeader = function () {
+          this.header.next(true);
+      };
+      return LayoutService;
+  }());
+  LayoutService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function LayoutService_Factory() { return new LayoutService(); }, token: LayoutService, providedIn: "root" });
+  LayoutService.decorators = [
+      { type: i0.Injectable, args: [{ providedIn: 'root' },] }
+  ];
+  LayoutService.ctorParameters = function () { return []; };
+
   var LayoutDefaultComponent = /** @class */ (function () {
-      function LayoutDefaultComponent(router$1, msgSrv, settings, el, renderer, doc) {
+      function LayoutDefaultComponent(router, layoutService, msgSrv, settings, el, renderer, doc) {
           var _this = this;
+          this.layoutService = layoutService;
+          this.msgSrv = msgSrv;
           this.settings = settings;
           this.el = el;
           this.renderer = renderer;
           this.doc = doc;
+          this.showHeader = true;
+          this.showSidebar = true;
           this.destroy$ = new rxjs.Subject();
           this.isFetching = false;
-          router$1.events.pipe(operators.takeUntil(this.destroy$)).subscribe(function (evt) {
-              if (!_this.isFetching && evt instanceof router.RouteConfigLoadStart) {
-                  _this.isFetching = true;
-              }
-              if (evt instanceof router.NavigationError || evt instanceof router.NavigationCancel) {
-                  _this.isFetching = false;
-                  if (evt instanceof router.NavigationError) {
-                      msgSrv.error("Could not load " + evt.url + " route", { nzDuration: 1000 * 3 });
-                  }
-                  return;
-              }
-              if (!(evt instanceof router.NavigationEnd || evt instanceof router.RouteConfigLoadEnd)) {
-                  return;
-              }
-              if (_this.isFetching) {
-                  setTimeout(function () {
-                      _this.isFetching = false;
-                  }, 100);
-              }
-          });
+          router.events.pipe(operators.takeUntil(this.destroy$)).subscribe(function (ev) { return _this.processEv(ev); });
       }
-      LayoutDefaultComponent.prototype.setClass = function () {
+      LayoutDefaultComponent.prototype.processEv = function (ev) {
+          var _this = this;
           var _a;
-          var _b = this, el = _b.el, doc = _b.doc, renderer = _b.renderer, settings = _b.settings;
+          if (!this.isFetching && ev instanceof router.RouteConfigLoadStart) {
+              this.isFetching = true;
+          }
+          if (ev instanceof router.NavigationError || ev instanceof router.NavigationCancel) {
+              this.isFetching = false;
+              var err = this.customError === null ? null : (_a = this.customError) !== null && _a !== void 0 ? _a : "Could not load " + ev.url + " route";
+              if (err && ev instanceof router.NavigationError) {
+                  this.msgSrv.error(err, { nzDuration: 1000 * 3 });
+              }
+              return;
+          }
+          if (!(ev instanceof router.NavigationEnd || ev instanceof router.RouteConfigLoadEnd)) {
+              return;
+          }
+          if (this.isFetching) {
+              setTimeout(function () {
+                  _this.isFetching = false;
+              }, 100);
+          }
+      };
+      LayoutDefaultComponent.prototype.setClass = function () {
+          var _b;
+          var _c = this, el = _c.el, doc = _c.doc, renderer = _c.renderer, settings = _c.settings;
           var layout = settings.layout;
-          browser.updateHostClass(el.nativeElement, renderer, (_a = {},
-              _a['yunzai-default'] = true,
-              _a["yunzai-default__fixed"] = layout.fixed,
-              _a["yunzai-default__collapsed"] = layout.collapsed,
-              _a["yunzai-default__hide-aside"] = this.options.hideAside,
-              _a));
+          browser.updateHostClass(el.nativeElement, renderer, (_b = {},
+              _b['yunzai-default'] = true,
+              _b["yunzai-default__fixed"] = layout.fixed,
+              _b["yunzai-default__collapsed"] = layout.collapsed,
+              _b["yunzai-default__hide-aside"] = this.options.hideAside,
+              _b));
           doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');
       };
       LayoutDefaultComponent.prototype.ngOnInit = function () {
           var _this = this;
           this.options = Object.assign({ logoExpanded: "./assets/logo-full.svg", logoCollapsed: "./assets/logo.svg", logoLink: "/", hideAside: false }, this.options);
-          var _a = this, settings = _a.settings, destroy$ = _a.destroy$;
+          var _b = this, settings = _b.settings, destroy$ = _b.destroy$;
           settings.notify.pipe(operators.takeUntil(destroy$)).subscribe(function () { return _this.setClass(); });
           this.setClass();
+          this.layoutService.header.subscribe(function (h) {
+              _this.showHeader = h;
+          });
+          this.layoutService.sidebar.subscribe(function (s) {
+              _this.showSidebar = s;
+          });
       };
       LayoutDefaultComponent.prototype.ngOnDestroy = function () {
           this.destroy$.next();
@@ -84,26 +143,28 @@
       return LayoutDefaultComponent;
   }());
   LayoutDefaultComponent.decorators = [
-      { type: core.Component, args: [{
+      { type: i0.Component, args: [{
                   selector: 'layout-default',
                   exportAs: 'layoutDefault',
-                  template: "\n    <div class=\"yunzai-default__progress-bar\" *ngIf=\"isFetching\"></div>\n    <layout-default-header></layout-default-header>\n    <div *ngIf=\"!options.hideAside\" class=\"yunzai-default__aside\">\n      <div class=\"yunzai-default__aside-inner\">\n        <ng-container *ngTemplateOutlet=\"asideUser\"></ng-container>\n        <ng-container *ngTemplateOutlet=\"nav\"></ng-container>\n        <layout-default-nav *ngIf=\"!nav\" class=\"d-block py-lg\"></layout-default-nav>\n      </div>\n    </div>\n    <section class=\"yunzai-default__content\">\n      <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n      <ng-content></ng-content>\n    </section>\n  "
+                  template: "\n    <div class=\"yunzai-default__progress-bar\" *ngIf=\"isFetching\"></div>\n    <layout-default-header *ngIf=\"showHeader\"></layout-default-header>\n    <ng-container *ngIf=\"showSidebar\">\n      <div *ngIf=\"!options.hideAside\" class=\"yunzai-default__aside\">\n        <div class=\"yunzai-default__aside-inner\">\n          <ng-container *ngTemplateOutlet=\"asideUser\"></ng-container>\n          <ng-container *ngTemplateOutlet=\"nav\"></ng-container>\n          <layout-default-nav *ngIf=\"!nav\" class=\"d-block py-lg\"></layout-default-nav>\n        </div>\n      </div>\n    </ng-container>\n    <section\n      class=\"yunzai-default__content\"\n      [ngStyle]=\"{ 'margin-top': !showHeader ? '0px' : '', 'margin-left': !showSidebar ? '0px' : '' }\"\n    >\n      <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n      <ng-content></ng-content>\n    </section>\n  "
               },] }
   ];
   LayoutDefaultComponent.ctorParameters = function () { return [
       { type: router.Router },
+      { type: LayoutService },
       { type: message.NzMessageService },
       { type: theme.SettingsService },
-      { type: core.ElementRef },
-      { type: core.Renderer2 },
-      { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
+      { type: i0.ElementRef },
+      { type: i0.Renderer2 },
+      { type: undefined, decorators: [{ type: i0.Inject, args: [common.DOCUMENT,] }] }
   ]; };
   LayoutDefaultComponent.propDecorators = {
-      headerItems: [{ type: core.ContentChildren, args: [LayoutDefaultHeaderItemComponent, { descendants: false },] }],
-      options: [{ type: core.Input }],
-      asideUser: [{ type: core.Input }],
-      nav: [{ type: core.Input }],
-      content: [{ type: core.Input }]
+      headerItems: [{ type: i0.ContentChildren, args: [LayoutDefaultHeaderItemComponent, { descendants: false },] }],
+      options: [{ type: i0.Input }],
+      asideUser: [{ type: i0.Input }],
+      nav: [{ type: i0.Input }],
+      content: [{ type: i0.Input }],
+      customError: [{ type: i0.Input }]
   };
 
   var LayoutDefaultHeaderItemTriggerDirective = /** @class */ (function () {
@@ -112,7 +173,7 @@
       return LayoutDefaultHeaderItemTriggerDirective;
   }());
   LayoutDefaultHeaderItemTriggerDirective.decorators = [
-      { type: core.Directive, args: [{
+      { type: i0.Directive, args: [{
                   selector: '[layout-default-header-item-trigger]',
                   host: {
                       '[class.yunzai-default__nav-item]': "true"
@@ -184,19 +245,19 @@
       return LayoutDefaultHeaderComponent;
   }());
   LayoutDefaultHeaderComponent.decorators = [
-      { type: core.Component, args: [{
+      { type: i0.Component, args: [{
                   selector: 'layout-default-header',
                   template: "\n    <ng-template #render let-ls>\n      <li *ngFor=\"let i of ls\" [class.hidden-mobile]=\"i.hidden === 'mobile'\" [class.hidden-pc]=\"i.hidden === 'pc'\">\n        <ng-container *ngTemplateOutlet=\"i.host\"></ng-container>\n      </li>\n    </ng-template>\n    <div class=\"yunzai-default__header-logo\" [style.width.px]=\"options.logoFixWidth\">\n      <a [routerLink]=\"options.logoLink\" class=\"yunzai-default__header-logo-link\">\n        <img class=\"yunzai-default__header-logo-expanded\" [attr.src]=\"options.logoExpanded\" [attr.alt]=\"app.name\" />\n        <img class=\"yunzai-default__header-logo-collapsed\" [attr.src]=\"options.logoCollapsed\" [attr.alt]=\"app.name\" />\n      </a>\n    </div>\n    <div class=\"yunzai-default__nav-wrap\">\n      <ul class=\"yunzai-default__nav\">\n        <li *ngIf=\"!options.hideAside\">\n          <div class=\"yunzai-default__nav-item yunzai-default__nav-item--collapse\" (click)=\"toggleCollapsed()\">\n            <i nz-icon [nzType]=\"collapsedIcon\"></i>\n          </div>\n        </li>\n        <ng-template [ngTemplateOutlet]=\"render\" [ngTemplateOutletContext]=\"{ $implicit: left }\"></ng-template>\n      </ul>\n      <div *ngIf=\"middle.length > 0\" class=\"yunzai-default__nav yunzai-default__nav-middle\">\n        <ng-container *ngTemplateOutlet=\"middle[0].host\"></ng-container>\n      </div>\n      <ul class=\"yunzai-default__nav\">\n        <ng-template [ngTemplateOutlet]=\"render\" [ngTemplateOutletContext]=\"{ $implicit: right }\"></ng-template>\n      </ul>\n    </div>\n  ",
                   host: {
                       '[class.yunzai-default__header]': "true"
                   },
-                  changeDetection: core.ChangeDetectionStrategy.OnPush
+                  changeDetection: i0.ChangeDetectionStrategy.OnPush
               },] }
   ];
   LayoutDefaultHeaderComponent.ctorParameters = function () { return [
       { type: theme.SettingsService },
       { type: LayoutDefaultComponent },
-      { type: core.ChangeDetectorRef }
+      { type: i0.ChangeDetectorRef }
   ]; };
 
   /*! *****************************************************************************
@@ -539,7 +600,7 @@
           this.recursivePath = true;
           this.openStrictly = false;
           this.maxLevelIcon = 3;
-          this.select = new core.EventEmitter();
+          this.select = new i0.EventEmitter();
       }
       Object.defineProperty(LayoutDefaultNavComponent.prototype, "collapsed", {
           get: function () {
@@ -578,7 +639,7 @@
           if (!this.floatingEl)
               return;
           this.floatingEl.removeEventListener('click', this.floatingClickHandle.bind(this));
-          // fix ie: https://github.com/ng-alain/delon/issues/52
+          // fix ie: https://github.com/hbyunzai/ng-yunzai/issues
           if (this.floatingEl.hasOwnProperty('remove')) {
               this.floatingEl.remove();
           }
@@ -773,37 +834,37 @@
       return LayoutDefaultNavComponent;
   }());
   LayoutDefaultNavComponent.decorators = [
-      { type: core.Component, args: [{
+      { type: i0.Component, args: [{
                   selector: 'layout-default-nav',
-                  template: "<ng-template #icon let-i>\n  <ng-container *ngIf=\"i\" [ngSwitch]=\"i.type\">\n    <i\n      *ngSwitchCase=\"'class'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzType]=\"i.value\"\n      [nzTheme]=\"i.theme\"\n      [nzSpin]=\"i.spin\"\n      [nzTwotoneColor]=\"i.twoToneColor\"\n      [nzIconfont]=\"i.iconfont\"\n      [nzRotate]=\"i.rotate\"\n    ></i>\n    <i\n      *ngSwitchCase=\"'icon'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzType]=\"i.value\"\n      [nzTheme]=\"i.theme\"\n      [nzSpin]=\"i.spin\"\n      [nzTwotoneColor]=\"i.twoToneColor\"\n      [nzIconfont]=\"i.iconfont\"\n      [nzRotate]=\"i.rotate\"\n    ></i>\n    <i *ngSwitchCase=\"'iconfont'\" class=\"sidebar-nav__item-icon\" nz-icon [nzIconfont]=\"i.iconfont\"></i>\n    <img *ngSwitchCase=\"'img'\" [src]=\"i.value\" class=\"sidebar-nav__item-icon sidebar-nav__item-img\" />\n    <span *ngSwitchCase=\"'svg'\" class=\"sidebar-nav__item-icon sidebar-nav__item-svg\" [innerHTML]=\"i.value\"></span>\n    <i *ngSwitchDefault class=\"sidebar-nav__item-icon {{ i.value }}\"></i>\n  </ng-container>\n</ng-template>\n<ng-template #tree let-ls>\n  <ng-container *ngFor=\"let i of ls\">\n    <li\n      *ngIf=\"i._hidden !== true\"\n      class=\"sidebar-nav__item\"\n      [class.sidebar-nav__selected]=\"i._selected\"\n      [class.sidebar-nav__open]=\"i._open\"\n    >\n      <!-- link -->\n      <a\n        *ngIf=\"i.children.length === 0\"\n        (click)=\"to(i)\"\n        [attr.data-id]=\"i._id\"\n        class=\"sidebar-nav__item-link\"\n        [ngClass]=\"{ 'sidebar-nav__item-disabled': i.disabled }\"\n      >\n        <ng-container *ngIf=\"i._needIcon\">\n          <ng-container *ngIf=\"!collapsed\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </ng-container>\n          <span *ngIf=\"collapsed\" nz-tooltip nzTooltipPlacement=\"right\" [nzTooltipTitle]=\"i.text\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </span>\n        </ng-container>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n      </a>\n      <!-- has children link -->\n      <a\n        *ngIf=\"i.children.length > 0\"\n        (click)=\"toggleOpen(i)\"\n        (mouseenter)=\"showSubMenu($event, i)\"\n        class=\"sidebar-nav__item-link\"\n      >\n        <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n        <i class=\"sidebar-nav__sub-arrow\"></i>\n      </a>\n      <!-- badge -->\n      <div\n        *ngIf=\"i.badge\"\n        [attr.title]=\"i.badge\"\n        class=\"badge badge-{{ i.badgeStatus }}\"\n        [class.badge-dot]=\"i.badgeDot\"\n      >\n        <em>{{ i.badge }}</em>\n      </div>\n      <ul *ngIf=\"i.children.length > 0\" class=\"sidebar-nav sidebar-nav__sub sidebar-nav__depth{{ i._depth }}\">\n        <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: i.children }\"></ng-template>\n      </ul>\n    </li>\n  </ng-container>\n</ng-template>\n<ul class=\"sidebar-nav\">\n  <ng-container *ngFor=\"let group of list\">\n    <li class=\"sidebar-nav__item sidebar-nav__group-title\" *ngIf=\"group.group\">\n      <span [innerHTML]=\"group._text\"></span>\n    </li>\n    <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: group.children }\"></ng-template>\n  </ng-container>\n</ul>\n",
+                  template: "<ng-template #icon let-i>\n  <ng-container *ngIf=\"i\" [ngSwitch]=\"i.type\">\n    <i\n      *ngSwitchCase=\"'class'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzType]=\"i.value\"\n      [nzTheme]=\"i.theme\"\n      [nzSpin]=\"i.spin\"\n      [nzTwotoneColor]=\"i.twoToneColor\"\n      [nzIconfont]=\"i.iconfont\"\n      [nzRotate]=\"i.rotate\"\n    ></i>\n    <i\n      *ngSwitchCase=\"'icon'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzType]=\"i.value\"\n      [nzTheme]=\"i.theme\"\n      [nzSpin]=\"i.spin\"\n      [nzTwotoneColor]=\"i.twoToneColor\"\n      [nzIconfont]=\"i.iconfont\"\n      [nzRotate]=\"i.rotate\"\n    ></i>\n    <i *ngSwitchCase=\"'iconfont'\" class=\"sidebar-nav__item-icon\" nz-icon [nzIconfont]=\"i.iconfont\"></i>\n    <img *ngSwitchCase=\"'img'\" [src]=\"i.value\" class=\"sidebar-nav__item-icon sidebar-nav__item-img\" />\n    <span *ngSwitchCase=\"'svg'\" class=\"sidebar-nav__item-icon sidebar-nav__item-svg\" [innerHTML]=\"i.value\"></span>\n    <i *ngSwitchDefault class=\"sidebar-nav__item-icon {{ i.value }}\"></i>\n  </ng-container>\n</ng-template>\n<ng-template #tree let-ls>\n  <ng-container *ngFor=\"let i of ls\">\n    <li\n      *ngIf=\"i._hidden !== true\"\n      class=\"sidebar-nav__item\"\n      [class.sidebar-nav__selected]=\"i._selected\"\n      [class.sidebar-nav__open]=\"i._open\"\n    >\n      <!-- link -->\n      <a\n        *ngIf=\"i.children.length === 0\"\n        (click)=\"to(i)\"\n        [attr.data-id]=\"i._id\"\n        class=\"sidebar-nav__item-link\"\n        [ngClass]=\"{ 'sidebar-nav__item-disabled': i.disabled }\"\n      >\n        <ng-container *ngIf=\"i._needIcon\">\n          <ng-container *ngIf=\"!collapsed\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </ng-container>\n          <span *ngIf=\"collapsed\" nz-tooltip nzTooltipPlacement=\"right\" [nzTooltipTitle]=\"i.text\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </span>\n        </ng-container>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n      </a>\n      <!-- has children link -->\n      <a\n        *ngIf=\"i.children.length > 0\"\n        (click)=\"toggleOpen(i)\"\n        (mouseenter)=\"showSubMenu($event, i)\"\n        class=\"sidebar-nav__item-link\"\n      >\n        <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n        <i class=\"sidebar-nav__sub-arrow\"></i>\n      </a>\n      <!-- badge -->\n      <nz-badge *ngIf=\"i.badge\" [nzCount]=\"i.badge\" [nzDot]=\"i.badgeDot\" nzStandalone [nzOverflowCount]=\"9\"></nz-badge>\n      <ul *ngIf=\"i.children.length > 0\" class=\"sidebar-nav sidebar-nav__sub sidebar-nav__depth{{ i._depth }}\">\n        <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: i.children }\"></ng-template>\n      </ul>\n    </li>\n  </ng-container>\n</ng-template>\n<ul class=\"sidebar-nav\">\n  <ng-container *ngFor=\"let group of list\">\n    <li class=\"sidebar-nav__item sidebar-nav__group-title\" *ngIf=\"group.group\">\n      <span [innerHTML]=\"group._text\"></span>\n    </li>\n    <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: group.children }\"></ng-template>\n  </ng-container>\n</ul>\n",
                   host: {
                       '(click)': '_click()',
                       '(document:click)': '_docClick()'
                   },
                   preserveWhitespaces: false,
-                  changeDetection: core.ChangeDetectionStrategy.OnPush,
-                  encapsulation: core.ViewEncapsulation.None
+                  changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                  encapsulation: i0.ViewEncapsulation.None
               },] }
   ];
   LayoutDefaultNavComponent.ctorParameters = function () { return [
       { type: theme.MenuService },
       { type: theme.SettingsService },
       { type: router.Router },
-      { type: core.Renderer2 },
-      { type: core.ChangeDetectorRef },
-      { type: core.NgZone },
+      { type: i0.Renderer2 },
+      { type: i0.ChangeDetectorRef },
+      { type: i0.NgZone },
       { type: platformBrowser.DomSanitizer },
-      { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-      { type: undefined, decorators: [{ type: core.Inject, args: [token.WINDOW,] }] },
-      { type: bidi.Directionality, decorators: [{ type: core.Optional }] }
+      { type: undefined, decorators: [{ type: i0.Inject, args: [common.DOCUMENT,] }] },
+      { type: undefined, decorators: [{ type: i0.Inject, args: [token.WINDOW,] }] },
+      { type: bidi.Directionality, decorators: [{ type: i0.Optional }] }
   ]; };
   LayoutDefaultNavComponent.propDecorators = {
-      disabledAcl: [{ type: core.Input }],
-      autoCloseUnderPad: [{ type: core.Input }],
-      recursivePath: [{ type: core.Input }],
-      openStrictly: [{ type: core.Input }],
-      maxLevelIcon: [{ type: core.Input }],
-      select: [{ type: core.Output }]
+      disabledAcl: [{ type: i0.Input }],
+      autoCloseUnderPad: [{ type: i0.Input }],
+      recursivePath: [{ type: i0.Input }],
+      openStrictly: [{ type: i0.Input }],
+      maxLevelIcon: [{ type: i0.Input }],
+      select: [{ type: i0.Output }]
   };
   __decorate([
       decorator.InputBoolean()
@@ -837,7 +898,7 @@
       return LayoutDefaultModule;
   }());
   LayoutDefaultModule.decorators = [
-      { type: core.NgModule, args: [{
+      { type: i0.NgModule, args: [{
                   imports: [
                       common.CommonModule,
                       router.RouterModule,
@@ -845,7 +906,8 @@
                       icon.NzIconModule,
                       avatar.NzAvatarModule,
                       dropdown.NzDropDownModule,
-                      message.NzMessageModule
+                      message.NzMessageModule,
+                      badge.NzBadgeModule
                   ],
                   declarations: COMPONENTS,
                   exports: COMPONENTS
@@ -862,6 +924,7 @@
   exports.LayoutDefaultHeaderItemTriggerDirective = LayoutDefaultHeaderItemTriggerDirective;
   exports.LayoutDefaultModule = LayoutDefaultModule;
   exports.LayoutDefaultNavComponent = LayoutDefaultNavComponent;
+  exports.LayoutService = LayoutService;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

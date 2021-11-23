@@ -17,7 +17,28 @@ ng-yunzai adds cool operations based on this.
 ng g ng-yunzai:[command name] [name] [options]
 ```
 
+Examples:
+
+```bash
+# Generate a trade module
+ng g ng-yunzai:trade
+# Generate a TradeListComponent List component under the trade module
+ng g ng-yunzai:list list -m=trade
+# Generate a ListComponent List component under the trade module
+ng g ng-yunzai:list list -m=trade -withoutModulePrefixInComponentName=true
+# Generate a TradeEditComponent Edit component under the trade module
+ng g ng-yunzai:edit edit -m=trade
+```
+
 > ng-yunzai has own file structure specification, which can cause exceptions when you break this file structure.
+
+| Option | Description |
+| ---- | --- |
+| `-m` | Allows specification of the declaring module. |
+| `-target` | Specifies relative path, could be set like `bus/list` |
+| `-modal` | Specifies using modal mode |
+| `-withoutPrefix` | Without prefix to selectors |
+| `-withoutModulePrefixInComponentName` | Without prefix to component name |
 
 ## Module
 
@@ -30,6 +51,21 @@ ng g ng-yunzai:module trade
 Will be generated `trade.module.ts`, `trade-routing.module.ts` in the `routes/trade` directory.
 
 The module imports `SharedModule` and some import and export specifications, and you can't destroy these variable names (like this: `COMPONENTS`, `routes`).
+
+By default, all the codes are stored under `app/routes`, which can be pointed to other folder through `ng-yunzai.json`, for example:
+
+```json
+{
+   "$schema": "./node_modules/ng-yunzai/schema.json",
+   "projects": {
+     // Indicates that ng-yunzai projects are stored under `app/pages`
+     "ng-yunzai": {
+       "routesRoot": "app/pages"
+     }
+   }
+}
+```
+
 
 ## Business page
 

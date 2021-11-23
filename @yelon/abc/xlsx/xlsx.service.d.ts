@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { NgZone } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { XlsxExportOptions, XlsxExportResult } from './xlsx.types';
 export declare class XlsxService {
     private http;

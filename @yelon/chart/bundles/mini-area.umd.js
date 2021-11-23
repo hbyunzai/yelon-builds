@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.12
+ * @license ng-yunzai(devcui@outlook.com) v12.0.16
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -378,10 +378,7 @@
             chart
                 .area()
                 .position('x*y')
-                .color('x*y', function (x, y) {
-                var colorItem = _this.data.find(function (w) { return w.x === x && w.y === y; });
-                return colorItem && colorItem.color ? colorItem.color : color;
-            })
+                .color(color)
                 .tooltip('x*y', function (x, y) { return ({ name: x, value: y + yTooltipSuffix }); })
                 .shape('smooth');
             if (line) {

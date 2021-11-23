@@ -6,7 +6,6 @@ import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 export interface G2MiniAreaData {
     x: NzSafeAny;
     y: NzSafeAny;
-    color?: string | null;
     [key: string]: NzSafeAny;
 }
 export interface G2MiniAreaClickItem {

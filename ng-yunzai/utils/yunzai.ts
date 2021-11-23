@@ -20,13 +20,12 @@ import { InsertChange } from '@schematics/angular/utility/change';
 import { buildRelativePath, findModuleFromOptions, ModuleOptions } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
-import * as ts from 'typescript';
-
 import * as fs from 'fs';
 import * as path from 'path';
+import * as ts from 'typescript';
 
 import { getSourceFile } from './ast';
-import { getProject } from './workspace';
+import { getProject, NgYunzaiProjectDefinition } from './workspace';
 
 const TEMPLATE_FILENAME_RE = /\.template$/;
 
@@ -41,6 +40,7 @@ export interface CommonSchema extends ComponentSchema {
   routerModulePath?: string;
   selector?: string;
   withoutPrefix?: boolean;
+  withoutModulePrefixInComponentName?: boolean;
   skipTests?: boolean;
   flat?: boolean;
   modal?: boolean;
@@ -69,7 +69,7 @@ function buildSelector(schema: CommonSchema, projectPrefix: string): string {
 }
 
 function buildComponentName(schema: CommonSchema, _projectPrefix: string): string {
-  const ret: string[] = [schema.module!];
+  const ret: string[] = schema.withoutModulePrefixInComponentName === true ? [] : [schema.module!];
   if (schema.target && schema.target.length > 0) {
     ret.push(...schema.target.split('/'));
   }
@@ -78,15 +78,28 @@ function buildComponentName(schema: CommonSchema, _projectPrefix: string): strin
   return strings.classify(ret.join('-'));
 }
 
-function resolveSchema(tree: Tree, project: ProjectDefinition, schema: CommonSchema): void {
+export function refreshPathRoot(
+  project: ProjectDefinition,
+  schema: CommonSchema,
+  yunzaiProject: NgYunzaiProjectDefinition
+): void {
+  if (schema.path === undefined) {
+    schema.path = `/${path.join(project.sourceRoot!, yunzaiProject?.routesRoot ?? 'app/routes')}`;
+  }
+}
+
+function resolveSchema(
+  tree: Tree,
+  project: ProjectDefinition,
+  schema: CommonSchema,
+  yunzaiProject: NgYunzaiProjectDefinition
+): void {
   // module name
   if (!schema.module) {
     throw new SchematicsException(`Must specify module name. (e.g: ng g ng-yunzai:list <list name> -m=<module name>)`);
   }
   // path
-  if (schema.path === undefined) {
-    schema.path = `/${project.sourceRoot}/app/routes`;
-  }
+  refreshPathRoot(project, schema, yunzaiProject);
 
   schema.path += `/${schema.module}`;
 
@@ -206,10 +219,10 @@ export function buildYunzai(schema: CommonSchema): Rule {
   return async (tree: Tree) => {
     const res = await getProject(tree, schema.project);
     if (schema.project && res.name !== schema.project) {
-      throw new Error(`The specified project does not match '${schema.project}', current: ${res.name}`);
+      throw new SchematicsException(`The specified project does not match '${schema.project}', current: ${res.name}`);
     }
     const project = res.project;
-    resolveSchema(tree, project, schema);
+    resolveSchema(tree, project, schema, res.yunzaiProject);
 
     schema.componentName = buildComponentName(schema, project.prefix);
 

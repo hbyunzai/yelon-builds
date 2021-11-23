@@ -328,7 +328,7 @@ ACLDirective.propDecorators = {
  */
 
 /**
- * Routing guard prevent unauthorized users visit the page, [ACL Document](https://ng-alain.com/acl).
+ * Routing guard prevent unauthorized users visit the page, [ACL Document](https://ng.yunzainfo.com/acl).
  *
  * ```ts
  * data: {

@@ -1,19 +1,21 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, Optional, ViewChild, Input, NgModule } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, Optional, ChangeDetectorRef, ViewChild, Input, NgModule } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { YelonLocaleService, YelonLocaleModule } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
+import { ObserversModule } from '@angular/cdk/observers';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 class ExceptionComponent {
-    constructor(i18n, dom, directionality) {
+    constructor(i18n, dom, directionality, cdr) {
         this.i18n = i18n;
         this.dom = dom;
         this.directionality = directionality;
+        this.cdr = cdr;
         this.destroy$ = new Subject();
         this.locale = {};
         this.hasCon = false;
@@ -59,6 +61,7 @@ class ExceptionComponent {
     }
     checkContent() {
         this.hasCon = !isEmpty(this.conTpl.nativeElement);
+        this.cdr.detectChanges();
     }
     ngOnInit() {
         var _a;
@@ -91,7 +94,8 @@ ExceptionComponent.decorators = [
 ExceptionComponent.ctorParameters = () => [
     { type: YelonLocaleService },
     { type: DomSanitizer },
-    { type: Directionality, decorators: [{ type: Optional }] }
+    { type: Directionality, decorators: [{ type: Optional }] },
+    { type: ChangeDetectorRef }
 ];
 ExceptionComponent.propDecorators = {
     conTpl: [{ type: ViewChild, args: ['conTpl', { static: true },] }],
@@ -107,7 +111,7 @@ class ExceptionModule {
 }
 ExceptionModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, RouterModule, YelonLocaleModule, NzButtonModule],
+                imports: [CommonModule, ObserversModule, RouterModule, YelonLocaleModule, NzButtonModule],
                 declarations: COMPONENTS,
                 exports: COMPONENTS
             },] }

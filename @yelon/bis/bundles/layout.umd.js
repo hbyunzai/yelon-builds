@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.12
+ * @license ng-yunzai(devcui@outlook.com) v12.0.16
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/cache'), require('@yelon/theme'), require('@yelon/util'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/common/locales/en'), require('@angular/common/locales/zh'), require('@angular/common/locales/zh-Hant'), require('date-fns/locale'), require('ng-zorro-antd/i18n'), require('@yelon/util/config'), require('@yelon/util/decorator'), require('rxjs'), require('rxjs/operators'), require('date-fns'), require('ng-zorro-antd/message'), require('@yelon/util/other'), require('@angular/cdk/bidi'), require('@yelon/theme/theme-btn'), require('@yelon/auth'), require('ng-zorro-antd/modal'), require('screenfull'), require('@angular/common/http'), require('@angular/forms'), require('@angular/router'), require('@yelon/bis/shared'), require('@stomp/rx-stomp'), require('ng-zorro-antd/notification'), require('ng-zorro-antd/icon'), require('@yelon/acl')) :
-    typeof define === 'function' && define.amd ? define('@yelon/bis/layout', ['exports', '@angular/core', '@yelon/cache', '@yelon/theme', '@yelon/util', '@angular/cdk/platform', '@angular/common', '@angular/common/locales/en', '@angular/common/locales/zh', '@angular/common/locales/zh-Hant', 'date-fns/locale', 'ng-zorro-antd/i18n', '@yelon/util/config', '@yelon/util/decorator', 'rxjs', 'rxjs/operators', 'date-fns', 'ng-zorro-antd/message', '@yelon/util/other', '@angular/cdk/bidi', '@yelon/theme/theme-btn', '@yelon/auth', 'ng-zorro-antd/modal', 'screenfull', '@angular/common/http', '@angular/forms', '@angular/router', '@yelon/bis/shared', '@stomp/rx-stomp', 'ng-zorro-antd/notification', 'ng-zorro-antd/icon', '@yelon/acl'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.bis = global.yelon.bis || {}, global.yelon.bis.layout = {}), global.ng.core, global.yelon.cache, global.yelon.theme, global.yelon.util, global.ng.cdk.platform, global.ng.common, global.ng.common.locales.en, global.ng.common.locales.zh, global.ng.common.locales.zhHant, global.locale, global["ng-zorro-antd/i18n"], global.yelon.util.config, global.decorator, global.rxjs, global.rxjs.operators, global.DateFns, global.message, global.yelon.util.other, global.ng.cdk.bidi, global.themeBtn, global.yelon.auth, global["ng-zorro-antd/modal"], global.screenfull, global.ng.common.http, global.ng.forms, global.ng.router, global.yelon.bis.shared, global.rxStomp, global.i3$1, global["ng-zorro-antd/icon"], global.yelon.acl));
-})(this, (function (exports, i0, i2$1, i1, util, i3, common, ngEn, ngZh, ngZhTw, locale, i2, i4, decorator, rxjs, operators, dateFns, message, other, bidi, themeBtn, auth, modal, screenfull, http, forms, router, shared, rxStomp, i3$1, icon, acl) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@yelon/cache'), require('@yelon/theme'), require('@yelon/util'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/common/locales/en'), require('@angular/common/locales/zh'), require('@angular/common/locales/zh-Hant'), require('date-fns/locale'), require('@yelon/util/config'), require('ng-zorro-antd/i18n'), require('@yelon/util/decorator'), require('rxjs'), require('rxjs/operators'), require('date-fns'), require('ng-zorro-antd/message'), require('@yelon/util/other'), require('@angular/cdk/bidi'), require('@yelon/theme/theme-btn'), require('@yelon/auth'), require('ng-zorro-antd/modal'), require('screenfull'), require('@angular/common/http'), require('@angular/forms'), require('@angular/router'), require('@yelon/bis/shared'), require('@stomp/rx-stomp'), require('ng-zorro-antd/notification'), require('ng-zorro-antd/icon'), require('@yelon/acl')) :
+    typeof define === 'function' && define.amd ? define('@yelon/bis/layout', ['exports', '@angular/core', '@yelon/cache', '@yelon/theme', '@yelon/util', '@angular/cdk/platform', '@angular/common', '@angular/common/locales/en', '@angular/common/locales/zh', '@angular/common/locales/zh-Hant', 'date-fns/locale', '@yelon/util/config', 'ng-zorro-antd/i18n', '@yelon/util/decorator', 'rxjs', 'rxjs/operators', 'date-fns', 'ng-zorro-antd/message', '@yelon/util/other', '@angular/cdk/bidi', '@yelon/theme/theme-btn', '@yelon/auth', 'ng-zorro-antd/modal', 'screenfull', '@angular/common/http', '@angular/forms', '@angular/router', '@yelon/bis/shared', '@stomp/rx-stomp', 'ng-zorro-antd/notification', 'ng-zorro-antd/icon', '@yelon/acl'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.bis = global.yelon.bis || {}, global.yelon.bis.layout = {}), global.ng.core, global.yelon.cache, global.yelon.theme, global.yelon.util, global.ng.cdk.platform, global.ng.common, global.ng.common.locales.en, global.ng.common.locales.zh, global.ng.common.locales.zhHant, global.locale, global.yelon.util.config, global["ng-zorro-antd/i18n"], global.decorator, global.rxjs, global.rxjs.operators, global.DateFns, global.message, global.yelon.util.other, global.ng.cdk.bidi, global.themeBtn, global.yelon.auth, global["ng-zorro-antd/modal"], global.screenfull, global.ng.common.http, global.ng.forms, global.ng.router, global.yelon.bis.shared, global.rxStomp, global.i3$1, global["ng-zorro-antd/icon"], global.yelon.acl));
+})(this, (function (exports, i0, i2$1, i1, util, i3, common, ngEn, ngZh, ngZhTw, locale, i1$1, i2, decorator, rxjs, operators, dateFns, message, other, bidi, themeBtn, auth, modal, screenfull, http, forms, i4, shared, rxStomp, i3$1, icon, acl) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -36,9 +36,10 @@
     var ngEn__default = /*#__PURE__*/_interopDefaultLegacy(ngEn);
     var ngZh__default = /*#__PURE__*/_interopDefaultLegacy(ngZh);
     var ngZhTw__default = /*#__PURE__*/_interopDefaultLegacy(ngZhTw);
+    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$1);
     var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
-    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
     var screenfull__namespace = /*#__PURE__*/_interopNamespace(screenfull);
+    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
     var i3__namespace$1 = /*#__PURE__*/_interopNamespace(i3$1);
 
     /*! *****************************************************************************
@@ -401,9 +402,7 @@
                 return { code: code, text: item.text, abbr: item.abbr };
             });
             var defaultLang = _this.getDefaultLang();
-            if (_this._langs.findIndex(function (w) { return w.code === defaultLang; })) {
-                _this._defaultLang = defaultLang;
-            }
+            _this._defaultLang = _this._langs.findIndex(function (w) { return w.code === defaultLang; }) === -1 ? DEFAULT : defaultLang;
             return _this;
         }
         YzI18NService.prototype.getDefaultLang = function () {
@@ -423,7 +422,7 @@
         YzI18NService.prototype.use = function (lang, data) {
             if (this._currentLang === lang)
                 return;
-            this._data = data;
+            this._data = this.flatData(data, []);
             var item = LANGS[lang];
             common.registerLocaleData(item.ng);
             this.nzI18nService.setLocale(item.zorro);
@@ -437,7 +436,7 @@
         };
         return YzI18NService;
     }(i1.YunzaiI18nBaseService));
-    YzI18NService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YzI18NService_Factory() { return new YzI18NService(i0__namespace.ɵɵinject(i1__namespace._HttpClient), i0__namespace.ɵɵinject(i1__namespace.SettingsService), i0__namespace.ɵɵinject(i2__namespace.NzI18nService), i0__namespace.ɵɵinject(i1__namespace.YelonLocaleService), i0__namespace.ɵɵinject(i3__namespace.Platform), i0__namespace.ɵɵinject(i4__namespace.YunzaiConfigService)); }, token: YzI18NService, providedIn: "root" });
+    YzI18NService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YzI18NService_Factory() { return new YzI18NService(i0__namespace.ɵɵinject(i1__namespace._HttpClient), i0__namespace.ɵɵinject(i1__namespace.SettingsService), i0__namespace.ɵɵinject(i2__namespace.NzI18nService), i0__namespace.ɵɵinject(i1__namespace.YelonLocaleService), i0__namespace.ɵɵinject(i3__namespace.Platform), i0__namespace.ɵɵinject(i1__namespace$1.YunzaiConfigService)); }, token: YzI18NService, providedIn: "root" });
     YzI18NService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
@@ -447,7 +446,7 @@
         { type: i2.NzI18nService },
         { type: i1.YelonLocaleService },
         { type: i3.Platform },
-        { type: i4.YunzaiConfigService }
+        { type: i1$1.YunzaiConfigService }
     ]; };
 
     exports.TOPIC = void 0;
@@ -864,7 +863,7 @@
     ];
     YzHeaderThemBtnComponent.ctorParameters = function () { return [
         { type: i0.Renderer2 },
-        { type: i4.YunzaiConfigService },
+        { type: i1$1.YunzaiConfigService },
         { type: i3.Platform },
         { type: undefined, decorators: [{ type: i0.Inject, args: [common.DOCUMENT,] }] },
         { type: bidi.Directionality, decorators: [{ type: i0.Optional }] },
@@ -1100,7 +1099,7 @@
         };
         return YzStompService;
     }());
-    YzStompService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YzStompService_Factory() { return new YzStompService(i0__namespace.ɵɵinject(i4__namespace.YunzaiConfigService), i0__namespace.ɵɵinject(i2__namespace$1.CacheService), i0__namespace.ɵɵinject(i0__namespace.INJECTOR), i0__namespace.ɵɵinject(i3__namespace$1.NzNotificationService)); }, token: YzStompService, providedIn: "root" });
+    YzStompService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function YzStompService_Factory() { return new YzStompService(i0__namespace.ɵɵinject(i1__namespace$1.YunzaiConfigService), i0__namespace.ɵɵinject(i2__namespace$1.CacheService), i0__namespace.ɵɵinject(i0__namespace.INJECTOR), i0__namespace.ɵɵinject(i3__namespace$1.NzNotificationService)); }, token: YzStompService, providedIn: "root" });
     YzStompService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
@@ -1151,6 +1150,7 @@
     ]; };
 
     var COMPONENTS = [
+        // ContactComponent,
         YzLayoutBasicComponent,
         YzHeaderApplicationComponent,
         YzHeaderNotifyComponent,
@@ -1167,7 +1167,7 @@
     }());
     YunzaiLayoutModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [http.HttpClientModule, common.CommonModule, forms.FormsModule, router.RouterModule, forms.ReactiveFormsModule, shared.YzSharedModule],
+                    imports: [http.HttpClientModule, common.CommonModule, forms.FormsModule, i4.RouterModule, forms.ReactiveFormsModule, shared.YzSharedModule],
                     providers: [
                         {
                             provide: themeBtn.YUNZAI_THEME_BTN_KEYS,
@@ -1187,7 +1187,7 @@
         }
         Object.defineProperty(YzAuthService.prototype, "csr", {
             get: function () {
-                return this.injector.get(i4.YunzaiConfigService);
+                return this.injector.get(i1$1.YunzaiConfigService);
             },
             enumerable: false,
             configurable: true
@@ -1400,17 +1400,26 @@
         });
         Object.defineProperty(YzDefaultInterceptor.prototype, "config", {
             get: function () {
-                return mergeBisConfig(this.injector.get(i4.YunzaiConfigService));
+                return mergeBisConfig(this.injector.get(i1$1.YunzaiConfigService));
             },
             enumerable: false,
             configurable: true
         });
         YzDefaultInterceptor.prototype.goTo = function (url) {
             var _this = this;
-            setTimeout(function () { return _this.injector.get(router.Router).navigateByUrl(url); });
+            setTimeout(function () { return _this.injector.get(i4.Router).navigateByUrl(url); });
         };
         YzDefaultInterceptor.prototype.checkStatus = function (ev) {
             if ((ev.status >= 200 && ev.status < 300) || ev.status === 401) {
+                return;
+            }
+            if (ev instanceof http.HttpErrorResponse && (ev.error.message || ev.error.errorMessage)) {
+                if (ev.error.errorMessage) {
+                    this.notification.error("\u53D1\u751F\u4E86\u4E00\u4E9B\u9519\u8BEF ", ev.error.errorMessage);
+                }
+                else {
+                    this.notification.error("\u53D1\u751F\u4E86\u4E00\u4E9B\u9519\u8BEF ", ev.error.message);
+                }
                 return;
             }
             if (ev instanceof http.HttpResponse && ev.body.errorMessage) {
@@ -1680,11 +1689,361 @@
         }
     ];
 
+    var PathToRegexpService = /** @class */ (function () {
+        function PathToRegexpService() {
+            this.DEFAULT_DELIMITER = '/';
+            this.PATH_REGEXP = new RegExp(['(\\\\.)', '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'].join('|'), 'g');
+        }
+        PathToRegexpService.prototype.parse = function (str, options) {
+            var tokens = [];
+            var key = 0;
+            var index = 0;
+            var path = '';
+            var defaultDelimiter = (options && options.delimiter) || this.DEFAULT_DELIMITER;
+            var whitelist = (options && options.whitelist) || undefined;
+            var pathEscaped = false;
+            var res;
+            while ((res = this.PATH_REGEXP.exec(str)) !== null) {
+                var m = res[0];
+                var escaped = res[1];
+                var offset = res.index;
+                path += str.slice(index, offset);
+                index = offset + m.length;
+                // Ignore already escaped sequences.
+                if (escaped) {
+                    path += escaped[1];
+                    pathEscaped = true;
+                    continue;
+                }
+                var prev = '';
+                var name = res[2];
+                var capture = res[3];
+                var group = res[4];
+                var modifier = res[5];
+                if (!pathEscaped && path.length) {
+                    var k = path.length - 1;
+                    var c = path[k];
+                    var matches = whitelist ? whitelist.indexOf(c) > -1 : true;
+                    if (matches) {
+                        prev = c;
+                        path = path.slice(0, k);
+                    }
+                }
+                // Push the current path onto the tokens.
+                if (path) {
+                    tokens.push(path);
+                    path = '';
+                    pathEscaped = false;
+                }
+                var repeat = modifier === '+' || modifier === '*';
+                var optional = modifier === '?' || modifier === '*';
+                var pattern = capture || group;
+                var delimiter = prev || defaultDelimiter;
+                tokens.push({
+                    name: name || key++,
+                    prefix: prev,
+                    delimiter: delimiter,
+                    optional: optional,
+                    repeat: repeat,
+                    pattern: pattern
+                        ? this.escapeGroup(pattern)
+                        : "[^" + this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter) + "]+?"
+                });
+            }
+            // Push any remaining characters.
+            if (path || index < str.length) {
+                tokens.push(path + str.substr(index));
+            }
+            return tokens;
+        };
+        PathToRegexpService.prototype.compile = function (str, options) {
+            return this.tokensToFunction(this.parse(str, options), options);
+        };
+        PathToRegexpService.prototype.tokensToFunction = function (tokens, options) {
+            var matches = new Array(tokens.length);
+            for (var i = 0; i < tokens.length; i++) {
+                if (typeof tokens[i] === 'object') {
+                    matches[i] = new RegExp("^(?:" + tokens[i].pattern + ")$", this.flags(options));
+                }
+            }
+            return function (data, options) {
+                var path = '';
+                var encode = (options && options.encode) || encodeURIComponent;
+                var validate = options ? options.validate !== false : true;
+                for (var i = 0; i < tokens.length; i++) {
+                    var token = tokens[i];
+                    if (typeof token === 'string') {
+                        path += token;
+                        continue;
+                    }
+                    var value = data ? data[token.name] : undefined;
+                    var segment = void 0;
+                    if (Array.isArray(value)) {
+                        if (!token.repeat) {
+                            throw new TypeError("Expected \"" + token.name + "\" to not repeat, but got array");
+                        }
+                        if (value.length === 0) {
+                            if (token.optional) {
+                                continue;
+                            }
+                            throw new TypeError("Expected \"" + token.name + "\" to not be empty");
+                        }
+                        for (var j = 0; j < value.length; j++) {
+                            segment = encode(value[j], token);
+                            if (validate && !matches[i].test(segment)) {
+                                throw new TypeError("Expected all \"" + token.name + "\" to match \"" + token.pattern + "\"");
+                            }
+                            path += (j === 0 ? token.prefix : token.delimiter) + segment;
+                        }
+                        continue;
+                    }
+                    if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+                        segment = encode(String(value), token);
+                        if (validate && !matches[i].test(segment)) {
+                            throw new TypeError("Expected \"" + token.name + "\" to match \"" + token.pattern + "\", but got \"" + segment + "\"");
+                        }
+                        path += token.prefix + segment;
+                        continue;
+                    }
+                    if (token.optional) {
+                        continue;
+                    }
+                    throw new TypeError("Expected \"" + token.name + "\" to be " + (token.repeat ? 'an array' : 'a string'));
+                }
+                return path;
+            };
+        };
+        PathToRegexpService.prototype.escapeString = function (str) {
+            return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
+        };
+        PathToRegexpService.prototype.escapeGroup = function (group) {
+            return group.replace(/([=!:$/()])/g, '\\$1');
+        };
+        PathToRegexpService.prototype.flags = function (options) {
+            return options && options.sensitive ? '' : 'i';
+        };
+        PathToRegexpService.prototype.regexpToRegexp = function (path, keys) {
+            if (!keys) {
+                return path;
+            }
+            var groups = path.source.match(/\((?!\?)/g);
+            if (groups) {
+                for (var i = 0; i < groups.length; i++) {
+                    keys.push({
+                        name: i,
+                        prefix: null,
+                        delimiter: null,
+                        optional: false,
+                        repeat: false,
+                        pattern: null
+                    });
+                }
+            }
+            return path;
+        };
+        PathToRegexpService.prototype.arrayToRegexp = function (path, keys, options) {
+            var parts = [];
+            for (var i = 0; i < path.length; i++) {
+                parts.push(this.pathToRegexp(path[i], keys, options).source);
+            }
+            return new RegExp("(?:" + parts.join('|') + ")", this.flags(options));
+        };
+        PathToRegexpService.prototype.stringToRegexp = function (path, keys, options) {
+            return this.tokensToRegExp(this.parse(path, options), keys, options);
+        };
+        PathToRegexpService.prototype.tokensToRegExp = function (tokens, keys, options) {
+            options = options || {};
+            var strict = options.strict;
+            var start = options.start !== false;
+            var end = options.end !== false;
+            var delimiter = options.delimiter || this.DEFAULT_DELIMITER;
+            var endsWith = []
+                .concat(options.endsWith || [])
+                .map(this.escapeString)
+                .concat('$')
+                .join('|');
+            var route = start ? '^' : '';
+            for (var i = 0; i < tokens.length; i++) {
+                var token = tokens[i];
+                if (typeof token === 'string') {
+                    route += this.escapeString(token);
+                }
+                else {
+                    var capture = token.repeat
+                        ? "(?:" + token.pattern + ")(?:" + this.escapeString(token.delimiter) + "(?:" + token.pattern + "))*"
+                        : token.pattern;
+                    if (keys) {
+                        keys.push(token);
+                    }
+                    if (token.optional) {
+                        if (!token.prefix) {
+                            route += "(" + capture + ")?";
+                        }
+                        else {
+                            route += "(?:" + this.escapeString(token.prefix) + "(" + capture + "))?";
+                        }
+                    }
+                    else {
+                        route += this.escapeString(token.prefix) + "(" + capture + ")";
+                    }
+                }
+            }
+            if (end) {
+                if (!strict) {
+                    route += "(?:" + this.escapeString(delimiter) + ")?";
+                }
+                route += endsWith === '$' ? '$' : "(?=" + endsWith + ")";
+            }
+            else {
+                var endToken = tokens[tokens.length - 1];
+                var isEndDelimited = typeof endToken === 'string' ? endToken[endToken.length - 1] === delimiter : endToken === undefined;
+                if (!strict) {
+                    route += "(?:" + this.escapeString(delimiter) + "(?=" + endsWith + "))?";
+                }
+                if (!isEndDelimited) {
+                    route += "(?=" + this.escapeString(delimiter) + "|" + endsWith + ")";
+                }
+            }
+            return new RegExp(route, this.flags(options));
+        };
+        PathToRegexpService.prototype.pathToRegexp = function (path, keys, options) {
+            if (path instanceof RegExp) {
+                return this.regexpToRegexp(path, keys);
+            }
+            if (Array.isArray(path)) {
+                return this.arrayToRegexp(/** @type {!Array} */ path, keys, options);
+            }
+            return this.stringToRegexp(/** @type {string} */ path, keys, options);
+        };
+        return PathToRegexpService;
+    }());
+    PathToRegexpService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function PathToRegexpService_Factory() { return new PathToRegexpService(); }, token: PathToRegexpService, providedIn: "root" });
+    PathToRegexpService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    PathToRegexpService.ctorParameters = function () { return []; };
+
+    var ActGuard = /** @class */ (function () {
+        function ActGuard(configService, cacheService, pathToRegexp, router) {
+            var _this = this;
+            this.configService = configService;
+            this.cacheService = cacheService;
+            this.pathToRegexp = pathToRegexp;
+            this.router = router;
+            this.bis = BUSINESS_DEFAULT_CONFIG;
+            this.menus = [];
+            this.links = [];
+            util.log('act: ');
+            this.bis = mergeBisConfig(this.configService);
+            util.log('act: config ', this.bis);
+            var user = this.cacheService.get('_yz_user', { mode: 'none' });
+            util.log('act: user ', user);
+            this.menus = util.deepCopy(user.menu).filter(function (m) { return m.systemCode && m.systemCode === _this.bis.systemCode; });
+            util.log('act: menus ', this.menus);
+            this.getAllLinks(this.menus, this.links);
+            util.log('act: links ', this.links);
+        }
+        ActGuard.prototype.canActivate = function (_, state) {
+            var _this = this;
+            util.log('act: can activate ', state);
+            if (this.preHandle(state)) {
+                return true;
+            }
+            util.log('act: can activate child prehandle success');
+            var canactivate = false;
+            this.links.forEach(function (link) {
+                var regexp = _this.pathToRegexp.stringToRegexp(link, null, null);
+                util.log("act: " + link + " test " + state.url.split('?')[0]);
+                if (regexp.test(state.url.split('?')[0])) {
+                    canactivate = true;
+                    util.log("act: test value " + canactivate);
+                    return;
+                }
+            });
+            if (canactivate) {
+                util.log("act: test sucess");
+                return true;
+            }
+            else {
+                util.log("act: test error");
+                this.router.navigate(['displayIndex']);
+                return false;
+            }
+        };
+        ActGuard.prototype.canActivateChild = function (_, state) {
+            var _this = this;
+            util.log('act: can activate child ', state);
+            if (this.preHandle(state)) {
+                return true;
+            }
+            util.log('act: can activate child prehandle success');
+            var canactivate = false;
+            this.links.forEach(function (link) {
+                var regexp = _this.pathToRegexp.stringToRegexp(link, null, null);
+                if (regexp.test(state.url.split('?')[0])) {
+                    util.log("act: " + link + " test " + state.url.split('?')[0]);
+                    canactivate = true;
+                    util.log("act: test value " + canactivate);
+                    return;
+                }
+            });
+            if (canactivate) {
+                util.log("act: test sucess");
+                return true;
+            }
+            else {
+                util.log("act: test error");
+                this.router.navigate(['displayIndex']);
+                return false;
+            }
+        };
+        ActGuard.prototype.preHandle = function (state) {
+            return (state.url.includes('error') ||
+                state.url.includes('exception') ||
+                state.url.includes('displayIndex') ||
+                state.url === '' ||
+                state.url === null ||
+                state.url === '/' ||
+                state.url.includes('iframePage'));
+        };
+        ActGuard.prototype.getAllLinks = function (menu, links) {
+            var _this = this;
+            menu.forEach(function (sider) {
+                if (sider.link) {
+                    links.push(sider.link);
+                }
+                if (sider.children && sider.children.length > 0) {
+                    _this.getAllLinks(sider.children, links);
+                }
+            });
+        };
+        return ActGuard;
+    }());
+    ActGuard.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function ActGuard_Factory() { return new ActGuard(i0__namespace.ɵɵinject(i1__namespace$1.YunzaiConfigService), i0__namespace.ɵɵinject(i2__namespace$1.CacheService), i0__namespace.ɵɵinject(PathToRegexpService), i0__namespace.ɵɵinject(i4__namespace.Router)); }, token: ActGuard, providedIn: "root" });
+    ActGuard.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    ActGuard.ctorParameters = function () { return [
+        { type: util.YunzaiConfigService },
+        { type: i2$1.CacheService },
+        { type: PathToRegexpService },
+        { type: i4.Router }
+    ]; };
+
+    // export * from './contact/contact.component';
+    // export * from './contact/contact.service';
+
     /**
      * Generated bundle index. Do not edit.
      */
 
+    exports.ActGuard = ActGuard;
     exports.BUSINESS_DEFAULT_CONFIG = BUSINESS_DEFAULT_CONFIG;
+    exports.PathToRegexpService = PathToRegexpService;
     exports.STOMP_DEFAULT_CONFIG = STOMP_DEFAULT_CONFIG;
     exports.YZ_APPINIT_PROVIDES = YZ_APPINIT_PROVIDES;
     exports.YunzaiLayoutModule = YunzaiLayoutModule;
