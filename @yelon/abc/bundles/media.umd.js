@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.16
+ * @license ng-yunzai(devcui@outlook.com) v12.0.19
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -363,10 +363,7 @@
             },
             set: function (val) {
                 this._cog = this.cogSrv.merge('media', {
-                    urls: [
-                        'https://cdn.bootcdn.net/ajax/libs/plyr/3.5.10/plyr.min.js',
-                        'https://cdn.bootcdn.net/ajax/libs/plyr/3.5.10/plyr.css'
-                    ]
+                    urls: ['https://cdn.jsdelivr.net/npm/plyr/dist/plyr.min.js', 'https://cdn.jsdelivr.net/npm/plyr/dist/plyr.css']
                 }, val);
             },
             enumerable: false,

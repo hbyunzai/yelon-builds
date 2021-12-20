@@ -1,13 +1,13 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.16
+ * @license ng-yunzai(devcui@outlook.com) v12.0.19
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/router'), require('rxjs'), require('rxjs/operators'), require('ng-zorro-antd/message'), require('@yelon/theme'), require('@yelon/util/browser'), require('ng-zorro-antd/avatar'), require('ng-zorro-antd/badge'), require('ng-zorro-antd/dropdown'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/tooltip'), require('@angular/cdk/bidi'), require('@angular/platform-browser'), require('@yelon/util/decorator'), require('@yelon/util/token')) :
-  typeof define === 'function' && define.amd ? define('@yelon/theme/layout-default', ['exports', '@angular/common', '@angular/core', '@angular/router', 'rxjs', 'rxjs/operators', 'ng-zorro-antd/message', '@yelon/theme', '@yelon/util/browser', 'ng-zorro-antd/avatar', 'ng-zorro-antd/badge', 'ng-zorro-antd/dropdown', 'ng-zorro-antd/icon', 'ng-zorro-antd/tooltip', '@angular/cdk/bidi', '@angular/platform-browser', '@yelon/util/decorator', '@yelon/util/token'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = global.yelon.theme || {}, global.yelon.theme["layout-default"] = {}), global.ng.common, global.ng.core, global.ng.router, global.rxjs, global.rxjs.operators, global.message, global.yelon.theme, global.browser, global.avatar, global.badge, global.dropdown, global.icon, global.tooltip, global.ng.cdk.bidi, global.ng.platformBrowser, global.decorator, global.token));
-})(this, (function (exports, common, i0, router, rxjs, operators, message, theme, browser, avatar, badge, dropdown, icon, tooltip, bidi, platformBrowser, decorator, token) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/router'), require('rxjs'), require('rxjs/operators'), require('@yelon/theme'), require('@yelon/util/browser'), require('ng-zorro-antd/message'), require('@yelon/util/other'), require('ng-zorro-antd/avatar'), require('ng-zorro-antd/badge'), require('ng-zorro-antd/dropdown'), require('ng-zorro-antd/icon'), require('ng-zorro-antd/tooltip'), require('@angular/cdk/bidi'), require('@angular/platform-browser'), require('@yelon/util/decorator'), require('@yelon/util/token')) :
+  typeof define === 'function' && define.amd ? define('@yelon/theme/layout-default', ['exports', '@angular/common', '@angular/core', '@angular/router', 'rxjs', 'rxjs/operators', '@yelon/theme', '@yelon/util/browser', 'ng-zorro-antd/message', '@yelon/util/other', 'ng-zorro-antd/avatar', 'ng-zorro-antd/badge', 'ng-zorro-antd/dropdown', 'ng-zorro-antd/icon', 'ng-zorro-antd/tooltip', '@angular/cdk/bidi', '@angular/platform-browser', '@yelon/util/decorator', '@yelon/util/token'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.yelon = global.yelon || {}, global.yelon.theme = global.yelon.theme || {}, global.yelon.theme["layout-default"] = {}), global.ng.common, global.ng.core, global.ng.router, global.rxjs, global.rxjs.operators, global.yelon.theme, global.browser, global.message, global.other, global.avatar, global.badge, global.dropdown, global.icon, global.tooltip, global.ng.cdk.bidi, global.ng.platformBrowser, global.decorator, global.token));
+})(this, (function (exports, common, i0, router, rxjs, operators, theme, browser, message, other, avatar, badge, dropdown, icon, tooltip, bidi, platformBrowser, decorator, token) { 'use strict';
 
   function _interopNamespace(e) {
     if (e && e.__esModule) return e;
@@ -52,18 +52,55 @@
       function LayoutService() {
           this.header = new rxjs.BehaviorSubject(true);
           this.sidebar = new rxjs.BehaviorSubject(true);
+          this.reuseTab = new rxjs.BehaviorSubject(true);
+          if (other.getUrlParam(window.location.href, 'showResuseTab') !== null) {
+              if (other.getUrlParam(window.location.href, 'showResuseTab') === 'true') {
+                  this.showReuseTab();
+              }
+              else {
+                  this.hideReuseTab();
+              }
+          }
+          if (other.getUrlParam(window.location.href, 'showHeader') !== null) {
+              if (other.getUrlParam(window.location.href, 'showHeader') === 'true') {
+                  this.showHeader();
+              }
+              else {
+                  this.hideHeader();
+              }
+          }
+          if (other.getUrlParam(window.location.href, 'showSider') !== null) {
+              if (other.getUrlParam(window.location.href, 'showSider') === 'true') {
+                  this.showSidebar();
+              }
+              else {
+                  this.hideSidebar();
+              }
+          }
       }
       LayoutService.prototype.hideSidebar = function () {
           this.sidebar.next(false);
+          other.resizeWindow();
       };
       LayoutService.prototype.hideHeader = function () {
           this.header.next(false);
+          other.resizeWindow();
       };
       LayoutService.prototype.showSidebar = function () {
           this.sidebar.next(true);
+          other.resizeWindow();
       };
       LayoutService.prototype.showHeader = function () {
           this.header.next(true);
+          other.resizeWindow();
+      };
+      LayoutService.prototype.showReuseTab = function () {
+          this.reuseTab.next(true);
+          other.resizeWindow();
+      };
+      LayoutService.prototype.hideReuseTab = function () {
+          this.reuseTab.next(false);
+          other.resizeWindow();
       };
       return LayoutService;
   }());
@@ -129,12 +166,8 @@
           var _b = this, settings = _b.settings, destroy$ = _b.destroy$;
           settings.notify.pipe(operators.takeUntil(destroy$)).subscribe(function () { return _this.setClass(); });
           this.setClass();
-          this.layoutService.header.subscribe(function (h) {
-              _this.showHeader = h;
-          });
-          this.layoutService.sidebar.subscribe(function (s) {
-              _this.showSidebar = s;
-          });
+          this.layoutService.header.subscribe(function (h) { return (_this.showHeader = h); });
+          this.layoutService.sidebar.subscribe(function (s) { return (_this.showSidebar = s); });
       };
       LayoutDefaultComponent.prototype.ngOnDestroy = function () {
           this.destroy$.next();
@@ -146,7 +179,7 @@
       { type: i0.Component, args: [{
                   selector: 'layout-default',
                   exportAs: 'layoutDefault',
-                  template: "\n    <div class=\"yunzai-default__progress-bar\" *ngIf=\"isFetching\"></div>\n    <layout-default-header *ngIf=\"showHeader\"></layout-default-header>\n    <ng-container *ngIf=\"showSidebar\">\n      <div *ngIf=\"!options.hideAside\" class=\"yunzai-default__aside\">\n        <div class=\"yunzai-default__aside-inner\">\n          <ng-container *ngTemplateOutlet=\"asideUser\"></ng-container>\n          <ng-container *ngTemplateOutlet=\"nav\"></ng-container>\n          <layout-default-nav *ngIf=\"!nav\" class=\"d-block py-lg\"></layout-default-nav>\n        </div>\n      </div>\n    </ng-container>\n    <section\n      class=\"yunzai-default__content\"\n      [ngStyle]=\"{ 'margin-top': !showHeader ? '0px' : '', 'margin-left': !showSidebar ? '0px' : '' }\"\n    >\n      <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n      <ng-content></ng-content>\n    </section>\n  "
+                  template: "\n    <div class=\"yunzai-default__progress-bar\" *ngIf=\"isFetching\"></div>\n    <layout-default-header *ngIf=\"showHeader\"></layout-default-header>\n    <ng-container *ngIf=\"showSidebar\">\n      <div\n        class=\"yunzai-default__aside\"\n        *ngIf=\"!options.hideAside\"\n        [ngStyle]=\"!showHeader ? { 'margin-top': '0px' } : {}\"\n      >\n        <div class=\"yunzai-default__aside-inner\">\n          <ng-container *ngTemplateOutlet=\"asideUser\"></ng-container>\n          <ng-container *ngTemplateOutlet=\"nav\"></ng-container>\n          <layout-default-nav *ngIf=\"!nav\" class=\"d-block py-lg\"></layout-default-nav>\n        </div>\n      </div>\n    </ng-container>\n    <section\n      class=\"yunzai-default__content\"\n      [ngStyle]=\"{ 'margin-top': !showHeader ? '0px' : '', 'margin-left': !showSidebar ? '0px' : '' }\"\n    >\n      <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n      <ng-content></ng-content>\n    </section>\n  "
               },] }
   ];
   LayoutDefaultComponent.ctorParameters = function () { return [

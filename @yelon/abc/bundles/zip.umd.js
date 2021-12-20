@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.16
+ * @license ng-yunzai(devcui@outlook.com) v12.0.19
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -356,7 +356,7 @@
             this.lazy = lazy;
             this.ngZone = ngZone;
             this.cog = configSrv.merge('zip', {
-                url: '//cdn.bootcss.com/jszip/3.3.0/jszip.min.js',
+                url: 'https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js',
                 utils: []
             });
         }

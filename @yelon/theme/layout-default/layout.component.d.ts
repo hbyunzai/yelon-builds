@@ -1,8 +1,8 @@
 import { ElementRef, OnDestroy, OnInit, QueryList, Renderer2, TemplateRef } from '@angular/core';
 import { Router, Event } from '@angular/router';
+import { SettingsService } from '@yelon/theme';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { SettingsService } from '@yelon/theme';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutService } from './layout.service';
 import { LayoutDefaultOptions } from './types';

@@ -4,9 +4,10 @@ import { Component, ViewChild, Input, Injectable, ElementRef, Renderer2, Inject,
 import { RouteConfigLoadStart, NavigationError, NavigationCancel, NavigationEnd, RouteConfigLoadEnd, Router, RouterModule } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
-import { NzMessageService, NzMessageModule } from 'ng-zorro-antd/message';
 import { SettingsService, MenuService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
+import { NzMessageService, NzMessageModule } from 'ng-zorro-antd/message';
+import { getUrlParam, resizeWindow } from '@yelon/util/other';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -44,18 +45,55 @@ class LayoutService {
     constructor() {
         this.header = new BehaviorSubject(true);
         this.sidebar = new BehaviorSubject(true);
+        this.reuseTab = new BehaviorSubject(true);
+        if (getUrlParam(window.location.href, 'showResuseTab') !== null) {
+            if (getUrlParam(window.location.href, 'showResuseTab') === 'true') {
+                this.showReuseTab();
+            }
+            else {
+                this.hideReuseTab();
+            }
+        }
+        if (getUrlParam(window.location.href, 'showHeader') !== null) {
+            if (getUrlParam(window.location.href, 'showHeader') === 'true') {
+                this.showHeader();
+            }
+            else {
+                this.hideHeader();
+            }
+        }
+        if (getUrlParam(window.location.href, 'showSider') !== null) {
+            if (getUrlParam(window.location.href, 'showSider') === 'true') {
+                this.showSidebar();
+            }
+            else {
+                this.hideSidebar();
+            }
+        }
     }
     hideSidebar() {
         this.sidebar.next(false);
+        resizeWindow();
     }
     hideHeader() {
         this.header.next(false);
+        resizeWindow();
     }
     showSidebar() {
         this.sidebar.next(true);
+        resizeWindow();
     }
     showHeader() {
         this.header.next(true);
+        resizeWindow();
+    }
+    showReuseTab() {
+        this.reuseTab.next(true);
+        resizeWindow();
+    }
+    hideReuseTab() {
+        this.reuseTab.next(false);
+        resizeWindow();
     }
 }
 LayoutService.ɵprov = i0.ɵɵdefineInjectable({ factory: function LayoutService_Factory() { return new LayoutService(); }, token: LayoutService, providedIn: "root" });
@@ -116,12 +154,8 @@ class LayoutDefaultComponent {
         const { settings, destroy$ } = this;
         settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
         this.setClass();
-        this.layoutService.header.subscribe(h => {
-            this.showHeader = h;
-        });
-        this.layoutService.sidebar.subscribe(s => {
-            this.showSidebar = s;
-        });
+        this.layoutService.header.subscribe(h => (this.showHeader = h));
+        this.layoutService.sidebar.subscribe(s => (this.showSidebar = s));
     }
     ngOnDestroy() {
         this.destroy$.next();
@@ -136,7 +170,11 @@ LayoutDefaultComponent.decorators = [
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
     <layout-default-header *ngIf="showHeader"></layout-default-header>
     <ng-container *ngIf="showSidebar">
-      <div *ngIf="!options.hideAside" class="yunzai-default__aside">
+      <div
+        class="yunzai-default__aside"
+        *ngIf="!options.hideAside"
+        [ngStyle]="!showHeader ? { 'margin-top': '0px' } : {}"
+      >
         <div class="yunzai-default__aside-inner">
           <ng-container *ngTemplateOutlet="asideUser"></ng-container>
           <ng-container *ngTemplateOutlet="nav"></ng-container>

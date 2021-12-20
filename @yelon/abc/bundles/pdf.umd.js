@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.16
+ * @license ng-yunzai(devcui@outlook.com) v12.0.19
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -328,7 +328,7 @@
     }
 
     var PDF_DEFULAT_CONFIG = {
-        lib: "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.5.207/",
+        lib: "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.x/",
         showAll: true,
         renderText: true,
         showBorders: false,

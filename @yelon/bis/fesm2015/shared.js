@@ -22,6 +22,7 @@ import { ResultModule } from '@yelon/abc/result';
 import { ReuseTabModule } from '@yelon/abc/reuse-tab';
 import { SEModule } from '@yelon/abc/se';
 import { SGModule } from '@yelon/abc/sg';
+import { STModule } from '@yelon/abc/st';
 import { SVModule } from '@yelon/abc/sv';
 import { TagSelectModule } from '@yelon/abc/tag-select';
 import { YelonACLModule } from '@yelon/acl';
@@ -101,7 +102,7 @@ const YZ_SHARED_YELON_MODULES = [
     DatePickerModule,
     DownFileModule,
     EllipsisModule,
-    // STModule,
+    STModule,
     SVModule,
     SEModule,
     SGModule,
@@ -189,16 +190,22 @@ const YZ_SHARED_ZORRO_MODULES = [
     NzHighlightModule
 ];
 
-const THIRDMODULES = [];
-const COMPONENTS = [];
-const DIRECTIVES = [];
+/*
+ * @Author: cui <devcui@outlook.com>
+ * @Editor: microsoft vscode
+ * @Date: 2021-11-27 11:30:50
+ * @LastEditTime: 2021-11-27 14:41:18
+ * @LastEditors: cui <devcui@outlook.com>
+ * @Description: empty description
+ * @FilePath: \yelon\packages\bis\shared\shared.module.ts
+ * LICENSE HERE
+ */
 class YzSharedModule {
 }
 YzSharedModule.decorators = [
     { type: NgModule, args: [{
-                imports: [...YZ_SHARED_YELON_MODULES, ...YZ_SHARED_ZORRO_MODULES, ...THIRDMODULES],
-                declarations: [...COMPONENTS, ...DIRECTIVES],
-                exports: [...YZ_SHARED_YELON_MODULES, ...YZ_SHARED_ZORRO_MODULES, ...THIRDMODULES, ...COMPONENTS, ...DIRECTIVES]
+                imports: [...YZ_SHARED_YELON_MODULES, ...YZ_SHARED_ZORRO_MODULES],
+                exports: [...YZ_SHARED_YELON_MODULES, ...YZ_SHARED_ZORRO_MODULES]
             },] }
 ];
 

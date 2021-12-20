@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Injectable, Component, ChangeDetectionStrategy, Injector, Inject, Input, ChangeDetectorRef, Renderer2, Optional, HostListener, isDevMode, NgModule, APP_INITIALIZER } from '@angular/core';
+import { Injectable, Component, ChangeDetectionStrategy, Injector, Inject, Input, ChangeDetectorRef, Renderer2, Optional, HostListener, EventEmitter, ViewChild, Output, isDevMode, NgModule, APP_INITIALIZER } from '@angular/core';
 import * as i2$1 from '@yelon/cache';
 import { CacheService } from '@yelon/cache';
 import * as i1 from '@yelon/theme';
@@ -21,8 +21,8 @@ import { InputBoolean } from '@yelon/util/decorator';
 import { forkJoin, Subject, of, BehaviorSubject, throwError } from 'rxjs';
 import { map, takeUntil, mergeMap, mergeAll, filter, take, switchMap, catchError } from 'rxjs/operators';
 import { formatDistanceToNow } from 'date-fns';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { log } from '@yelon/util/other';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Directionality } from '@angular/cdk/bidi';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 import { YA_SERVICE_TOKEN, mergeConfig } from '@yelon/auth';
@@ -33,11 +33,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as i4 from '@angular/router';
 import { RouterModule, Router } from '@angular/router';
 import { YzSharedModule, ICONS } from '@yelon/bis/shared';
+import { LayoutService } from '@yelon/theme/layout-default';
 import { RxStomp } from '@stomp/rx-stomp';
 import * as i3$1 from 'ng-zorro-antd/notification';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { NzIconService } from 'ng-zorro-antd/icon';
 import { ACLService } from '@yelon/acl';
+import { NzIconService } from 'ng-zorro-antd/icon';
 
 // 请参考：https://ng.yunzainfo.com/docs/i18n
 const DEFAULT = 'zh-CN';
@@ -394,36 +395,37 @@ __decorate([
 ], YzHeaderI18NComponent.prototype, "showLangText", void 0);
 
 class YzHeaderNotifyComponent {
-    constructor(injector, msg, nzI18n, cdr, httpClient) {
+    constructor(injector, msg, y18n, nzI18n, cdr, httpClient) {
         this.injector = injector;
         this.msg = msg;
+        this.y18n = y18n;
         this.nzI18n = nzI18n;
         this.cdr = cdr;
         this.httpClient = httpClient;
         this.data = [
             {
                 key: 'msg',
-                title: '消息',
+                title: this.y18n.fanyi('notify.message'),
                 list: [],
-                emptyText: '您已读完所有消息',
+                emptyText: this.y18n.fanyi('notify.message.emptyText'),
                 emptyImage: './assets/tmp/img/message.svg',
-                clearText: '清空消息'
+                clearText: this.y18n.fanyi('notify.message.clearText')
             },
             {
                 key: 'todo',
-                title: '待办',
+                title: this.y18n.fanyi('notify.todo'),
                 list: [],
-                emptyText: '你已完成所有待办',
+                emptyText: this.y18n.fanyi('notify.todo.emptyText'),
                 emptyImage: './assets/tmp/img/todo.svg',
-                clearText: '重新加载'
+                clearText: this.y18n.fanyi('notify.todo.clearText')
             },
             {
                 key: 'notice',
-                title: '通知',
+                title: this.y18n.fanyi('notify.notice'),
                 list: [],
-                emptyText: '你已查看所有通知',
+                emptyText: this.y18n.fanyi('notify.notice.emptyText'),
                 emptyImage: './assets/tmp/img/notice.svg',
-                clearText: '重新加载'
+                clearText: this.y18n.fanyi('notify.notice.clearText')
             }
         ];
         this.loading = false;
@@ -446,11 +448,11 @@ class YzHeaderNotifyComponent {
         const formatMessageStatus = (status) => {
             switch (status) {
                 case '0':
-                    return { extra: '未读', color: 'red' };
+                    return { extra: this.y18n.fanyi('notify.unread'), color: 'red' };
                 case '1':
-                    return { extra: '已读', color: 'green' };
+                    return { extra: this.y18n.fanyi('notify.readed'), color: 'green' };
                 default:
-                    return { extra: '无状态', color: 'primary' };
+                    return { extra: this.y18n.fanyi('notify.nostatus'), color: 'primary' };
             }
         };
         return this.httpClient
@@ -472,11 +474,11 @@ class YzHeaderNotifyComponent {
         const formatTodoStatus = (status) => {
             switch (status) {
                 case '0':
-                    return { extra: '未开始', color: 'red' };
+                    return { extra: this.y18n.fanyi('notify.unstart'), color: 'red' };
                 case '1':
-                    return { extra: '已开始', color: 'green' };
+                    return { extra: this.y18n.fanyi('notify.started'), color: 'green' };
                 default:
-                    return { extra: '无状态', color: 'primary' };
+                    return { extra: this.y18n.fanyi('notify.nostatus'), color: 'primary' };
             }
         };
         return this.httpClient
@@ -497,7 +499,7 @@ class YzHeaderNotifyComponent {
         const t = this.data.filter(d => d.title === type)[0];
         if (t.key == 'msg' || t.key == 'notice') {
             this.subs.push(this.httpClient.post(`/message-center-3/my-msg-and-todo/msg-clear`, {}).subscribe(_ => {
-                this.msg.success(`清空了 ${type}`);
+                this.msg.success(`${this.y18n.fanyi('notify.clear')} ${type}`);
                 this.loadData();
             }));
         }
@@ -533,6 +535,7 @@ YzHeaderNotifyComponent.decorators = [
 YzHeaderNotifyComponent.ctorParameters = () => [
     { type: Injector },
     { type: NzMessageService },
+    { type: YzI18NService, decorators: [{ type: Inject, args: [YUNZAI_I18N_TOKEN,] }] },
     { type: NzI18nService },
     { type: ChangeDetectorRef },
     { type: _HttpClient }
@@ -832,6 +835,581 @@ YzHeaderFullScreenComponent.propDecorators = {
     _click: [{ type: HostListener, args: ['click',] }]
 };
 
+class ContactService {
+    constructor(http, cache) {
+        this.http = http;
+        this.cache = cache;
+    }
+    /**
+     * 部门树查询
+     *
+     * @param clas 包含班级
+     * @param his 包含历史班级
+     * @param grade 系部
+     * @param gradeID 系部ID
+     * @returns 可观察部门树
+     */
+    dept(clas, his, grade, gradeID) {
+        let baseUrl = `/auth/baseDepartMent/tree?debug=false`;
+        if (clas) {
+            baseUrl += `&includeClass=true`;
+        }
+        else {
+            baseUrl += `&includeClass=false`;
+        }
+        if (his) {
+            baseUrl += `&includeHisClass=true`;
+        }
+        else {
+            baseUrl += `&includeHisClass=false`;
+        }
+        if (grade) {
+            baseUrl += `&deptTypes=2,class`;
+        }
+        if (gradeID) {
+            baseUrl += `&gradeId=${gradeID}`;
+        }
+        return this.http.get(baseUrl).pipe(map((response) => {
+            return response.data || [];
+        }));
+    }
+    page(uri, page) {
+        return this.http.post(`${uri}/queryListForPage`, page);
+    }
+    pageBaseUser(page) {
+        return this.page('/auth/baseUser', page);
+    }
+    getUserByIds(ids) {
+        return this.http
+            .post('/auth/baseUser/users', {
+            userIds: ids
+        })
+            .pipe((response) => {
+            return response.data || [];
+        });
+    }
+    /**
+     * 查询人员信息
+     *
+     * @param userIds[] 用户id数组,["aaa","bbb","ccc"]
+     */
+    getUserByUserIds(userIds) {
+        return this.http
+            .post(`/auth/baseUser/users`, {
+            userIds: userIds
+        })
+            .pipe(map((response) => {
+            return response.data ? response.data : [];
+        }));
+    }
+    /**
+     * 获取角色组角色
+     *
+     * @param roleGroupCode 角色组code
+     */
+    getGroupRole(roleGroupCode) {
+        return this.http
+            .post(`/auth/baseRole/findGroupRole`, {
+            roleGroupCode: roleGroupCode
+        })
+            .pipe(map((response) => {
+            return response.data ? response.data : [];
+        }));
+    }
+    /**
+     * 查询当前用户好友分组
+     */
+    getFriendGroup() {
+        return this.http.post(`/contact/appcontact/findGroup`, {}).pipe(map((response) => {
+            return response.data ? response.data : [];
+        }));
+    }
+    /**
+     * 查询年级
+     */
+    getGrade() {
+        return this.http.get(`/auth/gradeYear/queryListForPage`).pipe(map((response) => {
+            return response.data ? response.data : [];
+        }));
+    }
+    /**
+     * 查询人员类别列表
+     */
+    getRylbs() {
+        return this.http.post(`/auth/baseTeacher/queryRylbs`, {}).pipe(map((response) => {
+            return response.data ? response.data : [];
+        }));
+    }
+    /**
+     * 获取学生公寓树
+     *
+     * @param isPower 是否带有权限，默认false
+     * @param treeType 树类型 0:宿舍楼 1:宿舍楼+层 2:宿舍楼+层+房间
+     */
+    getDormTree(isPower, treeType) {
+        const user = this.cache.get('_yz_user', { mode: 'none' });
+        let params = {};
+        if (isPower) {
+            params = {
+                isPower: isPower,
+                userId: user.userId,
+                treeType: treeType
+            };
+        }
+        else {
+            params = {
+                isPower: isPower,
+                treeType: treeType
+            };
+        }
+        return this.http.post(`/auth/dorm/tree`, params).pipe(map((response) => {
+            return response.data ? response.data : [];
+        }));
+    }
+}
+ContactService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ContactService_Factory() { return new ContactService(i0.ɵɵinject(i1._HttpClient), i0.ɵɵinject(i2$1.CacheService)); }, token: ContactService, providedIn: "root" });
+ContactService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ContactService.ctorParameters = () => [
+    { type: _HttpClient },
+    { type: CacheService }
+];
+
+class ContactComponent {
+    constructor(contact, changeDetectorRef) {
+        this.contact = contact;
+        this.changeDetectorRef = changeDetectorRef;
+        this.subs = [];
+        /**
+         * tabset
+         */
+        this.nzTabsetSearch = null;
+        this.nzTabsetLoading = false;
+        /**
+         * 树展开状态
+         */
+        this.nzExpandAll = true;
+        /**
+         * 部门树和部门查询的一些选项/可传可不传
+         */
+        this.nzDepts = [];
+        this._nzDeptsCopy = [];
+        this.nzDeptTreeVirtualHeight = null;
+        this.nzDeptClass = true;
+        this.nzDeptClassHistory = true;
+        this.nzDeptGrade = false;
+        /**
+         * 角色树
+         */
+        this.nzRoles = [];
+        this._nzRolesCopy = [];
+        this.nzRoleTreeVirtualHeight = null;
+        /**
+         * 好友分组
+         */
+        this.nzFriendGroups = [];
+        this._nzFriendGroupsCopy = [];
+        /**
+         * 联系人
+         */
+        this.defaultContacts = [];
+        this.nzContacts = [];
+        this.nzContactLoading = false;
+        /**
+         * 提交和提交按钮
+         */
+        this.button = true;
+        this.confirmed = new EventEmitter();
+    }
+    /**
+     * 初始化，首先加载部门树和默认选中的人的数据
+     */
+    ngOnInit() {
+        this.onTabsetDept();
+        this.onContactsInit();
+    }
+    /**
+     * 视图初始化完毕后进行table初始化
+     */
+    ngAfterViewInit() {
+        this.onTableInit();
+    }
+    /**
+     * 初始化默认选中联系人
+     */
+    onContactsInit() {
+        if (this.defaultContacts && this.defaultContacts.length > 0) {
+            this.nzContactLoading = true;
+            this.subs.push(this.contact.getUserByUserIds(this.defaultContacts).subscribe(contacts => {
+                this.nzContacts = contacts;
+                this.nzContactLoading = false;
+                this.refresh();
+            }));
+        }
+    }
+    /**
+     * table初始化
+     */
+    onTableInit() {
+        // 设置表头
+        this.st.resetColumns({
+            columns: [
+                { title: '选择', type: 'checkbox' },
+                { title: '序号', type: 'no' },
+                { title: '姓名', index: 'realName' },
+                { title: '学号/工号', index: 'userCode' },
+                { title: '部门', index: 'dept.deptName' }
+            ]
+        });
+        // 订阅table点击checkbox事件变化
+        this.subs.push(this.st.change.subscribe(e => {
+            if (e.type === 'checkbox') {
+                // 点击checkbox新增联系人
+                const contactIds = this.nzContacts.map(c => c.userId);
+                this.nzContacts = this.nzContacts.concat(e.checkbox.filter(c => !contactIds.includes(c.userId)));
+                // 取消checkbox取消联系人
+                const cancelIds = this.st.list.filter(d => !d.checked).map(d => d.userId);
+                this.nzContacts = this.nzContacts.filter(d => !cancelIds.includes(d.userId));
+            }
+        }));
+    }
+    /**
+     * tabset进入加载状态
+     */
+    onTabsetLoadStart() {
+        this.nzTabsetLoading = true;
+    }
+    /**
+     * tabset取消加载状态
+     */
+    onTabsetLoadEnd() {
+        this.nzTabsetLoading = false;
+    }
+    /**
+     * tabset搜索框清除
+     */
+    onTabsetSearchClean() {
+        this.nzDepts = this._nzDeptsCopy;
+        this.nzRoles = this._nzRolesCopy;
+        this.nzFriendGroups = this._nzFriendGroupsCopy;
+        this.nzTabsetSearch = null;
+    }
+    /**
+     * tabset搜索框输入
+     *
+     * @param type 类型
+     * @param value 值
+     */
+    onTabsetSearchChange(type, value) {
+        this.onTabsetLoadStart();
+        if (!value || value === '') {
+            this.nzDepts = this._nzDeptsCopy;
+            this.nzRoles = this._nzRolesCopy;
+            this.nzFriendGroups = this._nzFriendGroupsCopy;
+        }
+        else {
+            const trees = [];
+            if (type === 'dept') {
+                this.searchTree(value, this._nzDeptsCopy, trees);
+                this.nzDepts = trees;
+            }
+            if (type === 'role') {
+                this.searchTree(value, this._nzRolesCopy, trees);
+                this.nzRoles = trees;
+            }
+            if (type === 'friendGroup') {
+                this.nzFriendGroups = this._nzFriendGroupsCopy.filter(f => {
+                    return !f.name.indexOf(value);
+                });
+            }
+        }
+        this.onTabsetLoadEnd();
+        this.refresh();
+    }
+    /**
+     * tabset切换到部门
+     */
+    onTabsetDept() {
+        this.onTabsetSearchClean();
+        if (!this.nzDepts || this.nzDepts.length === 0) {
+            this.onTabsetDeptFlush();
+        }
+    }
+    /**
+     * tabset切换到角色
+     */
+    onTabsetRole() {
+        this.onTabsetSearchClean();
+        if (!this.nzRoles || this.nzRoles.length === 0) {
+            this.onTabsetRoleFlush(null);
+        }
+    }
+    /**
+     * tabset切换到好友分组
+     */
+    onTabsetFriendGroup() {
+        this.onTabsetSearchClean();
+        if (!this.nzFriendGroups || this.nzFriendGroups.length === 0) {
+            this.onTabsetFriendGroupFlush();
+        }
+    }
+    /**
+     * 获取部门树
+     */
+    onTabsetDeptFlush() {
+        this.onTabsetLoadStart();
+        this.subs.push(this.contact
+            .dept(this.nzDeptClass, this.nzDeptClassHistory, this.nzDeptGrade, this.nzDeptGradeID)
+            .subscribe((trees) => {
+            this.expandTree(trees);
+            this.nzDepts = trees;
+            this._nzDeptsCopy = trees;
+            this.onTabsetLoadEnd();
+            this.refresh();
+        }));
+    }
+    // 获取角色树
+    onTabsetRoleFlush(groupRoleCode) {
+        this.onTabsetLoadStart();
+        this.subs.push(this.contact.getGroupRole(groupRoleCode).subscribe((roles) => {
+            this.expandTree(roles);
+            this.nzRoles = roles;
+            this._nzRolesCopy = roles;
+            this.onTabsetLoadEnd();
+            this.refresh();
+        }));
+    }
+    // 获取好友分组列表
+    onTabsetFriendGroupFlush() {
+        this.onTabsetLoadStart();
+        this.subs.push(this.contact.getFriendGroup().subscribe((group) => {
+            this.nzFriendGroups = group;
+            this._nzFriendGroupsCopy = group;
+            this.onTabsetLoadEnd();
+            this.refresh();
+        }));
+    }
+    /**
+     * 部门树点击
+     *
+     * @param e 节点
+     */
+    onDeptClick(e) {
+        var _a;
+        // 构造分页请求，直接传入stTable组件，剩下的所有交给组件自己完成
+        this.st.data = '/auth/baseUser/queryListForPage';
+        this.st.req = {
+            allInBody: true,
+            method: 'POST',
+            type: 'page',
+            reName: {
+                pi: 'pageNum',
+                ps: 'pageSize'
+            },
+            body: {
+                pageParam: {
+                    deptId: (_a = e.keys) === null || _a === void 0 ? void 0 : _a.pop()
+                }
+            }
+        };
+        // table数据预处理
+        this.st.res = {
+            process: data => {
+                this.onTableCheck(data);
+                return data;
+            }
+        };
+        // 加载第一页
+        this.st.load(1);
+    }
+    /**
+     * 角色树点击
+     *
+     * @param e 节点
+     */
+    onRoleClick(e) {
+        var _a;
+        // 构造分页请求，直接传入stTable组件，剩下的所有交给组件自己完成
+        this.st.data = '/auth/baseUser/queryListForPage';
+        this.st.req = {
+            allInBody: true,
+            method: 'POST',
+            type: 'page',
+            reName: {
+                pi: 'pageNum',
+                ps: 'pageSize'
+            },
+            body: {
+                pageParam: {
+                    roleId: (_a = e.keys) === null || _a === void 0 ? void 0 : _a.pop()
+                }
+            }
+        };
+        // table数据预处理
+        this.st.res = {
+            process: data => {
+                this.onTableCheck(data);
+                return data;
+            }
+        };
+        // 加载第一页
+        this.st.load(1);
+    }
+    /**
+     * 好友分组点击
+     *
+     * @param e 分组
+     */
+    onFriendGroupClick(e) {
+        // 构造分页请求，直接传入stTable组件，剩下的所有交给组件自己完成
+        this.st.data = '/auth/baseUser/queryListForPage';
+        this.st.req = {
+            allInBody: true,
+            method: 'POST',
+            type: 'page',
+            reName: {
+                pi: 'pageNum',
+                ps: 'pageSize'
+            },
+            body: {
+                pageParam: {
+                    friendGroupId: e.id
+                }
+            }
+        };
+        // table数据预处理
+        this.st.res = {
+            process: data => {
+                this.onTableCheck(data);
+                return data;
+            }
+        };
+        // 加载第一页
+        this.st.load(1);
+    }
+    /**
+     * 点击右侧联系人进行删除
+     *
+     * @param c 点击的联系人
+     */
+    onContactRemove(c) {
+        this.nzContacts = this.nzContacts.filter(contact => {
+            return contact.userId != c.userId;
+        });
+        this.st.reload();
+    }
+    /**
+     * 预处理table当前页数据，和nzContat对比，确定checkbox状态
+     *
+     * @param data 预处理数据
+     */
+    onTableCheck(data) {
+        const ids = this.nzContacts.map(u => u.userId);
+        data.forEach(d => {
+            if (ids.includes(d.userId)) {
+                d.checked = true;
+            }
+            else {
+                d.checked = false;
+            }
+        });
+    }
+    /**
+     * 递归树寻找name相同节点
+     *
+     * @param name 名称
+     * @param trees 需要递归的树
+     * @param list 搜索结果
+     */
+    searchTree(name, trees, list) {
+        if (trees && trees.length && trees.length > 0) {
+            trees.forEach((tree) => {
+                if (tree.title.indexOf(name) != -1) {
+                    list.push(tree);
+                }
+                if (tree.children) {
+                    this.searchTree(name, tree.children, list);
+                }
+            });
+        }
+    }
+    /**
+     * 递归树展开所有有子节点的节点
+     *
+     * @param trees 需要展开的树
+     */
+    expandTree(trees) {
+        if (trees && trees.length && trees.length > 0) {
+            trees.forEach(tree => {
+                if (!tree.children || tree.children.length === 0) {
+                    tree.expanded = false;
+                    tree.isLeaf = true;
+                }
+                if (tree.children) {
+                    tree.expanded = this.nzExpandAll;
+                    tree.isLeaf = false;
+                    this.expandTree(tree.children);
+                }
+            });
+        }
+    }
+    /**
+     * 刷新当前页面
+     */
+    refresh() {
+        this.changeDetectorRef.detectChanges();
+    }
+    /**
+     * 确认按钮output数据
+     */
+    confirm() {
+        this.confirmed.next(this.nzContacts);
+    }
+    /**
+     * 销毁函数
+     */
+    ngOnDestroy() {
+        this.nzDepts = [];
+        this.nzRoles = [];
+        this.nzContacts = [];
+        this.subs.forEach(s => s.unsubscribe());
+    }
+}
+ContactComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'contact',
+                template: "<nz-row [nzGutter]=\"16\">\n  <nz-col [nzXs]=\"24\" [nzSm]=\"24\" [nzMd]=\"24\" [nzLg]=\"8\" [nzXl]=\"6\" [nzXXl]=\"6\">\n    <nz-tabset nzCentered>\n      <nz-tab nzTitle=\"\u90E8\u95E8\" (nzSelect)=\"onTabsetDept()\">\n        <div sg-container=\"2\">\n          <sg col=\"1\" class=\"nz-tabset-sg\">\n            <nz-input-group class=\"nz-tabset-input\" [nzSuffix]=\"searchInputTpl\">\n              <input\n                nz-input\n                [(ngModel)]=\"nzTabsetSearch\"\n                (ngModelChange)=\"onTabsetSearchChange('dept', $event)\"\n                type=\"text\"\n                placeholder=\"\u8BF7\u8F93\u5165\u90E8\u95E8\u540D\u79F0\"\n              />\n            </nz-input-group>\n          </sg>\n          <sg col=\"1\">\n            <nz-spin [nzSpinning]=\"nzTabsetLoading\">\n              <nz-tree\n                class=\"nz-tabset-content\"\n                (nzClick)=\"onDeptClick($event)\"\n                [nzBlockNode]=\"true\"\n                [nzShowLine]=\"true\"\n                [nzHideUnMatched]=\"true\"\n                [nzVirtualHeight]=\"nzDeptTreeVirtualHeight\"\n                [nzData]=\"nzDepts\"\n              ></nz-tree>\n            </nz-spin>\n          </sg>\n        </div>\n      </nz-tab>\n      <nz-tab nzTitle=\"\u89D2\u8272\" (nzSelect)=\"onTabsetRole()\">\n        <div sg-container=\"2\">\n          <sg col=\"1\" class=\"nz-tabset-sg\">\n            <nz-input-group class=\"nz-tabset-input\" [nzSuffix]=\"searchInputTpl\">\n              <input\n                nz-input\n                [(ngModel)]=\"nzTabsetSearch\"\n                (ngModelChange)=\"onTabsetSearchChange('role', $event)\"\n                type=\"text\"\n                placeholder=\"\u8BF7\u8F93\u5165\u89D2\u8272\u540D\u79F0\"\n              />\n            </nz-input-group>\n          </sg>\n          <sg col=\"1\">\n            <nz-spin [nzSpinning]=\"nzTabsetLoading\">\n              <nz-tree\n                class=\"nz-tabset-content\"\n                (nzClick)=\"onRoleClick($event)\"\n                [nzBlockNode]=\"true\"\n                [nzShowLine]=\"true\"\n                [nzHideUnMatched]=\"true\"\n                [nzVirtualHeight]=\"nzRoleTreeVirtualHeight\"\n                [nzData]=\"nzRoles\"\n              ></nz-tree>\n            </nz-spin>\n          </sg>\n        </div>\n      </nz-tab>\n      <nz-tab nzTitle=\"\u597D\u53CB\" (nzSelect)=\"onTabsetFriendGroup()\">\n        <div sg-container=\"2\">\n          <sg col=\"1\" class=\"nz-tabset-sg\">\n            <nz-input-group class=\"nz-tabset-input\" [nzSuffix]=\"searchInputTpl\">\n              <input\n                nz-input\n                [(ngModel)]=\"nzTabsetSearch\"\n                (ngModelChange)=\"onTabsetSearchChange('friendGroup', $event)\"\n                type=\"text\"\n                placeholder=\"\u8BF7\u8F93\u5165\u597D\u53CB\u540D\u79F0\"\n              />\n            </nz-input-group>\n          </sg>\n          <sg col=\"1\">\n            <nz-spin [nzSpinning]=\"nzTabsetLoading\">\n              <nz-list class=\"nz-tabset-content\" nzItemLayout=\"horizontal\" [nzSplit]=\"false\" nzSize=\"small\">\n                <nz-list-item\n                  class=\"nz-tabset-content-item\"\n                  *ngFor=\"let group of nzFriendGroups\"\n                  (click)=\"onFriendGroupClick(group)\"\n                >\n                  <nz-list-item-meta>\n                    <nz-list-item-meta-title>\n                      {{ group.name }}\n                    </nz-list-item-meta-title>\n                  </nz-list-item-meta>\n                </nz-list-item>\n              </nz-list>\n            </nz-spin>\n          </sg>\n        </div>\n      </nz-tab>\n    </nz-tabset>\n  </nz-col>\n\n  <nz-col [nzXs]=\"24\" [nzSm]=\"24\" [nzMd]=\"24\" [nzLg]=\"16\" [nzXl]=\"13\" [nzXXl]=\"13\">\n    <st #st responsiveHideHeaderFooter></st>\n  </nz-col>\n\n  <nz-col [nzXs]=\"24\" [nzSm]=\"24\" [nzMd]=\"24\" [nzLg]=\"24\" [nzXl]=\"5\" [nzXXl]=\"5\">\n    <nz-spin [nzSpinning]=\"nzContactLoading\">\n      <nz-list nzItemLayout=\"horizontal\" [nzSplit]=\"false\" nzSize=\"small\">\n        <nz-list-item\n          class=\"nz-tabset-content-item\"\n          *ngFor=\"let contact of nzContacts\"\n          (click)=\"onContactRemove(contact)\"\n        >\n          <nz-list-item-meta>\n            <nz-list-item-meta-title>\n              {{ contact.realName }}\n            </nz-list-item-meta-title>\n          </nz-list-item-meta>\n        </nz-list-item>\n      </nz-list>\n    </nz-spin>\n  </nz-col>\n</nz-row>\n\n<nz-row *ngIf=\"button\">\n  <nz-col [nzSpan]=\"4\" [nzOffset]=\"20\">\n    <button nz-button nzType=\"primary\" (click)=\"confirm()\">\u786E\u5B9A</button>\n  </nz-col>\n</nz-row>\n\n<ng-template #searchInputTpl>\n  <i nz-icon nzType=\"close\" nzTheme=\"outline\" *ngIf=\"nzTabsetSearch\" (click)=\"onTabsetSearchClean()\"></i>\n  <i nz-icon nzType=\"search\" nzTheme=\"outline\" *ngIf=\"!nzTabsetSearch\"></i>\n</ng-template>\n",
+                styles: [".nz-tabset-input{width:100%}.nz-tabset-content{padding:20px}.nz-tabset-sg{padding-right:38px!important;padding-left:38px!important}.nz-tabset-content-item:hover{background-color:#f1f1f1;cursor:pointer}\n"]
+            },] }
+];
+ContactComponent.ctorParameters = () => [
+    { type: ContactService },
+    { type: ChangeDetectorRef }
+];
+ContactComponent.propDecorators = {
+    nzTabsetSearch: [{ type: Optional }, { type: Input }],
+    nzTabsetLoading: [{ type: Optional }, { type: Input }],
+    nzExpandAll: [{ type: Optional }, { type: Input }],
+    nzDepts: [{ type: Optional }, { type: Input }],
+    nzDeptTreeVirtualHeight: [{ type: Optional }, { type: Input }],
+    nzDeptClass: [{ type: Optional }, { type: Input }],
+    nzDeptClassHistory: [{ type: Optional }, { type: Input }],
+    nzDeptGrade: [{ type: Optional }, { type: Input }],
+    nzDeptGradeID: [{ type: Optional }, { type: Input }],
+    nzRoles: [{ type: Optional }, { type: Input }],
+    nzRoleTreeVirtualHeight: [{ type: Optional }, { type: Input }],
+    nzFriendGroups: [{ type: Optional }, { type: Input }],
+    st: [{ type: ViewChild, args: ['st', { static: false },] }],
+    defaultContacts: [{ type: Optional }, { type: Input }],
+    nzContacts: [{ type: Optional }, { type: Input }],
+    nzContactLoading: [{ type: Optional }, { type: Input }],
+    button: [{ type: Optional }, { type: Input }],
+    confirmed: [{ type: Output }]
+};
+
 const ɵ0 = msg => {
     log$1(msg);
 };
@@ -930,9 +1508,10 @@ YzStompService.ctorParameters = () => [
 ];
 
 class YzLayoutBasicComponent {
-    constructor(cacheService, yzStompService) {
+    constructor(cacheService, yzStompService, layoutService) {
         this.cacheService = cacheService;
         this.yzStompService = yzStompService;
+        this.layoutService = layoutService;
         this.options = {
             logoExpanded: `./assets/logo-full.svg`,
             logoCollapsed: `./assets/logo.svg`
@@ -940,6 +1519,19 @@ class YzLayoutBasicComponent {
         this.intro = '';
         this.text = '';
         this.icon = '';
+        this.showReuseTab = true;
+        this.showHeader = true;
+        this.showSider = true;
+    }
+    get reuseStyleSheet() {
+        let cascadingStyleSheet = {};
+        if (!this.showHeader) {
+            cascadingStyleSheet = Object.assign(Object.assign({}, cascadingStyleSheet), { top: 0 });
+        }
+        if (!this.showSider) {
+            cascadingStyleSheet = Object.assign(Object.assign({}, cascadingStyleSheet), { left: '24px' });
+        }
+        return cascadingStyleSheet;
     }
     ngOnInit() {
         const current = this.cacheService.get('_yz_current', { mode: 'none' });
@@ -950,6 +1542,9 @@ class YzLayoutBasicComponent {
         this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
         this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
         this.yzStompService.listen();
+        this.layoutService.reuseTab.asObservable().subscribe(show => (this.showReuseTab = show));
+        this.layoutService.header.asObservable().subscribe(show => (this.showHeader = show));
+        this.layoutService.sidebar.asObservable().subscribe(show => (this.showSider = show));
     }
     ngOnDestroy() {
         this.yzStompService.unListen();
@@ -959,7 +1554,7 @@ YzLayoutBasicComponent.decorators = [
     { type: Component, args: [{
                 selector: 'yz-layout-basic',
                 template: `
-    <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl">
+    <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="showReuseTab ? contentTpl : noneTpl">
       <layout-default-header-item direction="left">
         <yz-header-application></yz-header-application>
       </layout-default-header-item>
@@ -1014,8 +1609,11 @@ YzLayoutBasicComponent.decorators = [
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #contentTpl>
-        <reuse-tab #reuseTab></reuse-tab>
+        <reuse-tab #reuseTab [ngStyle]="reuseStyleSheet"></reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+      </ng-template>
+      <ng-template #noneTpl>
+        <router-outlet></router-outlet>
       </ng-template>
     </layout-default>
   `,
@@ -1024,11 +1622,22 @@ YzLayoutBasicComponent.decorators = [
 ];
 YzLayoutBasicComponent.ctorParameters = () => [
     { type: CacheService },
-    { type: YzStompService }
+    { type: YzStompService },
+    { type: LayoutService }
 ];
 
+/*
+ * @Author: cui <devcui@outlook.com>
+ * @Editor: microsoft vscode
+ * @Date: 2021-11-27 11:30:50
+ * @LastEditTime: 2021-11-27 14:38:46
+ * @LastEditors: cui <devcui@outlook.com>
+ * @Description: empty description
+ * @FilePath: \yelon\packages\bis\layout\layout.module.ts
+ * LICENSE HERE
+ */
 const COMPONENTS = [
-    // ContactComponent,
+    ContactComponent,
     YzLayoutBasicComponent,
     YzHeaderApplicationComponent,
     YzHeaderNotifyComponent,
@@ -1464,7 +2073,7 @@ class YzStartupService {
         // menu
         const ms = deepCopy(user.menu).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
         mapYzSideToYelonMenu(ms);
-        const currentMenu = ms.pop();
+        const currentMenu = ms.pop() || [];
         this.menuService.add([currentMenu]);
         // logo app
         this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
@@ -1474,8 +2083,8 @@ class YzStartupService {
             email: user.email || 'no email'
         });
         // title
-        this.titleService.default = currentMenu.text || 'default application name';
-        this.titleService.setTitle(currentMenu.text || 'no title');
+        this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';
+        this.titleService.setTitle(currentMenu && currentMenu.text ? currentMenu.text : 'no title');
         // acl
         const abilities = [];
         generateAbility([currentMenu], abilities, '');
@@ -1865,5 +2474,5 @@ ActGuard.ctorParameters = () => [
  * Generated bundle index. Do not edit.
  */
 
-export { ActGuard, BUSINESS_DEFAULT_CONFIG, PathToRegexpService, STOMP_DEFAULT_CONFIG, TOPIC, YZ_APPINIT_PROVIDES, YunzaiLayoutModule, YzAuthService, YzDefaultInterceptor, YzHeaderApplicationComponent, YzHeaderClearStorageComponent, YzHeaderFullScreenComponent, YzHeaderI18NComponent, YzHeaderNotifyComponent, YzHeaderThemBtnComponent, YzHeaderUserComponent, YzI18NService, YzLayoutBasicComponent, YzStartupService, YzStartupServiceFactory, YzStompService, generateAbility, mapYzSideToYelonMenu, mergeBisConfig, mergeStompConfig, ɵ0, YzHeaderApplicationComponent as ɵa, YzHeaderNotifyComponent as ɵb, YzHeaderThemBtnComponent as ɵc, YzHeaderUserComponent as ɵd, YzHeaderFullScreenComponent as ɵe, YzHeaderClearStorageComponent as ɵf, YzHeaderI18NComponent as ɵg };
+export { ActGuard, BUSINESS_DEFAULT_CONFIG, PathToRegexpService, STOMP_DEFAULT_CONFIG, TOPIC, YZ_APPINIT_PROVIDES, YunzaiLayoutModule, YzAuthService, YzDefaultInterceptor, YzHeaderApplicationComponent, YzHeaderClearStorageComponent, YzHeaderFullScreenComponent, YzHeaderI18NComponent, YzHeaderNotifyComponent, YzHeaderThemBtnComponent, YzHeaderUserComponent, YzI18NService, YzLayoutBasicComponent, YzStartupService, YzStartupServiceFactory, YzStompService, generateAbility, mapYzSideToYelonMenu, mergeBisConfig, mergeStompConfig, ɵ0, ContactComponent as ɵa, ContactService as ɵb, YzHeaderApplicationComponent as ɵc, YzHeaderNotifyComponent as ɵd, YzHeaderThemBtnComponent as ɵe, YzHeaderUserComponent as ɵf, YzHeaderFullScreenComponent as ɵg, YzHeaderClearStorageComponent as ɵh, YzHeaderI18NComponent as ɵi };
 //# sourceMappingURL=layout.js.map

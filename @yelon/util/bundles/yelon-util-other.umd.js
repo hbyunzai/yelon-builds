@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.16
+ * @license ng-yunzai(devcui@outlook.com) v12.0.19
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -688,6 +688,23 @@
         }
     }
 
+    function getUrlParam(url, name) {
+        try {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = url.split('?')[1].match(reg);
+            if (r != null)
+                return unescape(r[2]);
+        }
+        catch (e) {
+            return null;
+        }
+        return null;
+    }
+
+    var resizeWindow = function () {
+        window.dispatchEvent(new Event('resize'));
+    };
+
     /**
      * Generated bundle index. Do not edit.
      */
@@ -704,7 +721,9 @@
     exports.deepGet = deepGet;
     exports.deepMerge = deepMerge;
     exports.deepMergeKey = deepMergeKey;
+    exports.getUrlParam = getUrlParam;
     exports.log = log;
+    exports.resizeWindow = resizeWindow;
     exports.warn = warn;
     exports.warnDeprecation = warnDeprecation;
 

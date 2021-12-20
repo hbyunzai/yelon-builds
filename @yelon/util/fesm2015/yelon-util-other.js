@@ -292,9 +292,26 @@ function assertObservable(obj, msg) {
     }
 }
 
+function getUrlParam(url, name) {
+    try {
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`);
+        var r = url.split('?')[1].match(reg);
+        if (r != null)
+            return unescape(r[2]);
+    }
+    catch (e) {
+        return null;
+    }
+    return null;
+}
+
+const resizeWindow = () => {
+    window.dispatchEvent(new Event('resize'));
+};
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { LazyService, PREFIX, assert, assertArray, assertEmpty, assertNumber, assertObservable, assertString, deepCopy, deepGet, deepMerge, deepMergeKey, log, warn, warnDeprecation };
+export { LazyService, PREFIX, assert, assertArray, assertEmpty, assertNumber, assertObservable, assertString, deepCopy, deepGet, deepMerge, deepMergeKey, getUrlParam, log, resizeWindow, warn, warnDeprecation };
 //# sourceMappingURL=yelon-util-other.js.map

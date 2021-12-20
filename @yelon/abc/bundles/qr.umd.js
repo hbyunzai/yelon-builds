@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v12.0.16
+ * @license ng-yunzai(devcui@outlook.com) v12.0.19
  * (c) 2020 devcui https://github.com/hbyunzai/yelon/
  * License: MIT
  */
@@ -328,7 +328,7 @@
     }
 
     var QR_DEFULAT_CONFIG = {
-        lib: "https://cdn.bootcdn.net/ajax/libs/qrious/4.0.2/qrious.min.js",
+        lib: "https://cdn.jsdelivr.net/npm/qrious/dist/qrious.min.js",
         background: 'white',
         backgroundAlpha: 1,
         foreground: 'black',

@@ -2482,7 +2482,7 @@ YunzaiThemeModule.ctorParameters = () => [
     { type: NzIconService }
 ];
 
-const VERSION = new Version('12.0.16');
+const VERSION = new Version('12.0.19-942b8d4');
 
 /**
  * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).

@@ -1,12 +1,14 @@
 import { ChangeDetectorRef, Injector, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { NzI18nService } from 'ng-zorro-antd/i18n';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { NoticeIconSelect, NoticeItem } from '@yelon/abc/notice-icon';
 import { _HttpClient } from '@yelon/theme';
+import { NzI18nService } from 'ng-zorro-antd/i18n';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { YzI18NService } from '../yz.i18n.service';
 export declare class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     private injector;
     private msg;
+    private y18n;
     private nzI18n;
     private cdr;
     private httpClient;
@@ -14,7 +16,7 @@ export declare class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     loading: boolean;
     count: number;
     subs: Subscription[];
-    constructor(injector: Injector, msg: NzMessageService, nzI18n: NzI18nService, cdr: ChangeDetectorRef, httpClient: _HttpClient);
+    constructor(injector: Injector, msg: NzMessageService, y18n: YzI18NService, nzI18n: NzI18nService, cdr: ChangeDetectorRef, httpClient: _HttpClient);
     ngOnInit(): void;
     loadData(): void;
     loadMessage(): Observable<void>;

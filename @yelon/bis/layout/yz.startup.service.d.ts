@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
-import { NzIconService } from 'ng-zorro-antd/icon';
 import { ACLService } from '@yelon/acl';
 import { CacheService } from '@yelon/cache';
 import { Menu, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util';
+import { NzIconService } from 'ng-zorro-antd/icon';
 import { YzAuthService } from './yz.auth.service';
 import { YzI18NService } from './yz.i18n.service';
 export declare function mapYzSideToYelonMenu(menus: Menu[]): void;
