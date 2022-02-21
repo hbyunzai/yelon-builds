@@ -1,3 +1,4 @@
+import * as i0 from "@angular/core";
 export declare class PathToRegexpService {
     constructor();
     DEFAULT_DELIMITER: string;
@@ -20,4 +21,6 @@ export declare class PathToRegexpService {
     stringToRegexp(path: any, keys: any, options: any): RegExp;
     tokensToRegExp(tokens: any, keys: any, options: any): RegExp;
     pathToRegexp(path: any, keys: any, options: any): any;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PathToRegexpService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<PathToRegexpService>;
 }

@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-util-config.umd.js",
-  "module": "../fesm2015/yelon-util-config.js",
-  "es2015": "../fesm2015/yelon-util-config.js",
-  "esm2015": "../esm2015/config/yelon-util-config.js",
-  "fesm2015": "../fesm2015/yelon-util-config.js",
-  "typings": "yelon-util-config.d.ts",
-  "metadata": "yelon-util-config.metadata.json",
+  "module": "../fesm2015/config.mjs",
+  "es2020": "../fesm2020/config.mjs",
+  "esm2020": "../esm2020/config/config.mjs",
+  "fesm2020": "../fesm2020/config.mjs",
+  "fesm2015": "../fesm2015/config.mjs",
+  "typings": "config.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/config"
 }

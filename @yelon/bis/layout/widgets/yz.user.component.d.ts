@@ -3,6 +3,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ITokenService } from '@yelon/auth';
 import { CacheService } from '@yelon/cache';
 import { YunzaiConfigService } from '@yelon/util';
+import * as i0 from "@angular/core";
 export interface UserLink {
     icon: string;
     name: string;
@@ -22,4 +23,6 @@ export declare class YzHeaderUserComponent implements OnInit {
     ngOnInit(): void;
     logout(): void;
     to(href: string): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzHeaderUserComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YzHeaderUserComponent, "yz-header-user", never, {}, {}, never, never>;
 }

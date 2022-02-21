@@ -1,27 +1,55 @@
 {
   "name": "@yelon/bis",
-  "version": "12.0.19-942b8d4",
+  "version": "13.2.0",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "ng-zorro-antd": "^12.0.1",
-    "@yelon/acl": "^12.0.19-942b8d4",
-    "@yelon/auth": "^12.0.19-942b8d4",
-    "@yelon/theme": "^12.0.19-942b8d4",
-    "@yelon/mock": "^12.0.19-942b8d4",
-    "@yelon/cache": "^12.0.19-942b8d4",
-    "@yelon/chart": "^12.0.19-942b8d4",
-    "@yelon/form": "^12.0.19-942b8d4",
-    "@yelon/testing": "^12.0.19-942b8d4",
-    "@yelon/util": "^12.0.19-942b8d4",
-    "tslib": "^2.2.0"
+    "ng-zorro-antd": "^13.0.0",
+    "@yelon/acl": "^13.2.0",
+    "@yelon/auth": "^13.2.0",
+    "@yelon/theme": "^13.2.0",
+    "@yelon/mock": "^13.2.0",
+    "@yelon/cache": "^13.2.0",
+    "@yelon/chart": "^13.2.0",
+    "@yelon/form": "^13.2.0",
+    "@yelon/testing": "^13.2.0",
+    "@yelon/util": "^13.2.0",
+    "tslib": "^2.3.0"
   },
-  "main": "bundles/bis.umd.js",
-  "module": "fesm2015/bis.js",
-  "es2015": "fesm2015/bis.js",
-  "esm2015": "esm2015/bis.js",
-  "fesm2015": "fesm2015/bis.js",
+  "module": "fesm2015/bis.mjs",
+  "es2020": "fesm2020/bis.mjs",
+  "esm2020": "esm2020/bis.mjs",
+  "fesm2020": "fesm2020/bis.mjs",
+  "fesm2015": "fesm2015/bis.mjs",
   "typings": "bis.d.ts",
-  "metadata": "bis.metadata.json",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./bis.d.ts",
+      "esm2020": "./esm2020/bis.mjs",
+      "es2020": "./fesm2020/bis.mjs",
+      "es2015": "./fesm2015/bis.mjs",
+      "node": "./fesm2015/bis.mjs",
+      "default": "./fesm2020/bis.mjs"
+    },
+    "./layout": {
+      "types": "./layout/layout.d.ts",
+      "esm2020": "./esm2020/layout/layout.mjs",
+      "es2020": "./fesm2020/layout.mjs",
+      "es2015": "./fesm2015/layout.mjs",
+      "node": "./fesm2015/layout.mjs",
+      "default": "./fesm2020/layout.mjs"
+    },
+    "./shared": {
+      "types": "./shared/shared.d.ts",
+      "esm2020": "./esm2020/shared/shared.mjs",
+      "es2020": "./fesm2020/shared.mjs",
+      "es2015": "./fesm2015/shared.mjs",
+      "node": "./fesm2015/shared.mjs",
+      "default": "./fesm2020/shared.mjs"
+    }
+  },
   "sideEffects": false
 }

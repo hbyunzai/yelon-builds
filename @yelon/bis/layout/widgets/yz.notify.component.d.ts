@@ -5,6 +5,7 @@ import { _HttpClient } from '@yelon/theme';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { YzI18NService } from '../yz.i18n.service';
+import * as i0 from "@angular/core";
 export declare class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     private injector;
     private msg;
@@ -24,4 +25,6 @@ export declare class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     clear(type: string): void;
     select(res: NoticeIconSelect): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzHeaderNotifyComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YzHeaderNotifyComponent, "yz-header-notify", never, {}, {}, never, never>;
 }

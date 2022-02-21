@@ -1,11 +1,10 @@
 {
-  "main": "../../bundles/yelon-util-pipes-format.umd.js",
-  "module": "../../fesm2015/yelon-util-pipes-format.js",
-  "es2015": "../../fesm2015/yelon-util-pipes-format.js",
-  "esm2015": "../../esm2015/pipes/format/yelon-util-pipes-format.js",
-  "fesm2015": "../../fesm2015/yelon-util-pipes-format.js",
-  "typings": "yelon-util-pipes-format.d.ts",
-  "metadata": "yelon-util-pipes-format.metadata.json",
+  "module": "../../fesm2015/pipe-format.mjs",
+  "es2020": "../../fesm2020/pipe-format.mjs",
+  "esm2020": "../../esm2020/pipes/format/pipe-format.mjs",
+  "fesm2020": "../../fesm2020/pipe-format.mjs",
+  "fesm2015": "../../fesm2015/pipe-format.mjs",
+  "typings": "pipe-format.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/pipes/format"
 }

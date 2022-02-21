@@ -1,8 +1,9 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
 import type { Event } from '@antv/g2';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import * as i0 from "@angular/core";
 export interface G2BarData {
     x: NzSafeAny;
     y: NzSafeAny;
@@ -16,7 +17,7 @@ export interface G2BarClickItem {
 export declare class G2BarComponent extends G2BaseComponent {
     static ngAcceptInputType_height: NumberInput;
     static ngAcceptInputType_autoLabel: BooleanInput;
-    title: string | TemplateRef<void>;
+    title?: string | TemplateRef<void>;
     color: string;
     height: number;
     padding: number | number[] | 'auto';
@@ -29,4 +30,6 @@ export declare class G2BarComponent extends G2BaseComponent {
     changeData(): void;
     private updatelabel;
     private installResizeEvent;
+    static ɵfac: i0.ɵɵFactoryDeclaration<G2BarComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<G2BarComponent, "g2-bar", ["g2Bar"], { "title": "title"; "color": "color"; "height": "height"; "padding": "padding"; "data": "data"; "autoLabel": "autoLabel"; "interaction": "interaction"; }, { "clickItem": "clickItem"; }, never, never>;
 }

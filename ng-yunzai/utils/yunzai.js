@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildYunzai = exports.addValueToVariable = exports.addImportToModule = exports.refreshPathRoot = void 0;
+exports.buildYunzai = exports.addValueToVariable = exports.addProviderToModule = exports.addImportToModule = exports.refreshPathRoot = void 0;
 const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
 const ast_utils_1 = require("@schematics/angular/utility/ast-utils");
@@ -45,13 +45,17 @@ function buildSelector(schema, projectPrefix) {
     ret.push(core_1.strings.dasherize(schema.name));
     return ret.join('-');
 }
-function buildComponentName(schema, _projectPrefix) {
+function buildName(schema, prefix) {
     const ret = schema.withoutModulePrefixInComponentName === true ? [] : [schema.module];
     if (schema.target && schema.target.length > 0) {
         ret.push(...schema.target.split('/'));
     }
     ret.push(schema.name);
-    ret.push(`Component`);
+    // 服务类自动过滤 list, empty 两个页面的后缀
+    if (prefix === 'Service' && ['list', 'empty'].includes(schema.name)) {
+        ret.pop();
+    }
+    ret.push(prefix);
     return core_1.strings.classify(ret.join('-'));
 }
 function refreshPathRoot(project, schema, yunzaiProject) {
@@ -69,14 +73,14 @@ function resolveSchema(tree, project, schema, yunzaiProject) {
     // path
     refreshPathRoot(project, schema, yunzaiProject);
     schema.path += `/${schema.module}`;
-    const parsedPath = parse_name_1.parseName(schema.path, schema.name);
+    const parsedPath = (0, parse_name_1.parseName)(schema.path, schema.name);
     schema.name = parsedPath.name;
     schema.path = parsedPath.path;
     const fullPath = path.join(process.cwd(), schema.path, schema.name);
     if (fs.existsSync(fullPath) && fs.readdirSync(fullPath).length > 0) {
         throw new schematics_1.SchematicsException(`The directory (${fullPath}) already exists`);
     }
-    schema.importModulePath = find_module_1.findModuleFromOptions(tree, schema);
+    schema.importModulePath = (0, find_module_1.findModuleFromOptions)(tree, schema);
     if (!schema._filesPath) {
         // 若基础页尝试从 `_cli-tpl/_${schema.schematicName!}` 下查找该目录，若存在则优先使用
         if (['list', 'edit', 'view', 'empty'].includes(schema.schematicName)) {
@@ -96,20 +100,35 @@ function resolveSchema(tree, project, schema, yunzaiProject) {
     schema.routerModulePath = schema.importModulePath.replace('.module.ts', '-routing.module.ts');
     // html selector
     schema.selector = schema.selector || buildSelector(schema, project.prefix);
-    validation_1.validateName(schema.name);
-    validation_1.validateHtmlSelector(schema.selector);
+    (0, validation_1.validateHtmlSelector)(schema.selector);
 }
 function addImportToModule(tree, filePath, symbolName, fileName) {
-    const source = ast_1.getSourceFile(tree, filePath);
-    const change = ast_utils_1.insertImport(source, filePath, symbolName, fileName);
+    const source = (0, ast_1.getSourceFile)(tree, filePath);
+    const change = (0, ast_utils_1.insertImport)(source, filePath, symbolName, fileName);
+    if (change.path == null)
+        return;
     const declarationRecorder = tree.beginUpdate(filePath);
     declarationRecorder.insertLeft(change.pos, change.toAdd);
     tree.commitUpdate(declarationRecorder);
 }
 exports.addImportToModule = addImportToModule;
+function addProviderToModule(tree, filePath, serviceName, importPath) {
+    const source = (0, ast_1.getSourceFile)(tree, filePath);
+    const changes = (0, ast_utils_1.addProviderToModule)(source, filePath, serviceName, importPath);
+    const declarationRecorder = tree.beginUpdate(filePath);
+    changes.forEach(change => {
+        if (change.path == null)
+            return;
+        if (change instanceof change_1.InsertChange) {
+            declarationRecorder.insertLeft(change.pos, change.toAdd);
+        }
+    });
+    tree.commitUpdate(declarationRecorder);
+}
+exports.addProviderToModule = addProviderToModule;
 function addValueToVariable(tree, filePath, variableName, text, needWrap = true) {
-    const source = ast_1.getSourceFile(tree, filePath);
-    const node = ast_utils_1.findNode(source, ts.SyntaxKind.Identifier, variableName);
+    const source = (0, ast_1.getSourceFile)(tree, filePath);
+    const node = (0, ast_utils_1.findNode)(source, ts.SyntaxKind.Identifier, variableName);
     if (!node) {
         throw new schematics_1.SchematicsException(`Could not find any [${variableName}] variable in path '${filePath}'.`);
     }
@@ -121,9 +140,9 @@ function addValueToVariable(tree, filePath, variableName, text, needWrap = true)
     tree.commitUpdate(declarationRecorder);
 }
 exports.addValueToVariable = addValueToVariable;
-function getRelativePath(filePath, schema) {
-    const importPath = `/${schema.path}/${schema.flat ? '' : `${core_1.strings.dasherize(schema.name)}/`}${core_1.strings.dasherize(schema.name)}.component`;
-    return find_module_1.buildRelativePath(filePath, importPath);
+function getRelativePath(filePath, schema, prefix) {
+    const importPath = `/${schema.path}/${schema.flat ? '' : `${core_1.strings.dasherize(schema.name)}/`}${core_1.strings.dasherize(schema.name)}.${prefix}`;
+    return (0, find_module_1.buildRelativePath)(filePath, importPath);
 }
 function addDeclaration(schema) {
     return (tree) => {
@@ -131,40 +150,46 @@ function addDeclaration(schema) {
             return tree;
         }
         // imports
-        addImportToModule(tree, schema.importModulePath, schema.componentName, getRelativePath(schema.importModulePath, schema));
+        addImportToModule(tree, schema.importModulePath, schema.componentName, getRelativePath(schema.importModulePath, schema, 'component'));
         addValueToVariable(tree, schema.importModulePath, 'COMPONENTS', schema.componentName);
         // component
         if (schema.modal !== true) {
             // routing
-            addImportToModule(tree, schema.routerModulePath, schema.componentName, getRelativePath(schema.routerModulePath, schema));
+            addImportToModule(tree, schema.routerModulePath, schema.componentName, getRelativePath(schema.routerModulePath, schema, 'component'));
             addValueToVariable(tree, schema.routerModulePath, 'routes', `{ path: '${schema.name}', component: ${schema.componentName} }`);
+        }
+        // service
+        if (schema.service === 'none') {
+            addProviderToModule(tree, schema.importModulePath, schema.serviceName, getRelativePath(schema.importModulePath, schema, 'service'));
         }
         return tree;
     };
 }
 function buildYunzai(schema) {
     return (tree) => __awaiter(this, void 0, void 0, function* () {
-        const res = yield workspace_1.getProject(tree, schema.project);
+        const res = yield (0, workspace_1.getProject)(tree, schema.project);
         if (schema.project && res.name !== schema.project) {
             throw new schematics_1.SchematicsException(`The specified project does not match '${schema.project}', current: ${res.name}`);
         }
         const project = res.project;
         resolveSchema(tree, project, schema, res.yunzaiProject);
-        schema.componentName = buildComponentName(schema, project.prefix);
+        schema.componentName = buildName(schema, 'Component');
+        schema.serviceName = buildName(schema, 'Service');
         // Don't support inline
         schema.inlineTemplate = false;
-        const templateSource = schematics_1.apply(schematics_1.url(schema._filesPath), [
-            schematics_1.filter(filePath => !filePath.endsWith('.DS_Store')),
-            schema.skipTests ? schematics_1.filter(filePath => !filePath.endsWith('.spec.ts.template')) : schematics_1.noop(),
-            schema.inlineStyle ? schematics_1.filter(filePath => !filePath.endsWith('.__style__.template')) : schematics_1.noop(),
-            schema.inlineTemplate ? schematics_1.filter(filePath => !filePath.endsWith('.html.template')) : schematics_1.noop(),
+        const templateSource = (0, schematics_1.apply)((0, schematics_1.url)(schema._filesPath), [
+            (0, schematics_1.filter)(filePath => !filePath.endsWith('.DS_Store')),
+            schema.service === 'ignore' ? (0, schematics_1.filter)(filePath => !filePath.endsWith('.service.ts.template')) : (0, schematics_1.noop)(),
+            schema.skipTests ? (0, schematics_1.filter)(filePath => !filePath.endsWith('.spec.ts.template')) : (0, schematics_1.noop)(),
+            schema.inlineStyle ? (0, schematics_1.filter)(filePath => !filePath.endsWith('.__style__.template')) : (0, schematics_1.noop)(),
+            schema.inlineTemplate ? (0, schematics_1.filter)(filePath => !filePath.endsWith('.html.template')) : (0, schematics_1.noop)(),
             // schema.spec ? noop() : filter(filePath => !filePath.endsWith('.spec.ts')),
             // schema.inlineStyle ? filter(filePath => !filePath.endsWith('.__styleext__')) : noop(),
             // schema.inlineTemplate ? filter(filePath => !filePath.endsWith('.html')) : noop(),
-            schematics_1.applyTemplates(Object.assign(Object.assign(Object.assign({}, core_1.strings), { 'if-flat': (s) => (schema.flat ? '' : s) }), schema)),
-            schematics_1.move(null, `${schema.path}/`)
+            (0, schematics_1.applyTemplates)(Object.assign(Object.assign(Object.assign({}, core_1.strings), { 'if-flat': (s) => (schema.flat ? '' : s) }), schema)),
+            (0, schematics_1.move)(null, `${schema.path}/`)
         ]);
-        return schematics_1.chain([schematics_1.branchAndMerge(schematics_1.chain([addDeclaration(schema), schematics_1.mergeWith(templateSource)]))]);
+        return (0, schematics_1.chain)([(0, schematics_1.branchAndMerge)((0, schematics_1.chain)([addDeclaration(schema), (0, schematics_1.mergeWith)(templateSource)]))]);
     });
 }
 exports.buildYunzai = buildYunzai;

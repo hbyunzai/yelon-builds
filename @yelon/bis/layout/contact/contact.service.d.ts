@@ -3,6 +3,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { CacheService } from '@yelon/cache';
 import { _HttpClient } from '@yelon/theme';
+import * as i0 from "@angular/core";
 export interface BaseUserParam {
     realName?: string;
     userCode?: string;
@@ -77,7 +78,7 @@ export declare class ContactService {
      * @param gradeID 系部ID
      * @returns 可观察部门树
      */
-    dept(clas: boolean, his: boolean, grade: boolean, gradeID: string): Observable<NzTreeNodeOptions[]>;
+    dept(clas: boolean, his: boolean, grade: boolean, gradeID: string | null): Observable<NzTreeNodeOptions[]>;
     page<U, T>(uri: string, page: Page<U>): Observable<PageRes<T>>;
     pageBaseUser(page: Page<BaseUserParam>): Observable<PageRes<NzSafeAny>>;
     getUserByIds(ids: string[]): Observable<any[]>;
@@ -112,4 +113,6 @@ export declare class ContactService {
      * @param treeType 树类型 0:宿舍楼 1:宿舍楼+层 2:宿舍楼+层+房间
      */
     getDormTree(isPower: boolean, treeType: number): Observable<any[]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ContactService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ContactService>;
 }

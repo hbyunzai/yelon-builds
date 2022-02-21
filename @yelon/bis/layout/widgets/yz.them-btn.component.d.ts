@@ -4,6 +4,7 @@ import { OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ThemeBtnType } from '@yelon/theme/theme-btn';
 import { YunzaiConfigService } from '@yelon/util/config';
+import * as i0 from "@angular/core";
 export interface YzThemeBtnType extends ThemeBtnType {
     color?: string;
 }
@@ -26,4 +27,6 @@ export declare class YzHeaderThemBtnComponent implements OnInit, OnDestroy {
     private updateChartTheme;
     onThemeChange(theme: string): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzHeaderThemBtnComponent, [null, null, null, null, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YzHeaderThemBtnComponent, "yz-header-theme-btn", never, { "types": "types"; "devTips": "devTips"; "deployUrl": "deployUrl"; }, {}, never, never>;
 }

@@ -1,7 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, ElementRef, NgZone, OnChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import * as i0 from "@angular/core";
 export declare class EllipsisComponent implements AfterViewInit, OnChanges {
     private el;
     private ngZone;
@@ -23,11 +24,12 @@ export declare class EllipsisComponent implements AfterViewInit, OnChanges {
     text: string;
     targetCount: number;
     tooltip: boolean;
-    length: number;
-    lines: number;
+    length?: number;
+    lines?: number;
     fullWidthRecognition: boolean;
     tail: string;
     get linsWord(): string;
+    private get win();
     constructor(el: ElementRef, ngZone: NgZone, dom: DomSanitizer, doc: NzSafeAny, cdr: ChangeDetectorRef);
     private getStrFullLength;
     private cutStrByFullLength;
@@ -39,4 +41,6 @@ export declare class EllipsisComponent implements AfterViewInit, OnChanges {
     refresh(): void;
     ngAfterViewInit(): void;
     ngOnChanges(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<EllipsisComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<EllipsisComponent, "ellipsis", ["ellipsis"], { "tooltip": "tooltip"; "length": "length"; "lines": "lines"; "fullWidthRecognition": "fullWidthRecognition"; "tail": "tail"; }, {}, never, ["*"]>;
 }

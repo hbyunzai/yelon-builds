@@ -2,6 +2,7 @@ import { AfterViewInit, ElementRef, OnChanges, Renderer2, TemplateRef } from '@a
 import { ResponsiveService } from '@yelon/theme';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 import { SVContainerComponent } from './sv-container.component';
+import * as i0 from "@angular/core";
 export declare class SVComponent implements AfterViewInit, OnChanges {
     parent: SVContainerComponent;
     private rep;
@@ -13,20 +14,22 @@ export declare class SVComponent implements AfterViewInit, OnChanges {
     private el;
     private clsMap;
     _noColon: boolean;
-    optional: string | TemplateRef<void>;
-    optionalHelp: string | TemplateRef<void>;
-    optionalHelpColor: string;
-    label: string | TemplateRef<void>;
-    unit: string | TemplateRef<void>;
-    col: number;
-    default: boolean;
-    type: 'primary' | 'success' | 'danger' | 'warning';
-    noColon: boolean;
+    optional?: string | TemplateRef<void> | null;
+    optionalHelp?: string | TemplateRef<void> | null;
+    optionalHelpColor?: string;
+    label?: string | TemplateRef<void> | null;
+    unit?: string | TemplateRef<void> | null;
+    col?: number | null;
+    default?: boolean | null;
+    type?: 'primary' | 'success' | 'danger' | 'warning';
+    noColon?: boolean | null;
     get paddingValue(): number;
-    get labelWidth(): number | null;
+    get labelWidth(): number | null | undefined;
     constructor(el: ElementRef, parent: SVContainerComponent, rep: ResponsiveService, ren: Renderer2);
     private setClass;
     ngAfterViewInit(): void;
     ngOnChanges(): void;
     checkContent(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SVComponent, [null, { optional: true; host: true; }, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SVComponent, "sv, [sv]", ["sv"], { "optional": "optional"; "optionalHelp": "optionalHelp"; "optionalHelpColor": "optionalHelpColor"; "label": "label"; "unit": "unit"; "col": "col"; "default": "default"; "type": "type"; "noColon": "noColon"; }, {}, never, ["*"]>;
 }

@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/view.umd.js",
-  "module": "../fesm2015/view.js",
-  "es2015": "../fesm2015/view.js",
-  "esm2015": "../esm2015/sv/view.js",
-  "fesm2015": "../fesm2015/view.js",
-  "typings": "view.d.ts",
-  "metadata": "view.metadata.json",
+  "module": "../fesm2015/sv.mjs",
+  "es2020": "../fesm2020/sv.mjs",
+  "esm2020": "../esm2020/sv/sv.mjs",
+  "fesm2020": "../fesm2020/sv.mjs",
+  "fesm2015": "../fesm2015/sv.mjs",
+  "typings": "sv.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/sv"
 }

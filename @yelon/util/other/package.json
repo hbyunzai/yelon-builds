@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-util-other.umd.js",
-  "module": "../fesm2015/yelon-util-other.js",
-  "es2015": "../fesm2015/yelon-util-other.js",
-  "esm2015": "../esm2015/other/yelon-util-other.js",
-  "fesm2015": "../fesm2015/yelon-util-other.js",
-  "typings": "yelon-util-other.d.ts",
-  "metadata": "yelon-util-other.metadata.json",
+  "module": "../fesm2015/other.mjs",
+  "es2020": "../fesm2020/other.mjs",
+  "esm2020": "../esm2020/other/other.mjs",
+  "fesm2020": "../fesm2020/other.mjs",
+  "fesm2015": "../fesm2015/other.mjs",
+  "typings": "other.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/other"
 }

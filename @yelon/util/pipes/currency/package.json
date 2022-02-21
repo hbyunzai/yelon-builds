@@ -1,11 +1,10 @@
 {
-  "main": "../../bundles/yelon-util-pipes-currency.umd.js",
-  "module": "../../fesm2015/yelon-util-pipes-currency.js",
-  "es2015": "../../fesm2015/yelon-util-pipes-currency.js",
-  "esm2015": "../../esm2015/pipes/currency/yelon-util-pipes-currency.js",
-  "fesm2015": "../../fesm2015/yelon-util-pipes-currency.js",
-  "typings": "yelon-util-pipes-currency.d.ts",
-  "metadata": "yelon-util-pipes-currency.metadata.json",
+  "module": "../../fesm2015/pipe-currency.mjs",
+  "es2020": "../../fesm2020/pipe-currency.mjs",
+  "esm2020": "../../esm2020/pipes/currency/pipe-currency.mjs",
+  "fesm2020": "../../fesm2020/pipe-currency.mjs",
+  "fesm2015": "../../fesm2015/pipe-currency.mjs",
+  "typings": "pipe-currency.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/pipes/currency"
 }

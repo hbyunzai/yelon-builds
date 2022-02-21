@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/number-info.umd.js",
-  "module": "../fesm2015/number-info.js",
-  "es2015": "../fesm2015/number-info.js",
-  "esm2015": "../esm2015/number-info/number-info.js",
-  "fesm2015": "../fesm2015/number-info.js",
+  "module": "../fesm2015/number-info.mjs",
+  "es2020": "../fesm2020/number-info.mjs",
+  "esm2020": "../esm2020/number-info/number-info.mjs",
+  "fesm2020": "../fesm2020/number-info.mjs",
+  "fesm2015": "../fesm2015/number-info.mjs",
   "typings": "number-info.d.ts",
-  "metadata": "number-info.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/number-info"
 }

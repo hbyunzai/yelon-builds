@@ -1,8 +1,9 @@
 import { EventEmitter } from '@angular/core';
 import type { Event } from '@antv/g2';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { G2BaseComponent } from '@yelon/chart/core';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import * as i0 from "@angular/core";
 export interface G2MiniAreaData {
     x: NzSafeAny;
     y: NzSafeAny;
@@ -34,4 +35,6 @@ export declare class G2MiniAreaComponent extends G2BaseComponent {
     readonly clickItem: EventEmitter<G2MiniAreaClickItem>;
     install(): void;
     changeData(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<G2MiniAreaComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<G2MiniAreaComponent, "g2-mini-area", ["g2MiniArea"], { "color": "color"; "borderColor": "borderColor"; "borderWidth": "borderWidth"; "height": "height"; "fit": "fit"; "line": "line"; "animate": "animate"; "xAxis": "xAxis"; "yAxis": "yAxis"; "padding": "padding"; "data": "data"; "yTooltipSuffix": "yTooltipSuffix"; "tooltipType": "tooltipType"; }, { "clickItem": "clickItem"; }, never, never>;
 }

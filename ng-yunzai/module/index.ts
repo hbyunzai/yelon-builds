@@ -15,11 +15,11 @@ import {
 } from '@angular-devkit/schematics';
 import { addImportToModule, findNode } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
-import { findModuleFromOptions } from '@schematics/angular/utility/find-module';
+import { findModuleFromOptions, buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import * as ts from 'typescript';
 
-import { getProject, refreshPathRoot } from '../utils';
+import { addProviderToModule, getProject, refreshPathRoot } from '../utils';
 import { Schema as ModuleSchema } from './schema';
 
 function addDeclarationToNgModule(options: ModuleSchema): Rule {
@@ -86,11 +86,33 @@ function addRoutingModuleToTop(options: ModuleSchema): Rule {
     }
     const recorder = tree.beginUpdate(modulePath);
     const moduleName = strings.classify(`${options.name}Module`);
-    const code = `{ path: '${options.name}', loadChildren: () => import('./${options.name}/${options.name}.module').then((m) => m.${moduleName}) },`;
     let pos = childrenNode.parent.end;
+    const validLines = childrenNode.parent
+      .getText()
+      .trim()
+      .split('\n')
+      .map(v => v.trim())
+      .filter(v => v.length > 1 && !v.startsWith('//'));
+    const comma = validLines.pop()?.endsWith(',') === false ? ', ' : '';
+    const code = `${comma} { path: '${options.name}', loadChildren: () => import('./${options.name}/${options.name}.module').then((m) => m.${moduleName}) }`;
     // Insert it just before the `]`.
-    recorder.insertRight(--pos, code);
+    recorder.insertRight(pos - 1, code);
     tree.commitUpdate(recorder);
+    return tree;
+  };
+}
+
+function addServiceToNgModule(options: ModuleSchema): Rule {
+  return (tree: Tree) => {
+    if (options.service !== 'none') return tree;
+
+    const basePath = `/${options.path}/${options.flat ? '' : `${strings.dasherize(options.name)}/`}${strings.dasherize(
+      options.name
+    )}`;
+    const servicePath = normalize(`${basePath}.service`);
+    const importModulePath = normalize(`${basePath}.module`);
+    const importServicePath = buildRelativePath(importModulePath, servicePath);
+    addProviderToModule(tree, `${importModulePath}.ts`, strings.classify(`${options.name}Service`), importServicePath);
     return tree;
   };
 }
@@ -113,6 +135,7 @@ export default function (schema: ModuleSchema): Rule {
     schema.flat = false;
 
     const templateSource = apply(url('./files'), [
+      schema.service === 'ignore' ? filter(filePath => !filePath.endsWith('.service.ts.template')) : noop(),
       schema.routing ? noop() : filter(path => !path.endsWith('-routing.module.ts')),
       applyTemplates({
         ...strings,
@@ -124,7 +147,12 @@ export default function (schema: ModuleSchema): Rule {
 
     return chain([
       branchAndMerge(
-        chain([addDeclarationToNgModule(schema), addRoutingModuleToTop(schema), mergeWith(templateSource)])
+        chain([
+          addDeclarationToNgModule(schema),
+          addRoutingModuleToTop(schema),
+          mergeWith(templateSource),
+          addServiceToNgModule(schema)
+        ])
       )
     ]);
   };

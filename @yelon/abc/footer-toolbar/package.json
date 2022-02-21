@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/footerToolbar.umd.js",
-  "module": "../fesm2015/footerToolbar.js",
-  "es2015": "../fesm2015/footerToolbar.js",
-  "esm2015": "../esm2015/footer-toolbar/footerToolbar.js",
-  "fesm2015": "../fesm2015/footerToolbar.js",
-  "typings": "footerToolbar.d.ts",
-  "metadata": "footerToolbar.metadata.json",
+  "module": "../fesm2015/footer-toolbar.mjs",
+  "es2020": "../fesm2020/footer-toolbar.mjs",
+  "esm2020": "../esm2020/footer-toolbar/footer-toolbar.mjs",
+  "fesm2020": "../fesm2020/footer-toolbar.mjs",
+  "fesm2015": "../fesm2015/footer-toolbar.mjs",
+  "typings": "footer-toolbar.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/footer-toolbar"
 }

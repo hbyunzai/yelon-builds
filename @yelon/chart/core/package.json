@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-chart-core.umd.js",
-  "module": "../fesm2015/yelon-chart-core.js",
-  "es2015": "../fesm2015/yelon-chart-core.js",
-  "esm2015": "../esm2015/core/yelon-chart-core.js",
-  "fesm2015": "../fesm2015/yelon-chart-core.js",
-  "typings": "yelon-chart-core.d.ts",
-  "metadata": "yelon-chart-core.metadata.json",
+  "module": "../fesm2015/core.mjs",
+  "es2020": "../fesm2020/core.mjs",
+  "esm2020": "../esm2020/core/core.mjs",
+  "fesm2020": "../fesm2020/core.mjs",
+  "fesm2015": "../fesm2015/core.mjs",
+  "typings": "core.d.ts",
   "sideEffects": false,
   "name": "@yelon/chart/core"
 }

@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/pie.umd.js",
-  "module": "../fesm2015/pie.js",
-  "es2015": "../fesm2015/pie.js",
-  "esm2015": "../esm2015/pie/pie.js",
-  "fesm2015": "../fesm2015/pie.js",
+  "module": "../fesm2015/pie.mjs",
+  "es2020": "../fesm2020/pie.mjs",
+  "esm2020": "../esm2020/pie/pie.mjs",
+  "fesm2020": "../fesm2020/pie.mjs",
+  "fesm2015": "../fesm2015/pie.mjs",
   "typings": "pie.d.ts",
-  "metadata": "pie.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/pie"
 }

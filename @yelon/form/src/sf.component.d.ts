@@ -6,14 +6,15 @@ import { YunzaiI18NService, YelonLocaleService, LocaleData } from '@yelon/theme'
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { BooleanInput } from '@yelon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { ErrorData } from './errors';
+import type { ErrorData } from './errors';
 import { SFButton, SFLayout, SFValueChange } from './interface';
 import { FormProperty } from './model/form.property';
 import { FormPropertyFactory } from './model/form.property.factory';
-import { SFSchema } from './schema/index';
-import { SFUISchema } from './schema/ui';
+import type { SFSchema } from './schema/index';
+import type { SFUISchema } from './schema/ui';
 import { TerminatorService } from './terminator.service';
 import { SchemaValidatorFactory } from './validator.factory';
+import * as i0 from "@angular/core";
 export declare function useFactory(schemaValidatorFactory: SchemaValidatorFactory, cogSrv: YunzaiConfigService): FormPropertyFactory;
 export declare type SFMode = 'default' | 'search' | 'edit';
 export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
@@ -54,7 +55,7 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     /** UI Schema */
     ui: SFUISchema;
     /** 表单默认值 */
-    formData: Record<string, NzSafeAny>;
+    formData?: Record<string, NzSafeAny>;
     /**
      * 按钮
      * - 值为 `null` 或 `undefined` 表示手动添加按钮，但保留容器
@@ -171,4 +172,6 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     reset(emit?: boolean): this;
     private cleanRootSub;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SFComponent, [null, null, null, null, null, { optional: true; }, { optional: true; }, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SFComponent, "sf, [sf]", ["sf"], { "layout": "layout"; "schema": "schema"; "ui": "ui"; "formData": "formData"; "button": "button"; "liveValidate": "liveValidate"; "autocomplete": "autocomplete"; "firstVisual": "firstVisual"; "onlyVisual": "onlyVisual"; "compact": "compact"; "mode": "mode"; "loading": "loading"; "disabled": "disabled"; "noColon": "noColon"; "cleanValue": "cleanValue"; }, { "formValueChange": "formValueChange"; "formChange": "formChange"; "formSubmit": "formSubmit"; "formReset": "formReset"; "formError": "formError"; }, never, ["*"]>;
 }

@@ -3,52 +3,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const color_1 = require("@angular/cli/utilities/color");
 const schematics_1 = require("@angular-devkit/schematics");
 const tasks_1 = require("@angular-devkit/schematics/tasks");
-const fs_1 = require("fs");
-const path_1 = require("path");
 const utils_1 = require("../utils");
-const V = 12;
+const node_1 = require("../utils/node");
+const V = 13;
 function genRules(options) {
     return () => {
         const rules = [];
         const applicationOptions = Object.assign({}, options);
-        rules.push(schematics_1.schematic('application', applicationOptions));
+        rules.push((0, schematics_1.schematic)('application', applicationOptions));
         if (options.codeStyle) {
-            rules.push(schematics_1.schematic('plugin', { name: 'codeStyle', type: 'add' }));
+            rules.push((0, schematics_1.schematic)('plugin', { name: 'codeStyle', type: 'add' }));
         }
         if (options.defaultLanguage) {
-            rules.push(schematics_1.schematic('plugin', {
+            rules.push((0, schematics_1.schematic)('plugin', {
                 name: 'defaultLanguage',
                 type: 'add',
                 defaultLanguage: options.defaultLanguage
             }));
         }
         if (options.npm) {
-            rules.push(schematics_1.schematic('plugin', {
+            rules.push((0, schematics_1.schematic)('plugin', {
                 name: 'networkEnv',
                 type: 'add',
                 packageManager: 'npm'
             }));
         }
         if (options.yarn) {
-            rules.push(schematics_1.schematic('plugin', {
+            rules.push((0, schematics_1.schematic)('plugin', {
                 name: 'networkEnv',
                 type: 'add',
                 packageManager: 'yarn'
             }));
         }
-        return schematics_1.chain(rules);
+        return (0, schematics_1.chain)(rules);
     };
 }
-function getFiles() {
-    const nodeModulesPath = path_1.join(process.cwd(), 'node_modules');
-    if (!fs_1.statSync(nodeModulesPath).isDirectory())
-        return [];
-    return fs_1.readdirSync(nodeModulesPath) || [];
-}
-function isUseCNPM() {
-    const names = getFiles();
-    const res = ['_@angular', '_ng-zorro-antd'].every(prefix => names.findIndex(w => w.startsWith(prefix)) !== -1);
-    return res;
+function isYarn(tree) {
+    var _a, _b;
+    return ((_b = (_a = (0, utils_1.readJSON)(tree, '/angular.json')) === null || _a === void 0 ? void 0 : _a.cli) === null || _b === void 0 ? void 0 : _b.packageManager) === 'yarn';
 }
 function finished() {
     return (_, context) => {
@@ -62,21 +54,27 @@ NG-YUNZAI documentation site: https://ng.yunzainfo.com
 }
 function default_1(options) {
     return (tree, context) => {
-        if (isUseCNPM()) {
-            throw new Error(`Sorry, Don't use cnpm to install dependencies, pls refer to: https://ng.yunzainfo.com/docs/faq#Installation`);
+        if (!isYarn(tree)) {
+            context.logger.warn(`TIPS:: Please use yarn instead of NPM to install dependencies`);
         }
-        const pkg = utils_1.readPackage(tree);
+        const nodeVersion = (0, node_1.getNodeMajorVersion)();
+        const allowNodeVersions = [12, 14, 16];
+        if (!allowNodeVersions.some(v => nodeVersion === v)) {
+            const versions = allowNodeVersions.join(', ');
+            throw new schematics_1.SchematicsException(`Sorry, currently only supports ${versions} major version number of node (Got ${process.version}), pls refer to https://gist.github.com/LayZeeDK/c822cc812f75bb07b7c55d07ba2719b3`);
+        }
+        const pkg = (0, utils_1.readPackage)(tree);
         if (pkg.devDependencies['ng-yunzai']) {
-            throw new Error(`Already an NG-YUNZAI project and can't be executed again: ng add ng-yunzai`);
+            throw new schematics_1.SchematicsException(`Already an NG-YUNZAI project and can't be executed again: ng add ng-yunzai`);
         }
         let ngCoreVersion = pkg.dependencies['@angular/core'];
         if (/^[\^|\~]/g.test(ngCoreVersion)) {
-            ngCoreVersion = ngCoreVersion.substr(1);
+            ngCoreVersion = ngCoreVersion.substring(1);
         }
         if (!ngCoreVersion.startsWith(`${V}.`)) {
-            throw new Error(`Sorry, the current version only supports angular ${V}.x, pls downgrade the global Anguar-cli version: [yarn global add @angular/cli@${V}] (or via npm: [npm install -g @angular/cli@${V}])`);
+            throw new schematics_1.SchematicsException(`Sorry, the current version only supports angular ${V}.x, pls downgrade the global Anguar-cli version: [yarn global add @angular/cli@${V}] (or via npm: [npm install -g @angular/cli@${V}])`);
         }
-        return schematics_1.chain([genRules(options), finished()])(tree, context);
+        return (0, schematics_1.chain)([genRules(options), finished()])(tree, context);
     };
 }
 exports.default = default_1;

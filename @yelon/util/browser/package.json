@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/browser.umd.js",
-  "module": "../fesm2015/browser.js",
-  "es2015": "../fesm2015/browser.js",
-  "esm2015": "../esm2015/browser/browser.js",
-  "fesm2015": "../fesm2015/browser.js",
+  "module": "../fesm2015/browser.mjs",
+  "es2020": "../fesm2020/browser.mjs",
+  "esm2020": "../esm2020/browser/browser.mjs",
+  "fesm2020": "../fesm2020/browser.mjs",
+  "fesm2015": "../fesm2015/browser.mjs",
   "typings": "browser.d.ts",
-  "metadata": "browser.metadata.json",
   "sideEffects": false,
   "name": "@yelon/util/browser"
 }

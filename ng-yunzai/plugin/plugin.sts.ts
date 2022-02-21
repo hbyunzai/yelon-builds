@@ -18,7 +18,7 @@ function fixPackage(options: PluginOptions): Rule {
   return (tree: Tree) => {
     (options.type === 'add' ? addPackage : removePackage)(
       tree,
-      ['ng-yunzai-sts@^0.0.1'],
+      ['ng-yunzai-sts@^0.0.3'],
       'devDependencies'
     );
   };

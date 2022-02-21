@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-util-array.umd.js",
-  "module": "../fesm2015/yelon-util-array.js",
-  "es2015": "../fesm2015/yelon-util-array.js",
-  "esm2015": "../esm2015/array/yelon-util-array.js",
-  "fesm2015": "../fesm2015/yelon-util-array.js",
-  "typings": "yelon-util-array.d.ts",
-  "metadata": "yelon-util-array.metadata.json",
+  "module": "../fesm2015/array.mjs",
+  "es2020": "../fesm2020/array.mjs",
+  "esm2020": "../esm2020/array/array.mjs",
+  "fesm2020": "../fesm2020/array.mjs",
+  "fesm2015": "../fesm2015/array.mjs",
+  "typings": "array.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/array"
 }

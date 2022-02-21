@@ -1,11 +1,12 @@
 import { DecimalPipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { DatePipe, YNPipe, _HttpClient } from '@yelon/theme';
 import { CurrencyService } from '@yelon/util/format';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { STCustomRequestOptions, STData, STMultiSort, STMultiSortResultType, STPage, STReq, STRes, STRowClassName, STSingleSort, STStatisticalResults } from './st.interfaces';
 import { _STColumn } from './st.types';
+import * as i0 from "@angular/core";
 export interface STDataSourceOptions {
     pi: number;
     ps: number;
@@ -65,4 +66,6 @@ export declare class STDataSource {
     private toFixed;
     private getValues;
     private getSum;
+    static ɵfac: i0.ɵɵFactoryDeclaration<STDataSource, [null, { host: true; }, { host: true; }, { host: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<STDataSource>;
 }

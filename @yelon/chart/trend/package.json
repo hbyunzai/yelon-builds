@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/trend.umd.js",
-  "module": "../fesm2015/trend.js",
-  "es2015": "../fesm2015/trend.js",
-  "esm2015": "../esm2015/trend/trend.js",
-  "fesm2015": "../fesm2015/trend.js",
+  "module": "../fesm2015/trend.mjs",
+  "es2020": "../fesm2020/trend.mjs",
+  "esm2020": "../esm2020/trend/trend.mjs",
+  "fesm2020": "../fesm2020/trend.mjs",
+  "fesm2015": "../fesm2015/trend.mjs",
   "typings": "trend.d.ts",
-  "metadata": "trend.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/trend"
 }

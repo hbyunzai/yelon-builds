@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService } from '../i18n/i18n';
 import { Menu } from './interface';
+import * as i0 from "@angular/core";
 /**
  * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
@@ -14,12 +15,14 @@ export declare class MenuService implements OnDestroy {
     private data;
     constructor(i18nSrv: YunzaiI18NService, aclService: ACLService);
     get change(): Observable<Menu[]>;
+    visit<T extends Menu = Menu>(data: T[], callback: (item: T, parentMenum: T | null, depth?: number) => void): void;
     visit(data: Menu[], callback: (item: Menu, parentMenum: Menu | null, depth?: number) => void): void;
     add(items: Menu[]): void;
     private fixItem;
     /**
      * 重置菜单，可能I18N、用户权限变动时需要调用刷新
      */
+    resume<T extends Menu = Menu>(callback?: (item: T, parentMenum: T | null, depth?: number) => void): void;
     resume(callback?: (item: Menu, parentMenum: Menu | null, depth?: number) => void): void;
     /**
      * 加载快捷菜单，加载位置规则如下：
@@ -56,4 +59,6 @@ export declare class MenuService implements OnDestroy {
      */
     setItem(key: string, value: Menu): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MenuService, [{ optional: true; }, { optional: true; }]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<MenuService>;
 }

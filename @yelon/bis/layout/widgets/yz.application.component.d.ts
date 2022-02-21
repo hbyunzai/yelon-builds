@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CacheService } from '@yelon/cache';
 import { _HttpClient } from '@yelon/theme';
 import { YzI18NService } from '../yz.i18n.service';
+import * as i0 from "@angular/core";
 export declare enum TOPIC {
     FULL = 0,
     OWN = 1,
@@ -42,4 +43,6 @@ export declare class YzHeaderApplicationComponent implements OnInit, OnDestroy {
     every(e: HeaderTopic): void;
     onSearch(): void;
     open(topic: HeaderTopic): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzHeaderApplicationComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YzHeaderApplicationComponent, "yz-header-application", never, {}, {}, never, never>;
 }

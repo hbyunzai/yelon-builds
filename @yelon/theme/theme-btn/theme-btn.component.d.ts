@@ -3,6 +3,7 @@ import { Platform } from '@angular/cdk/platform';
 import { InjectionToken, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService } from '@yelon/util/config';
+import * as i0 from "@angular/core";
 export interface ThemeBtnType {
     key: string;
     text: string;
@@ -28,4 +29,6 @@ export declare class ThemeBtnComponent implements OnInit, OnDestroy {
     private updateChartTheme;
     onThemeChange(theme: string): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ThemeBtnComponent, [null, null, null, null, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ThemeBtnComponent, "theme-btn", never, { "types": "types"; "devTips": "devTips"; "deployUrl": "deployUrl"; }, {}, never, never>;
 }

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProjectTarget = exports.getProjectFromWorkspace = exports.removeAllowedCommonJsDependencies = exports.addAllowedCommonJsDependencies = exports.addAssetsToTarget = exports.getProject = exports.getNgYunzaiJson = exports.NG_YUNZAI_JSON = exports.BUILD_TARGET_LINT = exports.BUILD_TARGET_SERVE = exports.BUILD_TARGET_TEST = exports.BUILD_TARGET_BUILD = void 0;
+exports.addStylePreprocessorOptionsToAllProject = exports.getProjectTarget = exports.getProjectFromWorkspace = exports.removeAllowedCommonJsDependencies = exports.addAllowedCommonJsDependencies = exports.addAssetsToTarget = exports.getProject = exports.getNgYunzaiJson = exports.NG_YUNZAI_JSON = exports.BUILD_TARGET_LINT = exports.BUILD_TARGET_SERVE = exports.BUILD_TARGET_TEST = exports.BUILD_TARGET_BUILD = void 0;
 const schematics_1 = require("@angular-devkit/schematics");
 const workspace_1 = require("@schematics/angular/utility/workspace");
 const json_1 = require("./json");
@@ -34,13 +34,13 @@ function getProjectName(workspace, name) {
 function getNgYunzaiJson(tree) {
     if (!tree.exists(exports.NG_YUNZAI_JSON))
         return undefined;
-    return json_1.readJSON(tree, exports.NG_YUNZAI_JSON);
+    return (0, json_1.readJSON)(tree, exports.NG_YUNZAI_JSON);
 }
 exports.getNgYunzaiJson = getNgYunzaiJson;
 function getProject(tree, projectName) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
-        const workspace = yield workspace_1.getWorkspace(tree);
+        const workspace = yield (0, workspace_1.getWorkspace)(tree);
         projectName = getProjectName(workspace, projectName);
         if (!projectName || !workspace.projects.has(projectName)) {
             throw new schematics_1.SchematicsException(`No project named "${projectName}" exists.`);
@@ -52,7 +52,7 @@ function getProject(tree, projectName) {
 }
 exports.getProject = getProject;
 function addAssetsToTarget(resources, behavior, types = [exports.BUILD_TARGET_BUILD, exports.BUILD_TARGET_TEST], projectName, clean = false) {
-    return workspace_1.updateWorkspace((workspace) => __awaiter(this, void 0, void 0, function* () {
+    return (0, workspace_1.updateWorkspace)((workspace) => __awaiter(this, void 0, void 0, function* () {
         const project = getProjectFromWorkspace(workspace, projectName);
         types.forEach(buildTarget => {
             const targetOptions = getProjectTarget(project, buildTarget);
@@ -78,7 +78,7 @@ function addAssetsToTarget(resources, behavior, types = [exports.BUILD_TARGET_BU
 }
 exports.addAssetsToTarget = addAssetsToTarget;
 function addAllowedCommonJsDependencies(items, projectName) {
-    return workspace_1.updateWorkspace((workspace) => __awaiter(this, void 0, void 0, function* () {
+    return (0, workspace_1.updateWorkspace)((workspace) => __awaiter(this, void 0, void 0, function* () {
         const project = getProjectFromWorkspace(workspace, projectName);
         const targetOptions = getProjectTarget(project, exports.BUILD_TARGET_BUILD);
         let list = targetOptions.allowedCommonJsDependencies;
@@ -95,7 +95,7 @@ function addAllowedCommonJsDependencies(items, projectName) {
 }
 exports.addAllowedCommonJsDependencies = addAllowedCommonJsDependencies;
 function removeAllowedCommonJsDependencies(key, projectName) {
-    return workspace_1.updateWorkspace((workspace) => __awaiter(this, void 0, void 0, function* () {
+    return (0, workspace_1.updateWorkspace)((workspace) => __awaiter(this, void 0, void 0, function* () {
         const project = getProjectFromWorkspace(workspace, projectName);
         const targetOptions = getProjectTarget(project, exports.BUILD_TARGET_BUILD);
         const list = targetOptions.allowedCommonJsDependencies;
@@ -127,4 +127,23 @@ function getProjectTarget(project, buildTarget, type = 'options') {
     return options;
 }
 exports.getProjectTarget = getProjectTarget;
+function addStylePreprocessorOptionsToAllProject(workspace) {
+    workspace.projects.forEach(project => {
+        var _a;
+        const build = project.targets.get(exports.BUILD_TARGET_BUILD);
+        if (build == null || build.options == null)
+            return;
+        if (build.options.stylePreprocessorOptions == null) {
+            build.options.stylePreprocessorOptions = {};
+        }
+        let includePaths = (_a = build.options.stylePreprocessorOptions['includePaths']) !== null && _a !== void 0 ? _a : [];
+        if (!Array.isArray(includePaths))
+            includePaths = [];
+        if (includePaths.includes(`node_modules/`))
+            return;
+        includePaths.push(`node_modules/`);
+        build.options.stylePreprocessorOptions['includePaths'] = includePaths;
+    });
+}
+exports.addStylePreprocessorOptionsToAllProject = addStylePreprocessorOptionsToAllProject;
 //# sourceMappingURL=workspace.js.map

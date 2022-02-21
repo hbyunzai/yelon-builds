@@ -68,11 +68,7 @@ function fixAngularJson(context: SchematicContext): Rule {
 
 function upgradeThirdVersion(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    addPackage(
-      tree,
-      [`tslib@^2.2.0`, `ngx-ueditor@^12.0.0`, `ngx-tinymce@^12.0.0`],
-      'dependencies'
-    );
+    addPackage(tree, [`ngx-ueditor@^13.0.0`, `ngx-tinymce@^13.0.0`], 'dependencies');
     logStart(context, `Upgrade third libs (ngx-ueditor, ngx-tinymce) version number`);
   };
 }
@@ -81,7 +77,7 @@ function removeThird(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     // removePackage(tree, [`ngx-countdown`], 'dependencies');
     // removePackage(tree, ['nz-tslint-rules', 'ng-alain-codelyzer'], 'devDependencies');
-    logStart(context, `Remove redundant dependencies: ngx-countdown, ng-alain-codelyzer, nz-tslint-rules`);
+    logStart(context, `Remove redundant dependencies: ngx-countdown, ng-yunzai-codelyzer, nz-tslint-rules`);
   };
 }
 

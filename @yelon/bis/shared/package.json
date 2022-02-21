@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/shared.umd.js",
-  "module": "../fesm2015/shared.js",
-  "es2015": "../fesm2015/shared.js",
-  "esm2015": "../esm2015/shared/shared.js",
-  "fesm2015": "../fesm2015/shared.js",
+  "module": "../fesm2015/shared.mjs",
+  "es2020": "../fesm2020/shared.mjs",
+  "esm2020": "../esm2020/shared/shared.mjs",
+  "fesm2020": "../fesm2020/shared.mjs",
+  "fesm2015": "../fesm2015/shared.mjs",
   "typings": "shared.d.ts",
-  "metadata": "shared.metadata.json",
   "sideEffects": false,
   "name": "@yelon/bis/shared"
 }

@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-util-pipes.umd.js",
-  "module": "../fesm2015/yelon-util-pipes.js",
-  "es2015": "../fesm2015/yelon-util-pipes.js",
-  "esm2015": "../esm2015/pipes/yelon-util-pipes.js",
-  "fesm2015": "../fesm2015/yelon-util-pipes.js",
-  "typings": "yelon-util-pipes.d.ts",
-  "metadata": "yelon-util-pipes.metadata.json",
+  "module": "../fesm2015/pipes.mjs",
+  "es2020": "../fesm2020/pipes.mjs",
+  "esm2020": "../esm2020/pipes/pipes.mjs",
+  "fesm2020": "../fesm2020/pipes.mjs",
+  "fesm2015": "../fesm2015/pipes.mjs",
+  "typings": "pipes.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/pipes"
 }

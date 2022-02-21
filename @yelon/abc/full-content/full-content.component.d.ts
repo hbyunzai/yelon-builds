@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 import { FullContentService } from './full-content.service';
+import * as i0 from "@angular/core";
 export declare class FullContentComponent implements AfterViewInit, OnInit, OnChanges, OnDestroy {
     private el;
     private cdr;
@@ -14,12 +15,12 @@ export declare class FullContentComponent implements AfterViewInit, OnInit, OnCh
     static ngAcceptInputType_padding: NumberInput;
     private bodyEl;
     private inited;
-    private srv$;
-    private route$;
+    private srv$?;
+    private route$?;
     private id;
     private scroll$;
     _height: number;
-    fullscreen: boolean;
+    fullscreen?: boolean;
     hideTitle: boolean;
     padding: number;
     readonly fullscreenChange: EventEmitter<boolean>;
@@ -33,4 +34,6 @@ export declare class FullContentComponent implements AfterViewInit, OnInit, OnCh
     ngAfterViewInit(): void;
     ngOnChanges(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<FullContentComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<FullContentComponent, "full-content", ["fullContent"], { "fullscreen": "fullscreen"; "hideTitle": "hideTitle"; "padding": "padding"; }, { "fullscreenChange": "fullscreenChange"; }, never, ["*"]>;
 }

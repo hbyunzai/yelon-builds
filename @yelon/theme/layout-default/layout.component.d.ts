@@ -6,6 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
+import * as i0 from "@angular/core";
 export declare class LayoutDefaultComponent implements OnInit, OnDestroy {
     private layoutService;
     private msgSrv;
@@ -17,9 +18,9 @@ export declare class LayoutDefaultComponent implements OnInit, OnDestroy {
     showHeader: boolean;
     showSidebar: boolean;
     options: LayoutDefaultOptions;
-    asideUser: TemplateRef<void>;
-    nav: TemplateRef<void>;
-    content: TemplateRef<void>;
+    asideUser: TemplateRef<void> | null;
+    nav: TemplateRef<void> | null;
+    content: TemplateRef<void> | null;
     customError?: string | null;
     private destroy$;
     isFetching: boolean;
@@ -28,4 +29,6 @@ export declare class LayoutDefaultComponent implements OnInit, OnDestroy {
     private setClass;
     ngOnInit(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LayoutDefaultComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<LayoutDefaultComponent, "layout-default", ["layoutDefault"], { "options": "options"; "asideUser": "asideUser"; "nav": "nav"; "content": "content"; "customError": "customError"; }, {}, ["headerItems"], ["*"]>;
 }

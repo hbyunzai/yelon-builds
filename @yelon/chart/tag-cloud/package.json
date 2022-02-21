@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/tag-cloud.umd.js",
-  "module": "../fesm2015/tag-cloud.js",
-  "es2015": "../fesm2015/tag-cloud.js",
-  "esm2015": "../esm2015/tag-cloud/tag-cloud.js",
-  "fesm2015": "../fesm2015/tag-cloud.js",
+  "module": "../fesm2015/tag-cloud.mjs",
+  "es2020": "../fesm2020/tag-cloud.mjs",
+  "esm2020": "../esm2020/tag-cloud/tag-cloud.mjs",
+  "fesm2020": "../fesm2020/tag-cloud.mjs",
+  "fesm2015": "../fesm2015/tag-cloud.mjs",
   "typings": "tag-cloud.d.ts",
-  "metadata": "tag-cloud.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/tag-cloud"
 }

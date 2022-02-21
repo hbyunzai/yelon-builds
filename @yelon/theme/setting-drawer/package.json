@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/setting-drawer.umd.js",
-  "module": "../fesm2015/setting-drawer.js",
-  "es2015": "../fesm2015/setting-drawer.js",
-  "esm2015": "../esm2015/setting-drawer/setting-drawer.js",
-  "fesm2015": "../fesm2015/setting-drawer.js",
+  "module": "../fesm2015/setting-drawer.mjs",
+  "es2020": "../fesm2020/setting-drawer.mjs",
+  "esm2020": "../esm2020/setting-drawer/setting-drawer.mjs",
+  "fesm2020": "../fesm2020/setting-drawer.mjs",
+  "fesm2015": "../fesm2015/setting-drawer.mjs",
   "typings": "setting-drawer.d.ts",
-  "metadata": "setting-drawer.metadata.json",
   "sideEffects": false,
   "name": "@yelon/theme/setting-drawer"
 }

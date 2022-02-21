@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/edit.umd.js",
-  "module": "../fesm2015/edit.js",
-  "es2015": "../fesm2015/edit.js",
-  "esm2015": "../esm2015/se/edit.js",
-  "fesm2015": "../fesm2015/edit.js",
-  "typings": "edit.d.ts",
-  "metadata": "edit.metadata.json",
+  "module": "../fesm2015/se.mjs",
+  "es2020": "../fesm2020/se.mjs",
+  "esm2020": "../esm2020/se/se.mjs",
+  "fesm2020": "../fesm2020/se.mjs",
+  "fesm2015": "../fesm2015/se.mjs",
+  "typings": "se.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/se"
 }

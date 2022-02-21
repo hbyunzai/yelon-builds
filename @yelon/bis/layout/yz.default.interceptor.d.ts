@@ -1,6 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injector } from '@angular/core';
 import { Observable } from 'rxjs';
+import * as i0 from "@angular/core";
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
  */
@@ -23,4 +24,6 @@ export declare class YzDefaultInterceptor implements HttpInterceptor {
     private getAdditionalHeaders;
     private handleData;
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzDefaultInterceptor, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<YzDefaultInterceptor>;
 }

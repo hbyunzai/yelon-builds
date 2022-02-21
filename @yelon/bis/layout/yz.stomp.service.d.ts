@@ -7,6 +7,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CacheService } from '@yelon/cache';
 import { YunzaiBusinessConfig, YunzaiConfigService, YunzaiStompConfig } from '@yelon/util';
+import * as i0 from "@angular/core";
 export interface StompMessage {
     title?: string;
     content?: string;
@@ -24,9 +25,9 @@ export declare class YzStompService {
     private cache;
     private injector;
     private notification;
-    config: YunzaiStompConfig;
-    bisConfig: YunzaiBusinessConfig;
-    rxStomp: RxStomp;
+    config: YunzaiStompConfig | null;
+    bisConfig: YunzaiBusinessConfig | null;
+    rxStomp: RxStomp | null;
     user: NzSafeAny;
     subs: Subscription[];
     constructor(csr: YunzaiConfigService, cache: CacheService, injector: Injector, notification: NzNotificationService);
@@ -36,4 +37,6 @@ export declare class YzStompService {
     unListen(): void;
     publish(parameters: IRxStompPublishParams): void;
     watch(destination: string, headers?: StompHeaders): Observable<IMessage>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzStompService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<YzStompService>;
 }

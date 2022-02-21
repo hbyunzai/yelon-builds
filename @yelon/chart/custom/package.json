@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/g2Custom.umd.js",
-  "module": "../fesm2015/g2Custom.js",
-  "es2015": "../fesm2015/g2Custom.js",
-  "esm2015": "../esm2015/custom/g2Custom.js",
-  "fesm2015": "../fesm2015/g2Custom.js",
-  "typings": "g2Custom.d.ts",
-  "metadata": "g2Custom.metadata.json",
+  "module": "../fesm2015/custom.mjs",
+  "es2020": "../fesm2020/custom.mjs",
+  "esm2020": "../esm2020/custom/custom.mjs",
+  "fesm2020": "../fesm2020/custom.mjs",
+  "fesm2015": "../fesm2015/custom.mjs",
+  "typings": "custom.d.ts",
   "sideEffects": false,
   "name": "@yelon/chart/custom"
 }

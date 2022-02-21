@@ -1,7 +1,8 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnChanges, OnDestroy, SimpleChange, SimpleChanges, TemplateRef, TrackByFunction } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { YunzaiI18NService, YelonLocaleService, LocaleData } from '@yelon/theme';
+import { YunzaiI18NService, YelonLocaleService, DrawerHelper, LocaleData, ModalHelper } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -11,8 +12,9 @@ import { NzTableComponent } from 'ng-zorro-antd/table';
 import { STColumnSource } from './st-column-source';
 import { STDataSource } from './st-data-source';
 import { STExport } from './st-export';
-import { STChange, STClickRowClassName, STColumn, STColumnSelection, STContextmenuFn, STContextmenuItem, STCustomRequestOptions, STData, STError, STExportOptions, STLoadOptions, STPage, STReq, STRes, STResetColumnsOption, STResizable, STRowClassName, STSingleSort, STStatisticalResults, STWidthMode } from './st.interfaces';
+import { STChange, STClickRowClassName, STColumn, STColumnButton, STColumnSelection, STContextmenuFn, STContextmenuItem, STCustomRequestOptions, STData, STError, STExportOptions, STLoadOptions, STPage, STReq, STRes, STResetColumnsOption, STResizable, STRowClassName, STSingleSort, STStatisticalResults, STWidthMode } from './st.interfaces';
 import { _STColumn, _STHeader, _STTdNotify } from './st.types';
+import * as i0 from "@angular/core";
 export declare class STComponent implements AfterViewInit, OnChanges, OnDestroy {
     private cdr;
     private el;
@@ -36,7 +38,7 @@ export declare class STComponent implements AfterViewInit, OnChanges, OnDestroy 
     static ngAcceptInputType_virtualMaxBufferPx: NumberInput;
     static ngAcceptInputType_virtualMinBufferPx: NumberInput;
     private destroy$;
-    private data$;
+    private data$?;
     private totalTpl;
     private cog;
     private _req;
@@ -73,23 +75,23 @@ export declare class STComponent implements AfterViewInit, OnChanges, OnDestroy 
     total: number;
     loading: boolean | null;
     loadingDelay: number;
-    loadingIndicator: TemplateRef<void>;
+    loadingIndicator: TemplateRef<void> | null;
     bordered: boolean;
     size: 'small' | 'middle' | 'default';
     scroll: {
-        y?: string;
-        x?: string;
+        x?: string | null;
+        y?: string | null;
     };
-    singleSort: STSingleSort;
+    singleSort?: STSingleSort;
     private _multiSort?;
     get multiSort(): NzSafeAny;
     set multiSort(value: NzSafeAny);
-    rowClassName: STRowClassName;
+    rowClassName?: STRowClassName;
     clickRowClassName?: STClickRowClassName | null;
     set widthMode(value: STWidthMode);
     get widthMode(): STWidthMode;
     set widthConfig(val: string[]);
-    private _resizable;
+    private _resizable?;
     set resizable(val: STResizable | boolean | string);
     header?: string | TemplateRef<void> | null;
     showHeader: boolean;
@@ -101,10 +103,10 @@ export declare class STComponent implements AfterViewInit, OnChanges, OnDestroy 
     expand: TemplateRef<{
         $implicit: NzSafeAny;
         column: STColumn;
-    }>;
+    }> | null;
     noResult?: string | TemplateRef<void> | null;
     responsive: boolean;
-    responsiveHideHeaderFooter: boolean;
+    responsiveHideHeaderFooter?: boolean;
     readonly error: EventEmitter<STError>;
     readonly change: EventEmitter<STChange<any>>;
     virtualScroll: boolean;
@@ -235,4 +237,29 @@ export declare class STComponent implements AfterViewInit, OnChanges, OnDestroy 
         [P in keyof this]?: SimpleChange;
     } & SimpleChanges): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<STComponent, [{ optional: true; }, null, null, null, null, null, null, null, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<STComponent, "st", ["st"], { "req": "req"; "res": "res"; "page": "page"; "data": "data"; "columns": "columns"; "contextmenu": "contextmenu"; "ps": "ps"; "pi": "pi"; "total": "total"; "loading": "loading"; "loadingDelay": "loadingDelay"; "loadingIndicator": "loadingIndicator"; "bordered": "bordered"; "size": "size"; "scroll": "scroll"; "singleSort": "singleSort"; "multiSort": "multiSort"; "rowClassName": "rowClassName"; "clickRowClassName": "clickRowClassName"; "widthMode": "widthMode"; "widthConfig": "widthConfig"; "resizable": "resizable"; "header": "header"; "showHeader": "showHeader"; "footer": "footer"; "bodyHeader": "bodyHeader"; "body": "body"; "expandRowByClick": "expandRowByClick"; "expandAccordion": "expandAccordion"; "expand": "expand"; "noResult": "noResult"; "responsive": "responsive"; "responsiveHideHeaderFooter": "responsiveHideHeaderFooter"; "virtualScroll": "virtualScroll"; "virtualItemSize": "virtualItemSize"; "virtualMaxBufferPx": "virtualMaxBufferPx"; "virtualMinBufferPx": "virtualMinBufferPx"; "customRequest": "customRequest"; "virtualForTrackBy": "virtualForTrackBy"; }, { "error": "error"; "change": "change"; }, never, never>;
+}
+export declare class STTdComponent {
+    private stComp;
+    private router;
+    private modalHelper;
+    private drawerHelper;
+    c: _STColumn;
+    cIdx: number;
+    data: STData[];
+    i: STData;
+    index: number;
+    readonly n: EventEmitter<_STTdNotify>;
+    private get routerState();
+    constructor(stComp: STComponent, router: Router, modalHelper: ModalHelper, drawerHelper: DrawerHelper);
+    private report;
+    _checkbox(value: boolean): void;
+    _radio(): void;
+    _link(e: Event): boolean;
+    _stopPropagation(ev: Event): void;
+    _btn(btn: STColumnButton, ev?: Event): void;
+    private btnCallback;
+    static ɵfac: i0.ɵɵFactoryDeclaration<STTdComponent, [{ host: true; }, null, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<STTdComponent, "st-td", never, { "c": "c"; "cIdx": "cIdx"; "data": "data"; "i": "i"; "index": "index"; }, { "n": "n"; }, never, never>;
 }

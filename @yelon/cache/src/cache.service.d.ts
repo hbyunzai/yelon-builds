@@ -1,19 +1,22 @@
+import { Platform } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { CacheNotifyResult, ICacheStore } from './interface';
+import * as i0 from "@angular/core";
 export declare class CacheService implements OnDestroy {
     private store;
     private http;
+    private platform;
     private readonly memory;
     private readonly notifyBuffer;
     private meta;
     private freqTick;
     private freqTime;
     private cog;
-    constructor(cogSrv: YunzaiConfigService, store: ICacheStore, http: HttpClient);
+    constructor(cogSrv: YunzaiConfigService, store: ICacheStore, http: HttpClient, platform: Platform);
     private deepGet;
     private pushMeta;
     private removeMeta;
@@ -28,6 +31,7 @@ export declare class CacheService implements OnDestroy {
     set<T>(key: string, data: Observable<T>, options?: {
         type?: 's';
         expire?: number;
+        emitNotify?: boolean;
     }): Observable<T>;
     /**
      * Persistent cached `Observable` object, for example:
@@ -37,6 +41,7 @@ export declare class CacheService implements OnDestroy {
     set(key: string, data: Observable<NzSafeAny>, options?: {
         type?: 's';
         expire?: number;
+        emitNotify?: boolean;
     }): Observable<NzSafeAny>;
     /**
      * Persistent cached simple object, for example:
@@ -46,6 +51,7 @@ export declare class CacheService implements OnDestroy {
     set(key: string, data: unknown, options?: {
         type?: 's';
         expire?: number;
+        emitNotify?: boolean;
     }): void;
     /**
      * Persistent cached simple object and specify storage type, for example caching in memory:
@@ -55,6 +61,7 @@ export declare class CacheService implements OnDestroy {
     set(key: string, data: unknown, options: {
         type: 'm' | 's';
         expire?: number;
+        emitNotify?: boolean;
     }): void;
     private save;
     /** 获取缓存数据，若 `key` 不存在则 `key` 作为HTTP请求缓存后返回 */
@@ -62,18 +69,21 @@ export declare class CacheService implements OnDestroy {
         mode: 'promise';
         type?: 'm' | 's';
         expire?: number;
+        emitNotify?: boolean;
     }): Observable<T>;
     /** 获取缓存数据，若 `key` 不存在则 `key` 作为HTTP请求缓存后返回 */
     get(key: string, options?: {
         mode: 'promise';
         type?: 'm' | 's';
         expire?: number;
+        emitNotify?: boolean;
     }): Observable<NzSafeAny>;
     /** 获取缓存数据，若 `key` 不存在或已过期则返回 null */
     get(key: string, options: {
         mode: 'none';
         type?: 'm' | 's';
         expire?: number;
+        emitNotify?: boolean;
     }): NzSafeAny;
     /** 获取缓存数据，若 `key` 不存在或已过期则返回 null */
     getNone<T>(key: string): T;
@@ -83,6 +93,7 @@ export declare class CacheService implements OnDestroy {
     tryGet<T>(key: string, data: Observable<T>, options?: {
         type?: 's';
         expire?: number;
+        emitNotify?: boolean;
     }): Observable<T>;
     /**
      * 获取缓存，若不存在则设置持久化缓存 `Observable` 对象
@@ -90,6 +101,7 @@ export declare class CacheService implements OnDestroy {
     tryGet(key: string, data: Observable<NzSafeAny>, options?: {
         type?: 's';
         expire?: number;
+        emitNotify?: boolean;
     }): Observable<NzSafeAny>;
     /**
      * 获取缓存，若不存在则设置持久化缓存基础对象
@@ -97,6 +109,7 @@ export declare class CacheService implements OnDestroy {
     tryGet(key: string, data: unknown, options?: {
         type?: 's';
         expire?: number;
+        emitNotify?: boolean;
     }): NzSafeAny;
     /**
      * 获取缓存，若不存在则设置指定缓存类型进行缓存对象
@@ -104,6 +117,7 @@ export declare class CacheService implements OnDestroy {
     tryGet(key: string, data: unknown, options: {
         type: 'm' | 's';
         expire?: number;
+        emitNotify?: boolean;
     }): NzSafeAny;
     /** 是否缓存 `key` */
     has(key: string): boolean;
@@ -137,4 +151,6 @@ export declare class CacheService implements OnDestroy {
     /** 清空所有 `key` 的监听 */
     clearNotify(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CacheService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<CacheService>;
 }

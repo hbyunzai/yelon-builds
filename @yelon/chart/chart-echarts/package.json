@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-chart-chart-echarts.umd.js",
-  "module": "../fesm2015/yelon-chart-chart-echarts.js",
-  "es2015": "../fesm2015/yelon-chart-chart-echarts.js",
-  "esm2015": "../esm2015/chart-echarts/yelon-chart-chart-echarts.js",
-  "fesm2015": "../fesm2015/yelon-chart-chart-echarts.js",
-  "typings": "yelon-chart-chart-echarts.d.ts",
-  "metadata": "yelon-chart-chart-echarts.metadata.json",
+  "module": "../fesm2015/chart-echarts.mjs",
+  "es2020": "../fesm2020/chart-echarts.mjs",
+  "esm2020": "../esm2020/chart-echarts/chart-echarts.mjs",
+  "fesm2020": "../fesm2020/chart-echarts.mjs",
+  "fesm2015": "../fesm2015/chart-echarts.mjs",
+  "typings": "chart-echarts.d.ts",
   "sideEffects": false,
   "name": "@yelon/chart/chart-echarts"
 }

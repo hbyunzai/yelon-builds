@@ -5,6 +5,7 @@ import { NzConfigService } from 'ng-zorro-antd/core/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { SettingsService } from '../settings/settings.service';
+import * as i0 from "@angular/core";
 export declare const HTML_DIR = "dir";
 export declare const RTL_DIRECTION = "direction";
 export declare const RTL_NZ_COMPONENTS: string[];
@@ -47,4 +48,6 @@ export declare class RTLService {
     toggle(): void;
     private updateHtml;
     private updateLibConfig;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RTLService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RTLService>;
 }

@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/single-bar.umd.js",
-  "module": "../fesm2015/single-bar.js",
-  "es2015": "../fesm2015/single-bar.js",
-  "esm2015": "../esm2015/single-bar/single-bar.js",
-  "fesm2015": "../fesm2015/single-bar.js",
+  "module": "../fesm2015/single-bar.mjs",
+  "es2020": "../fesm2020/single-bar.mjs",
+  "esm2020": "../esm2020/single-bar/single-bar.mjs",
+  "fesm2020": "../fesm2020/single-bar.mjs",
+  "fesm2015": "../fesm2015/single-bar.mjs",
   "typings": "single-bar.d.ts",
-  "metadata": "single-bar.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/single-bar"
 }

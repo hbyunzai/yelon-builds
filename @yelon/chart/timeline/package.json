@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/timeline.umd.js",
-  "module": "../fesm2015/timeline.js",
-  "es2015": "../fesm2015/timeline.js",
-  "esm2015": "../esm2015/timeline/timeline.js",
-  "fesm2015": "../fesm2015/timeline.js",
+  "module": "../fesm2015/timeline.mjs",
+  "es2020": "../fesm2020/timeline.mjs",
+  "esm2020": "../esm2020/timeline/timeline.mjs",
+  "fesm2020": "../fesm2020/timeline.mjs",
+  "fesm2015": "../fesm2015/timeline.mjs",
   "typings": "timeline.d.ts",
-  "metadata": "timeline.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/timeline"
 }

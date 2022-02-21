@@ -3,6 +3,7 @@ import type { NgClassType } from 'ng-zorro-antd/core/types';
 import { YelonLocaleService, LocaleData } from '@yelon/theme';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
+import * as i0 from "@angular/core";
 export declare class NoticeIconComponent implements OnInit, OnChanges, OnDestroy {
     private i18n;
     private cdr;
@@ -12,7 +13,7 @@ export declare class NoticeIconComponent implements OnInit, OnChanges, OnDestroy
     private i18n$;
     locale: LocaleData;
     data: NoticeItem[];
-    count: number;
+    count?: number;
     loading: boolean;
     popoverVisible: boolean;
     btnClass?: NgClassType;
@@ -27,4 +28,6 @@ export declare class NoticeIconComponent implements OnInit, OnChanges, OnDestroy
     ngOnInit(): void;
     ngOnChanges(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NoticeIconComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NoticeIconComponent, "notice-icon", ["noticeIcon"], { "data": "data"; "count": "count"; "loading": "loading"; "popoverVisible": "popoverVisible"; "btnClass": "btnClass"; "btnIconClass": "btnIconClass"; }, { "select": "select"; "clear": "clear"; "popoverVisibleChange": "popoverVisibleChange"; }, never, never>;
 }

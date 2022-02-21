@@ -1,7 +1,8 @@
 import { SimpleChanges } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { G2BaseComponent } from '@yelon/chart/core';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import * as i0 from "@angular/core";
 export declare class G2SingleBarComponent extends G2BaseComponent {
     static ngAcceptInputType_height: NumberInput;
     static ngAcceptInputType_barSize: NumberInput;
@@ -17,7 +18,7 @@ export declare class G2SingleBarComponent extends G2BaseComponent {
     max: number;
     value: number;
     line: boolean;
-    format: (value: number, item: NzSafeAny, index: number) => string;
+    format?: (value: number, item: NzSafeAny, index: number) => string;
     padding: number | number[] | 'auto';
     textStyle: {
         [key: string]: NzSafeAny;
@@ -25,4 +26,6 @@ export declare class G2SingleBarComponent extends G2BaseComponent {
     install(): void;
     onlyChangeData: (changes: SimpleChanges) => boolean;
     changeData(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<G2SingleBarComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<G2SingleBarComponent, "g2-single-bar", ["g2SingleBar"], { "plusColor": "plusColor"; "minusColor": "minusColor"; "height": "height"; "barSize": "barSize"; "min": "min"; "max": "max"; "value": "value"; "line": "line"; "format": "format"; "padding": "padding"; "textStyle": "textStyle"; }, {}, never, never>;
 }

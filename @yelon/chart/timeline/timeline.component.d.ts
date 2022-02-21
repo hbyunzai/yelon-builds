@@ -1,8 +1,9 @@
 import { EventEmitter, SimpleChanges, TemplateRef } from '@angular/core';
 import type { Event } from '@antv/g2';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { G2BaseComponent, G2Time } from '@yelon/chart/core';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import * as i0 from "@angular/core";
 export interface G2TimelineData {
     /**
      * 时间值
@@ -42,10 +43,10 @@ export declare class G2TimelineComponent extends G2BaseComponent {
     static ngAcceptInputType_maxAxis: NumberInput;
     static ngAcceptInputType_borderWidth: NumberInput;
     static ngAcceptInputType_slider: BooleanInput;
-    title: string | TemplateRef<void>;
+    title?: string | TemplateRef<void> | null;
     maxAxis: number;
     data: G2TimelineData[];
-    titleMap: G2TimelineMap;
+    titleMap?: G2TimelineMap | null;
     colorMap: G2TimelineMap;
     mask: string;
     maskSlider: string;
@@ -58,4 +59,6 @@ export declare class G2TimelineComponent extends G2BaseComponent {
     onlyChangeData: (changes: SimpleChanges) => boolean;
     install(): void;
     changeData(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<G2TimelineComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<G2TimelineComponent, "g2-timeline", ["g2Timeline"], { "title": "title"; "maxAxis": "maxAxis"; "data": "data"; "titleMap": "titleMap"; "colorMap": "colorMap"; "mask": "mask"; "maskSlider": "maskSlider"; "position": "position"; "height": "height"; "padding": "padding"; "borderWidth": "borderWidth"; "slider": "slider"; }, { "clickItem": "clickItem"; }, never, never>;
 }

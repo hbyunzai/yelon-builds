@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/pageHeader.umd.js",
-  "module": "../fesm2015/pageHeader.js",
-  "es2015": "../fesm2015/pageHeader.js",
-  "esm2015": "../esm2015/page-header/pageHeader.js",
-  "fesm2015": "../fesm2015/pageHeader.js",
-  "typings": "pageHeader.d.ts",
-  "metadata": "pageHeader.metadata.json",
+  "module": "../fesm2015/page-header.mjs",
+  "es2020": "../fesm2020/page-header.mjs",
+  "esm2020": "../esm2020/page-header/page-header.mjs",
+  "fesm2020": "../fesm2020/page-header.mjs",
+  "fesm2015": "../fesm2015/page-header.mjs",
+  "typings": "page-header.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/page-header"
 }

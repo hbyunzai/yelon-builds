@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/grid.umd.js",
-  "module": "../fesm2015/grid.js",
-  "es2015": "../fesm2015/grid.js",
-  "esm2015": "../esm2015/sg/grid.js",
-  "fesm2015": "../fesm2015/grid.js",
-  "typings": "grid.d.ts",
-  "metadata": "grid.metadata.json",
+  "module": "../fesm2015/sg.mjs",
+  "es2020": "../fesm2020/sg.mjs",
+  "esm2020": "../esm2020/sg/sg.mjs",
+  "fesm2020": "../fesm2020/sg.mjs",
+  "fesm2015": "../fesm2015/sg.mjs",
+  "typings": "sg.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/sg"
 }

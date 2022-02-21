@@ -1,22 +1,170 @@
 {
   "name": "@yelon/chart",
-  "version": "12.0.19-942b8d4",
+  "version": "13.2.0",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "@antv/data-set": "^0.11.8",
-    "@antv/g2": "^4.1.24",
-    "echarts": "^5.1.2",
-    "@yelon/util": "^12.0.19-942b8d4",
-    "@yelon/theme": "^12.0.19-942b8d4",
-    "tslib": "^2.2.0"
+    "@antv/g2": "^4.1.35",
+    "echarts": "^5.2.2",
+    "@yelon/util": "^13.2.0",
+    "@yelon/theme": "^13.2.0",
+    "tslib": "^2.3.0"
   },
-  "main": "bundles/chart.umd.js",
-  "module": "fesm2015/chart.js",
-  "es2015": "fesm2015/chart.js",
-  "esm2015": "esm2015/chart.js",
-  "fesm2015": "fesm2015/chart.js",
+  "module": "fesm2015/chart.mjs",
+  "es2020": "fesm2020/chart.mjs",
+  "esm2020": "esm2020/chart.mjs",
+  "fesm2020": "fesm2020/chart.mjs",
+  "fesm2015": "fesm2015/chart.mjs",
   "typings": "chart.d.ts",
-  "metadata": "chart.metadata.json",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./chart.d.ts",
+      "esm2020": "./esm2020/chart.mjs",
+      "es2020": "./fesm2020/chart.mjs",
+      "es2015": "./fesm2015/chart.mjs",
+      "node": "./fesm2015/chart.mjs",
+      "default": "./fesm2020/chart.mjs"
+    },
+    "./bar": {
+      "types": "./bar/bar.d.ts",
+      "esm2020": "./esm2020/bar/bar.mjs",
+      "es2020": "./fesm2020/bar.mjs",
+      "es2015": "./fesm2015/bar.mjs",
+      "node": "./fesm2015/bar.mjs",
+      "default": "./fesm2020/bar.mjs"
+    },
+    "./card": {
+      "types": "./card/card.d.ts",
+      "esm2020": "./esm2020/card/card.mjs",
+      "es2020": "./fesm2020/card.mjs",
+      "es2015": "./fesm2015/card.mjs",
+      "node": "./fesm2015/card.mjs",
+      "default": "./fesm2020/card.mjs"
+    },
+    "./chart-echarts": {
+      "types": "./chart-echarts/chart-echarts.d.ts",
+      "esm2020": "./esm2020/chart-echarts/chart-echarts.mjs",
+      "es2020": "./fesm2020/chart-echarts.mjs",
+      "es2015": "./fesm2015/chart-echarts.mjs",
+      "node": "./fesm2015/chart-echarts.mjs",
+      "default": "./fesm2020/chart-echarts.mjs"
+    },
+    "./core": {
+      "types": "./core/core.d.ts",
+      "esm2020": "./esm2020/core/core.mjs",
+      "es2020": "./fesm2020/core.mjs",
+      "es2015": "./fesm2015/core.mjs",
+      "node": "./fesm2015/core.mjs",
+      "default": "./fesm2020/core.mjs"
+    },
+    "./custom": {
+      "types": "./custom/custom.d.ts",
+      "esm2020": "./esm2020/custom/custom.mjs",
+      "es2020": "./fesm2020/custom.mjs",
+      "es2015": "./fesm2015/custom.mjs",
+      "node": "./fesm2015/custom.mjs",
+      "default": "./fesm2020/custom.mjs"
+    },
+    "./gauge": {
+      "types": "./gauge/gauge.d.ts",
+      "esm2020": "./esm2020/gauge/gauge.mjs",
+      "es2020": "./fesm2020/gauge.mjs",
+      "es2015": "./fesm2015/gauge.mjs",
+      "node": "./fesm2015/gauge.mjs",
+      "default": "./fesm2020/gauge.mjs"
+    },
+    "./mini-area": {
+      "types": "./mini-area/mini-area.d.ts",
+      "esm2020": "./esm2020/mini-area/mini-area.mjs",
+      "es2020": "./fesm2020/mini-area.mjs",
+      "es2015": "./fesm2015/mini-area.mjs",
+      "node": "./fesm2015/mini-area.mjs",
+      "default": "./fesm2020/mini-area.mjs"
+    },
+    "./mini-bar": {
+      "types": "./mini-bar/mini-bar.d.ts",
+      "esm2020": "./esm2020/mini-bar/mini-bar.mjs",
+      "es2020": "./fesm2020/mini-bar.mjs",
+      "es2015": "./fesm2015/mini-bar.mjs",
+      "node": "./fesm2015/mini-bar.mjs",
+      "default": "./fesm2020/mini-bar.mjs"
+    },
+    "./mini-progress": {
+      "types": "./mini-progress/mini-progress.d.ts",
+      "esm2020": "./esm2020/mini-progress/mini-progress.mjs",
+      "es2020": "./fesm2020/mini-progress.mjs",
+      "es2015": "./fesm2015/mini-progress.mjs",
+      "node": "./fesm2015/mini-progress.mjs",
+      "default": "./fesm2020/mini-progress.mjs"
+    },
+    "./number-info": {
+      "types": "./number-info/number-info.d.ts",
+      "esm2020": "./esm2020/number-info/number-info.mjs",
+      "es2020": "./fesm2020/number-info.mjs",
+      "es2015": "./fesm2015/number-info.mjs",
+      "node": "./fesm2015/number-info.mjs",
+      "default": "./fesm2020/number-info.mjs"
+    },
+    "./pie": {
+      "types": "./pie/pie.d.ts",
+      "esm2020": "./esm2020/pie/pie.mjs",
+      "es2020": "./fesm2020/pie.mjs",
+      "es2015": "./fesm2015/pie.mjs",
+      "node": "./fesm2015/pie.mjs",
+      "default": "./fesm2020/pie.mjs"
+    },
+    "./radar": {
+      "types": "./radar/radar.d.ts",
+      "esm2020": "./esm2020/radar/radar.mjs",
+      "es2020": "./fesm2020/radar.mjs",
+      "es2015": "./fesm2015/radar.mjs",
+      "node": "./fesm2015/radar.mjs",
+      "default": "./fesm2020/radar.mjs"
+    },
+    "./single-bar": {
+      "types": "./single-bar/single-bar.d.ts",
+      "esm2020": "./esm2020/single-bar/single-bar.mjs",
+      "es2020": "./fesm2020/single-bar.mjs",
+      "es2015": "./fesm2015/single-bar.mjs",
+      "node": "./fesm2015/single-bar.mjs",
+      "default": "./fesm2020/single-bar.mjs"
+    },
+    "./tag-cloud": {
+      "types": "./tag-cloud/tag-cloud.d.ts",
+      "esm2020": "./esm2020/tag-cloud/tag-cloud.mjs",
+      "es2020": "./fesm2020/tag-cloud.mjs",
+      "es2015": "./fesm2015/tag-cloud.mjs",
+      "node": "./fesm2015/tag-cloud.mjs",
+      "default": "./fesm2020/tag-cloud.mjs"
+    },
+    "./timeline": {
+      "types": "./timeline/timeline.d.ts",
+      "esm2020": "./esm2020/timeline/timeline.mjs",
+      "es2020": "./fesm2020/timeline.mjs",
+      "es2015": "./fesm2015/timeline.mjs",
+      "node": "./fesm2015/timeline.mjs",
+      "default": "./fesm2020/timeline.mjs"
+    },
+    "./trend": {
+      "types": "./trend/trend.d.ts",
+      "esm2020": "./esm2020/trend/trend.mjs",
+      "es2020": "./fesm2020/trend.mjs",
+      "es2015": "./fesm2015/trend.mjs",
+      "node": "./fesm2015/trend.mjs",
+      "default": "./fesm2020/trend.mjs"
+    },
+    "./water-wave": {
+      "types": "./water-wave/water-wave.d.ts",
+      "esm2020": "./esm2020/water-wave/water-wave.mjs",
+      "es2020": "./fesm2020/water-wave.mjs",
+      "es2015": "./fesm2015/water-wave.mjs",
+      "node": "./fesm2015/water-wave.mjs",
+      "default": "./fesm2020/water-wave.mjs"
+    }
+  },
   "sideEffects": false
 }

@@ -4,6 +4,7 @@ import { YelonLocaleService, SettingsService, _HttpClient, YunzaiI18nBaseService
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
+import * as i0 from "@angular/core";
 export declare class YzI18NService extends YunzaiI18nBaseService {
     private http;
     private settings;
@@ -21,4 +22,6 @@ export declare class YzI18NService extends YunzaiI18nBaseService {
         text: string;
         abbr: string;
     }>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YzI18NService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<YzI18NService>;
 }

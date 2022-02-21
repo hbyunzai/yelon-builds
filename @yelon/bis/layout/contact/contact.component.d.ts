@@ -4,6 +4,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTreeNodeOptions, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 import { STComponent } from '@yelon/abc/st';
 import { ContactService } from './contact.service';
+import * as i0 from "@angular/core";
 export declare class ContactComponent implements OnInit, OnDestroy, AfterViewInit {
     private contact;
     private changeDetectorRef;
@@ -26,7 +27,7 @@ export declare class ContactComponent implements OnInit, OnDestroy, AfterViewIni
     nzDeptClass: boolean;
     nzDeptClassHistory: boolean;
     nzDeptGrade: boolean;
-    nzDeptGradeID: string;
+    nzDeptGradeID: string | null;
     /**
      * 角色树
      */
@@ -163,4 +164,6 @@ export declare class ContactComponent implements OnInit, OnDestroy, AfterViewIni
      * 销毁函数
      */
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ContactComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ContactComponent, "contact", never, { "nzTabsetSearch": "nzTabsetSearch"; "nzTabsetLoading": "nzTabsetLoading"; "nzExpandAll": "nzExpandAll"; "nzDepts": "nzDepts"; "nzDeptTreeVirtualHeight": "nzDeptTreeVirtualHeight"; "nzDeptClass": "nzDeptClass"; "nzDeptClassHistory": "nzDeptClassHistory"; "nzDeptGrade": "nzDeptGrade"; "nzDeptGradeID": "nzDeptGradeID"; "nzRoles": "nzRoles"; "nzRoleTreeVirtualHeight": "nzRoleTreeVirtualHeight"; "nzFriendGroups": "nzFriendGroups"; "defaultContacts": "defaultContacts"; "nzContacts": "nzContacts"; "nzContactLoading": "nzContactLoading"; "button": "button"; }, { "confirmed": "confirmed"; }, never, never>;
 }

@@ -1,8 +1,9 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
 import type { Event } from '@antv/g2';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import * as i0 from "@angular/core";
 export interface G2PieData {
     x: NzSafeAny;
     y: number;
@@ -36,20 +37,20 @@ export declare class G2PieComponent extends G2BaseComponent {
     isPercent: boolean;
     animate: boolean;
     color: string;
-    subTitle: string | TemplateRef<void>;
-    total: string | number | TemplateRef<void>;
+    subTitle?: string | TemplateRef<void> | null;
+    total?: string | number | TemplateRef<void> | null;
     height: number;
     hasLegend: boolean;
     inner: number;
     padding: number | number[] | 'auto';
-    percent: number;
+    percent?: number;
     tooltip: boolean;
     lineWidth: number;
     blockMaxWidth: number;
     select: boolean;
-    valueFormat: (y: number) => string;
+    valueFormat?: (y: number) => string;
     data: G2PieData[];
-    colors: string[];
+    colors?: string[];
     interaction: G2InteractionType;
     ratio: G2PieRatio;
     readonly clickItem: EventEmitter<G2PieClickItem>;
@@ -60,4 +61,6 @@ export declare class G2PieComponent extends G2BaseComponent {
     private genLegend;
     _click(i: number): void;
     onChanges(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<G2PieComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<G2PieComponent, "g2-pie", ["g2Pie"], { "animate": "animate"; "color": "color"; "subTitle": "subTitle"; "total": "total"; "height": "height"; "hasLegend": "hasLegend"; "inner": "inner"; "padding": "padding"; "percent": "percent"; "tooltip": "tooltip"; "lineWidth": "lineWidth"; "blockMaxWidth": "blockMaxWidth"; "select": "select"; "valueFormat": "valueFormat"; "data": "data"; "colors": "colors"; "interaction": "interaction"; "ratio": "ratio"; }, { "clickItem": "clickItem"; }, never, never>;
 }

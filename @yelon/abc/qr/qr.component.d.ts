@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, EventEmitter, OnChanges, OnDestroy } 
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NumberInput } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
+import * as i0 from "@angular/core";
 export declare class QRComponent implements OnChanges, AfterViewInit, OnDestroy {
     private cdr;
     private lazySrv;
@@ -10,22 +11,22 @@ export declare class QRComponent implements OnChanges, AfterViewInit, OnDestroy 
     static ngAcceptInputType_padding: NumberInput;
     static ngAcceptInputType_size: NumberInput;
     static ngAcceptInputType_delay: NumberInput;
-    private lazy$;
+    private lazy$?;
     private qr;
     private cog;
     private option;
     private inited;
     dataURL: string;
-    background: string;
-    backgroundAlpha: number;
-    foreground: string;
-    foregroundAlpha: number;
-    level: string;
-    mime: string;
-    padding: number;
-    size: number;
-    value: string;
-    delay: number;
+    background?: string;
+    backgroundAlpha?: number;
+    foreground?: string;
+    foregroundAlpha?: number;
+    level?: string;
+    mime?: string;
+    padding?: number;
+    size?: number;
+    value: string | (() => string);
+    delay?: number;
     readonly change: EventEmitter<string>;
     constructor(cdr: ChangeDetectorRef, configSrv: YunzaiConfigService, lazySrv: LazyService, platform: Platform);
     private init;
@@ -34,4 +35,6 @@ export declare class QRComponent implements OnChanges, AfterViewInit, OnDestroy 
     ngOnChanges(): void;
     private toUtf8ByteArray;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<QRComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<QRComponent, "qr", ["qr"], { "background": "background"; "backgroundAlpha": "backgroundAlpha"; "foreground": "foreground"; "foregroundAlpha": "foregroundAlpha"; "level": "level"; "mime": "mime"; "padding": "padding"; "size": "size"; "value": "value"; "delay": "delay"; }, { "change": "change"; }, never, never>;
 }

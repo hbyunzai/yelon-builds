@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/mini-area.umd.js",
-  "module": "../fesm2015/mini-area.js",
-  "es2015": "../fesm2015/mini-area.js",
-  "esm2015": "../esm2015/mini-area/mini-area.js",
-  "fesm2015": "../fesm2015/mini-area.js",
+  "module": "../fesm2015/mini-area.mjs",
+  "es2020": "../fesm2020/mini-area.mjs",
+  "esm2020": "../esm2020/mini-area/mini-area.mjs",
+  "fesm2020": "../fesm2020/mini-area.mjs",
+  "fesm2015": "../fesm2015/mini-area.mjs",
   "typings": "mini-area.d.ts",
-  "metadata": "mini-area.metadata.json",
   "sideEffects": false,
   "name": "@yelon/chart/mini-area"
 }

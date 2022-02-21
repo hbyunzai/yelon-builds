@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/globalFooter.umd.js",
-  "module": "../fesm2015/globalFooter.js",
-  "es2015": "../fesm2015/globalFooter.js",
-  "esm2015": "../esm2015/global-footer/globalFooter.js",
-  "fesm2015": "../fesm2015/globalFooter.js",
-  "typings": "globalFooter.d.ts",
-  "metadata": "globalFooter.metadata.json",
+  "module": "../fesm2015/global-footer.mjs",
+  "es2020": "../fesm2020/global-footer.mjs",
+  "esm2020": "../esm2020/global-footer/global-footer.mjs",
+  "fesm2020": "../fesm2020/global-footer.mjs",
+  "fesm2015": "../fesm2015/global-footer.mjs",
+  "typings": "global-footer.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/global-footer"
 }

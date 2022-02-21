@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/yelon-util-format.umd.js",
-  "module": "../fesm2015/yelon-util-format.js",
-  "es2015": "../fesm2015/yelon-util-format.js",
-  "esm2015": "../esm2015/format/yelon-util-format.js",
-  "fesm2015": "../fesm2015/yelon-util-format.js",
-  "typings": "yelon-util-format.d.ts",
-  "metadata": "yelon-util-format.metadata.json",
+  "module": "../fesm2015/format.mjs",
+  "es2020": "../fesm2020/format.mjs",
+  "esm2020": "../esm2020/format/format.mjs",
+  "fesm2020": "../fesm2020/format.mjs",
+  "fesm2015": "../fesm2015/format.mjs",
+  "typings": "format.d.ts",
   "sideEffects": false,
   "name": "@yelon/util/format"
 }

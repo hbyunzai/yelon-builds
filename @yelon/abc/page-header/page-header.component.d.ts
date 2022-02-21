@@ -7,6 +7,7 @@ import { ReuseTabService } from '@yelon/abc/reuse-tab';
 import { YunzaiI18NService, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import * as i0 from "@angular/core";
 interface PageHeaderPath {
     title?: string;
     link?: string[];
@@ -38,7 +39,7 @@ export declare class PageHeaderComponent implements OnInit, OnChanges, AfterView
     _titleVal: string | null;
     paths: PageHeaderPath[];
     _title: string | null;
-    _titleTpl: TemplateRef<NzSafeAny>;
+    _titleTpl: TemplateRef<NzSafeAny> | null;
     set title(value: string | TemplateRef<void> | null);
     loading: boolean;
     wide: boolean;
@@ -66,5 +67,7 @@ export declare class PageHeaderComponent implements OnInit, OnChanges, AfterView
     ngAfterViewInit(): void;
     ngOnChanges(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PageHeaderComponent, [null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }, null, null, null, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PageHeaderComponent, "page-header", ["pageHeader"], { "title": "title"; "loading": "loading"; "wide": "wide"; "home": "home"; "homeLink": "homeLink"; "homeI18n": "homeI18n"; "autoBreadcrumb": "autoBreadcrumb"; "autoTitle": "autoTitle"; "syncTitle": "syncTitle"; "fixed": "fixed"; "fixedOffsetTop": "fixedOffsetTop"; "breadcrumb": "breadcrumb"; "recursiveBreadcrumb": "recursiveBreadcrumb"; "logo": "logo"; "action": "action"; "content": "content"; "extra": "extra"; "tab": "tab"; }, {}, never, ["*"]>;
 }
 export {};

@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/quickMenu.umd.js",
-  "module": "../fesm2015/quickMenu.js",
-  "es2015": "../fesm2015/quickMenu.js",
-  "esm2015": "../esm2015/quick-menu/quickMenu.js",
-  "fesm2015": "../fesm2015/quickMenu.js",
-  "typings": "quickMenu.d.ts",
-  "metadata": "quickMenu.metadata.json",
+  "module": "../fesm2015/quick-menu.mjs",
+  "es2020": "../fesm2020/quick-menu.mjs",
+  "esm2020": "../esm2020/quick-menu/quick-menu.mjs",
+  "fesm2020": "../fesm2020/quick-menu.mjs",
+  "fesm2015": "../fesm2015/quick-menu.mjs",
+  "typings": "quick-menu.d.ts",
   "sideEffects": false,
   "name": "@yelon/abc/quick-menu"
 }
