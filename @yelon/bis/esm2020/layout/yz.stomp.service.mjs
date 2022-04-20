@@ -79,9 +79,9 @@ export class YzStompService {
         return this.rxStomp.watch(destination, headers);
     }
 }
-YzStompService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzStompService, deps: [{ token: i1.YunzaiConfigService }, { token: i2.CacheService }, { token: i0.Injector }, { token: i3.NzNotificationService }], target: i0.ɵɵFactoryTarget.Injectable });
-YzStompService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzStompService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzStompService, decorators: [{
+YzStompService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzStompService, deps: [{ token: i1.YunzaiConfigService }, { token: i2.CacheService }, { token: i0.Injector }, { token: i3.NzNotificationService }], target: i0.ɵɵFactoryTarget.Injectable });
+YzStompService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzStompService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzStompService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }, { type: i2.CacheService }, { type: i0.Injector }, { type: i3.NzNotificationService }]; } });

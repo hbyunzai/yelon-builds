@@ -148,8 +148,8 @@ export class YzHeaderNotifyComponent {
         this.subs.forEach(a => a.unsubscribe());
     }
 }
-YzHeaderNotifyComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderNotifyComponent, deps: [{ token: i0.Injector }, { token: i1.NzMessageService }, { token: YUNZAI_I18N_TOKEN }, { token: i2.NzI18nService }, { token: i0.ChangeDetectorRef }, { token: i3._HttpClient }], target: i0.ɵɵFactoryTarget.Component });
-YzHeaderNotifyComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: YzHeaderNotifyComponent, selector: "yz-header-notify", ngImport: i0, template: `
+YzHeaderNotifyComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderNotifyComponent, deps: [{ token: i0.Injector }, { token: i1.NzMessageService }, { token: YUNZAI_I18N_TOKEN }, { token: i2.NzI18nService }, { token: i0.ChangeDetectorRef }, { token: i3._HttpClient }], target: i0.ɵɵFactoryTarget.Component });
+YzHeaderNotifyComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: YzHeaderNotifyComponent, selector: "yz-header-notify", ngImport: i0, template: `
     <notice-icon
       [data]="data"
       [count]="count"
@@ -160,7 +160,7 @@ YzHeaderNotifyComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0"
       (clear)="clear($event)"
     ></notice-icon>
   `, isInline: true, components: [{ type: i4.NoticeIconComponent, selector: "notice-icon", inputs: ["data", "count", "loading", "popoverVisible", "btnClass", "btnIconClass"], outputs: ["select", "clear", "popoverVisibleChange"], exportAs: ["noticeIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderNotifyComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderNotifyComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yz-header-notify',

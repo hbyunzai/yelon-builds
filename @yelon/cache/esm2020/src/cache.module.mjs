@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import * as i0 from "@angular/core";
 export class YelonCacheModule {
 }
-YelonCacheModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonCacheModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-YelonCacheModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonCacheModule });
-YelonCacheModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonCacheModule });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonCacheModule, decorators: [{
+YelonCacheModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonCacheModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+YelonCacheModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonCacheModule });
+YelonCacheModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonCacheModule });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonCacheModule, decorators: [{
             type: NgModule,
             args: [{}]
         }] });

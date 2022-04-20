@@ -1,14 +1,14 @@
 {
   "name": "@yelon/chart",
-  "version": "13.2.0",
+  "version": "13.4.2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "@antv/data-set": "^0.11.8",
-    "@antv/g2": "^4.1.35",
-    "echarts": "^5.2.2",
-    "@yelon/util": "^13.2.0",
-    "@yelon/theme": "^13.2.0",
+    "@antv/g2": "^4.1.47",
+    "echarts": "^5.3.1",
+    "@yelon/util": "^13.4.2",
+    "@yelon/theme": "^13.4.2",
     "tslib": "^2.3.0"
   },
   "module": "fesm2015/chart.mjs",

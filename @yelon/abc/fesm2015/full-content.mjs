@@ -4,8 +4,8 @@ import * as i0 from '@angular/core';
 import { Injectable, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Inject, Input, Output, Directive, NgModule } from '@angular/core';
 import * as i2 from '@angular/router';
 import { ActivationStart, ActivationEnd } from '@angular/router';
-import { BehaviorSubject, fromEvent } from 'rxjs';
-import { share, debounceTime, filter } from 'rxjs/operators';
+import { BehaviorSubject, Subject, fromEvent } from 'rxjs';
+import { share, takeUntil, debounceTime, filter } from 'rxjs/operators';
 import { InputBoolean, InputNumber } from '@yelon/util/decorator';
 
 class FullContentService {
@@ -20,9 +20,9 @@ class FullContentService {
         return this._change.pipe(share());
     }
 }
-FullContentService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-FullContentService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentService, decorators: [{
+FullContentService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+FullContentService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -39,7 +39,7 @@ class FullContentComponent {
         this.doc = doc;
         this.inited = false;
         this.id = `_full-content-${Math.random().toString(36).substring(2)}`;
-        this.scroll$ = null;
+        this.destroy$ = new Subject();
         this._height = 0;
         this.hideTitle = true;
         this.padding = 24;
@@ -80,14 +80,16 @@ class FullContentComponent {
         this.el.nativeElement.id = this.id;
         this.updateCls();
         // when window resize
-        this.scroll$ = fromEvent(window, 'resize')
-            .pipe(debounceTime(200))
+        fromEvent(window, 'resize')
+            .pipe(takeUntil(this.destroy$), debounceTime(200))
             .subscribe(() => this.updateHeight());
         // when servier changed
-        this.srv$ = this.srv.change.pipe(filter(res => res !== null)).subscribe(() => this.toggle());
+        this.srv.change
+            .pipe(takeUntil(this.destroy$), filter(res => res !== null))
+            .subscribe(() => this.toggle());
         // when router changed
-        this.route$ = this.router.events
-            .pipe(filter((e) => e instanceof ActivationStart || e instanceof ActivationEnd), debounceTime(200))
+        this.router.events
+            .pipe(takeUntil(this.destroy$), filter((e) => e instanceof ActivationStart || e instanceof ActivationEnd), debounceTime(200))
             .subscribe(() => {
             if (!!this.doc.querySelector(`#${this.id}`)) {
                 this.bodyEl.classList.add(wrapCls);
@@ -111,15 +113,14 @@ class FullContentComponent {
             this.update();
     }
     ngOnDestroy() {
-        var _a, _b;
         this.removeInBody();
-        this.scroll$.unsubscribe();
-        (_a = this.srv$) === null || _a === void 0 ? void 0 : _a.unsubscribe();
-        (_b = this.route$) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        const { destroy$ } = this;
+        destroy$.next();
+        destroy$.complete();
     }
 }
-FullContentComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentComponent, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: FullContentService }, { token: i2.Router }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component });
-FullContentComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: FullContentComponent, selector: "full-content", inputs: { fullscreen: "fullscreen", hideTitle: "hideTitle", padding: "padding" }, outputs: { fullscreenChange: "fullscreenChange" }, host: { properties: { "class.full-content": "true", "style.height.px": "_height" } }, exportAs: ["fullContent"], usesOnChanges: true, ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+FullContentComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentComponent, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: FullContentService }, { token: i2.Router }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component });
+FullContentComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: FullContentComponent, selector: "full-content", inputs: { fullscreen: "fullscreen", hideTitle: "hideTitle", padding: "padding" }, outputs: { fullscreenChange: "fullscreenChange" }, host: { properties: { "class.full-content": "true", "style.height.px": "_height" } }, exportAs: ["fullContent"], usesOnChanges: true, ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 __decorate([
     InputBoolean()
 ], FullContentComponent.prototype, "fullscreen", void 0);
@@ -129,7 +130,7 @@ __decorate([
 __decorate([
     InputNumber()
 ], FullContentComponent.prototype, "padding", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'full-content',
@@ -166,9 +167,9 @@ class FullContentToggleDirective {
         this.parent.toggle();
     }
 }
-FullContentToggleDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentToggleDirective, deps: [{ token: FullContentComponent }], target: i0.ɵɵFactoryTarget.Directive });
-FullContentToggleDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.3", type: FullContentToggleDirective, selector: "[full-toggle]", host: { listeners: { "click": "_click()" } }, exportAs: ["fullToggle"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentToggleDirective, decorators: [{
+FullContentToggleDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentToggleDirective, deps: [{ token: FullContentComponent }], target: i0.ɵɵFactoryTarget.Directive });
+FullContentToggleDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.3", type: FullContentToggleDirective, selector: "[full-toggle]", host: { listeners: { "click": "_click()" } }, exportAs: ["fullToggle"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentToggleDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[full-toggle]',
@@ -182,10 +183,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImpor
 const COMPONENTS = [FullContentComponent, FullContentToggleDirective];
 class FullContentModule {
 }
-FullContentModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-FullContentModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentModule, declarations: [FullContentComponent, FullContentToggleDirective], imports: [CommonModule], exports: [FullContentComponent, FullContentToggleDirective] });
-FullContentModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: FullContentModule, decorators: [{
+FullContentModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+FullContentModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentModule, declarations: [FullContentComponent, FullContentToggleDirective], imports: [CommonModule], exports: [FullContentComponent, FullContentToggleDirective] });
+FullContentModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: FullContentModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],

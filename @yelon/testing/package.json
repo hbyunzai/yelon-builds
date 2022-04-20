@@ -1,6 +1,6 @@
 {
   "name": "@yelon/testing",
-  "version": "13.2.0",
+  "version": "13.4.2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "module": "fesm2015/testing.mjs",

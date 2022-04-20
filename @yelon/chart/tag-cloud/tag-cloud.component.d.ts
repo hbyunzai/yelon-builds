@@ -1,8 +1,8 @@
 import { EventEmitter } from '@angular/core';
 import type { Event } from '@antv/g2';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { G2BaseComponent } from '@yelon/chart/core';
 import { NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface G2TagCloudData {
     value?: number;

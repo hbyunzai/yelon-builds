@@ -1,12 +1,12 @@
 {
   "name": "@yelon/theme",
-  "version": "13.2.0",
+  "version": "13.4.2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "ng-zorro-antd": "^13.0.0",
-    "@yelon/acl": "^13.2.0",
-    "@yelon/util": "^13.2.0",
+    "@yelon/acl": "^13.4.2",
+    "@yelon/util": "^13.4.2",
     "tslib": "^2.3.0"
   },
   "module": "fesm2015/theme.mjs",

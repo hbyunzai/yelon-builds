@@ -6,8 +6,9 @@ import { YunzaiI18NService, YelonLocaleService, LocaleData } from '@yelon/theme'
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { BooleanInput } from '@yelon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 import type { ErrorData } from './errors';
-import { SFButton, SFLayout, SFValueChange } from './interface';
+import type { SFButton, SFLayout, SFMode, SFValueChange } from './interface';
 import { FormProperty } from './model/form.property';
 import { FormPropertyFactory } from './model/form.property.factory';
 import type { SFSchema } from './schema/index';
@@ -16,7 +17,6 @@ import { TerminatorService } from './terminator.service';
 import { SchemaValidatorFactory } from './validator.factory';
 import * as i0 from "@angular/core";
 export declare function useFactory(schemaValidatorFactory: SchemaValidatorFactory, cogSrv: YunzaiConfigService): FormPropertyFactory;
-export declare type SFMode = 'default' | 'search' | 'edit';
 export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     private formPropertyFactory;
     private terminator;
@@ -34,7 +34,7 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     static ngAcceptInputType_disabled: BooleanInput;
     static ngAcceptInputType_noColon: BooleanInput;
     static ngAcceptInputType_cleanValue: BooleanInput;
-    private unsubscribe$;
+    private destroy$;
     private _renders;
     private _item;
     private _valid;
@@ -124,6 +124,19 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
      * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
      */
     setValue(path: string, value: NzSafeAny): this;
+    /**
+     * Update the feedback status of the widget
+     *
+     * 更新小部件的反馈状态
+     *
+     * ```ts
+     * // Validate status of the widget
+     * this.sf.updateFeedback('/name', 'validating');
+     * // Clean validate status of the widget
+     * this.sf.updateFeedback('/name');
+     * ```
+     */
+    updateFeedback(path: string, status?: NzFormControlStatusType, icon?: string | null): this;
     onSubmit(e: Event): void;
     constructor(formPropertyFactory: FormPropertyFactory, terminator: TerminatorService, dom: DomSanitizer, cdr: ChangeDetectorRef, localeSrv: YelonLocaleService, aclSrv: ACLService, i18nSrv: YunzaiI18NService, cogSrv: YunzaiConfigService, platform: Platform);
     protected fanyi(key: string): string;

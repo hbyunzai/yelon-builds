@@ -21,31 +21,31 @@ const workspace_2 = require("./workspace");
 function UpgradeMainVersions(tree, version = lib_versions_1.VERSION) {
     (0, package_1.addPackage)(tree, ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bis'].map(name => `@yelon/${name}@${version}`));
     (0, package_1.addPackage)(tree, [
-        `@angular-eslint/builder@~13.0.1`,
-        `@angular-eslint/eslint-plugin@~13.0.1`,
-        `@angular-eslint/eslint-plugin-template@~13.0.1`,
-        `@angular-eslint/schematics@~13.0.1`,
-        `@angular-eslint/template-parser@~13.0.1`,
-        `@typescript-eslint/eslint-plugin@~5.8.1`,
-        `@typescript-eslint/parser@~5.8.1`,
-        `eslint@^8.5.0`,
-        `eslint-config-prettier@^2.5.1`,
-        `eslint-plugin-import@~2.25.3`,
-        `eslint-plugin-jsdoc@~37.4.0`,
+        `@angular-eslint/builder@~13.1.0`,
+        `@angular-eslint/eslint-plugin@~13.1.0`,
+        `@angular-eslint/eslint-plugin-template@~13.1.0`,
+        `@angular-eslint/schematics@~13.1.0`,
+        `@angular-eslint/template-parser@~13.1.0`,
+        `@typescript-eslint/eslint-plugin@~5.15.0`,
+        `@typescript-eslint/parser@~5.15.0`,
+        `eslint@^8.11.0`,
+        `eslint-config-prettier@^2.6.0`,
+        `eslint-plugin-import@~2.25.4`,
+        `eslint-plugin-jsdoc@~38.0.4`,
         `eslint-plugin-prefer-arrow@~1.2.3`,
-        `eslint-plugin-prettier@^2.5.1`,
-        `prettier@^2.5.1`,
-        `husky@^6.0.0`,
+        `eslint-plugin-prettier@^2.6.0`,
+        `prettier@^2.6.0`,
+        `husky@^7.0.4`,
         `ng-yunzai@${version}`,
         `ng-yunzai-plugin-theme@^13.0.3`,
         `source-map-explorer@^2.5.2`,
-        `@angular/language-service@~13.2.0`,
+        `@angular/language-service@~13.3.0`,
         `@yelon/testing@${version}`,
         `@stomp/rx-stomp@^1.1.4`
     ], 'devDependencies');
     (0, package_1.addPackage)(tree, [
         `ng-zorro-antd@^13.0.0`,
-        'ajv@^8.8.2',
+        'ajv@^8.10.0',
         'ajv-formats@^2.1.1'
     ]);
 }

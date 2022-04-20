@@ -32,8 +32,8 @@ const COMPONENTS = [
 ];
 export class YunzaiLayoutModule {
 }
-YunzaiLayoutModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-YunzaiLayoutModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiLayoutModule, declarations: [ContactComponent,
+YunzaiLayoutModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+YunzaiLayoutModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiLayoutModule, declarations: [ContactComponent,
         YzLayoutBasicComponent,
         YzHeaderApplicationComponent,
         YzHeaderNotifyComponent,
@@ -50,13 +50,13 @@ YunzaiLayoutModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", vers
         YzHeaderFullScreenComponent,
         YzHeaderClearStorageComponent,
         YzHeaderI18NComponent] });
-YunzaiLayoutModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiLayoutModule, providers: [
+YunzaiLayoutModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiLayoutModule, providers: [
         {
             provide: YUNZAI_THEME_BTN_KEYS,
             useValue: 'site-theme'
         }
     ], imports: [[HttpClientModule, CommonModule, FormsModule, RouterModule, ReactiveFormsModule, YzSharedModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [HttpClientModule, CommonModule, FormsModule, RouterModule, ReactiveFormsModule, YzSharedModule],

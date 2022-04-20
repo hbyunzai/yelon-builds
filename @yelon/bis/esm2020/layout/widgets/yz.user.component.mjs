@@ -50,8 +50,8 @@ export class YzHeaderUserComponent {
         }
     }
 }
-YzHeaderUserComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderUserComponent, deps: [{ token: i0.Injector }, { token: i1.NzMessageService }, { token: YA_SERVICE_TOKEN }, { token: i2.YunzaiConfigService }, { token: i3.CacheService }], target: i0.ɵɵFactoryTarget.Component });
-YzHeaderUserComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: YzHeaderUserComponent, selector: "yz-header-user", ngImport: i0, template: `
+YzHeaderUserComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderUserComponent, deps: [{ token: i0.Injector }, { token: i1.NzMessageService }, { token: YA_SERVICE_TOKEN }, { token: i2.YunzaiConfigService }, { token: i3.CacheService }], target: i0.ɵɵFactoryTarget.Component });
+YzHeaderUserComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: YzHeaderUserComponent, selector: "yz-header-user", ngImport: i0, template: `
     <div
       class="yunzai-default__nav-item d-flex align-items-center px-sm"
       nz-dropdown
@@ -75,7 +75,7 @@ YzHeaderUserComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", 
       </div>
     </nz-dropdown-menu>
   `, isInline: true, components: [{ type: i4.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }], directives: [{ type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { type: i6.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { type: i7.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: i8.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { type: i6.NzMenuItemDirective, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { type: i9.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { type: i6.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }], pipes: { "i18n": i10.I18nPipe }, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderUserComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderUserComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yz-header-user',

@@ -3,8 +3,8 @@ import * as i5 from '@angular/common';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
 import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Optional, Inject, Input, Output, NgModule } from '@angular/core';
-import { Subject, fromEvent } from 'rxjs';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { Subject, timer, fromEvent } from 'rxjs';
+import { takeUntil, debounceTime, filter } from 'rxjs/operators';
 import { InputNumber, InputBoolean, ZoneOutside } from '@yelon/util/decorator';
 import * as i1 from '@yelon/util/config';
 import * as i2 from '@yelon/util/other';
@@ -48,7 +48,7 @@ class PdfComponent {
         this.doc = doc;
         this.cdr = cdr;
         this.inited = false;
-        this.unsubscribe$ = new Subject();
+        this.destroy$ = new Subject();
         this.lib = '';
         this._pi = 1;
         this._total = 0;
@@ -144,10 +144,15 @@ class PdfComponent {
         }));
     }
     initDelay() {
+        if (!this.win.pdfjsLib) {
+            throw new Error(`No window.pdfjsLib found, please make sure that cdn or local path exists, the current referenced path is: ${JSON.stringify(this.lib)}`);
+        }
         this.inited = true;
         this.cdr.detectChanges();
         this.win.pdfjsLib.GlobalWorkerOptions.workerSrc = `${this.lib}build/pdf.worker.min.js`;
-        setTimeout(() => this.load(), this.delay);
+        timer(this.delay ?? 0)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => this.load());
     }
     setLoading(status) {
         this.ngZone.run(() => {
@@ -210,19 +215,28 @@ class PdfComponent {
             return;
         }
         if (this._rotation !== 0 || currentViewer.pagesRotation !== this._rotation) {
-            setTimeout(() => {
+            this.timeExec(() => {
                 currentViewer.pagesRotation = this._rotation;
             });
         }
         if (this.stickToPage) {
-            setTimeout(() => {
+            this.timeExec(() => {
                 currentViewer.currentPageNumber = this._pi;
             });
         }
         this.updateSize();
     }
+    timeExec(fn) {
+        this.ngZone.runOutsideAngular(() => {
+            timer(0)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => this.ngZone.runOutsideAngular(() => fn()));
+        });
+    }
     updateSize() {
         const currentViewer = this.pageViewer;
+        if (!currentViewer)
+            return;
         this._pdf.getPage(currentViewer.currentPageNumber).then((page) => {
             const { _rotation, _zoom } = this;
             const rotation = _rotation || page.rotate;
@@ -359,7 +373,7 @@ class PdfComponent {
     }
     initResize() {
         fromEvent(this.win, 'resize')
-            .pipe(debounceTime(100), filter(() => this.autoReSize && this._pdf), takeUntil(this.unsubscribe$))
+            .pipe(debounceTime(100), filter(() => this.autoReSize && this._pdf), takeUntil(this.destroy$))
             .subscribe(() => this.updateSize());
     }
     ngOnChanges(changes) {
@@ -368,14 +382,14 @@ class PdfComponent {
         }
     }
     ngOnDestroy() {
-        const { unsubscribe$ } = this;
-        unsubscribe$.next();
-        unsubscribe$.complete();
+        const { destroy$ } = this;
+        destroy$.next();
+        destroy$.complete();
         this.destroy();
     }
 }
-PdfComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: PdfComponent, deps: [{ token: i0.NgZone }, { token: i1.YunzaiConfigService }, { token: i2.LazyService }, { token: i3.Platform }, { token: i0.ElementRef }, { token: DOCUMENT, optional: true }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
-PdfComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: PdfComponent, selector: "pdf", inputs: { src: "src", pi: "pi", showAll: "showAll", renderText: "renderText", textLayerMode: "textLayerMode", showBorders: "showBorders", stickToPage: "stickToPage", originalSize: "originalSize", fitToPage: "fitToPage", zoom: "zoom", zoomScale: "zoomScale", rotation: "rotation", autoReSize: "autoReSize", externalLinkTarget: "externalLinkTarget", delay: "delay" }, outputs: { change: "change" }, host: { properties: { "class.d-block": "true" } }, exportAs: ["pdf"], usesOnChanges: true, ngImport: i0, template: `
+PdfComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: PdfComponent, deps: [{ token: i0.NgZone }, { token: i1.YunzaiConfigService }, { token: i2.LazyService }, { token: i3.Platform }, { token: i0.ElementRef }, { token: DOCUMENT, optional: true }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+PdfComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: PdfComponent, selector: "pdf", inputs: { src: "src", pi: "pi", showAll: "showAll", renderText: "renderText", textLayerMode: "textLayerMode", showBorders: "showBorders", stickToPage: "stickToPage", originalSize: "originalSize", fitToPage: "fitToPage", zoom: "zoom", zoomScale: "zoomScale", rotation: "rotation", autoReSize: "autoReSize", externalLinkTarget: "externalLinkTarget", delay: "delay" }, outputs: { change: "change" }, host: { properties: { "class.d-block": "true" } }, exportAs: ["pdf"], usesOnChanges: true, ngImport: i0, template: `
     <nz-skeleton *ngIf="!inited || loading"></nz-skeleton>
     <div class="pdf-container">
       <div class="pdfViewer"></div>
@@ -426,7 +440,7 @@ __decorate([
 __decorate([
     ZoneOutside()
 ], PdfComponent.prototype, "destroy", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: PdfComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: PdfComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pdf',
@@ -486,10 +500,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImpor
 const COMPONENTS = [PdfComponent];
 class PdfModule {
 }
-PdfModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: PdfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PdfModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: PdfModule, declarations: [PdfComponent], imports: [CommonModule, NzSkeletonModule], exports: [PdfComponent] });
-PdfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: PdfModule, imports: [[CommonModule, NzSkeletonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: PdfModule, decorators: [{
+PdfModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: PdfModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PdfModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: PdfModule, declarations: [PdfComponent], imports: [CommonModule, NzSkeletonModule], exports: [PdfComponent] });
+PdfModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: PdfModule, imports: [[CommonModule, NzSkeletonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: PdfModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, NzSkeletonModule],

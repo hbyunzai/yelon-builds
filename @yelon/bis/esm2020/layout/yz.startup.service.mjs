@@ -113,9 +113,9 @@ export class YzStartupService {
         });
     }
 }
-YzStartupService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzStartupService, deps: [{ token: i1.NzIconService }, { token: i2.MenuService }, { token: YUNZAI_I18N_TOKEN }, { token: WINDOW }, { token: i2.SettingsService }, { token: i3.ACLService }, { token: i2.TitleService }, { token: i4.YzAuthService }, { token: i5.CacheService }, { token: i6.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-YzStartupService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzStartupService });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzStartupService, decorators: [{
+YzStartupService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzStartupService, deps: [{ token: i1.NzIconService }, { token: i2.MenuService }, { token: YUNZAI_I18N_TOKEN }, { token: WINDOW }, { token: i2.SettingsService }, { token: i3.ACLService }, { token: i2.TitleService }, { token: i4.YzAuthService }, { token: i5.CacheService }, { token: i6.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+YzStartupService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzStartupService });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzStartupService, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.NzIconService }, { type: i2.MenuService }, { type: i7.YzI18NService, decorators: [{
                     type: Inject,

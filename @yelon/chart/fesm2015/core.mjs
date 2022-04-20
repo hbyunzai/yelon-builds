@@ -24,7 +24,7 @@ class G2Service {
         this._cog = this.cogSrv.merge('chart', {
             theme: '',
             libs: [
-                'https://gw.alipayobjects.com/os/lib/antv/g2/4.1.14/dist/g2.min.js',
+                'https://gw.alipayobjects.com/os/lib/antv/g2/4.1.46/dist/g2.min.js',
                 'https://gw.alipayobjects.com/os/lib/antv/data-set/0.11.8/dist/data-set.js'
             ]
         }, val);
@@ -50,9 +50,9 @@ class G2Service {
         this.notify$.unsubscribe();
     }
 }
-G2Service.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: G2Service, deps: [{ token: i1.YunzaiConfigService }, { token: i2.LazyService }], target: i0.ɵɵFactoryTarget.Injectable });
-G2Service.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: G2Service, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: G2Service, decorators: [{
+G2Service.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: G2Service, deps: [{ token: i1.YunzaiConfigService }, { token: i2.LazyService }], target: i0.ɵɵFactoryTarget.Injectable });
+G2Service.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: G2Service, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: G2Service, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }, { type: i2.LazyService }]; } });
@@ -77,6 +77,9 @@ class G2BaseComponent {
     get chart() {
         return this._chart;
     }
+    get winG2() {
+        return window.G2;
+    }
     /** G2数据变更 */
     changeData() { }
     /** 等同 `ngOnInit` */
@@ -95,7 +98,7 @@ class G2BaseComponent {
             return;
         }
         this.onInit();
-        if (window.G2) {
+        if (this.winG2) {
             this.load();
         }
         else {
@@ -132,8 +135,8 @@ class G2BaseComponent {
         this.destroyChart();
     }
 }
-G2BaseComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: G2BaseComponent, deps: [{ token: G2Service }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i2$1.Platform }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
-G2BaseComponent.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.3", type: G2BaseComponent, inputs: { repaint: "repaint", delay: "delay", theme: "theme" }, outputs: { ready: "ready" }, viewQueries: [{ propertyName: "node", first: true, predicate: ["container"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0 });
+G2BaseComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: G2BaseComponent, deps: [{ token: G2Service }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i2$1.Platform }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
+G2BaseComponent.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.3", type: G2BaseComponent, inputs: { repaint: "repaint", delay: "delay", theme: "theme" }, outputs: { ready: "ready" }, viewQueries: [{ propertyName: "node", first: true, predicate: ["container"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0 });
 __decorate([
     InputBoolean()
 ], G2BaseComponent.prototype, "repaint", void 0);
@@ -146,7 +149,7 @@ __decorate([
 __decorate([
     ZoneOutside()
 ], G2BaseComponent.prototype, "destroyChart", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: G2BaseComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: G2BaseComponent, decorators: [{
             type: Directive
         }], ctorParameters: function () { return [{ type: G2Service }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i2$1.Platform }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { repaint: [{
                 type: Input

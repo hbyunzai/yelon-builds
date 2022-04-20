@@ -17,12 +17,12 @@ export class YzHeaderFullScreenComponent {
         }
     }
 }
-YzHeaderFullScreenComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderFullScreenComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-YzHeaderFullScreenComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: YzHeaderFullScreenComponent, selector: "yz-header-fullscreen", host: { listeners: { "window:resize": "_resize()", "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
+YzHeaderFullScreenComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderFullScreenComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+YzHeaderFullScreenComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: YzHeaderFullScreenComponent, selector: "yz-header-fullscreen", host: { listeners: { "window:resize": "_resize()", "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
     <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
     {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `, isInline: true, directives: [{ type: i1.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { type: i2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }], pipes: { "i18n": i3.I18nPipe }, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderFullScreenComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderFullScreenComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yz-header-fullscreen',

@@ -1,6 +1,6 @@
 import * as i0 from '@angular/core';
 import { InjectionToken, inject, Injectable, Optional, Inject, Pipe, SkipSelf, NgModule, Injector, Version } from '@angular/core';
-import { BehaviorSubject, Subject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, of, Observable, throwError } from 'rxjs';
 import { filter, share, map, delay, tap, switchMap, finalize, catchError } from 'rxjs/operators';
 import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService } from '@yelon/util/config';
@@ -115,14 +115,14 @@ class YunzaiI18nBaseService {
         return content;
     }
 }
-YunzaiI18nBaseService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiI18nBaseService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-YunzaiI18nBaseService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiI18nBaseService });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiI18nBaseService, decorators: [{
+YunzaiI18nBaseService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18nBaseService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+YunzaiI18nBaseService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18nBaseService });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18nBaseService, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }]; } });
 class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     use(lang, data) {
-        this._data = this.flatData(data, []);
+        this._data = this.flatData(data !== null && data !== void 0 ? data : {}, []);
         this._currentLang = lang;
         this._change$.next(lang);
     }
@@ -130,9 +130,9 @@ class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
         return [];
     }
 }
-YunzaiI18NServiceFake.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable });
-YunzaiI18NServiceFake.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiI18NServiceFake, decorators: [{
+YunzaiI18NServiceFake.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable });
+YunzaiI18NServiceFake.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18NServiceFake, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -369,9 +369,9 @@ class MenuService {
         this.i18n$.unsubscribe();
     }
 }
-MenuService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: MenuService, deps: [{ token: YUNZAI_I18N_TOKEN, optional: true }, { token: i1$1.ACLService, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
-MenuService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: MenuService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: MenuService, decorators: [{
+MenuService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: MenuService, deps: [{ token: YUNZAI_I18N_TOKEN, optional: true }, { token: i1$1.ACLService, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+MenuService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: MenuService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: MenuService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () {
@@ -462,9 +462,9 @@ class SettingsService {
         return this._user;
     }
 }
-SettingsService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: SettingsService, deps: [{ token: i1$2.Platform }, { token: YUNZAI_SETTING_KEYS }], target: i0.ɵɵFactoryTarget.Injectable });
-SettingsService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: SettingsService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: SettingsService, decorators: [{
+SettingsService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SettingsService, deps: [{ token: i1$2.Platform }, { token: YUNZAI_SETTING_KEYS }], target: i0.ɵɵFactoryTarget.Injectable });
+SettingsService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SettingsService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SettingsService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () {
@@ -510,9 +510,9 @@ class ResponsiveService {
         return clsMap;
     }
 }
-ResponsiveService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ResponsiveService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-ResponsiveService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ResponsiveService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ResponsiveService, decorators: [{
+ResponsiveService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ResponsiveService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+ResponsiveService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ResponsiveService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ResponsiveService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }]; } });
@@ -599,9 +599,9 @@ class RTLService {
         });
     }
 }
-RTLService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: RTLService, deps: [{ token: i1$3.Directionality }, { token: SettingsService }, { token: i3.NzConfigService }, { token: i1.YunzaiConfigService }, { token: i1$2.Platform }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-RTLService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: RTLService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: RTLService, decorators: [{
+RTLService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: RTLService, deps: [{ token: i1$3.Directionality }, { token: SettingsService }, { token: i3.NzConfigService }, { token: i1.YunzaiConfigService }, { token: i1$2.Platform }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+RTLService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: RTLService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: RTLService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () {
@@ -712,9 +712,9 @@ class TitleService {
         this.i18n$.unsubscribe();
     }
 }
-TitleService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: TitleService, deps: [{ token: i0.Injector }, { token: i1$4.Title }, { token: MenuService }, { token: YUNZAI_I18N_TOKEN, optional: true }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-TitleService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: TitleService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: TitleService, decorators: [{
+TitleService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: TitleService, deps: [{ token: i0.Injector }, { token: i1$4.Title }, { token: MenuService }, { token: YUNZAI_I18N_TOKEN, optional: true }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+TitleService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: TitleService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: TitleService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () {
@@ -737,9 +737,9 @@ class I18nPipe {
         return this.i18n.fanyi(key, params);
     }
 }
-I18nPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: I18nPipe, deps: [{ token: YUNZAI_I18N_TOKEN }], target: i0.ɵɵFactoryTarget.Pipe });
-I18nPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: I18nPipe, name: "i18n" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: I18nPipe, decorators: [{
+I18nPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: I18nPipe, deps: [{ token: YUNZAI_I18N_TOKEN }], target: i0.ɵɵFactoryTarget.Pipe });
+I18nPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: I18nPipe, name: "i18n" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: I18nPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'i18n' }]
         }], ctorParameters: function () {
@@ -747,6 +747,40 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImpor
                         type: Inject,
                         args: [YUNZAI_I18N_TOKEN]
                     }] }];
+    } });
+
+class YunzaiI18NGuard {
+    constructor(i18nSrv, cogSrv) {
+        this.i18nSrv = i18nSrv;
+        this.cogSrv = cogSrv;
+    }
+    resolve(route) {
+        var _a, _b;
+        const lang = route.params && route.params[(_b = (_a = this.cogSrv.get('themeI18n')) === null || _a === void 0 ? void 0 : _a.paramNameOfUrlGuard) !== null && _b !== void 0 ? _b : 'i18n'];
+        if (lang != null) {
+            this.i18nSrv.use(lang);
+        }
+        return of(true);
+    }
+    canActivateChild(childRoute, _) {
+        return this.resolve(childRoute);
+    }
+    canActivate(route, _) {
+        return this.resolve(route);
+    }
+}
+YunzaiI18NGuard.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18NGuard, deps: [{ token: YUNZAI_I18N_TOKEN, optional: true }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+YunzaiI18NGuard.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18NGuard, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiI18NGuard, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [YUNZAI_I18N_TOKEN]
+                    }] }, { type: i1.YunzaiConfigService }];
     } });
 
 const YELON_LOCALE = new InjectionToken('yelon-locale');
@@ -857,9 +891,9 @@ class YelonLocaleService {
         return (this._locale[path] || {});
     }
 }
-YelonLocaleService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable });
-YelonLocaleService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleService });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleService, decorators: [{
+YelonLocaleService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable });
+YelonLocaleService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleService });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleService, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
@@ -878,10 +912,10 @@ const YELON_LOCALE_SERVICE_PROVIDER = {
 
 class YelonLocaleModule {
 }
-YelonLocaleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-YelonLocaleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleModule });
-YelonLocaleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleModule, providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonLocaleModule, decorators: [{
+YelonLocaleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+YelonLocaleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleModule });
+YelonLocaleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleModule, providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonLocaleModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER]
@@ -1938,9 +1972,9 @@ class ModalHelper {
         return this.create(comp, params, Object.assign(Object.assign({}, options), { modalOptions }));
     }
 }
-ModalHelper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ModalHelper, deps: [{ token: i1$5.NzModalService }], target: i0.ɵɵFactoryTarget.Injectable });
-ModalHelper.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ModalHelper, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ModalHelper, decorators: [{
+ModalHelper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ModalHelper, deps: [{ token: i1$5.NzModalService }], target: i0.ɵɵFactoryTarget.Injectable });
+ModalHelper.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ModalHelper, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ModalHelper, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1$5.NzModalService }]; } });
@@ -2021,9 +2055,9 @@ class DrawerHelper {
         return this.create(title, comp, params, Object.assign(Object.assign({}, options), { drawerOptions }));
     }
 }
-DrawerHelper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: DrawerHelper, deps: [{ token: i1$6.NzDrawerService }], target: i0.ɵɵFactoryTarget.Injectable });
-DrawerHelper.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: DrawerHelper, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: DrawerHelper, decorators: [{
+DrawerHelper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: DrawerHelper, deps: [{ token: i1$6.NzDrawerService }], target: i0.ɵɵFactoryTarget.Injectable });
+DrawerHelper.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: DrawerHelper, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: DrawerHelper, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1$6.NzDrawerService }]; } });
@@ -2149,9 +2183,9 @@ class _HttpClient {
         delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
     }
 }
-_HttpClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: _HttpClient, deps: [{ token: i1$7.HttpClient }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-_HttpClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: _HttpClient, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: _HttpClient, decorators: [{
+_HttpClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: _HttpClient, deps: [{ token: i1$7.HttpClient }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+_HttpClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: _HttpClient, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: _HttpClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1$7.HttpClient }, { type: i1.YunzaiConfigService }]; } });
@@ -2168,9 +2202,9 @@ class BaseApi {
         this.injector = injector;
     }
 }
-BaseApi.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: BaseApi, deps: [{ token: Injector }], target: i0.ɵɵFactoryTarget.Injectable });
-BaseApi.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: BaseApi });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: BaseApi, decorators: [{
+BaseApi.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: BaseApi, deps: [{ token: Injector }], target: i0.ɵɵFactoryTarget.Injectable });
+BaseApi.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: BaseApi });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: BaseApi, decorators: [{
             type: Injectable
         }], ctorParameters: function () {
         return [{ type: i0.Injector, decorators: [{
@@ -2375,9 +2409,9 @@ class DatePipe {
         return formatString === 'fn' ? formatDistanceToNow(value, langOpt) : format(value, formatString, langOpt);
     }
 }
-DatePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: DatePipe, deps: [{ token: i1$8.NzI18nService }], target: i0.ɵɵFactoryTarget.Pipe });
-DatePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: DatePipe, name: "_date" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: DatePipe, decorators: [{
+DatePipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: DatePipe, deps: [{ token: i1$8.NzI18nService }], target: i0.ɵɵFactoryTarget.Pipe });
+DatePipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: DatePipe, name: "_date" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: DatePipe, decorators: [{
             type: Pipe,
             args: [{ name: '_date' }]
         }], ctorParameters: function () { return [{ type: i1$8.NzI18nService }]; } });
@@ -2394,9 +2428,9 @@ class KeysPipe {
         return ret;
     }
 }
-KeysPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: KeysPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-KeysPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: KeysPipe, name: "keys" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: KeysPipe, decorators: [{
+KeysPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: KeysPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+KeysPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: KeysPipe, name: "keys" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: KeysPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'keys' }]
         }] });
@@ -2429,9 +2463,9 @@ class YNPipe {
         return isSafeHtml ? this.dom.bypassSecurityTrustHtml(html) : html;
     }
 }
-YNPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YNPipe, deps: [{ token: i1$4.DomSanitizer }], target: i0.ɵɵFactoryTarget.Pipe });
-YNPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YNPipe, name: "yn" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YNPipe, decorators: [{
+YNPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YNPipe, deps: [{ token: i1$4.DomSanitizer }], target: i0.ɵɵFactoryTarget.Pipe });
+YNPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YNPipe, name: "yn" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YNPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'yn' }]
         }], ctorParameters: function () { return [{ type: i1$4.DomSanitizer }]; } });
@@ -2444,9 +2478,9 @@ class HTMLPipe {
         return html ? this.dom.bypassSecurityTrustHtml(html) : '';
     }
 }
-HTMLPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: HTMLPipe, deps: [{ token: i1$4.DomSanitizer }], target: i0.ɵɵFactoryTarget.Pipe });
-HTMLPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: HTMLPipe, name: "html" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: HTMLPipe, decorators: [{
+HTMLPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: HTMLPipe, deps: [{ token: i1$4.DomSanitizer }], target: i0.ɵɵFactoryTarget.Pipe });
+HTMLPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: HTMLPipe, name: "html" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: HTMLPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'html' }]
         }], ctorParameters: function () { return [{ type: i1$4.DomSanitizer }]; } });
@@ -2459,9 +2493,9 @@ class URLPipe {
         return url ? this.dom.bypassSecurityTrustUrl(url) : '';
     }
 }
-URLPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: URLPipe, deps: [{ token: i1$4.DomSanitizer }], target: i0.ɵɵFactoryTarget.Pipe });
-URLPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: URLPipe, name: "url" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: URLPipe, decorators: [{
+URLPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: URLPipe, deps: [{ token: i1$4.DomSanitizer }], target: i0.ɵɵFactoryTarget.Pipe });
+URLPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: URLPipe, name: "url" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: URLPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'url' }]
         }], ctorParameters: function () { return [{ type: i1$4.DomSanitizer }]; } });
@@ -2479,19 +2513,19 @@ class YunzaiThemeModule {
     static forRoot() {
         return {
             ngModule: YunzaiThemeModule,
-            providers: [...HELPERS]
+            providers: HELPERS
         };
     }
     static forChild() {
         return {
             ngModule: YunzaiThemeModule,
-            providers: [...HELPERS]
+            providers: HELPERS
         };
     }
 }
-YunzaiThemeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiThemeModule, deps: [{ token: i1$9.NzIconService }], target: i0.ɵɵFactoryTarget.NgModule });
-YunzaiThemeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiThemeModule, declarations: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe], imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule], exports: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe, YelonLocaleModule] });
-YunzaiThemeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiThemeModule, providers: [
+YunzaiThemeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiThemeModule, deps: [{ token: i1$9.NzIconService }], target: i0.ɵɵFactoryTarget.NgModule });
+YunzaiThemeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiThemeModule, declarations: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe], imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule], exports: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe, YelonLocaleModule] });
+YunzaiThemeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiThemeModule, providers: [
         {
             provide: YUNZAI_SETTING_KEYS,
             useValue: {
@@ -2501,11 +2535,11 @@ YunzaiThemeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", versi
             }
         }
     ], imports: [[CommonModule, RouterModule, OverlayModule, NzI18nModule], YelonLocaleModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YunzaiThemeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YunzaiThemeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule],
-                    declarations: [...PIPES],
+                    declarations: PIPES,
                     providers: [
                         {
                             provide: YUNZAI_SETTING_KEYS,
@@ -2520,7 +2554,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImpor
                 }]
         }], ctorParameters: function () { return [{ type: i1$9.NzIconService }]; } });
 
-const VERSION = new Version('13.2.0');
+const VERSION = new Version('13.4.2');
 
 /**
  * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
@@ -2547,5 +2581,5 @@ class PreloadOptionalModules {
  * Generated bundle index. Do not edit.
  */
 
-export { BaseApi, BaseHeaders, BaseUrl, Body, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, elGR as el_GR, enUS as en_US, esES as es_ES, frFR as fr_FR, hrHR as hr_HR, itIT as it_IT, jaJP as ja_JP, koKR as ko_KR, plPL as pl_PL, preloaderFinished, slSI as sl_SI, trTR as tr_TR, zhCN as zh_CN, zhTW as zh_TW };
+export { BaseApi, BaseHeaders, BaseUrl, Body, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiI18NGuard, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, elGR as el_GR, enUS as en_US, esES as es_ES, frFR as fr_FR, hrHR as hr_HR, itIT as it_IT, jaJP as ja_JP, koKR as ko_KR, plPL as pl_PL, preloaderFinished, slSI as sl_SI, trTR as tr_TR, zhCN as zh_CN, zhTW as zh_TW };
 //# sourceMappingURL=theme.mjs.map

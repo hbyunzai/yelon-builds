@@ -97,9 +97,9 @@ export class ActGuard {
         });
     }
 }
-ActGuard.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ActGuard, deps: [{ token: i1.YunzaiConfigService }, { token: i2.CacheService }, { token: i3.PathToRegexpService }, { token: i4.Router }], target: i0.ɵɵFactoryTarget.Injectable });
-ActGuard.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ActGuard, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: ActGuard, decorators: [{
+ActGuard.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ActGuard, deps: [{ token: i1.YunzaiConfigService }, { token: i2.CacheService }, { token: i3.PathToRegexpService }, { token: i4.Router }], target: i0.ɵɵFactoryTarget.Injectable });
+ActGuard.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ActGuard, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ActGuard, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'

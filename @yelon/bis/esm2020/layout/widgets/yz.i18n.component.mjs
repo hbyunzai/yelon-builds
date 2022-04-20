@@ -37,8 +37,8 @@ export class YzHeaderI18NComponent {
         });
     }
 }
-YzHeaderI18NComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderI18NComponent, deps: [{ token: i1.SettingsService }, { token: YUNZAI_I18N_TOKEN }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component });
-YzHeaderI18NComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: YzHeaderI18NComponent, selector: "yz-header-i18n", inputs: { showLangText: "showLangText" }, ngImport: i0, template: `
+YzHeaderI18NComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderI18NComponent, deps: [{ token: i1.SettingsService }, { token: YUNZAI_I18N_TOKEN }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component });
+YzHeaderI18NComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: YzHeaderI18NComponent, selector: "yz-header-i18n", inputs: { showLangText: "showLangText" }, ngImport: i0, template: `
     <div *ngIf="showLangText" nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
       <i nz-icon nzType="global"></i>
       {{ 'menu.lang' | i18n }}
@@ -69,7 +69,7 @@ YzHeaderI18NComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", 
 __decorate([
     InputBoolean()
 ], YzHeaderI18NComponent.prototype, "showLangText", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderI18NComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderI18NComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yz-header-i18n',

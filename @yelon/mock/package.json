@@ -1,12 +1,12 @@
 {
   "name": "@yelon/mock",
-  "version": "13.2.0",
+  "version": "13.4.2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "mockjs": "^1.1.0",
-    "@types/mockjs": "^1.0.4",
-    "@yelon/util": "^13.2.0",
+    "@types/mockjs": "^1.0.6",
+    "@yelon/util": "^13.4.2",
     "tslib": "^2.3.0"
   },
   "module": "fesm2015/mock.mjs",

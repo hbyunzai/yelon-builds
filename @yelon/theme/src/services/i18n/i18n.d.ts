@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface YunzaiI18NService {
     [key: string]: NzSafeAny;

@@ -1,9 +1,9 @@
 import { Platform } from '@angular/cdk/platform';
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, SimpleChange } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { PdfChangeEvent, PdfExternalLinkTarget, PdfTextLayerMode, PdfZoomScale } from './pdf.types';
 import * as i0 from "@angular/core";
 export declare class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
@@ -22,7 +22,7 @@ export declare class PdfComponent implements OnChanges, AfterViewInit, OnDestroy
     static ngAcceptInputType_disableTextLayer: BooleanInput;
     static ngAcceptInputType_removePageBorders: BooleanInput;
     inited: boolean;
-    private unsubscribe$;
+    private destroy$;
     private lib;
     private _pdf;
     private loadingTask;
@@ -74,6 +74,7 @@ export declare class PdfComponent implements OnChanges, AfterViewInit, OnDestroy
     private resetDoc;
     private cleanDoc;
     private render;
+    private timeExec;
     private updateSize;
     private getScale;
     private destroy;

@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { BooleanInput, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { FullContentService } from './full-content.service';
 import * as i0 from "@angular/core";
 export declare class FullContentComponent implements AfterViewInit, OnInit, OnChanges, OnDestroy {
@@ -15,10 +15,8 @@ export declare class FullContentComponent implements AfterViewInit, OnInit, OnCh
     static ngAcceptInputType_padding: NumberInput;
     private bodyEl;
     private inited;
-    private srv$?;
-    private route$?;
     private id;
-    private scroll$;
+    private destroy$;
     _height: number;
     fullscreen?: boolean;
     hideTitle: boolean;

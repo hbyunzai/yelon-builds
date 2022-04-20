@@ -1,17 +1,18 @@
 {
   "name": "@yelon/abc",
-  "version": "13.2.0",
+  "version": "13.4.2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "isutf8": "^4.0.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.7.1",
-    "xlsx": "^0.17.4",
+    "xlsx": "^0.18.4",
+    "plyr": "^3.6.12",
     "ngx-countdown": "^13.0.0",
-    "@yelon/theme": "^13.2.0",
-    "@yelon/util": "^13.2.0",
-    "@yelon/acl": "^13.2.0",
+    "@yelon/theme": "^13.4.2",
+    "@yelon/util": "^13.4.2",
+    "@yelon/acl": "^13.4.2",
     "tslib": "^2.3.0"
   },
   "module": "fesm2015/abc.mjs",

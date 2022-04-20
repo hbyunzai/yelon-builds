@@ -20,12 +20,12 @@ export class YzHeaderClearStorageComponent {
         });
     }
 }
-YzHeaderClearStorageComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderClearStorageComponent, deps: [{ token: i1.NzModalService }, { token: i2.NzMessageService }], target: i0.ɵɵFactoryTarget.Component });
-YzHeaderClearStorageComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.3", type: YzHeaderClearStorageComponent, selector: "yz-header-clear-storage", host: { listeners: { "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
+YzHeaderClearStorageComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderClearStorageComponent, deps: [{ token: i1.NzModalService }, { token: i2.NzMessageService }], target: i0.ɵɵFactoryTarget.Component });
+YzHeaderClearStorageComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.3", type: YzHeaderClearStorageComponent, selector: "yz-header-clear-storage", host: { listeners: { "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
     <i nz-icon nzType="tool"></i>
     {{ 'menu.clear.local.storage' | i18n }}
   `, isInline: true, directives: [{ type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { type: i4.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }], pipes: { "i18n": i5.I18nPipe }, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YzHeaderClearStorageComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YzHeaderClearStorageComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yz-header-clear-storage',

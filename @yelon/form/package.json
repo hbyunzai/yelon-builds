@@ -1,14 +1,14 @@
 {
   "name": "@yelon/form",
-  "version": "13.2.0",
+  "version": "13.4.2",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "ajv": "^8.8.2",
+    "ajv": "^8.10.0",
     "ajv-formats": "^2.1.1",
-    "@yelon/theme": "^13.2.0",
-    "@yelon/acl": "^13.2.0",
-    "@yelon/util": "^13.2.0",
+    "@yelon/theme": "^13.4.2",
+    "@yelon/acl": "^13.4.2",
+    "@yelon/util": "^13.4.2",
     "tslib": "^2.3.0"
   },
   "module": "fesm2015/form.mjs",

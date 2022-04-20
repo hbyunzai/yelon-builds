@@ -127,8 +127,8 @@ export class YelonFormModule {
         };
     }
 }
-YelonFormModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonFormModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-YelonFormModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonFormModule, declarations: [SFComponent, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SFFixedDirective, ObjectWidget,
+YelonFormModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonFormModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+YelonFormModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonFormModule, declarations: [SFComponent, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SFFixedDirective, ObjectWidget,
         ArrayWidget,
         StringWidget,
         NumberWidget,
@@ -173,8 +173,8 @@ YelonFormModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version
         NzTransferModule,
         NzTreeSelectModule,
         NzUploadModule], exports: [SFComponent, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SFFixedDirective] });
-YelonFormModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonFormModule, imports: [[CommonModule, FormsModule, YelonLocaleModule, ...ZORROS]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.3", ngImport: i0, type: YelonFormModule, decorators: [{
+YelonFormModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonFormModule, imports: [[CommonModule, FormsModule, YelonLocaleModule, ...ZORROS]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: YelonFormModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, FormsModule, YelonLocaleModule, ...ZORROS],
