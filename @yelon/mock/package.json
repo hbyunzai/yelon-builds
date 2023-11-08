@@ -1,0 +1,48 @@
+{
+  "name": "@yelon/mock",
+  "version": "16.3.8",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbyunzai/yelon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hbyunzai/ng-yunzai/issues"
+  },
+  "homepage": "https://ng.yunzainfo.com",
+  "keywords": [
+    "yelon",
+    "ng-yunzai",
+    "yunzai",
+    "mock",
+    "mockjs",
+    "angular-mock",
+    "ng mock",
+    "ngx-mock",
+    "antd",
+    "ng-zorro-antd",
+    "angular",
+    "component"
+  ],
+  "dependencies": {
+    "mockjs": "^1.1.0",
+    "@types/mockjs": "^1.0.7",
+    "@yelon/util": "^16.3.8",
+    "tslib": "^2.3.0"
+  },
+  "module": "fesm2022/mock.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/mock.mjs",
+      "esm": "./esm2022/mock.mjs",
+      "default": "./fesm2022/mock.mjs"
+    }
+  },
+  "sideEffects": false
+}

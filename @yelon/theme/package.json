@@ -1,0 +1,67 @@
+{
+  "name": "@yelon/theme",
+  "version": "16.3.8",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbyunzai/yelon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hbyunzai/ng-yunzai/issues"
+  },
+  "homepage": "https://ng.yunzainfo.com",
+  "keywords": [
+    "yelon",
+    "ng-yunzai",
+    "yunzai",
+    "antd",
+    "ng-zorro-antd",
+    "angular",
+    "component"
+  ],
+  "dependencies": {
+    "ng-zorro-antd": "16.1.0",
+    "@yelon/acl": "^16.3.8",
+    "@yelon/util": "^16.3.8",
+    "tslib": "^2.3.0"
+  },
+  "module": "fesm2022/theme.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/theme.mjs",
+      "esm": "./esm2022/theme.mjs",
+      "default": "./fesm2022/theme.mjs"
+    },
+    "./layout-blank": {
+      "types": "./layout-blank/index.d.ts",
+      "esm2022": "./esm2022/layout-blank/layout-blank.mjs",
+      "esm": "./esm2022/layout-blank/layout-blank.mjs",
+      "default": "./fesm2022/layout-blank.mjs"
+    },
+    "./layout-default": {
+      "types": "./layout-default/index.d.ts",
+      "esm2022": "./esm2022/layout-default/layout-default.mjs",
+      "esm": "./esm2022/layout-default/layout-default.mjs",
+      "default": "./fesm2022/layout-default.mjs"
+    },
+    "./setting-drawer": {
+      "types": "./setting-drawer/index.d.ts",
+      "esm2022": "./esm2022/setting-drawer/setting-drawer.mjs",
+      "esm": "./esm2022/setting-drawer/setting-drawer.mjs",
+      "default": "./fesm2022/setting-drawer.mjs"
+    },
+    "./theme-btn": {
+      "types": "./theme-btn/index.d.ts",
+      "esm2022": "./esm2022/theme-btn/theme-btn.mjs",
+      "esm": "./esm2022/theme-btn/theme-btn.mjs",
+      "default": "./fesm2022/theme-btn.mjs"
+    }
+  },
+  "sideEffects": false
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"bis.mjs","sources":["../../../../packages/bis/public_api.ts","../../../../packages/bis/bis.ts"],"sourcesContent":["export default void 0;\n","/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './index';\n"],"names":[],"mappings":"AAAA,iBAAe,KAAK,CAAC;;ACArB;;AAEG"}

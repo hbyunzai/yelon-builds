@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "migration-v16": {
+      "version": "16",
+      "description": "Updates NG-YUNZAI to v16 [https://github.com/hbyunzai/ng-yunzai/issues/2390]",
+      "factory": "./ng-update/index#updateToV16"
+    },
+    "ng-post-update": {
+      "description": "Performs cleanup after ng-update.",
+      "factory": "./ng-update/index#postUpdate",
+      "private": true
+    }
+  }
+}
+

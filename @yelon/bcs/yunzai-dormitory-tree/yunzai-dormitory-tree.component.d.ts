@@ -1,0 +1,36 @@
+import { AfterViewInit, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { SFComponent } from '@yelon/form';
+import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
+import { YunzaiDormitoryTreeService } from './yunzai-dormitory-tree.service';
+import { YunzaiDormitoryTree, YunzaiDormitoryTreeParam, YunzaiDormitoryTreeProps, YunzaiDormitoryTreeState } from './yunzai-dormitory-tree.types';
+import * as i0 from "@angular/core";
+export declare class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit, OnDestroy {
+    private dormitoryService;
+    sf: SFComponent;
+    props?: YunzaiDormitoryTreeProps;
+    onQueryComplete: EventEmitter<YunzaiDormitoryTree[]>;
+    onSelect: EventEmitter<YunzaiDormitoryTree[]>;
+    private $destroy;
+    state: YunzaiDormitoryTreeState;
+    get data(): YunzaiDormitoryTree[];
+    set data(dorms: YunzaiDormitoryTree[]);
+    get nodes(): NzTreeNode[];
+    get isMultiple(): boolean;
+    get param(): YunzaiDormitoryTreeParam;
+    get isWrapped(): boolean;
+    get isExpanded(): boolean;
+    constructor(dormitoryService: YunzaiDormitoryTreeService);
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    hookFormChange(): void;
+    recursionSearch(search: string, dorms: YunzaiDormitoryTree[]): YunzaiDormitoryTree[];
+    query(param: YunzaiDormitoryTreeParam): void;
+    load(): void;
+    unload(): void;
+    mapDormTree(tree: NzTreeNode[]): void;
+    activeNode(data: NzFormatEmitEvent): void;
+    open(data: NzTreeNode | NzFormatEmitEvent): void;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiDormitoryTreeComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiDormitoryTreeComponent, "yunzai-dormitory-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, false, never>;
+}

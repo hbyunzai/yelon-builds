@@ -1,0 +1,45 @@
+{
+  "name": "@yelon/auth",
+  "version": "16.3.8",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbyunzai/yelon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hbyunzai/ng-yunzai/issues"
+  },
+  "homepage": "https://ng.yunzainfo.com",
+  "keywords": [
+    "angular auth",
+    "ng auth",
+    "ngx auth",
+    "angular jwt",
+    "ng jwt",
+    "ngx jwt",
+    "yelon",
+    "ng-yunzai",
+    "yunzai",
+    "antd",
+    "ng-zorro-antd"
+  ],
+  "dependencies": {
+    "@yelon/util": "^16.3.8",
+    "tslib": "^2.3.0"
+  },
+  "module": "fesm2022/auth.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/auth.mjs",
+      "esm": "./esm2022/auth.mjs",
+      "default": "./fesm2022/auth.mjs"
+    }
+  },
+  "sideEffects": false
+}
