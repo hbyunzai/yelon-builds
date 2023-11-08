@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "16.3.8",
+  "version": "16.3.7-3098a9c",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^2.0.1",
     "ngx-countdown": "^16.0.0",
-    "@yelon/theme": "^16.3.8",
-    "@yelon/util": "^16.3.8",
-    "@yelon/acl": "^16.3.8",
+    "@yelon/theme": "^16.3.7-3098a9c",
+    "@yelon/util": "^16.3.7-3098a9c",
+    "@yelon/acl": "^16.3.7-3098a9c",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -75,17 +75,17 @@
       "esm": "./esm2022/date-picker/date-picker.mjs",
       "default": "./fesm2022/date-picker.mjs"
     },
-    "./ellipsis": {
-      "types": "./ellipsis/index.d.ts",
-      "esm2022": "./esm2022/ellipsis/ellipsis.mjs",
-      "esm": "./esm2022/ellipsis/ellipsis.mjs",
-      "default": "./fesm2022/ellipsis.mjs"
-    },
     "./down-file": {
       "types": "./down-file/index.d.ts",
       "esm2022": "./esm2022/down-file/down-file.mjs",
       "esm": "./esm2022/down-file/down-file.mjs",
       "default": "./fesm2022/down-file.mjs"
+    },
+    "./ellipsis": {
+      "types": "./ellipsis/index.d.ts",
+      "esm2022": "./esm2022/ellipsis/ellipsis.mjs",
+      "esm": "./esm2022/ellipsis/ellipsis.mjs",
+      "default": "./fesm2022/ellipsis.mjs"
     },
     "./error-collect": {
       "types": "./error-collect/index.d.ts",

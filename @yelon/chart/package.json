@@ -1,6 +1,6 @@
 {
   "name": "@yelon/chart",
-  "version": "16.3.8",
+  "version": "16.3.7-3098a9c",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,8 +28,8 @@
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.10",
     "echarts": "^5.4.3",
-    "@yelon/util": "^16.3.8",
-    "@yelon/theme": "^16.3.8",
+    "@yelon/util": "^16.3.7-3098a9c",
+    "@yelon/theme": "^16.3.7-3098a9c",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/chart.mjs",
@@ -62,6 +62,12 @@
       "esm": "./esm2022/chart-echarts/chart-echarts.mjs",
       "default": "./fesm2022/chart-echarts.mjs"
     },
+    "./core": {
+      "types": "./core/index.d.ts",
+      "esm2022": "./esm2022/core/core.mjs",
+      "esm": "./esm2022/core/core.mjs",
+      "default": "./fesm2022/core.mjs"
+    },
     "./custom": {
       "types": "./custom/index.d.ts",
       "esm2022": "./esm2022/custom/custom.mjs",
@@ -73,12 +79,6 @@
       "esm2022": "./esm2022/gauge/gauge.mjs",
       "esm": "./esm2022/gauge/gauge.mjs",
       "default": "./fesm2022/gauge.mjs"
-    },
-    "./core": {
-      "types": "./core/index.d.ts",
-      "esm2022": "./esm2022/core/core.mjs",
-      "esm": "./esm2022/core/core.mjs",
-      "default": "./fesm2022/core.mjs"
     },
     "./mini-area": {
       "types": "./mini-area/index.d.ts",
