@@ -6,11 +6,13 @@ import * as i0 from "@angular/core";
 export declare class YunzaiAnalysisAddonGuardService {
     private configService;
     private pathToRegexp;
+    private win;
     private tokenService;
     private bis;
     private menus;
     private links;
-    constructor(configService: YunzaiConfigService, pathToRegexp: PathToRegexpService, tokenService: ITokenService);
+    private value;
+    constructor(configService: YunzaiConfigService, pathToRegexp: PathToRegexpService, win: any, tokenService: ITokenService);
     process(url: string): boolean;
     getAllLinks(menu: Menu[], links: Array<{
         title: string;

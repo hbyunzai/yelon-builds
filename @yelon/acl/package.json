@@ -1,6 +1,6 @@
 {
   "name": "@yelon/acl",
-  "version": "16.3.8",
+  "version": "16.3.8-a22c4e7",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -26,7 +26,7 @@
     "component"
   ],
   "dependencies": {
-    "@yelon/util": "^16.3.8",
+    "@yelon/util": "^16.3.8-a22c4e7",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/acl.mjs",

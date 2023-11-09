@@ -3219,20 +3219,22 @@ class AnalysisAddon {
 }
 
 class YunzaiAnalysisAddonGuardService {
-    constructor(configService, pathToRegexp, tokenService) {
+    constructor(configService, pathToRegexp, win, tokenService) {
         this.configService = configService;
         this.pathToRegexp = pathToRegexp;
+        this.win = win;
         this.tokenService = tokenService;
         this.bis = BUSINESS_DEFAULT_CONFIG;
         this.menus = [];
         this.links = [];
+        this.value = {};
         this.bis = mergeBisConfig(this.configService);
         const [, getUser] = useLocalStorageUser();
         const user = getUser();
         // @ts-ignore
         this.menus = deepCopy(user.menu || []).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
         if (user) {
-            AnalysisAddon.putValueInAnalysis({
+            this.value = {
                 userid: user.id,
                 realname: user.realname,
                 usertype: user.userType,
@@ -3242,10 +3244,10 @@ class YunzaiAnalysisAddonGuardService {
                 deptid: user.deptId,
                 deptname: user.deptName,
                 token: this.tokenService.get()?.access_token
-            });
+            };
         }
         if (this.menus && this.menus.length > 0) {
-            AnalysisAddon.putValueInAnalysis({ system: this.menus[0].text });
+            this.value['system'] = this.menus[0].text;
         }
         this.getAllLinks(this.menus, this.links);
     }
@@ -3254,27 +3256,30 @@ class YunzaiAnalysisAddonGuardService {
         this.links.forEach((link) => {
             if (link.link === url.split('?')[0]) {
                 flag = true;
-                AnalysisAddon.putValueInAnalysis({
-                    routename: link.title,
-                    routeurl: link.link
-                });
+                this.value['routename'] = link.title;
+                this.value['routeurl'] = link.link;
+                if (this.win['yunzai']) {
+                    this.win['yunzai'].setExtra(this.value);
+                }
                 return;
             }
             const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
             if (regexp.test(url.split('?')[0])) {
                 flag = true;
-                AnalysisAddon.putValueInAnalysis({
-                    routename: link.title,
-                    routeurl: link.link
-                });
+                this.value['routename'] = link.title;
+                this.value['routeurl'] = link.link;
+                if (this.win['yunzai']) {
+                    this.win['yunzai'].setExtra(this.value);
+                }
                 return;
             }
         });
         if (!flag) {
-            AnalysisAddon.putValueInAnalysis({
-                routename: url,
-                routeurl: url
-            });
+            this.value['routename'] = url;
+            this.value['routeurl'] = url;
+            if (this.win['yunzai']) {
+                this.win['yunzai'].setExtra(this.value);
+            }
         }
         return true;
     }
@@ -3288,7 +3293,7 @@ class YunzaiAnalysisAddonGuardService {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1$3.YunzaiConfigService }, { token: i1$3.PathToRegexpService }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1$3.YunzaiConfigService }, { token: i1$3.PathToRegexpService }, { token: WINDOW }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, providedIn: 'root' }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, decorators: [{
@@ -3297,6 +3302,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     providedIn: 'root'
                 }]
         }], ctorParameters: function () { return [{ type: i1$3.YunzaiConfigService }, { type: i1$3.PathToRegexpService }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [WINDOW]
+                }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [YA_SERVICE_TOKEN]
                 }] }]; } });
