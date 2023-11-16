@@ -850,7 +850,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     args: [YUNZAI_I18N_TOKEN]
                 }] }, { type: i1.YunzaiConfigService }]; } });
 /**
- * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
+ * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
+ *
+ * 国际化守卫，自动识别Url中的语言，并触发 `YUNZAI_I18N_TOKEN.use` 方法
  *
  * ```ts
  * data: {
@@ -861,7 +863,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
  */
 const yunzaiI18nCanActivate = childRoute => inject(YunzaiI18NGuardService).process(childRoute);
 /**
- * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
+ * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
+ *
+ * 国际化守卫，自动识别Url中的语言，并触发 `YUNZAI_I18N_TOKEN.use` 方法
  *
  * ```ts
  * data: {

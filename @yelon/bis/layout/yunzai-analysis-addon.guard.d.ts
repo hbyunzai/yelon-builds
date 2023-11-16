@@ -1,7 +1,7 @@
-import { CanActivateChildFn, CanActivateFn } from "@angular/router";
-import { PathToRegexpService, YunzaiConfigService } from "@yelon/util";
-import { Menu } from "@yelon/theme";
-import { ITokenService } from "@yelon/auth";
+import { CanActivateChildFn, CanActivateFn } from '@angular/router';
+import { ITokenService } from '@yelon/auth';
+import { Menu } from '@yelon/theme';
+import { PathToRegexpService, YunzaiConfigService } from '@yelon/util';
 import * as i0 from "@angular/core";
 export declare class YunzaiAnalysisAddonGuardService {
     private configService;

@@ -12,7 +12,9 @@ export declare class YunzaiI18NGuardService {
     static ɵprov: i0.ɵɵInjectableDeclaration<YunzaiI18NGuardService>;
 }
 /**
- * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
+ * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
+ *
+ * 国际化守卫，自动识别Url中的语言，并触发 `YUNZAI_I18N_TOKEN.use` 方法
  *
  * ```ts
  * data: {
@@ -23,7 +25,9 @@ export declare class YunzaiI18NGuardService {
  */
 export declare const yunzaiI18nCanActivate: CanActivateFn;
 /**
- * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
+ * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
+ *
+ * 国际化守卫，自动识别Url中的语言，并触发 `YUNZAI_I18N_TOKEN.use` 方法
  *
  * ```ts
  * data: {

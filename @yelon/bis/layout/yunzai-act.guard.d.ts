@@ -1,9 +1,8 @@
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { Menu } from '@yelon/theme';
 import { YunzaiConfigService, PathToRegexpService } from '@yelon/util';
 import * as i0 from "@angular/core";
-export declare class ActGuard implements CanActivate, CanActivateChild {
+export declare class ActGuardService {
     private configService;
     private pathToRegexp;
     private router;
@@ -11,10 +10,11 @@ export declare class ActGuard implements CanActivate, CanActivateChild {
     private menus;
     private links;
     constructor(configService: YunzaiConfigService, pathToRegexp: PathToRegexpService, router: Router);
-    canActivate(_: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree;
-    canActivateChild(_: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree;
-    preHandle(state: RouterStateSnapshot): boolean;
+    process(url: string): boolean;
+    preHandle(url: string): boolean;
     getAllLinks(menu: Menu[], links: string[]): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<ActGuard, never>;
-    static ɵprov: i0.ɵɵInjectableDeclaration<ActGuard>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ActGuardService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ActGuardService>;
 }
+export declare const actGuardCanActive: CanActivateFn;
+export declare const actGuardCanActiveChild: CanActivateChildFn;

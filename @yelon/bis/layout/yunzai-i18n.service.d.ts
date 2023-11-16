@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITokenService } from "@yelon/auth";
+import { ITokenService } from '@yelon/auth';
 import { YelonLocaleService, SettingsService, _HttpClient, YunzaiI18nBaseService, YunzaiI18NType } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

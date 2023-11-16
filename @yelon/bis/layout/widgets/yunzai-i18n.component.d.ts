@@ -1,7 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { SettingsService, YunzaiI18NType } from '@yelon/theme';
-import { YunzaiI18NService } from "../yunzai-i18n.service";
 import { BooleanInput } from '@yelon/util/decorator';
+import { YunzaiI18NService } from '../yunzai-i18n.service';
 import * as i0 from "@angular/core";
 export declare class YunzaiI18NComponent implements OnDestroy {
     private settings;

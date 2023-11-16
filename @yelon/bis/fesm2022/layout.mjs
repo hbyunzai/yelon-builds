@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Component, ChangeDetectionStrategy, HostListener, Injectable, Inject, Input, Optional, NgModule, APP_INITIALIZER, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostListener, Injectable, Inject, Input, Optional, inject, NgModule, APP_INITIALIZER } from '@angular/core';
 import * as i1$3 from '@yelon/util';
 import { WINDOW, useLocalStorageProjectInfo, useLocalStorageUser, useLocalStorageHeader, NavType, hasFavicon, setFavicon, useLocalStorageCurrent, useLocalStorageHeaderType, useLocalStorageDefaultRoute, log as log$1, deepCopy, YunzaiConfigService, useLocalStorageTenant } from '@yelon/util';
 import * as i1$4 from '@yelon/theme/layout-default';
@@ -20,11 +20,12 @@ import * as i1$2 from '@yelon/theme';
 import { zh_CN as zh_CN$1, zh_TW as zh_TW$1, en_US as en_US$1, el_GR as el_GR$1, es_ES as es_ES$1, fr_FR as fr_FR$1, hr_HR as hr_HR$1, it_IT as it_IT$1, ko_KR as ko_KR$1, pl_PL as pl_PL$1, sl_SI as sl_SI$1, tr_TR as tr_TR$1, YunzaiI18nBaseService, YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
 import screenfull from 'screenfull';
 import { __decorate } from 'tslib';
-import { InputBoolean } from '@yelon/util/decorator';
 import { Subject, takeUntil, catchError, of, forkJoin, map as map$1, mergeMap, combineLatest, BehaviorSubject, throwError, filter, take, switchMap } from 'rxjs';
+import { InputBoolean } from '@yelon/util/decorator';
 import ngEn from '@angular/common/locales/en';
 import { zhCN, zhTW, enUS, el, es, fr, hr, it, ko, pl, sl, tr } from 'date-fns/locale';
 import { map } from 'rxjs/operators';
+import { YA_SERVICE_TOKEN, ALLOW_ANONYMOUS } from '@yelon/auth';
 import * as i2 from 'ng-zorro-antd/i18n';
 import { zh_CN, zh_TW, en_US, el_GR, es_ES, fr_FR, hr_HR, it_IT, ko_KR, pl_PL, sl_SI, tr_TR } from 'ng-zorro-antd/i18n';
 import ngElGr from '@angular/common/locales/el';
@@ -38,7 +39,6 @@ import ngSl from '@angular/common/locales/sl';
 import ngTr from '@angular/common/locales/tr';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
-import { YA_SERVICE_TOKEN, ALLOW_ANONYMOUS } from '@yelon/auth';
 import * as i3$1 from '@angular/cdk/platform';
 import * as i4 from '@yelon/util/config';
 import { YunzaiConfigService as YunzaiConfigService$1 } from '@yelon/util/config';
@@ -400,7 +400,7 @@ class YunzaiI18NComponent {
         </li>
       </ul>
     </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "directive", type: i4$2.NzMenuItemDirective, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 __decorate([
     InputBoolean()
@@ -504,7 +504,9 @@ class YunzaiNotifyComponent {
     loadData() {
         this.count = 0;
         this.loading = true;
-        this.subs.push(forkJoin(this.loadTodo(), this.loadMessage()).subscribe(() => {
+        this.subs.push(
+        // @ts-ignore
+        forkJoin(this.loadTodo(), this.loadMessage()).subscribe(() => {
             this.loading = false;
             this.cdr.detectChanges();
         }));
@@ -606,7 +608,7 @@ class YunzaiNotifyComponent {
       btnIconClass="yunzai-default__nav-item-icon"
       (select)="select($event)"
       (clear)="clear($event)"
-    ></notice-icon>
+    />
   `, isInline: true, dependencies: [{ kind: "component", type: i4$3.NoticeIconComponent, selector: "notice-icon", inputs: ["data", "count", "loading", "popoverVisible", "btnClass", "btnIconClass", "centered"], outputs: ["select", "clear", "popoverVisibleChange"], exportAs: ["noticeIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiNotifyComponent, decorators: [{
@@ -622,7 +624,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
       btnIconClass="yunzai-default__nav-item-icon"
       (select)="select($event)"
       (clear)="clear($event)"
-    ></notice-icon>
+    />
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }]
@@ -721,7 +723,7 @@ class YunzaiThemBtnComponent {
           <g fill-rule="nonzero">
             <path
               d="M7.02 3.635l12.518 12.518a1.863 1.863 0 010 2.635l-1.317 1.318a1.863 1.863 0 01-2.635 0L3.068 7.588A2.795 2.795 0 117.02 3.635zm2.09 14.428a.932.932 0 110 1.864.932.932 0 010-1.864zm-.043-9.747L7.75 9.635l9.154 9.153 1.318-1.317-9.154-9.155zM3.52 12.473c.514 0 .931.417.931.931v.932h.932a.932.932 0 110 1.864h-.932v.931a.932.932 0 01-1.863 0l-.001-.931h-.93a.932.932 0 010-1.864h.93v-.932c0-.514.418-.931.933-.931zm15.374-3.727a1.398 1.398 0 110 2.795 1.398 1.398 0 010-2.795zM4.385 4.953a.932.932 0 000 1.317l2.046 2.047L7.75 7 5.703 4.953a.932.932 0 00-1.318 0zM14.701.36a.932.932 0 01.931.932v.931h.932a.932.932 0 010 1.864h-.933l.001.932a.932.932 0 11-1.863 0l-.001-.932h-.93a.932.932 0 110-1.864h.93v-.931a.932.932 0 01.933-.932z"
-            ></path>
+            />
           </g>
         </g>
       </svg>
@@ -749,7 +751,7 @@ class YunzaiThemBtnComponent {
       <!--        </div>-->
       <!--      </div>-->
     </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "directive", type: i4$2.NzMenuItemDirective, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i8.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i8.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiThemBtnComponent, decorators: [{
             type: Component,
@@ -769,7 +771,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
           <g fill-rule="nonzero">
             <path
               d="M7.02 3.635l12.518 12.518a1.863 1.863 0 010 2.635l-1.317 1.318a1.863 1.863 0 01-2.635 0L3.068 7.588A2.795 2.795 0 117.02 3.635zm2.09 14.428a.932.932 0 110 1.864.932.932 0 010-1.864zm-.043-9.747L7.75 9.635l9.154 9.153 1.318-1.317-9.154-9.155zM3.52 12.473c.514 0 .931.417.931.931v.932h.932a.932.932 0 110 1.864h-.932v.931a.932.932 0 01-1.863 0l-.001-.931h-.93a.932.932 0 010-1.864h.93v-.932c0-.514.418-.931.933-.931zm15.374-3.727a1.398 1.398 0 110 2.795 1.398 1.398 0 010-2.795zM4.385 4.953a.932.932 0 000 1.317l2.046 2.047L7.75 7 5.703 4.953a.932.932 0 00-1.318 0zM14.701.36a.932.932 0 01.931.932v.931h.932a.932.932 0 010 1.864h-.933l.001.932a.932.932 0 11-1.863 0l-.001-.932h-.93a.932.932 0 110-1.864h.93v-.931a.932.932 0 01.933-.932z"
-            ></path>
+            />
           </g>
         </g>
       </svg>
@@ -878,7 +880,7 @@ class YunzaiUserComponent {
       [nzDropdownMenu]="userMenu"
     >
       <div class="yz-user-name">
-        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm"></nz-avatar>
+        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm" />
         {{ username }}
       </div>
     </div>
@@ -901,7 +903,7 @@ class YunzaiUserComponent {
         </div>
       </div>
     </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "directive", type: i4$2.NzMenuItemDirective, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i4$2.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8$1.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i4$2.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8$1.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiUserComponent, decorators: [{
             type: Component,
@@ -916,7 +918,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
       [nzDropdownMenu]="userMenu"
     >
       <div class="yz-user-name">
-        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm"></nz-avatar>
+        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm" />
         {{ username }}
       </div>
     </div>
@@ -974,17 +976,17 @@ class LayoutNavApplicationComponent {
             topic: undefined,
             topics: [],
             list: [],
-            search: null,
+            search: null
         };
         this.bis = mergeBisConfig(configService);
     }
     ngOnInit() {
         this.fetchAllTopic();
         this.attachNav('all');
-        this.win.addEventListener("click", (event) => {
+        this.win.addEventListener('click', (event) => {
             const { target } = event;
-            const btn = this.win.document.getElementById("navBtn");
-            const dropdown = this.win.document.getElementById("navDropdown");
+            const btn = this.win.document.getElementById('navBtn');
+            const dropdown = this.win.document.getElementById('navDropdown');
             if (btn && dropdown && !dropdown.contains(target) && !btn.contains(target)) {
                 this.state.active = false;
             }
@@ -1128,7 +1130,7 @@ class LayoutNavApplicationComponent {
               href="javascript:;"
               *ngFor="let nav of topic.children"
               (click)="open(nav)"
-            >{{ nav.name | i18n }}</a
+              >{{ nav.name | i18n }}</a
             >
           </li>
         </ul>
@@ -1137,28 +1139,37 @@ class LayoutNavApplicationComponent {
     <!-- right menu end -->
 
     <!--      button start-->
-    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item"
-         (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
+    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item" (click)="diffChange()">{{
+      'mode.nav' | i18n
+    }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div *ngIf="showAllMenu" data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text"
-             (click)="attachNav('all')">{{
-          'mode.nav.all' | i18n
-          }}</div>
-        <div *ngIf="showMineMenu" data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text"
-             (click)="attachNav('mine')">{{
-          'mode.nav.mine' | i18n
-          }}</div>
+        <div
+          *ngIf="showAllMenu"
+          data-event-id="_nav_topic"
+          data-name="全部应用"
+          class="yz-application-text"
+          (click)="attachNav('all')"
+          >{{ 'mode.nav.all' | i18n }}</div
+        >
+        <div
+          *ngIf="showMineMenu"
+          data-event-id="_nav_topic"
+          data-name="我的应用"
+          class="yz-application-text"
+          (click)="attachNav('mine')"
+          >{{ 'mode.nav.mine' | i18n }}</div
+        >
         <div
           data-event-id="_nav_topic"
           [attr.data-name]="nav.name | i18n"
           class="yz-application-text"
           *ngFor="let nav of state.topics"
           (click)="attachNav('other', nav)"
-        >{{ nav.name | i18n }}</div
+          >{{ nav.name | i18n }}</div
         >
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
@@ -1190,7 +1201,7 @@ class LayoutNavApplicationComponent {
       </div>
     </div>
     <!--      header end-->
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i4$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i5$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i5$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i5$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i7.NzColDirective, selector: "[nz-col],nz-col,nz-form-control,nz-form-label", inputs: ["nzFlex", "nzSpan", "nzOrder", "nzOffset", "nzPush", "nzPull", "nzXs", "nzSm", "nzMd", "nzLg", "nzXl", "nzXXl"], exportAs: ["nzCol"] }, { kind: "directive", type: i7.NzRowDirective, selector: "[nz-row],nz-row,nz-form-item", inputs: ["nzAlign", "nzJustify", "nzGutter"], exportAs: ["nzRow"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: i9.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: i9.NzInputGroupComponent, selector: "nz-input-group", inputs: ["nzAddOnBeforeIcon", "nzAddOnAfterIcon", "nzPrefixIcon", "nzSuffixIcon", "nzAddOnBefore", "nzAddOnAfter", "nzPrefix", "nzStatus", "nzSuffix", "nzSize", "nzSearch", "nzCompact"], exportAs: ["nzInputGroup"] }, { kind: "directive", type: i9.NzInputGroupWhitSuffixOrPrefixDirective, selector: "nz-input-group[nzSuffix], nz-input-group[nzPrefix]" }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i4$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i5$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i5$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i5$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i7.NzColDirective, selector: "[nz-col],nz-col,nz-form-control,nz-form-label", inputs: ["nzFlex", "nzSpan", "nzOrder", "nzOffset", "nzPush", "nzPull", "nzXs", "nzSm", "nzMd", "nzLg", "nzXl", "nzXXl"], exportAs: ["nzCol"] }, { kind: "directive", type: i7.NzRowDirective, selector: "[nz-row],nz-row,nz-form-item", inputs: ["nzAlign", "nzJustify", "nzGutter"], exportAs: ["nzRow"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: i9.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: i9.NzInputGroupComponent, selector: "nz-input-group", inputs: ["nzAddOnBeforeIcon", "nzAddOnAfterIcon", "nzPrefixIcon", "nzSuffixIcon", "nzAddOnBefore", "nzAddOnAfter", "nzPrefix", "nzStatus", "nzSuffix", "nzSize", "nzSearch", "nzCompact"], exportAs: ["nzInputGroup"] }, { kind: "directive", type: i9.NzInputGroupWhitSuffixOrPrefixDirective, selector: "nz-input-group[nzSuffix], nz-input-group[nzPrefix]" }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavApplicationComponent, decorators: [{
             type: Component,
@@ -1229,7 +1240,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
               href="javascript:;"
               *ngFor="let nav of topic.children"
               (click)="open(nav)"
-            >{{ nav.name | i18n }}</a
+              >{{ nav.name | i18n }}</a
             >
           </li>
         </ul>
@@ -1238,28 +1249,37 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
     <!-- right menu end -->
 
     <!--      button start-->
-    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item"
-         (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
+    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item" (click)="diffChange()">{{
+      'mode.nav' | i18n
+    }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div *ngIf="showAllMenu" data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text"
-             (click)="attachNav('all')">{{
-          'mode.nav.all' | i18n
-          }}</div>
-        <div *ngIf="showMineMenu" data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text"
-             (click)="attachNav('mine')">{{
-          'mode.nav.mine' | i18n
-          }}</div>
+        <div
+          *ngIf="showAllMenu"
+          data-event-id="_nav_topic"
+          data-name="全部应用"
+          class="yz-application-text"
+          (click)="attachNav('all')"
+          >{{ 'mode.nav.all' | i18n }}</div
+        >
+        <div
+          *ngIf="showMineMenu"
+          data-event-id="_nav_topic"
+          data-name="我的应用"
+          class="yz-application-text"
+          (click)="attachNav('mine')"
+          >{{ 'mode.nav.mine' | i18n }}</div
+        >
         <div
           data-event-id="_nav_topic"
           [attr.data-name]="nav.name | i18n"
           class="yz-application-text"
           *ngFor="let nav of state.topics"
           (click)="attachNav('other', nav)"
-        >{{ nav.name | i18n }}</div
+          >{{ nav.name | i18n }}</div
         >
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
@@ -1370,7 +1390,7 @@ class LayoutNavGroupComponent {
         </nz-tab>
       </nz-tabset>
     </div>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "directive", type: i4$2.NzMenuItemDirective, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i5.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i7$1.NzTabSetComponent, selector: "nz-tabset", inputs: ["nzSelectedIndex", "nzTabPosition", "nzTabBarExtraContent", "nzCanDeactivate", "nzAddIcon", "nzTabBarStyle", "nzType", "nzSize", "nzAnimated", "nzTabBarGutter", "nzHideAdd", "nzCentered", "nzHideAll", "nzLinkRouter", "nzLinkExact"], outputs: ["nzSelectChange", "nzSelectedIndexChange", "nzTabListScroll", "nzClose", "nzAdd"], exportAs: ["nzTabset"] }, { kind: "component", type: i7$1.NzTabComponent, selector: "nz-tab", inputs: ["nzTitle", "nzClosable", "nzCloseIcon", "nzDisabled", "nzForceRender"], outputs: ["nzSelect", "nzDeselect", "nzClick", "nzContextmenu"], exportAs: ["nzTab"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i5.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i7$1.NzTabSetComponent, selector: "nz-tabset", inputs: ["nzSelectedIndex", "nzTabPosition", "nzTabBarExtraContent", "nzCanDeactivate", "nzAddIcon", "nzTabBarStyle", "nzType", "nzSize", "nzAnimated", "nzTabBarGutter", "nzHideAdd", "nzCentered", "nzHideAll", "nzLinkRouter", "nzLinkExact"], outputs: ["nzSelectChange", "nzSelectedIndexChange", "nzTabListScroll", "nzClose", "nzAdd"], exportAs: ["nzTabset"] }, { kind: "component", type: i7$1.NzTabComponent, selector: "nz-tab", inputs: ["nzTitle", "nzClosable", "nzCloseIcon", "nzDisabled", "nzForceRender"], outputs: ["nzSelect", "nzDeselect", "nzClick", "nzContextmenu"], exportAs: ["nzTab"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavGroupComponent, decorators: [{
             type: Component,
@@ -1413,13 +1433,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
 class LayoutNavTileComponent {
     constructor() { }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavTileComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutNavTileComponent, selector: "layout-nav-tile", ngImport: i0, template: `<template></template>`, isInline: true }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutNavTileComponent, selector: "layout-nav-tile", ngImport: i0, template: `<ng-template />`, isInline: true }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavTileComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `layout-nav-tile`,
-                    template: `<template></template>`
+                    template: `<ng-template />`
                 }]
         }], ctorParameters: function () { return []; } });
 
@@ -1472,7 +1492,7 @@ class YunzaiLayoutBasicComponent {
                 aside: true,
                 reusetab: true
             },
-            navType: NavType.APPLICATION,
+            navType: NavType.APPLICATION
         };
     }
     ngOnInit() {
@@ -1556,25 +1576,25 @@ class YunzaiLayoutBasicComponent {
       <layout-default-header-item direction="left">
         <ng-container [ngSwitch]="navType">
           <ng-container *ngSwitchCase="NavType.APPLICATION">
-            <layout-nav-application></layout-nav-application>
+            <layout-nav-application />
           </ng-container>
           <ng-container *ngSwitchCase="NavType.GROUP">
-            <layout-nav-group></layout-nav-group>
+            <layout-nav-group />
           </ng-container>
           <ng-container *ngSwitchCase="NavType.TILE">
-            <layout-nav-tile></layout-nav-tile>
+            <layout-nav-tile />
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <layout-nav-application></layout-nav-application>
+            <layout-nav-application />
           </ng-container>
         </ng-container>
       </layout-default-header-item>
       <!-- nav end -->
       <layout-default-header-item direction="right" hidden="mobile">
-        <yunzai-notify></yunzai-notify>
+        <yunzai-notify />
       </layout-default-header-item>
       <layout-default-header-item direction="right" hidden="mobile">
-        <yunzai-theme-btn></yunzai-theme-btn>
+        <yunzai-theme-btn />
       </layout-default-header-item>
       <!-- setting -->
       <layout-default-header-item direction="right" hidden="mobile">
@@ -1612,19 +1632,19 @@ class YunzaiLayoutBasicComponent {
               {{ 'mode.nav.tile' | i18n }}
             </div>
             <div data-event-id="_nav_fullscreen" nz-menu-item>
-              <yunzai-fullscreen></yunzai-fullscreen>
+              <yunzai-fullscreen />
             </div>
             <div data-event-id="_nav_clearstorage" nz-menu-item>
-              <yunzai-clearstorage></yunzai-clearstorage>
+              <yunzai-clearstorage />
             </div>
             <div data-event-id="_nav_i18n" nz-menu-item>
-              <yunzai-i18n></yunzai-i18n>
+              <yunzai-i18n />
             </div>
           </div>
         </nz-dropdown-menu>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
-        <yunzai-user></yunzai-user>
+        <yunzai-user />
       </layout-default-header-item>
       <!-- setting end -->
     </layout-default>
@@ -1636,7 +1656,7 @@ class YunzaiLayoutBasicComponent {
         [nzDropdownMenu]="userMenu"
         class="yunzai-default__aside-user"
       >
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon"></nz-avatar>
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" />
         <div class="yunzai-default__aside-user-info">
           <strong>{{ aside.name | i18n }}</strong>
           <p class="mb0">{{ aside.intro | i18n }}</p>
@@ -1649,13 +1669,11 @@ class YunzaiLayoutBasicComponent {
       </nz-dropdown-menu>
     </ng-template>
     <ng-template #contentTpl>
-      <reuse-tab #reuseTab [ngStyle]="reusetabCSS"></reuse-tab>
-      <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
+      <reuse-tab #reuseTab [ngStyle]="reusetabCSS" />
+      <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
-    <ng-template #noneTpl>
-      <router-outlet></router-outlet>
-    </ng-template>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i4$1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "directive", type: i4$1.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { kind: "directive", type: i4$4.RouterOutlet, selector: "router-outlet", inputs: ["name"], outputs: ["activate", "deactivate", "attach", "detach"], exportAs: ["outlet"] }, { kind: "directive", type: i4$4.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "component", type: i5$2.ReuseTabComponent, selector: "reuse-tab, [reuse-tab]", inputs: ["mode", "i18n", "debug", "max", "tabMaxWidth", "excludes", "allowClose", "keepingScroll", "storageState", "keepingScrollContainer", "customContextMenu", "tabBarExtraContent", "tabBarGutter", "tabBarStyle", "tabType", "routeParamMatchMode", "disabled", "titleRender", "canClose"], outputs: ["change", "close"], exportAs: ["reuseTab"] }, { kind: "component", type: i1$4.LayoutDefaultComponent, selector: "layout-default", inputs: ["options", "asideUser", "asideBottom", "nav", "content", "customError", "fetchingStrictly", "fetching"], exportAs: ["layoutDefault"] }, { kind: "component", type: i1$4.LayoutDefaultHeaderItemComponent, selector: "layout-default-header-item", inputs: ["hidden", "direction"] }, { kind: "directive", type: i1$4.LayoutDefaultHeaderItemTriggerDirective, selector: "[layout-default-header-item-trigger]" }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "directive", type: i4$2.NzMenuItemDirective, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8$1.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "component", type: YunzaiClearStorageComponent, selector: "yunzai-clearstorage" }, { kind: "component", type: YunzaiFullScreenComponent, selector: "yunzai-fullscreen" }, { kind: "component", type: YunzaiI18NComponent, selector: "yunzai-i18n", inputs: ["showLangText"] }, { kind: "component", type: YunzaiNotifyComponent, selector: "yunzai-notify" }, { kind: "component", type: YunzaiThemBtnComponent, selector: "yunzai-theme-btn", inputs: ["types", "devTips", "deployUrl"] }, { kind: "component", type: YunzaiUserComponent, selector: "yunzai-user" }, { kind: "component", type: LayoutNavApplicationComponent, selector: "layout-nav-application" }, { kind: "component", type: LayoutNavGroupComponent, selector: "layout-nav-group" }, { kind: "component", type: LayoutNavTileComponent, selector: "layout-nav-tile" }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
+    <ng-template #noneTpl> <router-outlet /> </ng-template>
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i4$1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "directive", type: i4$1.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { kind: "directive", type: i4$4.RouterOutlet, selector: "router-outlet", inputs: ["name"], outputs: ["activate", "deactivate", "attach", "detach"], exportAs: ["outlet"] }, { kind: "directive", type: i4$4.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "component", type: i5$2.ReuseTabComponent, selector: "reuse-tab, [reuse-tab]", inputs: ["mode", "i18n", "debug", "max", "tabMaxWidth", "excludes", "allowClose", "keepingScroll", "storageState", "keepingScrollContainer", "customContextMenu", "tabBarExtraContent", "tabBarGutter", "tabBarStyle", "tabType", "routeParamMatchMode", "disabled", "titleRender", "canClose"], outputs: ["change", "close"], exportAs: ["reuseTab"] }, { kind: "component", type: i1$4.LayoutDefaultComponent, selector: "layout-default", inputs: ["options", "asideUser", "asideBottom", "nav", "content", "customError", "fetchingStrictly", "fetching"], exportAs: ["layoutDefault"] }, { kind: "component", type: i1$4.LayoutDefaultHeaderItemComponent, selector: "layout-default-header-item", inputs: ["hidden", "direction"] }, { kind: "directive", type: i1$4.LayoutDefaultHeaderItemTriggerDirective, selector: "[layout-default-header-item-trigger]" }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8$1.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "component", type: YunzaiClearStorageComponent, selector: "yunzai-clearstorage" }, { kind: "component", type: YunzaiFullScreenComponent, selector: "yunzai-fullscreen" }, { kind: "component", type: YunzaiI18NComponent, selector: "yunzai-i18n", inputs: ["showLangText"] }, { kind: "component", type: YunzaiNotifyComponent, selector: "yunzai-notify" }, { kind: "component", type: YunzaiThemBtnComponent, selector: "yunzai-theme-btn", inputs: ["types", "devTips", "deployUrl"] }, { kind: "component", type: YunzaiUserComponent, selector: "yunzai-user" }, { kind: "component", type: LayoutNavApplicationComponent, selector: "layout-nav-application" }, { kind: "component", type: LayoutNavGroupComponent, selector: "layout-nav-group" }, { kind: "component", type: LayoutNavTileComponent, selector: "layout-nav-tile" }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutBasicComponent, decorators: [{
             type: Component,
@@ -1667,25 +1685,25 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
       <layout-default-header-item direction="left">
         <ng-container [ngSwitch]="navType">
           <ng-container *ngSwitchCase="NavType.APPLICATION">
-            <layout-nav-application></layout-nav-application>
+            <layout-nav-application />
           </ng-container>
           <ng-container *ngSwitchCase="NavType.GROUP">
-            <layout-nav-group></layout-nav-group>
+            <layout-nav-group />
           </ng-container>
           <ng-container *ngSwitchCase="NavType.TILE">
-            <layout-nav-tile></layout-nav-tile>
+            <layout-nav-tile />
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <layout-nav-application></layout-nav-application>
+            <layout-nav-application />
           </ng-container>
         </ng-container>
       </layout-default-header-item>
       <!-- nav end -->
       <layout-default-header-item direction="right" hidden="mobile">
-        <yunzai-notify></yunzai-notify>
+        <yunzai-notify />
       </layout-default-header-item>
       <layout-default-header-item direction="right" hidden="mobile">
-        <yunzai-theme-btn></yunzai-theme-btn>
+        <yunzai-theme-btn />
       </layout-default-header-item>
       <!-- setting -->
       <layout-default-header-item direction="right" hidden="mobile">
@@ -1723,19 +1741,19 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
               {{ 'mode.nav.tile' | i18n }}
             </div>
             <div data-event-id="_nav_fullscreen" nz-menu-item>
-              <yunzai-fullscreen></yunzai-fullscreen>
+              <yunzai-fullscreen />
             </div>
             <div data-event-id="_nav_clearstorage" nz-menu-item>
-              <yunzai-clearstorage></yunzai-clearstorage>
+              <yunzai-clearstorage />
             </div>
             <div data-event-id="_nav_i18n" nz-menu-item>
-              <yunzai-i18n></yunzai-i18n>
+              <yunzai-i18n />
             </div>
           </div>
         </nz-dropdown-menu>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
-        <yunzai-user></yunzai-user>
+        <yunzai-user />
       </layout-default-header-item>
       <!-- setting end -->
     </layout-default>
@@ -1747,7 +1765,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
         [nzDropdownMenu]="userMenu"
         class="yunzai-default__aside-user"
       >
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon"></nz-avatar>
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" />
         <div class="yunzai-default__aside-user-info">
           <strong>{{ aside.name | i18n }}</strong>
           <p class="mb0">{{ aside.intro | i18n }}</p>
@@ -1760,12 +1778,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
       </nz-dropdown-menu>
     </ng-template>
     <ng-template #contentTpl>
-      <reuse-tab #reuseTab [ngStyle]="reusetabCSS"></reuse-tab>
-      <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
+      <reuse-tab #reuseTab [ngStyle]="reusetabCSS" />
+      <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
-    <ng-template #noneTpl>
-      <router-outlet></router-outlet>
-    </ng-template>
+    <ng-template #noneTpl> <router-outlet /> </ng-template>
   `
                 }]
         }], ctorParameters: function () { return [{ type: i1$4.LayoutDisplayService }, { type: i2$1.StompService }, { type: undefined, decorators: [{
@@ -1773,7 +1789,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     args: [WINDOW]
                 }] }]; } });
 
-class ActGuard {
+class ActGuardService {
     constructor(configService, pathToRegexp, router) {
         this.configService = configService;
         this.pathToRegexp = pathToRegexp;
@@ -1793,17 +1809,24 @@ class ActGuard {
         this.getAllLinks(this.menus, this.links);
         log$1('act: links ', this.links);
     }
-    canActivate(_, state) {
-        log$1('act: can activate ', state);
-        if (this.preHandle(state)) {
+    process(url) {
+        log$1('act: can activate ', url);
+        if (this.preHandle(url)) {
             return true;
         }
         log$1('act: can activate child prehandle success');
         let canactivate = false;
         this.links.forEach((link) => {
+            // path = /xxx
+            if (link === url.split('?')[0]) {
+                canactivate = true;
+                log$1(`act: link value ${link} equals url value ${url}`);
+                return;
+            }
+            // paht = /xxx/:xx
             const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
-            log$1(`act: ${link} test ${state.url.split('?')[0]}`);
-            if (regexp.test(state.url.split('?')[0])) {
+            log$1(`act: ${link} test ${url.split('?')[0]}`);
+            if (regexp.test(url.split('?')[0])) {
                 canactivate = true;
                 log$1(`act: test value ${canactivate}`);
                 return;
@@ -1819,44 +1842,14 @@ class ActGuard {
             return false;
         }
     }
-    canActivateChild(_, state) {
-        log$1('act: can activate child ', state);
-        if (this.preHandle(state)) {
-            return true;
-        }
-        log$1('act: can activate child prehandle success');
-        let canactivate = false;
-        this.links.forEach((link) => {
-            if (link === state.url.split('?')[0]) {
-                canactivate = true;
-                return;
-            }
-            const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
-            if (regexp.test(state.url.split('?')[0])) {
-                log$1(`act: ${link} test ${state.url.split('?')[0]}`);
-                canactivate = true;
-                log$1(`act: test value ${canactivate}`);
-                return;
-            }
-        });
-        if (canactivate) {
-            log$1(`act: test sucess`);
-            return true;
-        }
-        else {
-            log$1(`act: test error`);
-            this.router.navigate(['displayIndex']);
-            return false;
-        }
-    }
-    preHandle(state) {
-        return (state.url.includes('error') ||
-            state.url.includes('exception') ||
-            state.url.includes('displayIndex') ||
-            state.url === '' ||
-            state.url === null ||
-            state.url === '/' ||
-            state.url.includes('iframePage'));
+    preHandle(url) {
+        return (url.includes('error') ||
+            url.includes('exception') ||
+            url.includes('displayIndex') ||
+            url === '' ||
+            url === null ||
+            url === '/' ||
+            url.includes('iframePage'));
     }
     getAllLinks(menu, links) {
         menu.forEach((sider) => {
@@ -1868,15 +1861,15 @@ class ActGuard {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuard, deps: [{ token: i1$3.YunzaiConfigService }, { token: i1$3.PathToRegexpService }, { token: i4$4.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuard, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuardService, deps: [{ token: i1$3.YunzaiConfigService }, { token: i1$3.PathToRegexpService }, { token: i4$4.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuard, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuardService, decorators: [{
             type: Injectable,
-            args: [{
-                    providedIn: 'root'
-                }]
+            args: [{ providedIn: 'root' }]
         }], ctorParameters: function () { return [{ type: i1$3.YunzaiConfigService }, { type: i1$3.PathToRegexpService }, { type: i4$4.Router }]; } });
+const actGuardCanActive = (_, state) => inject(ActGuardService).process(state.url);
+const actGuardCanActiveChild = (_, state) => inject(ActGuardService).process(state.url);
 
 class YunzaiAuthService {
     constructor(injector) {
@@ -2108,7 +2101,7 @@ class YunzaiDefaultInterceptor {
             case 200:
                 return of(ev);
             case 401:
-                log("http401: ", req.url);
+                log('http401: ', req.url);
                 if (this.config.refreshTokenEnabled && this.config.refreshTokenType === 're-request') {
                     const unAuthorizationReq = req.clone();
                     unAuthorizationReq.headers.delete('Authorization');
@@ -3046,11 +3039,11 @@ class YunzaiStartupService {
         let defaultLang = this.settingService.layout.lang || this.i18n.defaultLang;
         return this.yzAuthService.login().pipe(mergeMap(() => {
             return this.i18n.loadLangData(defaultLang);
-        }), mergeMap((langData) => {
+        }), mergeMap(langData => {
             log$1('startup.service: ', 'set i18n, defaultLang->', defaultLang, ' langData->', langData);
             this.i18n.use(defaultLang, langData);
             return of(void 0);
-        }), mergeMap((v) => {
+        }), mergeMap(v => {
             this.systemInit();
             log$1('startup.service: preloader finish');
             if (this.win && this.win.appBootstrap) {
@@ -3199,25 +3192,6 @@ const HTML_NAMES_MAPPING = {
     _reusetab_custom: '多标签-自定义'
 };
 
-class AnalysisAddon {
-    static putValueInAnalysis(values) {
-        if (!window)
-            return;
-        // @ts-ignore
-        if (!window['yunzai'])
-            return;
-        // @ts-ignore
-        if (window['yunzai']['extra']) {
-            // @ts-ignore
-            window['yunzai']['extra'] = { ...window['yunzai']['extra'], ...values };
-        }
-        else {
-            // @ts-ignore
-            window['yunzai']['extra'] = { ...values };
-        }
-    }
-}
-
 class YunzaiAnalysisAddonGuardService {
     constructor(configService, pathToRegexp, win, tokenService) {
         this.configService = configService;
@@ -3253,7 +3227,7 @@ class YunzaiAnalysisAddonGuardService {
     }
     process(url) {
         let flag = false;
-        this.links.forEach((link) => {
+        this.links.forEach(link => {
             if (link.link === url.split('?')[0]) {
                 flag = true;
                 this.value['routename'] = link.title;
@@ -3315,5 +3289,5 @@ const analysisAddonCanActiveChild = (_, state) => inject(YunzaiAnalysisAddonGuar
  * Generated bundle index. Do not edit.
  */
 
-export { ActGuard, AnalysisAddon, BUSINESS_DEFAULT_CONFIG, HTML_NAMES_MAPPING, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent, YUNZAI_APPINIT_PROVIDES, YUNZAI_LANGS, YunzaiAnalysisAddonGuardService, YunzaiAuthService, YunzaiClearStorageComponent, YunzaiDefaultInterceptor, YunzaiFullScreenComponent, YunzaiI18NComponent, YunzaiI18NService, YunzaiLayoutBasicComponent, YunzaiLayoutModule, YunzaiNotifyComponent, YunzaiStartupService, YunzaiStartupServiceFactory, YunzaiThemBtnComponent, YunzaiUserComponent, YunzaiDefaultInterceptor as YzDefaultInterceptor, analysisAddonCanActive, analysisAddonCanActiveChild, generateAbility, mapYzSideToYelonMenu, mergeBisConfig };
+export { ActGuardService, BUSINESS_DEFAULT_CONFIG, HTML_NAMES_MAPPING, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent, YUNZAI_APPINIT_PROVIDES, YUNZAI_LANGS, YunzaiAnalysisAddonGuardService, YunzaiAuthService, YunzaiClearStorageComponent, YunzaiDefaultInterceptor, YunzaiFullScreenComponent, YunzaiI18NComponent, YunzaiI18NService, YunzaiLayoutBasicComponent, YunzaiLayoutModule, YunzaiNotifyComponent, YunzaiStartupService, YunzaiStartupServiceFactory, YunzaiThemBtnComponent, YunzaiUserComponent, YunzaiDefaultInterceptor as YzDefaultInterceptor, actGuardCanActive, actGuardCanActiveChild, analysisAddonCanActive, analysisAddonCanActiveChild, generateAbility, mapYzSideToYelonMenu, mergeBisConfig };
 //# sourceMappingURL=layout.mjs.map
