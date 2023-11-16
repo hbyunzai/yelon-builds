@@ -1,6 +1,6 @@
 {
   "name": "@yelon/theme",
-  "version": "16.4.0",
+  "version": "16.4.0-7e9e3ca",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^16.2.0",
-    "@yelon/acl": "^16.4.0",
-    "@yelon/util": "^16.4.0",
+    "@yelon/acl": "^16.4.0-7e9e3ca",
+    "@yelon/util": "^16.4.0-7e9e3ca",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/theme.mjs",
