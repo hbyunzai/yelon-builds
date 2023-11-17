@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "16.4.0-7e9e3ca",
+  "version": "16.4.0-1416c16",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^2.0.1",
     "ngx-countdown": "^16.0.0",
-    "@yelon/theme": "^16.4.0-7e9e3ca",
-    "@yelon/util": "^16.4.0-7e9e3ca",
-    "@yelon/acl": "^16.4.0-7e9e3ca",
+    "@yelon/theme": "^16.4.0-1416c16",
+    "@yelon/util": "^16.4.0-1416c16",
+    "@yelon/acl": "^16.4.0-1416c16",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -201,17 +201,17 @@
       "esm": "./esm2022/reuse-tab/reuse-tab.mjs",
       "default": "./fesm2022/reuse-tab.mjs"
     },
-    "./se": {
-      "types": "./se/index.d.ts",
-      "esm2022": "./esm2022/se/se.mjs",
-      "esm": "./esm2022/se/se.mjs",
-      "default": "./fesm2022/se.mjs"
-    },
     "./sg": {
       "types": "./sg/index.d.ts",
       "esm2022": "./esm2022/sg/sg.mjs",
       "esm": "./esm2022/sg/sg.mjs",
       "default": "./fesm2022/sg.mjs"
+    },
+    "./se": {
+      "types": "./se/index.d.ts",
+      "esm2022": "./esm2022/se/se.mjs",
+      "esm": "./esm2022/se/se.mjs",
+      "default": "./fesm2022/se.mjs"
     },
     "./st": {
       "types": "./st/index.d.ts",

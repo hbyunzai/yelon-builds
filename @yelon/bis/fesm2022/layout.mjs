@@ -3209,6 +3209,7 @@ class YunzaiAnalysisAddonGuardService {
         this.menus = deepCopy(user.menu || []).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
         if (user) {
             this.value = {
+                systemCode: this.bis.systemCode,
                 userid: user.id,
                 realname: user.realname,
                 usertype: user.userType,
