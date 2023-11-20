@@ -1,6 +1,6 @@
 {
   "name": "@yelon/cache",
-  "version": "16.4.4-318729d",
+  "version": "16.4.4-b7c8505",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -25,7 +25,7 @@
     "component"
   ],
   "dependencies": {
-    "@yelon/util": "^16.4.4-318729d",
+    "@yelon/util": "^16.4.4-b7c8505",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/cache.mjs",
