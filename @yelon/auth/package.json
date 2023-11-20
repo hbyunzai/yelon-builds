@@ -1,6 +1,6 @@
 {
   "name": "@yelon/auth",
-  "version": "16.4.0-7a6810e",
+  "version": "16.4.0-2377713",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -25,7 +25,7 @@
     "ng-zorro-antd"
   ],
   "dependencies": {
-    "@yelon/util": "^16.4.0-7a6810e",
+    "@yelon/util": "^16.4.0-2377713",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/auth.mjs",

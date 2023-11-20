@@ -4,6 +4,9 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { NumberInput } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
 import * as i0 from "@angular/core";
+/**
+ * @deprecated Will be removed in 18.0.0, please use [nz-qrcode](https://ng.ant.design/components/qr-code) instead.
+ */
 export declare class QRComponent implements OnChanges, AfterViewInit, OnDestroy {
     private cdr;
     private lazySrv;

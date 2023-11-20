@@ -1972,6 +1972,7 @@ var itIT = {
     }
 };
 
+const CLS_DRAG = 'MODAL-DRAG';
 /**
  * 对话框辅助类
  */
@@ -1979,7 +1980,6 @@ class ModalHelper {
     constructor(srv, drag, doc) {
         this.srv = srv;
         this.drag = drag;
-        this.dragClsPrefix = 'MODAL-DRAG';
         this.document = doc;
     }
     createDragRef(options, wrapCls) {
@@ -1987,7 +1987,7 @@ class ModalHelper {
         const modalEl = wrapEl.firstChild;
         const handelEl = options.handleCls ? wrapEl.querySelector(options.handleCls) : null;
         if (handelEl) {
-            handelEl.classList.add(`${this.dragClsPrefix}-HANDLE`);
+            handelEl.classList.add(`${CLS_DRAG}-HANDLE`);
         }
         return this.drag
             .createDrag(handelEl ?? modalEl)
@@ -2019,38 +2019,38 @@ class ModalHelper {
         }, options);
         return new Observable((observer) => {
             const { size, includeTabs, modalOptions, drag, useNzData } = options;
-            let cls = '';
+            let cls = [];
             let width = '';
             if (size) {
                 if (typeof size === 'number') {
                     width = `${size}px`;
                 }
                 else if (['sm', 'md', 'lg', 'xl'].includes(size)) {
-                    cls = `modal-${size}`;
+                    cls.push(`modal-${size}`);
                 }
                 else {
                     width = size;
                 }
             }
             if (includeTabs) {
-                cls += ' modal-include-tabs';
+                cls.push(`modal-include-tabs`);
             }
             if (modalOptions && modalOptions.nzWrapClassName) {
-                cls += ` ${modalOptions.nzWrapClassName}`;
+                cls.push(modalOptions.nzWrapClassName);
                 delete modalOptions.nzWrapClassName;
             }
             let dragOptions;
-            let dragWrapCls = `${this.dragClsPrefix}-${+new Date()}`;
+            let dragWrapCls = `${CLS_DRAG}-${+new Date()}`;
             let dragRef;
             if (drag != null && drag !== false) {
                 dragOptions = {
                     handleCls: `.modal-header, .ant-modal-title`,
                     ...(typeof drag === 'object' ? drag : {})
                 };
-                cls += ` ${this.dragClsPrefix} ${dragWrapCls}`;
+                cls.push(CLS_DRAG, dragWrapCls);
             }
             const subject = this.srv.create({
-                nzWrapClassName: cls,
+                nzWrapClassName: cls.join(' '),
                 nzContent: comp,
                 nzWidth: width ? width : undefined,
                 nzFooter: null,

@@ -5,7 +5,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalOptions, NzModalService } from 'ng-zorro-antd/modal';
 import * as i0 from "@angular/core";
 export interface ModalHelperOptions {
-    /** 大小；例如：lg、600、80%, 默认：`lg` */
+    /** 大小；例如：lg、600、80%，默认：`lg` */
     size?: 'sm' | 'md' | 'lg' | 'xl' | '' | number | string;
     /** 对话框 [ModalOptions](https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/modal/modal-types.ts) 参数 */
     modalOptions?: ModalOptions;
@@ -35,7 +35,6 @@ export declare class ModalHelper {
     private srv;
     private drag;
     private document;
-    private dragClsPrefix;
     constructor(srv: NzModalService, drag: DragDrop, doc: NzSafeAny);
     private createDragRef;
     /**
