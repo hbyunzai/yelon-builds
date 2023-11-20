@@ -1,6 +1,6 @@
 {
   "name": "@yelon/chart",
-  "version": "16.4.4-dac2c3a",
+  "version": "16.4.4-318729d",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,8 +28,8 @@
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.10",
     "echarts": "^5.4.3",
-    "@yelon/util": "^16.4.4-dac2c3a",
-    "@yelon/theme": "^16.4.4-dac2c3a",
+    "@yelon/util": "^16.4.4-318729d",
+    "@yelon/theme": "^16.4.4-318729d",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/chart.mjs",
@@ -116,17 +116,17 @@
       "esm": "./esm2022/radar/radar.mjs",
       "default": "./fesm2022/radar.mjs"
     },
-    "./single-bar": {
-      "types": "./single-bar/index.d.ts",
-      "esm2022": "./esm2022/single-bar/single-bar.mjs",
-      "esm": "./esm2022/single-bar/single-bar.mjs",
-      "default": "./fesm2022/single-bar.mjs"
-    },
     "./tag-cloud": {
       "types": "./tag-cloud/index.d.ts",
       "esm2022": "./esm2022/tag-cloud/tag-cloud.mjs",
       "esm": "./esm2022/tag-cloud/tag-cloud.mjs",
       "default": "./fesm2022/tag-cloud.mjs"
+    },
+    "./single-bar": {
+      "types": "./single-bar/index.d.ts",
+      "esm2022": "./esm2022/single-bar/single-bar.mjs",
+      "esm": "./esm2022/single-bar/single-bar.mjs",
+      "default": "./fesm2022/single-bar.mjs"
     },
     "./timeline": {
       "types": "./timeline/index.d.ts",

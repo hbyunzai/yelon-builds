@@ -1,6 +1,6 @@
 {
   "name": "@yelon/form",
-  "version": "16.4.4-dac2c3a",
+  "version": "16.4.4-318729d",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -30,9 +30,9 @@
   "dependencies": {
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
-    "@yelon/theme": "^16.4.4-dac2c3a",
-    "@yelon/acl": "^16.4.4-dac2c3a",
-    "@yelon/util": "^16.4.4-dac2c3a",
+    "@yelon/theme": "^16.4.4-318729d",
+    "@yelon/acl": "^16.4.4-318729d",
+    "@yelon/util": "^16.4.4-318729d",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/form.mjs",
