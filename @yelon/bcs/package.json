@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "16.4.3",
+  "version": "16.4.2-dc51831",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,16 +22,16 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^16.2.2",
-    "@yelon/acl": "^16.4.3",
-    "@yelon/auth": "^16.4.3",
-    "@yelon/theme": "^16.4.3",
-    "@yelon/mock": "^16.4.3",
-    "@yelon/cache": "^16.4.3",
-    "@yelon/chart": "^16.4.3",
-    "@yelon/form": "^16.4.3",
-    "@yelon/testing": "^16.4.3",
-    "@yelon/util": "^16.4.3",
-    "@yelon/bis": "^16.4.3",
+    "@yelon/acl": "^16.4.2-dc51831",
+    "@yelon/auth": "^16.4.2-dc51831",
+    "@yelon/theme": "^16.4.2-dc51831",
+    "@yelon/mock": "^16.4.2-dc51831",
+    "@yelon/cache": "^16.4.2-dc51831",
+    "@yelon/chart": "^16.4.2-dc51831",
+    "@yelon/form": "^16.4.2-dc51831",
+    "@yelon/testing": "^16.4.2-dc51831",
+    "@yelon/util": "^16.4.2-dc51831",
+    "@yelon/bis": "^16.4.2-dc51831",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -58,6 +58,12 @@
       "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
       "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
+    "./yunzai-dormitory-tree": {
+      "types": "./yunzai-dormitory-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
+    },
     "./yunzai-friend-group": {
       "types": "./yunzai-friend-group/index.d.ts",
       "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
@@ -69,12 +75,6 @@
       "esm2022": "./esm2022/yunzai-grade/yunzai-grade.mjs",
       "esm": "./esm2022/yunzai-grade/yunzai-grade.mjs",
       "default": "./fesm2022/yunzai-grade.mjs"
-    },
-    "./yunzai-dormitory-tree": {
-      "types": "./yunzai-dormitory-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
     "./yunzai-role-tree": {
       "types": "./yunzai-role-tree/index.d.ts",

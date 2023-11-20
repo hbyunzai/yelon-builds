@@ -1,4 +1,4 @@
-import { NzHighlightModule } from 'ng-zorro-antd/core/highlight';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 import * as i0 from "@angular/core";
 import * as i1 from "ng-zorro-antd/tree";
 import * as i2 from "ng-zorro-antd/button";
@@ -39,7 +39,7 @@ import * as i36 from "ng-zorro-antd/upload";
 import * as i37 from "ng-zorro-antd/pagination";
 import * as i38 from "ng-zorro-antd/empty";
 import * as i39 from "ng-zorro-antd/core/highlight";
-export declare const YUNZAI_SHARED_ZORRO_MODULES: (typeof NzHighlightModule)[];
+export declare const YUNZAI_SHARED_ZORRO_MODULES: (typeof NzTreeModule)[];
 export declare class YunzaiSharedZorroModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiSharedZorroModule, never>;
     static ɵmod: i0.ɵɵNgModuleDeclaration<YunzaiSharedZorroModule, never, [typeof i1.NzTreeModule, typeof i2.NzButtonModule, typeof i3.NzMessageModule, typeof i4.NzBackTopModule, typeof i5.NzDropDownModule, typeof i6.NzGridModule, typeof i7.NzCarouselModule, typeof i8.NzCheckboxModule, typeof i9.NzToolTipModule, typeof i10.NzPopoverModule, typeof i11.NzSelectModule, typeof i12.NzIconModule, typeof i13.NzAffixModule, typeof i14.NzBadgeModule, typeof i15.NzAlertModule, typeof i16.NzModalModule, typeof i17.NzTableModule, typeof i18.NzDrawerModule, typeof i19.NzTabsModule, typeof i20.NzInputModule, typeof i21.NzDatePickerModule, typeof i22.NzTagModule, typeof i23.NzInputNumberModule, typeof i24.NzBreadCrumbModule, typeof i25.NzStepsModule, typeof i26.NzListModule, typeof i27.NzSwitchModule, typeof i28.NzRadioModule, typeof i29.NzFormModule, typeof i30.NzAvatarModule, typeof i31.NzCardModule, typeof i32.NzSpinModule, typeof i33.NzDividerModule, typeof i34.NzResizableModule, typeof i35.NzAnchorModule, typeof i36.NzUploadModule, typeof i37.NzPaginationModule, typeof i38.NzEmptyModule, typeof i39.NzHighlightModule], [typeof i1.NzTreeModule, typeof i2.NzButtonModule, typeof i3.NzMessageModule, typeof i4.NzBackTopModule, typeof i5.NzDropDownModule, typeof i6.NzGridModule, typeof i7.NzCarouselModule, typeof i8.NzCheckboxModule, typeof i9.NzToolTipModule, typeof i10.NzPopoverModule, typeof i11.NzSelectModule, typeof i12.NzIconModule, typeof i13.NzAffixModule, typeof i14.NzBadgeModule, typeof i15.NzAlertModule, typeof i16.NzModalModule, typeof i17.NzTableModule, typeof i18.NzDrawerModule, typeof i19.NzTabsModule, typeof i20.NzInputModule, typeof i21.NzDatePickerModule, typeof i22.NzTagModule, typeof i23.NzInputNumberModule, typeof i24.NzBreadCrumbModule, typeof i25.NzStepsModule, typeof i26.NzListModule, typeof i27.NzSwitchModule, typeof i28.NzRadioModule, typeof i29.NzFormModule, typeof i30.NzAvatarModule, typeof i31.NzCardModule, typeof i32.NzSpinModule, typeof i33.NzDividerModule, typeof i34.NzResizableModule, typeof i35.NzAnchorModule, typeof i36.NzUploadModule, typeof i37.NzPaginationModule, typeof i38.NzEmptyModule, typeof i39.NzHighlightModule]>;
