@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "16.4.4-b7c8505",
+  "version": "16.4.4-f31451f",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^2.0.1",
     "ngx-countdown": "^16.0.0",
-    "@yelon/theme": "^16.4.4-b7c8505",
-    "@yelon/util": "^16.4.4-b7c8505",
-    "@yelon/acl": "^16.4.4-b7c8505",
+    "@yelon/theme": "^16.4.4-f31451f",
+    "@yelon/util": "^16.4.4-f31451f",
+    "@yelon/acl": "^16.4.4-f31451f",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
