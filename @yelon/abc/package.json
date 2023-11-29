@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "16.4.5",
+  "version": "16.4.6",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^2.0.1",
     "ngx-countdown": "^16.0.0",
-    "@yelon/theme": "^16.4.5",
-    "@yelon/util": "^16.4.5",
-    "@yelon/acl": "^16.4.5",
+    "@yelon/theme": "^16.4.6",
+    "@yelon/util": "^16.4.6",
+    "@yelon/acl": "^16.4.6",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -69,6 +69,12 @@
       "esm": "./esm2022/count-down/count-down.mjs",
       "default": "./fesm2022/count-down.mjs"
     },
+    "./date-picker": {
+      "types": "./date-picker/index.d.ts",
+      "esm2022": "./esm2022/date-picker/date-picker.mjs",
+      "esm": "./esm2022/date-picker/date-picker.mjs",
+      "default": "./fesm2022/date-picker.mjs"
+    },
     "./down-file": {
       "types": "./down-file/index.d.ts",
       "esm2022": "./esm2022/down-file/down-file.mjs",
@@ -80,12 +86,6 @@
       "esm2022": "./esm2022/ellipsis/ellipsis.mjs",
       "esm": "./esm2022/ellipsis/ellipsis.mjs",
       "default": "./fesm2022/ellipsis.mjs"
-    },
-    "./date-picker": {
-      "types": "./date-picker/index.d.ts",
-      "esm2022": "./esm2022/date-picker/date-picker.mjs",
-      "esm": "./esm2022/date-picker/date-picker.mjs",
-      "default": "./fesm2022/date-picker.mjs"
     },
     "./error-collect": {
       "types": "./error-collect/index.d.ts",
@@ -141,6 +141,12 @@
       "esm": "./esm2022/lodop/lodop.mjs",
       "default": "./fesm2022/lodop.mjs"
     },
+    "./media": {
+      "types": "./media/index.d.ts",
+      "esm2022": "./esm2022/media/media.mjs",
+      "esm": "./esm2022/media/media.mjs",
+      "default": "./fesm2022/media.mjs"
+    },
     "./notice-icon": {
       "types": "./notice-icon/index.d.ts",
       "esm2022": "./esm2022/notice-icon/notice-icon.mjs",
@@ -153,11 +159,11 @@
       "esm": "./esm2022/observers/chart-observer-size.mjs",
       "default": "./fesm2022/chart-observer-size.mjs"
     },
-    "./media": {
-      "types": "./media/index.d.ts",
-      "esm2022": "./esm2022/media/media.mjs",
-      "esm": "./esm2022/media/media.mjs",
-      "default": "./fesm2022/media.mjs"
+    "./onboarding": {
+      "types": "./onboarding/index.d.ts",
+      "esm2022": "./esm2022/onboarding/onboarding.mjs",
+      "esm": "./esm2022/onboarding/onboarding.mjs",
+      "default": "./fesm2022/onboarding.mjs"
     },
     "./page-header": {
       "types": "./page-header/index.d.ts",
@@ -170,12 +176,6 @@
       "esm2022": "./esm2022/pdf/pdf.mjs",
       "esm": "./esm2022/pdf/pdf.mjs",
       "default": "./fesm2022/pdf.mjs"
-    },
-    "./onboarding": {
-      "types": "./onboarding/index.d.ts",
-      "esm2022": "./esm2022/onboarding/onboarding.mjs",
-      "esm": "./esm2022/onboarding/onboarding.mjs",
-      "default": "./fesm2022/onboarding.mjs"
     },
     "./qr": {
       "types": "./qr/index.d.ts",

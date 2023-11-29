@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "16.4.5",
+  "version": "16.4.6",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,16 +22,16 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^16.2.2",
-    "@yelon/acl": "^16.4.5",
-    "@yelon/auth": "^16.4.5",
-    "@yelon/theme": "^16.4.5",
-    "@yelon/mock": "^16.4.5",
-    "@yelon/cache": "^16.4.5",
-    "@yelon/chart": "^16.4.5",
-    "@yelon/form": "^16.4.5",
-    "@yelon/testing": "^16.4.5",
-    "@yelon/util": "^16.4.5",
-    "@yelon/bis": "^16.4.5",
+    "@yelon/acl": "^16.4.6",
+    "@yelon/auth": "^16.4.6",
+    "@yelon/theme": "^16.4.6",
+    "@yelon/mock": "^16.4.6",
+    "@yelon/cache": "^16.4.6",
+    "@yelon/chart": "^16.4.6",
+    "@yelon/form": "^16.4.6",
+    "@yelon/testing": "^16.4.6",
+    "@yelon/util": "^16.4.6",
+    "@yelon/bis": "^16.4.6",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -58,6 +58,12 @@
       "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
       "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
+    "./yunzai-grade": {
+      "types": "./yunzai-grade/index.d.ts",
+      "esm2022": "./esm2022/yunzai-grade/yunzai-grade.mjs",
+      "esm": "./esm2022/yunzai-grade/yunzai-grade.mjs",
+      "default": "./fesm2022/yunzai-grade.mjs"
+    },
     "./yunzai-dormitory-tree": {
       "types": "./yunzai-dormitory-tree/index.d.ts",
       "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
@@ -69,12 +75,6 @@
       "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
       "esm": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
       "default": "./fesm2022/yunzai-friend-group.mjs"
-    },
-    "./yunzai-grade": {
-      "types": "./yunzai-grade/index.d.ts",
-      "esm2022": "./esm2022/yunzai-grade/yunzai-grade.mjs",
-      "esm": "./esm2022/yunzai-grade/yunzai-grade.mjs",
-      "default": "./fesm2022/yunzai-grade.mjs"
     },
     "./yunzai-iframe-page": {
       "types": "./yunzai-iframe-page/index.d.ts",
