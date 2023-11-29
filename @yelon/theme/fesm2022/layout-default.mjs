@@ -354,7 +354,11 @@ class LayoutDefaultNavComponent {
                 this.win.open(item.externalLink);
             }
             else {
-                this.win.location.href = item.externalLink;
+                // this.win.location.href = item.externalLink;
+                // 浏览器缓存iframe路径
+                localStorage.setItem('iframeSrc', item.externalLink);
+                this.menuSrv.setRouterLink(item.externalLink);
+                this.router.navigate(['iframePage']);
             }
             return;
         }

@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "16.4.4-f31451f",
+  "version": "16.4.5",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -53,17 +53,17 @@
       "esm": "./esm2022/browser/browser.mjs",
       "default": "./fesm2022/browser.mjs"
     },
-    "./config": {
-      "types": "./config/index.d.ts",
-      "esm2022": "./esm2022/config/config.mjs",
-      "esm": "./esm2022/config/config.mjs",
-      "default": "./fesm2022/config.mjs"
-    },
     "./date-time": {
       "types": "./date-time/index.d.ts",
       "esm2022": "./esm2022/date-time/date-time.mjs",
       "esm": "./esm2022/date-time/date-time.mjs",
       "default": "./fesm2022/date-time.mjs"
+    },
+    "./config": {
+      "types": "./config/index.d.ts",
+      "esm2022": "./esm2022/config/config.mjs",
+      "esm": "./esm2022/config/config.mjs",
+      "default": "./fesm2022/config.mjs"
     },
     "./decorator": {
       "types": "./decorator/index.d.ts",
@@ -95,17 +95,17 @@
       "esm": "./esm2022/mcache/mcache.mjs",
       "default": "./fesm2022/mcache.mjs"
     },
-    "./mtypes": {
-      "types": "./mtypes/index.d.ts",
-      "esm2022": "./esm2022/mtypes/mtypes.mjs",
-      "esm": "./esm2022/mtypes/mtypes.mjs",
-      "default": "./fesm2022/mtypes.mjs"
-    },
     "./other": {
       "types": "./other/index.d.ts",
       "esm2022": "./esm2022/other/other.mjs",
       "esm": "./esm2022/other/other.mjs",
       "default": "./fesm2022/other.mjs"
+    },
+    "./mtypes": {
+      "types": "./mtypes/index.d.ts",
+      "esm2022": "./esm2022/mtypes/mtypes.mjs",
+      "esm": "./esm2022/mtypes/mtypes.mjs",
+      "default": "./fesm2022/mtypes.mjs"
     },
     "./pipes": {
       "types": "./pipes/index.d.ts",

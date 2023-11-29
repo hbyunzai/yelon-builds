@@ -150,6 +150,7 @@ class MenuService {
          * 是否完全受控菜单打开状态，默认：`false`
          */
         this.openStrictly = false;
+        this.$routerLink = new BehaviorSubject('');
         this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
     }
     get change() {
@@ -417,6 +418,13 @@ class MenuService {
     ngOnDestroy() {
         this._change$.unsubscribe();
         this.i18n$.unsubscribe();
+    }
+    // 路由跳转路径
+    setRouterLink(url) {
+        this.$routerLink.next(url);
+    }
+    getRouterLink() {
+        return this.$routerLink.asObservable();
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: MenuService, deps: [{ token: YUNZAI_I18N_TOKEN, optional: true }, { token: i1$1.ACLService, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: MenuService, providedIn: 'root' }); }
@@ -2794,7 +2802,7 @@ class PreloadOptionalModules {
     }
 }
 
-const VERSION = new Version('16.4.4');
+const VERSION = new Version('16.4.5');
 
 /**
  * Generated bundle index. Do not edit.

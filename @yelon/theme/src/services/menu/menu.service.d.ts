@@ -17,6 +17,7 @@ export declare class MenuService implements OnDestroy {
      * 是否完全受控菜单打开状态，默认：`false`
      */
     openStrictly: boolean;
+    private $routerLink;
     constructor(i18nSrv: YunzaiI18NService, aclService: ACLService);
     get change(): Observable<Menu[]>;
     get menus(): Menu[];
@@ -97,6 +98,8 @@ export declare class MenuService implements OnDestroy {
         emit?: boolean;
     }): void;
     ngOnDestroy(): void;
+    setRouterLink(url: string): void;
+    getRouterLink(): Observable<string>;
     static ɵfac: i0.ɵɵFactoryDeclaration<MenuService, [{ optional: true; }, { optional: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<MenuService>;
 }
