@@ -3,7 +3,7 @@ import { YunzaiDeptTree, YunzaiDeptTreeProps } from '@yelon/bcs/yunzai-dept-tree
 import { YunzaiDormitoryTree, YunzaiDormitoryTreeProps } from '@yelon/bcs/yunzai-dormitory-tree';
 import { YunzaiFriendGroup, YunzaiFriendGroupProps } from '@yelon/bcs/yunzai-friend-group';
 import { YunzaiRoleTree, YunzaiRoleTreeProps } from '@yelon/bcs/yunzai-role-tree';
-import { YunzaiTableUser, YunzaiTableUserComponent, YunzaiTableUserProps } from '@yelon/bcs/yunzai-table-user';
+import { YunzaiTableUserComponent, YunzaiTableUser, YunzaiTableUserProps } from '@yelon/bcs/yunzai-table-user';
 import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
 import * as i0 from "@angular/core";
 export declare class YunzaiContactComponent {
@@ -13,11 +13,11 @@ export declare class YunzaiContactComponent {
     roleTree?: YunzaiRoleTreeProps;
     tableUser?: YunzaiTableUserProps;
     props?: YunzaiContactProps;
-    onSelect: EventEmitter<YunzaiTableUser[]>;
-    onSelectDept: EventEmitter<YunzaiDeptTree[]>;
-    onSelectRole: EventEmitter<YunzaiRoleTree[]>;
-    onSelectDormitory: EventEmitter<YunzaiDormitoryTree[]>;
-    onSelectGroup: EventEmitter<YunzaiFriendGroup>;
+    readonly onSelect: EventEmitter<YunzaiTableUser[]>;
+    readonly onSelectDept: EventEmitter<YunzaiDeptTree[]>;
+    readonly onSelectRole: EventEmitter<YunzaiRoleTree[]>;
+    readonly onSelectDormitory: EventEmitter<YunzaiDormitoryTree[]>;
+    readonly onSelectGroup: EventEmitter<YunzaiFriendGroup>;
     table: YunzaiTableUserComponent;
     state: YunzaiContactState;
     get tableUserProps(): YunzaiTableUserProps;
@@ -33,5 +33,5 @@ export declare class YunzaiContactComponent {
     onFriendSelect(group: YunzaiFriendGroup): void;
     onTableUserChecked(users: YunzaiTableUser[]): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiContactComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiContactComponent, "yunzai-contact", never, { "deptTree": { "alias": "deptTree"; "required": false; }; "dormitoryTree": { "alias": "dormitoryTree"; "required": false; }; "friendGroup": { "alias": "friendGroup"; "required": false; }; "roleTree": { "alias": "roleTree"; "required": false; }; "tableUser": { "alias": "tableUser"; "required": false; }; "props": { "alias": "props"; "required": false; }; }, { "onSelect": "onSelect"; "onSelectDept": "onSelectDept"; "onSelectRole": "onSelectRole"; "onSelectDormitory": "onSelectDormitory"; "onSelectGroup": "onSelectGroup"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiContactComponent, "yunzai-contact", never, { "deptTree": { "alias": "deptTree"; "required": false; }; "dormitoryTree": { "alias": "dormitoryTree"; "required": false; }; "friendGroup": { "alias": "friendGroup"; "required": false; }; "roleTree": { "alias": "roleTree"; "required": false; }; "tableUser": { "alias": "tableUser"; "required": false; }; "props": { "alias": "props"; "required": false; }; }, { "onSelect": "onSelect"; "onSelectDept": "onSelectDept"; "onSelectRole": "onSelectRole"; "onSelectDormitory": "onSelectDormitory"; "onSelectGroup": "onSelectGroup"; }, never, never, true, never>;
 }

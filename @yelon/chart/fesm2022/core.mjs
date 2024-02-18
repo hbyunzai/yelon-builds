@@ -1,11 +1,11 @@
 import * as i0 from '@angular/core';
-import { Injectable, EventEmitter, Directive, Input, ViewChild, Output } from '@angular/core';
+import { inject, Injectable, ElementRef, NgZone, ChangeDetectorRef, EventEmitter, booleanAttribute, numberAttribute, Directive, Input, ViewChild, Output } from '@angular/core';
 import { Subject, takeUntil, filter } from 'rxjs';
-import * as i1 from '@yelon/util/config';
-import * as i2 from '@yelon/util/other';
+import { YunzaiConfigService } from '@yelon/util/config';
+import { LazyService } from '@yelon/util/other';
 import { __decorate } from 'tslib';
-import { InputBoolean, InputNumber, ZoneOutside } from '@yelon/util/decorator';
-import * as i2$1 from '@angular/cdk/platform';
+import { Platform } from '@angular/cdk/platform';
+import { ZoneOutside } from '@yelon/util/decorator';
 
 class G2Service {
     get cog() {
@@ -20,9 +20,9 @@ class G2Service {
             ]
         }, val);
     }
-    constructor(cogSrv, lazySrv) {
-        this.cogSrv = cogSrv;
-        this.lazySrv = lazySrv;
+    constructor() {
+        this.cogSrv = inject(YunzaiConfigService);
+        this.lazySrv = inject(LazyService);
         this.loading = false;
         this.loaded = false;
         this.notify$ = new Subject();
@@ -48,13 +48,13 @@ class G2Service {
     ngOnDestroy() {
         this.notify$.unsubscribe();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2Service, deps: [{ token: i1.YunzaiConfigService }, { token: i2.LazyService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2Service, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2Service, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2Service, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2Service, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2Service, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }, { type: i2.LazyService }]; } });
+        }], ctorParameters: () => [] });
 
 class G2BaseComponent {
     get chart() {
@@ -63,18 +63,18 @@ class G2BaseComponent {
     get winG2() {
         return window.G2;
     }
-    constructor(srv, el, ngZone, platform, cdr) {
-        this.srv = srv;
-        this.el = el;
-        this.ngZone = ngZone;
-        this.platform = platform;
-        this.cdr = cdr;
+    constructor() {
+        this.srv = inject(G2Service);
+        this.el = inject((ElementRef));
+        this.ngZone = inject(NgZone);
+        this.platform = inject(Platform);
+        this.cdr = inject(ChangeDetectorRef);
         this.repaint = true;
         this.destroy$ = new Subject();
         this.loaded = false;
         this.delay = 0;
         this.ready = new EventEmitter();
-        this.theme = srv.cog.theme;
+        this.theme = this.srv.cog.theme;
         this.srv.notify
             .pipe(takeUntil(this.destroy$), filter(() => !this.loaded))
             .subscribe(() => this.load());
@@ -133,30 +133,26 @@ class G2BaseComponent {
         this.destroy$.complete();
         this.destroyChart();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2BaseComponent, deps: [{ token: G2Service }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i2$1.Platform }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.2.12", type: G2BaseComponent, inputs: { repaint: "repaint", delay: "delay", theme: "theme" }, outputs: { ready: "ready" }, viewQueries: [{ propertyName: "node", first: true, predicate: ["container"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2BaseComponent, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "17.2.1", type: G2BaseComponent, inputs: { repaint: ["repaint", "repaint", booleanAttribute], delay: ["delay", "delay", numberAttribute], theme: "theme" }, outputs: { ready: "ready" }, viewQueries: [{ propertyName: "node", first: true, predicate: ["container"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0 }); }
 }
-__decorate([
-    InputBoolean()
-], G2BaseComponent.prototype, "repaint", void 0);
-__decorate([
-    InputNumber()
-], G2BaseComponent.prototype, "delay", void 0);
 __decorate([
     ZoneOutside()
 ], G2BaseComponent.prototype, "load", null);
 __decorate([
     ZoneOutside()
 ], G2BaseComponent.prototype, "destroyChart", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2BaseComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2BaseComponent, decorators: [{
             type: Directive
-        }], ctorParameters: function () { return [{ type: G2Service }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i2$1.Platform }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { repaint: [{
-                type: Input
+        }], ctorParameters: () => [], propDecorators: { repaint: [{
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], node: [{
                 type: ViewChild,
                 args: ['container', { static: true }]
             }], delay: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], theme: [{
                 type: Input
             }], ready: [{

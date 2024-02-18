@@ -1,10 +1,5 @@
-import { Direction, Directionality } from '@angular/cdk/bidi';
-import { Platform } from '@angular/cdk/platform';
+import { Direction } from '@angular/cdk/bidi';
 import { Observable } from 'rxjs';
-import { YunzaiConfigService } from '@yelon/util/config';
-import { NzConfigService } from 'ng-zorro-antd/core/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { SettingsService } from '../settings/settings.service';
 import * as i0 from "@angular/core";
 export declare const HTML_DIR = "dir";
 export declare const RTL_DIRECTION = "direction";
@@ -13,12 +8,12 @@ export declare const RTL_YELON_COMPONENTS: string[];
 export declare const LTR = "ltr";
 export declare const RTL = "rtl";
 export declare class RTLService {
-    private d;
-    private srv;
-    private nz;
-    private yelon;
-    private platform;
-    private doc;
+    private readonly d;
+    private readonly nz;
+    private readonly yelon;
+    private readonly platform;
+    private readonly doc;
+    private readonly srv;
     private _dir;
     /**
      * Get or Set the current text direction
@@ -39,7 +34,7 @@ export declare class RTLService {
      * 订阅变更通知
      */
     get change(): Observable<Direction>;
-    constructor(d: Directionality, srv: SettingsService, nz: NzConfigService, yelon: YunzaiConfigService, platform: Platform, doc: NzSafeAny);
+    constructor();
     /**
      * Toggle text direction
      *

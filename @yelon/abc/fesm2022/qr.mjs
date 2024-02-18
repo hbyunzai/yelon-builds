@@ -1,12 +1,9 @@
-import { __decorate } from 'tslib';
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Output, NgModule } from '@angular/core';
+import { EventEmitter, numberAttribute, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Output, NgModule } from '@angular/core';
 import { filter } from 'rxjs';
-import { InputNumber } from '@yelon/util/decorator';
 import * as i1 from '@yelon/util/config';
 import * as i2 from '@yelon/util/other';
 import * as i3 from '@angular/cdk/platform';
-import * as i4 from '@angular/common';
 import { CommonModule } from '@angular/common';
 
 const QR_DEFULAT_CONFIG = {
@@ -100,24 +97,19 @@ class QRComponent {
             this.lazy$.unsubscribe();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: QRComponent, deps: [{ token: i0.ChangeDetectorRef }, { token: i1.YunzaiConfigService }, { token: i2.LazyService }, { token: i3.Platform }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: QRComponent, selector: "qr", inputs: { background: "background", backgroundAlpha: "backgroundAlpha", foreground: "foreground", foregroundAlpha: "foregroundAlpha", level: "level", mime: "mime", padding: "padding", size: "size", value: "value", delay: "delay" }, outputs: { change: "change" }, host: { properties: { "style.display": "'inline-block'", "style.height.px": "size", "style.width.px": "size" } }, exportAs: ["qr"], usesOnChanges: true, ngImport: i0, template: ` <img *ngIf="dataURL" style="max-width: 100%; max-height: 100%;" [src]="dataURL" /> `, isInline: true, dependencies: [{ kind: "directive", type: i4.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QRComponent, deps: [{ token: i0.ChangeDetectorRef }, { token: i1.YunzaiConfigService }, { token: i2.LazyService }, { token: i3.Platform }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: QRComponent, selector: "qr", inputs: { background: "background", backgroundAlpha: "backgroundAlpha", foreground: "foreground", foregroundAlpha: "foregroundAlpha", level: "level", mime: "mime", padding: ["padding", "padding", (v) => (v == null ? null : numberAttribute(v))], size: ["size", "size", numberAttribute], value: "value", delay: ["delay", "delay", numberAttribute] }, outputs: { change: "change" }, host: { properties: { "style.display": "'inline-block'", "style.height.px": "size", "style.width.px": "size" } }, exportAs: ["qr"], usesOnChanges: true, ngImport: i0, template: `@if (dataURL) {
+    <img style="max-width: 100%; max-height: 100%;" [src]="dataURL" />
+  }`, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputNumber(null)
-], QRComponent.prototype, "padding", void 0);
-__decorate([
-    InputNumber()
-], QRComponent.prototype, "size", void 0);
-__decorate([
-    InputNumber()
-], QRComponent.prototype, "delay", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: QRComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QRComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'qr',
                     exportAs: 'qr',
-                    template: ` <img *ngIf="dataURL" style="max-width: 100%; max-height: 100%;" [src]="dataURL" /> `,
+                    template: `@if (dataURL) {
+    <img style="max-width: 100%; max-height: 100%;" [src]="dataURL" />
+  }`,
                     host: {
                         '[style.display]': `'inline-block'`,
                         '[style.height.px]': 'size',
@@ -127,7 +119,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None
                 }]
-        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: i1.YunzaiConfigService }, { type: i2.LazyService }, { type: i3.Platform }]; }, propDecorators: { background: [{
+        }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: i1.YunzaiConfigService }, { type: i2.LazyService }, { type: i3.Platform }], propDecorators: { background: [{
                 type: Input
             }], backgroundAlpha: [{
                 type: Input
@@ -140,13 +132,16 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
             }], mime: [{
                 type: Input
             }], padding: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : numberAttribute(v)) }]
             }], size: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], value: [{
                 type: Input
             }], delay: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], change: [{
                 type: Output
             }] } });
@@ -156,11 +151,11 @@ const COMPONENTS = [QRComponent];
  * @deprecated Will be removed in 18.0.0, please use [nz-qrcode](https://ng.ant.design/components/qr-code) instead.
  */
 class QRModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: QRModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: QRModule, declarations: [QRComponent], imports: [CommonModule], exports: [QRComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: QRModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QRModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: QRModule, declarations: [QRComponent], imports: [CommonModule], exports: [QRComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QRModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: QRModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QRModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],

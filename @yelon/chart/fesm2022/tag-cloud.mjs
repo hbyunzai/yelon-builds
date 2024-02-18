@@ -1,13 +1,9 @@
-import { __decorate } from 'tslib';
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Output, NgModule } from '@angular/core';
+import { EventEmitter, numberAttribute, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Output, NgModule } from '@angular/core';
 import { fromEvent, filter, debounceTime } from 'rxjs';
 import { G2BaseComponent } from '@yelon/chart/core';
-import { InputNumber } from '@yelon/util/decorator';
-import * as i1 from '@angular/common';
+import { NzSkeletonComponent, NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { CommonModule } from '@angular/common';
-import * as i2 from 'ng-zorro-antd/skeleton';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 class G2TagCloudComponent extends G2BaseComponent {
     constructor() {
@@ -108,9 +104,9 @@ class G2TagCloudComponent extends G2BaseComponent {
             fields: ['name', 'value'],
             // imageMask,
             font: 'Verdana',
-            size: [this.width, this.height],
+            size: [this.width, this.height], // 宽高设置最好根据 imageMask 做调整
             padding: 0,
-            timeInterval: 5000,
+            timeInterval: 5000, // max execute time
             rotate() {
                 let random = ~~(Math.random() * 4) % 4;
                 if (random === 2) {
@@ -132,29 +128,31 @@ class G2TagCloudComponent extends G2BaseComponent {
     onInit() {
         this.installResizeEvent();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2TagCloudComponent, deps: null, target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: G2TagCloudComponent, selector: "g2-tag-cloud", inputs: { width: "width", height: "height", padding: "padding", data: "data" }, outputs: { clickItem: "clickItem" }, exportAs: ["g2TagCloud"], usesInheritance: true, ngImport: i0, template: `<nz-skeleton *ngIf="!loaded" />`, isInline: true, dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: i2.NzSkeletonComponent, selector: "nz-skeleton", inputs: ["nzActive", "nzLoading", "nzRound", "nzTitle", "nzAvatar", "nzParagraph"], exportAs: ["nzSkeleton"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2TagCloudComponent, deps: null, target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: G2TagCloudComponent, isStandalone: true, selector: "g2-tag-cloud", inputs: { width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], padding: "padding", data: "data" }, outputs: { clickItem: "clickItem" }, exportAs: ["g2TagCloud"], usesInheritance: true, ngImport: i0, template: `@if (!loaded) {
+    <nz-skeleton />
+  }`, isInline: true, dependencies: [{ kind: "component", type: NzSkeletonComponent, selector: "nz-skeleton", inputs: ["nzActive", "nzLoading", "nzRound", "nzTitle", "nzAvatar", "nzParagraph"], exportAs: ["nzSkeleton"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputNumber()
-], G2TagCloudComponent.prototype, "width", void 0);
-__decorate([
-    InputNumber()
-], G2TagCloudComponent.prototype, "height", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2TagCloudComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2TagCloudComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'g2-tag-cloud',
                     exportAs: 'g2TagCloud',
-                    template: `<nz-skeleton *ngIf="!loaded" />`,
+                    template: `@if (!loaded) {
+    <nz-skeleton />
+  }`,
                     preserveWhitespaces: false,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
+                    encapsulation: ViewEncapsulation.None,
+                    standalone: true,
+                    imports: [NzSkeletonComponent]
                 }]
         }], propDecorators: { width: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], height: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], padding: [{
                 type: Input
             }], data: [{
@@ -165,15 +163,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
 
 const COMPONENTS = [G2TagCloudComponent];
 class G2TagCloudModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2TagCloudModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: G2TagCloudModule, declarations: [G2TagCloudComponent], imports: [CommonModule, NzSkeletonModule], exports: [G2TagCloudComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2TagCloudModule, imports: [CommonModule, NzSkeletonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2TagCloudModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: G2TagCloudModule, imports: [CommonModule, NzSkeletonModule, G2TagCloudComponent], exports: [G2TagCloudComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2TagCloudModule, imports: [CommonModule, NzSkeletonModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2TagCloudModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2TagCloudModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule, NzSkeletonModule],
-                    declarations: COMPONENTS,
+                    imports: [CommonModule, NzSkeletonModule, ...COMPONENTS],
                     exports: COMPONENTS
                 }]
         }] });

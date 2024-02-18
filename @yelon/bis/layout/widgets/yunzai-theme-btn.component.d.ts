@@ -8,7 +8,7 @@ import * as i0 from "@angular/core";
 export interface YunzaiThemeBtnType extends ThemeBtnType {
     color?: string;
 }
-export declare class YunzaiThemBtnComponent implements OnInit, OnDestroy {
+export declare class YunzaiThemeBtnComponent implements OnInit, OnDestroy {
     private renderer;
     private configSrv;
     private platform;
@@ -27,6 +27,6 @@ export declare class YunzaiThemBtnComponent implements OnInit, OnDestroy {
     private updateChartTheme;
     onThemeChange(theme: string): void;
     ngOnDestroy(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiThemBtnComponent, [null, null, null, null, { optional: true; }, null]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiThemBtnComponent, "yunzai-theme-btn", never, { "types": { "alias": "types"; "required": false; }; "devTips": { "alias": "devTips"; "required": false; }; "deployUrl": { "alias": "deployUrl"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiThemeBtnComponent, [null, null, null, null, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiThemeBtnComponent, "yunzai-theme-btn", never, { "types": { "alias": "types"; "required": false; }; "devTips": { "alias": "devTips"; "required": false; }; "deployUrl": { "alias": "deployUrl"; "required": false; }; }, {}, never, never, false, never>;
 }

@@ -65,7 +65,7 @@ const ATTRIBUTES = {
     'quick-menu': ['icon']
 };
 const ATTRIBUTE_NAMES = Object.keys(ATTRIBUTES);
-// fix parse5 auto ignore lower case all properies
+// fix parse5 auto ingore lower case all properies
 ATTRIBUTE_NAMES.forEach(key => {
     const res = [];
     ATTRIBUTES[key].forEach(prop => {
@@ -156,7 +156,7 @@ function getNgValue(attr) {
         }
         return [str];
     }
-    // ignore {{ }}
+    // ingore {{ }}
     if (templatVarIndex !== -1)
         return null;
     return fixValue(str, '');
@@ -252,6 +252,7 @@ export const ICONS = [ ];
         return;
     }
     const source = (0, utils_1.getSourceFile)(tree, path);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const allImports = (0, ast_utils_1.findNodes)(source, ts.SyntaxKind.ImportDeclaration);
     const iconImport = allImports.find((w) => w.moduleSpecifier.getText().includes('@ant-design/icons-angular/icons'));
     if (!iconImport)

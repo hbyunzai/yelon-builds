@@ -1,18 +1,17 @@
 import { __decorate } from 'tslib';
+import { HttpClient } from '@angular/common/http';
 import * as i0 from '@angular/core';
-import { Injectable, NgModule } from '@angular/core';
+import { inject, NgZone, Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { ZoneOutside } from '@yelon/util/decorator';
-import * as i1 from '@angular/common/http';
-import * as i2 from '@yelon/util/other';
-import * as i3 from '@yelon/util/config';
-import { CommonModule } from '@angular/common';
+import { LazyService } from '@yelon/util/other';
+import * as i1 from '@yelon/util/config';
 
 class ZipService {
-    constructor(http, lazy, configSrv, ngZone) {
-        this.http = http;
-        this.lazy = lazy;
-        this.ngZone = ngZone;
+    constructor(configSrv) {
+        this.http = inject(HttpClient);
+        this.lazy = inject(LazyService);
+        this.ngZone = inject(NgZone);
         this.cog = configSrv.merge('zip', {
             url: 'https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js',
             utils: []
@@ -105,32 +104,20 @@ class ZipService {
             });
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZipService, deps: [{ token: i1.HttpClient }, { token: i2.LazyService }, { token: i3.YunzaiConfigService }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZipService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ZipService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ZipService, providedIn: 'root' }); }
 }
 __decorate([
     ZoneOutside()
 ], ZipService.prototype, "read", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZipService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ZipService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1.HttpClient }, { type: i2.LazyService }, { type: i3.YunzaiConfigService }, { type: i0.NgZone }]; }, propDecorators: { read: [] } });
-
-class ZipModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZipModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: ZipModule, imports: [CommonModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZipModule, imports: [CommonModule] }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ZipModule, decorators: [{
-            type: NgModule,
-            args: [{
-                    imports: [CommonModule]
-                }]
-        }] });
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }], propDecorators: { read: [] } });
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { ZipModule, ZipService };
+export { ZipService };
 //# sourceMappingURL=zip.mjs.map

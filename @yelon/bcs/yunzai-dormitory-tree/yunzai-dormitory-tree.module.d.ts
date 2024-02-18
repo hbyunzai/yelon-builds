@@ -1,13 +1,14 @@
 import * as i0 from "@angular/core";
-import * as i1 from "./yunzai-dormitory-tree.component";
-import * as i2 from "@angular/common/http";
-import * as i3 from "@angular/common";
-import * as i4 from "@angular/forms";
-import * as i5 from "@angular/router";
-import * as i6 from "@yelon/bcs/yunzai-shared-zorro";
-import * as i7 from "@yelon/bcs/yunzai-shared-yelon";
+import * as i1 from "@angular/common";
+import * as i2 from "@yelon/form";
+import * as i3 from "ng-zorro-antd/icon";
+import * as i4 from "ng-zorro-antd/empty";
+import * as i5 from "ng-zorro-antd/tree";
+import * as i6 from "ng-zorro-antd/spin";
+import * as i7 from "ng-zorro-antd/card";
+import * as i8 from "./yunzai-dormitory-tree.component";
 export declare class YunzaiDormitoryTreeModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiDormitoryTreeModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<YunzaiDormitoryTreeModule, [typeof i1.YunzaiDormitoryTreeComponent], [typeof i2.HttpClientModule, typeof i3.CommonModule, typeof i4.FormsModule, typeof i5.RouterModule, typeof i4.ReactiveFormsModule, typeof i6.YunzaiSharedZorroModule, typeof i7.YunzaiSharedYelonModule], [typeof i1.YunzaiDormitoryTreeComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<YunzaiDormitoryTreeModule, never, [typeof i1.CommonModule, typeof i2.YelonFormModule, typeof i3.NzIconModule, typeof i4.NzEmptyModule, typeof i5.NzTreeModule, typeof i6.NzSpinModule, typeof i7.NzCardModule, typeof i8.YunzaiDormitoryTreeComponent], [typeof i8.YunzaiDormitoryTreeComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<YunzaiDormitoryTreeModule>;
 }

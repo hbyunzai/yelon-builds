@@ -1,6 +1,7 @@
 import { Injector, OnDestroy, OnInit } from '@angular/core';
 import { _HttpClient } from '@yelon/theme';
 import { LayoutNavApplicationState, YunzaiConfigService, YunzaiNavTopic } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiI18NService } from '../yunzai-i18n.service';
 import * as i0 from "@angular/core";
 export declare class LayoutNavApplicationComponent implements OnInit, OnDestroy {
@@ -14,7 +15,7 @@ export declare class LayoutNavApplicationComponent implements OnInit, OnDestroy 
     state: LayoutNavApplicationState;
     get showAllMenu(): boolean;
     get showMineMenu(): boolean;
-    constructor(i18n: YunzaiI18NService, http: _HttpClient, inject: Injector, configService: YunzaiConfigService, win: any);
+    constructor(i18n: YunzaiI18NService, http: _HttpClient, inject: Injector, configService: YunzaiConfigService, win: NzSafeAny);
     ngOnInit(): void;
     fetchAllTopic(): void;
     attachNav(type: 'all' | 'mine' | 'other', topic?: YunzaiNavTopic): void;

@@ -1,26 +1,27 @@
-import { __decorate } from 'tslib';
-import * as i5 from '@angular/common';
+import * as i1$1 from '@angular/common';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Component, ViewChild, Input, Injectable, inject, DestroyRef, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, Inject, Optional, Output, ContentChildren, Directive, NgModule } from '@angular/core';
+import { Component, ViewChild, Input, inject, Injectable, Renderer2, ChangeDetectorRef, NgZone, DestroyRef, EventEmitter, booleanAttribute, numberAttribute, ChangeDetectionStrategy, ViewEncapsulation, Output, Inject, ContentChildren, Directive, NgModule } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import * as i1$1 from '@angular/router';
-import { NavigationEnd, RouteConfigLoadStart, NavigationError, NavigationCancel, RouteConfigLoadEnd, RouterModule } from '@angular/router';
+import * as i1 from '@angular/router';
+import { Router, NavigationEnd, RouteConfigLoadStart, NavigationError, NavigationCancel, RouteConfigLoadEnd, RouterModule } from '@angular/router';
 import { BehaviorSubject, Subject, takeUntil, filter } from 'rxjs';
-import { resizeWindow, InputBoolean as InputBoolean$1 } from '@yelon/util';
 import { updateHostClass } from '@yelon/util/browser';
-import * as i2 from 'ng-zorro-antd/message';
+import * as i2$1 from 'ng-zorro-antd/message';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-import * as i1 from '@yelon/theme';
-import * as i7 from 'ng-zorro-antd/icon';
+import * as i3$1 from '@yelon/theme';
+import { SettingsService, MenuService } from '@yelon/theme';
+import { resizeWindow } from '@yelon/util';
+import * as i3 from 'ng-zorro-antd/icon';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { InputBoolean, InputNumber, ZoneOutside } from '@yelon/util/decorator';
+import { __decorate } from 'tslib';
+import { Directionality } from '@angular/cdk/bidi';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ZoneOutside } from '@yelon/util/decorator';
 import { WINDOW } from '@yelon/util/token';
-import * as i3 from '@angular/platform-browser';
-import * as i4 from '@angular/cdk/bidi';
-import * as i6 from 'ng-zorro-antd/tooltip';
+import * as i2 from 'ng-zorro-antd/tooltip';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import * as i8 from 'ng-zorro-antd/badge';
+import * as i4 from 'ng-zorro-antd/badge';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -30,20 +31,20 @@ class LayoutDefaultHeaderItemComponent {
         this.hidden = 'none';
         this.direction = 'right';
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultHeaderItemComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutDefaultHeaderItemComponent, selector: "layout-default-header-item", inputs: { hidden: "hidden", direction: "direction" }, viewQueries: [{ propertyName: "host", first: true, predicate: ["host"], descendants: true, static: true }], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultHeaderItemComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: LayoutDefaultHeaderItemComponent, selector: "layout-default-header-item", inputs: { hidden: "hidden", direction: "direction" }, viewQueries: [{ propertyName: "host", first: true, predicate: ["host"], descendants: true, static: true }], ngImport: i0, template: `
     <ng-template #host>
-      <ng-content></ng-content>
+      <ng-content />
     </ng-template>
   `, isInline: true }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultHeaderItemComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultHeaderItemComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'layout-default-header-item',
                     template: `
     <ng-template #host>
-      <ng-content></ng-content>
+      <ng-content />
     </ng-template>
   `
                 }]
@@ -66,6 +67,11 @@ const DEFAULT = {
     hideHeader: false
 };
 class LayoutDefaultService {
+    constructor() {
+        this.settings = inject(SettingsService);
+        this._options$ = new BehaviorSubject(DEFAULT);
+        this._options = DEFAULT;
+    }
     get options() {
         return this._options;
     }
@@ -79,11 +85,6 @@ class LayoutDefaultService {
             type = collapsed ? 'fold' : 'unfold';
         }
         return `menu-${type}`;
-    }
-    constructor(settings) {
-        this.settings = settings;
-        this._options$ = new BehaviorSubject(DEFAULT);
-        this._options = DEFAULT;
     }
     notify() {
         this._options$.next(this._options);
@@ -109,13 +110,13 @@ class LayoutDefaultService {
         this.settings.setLayout('collapsed', status != null ? status : !this.settings.layout.collapsed);
         this.notify();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultService, deps: [{ token: i1.SettingsService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1.SettingsService }]; } });
+        }] });
 
 class LayoutDisplayService {
     constructor(activatedRoute) {
@@ -212,44 +213,45 @@ class LayoutDisplayService {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDisplayService, deps: [{ token: i1$1.ActivatedRoute }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDisplayService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDisplayService, deps: [{ token: i1.ActivatedRoute }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDisplayService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDisplayService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDisplayService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
                 }]
-        }], ctorParameters: function () { return [{ type: i1$1.ActivatedRoute }]; } });
+        }], ctorParameters: () => [{ type: i1.ActivatedRoute }] });
 
 const SHOWCLS = 'sidebar-nav__floating-show';
 const FLOATINGCLS = 'sidebar-nav__floating';
 class LayoutDefaultNavComponent {
-    set openStrictly(value) {
-        this.menuSrv.openStrictly = value;
-    }
-    get collapsed() {
-        return this.settings.layout.collapsed;
-    }
-    constructor(menuSrv, settings, router, render, cdr, ngZone, sanitizer, doc, win, directionality) {
-        this.menuSrv = menuSrv;
-        this.settings = settings;
-        this.router = router;
-        this.render = render;
-        this.cdr = cdr;
-        this.ngZone = ngZone;
-        this.sanitizer = sanitizer;
-        this.doc = doc;
-        this.win = win;
-        this.directionality = directionality;
+    constructor() {
+        this.doc = inject(DOCUMENT);
+        this.win = inject(WINDOW);
+        this.router = inject(Router);
+        this.render = inject(Renderer2);
+        this.menuSrv = inject(MenuService);
+        this.settings = inject(SettingsService);
+        this.cdr = inject(ChangeDetectorRef);
+        this.ngZone = inject(NgZone);
+        this.sanitizer = inject(DomSanitizer);
+        this.directionality = inject(Directionality, { optional: true });
         this.destroy$ = inject(DestroyRef);
         this.dir = 'ltr';
         this.list = [];
         this.disabledAcl = false;
         this.autoCloseUnderPad = true;
         this.recursivePath = true;
+        this.hideEmptyChildren = true;
         this.maxLevelIcon = 3;
         this.select = new EventEmitter();
+    }
+    set openStrictly(value) {
+        this.menuSrv.openStrictly = value;
+    }
+    get collapsed() {
+        return this.settings.layout.collapsed;
     }
     getLinkNode(node) {
         node = node.nodeName === 'A' ? node : node.parentNode;
@@ -402,7 +404,8 @@ class LayoutDefaultNavComponent {
                     icon.value = this.sanitizer.bypassSecurityTrustHtml(icon.value);
                 }
             });
-            this.fixHide(data);
+            if (this.hideEmptyChildren)
+                this.fixHide(data);
             this.list = data.filter((w) => w._hidden !== true);
             cdr.detectChanges();
         });
@@ -417,8 +420,8 @@ class LayoutDefaultNavComponent {
             .pipe(takeUntilDestroyed(this.destroy$), filter(t => t.type === 'layout' && t.name === 'collapsed'))
             .subscribe(() => this.clearFloating());
         this.underPad();
-        this.dir = this.directionality.value;
-        this.directionality.change?.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction) => {
+        this.dir = this.directionality?.value;
+        this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
             this.dir = direction;
             this.cdr.detectChanges();
         });
@@ -453,57 +456,51 @@ class LayoutDefaultNavComponent {
     openAside(status) {
         this.settings.setLayout('collapsed', status);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultNavComponent, deps: [{ token: i1.MenuService }, { token: i1.SettingsService }, { token: i1$1.Router }, { token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }, { token: i0.NgZone }, { token: i3.DomSanitizer }, { token: DOCUMENT }, { token: WINDOW }, { token: i4.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutDefaultNavComponent, selector: "layout-default-nav", inputs: { disabledAcl: "disabledAcl", autoCloseUnderPad: "autoCloseUnderPad", recursivePath: "recursivePath", openStrictly: "openStrictly", maxLevelIcon: "maxLevelIcon" }, outputs: { select: "select" }, host: { listeners: { "click": "_click()", "document:click": "closeSubMenu()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: "<ng-template #icon let-i>\n  <ng-container data-event-container=\"_route_icon_container\" *ngIf=\"i\" [ngSwitch]=\"i.type\">\n    <i\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'icon'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzType]=\"i.value\"\n      [nzTheme]=\"i.theme\"\n      [nzSpin]=\"i.spin\"\n      [nzTwotoneColor]=\"i.twoToneColor\"\n      [nzIconfont]=\"i.iconfont\"\n      [nzRotate]=\"i.rotate\"\n    ></i>\n    <i\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'iconfont'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzIconfont]=\"i.iconfont\"\n    ></i>\n    <img\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'img'\"\n      [src]=\"i.value\"\n      class=\"sidebar-nav__item-icon sidebar-nav__item-img\"\n    />\n    <span\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'svg'\"\n      class=\"sidebar-nav__item-icon sidebar-nav__item-svg\"\n      [innerHTML]=\"i.value\"\n    ></span>\n    <i data-event-id=\"_route_icon\" *ngSwitchDefault class=\"sidebar-nav__item-icon {{ i.value }}\"></i>\n  </ng-container>\n</ng-template>\n<ng-template #tree let-ls>\n  <ng-container *ngFor=\"let i of ls\">\n    <li\n      *ngIf=\"i._hidden !== true\"\n      class=\"sidebar-nav__item\"\n      [class.sidebar-nav__selected]=\"i._selected\"\n      [class.sidebar-nav__open]=\"i.open\"\n    >\n      <!-- link -->\n      <a\n        data-event-id=\"_route_link\"\n        *ngIf=\"i.children.length === 0\"\n        (click)=\"to(i)\"\n        [attr.data-text]=\"i.text\"\n        [attr.data-id]=\"i._id\"\n        class=\"sidebar-nav__item-link\"\n        [ngClass]=\"{ 'sidebar-nav__item-disabled': i.disabled }\"\n        (mouseenter)=\"closeSubMenu()\"\n      >\n        <ng-container *ngIf=\"i._needIcon\">\n          <ng-container *ngIf=\"!collapsed\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </ng-container>\n          <span *ngIf=\"collapsed\" nz-tooltip nzTooltipPlacement=\"right\" [nzTooltipTitle]=\"i.text\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </span>\n        </ng-container>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n      </a>\n      <!-- has children link -->\n      <a\n        data-event-id=\"_route_toggle\"\n        [attr.data-text]=\"i.text\"\n        [attr.data-id]=\"i._id\"\n        *ngIf=\"i.children.length > 0\"\n        (click)=\"toggleOpen(i)\"\n        (mouseenter)=\"showSubMenu($event, i)\"\n        class=\"sidebar-nav__item-link\"\n      >\n        <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n        <i class=\"sidebar-nav__sub-arrow\"></i>\n      </a>\n      <!-- badge -->\n      <nz-badge *ngIf=\"i.badge\" [nzCount]=\"i.badge\" [nzDot]=\"i.badgeDot\" nzStandalone [nzOverflowCount]=\"9\" />\n      <ul *ngIf=\"i.children.length > 0\" class=\"sidebar-nav sidebar-nav__sub sidebar-nav__depth{{ i._depth }}\">\n        <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: i.children }\"></ng-template>\n      </ul>\n    </li>\n  </ng-container>\n</ng-template>\n<ul class=\"sidebar-nav\">\n  <ng-container *ngFor=\"let group of list\">\n    <li\n      data-event-id=\"_route_group\"\n      [attr.data-id]=\"group.id\"\n      [attr.data-text]=\"group.text\"\n      class=\"sidebar-nav__item sidebar-nav__group-title\"\n      *ngIf=\"group.group\"\n    >\n      <span [innerHTML]=\"group._text\"></span>\n    </li>\n    <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: group.children }\"></ng-template>\n  </ng-container>\n</ul>\n", dependencies: [{ kind: "directive", type: i5.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i5.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i5.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i5.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i5.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i5.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "directive", type: i5.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { kind: "directive", type: i6.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i7.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8.NzBadgeComponent, selector: "nz-badge", inputs: ["nzShowZero", "nzShowDot", "nzStandalone", "nzDot", "nzOverflowCount", "nzColor", "nzStyle", "nzText", "nzTitle", "nzStatus", "nzCount", "nzOffset", "nzSize"], exportAs: ["nzBadge"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultNavComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: LayoutDefaultNavComponent, selector: "layout-default-nav", inputs: { disabledAcl: ["disabledAcl", "disabledAcl", booleanAttribute], autoCloseUnderPad: ["autoCloseUnderPad", "autoCloseUnderPad", booleanAttribute], recursivePath: ["recursivePath", "recursivePath", booleanAttribute], hideEmptyChildren: ["hideEmptyChildren", "hideEmptyChildren", booleanAttribute], openStrictly: ["openStrictly", "openStrictly", booleanAttribute], maxLevelIcon: ["maxLevelIcon", "maxLevelIcon", numberAttribute] }, outputs: { select: "select" }, host: { listeners: { "click": "_click()", "document:click": "closeSubMenu()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: "<ng-template #icon let-i>\n  @if (i) {\n    @switch (i.type) {\n      @case ('icon') {\n        <i\n          class=\"sidebar-nav__item-icon\"\n          nz-icon\n          [nzType]=\"i.value\"\n          [nzTheme]=\"i.theme\"\n          [nzSpin]=\"i.spin\"\n          [nzTwotoneColor]=\"i.twoToneColor\"\n          [nzIconfont]=\"i.iconfont\"\n          [nzRotate]=\"i.rotate\"\n        ></i>\n      }\n      @case ('iconfont') {\n        <i class=\"sidebar-nav__item-icon\" nz-icon [nzIconfont]=\"i.iconfont\"></i>\n      }\n      @case ('img') {\n        <img [src]=\"i.value\" class=\"sidebar-nav__item-icon sidebar-nav__item-img\" />\n      }\n      @case ('svg') {\n        <span class=\"sidebar-nav__item-icon sidebar-nav__item-svg\" [innerHTML]=\"i.value\"></span>\n      }\n      @default {\n        <i class=\"sidebar-nav__item-icon {{ i.value }}\"></i>\n      }\n    }\n  }\n</ng-template>\n<ng-template #tree let-ls>\n  @for (i of ls; track $index) {\n    @if (i._hidden !== true) {\n      <li class=\"sidebar-nav__item\" [class.sidebar-nav__selected]=\"i._selected\" [class.sidebar-nav__open]=\"i.open\">\n        <!-- link -->\n        @if (i.children.length === 0) {\n          <a\n            (click)=\"to(i)\"\n            [attr.data-id]=\"i._id\"\n            class=\"sidebar-nav__item-link\"\n            [ngClass]=\"{ 'sidebar-nav__item-disabled': i.disabled }\"\n            (mouseenter)=\"closeSubMenu()\"\n          >\n            @if (i._needIcon) {\n              @if (collapsed) {\n                <span nz-tooltip nzTooltipPlacement=\"right\" [nzTooltipTitle]=\"i.text\">\n                  <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\" />\n                </span>\n              } @else {\n                <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\" />\n              }\n            }\n            <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n          </a>\n        }\n        <!-- has children link -->\n        @if (i.children.length > 0) {\n          <a (click)=\"toggleOpen(i)\" (mouseenter)=\"showSubMenu($event, i)\" class=\"sidebar-nav__item-link\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\" />\n            <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n            <i class=\"sidebar-nav__sub-arrow\"></i>\n          </a>\n        }\n        <!-- badge -->\n        @if (i.badge) {\n          <nz-badge [nzCount]=\"i.badge\" [nzDot]=\"i.badgeDot\" nzStandalone [nzOverflowCount]=\"9\" />\n        }\n        @if (i.children.length > 0) {\n          <ul class=\"sidebar-nav sidebar-nav__sub sidebar-nav__depth{{ i._depth }}\">\n            <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: i.children }\" />\n          </ul>\n        }\n      </li>\n    }\n  }\n</ng-template>\n<ul class=\"sidebar-nav\">\n  @for (group of list; track $index) {\n    @if (group.group) {\n      <li class=\"sidebar-nav__item sidebar-nav__group-title\">\n        <span [innerHTML]=\"group._text\"></span>\n      </li>\n    }\n    <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: group.children }\" />\n  }\n</ul>\n", dependencies: [{ kind: "directive", type: i1$1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i2.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i3.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i4.NzBadgeComponent, selector: "nz-badge", inputs: ["nzShowZero", "nzShowDot", "nzStandalone", "nzDot", "nzOverflowCount", "nzColor", "nzStyle", "nzText", "nzTitle", "nzStatus", "nzCount", "nzOffset", "nzSize"], exportAs: ["nzBadge"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputBoolean()
-], LayoutDefaultNavComponent.prototype, "disabledAcl", void 0);
-__decorate([
-    InputBoolean()
-], LayoutDefaultNavComponent.prototype, "autoCloseUnderPad", void 0);
-__decorate([
-    InputBoolean()
-], LayoutDefaultNavComponent.prototype, "recursivePath", void 0);
-__decorate([
-    InputBoolean()
-], LayoutDefaultNavComponent.prototype, "openStrictly", null);
-__decorate([
-    InputNumber()
-], LayoutDefaultNavComponent.prototype, "maxLevelIcon", void 0);
 __decorate([
     ZoneOutside()
 ], LayoutDefaultNavComponent.prototype, "showSubMenu", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultNavComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultNavComponent, decorators: [{
             type: Component,
             args: [{ selector: 'layout-default-nav', host: {
                         '(click)': '_click()',
                         '(document:click)': 'closeSubMenu()',
                         '[class.d-block]': `true`
-                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<ng-template #icon let-i>\n  <ng-container data-event-container=\"_route_icon_container\" *ngIf=\"i\" [ngSwitch]=\"i.type\">\n    <i\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'icon'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzType]=\"i.value\"\n      [nzTheme]=\"i.theme\"\n      [nzSpin]=\"i.spin\"\n      [nzTwotoneColor]=\"i.twoToneColor\"\n      [nzIconfont]=\"i.iconfont\"\n      [nzRotate]=\"i.rotate\"\n    ></i>\n    <i\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'iconfont'\"\n      class=\"sidebar-nav__item-icon\"\n      nz-icon\n      [nzIconfont]=\"i.iconfont\"\n    ></i>\n    <img\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'img'\"\n      [src]=\"i.value\"\n      class=\"sidebar-nav__item-icon sidebar-nav__item-img\"\n    />\n    <span\n      data-event-id=\"_route_icon\"\n      *ngSwitchCase=\"'svg'\"\n      class=\"sidebar-nav__item-icon sidebar-nav__item-svg\"\n      [innerHTML]=\"i.value\"\n    ></span>\n    <i data-event-id=\"_route_icon\" *ngSwitchDefault class=\"sidebar-nav__item-icon {{ i.value }}\"></i>\n  </ng-container>\n</ng-template>\n<ng-template #tree let-ls>\n  <ng-container *ngFor=\"let i of ls\">\n    <li\n      *ngIf=\"i._hidden !== true\"\n      class=\"sidebar-nav__item\"\n      [class.sidebar-nav__selected]=\"i._selected\"\n      [class.sidebar-nav__open]=\"i.open\"\n    >\n      <!-- link -->\n      <a\n        data-event-id=\"_route_link\"\n        *ngIf=\"i.children.length === 0\"\n        (click)=\"to(i)\"\n        [attr.data-text]=\"i.text\"\n        [attr.data-id]=\"i._id\"\n        class=\"sidebar-nav__item-link\"\n        [ngClass]=\"{ 'sidebar-nav__item-disabled': i.disabled }\"\n        (mouseenter)=\"closeSubMenu()\"\n      >\n        <ng-container *ngIf=\"i._needIcon\">\n          <ng-container *ngIf=\"!collapsed\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </ng-container>\n          <span *ngIf=\"collapsed\" nz-tooltip nzTooltipPlacement=\"right\" [nzTooltipTitle]=\"i.text\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n          </span>\n        </ng-container>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n      </a>\n      <!-- has children link -->\n      <a\n        data-event-id=\"_route_toggle\"\n        [attr.data-text]=\"i.text\"\n        [attr.data-id]=\"i._id\"\n        *ngIf=\"i.children.length > 0\"\n        (click)=\"toggleOpen(i)\"\n        (mouseenter)=\"showSubMenu($event, i)\"\n        class=\"sidebar-nav__item-link\"\n      >\n        <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\"></ng-template>\n        <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n        <i class=\"sidebar-nav__sub-arrow\"></i>\n      </a>\n      <!-- badge -->\n      <nz-badge *ngIf=\"i.badge\" [nzCount]=\"i.badge\" [nzDot]=\"i.badgeDot\" nzStandalone [nzOverflowCount]=\"9\" />\n      <ul *ngIf=\"i.children.length > 0\" class=\"sidebar-nav sidebar-nav__sub sidebar-nav__depth{{ i._depth }}\">\n        <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: i.children }\"></ng-template>\n      </ul>\n    </li>\n  </ng-container>\n</ng-template>\n<ul class=\"sidebar-nav\">\n  <ng-container *ngFor=\"let group of list\">\n    <li\n      data-event-id=\"_route_group\"\n      [attr.data-id]=\"group.id\"\n      [attr.data-text]=\"group.text\"\n      class=\"sidebar-nav__item sidebar-nav__group-title\"\n      *ngIf=\"group.group\"\n    >\n      <span [innerHTML]=\"group._text\"></span>\n    </li>\n    <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: group.children }\"></ng-template>\n  </ng-container>\n</ul>\n" }]
-        }], ctorParameters: function () { return [{ type: i1.MenuService }, { type: i1.SettingsService }, { type: i1$1.Router }, { type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }, { type: i0.NgZone }, { type: i3.DomSanitizer }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [WINDOW]
-                }] }, { type: i4.Directionality, decorators: [{
-                    type: Optional
-                }] }]; }, propDecorators: { disabledAcl: [{
-                type: Input
+                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<ng-template #icon let-i>\n  @if (i) {\n    @switch (i.type) {\n      @case ('icon') {\n        <i\n          class=\"sidebar-nav__item-icon\"\n          nz-icon\n          [nzType]=\"i.value\"\n          [nzTheme]=\"i.theme\"\n          [nzSpin]=\"i.spin\"\n          [nzTwotoneColor]=\"i.twoToneColor\"\n          [nzIconfont]=\"i.iconfont\"\n          [nzRotate]=\"i.rotate\"\n        ></i>\n      }\n      @case ('iconfont') {\n        <i class=\"sidebar-nav__item-icon\" nz-icon [nzIconfont]=\"i.iconfont\"></i>\n      }\n      @case ('img') {\n        <img [src]=\"i.value\" class=\"sidebar-nav__item-icon sidebar-nav__item-img\" />\n      }\n      @case ('svg') {\n        <span class=\"sidebar-nav__item-icon sidebar-nav__item-svg\" [innerHTML]=\"i.value\"></span>\n      }\n      @default {\n        <i class=\"sidebar-nav__item-icon {{ i.value }}\"></i>\n      }\n    }\n  }\n</ng-template>\n<ng-template #tree let-ls>\n  @for (i of ls; track $index) {\n    @if (i._hidden !== true) {\n      <li class=\"sidebar-nav__item\" [class.sidebar-nav__selected]=\"i._selected\" [class.sidebar-nav__open]=\"i.open\">\n        <!-- link -->\n        @if (i.children.length === 0) {\n          <a\n            (click)=\"to(i)\"\n            [attr.data-id]=\"i._id\"\n            class=\"sidebar-nav__item-link\"\n            [ngClass]=\"{ 'sidebar-nav__item-disabled': i.disabled }\"\n            (mouseenter)=\"closeSubMenu()\"\n          >\n            @if (i._needIcon) {\n              @if (collapsed) {\n                <span nz-tooltip nzTooltipPlacement=\"right\" [nzTooltipTitle]=\"i.text\">\n                  <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\" />\n                </span>\n              } @else {\n                <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\" />\n              }\n            }\n            <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n          </a>\n        }\n        <!-- has children link -->\n        @if (i.children.length > 0) {\n          <a (click)=\"toggleOpen(i)\" (mouseenter)=\"showSubMenu($event, i)\" class=\"sidebar-nav__item-link\">\n            <ng-template [ngTemplateOutlet]=\"icon\" [ngTemplateOutletContext]=\"{ $implicit: i.icon }\" />\n            <span class=\"sidebar-nav__item-text\" [innerHTML]=\"i._text\" [attr.title]=\"i.text\"></span>\n            <i class=\"sidebar-nav__sub-arrow\"></i>\n          </a>\n        }\n        <!-- badge -->\n        @if (i.badge) {\n          <nz-badge [nzCount]=\"i.badge\" [nzDot]=\"i.badgeDot\" nzStandalone [nzOverflowCount]=\"9\" />\n        }\n        @if (i.children.length > 0) {\n          <ul class=\"sidebar-nav sidebar-nav__sub sidebar-nav__depth{{ i._depth }}\">\n            <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: i.children }\" />\n          </ul>\n        }\n      </li>\n    }\n  }\n</ng-template>\n<ul class=\"sidebar-nav\">\n  @for (group of list; track $index) {\n    @if (group.group) {\n      <li class=\"sidebar-nav__item sidebar-nav__group-title\">\n        <span [innerHTML]=\"group._text\"></span>\n      </li>\n    }\n    <ng-template [ngTemplateOutlet]=\"tree\" [ngTemplateOutletContext]=\"{ $implicit: group.children }\" />\n  }\n</ul>\n" }]
+        }], propDecorators: { disabledAcl: [{
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], autoCloseUnderPad: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], recursivePath: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
+            }], hideEmptyChildren: [{
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], openStrictly: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], maxLevelIcon: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], select: [{
                 type: Output
             }], showSubMenu: [] } });
 
 class LayoutDefaultHeaderComponent {
+    constructor() {
+        this.settings = inject(SettingsService);
+        this.srv = inject(LayoutDefaultService);
+        this.cdr = inject(ChangeDetectorRef);
+        this.destroy$ = inject(DestroyRef);
+        this.left = [];
+        this.middle = [];
+        this.right = [];
+    }
     get opt() {
         return this.srv.options;
     }
@@ -515,15 +512,6 @@ class LayoutDefaultHeaderComponent {
     }
     get collapsedIcon() {
         return this.srv.collapsedIcon;
-    }
-    constructor(srv, settings, cdr) {
-        this.srv = srv;
-        this.settings = settings;
-        this.cdr = cdr;
-        this.destroy$ = inject(DestroyRef);
-        this.left = [];
-        this.middle = [];
-        this.right = [];
     }
     refresh() {
         const arr = this.items.toArray();
@@ -540,79 +528,87 @@ class LayoutDefaultHeaderComponent {
     toggleCollapsed() {
         this.srv.toggleCollapsed();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultHeaderComponent, deps: [{ token: LayoutDefaultService }, { token: i1.SettingsService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutDefaultHeaderComponent, selector: "layout-default-header", inputs: { items: "items" }, host: { properties: { "class.yunzai-default__header": "true" } }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultHeaderComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: LayoutDefaultHeaderComponent, selector: "layout-default-header", inputs: { items: "items" }, host: { properties: { "class.yunzai-default__header": "true" } }, ngImport: i0, template: `
     <ng-template #render let-ls>
-      <li *ngFor="let i of ls" [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
-        <ng-container *ngTemplateOutlet="i.host" />
-      </li>
+      @for (i of ls; track $index) {
+        <li [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
+          <ng-container *ngTemplateOutlet="i.host" />
+        </li>
+      }
     </ng-template>
     <div class="yunzai-default__header-logo" [style.width.px]="opt.logoFixWidth">
-      <ng-container *ngIf="!opt.logo; else opt.logo!">
-        <a data-event-id="_nav_logo" [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
+      @if (opt.logo) {
+        <ng-container *ngTemplateOutlet="opt.logo" />
+      } @else {
+        <a [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
           <img class="yunzai-default__header-logo-expanded" [attr.src]="opt.logoExpanded" [attr.alt]="app.name" />
           <img class="yunzai-default__header-logo-collapsed" [attr.src]="opt.logoCollapsed" [attr.alt]="app.name" />
         </a>
-      </ng-container>
+      }
     </div>
     <div class="yunzai-default__nav-wrap">
       <ul class="yunzai-default__nav">
-        <li *ngIf="!opt.hideAside && opt.showHeaderCollapse">
-          <div
-            data-event-id="_nav_toggle"
-            class="yunzai-default__nav-item yunzai-default__nav-item--collapse"
-            (click)="toggleCollapsed()"
-          >
-            <span nz-icon [nzType]="collapsedIcon"></span>
-          </div>
-        </li>
-        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }"></ng-template>
+        @if (!opt.hideAside && opt.showHeaderCollapse) {
+          <li>
+            <div class="yunzai-default__nav-item yunzai-default__nav-item--collapse" (click)="toggleCollapsed()">
+              <span nz-icon [nzType]="collapsedIcon"></span>
+            </div>
+          </li>
+        }
+        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }" />
       </ul>
-      <div *ngIf="middle.length > 0" class="yunzai-default__nav yunzai-default__nav-middle">
-        <ng-container *ngTemplateOutlet="middle[0].host" />
-      </div>
+      @if (middle.length > 0) {
+        <div class="yunzai-default__nav yunzai-default__nav-middle">
+          <ng-container *ngTemplateOutlet="middle[0].host" />
+        </div>
+      }
       <ul class="yunzai-default__nav">
-        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }"></ng-template>
+        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }" />
       </ul>
     </div>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i5.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i5.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i5.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i1$1.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "directive", type: i7.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i1$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i1.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "info", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "directive", type: i3.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultHeaderComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultHeaderComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'layout-default-header',
                     template: `
     <ng-template #render let-ls>
-      <li *ngFor="let i of ls" [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
-        <ng-container *ngTemplateOutlet="i.host" />
-      </li>
+      @for (i of ls; track $index) {
+        <li [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
+          <ng-container *ngTemplateOutlet="i.host" />
+        </li>
+      }
     </ng-template>
     <div class="yunzai-default__header-logo" [style.width.px]="opt.logoFixWidth">
-      <ng-container *ngIf="!opt.logo; else opt.logo!">
-        <a data-event-id="_nav_logo" [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
+      @if (opt.logo) {
+        <ng-container *ngTemplateOutlet="opt.logo" />
+      } @else {
+        <a [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
           <img class="yunzai-default__header-logo-expanded" [attr.src]="opt.logoExpanded" [attr.alt]="app.name" />
           <img class="yunzai-default__header-logo-collapsed" [attr.src]="opt.logoCollapsed" [attr.alt]="app.name" />
         </a>
-      </ng-container>
+      }
     </div>
     <div class="yunzai-default__nav-wrap">
       <ul class="yunzai-default__nav">
-        <li *ngIf="!opt.hideAside && opt.showHeaderCollapse">
-          <div
-            data-event-id="_nav_toggle"
-            class="yunzai-default__nav-item yunzai-default__nav-item--collapse"
-            (click)="toggleCollapsed()"
-          >
-            <span nz-icon [nzType]="collapsedIcon"></span>
-          </div>
-        </li>
-        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }"></ng-template>
+        @if (!opt.hideAside && opt.showHeaderCollapse) {
+          <li>
+            <div class="yunzai-default__nav-item yunzai-default__nav-item--collapse" (click)="toggleCollapsed()">
+              <span nz-icon [nzType]="collapsedIcon"></span>
+            </div>
+          </li>
+        }
+        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }" />
       </ul>
-      <div *ngIf="middle.length > 0" class="yunzai-default__nav yunzai-default__nav-middle">
-        <ng-container *ngTemplateOutlet="middle[0].host" />
-      </div>
+      @if (middle.length > 0) {
+        <div class="yunzai-default__nav yunzai-default__nav-middle">
+          <ng-container *ngTemplateOutlet="middle[0].host" />
+        </div>
+      }
       <ul class="yunzai-default__nav">
-        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }"></ng-template>
+        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }" />
       </ul>
     </div>
   `,
@@ -621,7 +617,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }]
-        }], ctorParameters: function () { return [{ type: LayoutDefaultService }, { type: i1.SettingsService }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { items: [{
+        }], propDecorators: { items: [{
                 type: Input
             }] } });
 
@@ -637,6 +633,12 @@ class LayoutDefaultComponent {
             return this.fetching;
         return this.isFetching;
     }
+    get collapsed() {
+        return this.settings.layout.collapsed;
+    }
+    get collapsedIcon() {
+        return this.srv.collapsedIcon;
+    }
     get contentStyle() {
         return {
             'margin-top': !this.displayNav ? '0px' : '',
@@ -647,12 +649,6 @@ class LayoutDefaultComponent {
         return {
             'margin-top': !this.displayNav ? '0px' : ''
         };
-    }
-    get collapsed() {
-        return this.settings.layout.collapsed;
-    }
-    get collapsedIcon() {
-        return this.srv.collapsedIcon;
     }
     toggleCollapsed() {
         this.srv.toggleCollapsed();
@@ -721,76 +717,90 @@ class LayoutDefaultComponent {
         });
         doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultComponent, deps: [{ token: i1$1.Router }, { token: i2.NzMessageService }, { token: i1.SettingsService }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: DOCUMENT }, { token: LayoutDefaultService }, { token: LayoutDisplayService }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutDefaultComponent, selector: "layout-default", inputs: { options: "options", asideUser: "asideUser", asideBottom: "asideBottom", nav: "nav", content: "content", customError: "customError", fetchingStrictly: "fetchingStrictly", fetching: "fetching" }, queries: [{ propertyName: "headerItems", predicate: LayoutDefaultHeaderItemComponent }], exportAs: ["layoutDefault"], ngImport: i0, template: `
-    <div class="yunzai-default__progress-bar" *ngIf="showFetching"></div>
-    <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems" />
-    <ng-container *ngIf="displayAside">
-      <div *ngIf="!opt.hideAside" class="yunzai-default__aside" [ngStyle]="asideStyle">
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultComponent, deps: [{ token: i1.Router }, { token: i2$1.NzMessageService }, { token: i3$1.SettingsService }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: DOCUMENT }, { token: LayoutDefaultService }, { token: LayoutDisplayService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: LayoutDefaultComponent, selector: "layout-default", inputs: { options: "options", asideUser: "asideUser", asideBottom: "asideBottom", nav: "nav", content: "content", customError: "customError", fetchingStrictly: ["fetchingStrictly", "fetchingStrictly", booleanAttribute], fetching: ["fetching", "fetching", booleanAttribute] }, queries: [{ propertyName: "headerItems", predicate: LayoutDefaultHeaderItemComponent }], exportAs: ["layoutDefault"], ngImport: i0, template: `
+    @if (showFetching) {
+      <div class="yunzai-default__progress-bar"></div>
+    }
+    @if (!opt.hideHeader) {
+      <layout-default-header [items]="headerItems" />
+    }
+    @if (!opt.hideAside) {
+      <div class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
             <ng-container *ngTemplateOutlet="asideUser" />
             <ng-container *ngTemplateOutlet="nav" />
-            <layout-default-nav *ngIf="!nav" />
+            @if (!nav) {
+              <layout-default-nav />
+            }
           </div>
-          <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
-            <ng-container *ngIf="asideBottom === null; else asideBottom">
-              <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
-                <span nz-icon [nzType]="collapsedIcon"></span>
-              </div>
-            </ng-container>
-          </div>
+          @if (opt.showSiderCollapse) {
+            <div class="yunzai-default__aside-link">
+              @if (asideBottom) {
+                <ng-container *ngTemplateOutlet="asideBottom" />
+              } @else {
+                <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
+                  <span nz-icon [nzType]="collapsedIcon"></span>
+                </div>
+              }
+            </div>
+          }
         </div>
       </div>
-    </ng-container>
+    }
     <section class="yunzai-default__content" [ngStyle]="contentStyle">
       <ng-container *ngTemplateOutlet="content" />
-      <ng-content></ng-content>
+      <ng-content />
     </section>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i5.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i5.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i5.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: i7.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: LayoutDefaultNavComponent, selector: "layout-default-nav", inputs: ["disabledAcl", "autoCloseUnderPad", "recursivePath", "openStrictly", "maxLevelIcon"], outputs: ["select"] }, { kind: "component", type: LayoutDefaultHeaderComponent, selector: "layout-default-header", inputs: ["items"] }] }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i1$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i1$1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: i3.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: LayoutDefaultNavComponent, selector: "layout-default-nav", inputs: ["disabledAcl", "autoCloseUnderPad", "recursivePath", "hideEmptyChildren", "openStrictly", "maxLevelIcon"], outputs: ["select"] }, { kind: "component", type: LayoutDefaultHeaderComponent, selector: "layout-default-header", inputs: ["items"] }] }); }
 }
-__decorate([
-    InputBoolean$1()
-], LayoutDefaultComponent.prototype, "fetchingStrictly", void 0);
-__decorate([
-    InputBoolean$1()
-], LayoutDefaultComponent.prototype, "fetching", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'layout-default',
                     exportAs: 'layoutDefault',
                     template: `
-    <div class="yunzai-default__progress-bar" *ngIf="showFetching"></div>
-    <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems" />
-    <ng-container *ngIf="displayAside">
-      <div *ngIf="!opt.hideAside" class="yunzai-default__aside" [ngStyle]="asideStyle">
+    @if (showFetching) {
+      <div class="yunzai-default__progress-bar"></div>
+    }
+    @if (!opt.hideHeader) {
+      <layout-default-header [items]="headerItems" />
+    }
+    @if (!opt.hideAside) {
+      <div class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
             <ng-container *ngTemplateOutlet="asideUser" />
             <ng-container *ngTemplateOutlet="nav" />
-            <layout-default-nav *ngIf="!nav" />
+            @if (!nav) {
+              <layout-default-nav />
+            }
           </div>
-          <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
-            <ng-container *ngIf="asideBottom === null; else asideBottom">
-              <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
-                <span nz-icon [nzType]="collapsedIcon"></span>
-              </div>
-            </ng-container>
-          </div>
+          @if (opt.showSiderCollapse) {
+            <div class="yunzai-default__aside-link">
+              @if (asideBottom) {
+                <ng-container *ngTemplateOutlet="asideBottom" />
+              } @else {
+                <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
+                  <span nz-icon [nzType]="collapsedIcon"></span>
+                </div>
+              }
+            </div>
+          }
         </div>
       </div>
-    </ng-container>
+    }
     <section class="yunzai-default__content" [ngStyle]="contentStyle">
       <ng-container *ngTemplateOutlet="content" />
-      <ng-content></ng-content>
+      <ng-content />
     </section>
   `
                 }]
-        }], ctorParameters: function () { return [{ type: i1$1.Router }, { type: i2.NzMessageService }, { type: i1.SettingsService }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i1.Router }, { type: i2$1.NzMessageService }, { type: i3$1.SettingsService }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
-                }] }, { type: LayoutDefaultService }, { type: LayoutDisplayService }]; }, propDecorators: { headerItems: [{
+                }] }, { type: LayoutDefaultService }, { type: LayoutDisplayService }], propDecorators: { headerItems: [{
                 type: ContentChildren,
                 args: [LayoutDefaultHeaderItemComponent, { descendants: false }]
             }], options: [{
@@ -806,16 +816,18 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
             }], customError: [{
                 type: Input
             }], fetchingStrictly: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], fetching: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }] } });
 
 class LayoutDefaultHeaderItemTriggerDirective {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultHeaderItemTriggerDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.2.12", type: LayoutDefaultHeaderItemTriggerDirective, selector: "[layout-default-header-item-trigger]", host: { properties: { "class.yunzai-default__nav-item": "true" } }, ngImport: i0 }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultHeaderItemTriggerDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.2.1", type: LayoutDefaultHeaderItemTriggerDirective, selector: "[layout-default-header-item-trigger]", host: { properties: { "class.yunzai-default__nav-item": "true" } }, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultHeaderItemTriggerDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultHeaderItemTriggerDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[layout-default-header-item-trigger]',
@@ -830,20 +842,14 @@ class LayoutDefaultTopMenuItemComponent {
         this.selected = false;
         this.disabled = false;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultTopMenuItemComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutDefaultTopMenuItemComponent, selector: "layout-default-top-menu-item", inputs: { selected: "selected", disabled: "disabled" }, host: { properties: { "class.yunzai-default__nav-item": "true", "class.yunzai-default__top-menu-item": "true", "class.yunzai-default__top-menu-item-selected": "selected", "class.yunzai-default__top-menu-item-disabled": "disabled" } }, ngImport: i0, template: `<ng-content></ng-content>`, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultTopMenuItemComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "16.1.0", version: "17.2.1", type: LayoutDefaultTopMenuItemComponent, selector: "layout-default-top-menu-item", inputs: { selected: ["selected", "selected", booleanAttribute], disabled: ["disabled", "disabled", booleanAttribute] }, host: { properties: { "class.yunzai-default__nav-item": "true", "class.yunzai-default__top-menu-item": "true", "class.yunzai-default__top-menu-item-selected": "selected", "class.yunzai-default__top-menu-item-disabled": "disabled" } }, ngImport: i0, template: `<ng-content />`, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputBoolean()
-], LayoutDefaultTopMenuItemComponent.prototype, "selected", void 0);
-__decorate([
-    InputBoolean()
-], LayoutDefaultTopMenuItemComponent.prototype, "disabled", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultTopMenuItemComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultTopMenuItemComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'layout-default-top-menu-item',
-                    template: `<ng-content></ng-content>`,
+                    template: `<ng-content />`,
                     host: {
                         '[class.yunzai-default__nav-item]': `true`,
                         '[class.yunzai-default__top-menu-item]': `true`,
@@ -855,9 +861,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     encapsulation: ViewEncapsulation.None
                 }]
         }], propDecorators: { selected: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], disabled: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }] } });
 
 const COMPONENTS = [
@@ -869,8 +877,8 @@ const COMPONENTS = [
     LayoutDefaultTopMenuItemComponent
 ];
 class LayoutDefaultModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultModule, declarations: [LayoutDefaultComponent,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultModule, declarations: [LayoutDefaultComponent,
             LayoutDefaultNavComponent,
             LayoutDefaultHeaderComponent,
             LayoutDefaultHeaderItemComponent,
@@ -888,7 +896,7 @@ class LayoutDefaultModule {
             LayoutDefaultHeaderItemComponent,
             LayoutDefaultHeaderItemTriggerDirective,
             LayoutDefaultTopMenuItemComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultModule, imports: [CommonModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultModule, imports: [CommonModule,
             RouterModule,
             NzToolTipModule,
             NzIconModule,
@@ -897,7 +905,7 @@ class LayoutDefaultModule {
             NzMessageModule,
             NzBadgeModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutDefaultModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutDefaultModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

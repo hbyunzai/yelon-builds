@@ -1,27 +1,29 @@
 import * as i0 from '@angular/core';
 import { Component, ChangeDetectionStrategy, HostListener, Injectable, Inject, Input, Optional, inject, NgModule, APP_INITIALIZER } from '@angular/core';
-import * as i1$3 from '@yelon/util';
+import * as i1$4 from '@yelon/util';
 import { WINDOW, useLocalStorageProjectInfo, useLocalStorageUser, useLocalStorageHeader, NavType, hasFavicon, setFavicon, useLocalStorageCurrent, useLocalStorageHeaderType, useLocalStorageDefaultRoute, log as log$1, deepCopy, YunzaiConfigService, useLocalStorageTenant } from '@yelon/util';
-import * as i1$4 from '@yelon/theme/layout-default';
+import * as i1$5 from '@yelon/theme/layout-default';
+import { LayoutDefaultModule } from '@yelon/theme/layout-default';
 import * as i2$1 from '@yelon/socket';
-import * as i4$1 from '@angular/common';
-import { registerLocaleData, DOCUMENT, CommonModule } from '@angular/common';
-import * as i4$4 from '@angular/router';
+import * as i3$3 from '@angular/router';
 import { Router, RouterModule } from '@angular/router';
-import * as i5$2 from '@yelon/abc/reuse-tab';
-import * as i3 from 'ng-zorro-antd/core/transition-patch';
+import * as i4$4 from '@yelon/abc/reuse-tab';
+import { ReuseTabModule } from '@yelon/abc/reuse-tab';
+import * as i4$1 from '@angular/common';
+import { registerLocaleData, DOCUMENT, CommonModule, NgOptimizedImage } from '@angular/common';
 import * as i4$2 from 'ng-zorro-antd/menu';
 import * as i5 from 'ng-zorro-antd/dropdown';
-import * as i6 from 'ng-zorro-antd/icon';
-import * as i8$1 from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import * as i6 from 'ng-zorro-antd/avatar';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import * as i1$2 from 'ng-zorro-antd/icon';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import * as i1 from 'ng-zorro-antd/modal';
 import * as i1$1 from 'ng-zorro-antd/message';
-import * as i1$2 from '@yelon/theme';
-import { zh_CN as zh_CN$1, zh_TW as zh_TW$1, en_US as en_US$1, el_GR as el_GR$1, es_ES as es_ES$1, fr_FR as fr_FR$1, hr_HR as hr_HR$1, it_IT as it_IT$1, ko_KR as ko_KR$1, pl_PL as pl_PL$1, sl_SI as sl_SI$1, tr_TR as tr_TR$1, YunzaiI18nBaseService, YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
+import * as i1$3 from '@yelon/theme';
+import { zh_CN as zh_CN$1, zh_TW as zh_TW$1, en_US as en_US$1, el_GR as el_GR$1, es_ES as es_ES$1, fr_FR as fr_FR$1, hr_HR as hr_HR$1, it_IT as it_IT$1, ko_KR as ko_KR$1, pl_PL as pl_PL$1, sl_SI as sl_SI$1, tr_TR as tr_TR$1, YunzaiI18nBaseService, YUNZAI_I18N_TOKEN, _HttpClient, YunzaiThemeModule } from '@yelon/theme';
 import screenfull from 'screenfull';
-import { __decorate } from 'tslib';
 import { Subject, takeUntil, catchError, of, forkJoin, map as map$1, mergeMap, combineLatest, BehaviorSubject, throwError, filter, take, switchMap } from 'rxjs';
-import { InputBoolean } from '@yelon/util/decorator';
 import ngEn from '@angular/common/locales/en';
 import { zhCN, zhTW, enUS, el, es, fr, hr, it, ko, pl, sl, tr } from 'date-fns/locale';
 import { map } from 'rxjs/operators';
@@ -39,26 +41,29 @@ import ngSl from '@angular/common/locales/sl';
 import ngTr from '@angular/common/locales/tr';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
-import * as i3$1 from '@angular/cdk/platform';
+import * as i3 from '@angular/cdk/platform';
 import * as i4 from '@yelon/util/config';
 import { YunzaiConfigService as YunzaiConfigService$1 } from '@yelon/util/config';
 import { formatDistanceToNow } from 'date-fns';
 import { log } from '@yelon/util/other';
 import * as i4$3 from '@yelon/abc/notice-icon';
+import { NoticeIconModule } from '@yelon/abc/notice-icon';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
-import * as i3$2 from '@angular/cdk/bidi';
-import * as i8 from 'ng-zorro-antd/tooltip';
-import * as i5$1 from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as i7 from 'ng-zorro-antd/grid';
-import * as i9 from 'ng-zorro-antd/input';
-import * as i7$1 from 'ng-zorro-antd/tabs';
-import { HttpErrorResponse, HttpResponse, HttpResponseBase, HttpClientModule } from '@angular/common/http';
+import * as i3$1 from '@angular/cdk/bidi';
+import * as i5$1 from 'ng-zorro-antd/tooltip';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import * as i5$2 from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import * as i6$1 from 'ng-zorro-antd/grid';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import * as i7 from 'ng-zorro-antd/input';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import * as i3$2 from 'ng-zorro-antd/tabs';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { HttpErrorResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
 import { AccountBookTwoTone, AccountBookFill, AccountBookOutline, AlertTwoTone, AlertFill, AlibabaOutline, AimOutline, AlipayCircleFill, AlertOutline, AlignCenterOutline, AlipayCircleOutline, AlipayOutline, AlignLeftOutline, AlignRightOutline, AmazonOutline, AliwangwangOutline, AliyunOutline, AlipaySquareFill, AmazonCircleFill, AndroidFill, AliwangwangFill, AntCloudOutline, AmazonSquareFill, AndroidOutline, ApartmentOutline, ApiTwoTone, ApiFill, ApiOutline, AntDesignOutline, AppstoreAddOutline, AppstoreFill, AppleOutline, AppstoreOutline, ArrowDownOutline, AppleFill, ArrowsAltOutline, AppstoreTwoTone, ArrowUpOutline, AreaChartOutline, ArrowLeftOutline, AudioFill, ArrowRightOutline, AudioTwoTone, AuditOutline, AudioMutedOutline, BackwardFill, AudioOutline, BackwardOutline, BankFill, BarcodeOutline, BellFill, BankTwoTone, BarsOutline, BankOutline, BehanceCircleFill, BehanceSquareFill, BoldOutline, BellOutline, BehanceOutline, BlockOutline, BehanceSquareOutline, BgColorsOutline, BellTwoTone, BarChartOutline, BookTwoTone, BookFill, BorderOuterOutline, BorderLeftOutline, BorderBottomOutline, BorderHorizontalOutline, BorderTopOutline, BorderOutline, BorderInnerOutline, BorderRightOutline, BoxPlotOutline, BoxPlotFill, BoxPlotTwoTone, BookOutline, BorderlessTableOutline, BorderVerticleOutline, BuildTwoTone, BuildOutline, BugFill, BugOutline, BugTwoTone, BulbFill, BulbTwoTone, BuildFill, BulbOutline, CalculatorFill, CalculatorTwoTone, CalendarFill, CalendarOutline, CalculatorOutline, CalendarTwoTone, CameraOutline, CameraFill, CameraTwoTone, CarTwoTone, CaretDownOutline, CarOutline, CaretLeftFill, CarFill, CaretRightOutline, CaretDownFill, CaretUpOutline, CaretRightFill, CarryOutFill, CarryOutOutline, CaretLeftOutline, CaretUpFill, BranchesOutline, CarryOutTwoTone, CheckCircleFill, CheckCircleOutline, CheckSquareOutline, CheckCircleTwoTone, CiCircleTwoTone, CheckOutline, CheckSquareTwoTone, CiOutline, CheckSquareFill, CiTwoTone, ChromeOutline, ClockCircleOutline, CiCircleOutline, ChromeFill, ClearOutline, CloseCircleTwoTone, CiCircleFill, CloseCircleOutline, ClockCircleFill, CloseCircleFill, ClockCircleTwoTone, CloseOutline, CloseSquareOutline, CloseSquareFill, CloudFill, CloseSquareTwoTone, CloudDownloadOutline, CloudTwoTone, CloudServerOutline, CloudUploadOutline, CloudSyncOutline, ClusterOutline, CodeSandboxCircleFill, CodeFill, CodepenCircleOutline, CloudOutline, CodeSandboxOutline, CodeOutline, CodeSandboxSquareFill, CodeTwoTone, CodepenSquareFill, CodepenOutline, CoffeeOutline, ColumnWidthOutline, CompressOutline, ColumnHeightOutline, CodepenCircleFill, CompassTwoTone, CommentOutline, ContainerFill, CompassOutline, ConsoleSqlOutline, ContactsOutline, ContainerTwoTone, ContactsFill, ContactsTwoTone, ContainerOutline, ControlFill, CopyFill, CopyOutline, CompassFill, CopyTwoTone, CopyrightOutline, CopyrightCircleOutline, ControlTwoTone, ControlOutline, CreditCardFill, CopyrightTwoTone, CrownFill, CopyrightCircleFill, CrownOutline, CustomerServiceTwoTone, CreditCardOutline, CustomerServiceOutline, DashboardTwoTone, CrownTwoTone, CreditCardTwoTone, CustomerServiceFill, DashboardFill, DashOutline, DatabaseOutline, DatabaseTwoTone, DatabaseFill, DashboardOutline, DeleteTwoTone, DeleteRowOutline, DeleteColumnOutline, DeliveredProcedureOutline, DeleteOutline, CopyrightCircleTwoTone, DesktopOutline, DeleteFill, DiffOutline, DiffFill, DeploymentUnitOutline, DiffTwoTone, DingtalkOutline, DollarCircleFill, DislikeFill, DingtalkSquareFill, DisconnectOutline, DollarCircleTwoTone, DollarOutline, DingtalkCircleFill, DislikeTwoTone, DollarTwoTone, DownCircleFill, DislikeOutline, DollarCircleOutline, DoubleLeftOutline, DownSquareFill, DownOutline, DownSquareOutline, DownSquareTwoTone, DownCircleTwoTone, DoubleRightOutline, DownCircleOutline, DownloadOutline, DotChartOutline, DribbbleCircleFill, DribbbleOutline, DribbbleSquareOutline, DropboxCircleFill, DingdingOutline, EditOutline, DribbbleSquareFill, DropboxSquareFill, EllipsisOutline, EnvironmentFill, EditFill, EnterOutline, EuroCircleFill, EuroTwoTone, EuroCircleOutline, EditTwoTone, EuroOutline, EnvironmentTwoTone, ExclamationCircleFill, ExpandAltOutline, EuroCircleTwoTone, ExclamationCircleTwoTone, EnvironmentOutline, ExperimentOutline, ExperimentFill, ExpandOutline, ExceptionOutline, ExportOutline, ExperimentTwoTone, ExclamationCircleOutline, ExclamationOutline, EyeFill, EyeInvisibleFill, EyeInvisibleTwoTone, DropboxOutline, DragOutline, FacebookOutline, FacebookFill, EyeTwoTone, EyeOutline, FastForwardFill, FieldBinaryOutline, FieldNumberOutline, FastBackwardOutline, FileAddFill, FastBackwardFill, FileExcelFill, FastForwardOutline, FieldStringOutline, FileDoneOutline, FileAddTwoTone, FileExcelTwoTone, FileExclamationFill, FileAddOutline, FileExclamationOutline, FieldTimeOutline, FileImageTwoTone, FileExcelOutline, FileExclamationTwoTone, FileImageFill, FileGifOutline, FileFill, FileMarkdownTwoTone, FileMarkdownOutline, FallOutline, FileImageOutline, EyeInvisibleOutline, FilePdfOutline, FileSearchOutline, FilePptTwoTone, FilePdfTwoTone, FileJpgOutline, FileTextFill, FilePptOutline, FileSyncOutline, FilePptFill, FileUnknownOutline, FileProtectOutline, FileTextTwoTone, FileWordFill, FileUnknownTwoTone, FileWordTwoTone, FileUnknownFill, FileTextOutline, FileZipFill, FilterTwoTone, FilterFill, FileWordOutline, FireOutline, FireTwoTone, FileZipOutline, FilterOutline, FlagTwoTone, FileTwoTone, FilePdfFill, FileOutline, FileMarkdownFill, FileZipTwoTone, FlagOutline, FolderAddTwoTone, FolderOpenFill, FireFill, FlagFill, FolderOutline, FolderViewOutline, FolderTwoTone, FontColorsOutline, FolderOpenTwoTone, FolderFill, ForwardOutline, FolderOpenOutline, ForkOutline, ForwardFill, FormatPainterOutline, FormatPainterFill, FormOutline, FrownFill, FrownTwoTone, FullscreenOutline, FontSizeOutline, FundFill, FunctionOutline, FundViewOutline, FullscreenExitOutline, GifOutline, FundProjectionScreenOutline, FundTwoTone, FolderAddFill, FunnelPlotTwoTone, GiftOutline, FunnelPlotFill, FundOutline, FrownOutline, GithubOutline, GoldFill, FolderAddOutline, GitlabFill, GiftFill, GitlabOutline, GoldTwoTone, GoogleCircleFill, GiftTwoTone, GooglePlusCircleFill, GoldOutline, GithubFill, GoogleOutline, GooglePlusOutline, GoogleSquareFill, GoldenFill, HddTwoTone, GooglePlusSquareFill, GlobalOutline, HeartOutline, HeartTwoTone, GroupOutline, HeartFill, HeatMapOutline, GatewayOutline, FunnelPlotOutline, HddFill, HomeFill, HighlightFill, HomeOutline, HistoryOutline, HighlightOutline, HddOutline, HourglassFill, HomeTwoTone, HourglassTwoTone, Html5Outline, Html5Fill, IdcardFill, Html5TwoTone, HourglassOutline, IdcardTwoTone, IdcardOutline, IeOutline, IeCircleFill, IeSquareFill, InboxOutline, ImportOutline, InfoCircleOutline, InfoCircleTwoTone, InsertRowAboveOutline, InsertRowRightOutline, InfoCircleFill, InfoOutline, InsertRowBelowOutline, HighlightTwoTone, InsuranceFill, InstagramFill, InteractionFill, InsertRowLeftOutline, InstagramOutline, InteractionOutline, ItalicOutline, InteractionTwoTone, LayoutOutline, IssuesCloseOutline, LayoutFill, LaptopOutline, LeftCircleFill, LayoutTwoTone, KeyOutline, LeftOutline, LeftCircleOutline, LeftSquareOutline, LeftSquareFill, LeftCircleTwoTone, LikeFill, LeftSquareTwoTone, LineOutline, LikeTwoTone, LinkedinOutline, LineChartOutline, LineHeightOutline, LinkedinFill, LinkOutline, LikeOutline, InsuranceOutline, Loading3QuartersOutline, LockFill, InsuranceTwoTone, MacCommandOutline, LockTwoTone, LoadingOutline, MailOutline, LoginOutline, MedicineBoxOutline, MailFill, MailTwoTone, MacCommandFill, ManOutline, MedicineBoxFill, MedicineBoxTwoTone, MediumCircleFill, MediumOutline, MehFill, MediumWorkmarkOutline, MenuFoldOutline, MehOutline, MediumSquareFill, MessageTwoTone, MehTwoTone, MergeCellsOutline, MinusCircleFill, MenuOutline, MenuUnfoldOutline, MessageFill, MinusCircleTwoTone, LockOutline, MinusOutline, MinusCircleOutline, LogoutOutline, MessageOutline, MoneyCollectFill, MinusSquareOutline, MinusSquareTwoTone, MobileOutline, MobileTwoTone, MoneyCollectOutline, MoreOutline, NotificationFill, NotificationOutline, MoneyCollectTwoTone, NodeIndexOutline, NodeExpandOutline, MonitorOutline, OrderedListOutline, NodeCollapseOutline, NumberOutline, PaperClipOutline, NotificationTwoTone, PauseCircleFill, PartitionOutline, PauseOutline, OneToOneOutline, PayCircleOutline, PayCircleFill, MinusSquareFill, PauseCircleOutline, PauseCircleTwoTone, PicCenterOutline, PicRightOutline, PercentageOutline, MobileFill, PictureOutline, PictureFill, PhoneTwoTone, PhoneFill, PieChartFill, PictureTwoTone, PieChartOutline, PlaySquareFill, PlayCircleTwoTone, PlayCircleFill, PlusCircleFill, PlaySquareTwoTone, PlaySquareOutline, PlayCircleOutline, PieChartTwoTone, PlusCircleOutline, PlusSquareFill, PoundCircleFill, PlusSquareOutline, PlusOutline, PoundOutline, PoundCircleOutline, PlusSquareTwoTone, PlusCircleTwoTone, PoweroffOutline, PoundCircleTwoTone, PhoneOutline, PrinterFill, PicLeftOutline, ProjectTwoTone, PrinterOutline, ProjectFill, ProfileOutline, ProfileTwoTone, ProjectOutline, PropertySafetyFill, PullRequestOutline, PropertySafetyOutline, PushpinOutline, PushpinTwoTone, PropertySafetyTwoTone, PushpinFill, QqOutline, QqCircleFill, QrcodeOutline, QqSquareFill, QuestionCircleTwoTone, QuestionCircleFill, RadarChartOutline, RadiusUprightOutline, QuestionCircleOutline, QuestionOutline, ReadFill, RadiusUpleftOutline, RadiusBottomleftOutline, RadiusSettingOutline, RadiusBottomrightOutline, ProfileFill, PrinterTwoTone, ReadOutline, ReconciliationFill, ReloadOutline, ReconciliationOutline, RedEnvelopeTwoTone, RedditCircleFill, RedoOutline, RedEnvelopeFill, RedditOutline, RestTwoTone, RightCircleOutline, RestOutline, RedditSquareFill, RestFill, RightCircleTwoTone, RightOutline, RightSquareFill, RightCircleFill, RightSquareOutline, RetweetOutline, RiseOutline, RightSquareTwoTone, RobotFill, RocketOutline, RobotOutline, RocketTwoTone, RocketFill, RedEnvelopeOutline, RollbackOutline, RotateRightOutline, RotateLeftOutline, ReconciliationTwoTone, SafetyCertificateTwoTone, SaveOutline, SafetyOutline, SaveFill, SaveTwoTone, ScheduleFill, SafetyCertificateOutline, ScanOutline, ScheduleTwoTone, SearchOutline, ScheduleOutline, SecurityScanTwoTone, SecurityScanOutline, ScissorOutline, SelectOutline, SecurityScanFill, SendOutline, SettingOutline, SettingTwoTone, SettingFill, ShareAltOutline, ShopOutline, ShopFill, ShopTwoTone, ShrinkOutline, ShakeOutline, ShoppingOutline, ShoppingCartOutline, ShoppingFill, SisternodeOutline, ShoppingTwoTone, SafetyCertificateFill, SkinOutline, SignalFill, SketchOutline, SkinTwoTone, SketchSquareFill, SkypeFill, SkinFill, SlackCircleFill, SlackSquareFill, SlidersTwoTone, SkypeOutline, SlidersFill, SlackSquareOutline, SmallDashOutline, SmileTwoTone, SlidersOutline, SnippetsFill, SnippetsOutline, SmileOutline, SolutionOutline, SlackOutline, SnippetsTwoTone, SoundTwoTone, SortAscendingOutline, SoundFill, SortDescendingOutline, SmileFill, SoundOutline, SplitCellsOutline, SketchCircleFill, StarOutline, StockOutline, StarTwoTone, StepForwardFill, StarFill, StepBackwardFill, StepForwardOutline, StopFill, SubnodeOutline, SwapLeftOutline, StopOutline, StopTwoTone, SwapRightOutline, SwapOutline, SwitcherTwoTone, SwitcherOutline, SyncOutline, StrikethroughOutline, SwitcherFill, TagOutline, TabletTwoTone, TabletOutline, TabletFill, TableOutline, TagsFill, TagFill, TagsTwoTone, TaobaoCircleOutline, StepBackwardOutline, TagsOutline, TagTwoTone, TaobaoOutline, ThunderboltOutline, TaobaoSquareFill, TeamOutline, TaobaoCircleFill, ThunderboltTwoTone, ToolFill, ThunderboltFill, ToTopOutline, ToolOutline, ToolTwoTone, TrademarkCircleFill, TrophyFill, TrademarkCircleTwoTone, TransactionOutline, TrademarkCircleOutline, TranslationOutline, TwitterCircleFill, TrophyOutline, TrademarkOutline, TrophyTwoTone, TwitterSquareFill, UnlockFill, TwitterOutline, UnderlineOutline, UndoOutline, UpCircleFill, UngroupOutline, UnlockTwoTone, UnlockOutline, UpOutline, UsbFill, UpCircleOutline, UnorderedListOutline, UpCircleTwoTone, UpSquareFill, UpSquareOutline, UserAddOutline, UsbTwoTone, UsergroupDeleteOutline, UpSquareTwoTone, UserOutline, UsbOutline, UserDeleteOutline, UserSwitchOutline, VerticalLeftOutline, VerticalAlignBottomOutline, VerifiedOutline, UsergroupAddOutline, UploadOutline, VerticalAlignMiddleOutline, VerticalAlignTopOutline, VerticalRightOutline, VideoCameraOutline, VideoCameraAddOutline, VideoCameraTwoTone, VideoCameraFill, WalletOutline, WalletFill, WarningFill, WarningOutline, WechatOutline, WalletTwoTone, WeiboCircleFill, WarningTwoTone, WeiboSquareFill, WeiboOutline, WeiboSquareOutline, WeiboCircleOutline, WechatFill, WhatsAppOutline, WifiOutline, WomanOutline, YoutubeFill, YahooOutline, WindowsFill, WindowsOutline, YoutubeOutline, YuqueOutline, ZhihuCircleFill, YuqueFill, ZhihuOutline, ZhihuSquareFill, ZoomInOutline, ZoomOutOutline, YahooFill } from '@ant-design/icons-angular/icons';
-import * as i3$3 from '@yelon/acl';
+import * as i3$4 from '@yelon/acl';
 
 class YunzaiClearStorageComponent {
     constructor(modalSrv, messageSrv) {
@@ -74,13 +79,13 @@ class YunzaiClearStorageComponent {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiClearStorageComponent, deps: [{ token: i1.NzModalService }, { token: i1$1.NzMessageService }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiClearStorageComponent, selector: "yunzai-clearstorage", host: { listeners: { "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiClearStorageComponent, deps: [{ token: i1.NzModalService }, { token: i1$1.NzMessageService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiClearStorageComponent, selector: "yunzai-clearstorage", host: { listeners: { "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
     <i nz-icon nzType="tool"></i>
     {{ 'storage.clear' | i18n }}
-  `, isInline: true, dependencies: [{ kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiClearStorageComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiClearStorageComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-clearstorage',
@@ -93,7 +98,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }]
-        }], ctorParameters: function () { return [{ type: i1.NzModalService }, { type: i1$1.NzMessageService }]; }, propDecorators: { _click: [{
+        }], ctorParameters: () => [{ type: i1.NzModalService }, { type: i1$1.NzMessageService }], propDecorators: { _click: [{
                 type: HostListener,
                 args: ['click']
             }] } });
@@ -110,13 +115,13 @@ class YunzaiFullScreenComponent {
             screenfull.toggle();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiFullScreenComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiFullScreenComponent, selector: "yunzai-fullscreen", host: { listeners: { "window:resize": "_resize()", "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiFullScreenComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiFullScreenComponent, selector: "yunzai-fullscreen", host: { listeners: { "window:resize": "_resize()", "click": "_click()" }, properties: { "class.d-block": "true" } }, ngImport: i0, template: `
     <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
     {{ (status ? 'exitFullscreen' : 'fullscreen') | i18n }}
-  `, isInline: true, dependencies: [{ kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiFullScreenComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiFullScreenComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-fullscreen',
@@ -317,16 +322,16 @@ class YunzaiI18NService extends YunzaiI18nBaseService {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiI18NService, deps: [{ token: i1$2._HttpClient }, { token: i1$2.SettingsService }, { token: i2.NzI18nService }, { token: i1$2.YelonLocaleService }, { token: i3$1.Platform }, { token: YA_SERVICE_TOKEN }, { token: i4.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiI18NService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NService, deps: [{ token: i1$3._HttpClient }, { token: i1$3.SettingsService }, { token: i2.NzI18nService }, { token: i1$3.YelonLocaleService }, { token: i3.Platform }, { token: YA_SERVICE_TOKEN }, { token: i4.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiI18NService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1$2._HttpClient }, { type: i1$2.SettingsService }, { type: i2.NzI18nService }, { type: i1$2.YelonLocaleService }, { type: i3$1.Platform }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i1$3._HttpClient }, { type: i1$3.SettingsService }, { type: i2.NzI18nService }, { type: i1$3.YelonLocaleService }, { type: i3.Platform }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [YA_SERVICE_TOKEN]
-                }] }, { type: i4.YunzaiConfigService }]; } });
+                }] }, { type: i4.YunzaiConfigService }] });
 
 class YunzaiI18NComponent {
     get curLangCode() {
@@ -361,8 +366,8 @@ class YunzaiI18NComponent {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiI18NComponent, deps: [{ token: i1$2.SettingsService }, { token: YUNZAI_I18N_TOKEN }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiI18NComponent, selector: "yunzai-i18n", inputs: { showLangText: "showLangText" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NComponent, deps: [{ token: i1$3.SettingsService }, { token: YUNZAI_I18N_TOKEN }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiI18NComponent, selector: "yunzai-i18n", inputs: { showLangText: "showLangText" }, ngImport: i0, template: `
     <div *ngIf="showLangText" nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
       <i nz-icon nzType="global"></i>
       {{ 'lang.nav' | i18n }}
@@ -392,7 +397,7 @@ class YunzaiI18NComponent {
             style="margin-right:4px"
             width="50px"
             height="30px"
-            [src]="'data:image/png;base64,' + item.icon"
+            ngSrc="'data:image/png;base64,' + item.icon"
             [alt]="item.abbr"
             class="pr-xs"
           />
@@ -400,12 +405,9 @@ class YunzaiI18NComponent {
         </li>
       </ul>
     </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i4$1.NgOptimizedImage, selector: "img[ngSrc]", inputs: ["ngSrc", "ngSrcset", "sizes", "width", "height", "loading", "priority", "loaderParams", "disableOptimizedSrcset", "fill", "placeholder", "placeholderConfig", "src", "srcset"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-__decorate([
-    InputBoolean()
-], YunzaiI18NComponent.prototype, "showLangText", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiI18NComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-i18n',
@@ -439,7 +441,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
             style="margin-right:4px"
             width="50px"
             height="30px"
-            [src]="'data:image/png;base64,' + item.icon"
+            ngSrc="'data:image/png;base64,' + item.icon"
             [alt]="item.abbr"
             class="pr-xs"
           />
@@ -450,13 +452,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }]
-        }], ctorParameters: function () { return [{ type: i1$2.SettingsService }, { type: YunzaiI18NService, decorators: [{
+        }], ctorParameters: () => [{ type: i1$3.SettingsService }, { type: YunzaiI18NService, decorators: [{
                     type: Inject,
                     args: [YUNZAI_I18N_TOKEN]
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
-                }] }]; }, propDecorators: { showLangText: [{
+                }] }], propDecorators: { showLangText: [{
                 type: Input
             }] } });
 
@@ -598,8 +600,8 @@ class YunzaiNotifyComponent {
     ngOnDestroy() {
         this.subs.forEach(a => a.unsubscribe());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiNotifyComponent, deps: [{ token: i0.Injector }, { token: i1$1.NzMessageService }, { token: YUNZAI_I18N_TOKEN }, { token: i2.NzI18nService }, { token: i0.ChangeDetectorRef }, { token: i1$2._HttpClient }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiNotifyComponent, selector: "yunzai-notify", ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiNotifyComponent, deps: [{ token: i0.Injector }, { token: i1$1.NzMessageService }, { token: YUNZAI_I18N_TOKEN }, { token: i2.NzI18nService }, { token: i0.ChangeDetectorRef }, { token: i1$3._HttpClient }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiNotifyComponent, selector: "yunzai-notify", ngImport: i0, template: `
     <notice-icon
       [data]="data"
       [count]="count"
@@ -611,7 +613,7 @@ class YunzaiNotifyComponent {
     />
   `, isInline: true, dependencies: [{ kind: "component", type: i4$3.NoticeIconComponent, selector: "notice-icon", inputs: ["data", "count", "loading", "popoverVisible", "btnClass", "btnIconClass", "centered"], outputs: ["select", "clear", "popoverVisibleChange"], exportAs: ["noticeIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiNotifyComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiNotifyComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-notify',
@@ -628,12 +630,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }]
-        }], ctorParameters: function () { return [{ type: i0.Injector }, { type: i1$1.NzMessageService }, { type: YunzaiI18NService, decorators: [{
+        }], ctorParameters: () => [{ type: i0.Injector }, { type: i1$1.NzMessageService }, { type: YunzaiI18NService, decorators: [{
                     type: Inject,
                     args: [YUNZAI_I18N_TOKEN]
-                }] }, { type: i2.NzI18nService }, { type: i0.ChangeDetectorRef }, { type: i1$2._HttpClient }]; } });
+                }] }, { type: i2.NzI18nService }, { type: i0.ChangeDetectorRef }, { type: i1$3._HttpClient }] });
 
-class YunzaiThemBtnComponent {
+class YunzaiThemeBtnComponent {
     constructor(renderer, configSrv, platform, doc, directionality, KEYS) {
         this.renderer = renderer;
         this.configSrv = configSrv;
@@ -708,8 +710,8 @@ class YunzaiThemBtnComponent {
             this.doc.body.removeChild(el);
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiThemBtnComponent, deps: [{ token: i0.Renderer2 }, { token: i4.YunzaiConfigService }, { token: i3$1.Platform }, { token: DOCUMENT }, { token: i3$2.Directionality, optional: true }, { token: YUNZAI_THEME_BTN_KEYS }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiThemBtnComponent, selector: "yunzai-theme-btn", inputs: { types: "types", devTips: "devTips", deployUrl: "deployUrl" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiThemeBtnComponent, deps: [{ token: i0.Renderer2 }, { token: i4.YunzaiConfigService }, { token: i3.Platform }, { token: DOCUMENT }, { token: i3$1.Directionality, optional: true }, { token: YUNZAI_THEME_BTN_KEYS }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiThemeBtnComponent, selector: "yunzai-theme-btn", inputs: { types: "types", devTips: "devTips", deployUrl: "deployUrl" }, ngImport: i0, template: `
     <div
       data-event-id="_nav_theme"
       class="yunzai-default__nav-item"
@@ -751,9 +753,9 @@ class YunzaiThemBtnComponent {
       <!--        </div>-->
       <!--      </div>-->
     </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i8.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i5$1.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiThemBtnComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiThemeBtnComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-theme-btn',
@@ -800,17 +802,18 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
       <!--      </div>-->
     </nz-dropdown-menu>
   `,
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    // eslint-disable-next-line prettier/prettier
+                    changeDetection: ChangeDetectionStrategy.OnPush,
                 }]
-        }], ctorParameters: function () { return [{ type: i0.Renderer2 }, { type: i4.YunzaiConfigService }, { type: i3$1.Platform }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i0.Renderer2 }, { type: i4.YunzaiConfigService }, { type: i3.Platform }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
-                }] }, { type: i3$2.Directionality, decorators: [{
+                }] }, { type: i3$1.Directionality, decorators: [{
                     type: Optional
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [YUNZAI_THEME_BTN_KEYS]
-                }] }]; }, propDecorators: { types: [{
+                }] }], propDecorators: { types: [{
                 type: Input
             }], devTips: [{
                 type: Input
@@ -870,8 +873,8 @@ class YunzaiUserComponent {
             this.msg.error('该菜单没有配置链接!');
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiUserComponent, deps: [{ token: i0.Injector }, { token: i1$1.NzMessageService }, { token: YA_SERVICE_TOKEN }, { token: i1$3.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiUserComponent, selector: "yunzai-user", ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiUserComponent, deps: [{ token: i0.Injector }, { token: i1$1.NzMessageService }, { token: YA_SERVICE_TOKEN }, { token: i1$4.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiUserComponent, selector: "yunzai-user", ngImport: i0, template: `
     <div
       class="yunzai-default__nav-item d-flex align-items-center px-sm"
       data-event-id="_nav_user"
@@ -903,9 +906,9 @@ class YunzaiUserComponent {
         </div>
       </div>
     </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i4$2.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8$1.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i4$2.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "component", type: i6.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiUserComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiUserComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-user',
@@ -944,10 +947,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }]
-        }], ctorParameters: function () { return [{ type: i0.Injector }, { type: i1$1.NzMessageService }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i0.Injector }, { type: i1$1.NzMessageService }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [YA_SERVICE_TOKEN]
-                }] }, { type: i1$3.YunzaiConfigService }]; } });
+                }] }, { type: i1$4.YunzaiConfigService }] });
 
 class LayoutNavApplicationComponent {
     get showAllMenu() {
@@ -1096,8 +1099,8 @@ class LayoutNavApplicationComponent {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavApplicationComponent, deps: [{ token: YunzaiI18NService }, { token: i1$2._HttpClient }, { token: i0.Injector }, { token: i1$3.YunzaiConfigService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutNavApplicationComponent, selector: "layout-nav-application", ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutNavApplicationComponent, deps: [{ token: YunzaiI18NService }, { token: i1$3._HttpClient }, { token: i0.Injector }, { token: i1$4.YunzaiConfigService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: LayoutNavApplicationComponent, selector: "layout-nav-application", ngImport: i0, template: `
     <!--      search start-->
     <ng-template #search>
       <div nz-row class="yz-application-list-search">
@@ -1174,12 +1177,12 @@ class LayoutNavApplicationComponent {
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
         <div *ngIf="state.type === 'all'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
+          <ng-template [ngTemplateOutlet]="search" />
+          <ng-template [ngTemplateOutlet]="ld" />
         </div>
         <div *ngIf="state.type === 'mine'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
+          <ng-template [ngTemplateOutlet]="search" />
+          <ng-template [ngTemplateOutlet]="ld" />
         </div>
         <div *ngIf="state.type === 'other'" class="yz-application-list">
           <div class="yz-application-list-item">
@@ -1201,9 +1204,9 @@ class LayoutNavApplicationComponent {
       </div>
     </div>
     <!--      header end-->
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i4$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i5$1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i5$1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i5$1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i7.NzColDirective, selector: "[nz-col],nz-col,nz-form-control,nz-form-label", inputs: ["nzFlex", "nzSpan", "nzOrder", "nzOffset", "nzPush", "nzPull", "nzXs", "nzSm", "nzMd", "nzLg", "nzXl", "nzXXl"], exportAs: ["nzCol"] }, { kind: "directive", type: i7.NzRowDirective, selector: "[nz-row],nz-row,nz-form-item", inputs: ["nzAlign", "nzJustify", "nzGutter"], exportAs: ["nzRow"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: i9.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: i9.NzInputGroupComponent, selector: "nz-input-group", inputs: ["nzAddOnBeforeIcon", "nzAddOnAfterIcon", "nzPrefixIcon", "nzSuffixIcon", "nzAddOnBefore", "nzAddOnAfter", "nzPrefix", "nzStatus", "nzSuffix", "nzSize", "nzSearch", "nzCompact"], exportAs: ["nzInputGroup"] }, { kind: "directive", type: i9.NzInputGroupWhitSuffixOrPrefixDirective, selector: "nz-input-group[nzSuffix], nz-input-group[nzPrefix]" }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i4$1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i5$2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i5$2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i5$2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i6$1.NzColDirective, selector: "[nz-col],nz-col,nz-form-control,nz-form-label", inputs: ["nzFlex", "nzSpan", "nzOrder", "nzOffset", "nzPush", "nzPull", "nzXs", "nzSm", "nzMd", "nzLg", "nzXl", "nzXXl"], exportAs: ["nzCol"] }, { kind: "directive", type: i6$1.NzRowDirective, selector: "[nz-row],nz-row,nz-form-item", inputs: ["nzAlign", "nzJustify", "nzGutter"], exportAs: ["nzRow"] }, { kind: "directive", type: i7.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: i7.NzInputGroupComponent, selector: "nz-input-group", inputs: ["nzAddOnBeforeIcon", "nzAddOnAfterIcon", "nzPrefixIcon", "nzSuffixIcon", "nzAddOnBefore", "nzAddOnAfter", "nzPrefix", "nzStatus", "nzSuffix", "nzSize", "nzSearch", "nzCompact"], exportAs: ["nzInputGroup"] }, { kind: "directive", type: i7.NzInputGroupWhitSuffixOrPrefixDirective, selector: "nz-input-group[nzSuffix], nz-input-group[nzPrefix]" }, { kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavApplicationComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutNavApplicationComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `layout-nav-application`,
@@ -1284,12 +1287,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
         <div *ngIf="state.type === 'all'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
+          <ng-template [ngTemplateOutlet]="search" />
+          <ng-template [ngTemplateOutlet]="ld" />
         </div>
         <div *ngIf="state.type === 'mine'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
+          <ng-template [ngTemplateOutlet]="search" />
+          <ng-template [ngTemplateOutlet]="ld" />
         </div>
         <div *ngIf="state.type === 'other'" class="yz-application-list">
           <div class="yz-application-list-item">
@@ -1313,10 +1316,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
     <!--      header end-->
   `
                 }]
-        }], ctorParameters: function () { return [{ type: YunzaiI18NService }, { type: i1$2._HttpClient }, { type: i0.Injector }, { type: i1$3.YunzaiConfigService }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: YunzaiI18NService }, { type: i1$3._HttpClient }, { type: i0.Injector }, { type: i1$4.YunzaiConfigService }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [WINDOW]
-                }] }]; } });
+                }] }] });
 
 class LayoutNavGroupComponent {
     constructor(inject, http) {
@@ -1359,8 +1362,8 @@ class LayoutNavGroupComponent {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavGroupComponent, deps: [{ token: i0.Injector }, { token: i1$2._HttpClient }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutNavGroupComponent, selector: "layout-nav-group", ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutNavGroupComponent, deps: [{ token: i0.Injector }, { token: i1$3._HttpClient }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: LayoutNavGroupComponent, selector: "layout-nav-group", ngImport: i0, template: `
     <div class="yz-application-group">
       <nz-tabset>
         <nz-tab *ngFor="let menu of state.topics" [nzTitle]="groupTitleTpl">
@@ -1390,9 +1393,9 @@ class LayoutNavGroupComponent {
         </nz-tab>
       </nz-tabset>
     </div>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i5.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i7$1.NzTabSetComponent, selector: "nz-tabset", inputs: ["nzSelectedIndex", "nzTabPosition", "nzTabBarExtraContent", "nzCanDeactivate", "nzAddIcon", "nzTabBarStyle", "nzType", "nzSize", "nzAnimated", "nzTabBarGutter", "nzHideAdd", "nzCentered", "nzHideAll", "nzLinkRouter", "nzLinkExact"], outputs: ["nzSelectChange", "nzSelectedIndexChange", "nzTabListScroll", "nzClose", "nzAdd"], exportAs: ["nzTabset"] }, { kind: "component", type: i7$1.NzTabComponent, selector: "nz-tab", inputs: ["nzTitle", "nzClosable", "nzCloseIcon", "nzDisabled", "nzForceRender"], outputs: ["nzSelect", "nzDeselect", "nzClick", "nzContextmenu"], exportAs: ["nzTab"] }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i4$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: i3$2.NzTabSetComponent, selector: "nz-tabset", inputs: ["nzSelectedIndex", "nzTabPosition", "nzTabBarExtraContent", "nzCanDeactivate", "nzAddIcon", "nzTabBarStyle", "nzType", "nzSize", "nzAnimated", "nzTabBarGutter", "nzHideAdd", "nzCentered", "nzHideAll", "nzLinkRouter", "nzLinkExact"], outputs: ["nzSelectChange", "nzSelectedIndexChange", "nzTabListScroll", "nzClose", "nzAdd"], exportAs: ["nzTabset"] }, { kind: "component", type: i3$2.NzTabComponent, selector: "nz-tab", inputs: ["nzTitle", "nzClosable", "nzCloseIcon", "nzDisabled", "nzForceRender"], outputs: ["nzSelect", "nzDeselect", "nzClick", "nzContextmenu"], exportAs: ["nzTab"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i5.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavGroupComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutNavGroupComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `layout-nav-group`,
@@ -1428,20 +1431,20 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
     </div>
   `
                 }]
-        }], ctorParameters: function () { return [{ type: i0.Injector }, { type: i1$2._HttpClient }]; } });
+        }], ctorParameters: () => [{ type: i0.Injector }, { type: i1$3._HttpClient }] });
 
 class LayoutNavTileComponent {
     constructor() { }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavTileComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: LayoutNavTileComponent, selector: "layout-nav-tile", ngImport: i0, template: `<ng-template />`, isInline: true }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutNavTileComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: LayoutNavTileComponent, selector: "layout-nav-tile", ngImport: i0, template: `<ng-template />`, isInline: true }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LayoutNavTileComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LayoutNavTileComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `layout-nav-tile`,
                     template: `<ng-template />`
                 }]
-        }], ctorParameters: function () { return []; } });
+        }], ctorParameters: () => [] });
 
 class YunzaiLayoutBasicComponent {
     get options() {
@@ -1569,8 +1572,8 @@ class YunzaiLayoutBasicComponent {
             this.state.display.aside = display;
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutBasicComponent, deps: [{ token: i1$4.LayoutDisplayService }, { token: i2$1.StompService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiLayoutBasicComponent, selector: "yz-layout-basic", ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutBasicComponent, deps: [{ token: i1$5.LayoutDisplayService }, { token: i2$1.StompService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiLayoutBasicComponent, selector: "yz-layout-basic", ngImport: i0, template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="displayReusetab ? contentTpl : noneTpl">
       <!-- nav -->
       <layout-default-header-item direction="left">
@@ -1673,9 +1676,9 @@ class YunzaiLayoutBasicComponent {
       <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
     <ng-template #noneTpl> <router-outlet /> </ng-template>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4$1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i4$1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "directive", type: i4$1.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { kind: "directive", type: i4$4.RouterOutlet, selector: "router-outlet", inputs: ["name"], outputs: ["activate", "deactivate", "attach", "detach"], exportAs: ["outlet"] }, { kind: "directive", type: i4$4.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "component", type: i5$2.ReuseTabComponent, selector: "reuse-tab, [reuse-tab]", inputs: ["mode", "i18n", "debug", "max", "tabMaxWidth", "excludes", "allowClose", "keepingScroll", "storageState", "keepingScrollContainer", "customContextMenu", "tabBarExtraContent", "tabBarGutter", "tabBarStyle", "tabType", "routeParamMatchMode", "disabled", "titleRender", "canClose"], outputs: ["change", "close"], exportAs: ["reuseTab"] }, { kind: "component", type: i1$4.LayoutDefaultComponent, selector: "layout-default", inputs: ["options", "asideUser", "asideBottom", "nav", "content", "customError", "fetchingStrictly", "fetching"], exportAs: ["layoutDefault"] }, { kind: "component", type: i1$4.LayoutDefaultHeaderItemComponent, selector: "layout-default-header-item", inputs: ["hidden", "direction"] }, { kind: "directive", type: i1$4.LayoutDefaultHeaderItemTriggerDirective, selector: "[layout-default-header-item-trigger]" }, { kind: "directive", type: i3.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i8$1.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "component", type: YunzaiClearStorageComponent, selector: "yunzai-clearstorage" }, { kind: "component", type: YunzaiFullScreenComponent, selector: "yunzai-fullscreen" }, { kind: "component", type: YunzaiI18NComponent, selector: "yunzai-i18n", inputs: ["showLangText"] }, { kind: "component", type: YunzaiNotifyComponent, selector: "yunzai-notify" }, { kind: "component", type: YunzaiThemBtnComponent, selector: "yunzai-theme-btn", inputs: ["types", "devTips", "deployUrl"] }, { kind: "component", type: YunzaiUserComponent, selector: "yunzai-user" }, { kind: "component", type: LayoutNavApplicationComponent, selector: "layout-nav-application" }, { kind: "component", type: LayoutNavGroupComponent, selector: "layout-nav-group" }, { kind: "component", type: LayoutNavTileComponent, selector: "layout-nav-tile" }, { kind: "pipe", type: i1$2.I18nPipe, name: "i18n" }] }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i3$3.RouterOutlet, selector: "router-outlet", inputs: ["name"], outputs: ["activate", "deactivate", "attach", "detach"], exportAs: ["outlet"] }, { kind: "directive", type: i3$3.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "info", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "component", type: i4$4.ReuseTabComponent, selector: "reuse-tab, [reuse-tab]", inputs: ["mode", "i18n", "debug", "max", "tabMaxWidth", "excludes", "allowClose", "keepingScroll", "storageState", "keepingScrollContainer", "customContextMenu", "tabBarExtraContent", "tabBarGutter", "tabBarStyle", "tabType", "routeParamMatchMode", "disabled", "titleRender", "canClose"], outputs: ["change", "close"], exportAs: ["reuseTab"] }, { kind: "component", type: i1$5.LayoutDefaultComponent, selector: "layout-default", inputs: ["options", "asideUser", "asideBottom", "nav", "content", "customError", "fetchingStrictly", "fetching"], exportAs: ["layoutDefault"] }, { kind: "component", type: i1$5.LayoutDefaultHeaderItemComponent, selector: "layout-default-header-item", inputs: ["hidden", "direction"] }, { kind: "directive", type: i1$5.LayoutDefaultHeaderItemTriggerDirective, selector: "[layout-default-header-item-trigger]" }, { kind: "directive", type: i4$1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: i4$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i4$1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "directive", type: i4$1.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { kind: "directive", type: i4$2.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i4$2.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i5.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i5.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "component", type: i6.NzAvatarComponent, selector: "nz-avatar", inputs: ["nzShape", "nzSize", "nzGap", "nzText", "nzSrc", "nzSrcSet", "nzAlt", "nzIcon"], outputs: ["nzError"], exportAs: ["nzAvatar"] }, { kind: "directive", type: i1$2.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: YunzaiClearStorageComponent, selector: "yunzai-clearstorage" }, { kind: "component", type: YunzaiFullScreenComponent, selector: "yunzai-fullscreen" }, { kind: "component", type: YunzaiI18NComponent, selector: "yunzai-i18n", inputs: ["showLangText"] }, { kind: "component", type: YunzaiNotifyComponent, selector: "yunzai-notify" }, { kind: "component", type: YunzaiThemeBtnComponent, selector: "yunzai-theme-btn", inputs: ["types", "devTips", "deployUrl"] }, { kind: "component", type: YunzaiUserComponent, selector: "yunzai-user" }, { kind: "component", type: LayoutNavApplicationComponent, selector: "layout-nav-application" }, { kind: "component", type: LayoutNavGroupComponent, selector: "layout-nav-group" }, { kind: "component", type: LayoutNavTileComponent, selector: "layout-nav-tile" }, { kind: "pipe", type: i1$3.I18nPipe, name: "i18n" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutBasicComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutBasicComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yz-layout-basic`,
@@ -1784,10 +1787,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
     <ng-template #noneTpl> <router-outlet /> </ng-template>
   `
                 }]
-        }], ctorParameters: function () { return [{ type: i1$4.LayoutDisplayService }, { type: i2$1.StompService }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i1$5.LayoutDisplayService }, { type: i2$1.StompService }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [WINDOW]
-                }] }]; } });
+                }] }] });
 
 class ActGuardService {
     constructor(configService, pathToRegexp, router) {
@@ -1861,13 +1864,13 @@ class ActGuardService {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuardService, deps: [{ token: i1$3.YunzaiConfigService }, { token: i1$3.PathToRegexpService }, { token: i4$4.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuardService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ActGuardService, deps: [{ token: i1$4.YunzaiConfigService }, { token: i1$4.PathToRegexpService }, { token: i3$3.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ActGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ActGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ActGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1$3.YunzaiConfigService }, { type: i1$3.PathToRegexpService }, { type: i4$4.Router }]; } });
+        }], ctorParameters: () => [{ type: i1$4.YunzaiConfigService }, { type: i1$4.PathToRegexpService }, { type: i3$3.Router }] });
 const actGuardCanActive = (_, state) => inject(ActGuardService).process(state.url);
 const actGuardCanActiveChild = (_, state) => inject(ActGuardService).process(state.url);
 
@@ -1964,13 +1967,13 @@ class YunzaiAuthService {
             return void 0;
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAuthService, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAuthService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAuthService, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAuthService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAuthService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAuthService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i0.Injector }]; } });
+        }], ctorParameters: () => [{ type: i0.Injector }] });
 
 const CODEMESSAGE = {
     200: '服务器成功返回请求的数据。',
@@ -2153,75 +2156,108 @@ class YunzaiDefaultInterceptor {
             return of(ev);
         }), catchError((err) => this.handleData(err, newReq, next)));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDefaultInterceptor, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDefaultInterceptor }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDefaultInterceptor, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDefaultInterceptor }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDefaultInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDefaultInterceptor, decorators: [{
             type: Injectable
-        }], ctorParameters: function () { return [{ type: i0.Injector }]; } });
+        }], ctorParameters: () => [{ type: i0.Injector }] });
 
-const WIDGETS = [
+const COMPONENTS = [
     YunzaiClearStorageComponent,
     YunzaiFullScreenComponent,
     YunzaiI18NComponent,
     YunzaiNotifyComponent,
-    YunzaiThemBtnComponent,
-    YunzaiUserComponent
+    YunzaiThemeBtnComponent,
+    YunzaiUserComponent,
+    YunzaiLayoutBasicComponent,
+    LayoutNavApplicationComponent,
+    LayoutNavGroupComponent,
+    LayoutNavTileComponent
 ];
-const LAYOUT_NAV_COMPONENTS = [LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent];
-const COMPONENTS = [YunzaiLayoutBasicComponent];
 class YunzaiLayoutModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, declarations: [YunzaiLayoutBasicComponent, YunzaiClearStorageComponent,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, declarations: [YunzaiClearStorageComponent,
             YunzaiFullScreenComponent,
             YunzaiI18NComponent,
             YunzaiNotifyComponent,
-            YunzaiThemBtnComponent,
-            YunzaiUserComponent, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent], imports: [HttpClientModule,
+            YunzaiThemeBtnComponent,
+            YunzaiUserComponent,
+            YunzaiLayoutBasicComponent,
+            LayoutNavApplicationComponent,
+            LayoutNavGroupComponent,
+            LayoutNavTileComponent], imports: [RouterModule,
+            ReuseTabModule,
+            LayoutDefaultModule,
             CommonModule,
+            NzTabsModule,
+            NgOptimizedImage,
+            NzToolTipModule,
+            NzDropDownModule,
+            NzAvatarModule,
+            NoticeIconModule,
             FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedYelonModule,
-            YunzaiSharedZorroModule], exports: [YunzaiLayoutBasicComponent, YunzaiClearStorageComponent,
+            NzGridModule,
+            YunzaiThemeModule,
+            NzInputModule,
+            NzIconModule], exports: [YunzaiClearStorageComponent,
             YunzaiFullScreenComponent,
             YunzaiI18NComponent,
             YunzaiNotifyComponent,
-            YunzaiThemBtnComponent,
-            YunzaiUserComponent, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, providers: [
+            YunzaiThemeBtnComponent,
+            YunzaiUserComponent,
+            YunzaiLayoutBasicComponent,
+            LayoutNavApplicationComponent,
+            LayoutNavGroupComponent,
+            LayoutNavTileComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, providers: [
             {
                 provide: YUNZAI_THEME_BTN_KEYS,
                 useValue: 'site-theme'
             }
-        ], imports: [HttpClientModule,
+        ], imports: [RouterModule,
+            ReuseTabModule,
+            LayoutDefaultModule,
             CommonModule,
+            NzTabsModule,
+            NzToolTipModule,
+            NzDropDownModule,
+            NzAvatarModule,
+            NoticeIconModule,
             FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedYelonModule,
-            YunzaiSharedZorroModule] }); }
+            NzGridModule,
+            YunzaiThemeModule,
+            NzInputModule,
+            NzIconModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
-                        HttpClientModule,
-                        CommonModule,
-                        FormsModule,
                         RouterModule,
-                        ReactiveFormsModule,
-                        YunzaiSharedYelonModule,
-                        YunzaiSharedZorroModule
+                        ReuseTabModule,
+                        LayoutDefaultModule,
+                        CommonModule,
+                        NzTabsModule,
+                        NgOptimizedImage,
+                        NzToolTipModule,
+                        NzDropDownModule,
+                        NzAvatarModule,
+                        NoticeIconModule,
+                        FormsModule,
+                        NzGridModule,
+                        YunzaiThemeModule,
+                        NzInputModule,
+                        NzIconModule
                     ],
+                    declarations: COMPONENTS,
                     providers: [
                         {
                             provide: YUNZAI_THEME_BTN_KEYS,
                             useValue: 'site-theme'
                         }
                     ],
-                    declarations: [...COMPONENTS, ...WIDGETS, ...LAYOUT_NAV_COMPONENTS],
-                    exports: [...COMPONENTS, ...WIDGETS, ...LAYOUT_NAV_COMPONENTS]
+                    exports: COMPONENTS
                 }]
         }] });
 
@@ -3100,18 +3136,18 @@ class YunzaiStartupService {
             }
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiStartupService, deps: [{ token: i6.NzIconService }, { token: i1$2.MenuService }, { token: YUNZAI_I18N_TOKEN }, { token: WINDOW }, { token: i1$2.SettingsService }, { token: i3$3.ACLService }, { token: i1$2.TitleService }, { token: YunzaiAuthService }, { token: i1$3.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiStartupService }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiStartupService, deps: [{ token: i1$2.NzIconService }, { token: i1$3.MenuService }, { token: YUNZAI_I18N_TOKEN }, { token: WINDOW }, { token: i1$3.SettingsService }, { token: i3$4.ACLService }, { token: i1$3.TitleService }, { token: YunzaiAuthService }, { token: i1$4.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiStartupService }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiStartupService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiStartupService, decorators: [{
             type: Injectable
-        }], ctorParameters: function () { return [{ type: i6.NzIconService }, { type: i1$2.MenuService }, { type: YunzaiI18NService, decorators: [{
+        }], ctorParameters: () => [{ type: i1$2.NzIconService }, { type: i1$3.MenuService }, { type: YunzaiI18NService, decorators: [{
                     type: Inject,
                     args: [YUNZAI_I18N_TOKEN]
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [WINDOW]
-                }] }, { type: i1$2.SettingsService }, { type: i3$3.ACLService }, { type: i1$2.TitleService }, { type: YunzaiAuthService }, { type: i1$3.YunzaiConfigService }]; } });
+                }] }, { type: i1$3.SettingsService }, { type: i3$4.ACLService }, { type: i1$3.TitleService }, { type: YunzaiAuthService }, { type: i1$4.YunzaiConfigService }] });
 function mapYzSideToYelonMenu(menus) {
     menus.forEach(menu => {
         if (menu.children && menu.hideChildren) {
@@ -3268,21 +3304,21 @@ class YunzaiAnalysisAddonGuardService {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1$3.YunzaiConfigService }, { token: i1$3.PathToRegexpService }, { token: WINDOW }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1$4.YunzaiConfigService }, { token: i1$4.PathToRegexpService }, { token: WINDOW }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAnalysisAddonGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiAnalysisAddonGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAnalysisAddonGuardService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
                 }]
-        }], ctorParameters: function () { return [{ type: i1$3.YunzaiConfigService }, { type: i1$3.PathToRegexpService }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i1$4.YunzaiConfigService }, { type: i1$4.PathToRegexpService }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [WINDOW]
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [YA_SERVICE_TOKEN]
-                }] }]; } });
+                }] }] });
 const analysisAddonCanActive = (_, state) => inject(YunzaiAnalysisAddonGuardService).process(state.url);
 const analysisAddonCanActiveChild = (_, state) => inject(YunzaiAnalysisAddonGuardService).process(state.url);
 
@@ -3290,5 +3326,5 @@ const analysisAddonCanActiveChild = (_, state) => inject(YunzaiAnalysisAddonGuar
  * Generated bundle index. Do not edit.
  */
 
-export { ActGuardService, BUSINESS_DEFAULT_CONFIG, HTML_NAMES_MAPPING, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent, YUNZAI_APPINIT_PROVIDES, YUNZAI_LANGS, YunzaiAnalysisAddonGuardService, YunzaiAuthService, YunzaiClearStorageComponent, YunzaiDefaultInterceptor, YunzaiFullScreenComponent, YunzaiI18NComponent, YunzaiI18NService, YunzaiLayoutBasicComponent, YunzaiLayoutModule, YunzaiNotifyComponent, YunzaiStartupService, YunzaiStartupServiceFactory, YunzaiThemBtnComponent, YunzaiUserComponent, YunzaiDefaultInterceptor as YzDefaultInterceptor, actGuardCanActive, actGuardCanActiveChild, analysisAddonCanActive, analysisAddonCanActiveChild, generateAbility, mapYzSideToYelonMenu, mergeBisConfig };
+export { ActGuardService, BUSINESS_DEFAULT_CONFIG, HTML_NAMES_MAPPING, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent, YUNZAI_APPINIT_PROVIDES, YUNZAI_LANGS, YunzaiAnalysisAddonGuardService, YunzaiAuthService, YunzaiClearStorageComponent, YunzaiDefaultInterceptor, YunzaiFullScreenComponent, YunzaiI18NComponent, YunzaiI18NService, YunzaiLayoutBasicComponent, YunzaiLayoutModule, YunzaiNotifyComponent, YunzaiStartupService, YunzaiStartupServiceFactory, YunzaiThemeBtnComponent, YunzaiUserComponent, YunzaiDefaultInterceptor as YzDefaultInterceptor, actGuardCanActive, actGuardCanActiveChild, analysisAddonCanActive, analysisAddonCanActiveChild, generateAbility, mapYzSideToYelonMenu, mergeBisConfig };
 //# sourceMappingURL=layout.mjs.map

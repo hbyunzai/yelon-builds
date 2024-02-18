@@ -1,6 +1,7 @@
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface YunzaiNavTopic {
-    attribute: any;
-    icon: any;
+    attribute: NzSafeAny;
+    icon: NzSafeAny;
     children: YunzaiNavTopic[];
     intro: string;
     key: string;

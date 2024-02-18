@@ -1,2 +1,2 @@
-export const VERSION = '^16.4.6';
-export const ZORROVERSION = '^16.2.2';
+export const VERSION = '^17.2.0';
+export const ZORROVERSION = '^17.2.0';

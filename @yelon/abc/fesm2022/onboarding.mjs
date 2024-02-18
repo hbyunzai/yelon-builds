@@ -1,25 +1,29 @@
-import * as i2 from '@angular/common';
+import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Optional, Inject, ViewChild, InjectionToken, createComponent, Injectable, NgModule } from '@angular/core';
+import { inject, ElementRef, ChangeDetectorRef, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, InjectionToken, ApplicationRef, createComponent, Injectable, NgModule } from '@angular/core';
+import { Router } from '@angular/router';
 import { of, switchMap, delay, pipe } from 'rxjs';
-import * as i1 from '@angular/cdk/platform';
-import * as i3 from 'ng-zorro-antd/popover';
-import { NzPopoverModule } from 'ng-zorro-antd/popover';
-import * as i4 from 'ng-zorro-antd/core/outlet';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
-import * as i5 from 'ng-zorro-antd/button';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import * as i6 from 'ng-zorro-antd/core/transition-patch';
-import * as i7 from 'ng-zorro-antd/core/no-animation';
-import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
-import * as i1$1 from '@yelon/theme';
-import { YelonLocaleModule } from '@yelon/theme';
-import * as i2$1 from '@angular/router';
-import * as i3$1 from '@yelon/util/config';
-import * as i4$1 from '@angular/cdk/bidi';
+import { YelonLocaleService, YelonLocaleModule } from '@yelon/theme';
+import { YunzaiConfigService } from '@yelon/util/config';
+import { Platform } from '@angular/cdk/platform';
+import { NzButtonComponent, NzButtonModule } from 'ng-zorro-antd/button';
+import { NzNoAnimationDirective, NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
+import { NzStringTemplateOutletDirective, NzOutletModule } from 'ng-zorro-antd/core/outlet';
+import { NzPopoverDirective, NzPopoverModule } from 'ng-zorro-antd/popover';
 
 class OnboardingComponent {
+    constructor() {
+        this.el = inject(ElementRef).nativeElement;
+        this.platform = inject(Platform);
+        this.cdr = inject(ChangeDetectorRef);
+        this.doc = inject(DOCUMENT);
+        this.active = 0;
+        this.max = 0;
+        this.op = new EventEmitter();
+        this.running = false;
+        this.dir = 'ltr';
+    }
     get first() {
         return this.active === 0;
     }
@@ -31,17 +35,6 @@ class OnboardingComponent {
     }
     _getWin() {
         return this._getDoc().defaultView || window;
-    }
-    constructor(el, doc, platform, cdr) {
-        this.el = el;
-        this.doc = doc;
-        this.platform = platform;
-        this.cdr = cdr;
-        this.active = 0;
-        this.max = 0;
-        this.op = new EventEmitter();
-        this.running = false;
-        this.dir = 'ltr';
     }
     getLightData() {
         const doc = this._getDoc();
@@ -97,7 +90,7 @@ class OnboardingComponent {
             }
             return;
         }
-        const lightStyle = this.el.nativeElement.querySelector('.onboarding__light').style;
+        const lightStyle = this.el.querySelector('.onboarding__light').style;
         lightStyle.top = `${pos.top}px`;
         lightStyle.left = `${pos.left}px`;
         lightStyle.width = `${pos.width}px`;
@@ -123,22 +116,17 @@ class OnboardingComponent {
         clearTimeout(this.time);
         this.updatePrevElStatus(false);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingComponent, deps: [{ token: i0.ElementRef }, { token: DOCUMENT, optional: true }, { token: i1.Platform }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: OnboardingComponent, selector: "onboarding", host: { properties: { "class.onboarding": "true", "class.onboarding-rtl": "dir === 'rtl'", "attr.data-onboarding-active": "active" } }, viewQueries: [{ propertyName: "popover", first: true, predicate: ["popover"], descendants: true }], ngImport: i0, template: "<div *ngIf=\"!running && config.mask\" class=\"onboarding__mask\" (click)=\"handleMask()\"></div>\n<div\n  *ngIf=\"item\"\n  class=\"onboarding__light\"\n  [class.onboarding__light-hide]=\"running\"\n  [attr.style]=\"item.lightStyle\"\n  nz-popover\n  #popover=\"nzPopover\"\n  [nzPopoverTitle]=\"item.title\"\n  [nzPopoverContent]=\"content\"\n  [nzPopoverVisible]=\"!running\"\n  [nzPopoverTrigger]=\"null\"\n  [nzPopoverPlacement]=\"item.position\"\n  [nzPopoverOverlayClassName]=\"item.className\"\n  [nzPopoverOverlayStyle]=\"{ 'max-width.px': item.width, direction: dir }\"\n  [nzNoAnimation]=\"true\"\n></div>\n<ng-template #content>\n  <ng-container *nzStringTemplateOutlet=\"item.content\">\n    <div [innerHTML]=\"item.content\"></div>\n  </ng-container>\n  <div class=\"flex-center-between onboarding__footer\">\n    <span class=\"onboarding__total\">\n      <ng-container *ngIf=\"config.showTotal\">{{ active + 1 }}/{{ max }}</ng-container>\n    </span>\n    <div class=\"onboarding__btns\">\n      <a\n        *ngIf=\"!last && item.skip !== null && item.skip !== undefined\"\n        nz-button\n        nzType=\"link\"\n        (click)=\"to('skip')\"\n        nzSize=\"small\"\n        data-btnType=\"skip\"\n      >\n        <ng-container *nzStringTemplateOutlet=\"item.skip\">{{ item.skip }}</ng-container>\n      </a>\n      <a *ngIf=\"!first && item.prev !== null\" nz-button (click)=\"to('prev')\" nzSize=\"small\" data-btnType=\"prev\">\n        <ng-container *nzStringTemplateOutlet=\"item.prev\">{{ item.prev }}</ng-container>\n      </a>\n      <a\n        *ngIf=\"!last && item.next !== null && item.next !== undefined\"\n        nz-button\n        (click)=\"to('next')\"\n        nzType=\"primary\"\n        nzSize=\"small\"\n        data-btnType=\"next\"\n      >\n        <ng-container *nzStringTemplateOutlet=\"item.next\">{{ item.next }}</ng-container>\n      </a>\n      <a\n        *ngIf=\"last && item.done !== null && item.done !== undefined\"\n        nz-button\n        (click)=\"to('done')\"\n        nzType=\"primary\"\n        nzSize=\"small\"\n        data-btnType=\"done\"\n      >\n        <ng-container *nzStringTemplateOutlet=\"item.done\">{{ item.done }}</ng-container>\n      </a>\n    </div>\n  </div>\n</ng-template>\n", dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NzPopoverDirective, selector: "[nz-popover]", inputs: ["nzPopoverArrowPointAtCenter", "nzPopoverTitle", "nzPopoverContent", "nz-popover", "nzPopoverTrigger", "nzPopoverPlacement", "nzPopoverOrigin", "nzPopoverVisible", "nzPopoverMouseEnterDelay", "nzPopoverMouseLeaveDelay", "nzPopoverOverlayClassName", "nzPopoverOverlayStyle", "nzPopoverBackdrop"], outputs: ["nzPopoverVisibleChange"], exportAs: ["nzPopover"] }, { kind: "directive", type: i4.NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }, { kind: "component", type: i5.NzButtonComponent, selector: "button[nz-button], a[nz-button]", inputs: ["nzBlock", "nzGhost", "nzSearch", "nzLoading", "nzDanger", "disabled", "tabIndex", "nzType", "nzShape", "nzSize"], exportAs: ["nzButton"] }, { kind: "directive", type: i6.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i7.NzNoAnimationDirective, selector: "[nzNoAnimation]", inputs: ["nzNoAnimation"], exportAs: ["nzNoAnimation"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: OnboardingComponent, isStandalone: true, selector: "onboarding", host: { properties: { "class.onboarding": "true", "class.onboarding-rtl": "dir === 'rtl'", "attr.data-onboarding-active": "active" } }, viewQueries: [{ propertyName: "popover", first: true, predicate: ["popover"], descendants: true }], ngImport: i0, template: "@if (!running && config.mask) {\n  <div class=\"onboarding__mask\" (click)=\"handleMask()\"></div>\n}\n@if (item) {\n  <div\n    class=\"onboarding__light\"\n    [class.onboarding__light-hide]=\"running\"\n    [attr.style]=\"item.lightStyle\"\n    nz-popover\n    #popover=\"nzPopover\"\n    [nzPopoverTitle]=\"item.title\"\n    [nzPopoverContent]=\"content\"\n    [nzPopoverVisible]=\"!running\"\n    [nzPopoverTrigger]=\"null\"\n    [nzPopoverPlacement]=\"item.position\"\n    [nzPopoverOverlayClassName]=\"item.className\"\n    [nzPopoverOverlayStyle]=\"{ 'max-width.px': item.width, direction: dir }\"\n    [nzNoAnimation]=\"true\"\n  ></div>\n  <ng-template #content>\n    <ng-container *nzStringTemplateOutlet=\"item.content\">\n      <div [innerHTML]=\"item.content\"></div>\n    </ng-container>\n    <div class=\"flex-center-between onboarding__footer\">\n      <span class=\"onboarding__total\">\n        @if (config.showTotal) {\n          {{ active + 1 }}/{{ max }}\n        }\n      </span>\n      <div class=\"onboarding__btns\">\n        @if (!last && item.skip !== null && item.skip !== undefined) {\n          <a nz-button nzType=\"link\" (click)=\"to('skip')\" nzSize=\"small\" data-btnType=\"skip\">\n            <ng-container *nzStringTemplateOutlet=\"item.skip\">{{ item.skip }}</ng-container>\n          </a>\n        }\n        @if (!first && item.prev !== null) {\n          <a nz-button (click)=\"to('prev')\" nzSize=\"small\" data-btnType=\"prev\">\n            <ng-container *nzStringTemplateOutlet=\"item.prev\">{{ item.prev }}</ng-container>\n          </a>\n        }\n        @if (!last && item.next !== null && item.next !== undefined) {\n          <a nz-button (click)=\"to('next')\" nzType=\"primary\" nzSize=\"small\" data-btnType=\"next\">\n            <ng-container *nzStringTemplateOutlet=\"item.next\">{{ item.next }}</ng-container>\n          </a>\n        }\n        @if (last && item.done !== null && item.done !== undefined) {\n          <a nz-button (click)=\"to('done')\" nzType=\"primary\" nzSize=\"small\" data-btnType=\"done\">\n            <ng-container *nzStringTemplateOutlet=\"item.done\">{{ item.done }}</ng-container>\n          </a>\n        }\n      </div>\n    </div>\n  </ng-template>\n}\n", dependencies: [{ kind: "directive", type: NzPopoverDirective, selector: "[nz-popover]", inputs: ["nzPopoverArrowPointAtCenter", "nzPopoverTitle", "nzPopoverContent", "nz-popover", "nzPopoverTrigger", "nzPopoverPlacement", "nzPopoverOrigin", "nzPopoverVisible", "nzPopoverMouseEnterDelay", "nzPopoverMouseLeaveDelay", "nzPopoverOverlayClassName", "nzPopoverOverlayStyle", "nzPopoverBackdrop"], outputs: ["nzPopoverVisibleChange"], exportAs: ["nzPopover"] }, { kind: "directive", type: NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }, { kind: "component", type: NzButtonComponent, selector: "button[nz-button], a[nz-button]", inputs: ["nzBlock", "nzGhost", "nzSearch", "nzLoading", "nzDanger", "disabled", "tabIndex", "nzType", "nzShape", "nzSize"], exportAs: ["nzButton"] }, { kind: "directive", type: NzNoAnimationDirective, selector: "[nzNoAnimation]", inputs: ["nzNoAnimation"], exportAs: ["nzNoAnimation"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingComponent, decorators: [{
             type: Component,
             args: [{ selector: 'onboarding', host: {
                         '[class.onboarding]': `true`,
                         '[class.onboarding-rtl]': `dir === 'rtl'`,
                         '[attr.data-onboarding-active]': `active`
-                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<div *ngIf=\"!running && config.mask\" class=\"onboarding__mask\" (click)=\"handleMask()\"></div>\n<div\n  *ngIf=\"item\"\n  class=\"onboarding__light\"\n  [class.onboarding__light-hide]=\"running\"\n  [attr.style]=\"item.lightStyle\"\n  nz-popover\n  #popover=\"nzPopover\"\n  [nzPopoverTitle]=\"item.title\"\n  [nzPopoverContent]=\"content\"\n  [nzPopoverVisible]=\"!running\"\n  [nzPopoverTrigger]=\"null\"\n  [nzPopoverPlacement]=\"item.position\"\n  [nzPopoverOverlayClassName]=\"item.className\"\n  [nzPopoverOverlayStyle]=\"{ 'max-width.px': item.width, direction: dir }\"\n  [nzNoAnimation]=\"true\"\n></div>\n<ng-template #content>\n  <ng-container *nzStringTemplateOutlet=\"item.content\">\n    <div [innerHTML]=\"item.content\"></div>\n  </ng-container>\n  <div class=\"flex-center-between onboarding__footer\">\n    <span class=\"onboarding__total\">\n      <ng-container *ngIf=\"config.showTotal\">{{ active + 1 }}/{{ max }}</ng-container>\n    </span>\n    <div class=\"onboarding__btns\">\n      <a\n        *ngIf=\"!last && item.skip !== null && item.skip !== undefined\"\n        nz-button\n        nzType=\"link\"\n        (click)=\"to('skip')\"\n        nzSize=\"small\"\n        data-btnType=\"skip\"\n      >\n        <ng-container *nzStringTemplateOutlet=\"item.skip\">{{ item.skip }}</ng-container>\n      </a>\n      <a *ngIf=\"!first && item.prev !== null\" nz-button (click)=\"to('prev')\" nzSize=\"small\" data-btnType=\"prev\">\n        <ng-container *nzStringTemplateOutlet=\"item.prev\">{{ item.prev }}</ng-container>\n      </a>\n      <a\n        *ngIf=\"!last && item.next !== null && item.next !== undefined\"\n        nz-button\n        (click)=\"to('next')\"\n        nzType=\"primary\"\n        nzSize=\"small\"\n        data-btnType=\"next\"\n      >\n        <ng-container *nzStringTemplateOutlet=\"item.next\">{{ item.next }}</ng-container>\n      </a>\n      <a\n        *ngIf=\"last && item.done !== null && item.done !== undefined\"\n        nz-button\n        (click)=\"to('done')\"\n        nzType=\"primary\"\n        nzSize=\"small\"\n        data-btnType=\"done\"\n      >\n        <ng-container *nzStringTemplateOutlet=\"item.done\">{{ item.done }}</ng-container>\n      </a>\n    </div>\n  </div>\n</ng-template>\n" }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: undefined, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }, { type: i1.Platform }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { popover: [{
+                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, standalone: true, imports: [NzPopoverDirective, NzStringTemplateOutletDirective, NzButtonComponent, NzNoAnimationDirective], template: "@if (!running && config.mask) {\n  <div class=\"onboarding__mask\" (click)=\"handleMask()\"></div>\n}\n@if (item) {\n  <div\n    class=\"onboarding__light\"\n    [class.onboarding__light-hide]=\"running\"\n    [attr.style]=\"item.lightStyle\"\n    nz-popover\n    #popover=\"nzPopover\"\n    [nzPopoverTitle]=\"item.title\"\n    [nzPopoverContent]=\"content\"\n    [nzPopoverVisible]=\"!running\"\n    [nzPopoverTrigger]=\"null\"\n    [nzPopoverPlacement]=\"item.position\"\n    [nzPopoverOverlayClassName]=\"item.className\"\n    [nzPopoverOverlayStyle]=\"{ 'max-width.px': item.width, direction: dir }\"\n    [nzNoAnimation]=\"true\"\n  ></div>\n  <ng-template #content>\n    <ng-container *nzStringTemplateOutlet=\"item.content\">\n      <div [innerHTML]=\"item.content\"></div>\n    </ng-container>\n    <div class=\"flex-center-between onboarding__footer\">\n      <span class=\"onboarding__total\">\n        @if (config.showTotal) {\n          {{ active + 1 }}/{{ max }}\n        }\n      </span>\n      <div class=\"onboarding__btns\">\n        @if (!last && item.skip !== null && item.skip !== undefined) {\n          <a nz-button nzType=\"link\" (click)=\"to('skip')\" nzSize=\"small\" data-btnType=\"skip\">\n            <ng-container *nzStringTemplateOutlet=\"item.skip\">{{ item.skip }}</ng-container>\n          </a>\n        }\n        @if (!first && item.prev !== null) {\n          <a nz-button (click)=\"to('prev')\" nzSize=\"small\" data-btnType=\"prev\">\n            <ng-container *nzStringTemplateOutlet=\"item.prev\">{{ item.prev }}</ng-container>\n          </a>\n        }\n        @if (!last && item.next !== null && item.next !== undefined) {\n          <a nz-button (click)=\"to('next')\" nzType=\"primary\" nzSize=\"small\" data-btnType=\"next\">\n            <ng-container *nzStringTemplateOutlet=\"item.next\">{{ item.next }}</ng-container>\n          </a>\n        }\n        @if (last && item.done !== null && item.done !== undefined) {\n          <a nz-button (click)=\"to('done')\" nzType=\"primary\" nzSize=\"small\" data-btnType=\"done\">\n            <ng-container *nzStringTemplateOutlet=\"item.done\">{{ item.done }}</ng-container>\n          </a>\n        }\n      </div>\n    </div>\n  </ng-template>\n}\n" }]
+        }], propDecorators: { popover: [{
                 type: ViewChild,
                 args: ['popover', { static: false }]
             }] } });
@@ -160,6 +148,19 @@ class LocalStorageStore {
 }
 
 class OnboardingService {
+    constructor() {
+        this.i18n = inject(YelonLocaleService);
+        this.appRef = inject(ApplicationRef);
+        this.router = inject(Router);
+        this.doc = inject(DOCUMENT);
+        this.configSrv = inject(YunzaiConfigService);
+        this.keyStoreSrv = inject(ONBOARDING_STORE_TOKEN);
+        this.directionality = inject(Directionality, { optional: true });
+        this.active = 0;
+        this.running$ = null;
+        this._running = false;
+        this.type = null;
+    }
     _getDoc() {
         return this.doc;
     }
@@ -170,19 +171,6 @@ class OnboardingService {
      */
     get running() {
         return this._running;
-    }
-    constructor(i18n, appRef, router, doc, configSrv, keyStoreSrv, directionality) {
-        this.i18n = i18n;
-        this.appRef = appRef;
-        this.router = router;
-        this.doc = doc;
-        this.configSrv = configSrv;
-        this.keyStoreSrv = keyStoreSrv;
-        this.directionality = directionality;
-        this.active = 0;
-        this.running$ = null;
-        this._running = false;
-        this.type = null;
     }
     attach() {
         const compRef = createComponent(OnboardingComponent, {
@@ -246,7 +234,7 @@ class OnboardingService {
             ...this.i18n.getData('onboarding'),
             ...items[this.active]
         };
-        const dir = this.configSrv.get('onboarding').direction || this.directionality.value;
+        const dir = this.configSrv.get('onboarding').direction || this.directionality?.value;
         Object.assign(this.compRef.instance, { item, config: this.config, active: this.active, max: items.length, dir });
         const pipes = [
             switchMap(() => (item.url ? this.router.navigateByUrl(item.url) : of(true))),
@@ -333,33 +321,43 @@ class OnboardingService {
     ngOnDestroy() {
         this.destroy();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingService, deps: [{ token: i1$1.YelonLocaleService }, { token: i0.ApplicationRef }, { token: i2$1.Router }, { token: DOCUMENT }, { token: i3$1.YunzaiConfigService }, { token: ONBOARDING_STORE_TOKEN }, { token: i4$1.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingService }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingService, decorators: [{
-            type: Injectable
-        }], ctorParameters: function () { return [{ type: i1$1.YelonLocaleService }, { type: i0.ApplicationRef }, { type: i2$1.Router }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }, { type: i3$1.YunzaiConfigService }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [ONBOARDING_STORE_TOKEN]
-                }] }, { type: i4$1.Directionality, decorators: [{
-                    type: Optional
-                }] }]; } });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingService, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }] });
 
 const COMPONENTS = [OnboardingComponent];
 class OnboardingModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: OnboardingModule, declarations: [OnboardingComponent], imports: [CommonModule, YelonLocaleModule, NzPopoverModule, NzOutletModule, NzButtonModule, NzNoAnimationModule], exports: [OnboardingComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingModule, providers: [OnboardingService], imports: [CommonModule, YelonLocaleModule, NzPopoverModule, NzOutletModule, NzButtonModule, NzNoAnimationModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: OnboardingModule, imports: [CommonModule,
+            YelonLocaleModule,
+            NzPopoverModule,
+            NzOutletModule,
+            NzButtonModule,
+            NzNoAnimationModule, OnboardingComponent], exports: [OnboardingComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingModule, imports: [CommonModule,
+            YelonLocaleModule,
+            NzPopoverModule,
+            NzOutletModule,
+            NzButtonModule,
+            NzNoAnimationModule,
+            COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: OnboardingModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: OnboardingModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule, YelonLocaleModule, NzPopoverModule, NzOutletModule, NzButtonModule, NzNoAnimationModule],
-                    declarations: COMPONENTS,
-                    providers: [OnboardingService],
+                    imports: [
+                        CommonModule,
+                        YelonLocaleModule,
+                        NzPopoverModule,
+                        NzOutletModule,
+                        NzButtonModule,
+                        NzNoAnimationModule,
+                        COMPONENTS
+                    ],
                     exports: COMPONENTS
                 }]
         }] });

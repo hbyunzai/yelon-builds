@@ -1,27 +1,27 @@
+import * as i7 from '@angular/common';
+import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
 import { EventEmitter, Component, Input, Output, ViewChild, NgModule, Injectable } from '@angular/core';
-import * as i1 from '@yelon/bcs/yunzai-dept-tree';
+import * as i11 from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import * as i2 from '@yelon/bcs/yunzai-dept-tree';
 import { YunzaiDeptTreeModule, YUNZAI_DEPT_TYPES } from '@yelon/bcs/yunzai-dept-tree';
-import * as i2 from '@yelon/bcs/yunzai-dormitory-tree';
+import * as i3 from '@yelon/bcs/yunzai-dormitory-tree';
 import { YunzaiDormitoryTreeModule } from '@yelon/bcs/yunzai-dormitory-tree';
-import * as i3 from '@yelon/bcs/yunzai-friend-group';
+import * as i4 from '@yelon/bcs/yunzai-friend-group';
 import { YunzaiFriendGroupModule } from '@yelon/bcs/yunzai-friend-group';
-import * as i4 from '@yelon/bcs/yunzai-role-tree';
+import * as i5 from '@yelon/bcs/yunzai-role-tree';
 import { YunzaiRoleTreeModule } from '@yelon/bcs/yunzai-role-tree';
-import * as i5 from '@yelon/bcs/yunzai-table-user';
+import * as i6 from '@yelon/bcs/yunzai-table-user';
 import { YunzaiTableUserModule } from '@yelon/bcs/yunzai-table-user';
-import * as i6 from '@angular/common';
-import { CommonModule } from '@angular/common';
-import * as i7 from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import * as i8 from 'ng-zorro-antd/grid';
-import * as i9 from 'ng-zorro-antd/radio';
-import * as i10 from 'ng-zorro-antd/card';
-import * as i11 from '@yelon/theme';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import * as i1 from '@yelon/theme';
+import { YunzaiThemeModule } from '@yelon/theme';
+import * as i8 from 'ng-zorro-antd/card';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import * as i9 from 'ng-zorro-antd/grid';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import * as i10 from 'ng-zorro-antd/radio';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { lastValueFrom } from 'rxjs';
 import * as i1$1 from 'ng-zorro-antd/modal';
 
@@ -61,10 +61,15 @@ class YunzaiContactComponent {
         return !!this.props?.wrap;
     }
     constructor() {
+        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
         this.onSelect = new EventEmitter();
+        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
         this.onSelectDept = new EventEmitter();
+        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
         this.onSelectRole = new EventEmitter();
+        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
         this.onSelectDormitory = new EventEmitter();
+        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
         this.onSelectGroup = new EventEmitter();
         this.state = {
             cursor: 'deptTree'
@@ -98,102 +103,120 @@ class YunzaiContactComponent {
         this.tableUserProps.check.data = users;
         this.onSelect.emit(users);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: YunzaiContactComponent, selector: "yunzai-contact", inputs: { deptTree: "deptTree", dormitoryTree: "dormitoryTree", friendGroup: "friendGroup", roleTree: "roleTree", tableUser: "tableUser", props: "props" }, outputs: { onSelect: "onSelect", onSelectDept: "onSelectDept", onSelectRole: "onSelectRole", onSelectDormitory: "onSelectDormitory", onSelectGroup: "onSelectGroup" }, viewQueries: [{ propertyName: "table", first: true, predicate: ["table"], descendants: true }], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: YunzaiContactComponent, isStandalone: true, selector: "yunzai-contact", inputs: { deptTree: "deptTree", dormitoryTree: "dormitoryTree", friendGroup: "friendGroup", roleTree: "roleTree", tableUser: "tableUser", props: "props" }, outputs: { onSelect: "onSelect", onSelectDept: "onSelectDept", onSelectRole: "onSelectRole", onSelectDormitory: "onSelectDormitory", onSelectGroup: "onSelectGroup" }, viewQueries: [{ propertyName: "table", first: true, predicate: ["table"], descendants: true }], ngImport: i0, template: `
     <nz-card *ngIf="isWarp">
-      <ng-container [ngTemplateOutlet]="content"></ng-container>
+      <ng-container [ngTemplateOutlet]="content" />
     </nz-card>
 
-    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content"></ng-container>
+    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content" />
 
     <ng-template #content>
       <nz-row>
         <nz-col [nzSpan]="6">
-
           <div class="yz-select-contacts-modal-type">
             <nz-radio-group [(ngModel)]="state.cursor">
-              <label *ngIf="!disableDeptTree" nz-radio-button
-                     nzValue="deptTree">{{'deptTree'|i18n}}</label>
-              <label *ngIf="!disableRoleTree" nz-radio-button
-                     nzValue="roleTree">{{'roleTree'|i18n}}</label>
-              <label *ngIf="!disableDormitoryTree" nz-radio-button
-                     nzValue="dormitoryTree">{{'dormitoryTree'|i18n}}</label>
-              <label *ngIf="!disableFriendGroup" nz-radio-button
-                     nzValue="friendGroup">{{'friendGroup'|i18n}}</label>
+              <label *ngIf="!disableDeptTree" nz-radio-button nzValue="deptTree">{{ 'deptTree' | i18n }}</label>
+              <label *ngIf="!disableRoleTree" nz-radio-button nzValue="roleTree">{{ 'roleTree' | i18n }}</label>
+              <label *ngIf="!disableDormitoryTree" nz-radio-button nzValue="dormitoryTree">{{
+                'dormitoryTree' | i18n
+              }}</label>
+              <label *ngIf="!disableFriendGroup" nz-radio-button nzValue="friendGroup">{{
+                'friendGroup' | i18n
+              }}</label>
             </nz-radio-group>
           </div>
 
           <nz-row class="yz-select-contacts-modal-tree">
             <nz-col [nzSpan]="24" [ngSwitch]="state.cursor">
-              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree"
-                             (onSelect)="onDeptSelect($event)"></yunzai-dept-tree>
-              <yunzai-dormitory-tree *ngSwitchCase="'dormitoryTree'" [props]="dormitoryTree"
-                                  (onSelect)="onDormTreeSelect($event)"></yunzai-dormitory-tree>
-              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree"
-                             (onSelect)="onRoleTreeSelect($event)"></yunzai-role-tree>
-              <yunzai-friend-group *ngSwitchCase="'friendGroup'" [props]="friendGroup"
-                                (onSelect)="onFriendSelect($event)"></yunzai-friend-group>
+              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree" (onSelect)="onDeptSelect($event)" />
+              <yunzai-dormitory-tree
+                *ngSwitchCase="'dormitoryTree'"
+                [props]="dormitoryTree"
+                (onSelect)="onDormTreeSelect($event)"
+              />
+              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree" (onSelect)="onRoleTreeSelect($event)" />
+              <yunzai-friend-group
+                *ngSwitchCase="'friendGroup'"
+                [props]="friendGroup"
+                (onSelect)="onFriendSelect($event)"
+              />
             </nz-col>
           </nz-row>
         </nz-col>
         <nz-col [nzSpan]="18">
-          <yunzai-table-user #table [props]="tableUserProps"
-                          (onChecked)="onTableUserChecked($event)"></yunzai-table-user>
+          <yunzai-table-user #table [props]="tableUserProps" (onChecked)="onTableUserChecked($event)" />
         </nz-col>
       </nz-row>
     </ng-template>
-  `, isInline: true, dependencies: [{ kind: "component", type: i1.YunzaiDeptTreeComponent, selector: "yunzai-dept-tree", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "component", type: i2.YunzaiDormitoryTreeComponent, selector: "yunzai-dormitory-tree", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "component", type: i3.YunzaiFriendGroupComponent, selector: "yunzai-friend-group", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "component", type: i4.YunzaiRoleTreeComponent, selector: "yunzai-role-tree", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "component", type: i5.YunzaiTableUserComponent, selector: "yunzai-table-user", inputs: ["props"], outputs: ["onChecked"] }, { kind: "directive", type: i6.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i6.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i6.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i6.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "directive", type: i7.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i7.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i8.NzColDirective, selector: "[nz-col],nz-col,nz-form-control,nz-form-label", inputs: ["nzFlex", "nzSpan", "nzOrder", "nzOffset", "nzPush", "nzPull", "nzXs", "nzSm", "nzMd", "nzLg", "nzXl", "nzXXl"], exportAs: ["nzCol"] }, { kind: "directive", type: i8.NzRowDirective, selector: "[nz-row],nz-row,nz-form-item", inputs: ["nzAlign", "nzJustify", "nzGutter"], exportAs: ["nzRow"] }, { kind: "component", type: i9.NzRadioComponent, selector: "[nz-radio],[nz-radio-button]", inputs: ["nzValue", "nzDisabled", "nzAutoFocus"], exportAs: ["nzRadio"] }, { kind: "directive", type: i9.NzRadioButtonDirective, selector: "[nz-radio-button]" }, { kind: "component", type: i9.NzRadioGroupComponent, selector: "nz-radio-group", inputs: ["nzDisabled", "nzButtonStyle", "nzSize", "nzName"], exportAs: ["nzRadioGroup"] }, { kind: "component", type: i10.NzCardComponent, selector: "nz-card", inputs: ["nzBordered", "nzBorderless", "nzLoading", "nzHoverable", "nzBodyStyle", "nzCover", "nzActions", "nzType", "nzSize", "nzTitle", "nzExtra"], exportAs: ["nzCard"] }, { kind: "pipe", type: i11.I18nPipe, name: "i18n" }] }); }
+  `, isInline: true, dependencies: [{ kind: "ngmodule", type: YunzaiThemeModule }, { kind: "pipe", type: i1.I18nPipe, name: "i18n" }, { kind: "ngmodule", type: YunzaiDeptTreeModule }, { kind: "component", type: i2.YunzaiDeptTreeComponent, selector: "yunzai-dept-tree", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "ngmodule", type: YunzaiDormitoryTreeModule }, { kind: "component", type: i3.YunzaiDormitoryTreeComponent, selector: "yunzai-dormitory-tree", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "ngmodule", type: YunzaiFriendGroupModule }, { kind: "component", type: i4.YunzaiFriendGroupComponent, selector: "yunzai-friend-group", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "ngmodule", type: YunzaiRoleTreeModule }, { kind: "component", type: i5.YunzaiRoleTreeComponent, selector: "yunzai-role-tree", inputs: ["props"], outputs: ["onQueryComplete", "onSelect"] }, { kind: "ngmodule", type: YunzaiTableUserModule }, { kind: "component", type: i6.YunzaiTableUserComponent, selector: "yunzai-table-user", inputs: ["props"], outputs: ["onChecked"] }, { kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i7.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i7.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i7.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i7.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "ngmodule", type: NzCardModule }, { kind: "component", type: i8.NzCardComponent, selector: "nz-card", inputs: ["nzBordered", "nzBorderless", "nzLoading", "nzHoverable", "nzBodyStyle", "nzCover", "nzActions", "nzType", "nzSize", "nzTitle", "nzExtra"], exportAs: ["nzCard"] }, { kind: "ngmodule", type: NzGridModule }, { kind: "directive", type: i9.NzColDirective, selector: "[nz-col],nz-col,nz-form-control,nz-form-label", inputs: ["nzFlex", "nzSpan", "nzOrder", "nzOffset", "nzPush", "nzPull", "nzXs", "nzSm", "nzMd", "nzLg", "nzXl", "nzXXl"], exportAs: ["nzCol"] }, { kind: "directive", type: i9.NzRowDirective, selector: "[nz-row],nz-row,nz-form-item", inputs: ["nzAlign", "nzJustify", "nzGutter"], exportAs: ["nzRow"] }, { kind: "ngmodule", type: NzRadioModule }, { kind: "component", type: i10.NzRadioComponent, selector: "[nz-radio],[nz-radio-button]", inputs: ["nzValue", "nzDisabled", "nzAutoFocus"], exportAs: ["nzRadio"] }, { kind: "directive", type: i10.NzRadioButtonDirective, selector: "[nz-radio-button]" }, { kind: "component", type: i10.NzRadioGroupComponent, selector: "nz-radio-group", inputs: ["nzDisabled", "nzButtonStyle", "nzSize", "nzName"], exportAs: ["nzRadioGroup"] }, { kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i11.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i11.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yunzai-contact`,
                     template: `
     <nz-card *ngIf="isWarp">
-      <ng-container [ngTemplateOutlet]="content"></ng-container>
+      <ng-container [ngTemplateOutlet]="content" />
     </nz-card>
 
-    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content"></ng-container>
+    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content" />
 
     <ng-template #content>
       <nz-row>
         <nz-col [nzSpan]="6">
-
           <div class="yz-select-contacts-modal-type">
             <nz-radio-group [(ngModel)]="state.cursor">
-              <label *ngIf="!disableDeptTree" nz-radio-button
-                     nzValue="deptTree">{{'deptTree'|i18n}}</label>
-              <label *ngIf="!disableRoleTree" nz-radio-button
-                     nzValue="roleTree">{{'roleTree'|i18n}}</label>
-              <label *ngIf="!disableDormitoryTree" nz-radio-button
-                     nzValue="dormitoryTree">{{'dormitoryTree'|i18n}}</label>
-              <label *ngIf="!disableFriendGroup" nz-radio-button
-                     nzValue="friendGroup">{{'friendGroup'|i18n}}</label>
+              <label *ngIf="!disableDeptTree" nz-radio-button nzValue="deptTree">{{ 'deptTree' | i18n }}</label>
+              <label *ngIf="!disableRoleTree" nz-radio-button nzValue="roleTree">{{ 'roleTree' | i18n }}</label>
+              <label *ngIf="!disableDormitoryTree" nz-radio-button nzValue="dormitoryTree">{{
+                'dormitoryTree' | i18n
+              }}</label>
+              <label *ngIf="!disableFriendGroup" nz-radio-button nzValue="friendGroup">{{
+                'friendGroup' | i18n
+              }}</label>
             </nz-radio-group>
           </div>
 
           <nz-row class="yz-select-contacts-modal-tree">
             <nz-col [nzSpan]="24" [ngSwitch]="state.cursor">
-              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree"
-                             (onSelect)="onDeptSelect($event)"></yunzai-dept-tree>
-              <yunzai-dormitory-tree *ngSwitchCase="'dormitoryTree'" [props]="dormitoryTree"
-                                  (onSelect)="onDormTreeSelect($event)"></yunzai-dormitory-tree>
-              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree"
-                             (onSelect)="onRoleTreeSelect($event)"></yunzai-role-tree>
-              <yunzai-friend-group *ngSwitchCase="'friendGroup'" [props]="friendGroup"
-                                (onSelect)="onFriendSelect($event)"></yunzai-friend-group>
+              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree" (onSelect)="onDeptSelect($event)" />
+              <yunzai-dormitory-tree
+                *ngSwitchCase="'dormitoryTree'"
+                [props]="dormitoryTree"
+                (onSelect)="onDormTreeSelect($event)"
+              />
+              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree" (onSelect)="onRoleTreeSelect($event)" />
+              <yunzai-friend-group
+                *ngSwitchCase="'friendGroup'"
+                [props]="friendGroup"
+                (onSelect)="onFriendSelect($event)"
+              />
             </nz-col>
           </nz-row>
         </nz-col>
         <nz-col [nzSpan]="18">
-          <yunzai-table-user #table [props]="tableUserProps"
-                          (onChecked)="onTableUserChecked($event)"></yunzai-table-user>
+          <yunzai-table-user #table [props]="tableUserProps" (onChecked)="onTableUserChecked($event)" />
         </nz-col>
       </nz-row>
     </ng-template>
-  `
+  `,
+                    standalone: true,
+                    imports: [
+                        YunzaiThemeModule,
+                        YunzaiDeptTreeModule,
+                        YunzaiDormitoryTreeModule,
+                        YunzaiFriendGroupModule,
+                        YunzaiRoleTreeModule,
+                        YunzaiTableUserModule,
+                        CommonModule,
+                        NzCardModule,
+                        NzGridModule,
+                        NzRadioModule,
+                        FormsModule
+                    ]
                 }]
-        }], ctorParameters: function () { return []; }, propDecorators: { deptTree: [{
+        }], ctorParameters: () => [], propDecorators: { deptTree: [{
                 type: Input
             }], dormitoryTree: [{
                 type: Input
@@ -220,52 +243,50 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                 args: ['table']
             }] } });
 
+const COMPONENTS = [YunzaiContactComponent];
 class YunzaiContactModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactModule, declarations: [YunzaiContactComponent], imports: [YunzaiDeptTreeModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, imports: [YunzaiThemeModule,
+            YunzaiDeptTreeModule,
             YunzaiDormitoryTreeModule,
             YunzaiFriendGroupModule,
             YunzaiRoleTreeModule,
             YunzaiTableUserModule,
-            HttpClientModule,
             CommonModule,
-            FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedZorroModule,
-            YunzaiSharedYelonModule], exports: [YunzaiContactComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactModule, imports: [YunzaiDeptTreeModule,
+            NzCardModule,
+            NzGridModule,
+            NzRadioModule,
+            FormsModule, YunzaiContactComponent], exports: [YunzaiContactComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, imports: [YunzaiThemeModule,
+            YunzaiDeptTreeModule,
             YunzaiDormitoryTreeModule,
             YunzaiFriendGroupModule,
             YunzaiRoleTreeModule,
             YunzaiTableUserModule,
-            HttpClientModule,
             CommonModule,
-            FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedZorroModule,
-            YunzaiSharedYelonModule] }); }
+            NzCardModule,
+            NzGridModule,
+            NzRadioModule,
+            FormsModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
+                        YunzaiThemeModule,
                         YunzaiDeptTreeModule,
                         YunzaiDormitoryTreeModule,
                         YunzaiFriendGroupModule,
                         YunzaiRoleTreeModule,
                         YunzaiTableUserModule,
-                        HttpClientModule,
                         CommonModule,
+                        NzCardModule,
+                        NzGridModule,
+                        NzRadioModule,
                         FormsModule,
-                        RouterModule,
-                        ReactiveFormsModule,
-                        YunzaiSharedZorroModule,
-                        YunzaiSharedYelonModule
+                        ...COMPONENTS
                     ],
-                    declarations: [YunzaiContactComponent],
-                    exports: [YunzaiContactComponent]
+                    exports: COMPONENTS
                 }]
         }] });
 
@@ -339,15 +360,15 @@ class YunzaiContactService {
         contactComponent.tableUser = param.tableUser;
         contactComponent.onSelect.subscribe(users => (value = users));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactService, deps: [{ token: i1$1.NzModalService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactService, deps: [{ token: i1$1.NzModalService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiContactService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
                 }]
-        }], ctorParameters: function () { return [{ type: i1$1.NzModalService }]; } });
+        }], ctorParameters: () => [{ type: i1$1.NzModalService }] });
 
 /**
  * Generated bundle index. Do not edit.

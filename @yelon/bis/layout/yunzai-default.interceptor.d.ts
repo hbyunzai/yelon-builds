@@ -1,6 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injector } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 declare class YunzaiDefaultInterceptor implements HttpInterceptor {
     private injector;
@@ -20,7 +21,7 @@ declare class YunzaiDefaultInterceptor implements HttpInterceptor {
     private tryRefreshToken;
     private getAdditionalHeaders;
     private handleData;
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>;
+    intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>>;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiDefaultInterceptor, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<YunzaiDefaultInterceptor>;
 }

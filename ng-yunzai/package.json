@@ -1,8 +1,8 @@
 {
   "name": "ng-yunzai",
-  "version": "16.4.6",
+  "version": "17.2.0-c502481",
   "description": "Schematics specific to ng-yunzai",
-  "author": "devcui<devcui@outlook.com>",
+  "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,8 +23,9 @@
   "schematics": "./collection.json",
   "dependencies": {
     "swagger-typescript-api": "^12.0.4",
-    "ng-yunzai-sts": "^0.0.3",
-    "ng-yunzai-plugin-theme": "^15.0.2"
+    "ng-yunzai-sts": "latest",
+    "ng-yunzai-plugin-theme": "latest",
+    "@angular/cdk": "^17.1.0"
   },
   "ng-update": {
     "migrations": "./migration.json",

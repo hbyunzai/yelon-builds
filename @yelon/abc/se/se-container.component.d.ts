@@ -1,19 +1,20 @@
-import { ElementRef, OnInit, Renderer2, TemplateRef } from '@angular/core';
+import { OnInit, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-import { BooleanInput, NumberInput } from '@yelon/util/decorator';
 import { SEErrorRefresh, SELayout } from './se.types';
 import * as i0 from "@angular/core";
+export declare class SETitleComponent implements OnInit {
+    private readonly parentComp;
+    private readonly el;
+    private readonly ren;
+    constructor();
+    private setClass;
+    ngOnInit(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SETitleComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SETitleComponent, "se-title, [se-title]", ["seTitle"], {}, {}, never, ["*"], true, never>;
+}
 export declare class SEContainerComponent {
-    static ngAcceptInputType_gutter: NumberInput;
-    static ngAcceptInputType_col: NumberInput;
-    static ngAcceptInputType_colInCon: NumberInput;
-    static ngAcceptInputType_labelWidth: NumberInput;
-    static ngAcceptInputType_firstVisual: BooleanInput;
-    static ngAcceptInputType_ignoreDirty: BooleanInput;
-    static ngAcceptInputType_line: BooleanInput;
-    static ngAcceptInputType_noColon: BooleanInput;
     private errorNotify$;
     colInCon?: REP_TYPE;
     col: REP_TYPE;
@@ -36,15 +37,13 @@ export declare class SEContainerComponent {
     constructor(configSrv: YunzaiConfigService);
     setErrors(errors: SEErrorRefresh[]): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SEContainerComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SEContainerComponent, "se-container, [se-container]", ["seContainer"], { "colInCon": { "alias": "se-container"; "required": false; }; "col": { "alias": "col"; "required": false; }; "labelWidth": { "alias": "labelWidth"; "required": false; }; "noColon": { "alias": "noColon"; "required": false; }; "title": { "alias": "title"; "required": false; }; "gutter": { "alias": "gutter"; "required": false; }; "nzLayout": { "alias": "nzLayout"; "required": false; }; "size": { "alias": "size"; "required": false; }; "firstVisual": { "alias": "firstVisual"; "required": false; }; "ignoreDirty": { "alias": "ignoreDirty"; "required": false; }; "line": { "alias": "line"; "required": false; }; "errors": { "alias": "errors"; "required": false; }; }, {}, never, ["*"], false, never>;
-}
-export declare class SETitleComponent implements OnInit {
-    private parent;
-    private ren;
-    private el;
-    constructor(parent: SEContainerComponent, el: ElementRef, ren: Renderer2);
-    private setClass;
-    ngOnInit(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<SETitleComponent, [{ optional: true; host: true; }, null, null]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SETitleComponent, "se-title, [se-title]", ["seTitle"], {}, {}, never, ["*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SEContainerComponent, "se-container, [se-container]", ["seContainer"], { "colInCon": { "alias": "se-container"; "required": false; }; "col": { "alias": "col"; "required": false; }; "labelWidth": { "alias": "labelWidth"; "required": false; }; "noColon": { "alias": "noColon"; "required": false; }; "title": { "alias": "title"; "required": false; }; "gutter": { "alias": "gutter"; "required": false; }; "nzLayout": { "alias": "nzLayout"; "required": false; }; "size": { "alias": "size"; "required": false; }; "firstVisual": { "alias": "firstVisual"; "required": false; }; "ignoreDirty": { "alias": "ignoreDirty"; "required": false; }; "line": { "alias": "line"; "required": false; }; "errors": { "alias": "errors"; "required": false; }; }, {}, never, ["*"], true, never>;
+    static ngAcceptInputType_colInCon: unknown;
+    static ngAcceptInputType_col: unknown;
+    static ngAcceptInputType_labelWidth: unknown;
+    static ngAcceptInputType_noColon: unknown;
+    static ngAcceptInputType_gutter: unknown;
+    static ngAcceptInputType_firstVisual: unknown;
+    static ngAcceptInputType_ignoreDirty: unknown;
+    static ngAcceptInputType_line: unknown;
 }

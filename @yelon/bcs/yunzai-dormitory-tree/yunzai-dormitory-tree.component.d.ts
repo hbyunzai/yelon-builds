@@ -8,8 +8,8 @@ export declare class YunzaiDormitoryTreeComponent implements OnInit, AfterViewIn
     private dormitoryService;
     sf: SFComponent;
     props?: YunzaiDormitoryTreeProps;
-    onQueryComplete: EventEmitter<YunzaiDormitoryTree[]>;
-    onSelect: EventEmitter<YunzaiDormitoryTree[]>;
+    readonly onQueryComplete: EventEmitter<YunzaiDormitoryTree[]>;
+    readonly onSelect: EventEmitter<YunzaiDormitoryTree[]>;
     private $destroy;
     state: YunzaiDormitoryTreeState;
     get data(): YunzaiDormitoryTree[];
@@ -32,5 +32,5 @@ export declare class YunzaiDormitoryTreeComponent implements OnInit, AfterViewIn
     open(data: NzTreeNode | NzFormatEmitEvent): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiDormitoryTreeComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiDormitoryTreeComponent, "yunzai-dormitory-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiDormitoryTreeComponent, "yunzai-dormitory-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, true, never>;
 }

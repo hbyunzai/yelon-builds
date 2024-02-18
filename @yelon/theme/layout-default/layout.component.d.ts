@@ -1,7 +1,6 @@
-import { ElementRef, OnInit, QueryList, Renderer2, TemplateRef } from '@angular/core';
+import { ElementRef, QueryList, Renderer2, TemplateRef, OnInit } from '@angular/core';
 import { Router, Event } from '@angular/router';
 import { SettingsService } from '@yelon/theme';
-import { BooleanInput } from '@yelon/util';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { LayoutDisplayService } from './layout-display.service';
@@ -17,8 +16,6 @@ export declare class LayoutDefaultComponent implements OnInit {
     private doc;
     private srv;
     private layoutDisplayService;
-    static ngAcceptInputType_fetchingStrictly: BooleanInput;
-    static ngAcceptInputType_fetching: BooleanInput;
     headerItems: QueryList<LayoutDefaultHeaderItemComponent>;
     get opt(): LayoutDefaultOptions;
     set options(value: LayoutDefaultOptions | null | undefined);
@@ -33,10 +30,10 @@ export declare class LayoutDefaultComponent implements OnInit {
     displayAside: boolean;
     private isFetching;
     get showFetching(): boolean;
-    get contentStyle(): any;
-    get asideStyle(): any;
     get collapsed(): boolean;
     get collapsedIcon(): string;
+    get contentStyle(): NzSafeAny;
+    get asideStyle(): NzSafeAny;
     toggleCollapsed(): void;
     constructor(router: Router, msgSrv: NzMessageService, settings: SettingsService, el: ElementRef, renderer: Renderer2, doc: NzSafeAny, srv: LayoutDefaultService, layoutDisplayService: LayoutDisplayService);
     ngOnInit(): void;
@@ -44,4 +41,6 @@ export declare class LayoutDefaultComponent implements OnInit {
     private setClass;
     static ɵfac: i0.ɵɵFactoryDeclaration<LayoutDefaultComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<LayoutDefaultComponent, "layout-default", ["layoutDefault"], { "options": { "alias": "options"; "required": false; }; "asideUser": { "alias": "asideUser"; "required": false; }; "asideBottom": { "alias": "asideBottom"; "required": false; }; "nav": { "alias": "nav"; "required": false; }; "content": { "alias": "content"; "required": false; }; "customError": { "alias": "customError"; "required": false; }; "fetchingStrictly": { "alias": "fetchingStrictly"; "required": false; }; "fetching": { "alias": "fetching"; "required": false; }; }, {}, ["headerItems"], ["*"], false, never>;
+    static ngAcceptInputType_fetchingStrictly: unknown;
+    static ngAcceptInputType_fetching: unknown;
 }

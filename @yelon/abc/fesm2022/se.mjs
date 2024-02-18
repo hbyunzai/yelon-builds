@@ -1,31 +1,61 @@
-import { __decorate } from 'tslib';
 import * as i0 from '@angular/core';
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Host, Optional, TemplateRef, inject, DestroyRef, ContentChild, ViewChild, NgModule } from '@angular/core';
+import { inject, ElementRef, Renderer2, Component, ChangeDetectionStrategy, ViewEncapsulation, numberAttribute, booleanAttribute, Input, TemplateRef, ChangeDetectorRef, DestroyRef, ContentChild, ViewChild, NgModule } from '@angular/core';
 import { filter, BehaviorSubject } from 'rxjs';
-import { toNumber, InputNumber, InputBoolean } from '@yelon/util/decorator';
+import { NzStringTemplateOutletDirective, NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import * as i1 from '@yelon/util/config';
-import * as i4 from '@angular/common';
-import { CommonModule } from '@angular/common';
-import * as i3 from 'ng-zorro-antd/core/outlet';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
+import { CdkObserveContent } from '@angular/cdk/observers';
+import { NgClass, CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RequiredValidator, NgModel, FormControlName } from '@angular/forms';
+import { Validators, RequiredValidator, NgModel, FormControlName } from '@angular/forms';
+import { ResponsiveService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
 import { helpMotion } from 'ng-zorro-antd/core/animation';
-import * as i2 from 'ng-zorro-antd/core/form';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
-import * as i3$1 from '@yelon/theme';
-import * as i5 from 'ng-zorro-antd/tooltip';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import * as i6 from 'ng-zorro-antd/icon';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzIconDirective, NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTooltipDirective, NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
+class SETitleComponent {
+    constructor() {
+        this.parentComp = inject(SEContainerComponent, { host: true, optional: true });
+        this.el = inject(ElementRef).nativeElement;
+        this.ren = inject(Renderer2);
+        if (this.parentComp == null) {
+            throw new Error(`[se-title] must include 'se-container' component`);
+        }
+    }
+    setClass() {
+        const { el } = this;
+        const gutter = this.parentComp.gutter;
+        this.ren.setStyle(el, 'padding-left', `${gutter / 2}px`);
+        this.ren.setStyle(el, 'padding-right', `${gutter / 2}px`);
+    }
+    ngOnInit() {
+        this.setClass();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SETitleComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.2.1", type: SETitleComponent, isStandalone: true, selector: "se-title, [se-title]", host: { properties: { "class.se__title": "true" } }, exportAs: ["seTitle"], ngImport: i0, template: '<ng-content />', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SETitleComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'se-title, [se-title]',
+                    exportAs: 'seTitle',
+                    template: '<ng-content />',
+                    host: {
+                        '[class.se__title]': 'true'
+                    },
+                    preserveWhitespaces: false,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    standalone: true
+                }]
+        }], ctorParameters: () => [] });
 class SEContainerComponent {
     get gutter() {
         return this.nzLayout === 'horizontal' ? this._gutter : 0;
     }
     set gutter(value) {
-        this._gutter = toNumber(value);
+        this._gutter = value;
     }
     get nzLayout() {
         return this._nzLayout;
@@ -64,45 +94,28 @@ class SEContainerComponent {
             this.errorNotify$.next(error);
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEContainerComponent, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: SEContainerComponent, selector: "se-container, [se-container]", inputs: { colInCon: ["se-container", "colInCon"], col: "col", labelWidth: "labelWidth", noColon: "noColon", title: "title", gutter: "gutter", nzLayout: "nzLayout", size: "size", firstVisual: "firstVisual", ignoreDirty: "ignoreDirty", line: "line", errors: "errors" }, host: { properties: { "class.ant-row": "true", "class.se__container": "true", "class.se__horizontal": "nzLayout === 'horizontal'", "class.se__vertical": "nzLayout === 'vertical'", "class.se__inline": "nzLayout === 'inline'", "class.se__compact": "size === 'compact'", "style.margin-left.px": "margin", "style.margin-right.px": "margin" } }, exportAs: ["seContainer"], ngImport: i0, template: `
-    <div se-title *ngIf="title">
-      <ng-container *nzStringTemplateOutlet="title">{{ title }}</ng-container>
-    </div>
-    <ng-content></ng-content>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i0.forwardRef(function () { return i4.NgIf; }), selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i0.forwardRef(function () { return i3.NzStringTemplateOutletDirective; }), selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }, { kind: "component", type: i0.forwardRef(function () { return SETitleComponent; }), selector: "se-title, [se-title]", exportAs: ["seTitle"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEContainerComponent, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: SEContainerComponent, isStandalone: true, selector: "se-container, [se-container]", inputs: { colInCon: ["se-container", "colInCon", (v) => (v == null ? null : numberAttribute(v))], col: ["col", "col", (v) => (v == null ? null : numberAttribute(v))], labelWidth: ["labelWidth", "labelWidth", (v) => (v == null ? null : numberAttribute(v))], noColon: ["noColon", "noColon", booleanAttribute], title: "title", gutter: ["gutter", "gutter", numberAttribute], nzLayout: "nzLayout", size: "size", firstVisual: ["firstVisual", "firstVisual", booleanAttribute], ignoreDirty: ["ignoreDirty", "ignoreDirty", booleanAttribute], line: ["line", "line", booleanAttribute], errors: "errors" }, host: { properties: { "class.ant-row": "true", "class.se__container": "true", "class.se__horizontal": "nzLayout === 'horizontal'", "class.se__vertical": "nzLayout === 'vertical'", "class.se__inline": "nzLayout === 'inline'", "class.se__compact": "size === 'compact'", "style.margin-left.px": "margin", "style.margin-right.px": "margin" } }, exportAs: ["seContainer"], ngImport: i0, template: `
+    @if (title) {
+      <div se-title>
+        <ng-container *nzStringTemplateOutlet="title">{{ title }}</ng-container>
+      </div>
+    }
+    <ng-content />
+  `, isInline: true, dependencies: [{ kind: "component", type: SETitleComponent, selector: "se-title, [se-title]", exportAs: ["seTitle"] }, { kind: "directive", type: NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputNumber(null)
-], SEContainerComponent.prototype, "colInCon", void 0);
-__decorate([
-    InputNumber(null)
-], SEContainerComponent.prototype, "col", void 0);
-__decorate([
-    InputNumber(null)
-], SEContainerComponent.prototype, "labelWidth", void 0);
-__decorate([
-    InputBoolean()
-], SEContainerComponent.prototype, "noColon", void 0);
-__decorate([
-    InputBoolean()
-], SEContainerComponent.prototype, "firstVisual", void 0);
-__decorate([
-    InputBoolean()
-], SEContainerComponent.prototype, "ignoreDirty", void 0);
-__decorate([
-    InputBoolean()
-], SEContainerComponent.prototype, "line", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEContainerComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEContainerComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'se-container, [se-container]',
                     exportAs: 'seContainer',
                     template: `
-    <div se-title *ngIf="title">
-      <ng-container *nzStringTemplateOutlet="title">{{ title }}</ng-container>
-    </div>
-    <ng-content></ng-content>
+    @if (title) {
+      <div se-title>
+        <ng-container *nzStringTemplateOutlet="title">{{ title }}</ng-container>
+      </div>
+    }
+    <ng-content />
   `,
                     host: {
                         '[class.ant-row]': `true`,
@@ -116,73 +129,43 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     },
                     preserveWhitespaces: false,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
+                    encapsulation: ViewEncapsulation.None,
+                    standalone: true,
+                    imports: [SETitleComponent, NzStringTemplateOutletDirective]
                 }]
-        }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }]; }, propDecorators: { colInCon: [{
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }], propDecorators: { colInCon: [{
                 type: Input,
-                args: ['se-container']
+                args: [{ alias: 'se-container', transform: (v) => (v == null ? null : numberAttribute(v)) }]
             }], col: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : numberAttribute(v)) }]
             }], labelWidth: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : numberAttribute(v)) }]
             }], noColon: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], title: [{
                 type: Input
             }], gutter: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], nzLayout: [{
                 type: Input
             }], size: [{
                 type: Input
             }], firstVisual: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], ignoreDirty: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], line: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], errors: [{
                 type: Input
             }] } });
-class SETitleComponent {
-    constructor(parent, el, ren) {
-        this.parent = parent;
-        this.ren = ren;
-        if (parent == null) {
-            throw new Error(`[se-title] must include 'se-container' component`);
-        }
-        this.el = el.nativeElement;
-    }
-    setClass() {
-        const { el } = this;
-        const gutter = this.parent.gutter;
-        this.ren.setStyle(el, 'padding-left', `${gutter / 2}px`);
-        this.ren.setStyle(el, 'padding-right', `${gutter / 2}px`);
-    }
-    ngOnInit() {
-        this.setClass();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SETitleComponent, deps: [{ token: SEContainerComponent, host: true, optional: true }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: SETitleComponent, selector: "se-title, [se-title]", host: { properties: { "class.se__title": "true" } }, exportAs: ["seTitle"], ngImport: i0, template: '<ng-content></ng-content>', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SETitleComponent, decorators: [{
-            type: Component,
-            args: [{
-                    selector: 'se-title, [se-title]',
-                    exportAs: 'seTitle',
-                    template: '<ng-content></ng-content>',
-                    host: {
-                        '[class.se__title]': 'true'
-                    },
-                    preserveWhitespaces: false,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
-                }]
-        }], ctorParameters: function () { return [{ type: SEContainerComponent, decorators: [{
-                    type: Host
-                }, {
-                    type: Optional
-                }] }, { type: i0.ElementRef }, { type: i0.Renderer2 }]; } });
 
 const prefixCls = `se`;
 let nextUniqueId = 0;
@@ -196,23 +179,24 @@ class SEComponent {
     }
     // #endregion
     get paddingValue() {
-        return this.parent.gutter / 2;
+        return this.parentComp.gutter / 2;
     }
     get showErr() {
         return this.invalid && !!this._error && !this.compact;
     }
     get compact() {
-        return this.parent.size === 'compact';
+        return this.parentComp.size === 'compact';
     }
     get ngControl() {
         return this.ngModel || this.formControlName;
     }
-    constructor(el, parent, statusSrv, rep, ren, cdr) {
-        this.parent = parent;
-        this.statusSrv = statusSrv;
-        this.rep = rep;
-        this.ren = ren;
-        this.cdr = cdr;
+    constructor() {
+        this.parentComp = inject(SEContainerComponent, { host: true, optional: true });
+        this.el = inject(ElementRef).nativeElement;
+        this.rep = inject(ResponsiveService);
+        this.ren = inject(Renderer2);
+        this.cdr = inject(ChangeDetectorRef);
+        this.statusSrv = inject(NzFormStatusService);
         this.destroy$ = inject(DestroyRef);
         this.clsMap = [];
         this.inited = false;
@@ -230,19 +214,19 @@ class SEComponent {
         this.hideLabel = false;
         this._id = `_se-${++nextUniqueId}`;
         this._autoId = true;
-        if (parent == null) {
+        if (this.parentComp == null) {
             throw new Error(`[se] must include 'se-container' component`);
         }
-        this.el = el.nativeElement;
-        parent.errorNotify
-            .pipe(takeUntilDestroyed(this.destroy$), filter(w => this.inited && this.ngControl != null && this.ngControl.name === w.name))
+        this.parentComp.errorNotify
+            .pipe(takeUntilDestroyed(), filter(w => this.inited && this.ngControl != null && this.ngControl.name === w.name))
             .subscribe(item => {
             this.error = item.error;
             this.updateStatus(this.ngControl.invalid);
         });
     }
     setClass() {
-        const { el, ren, clsMap, col, parent, cdr, line, labelWidth, rep, noColon } = this;
+        const { el, ren, clsMap, col, cdr, line, labelWidth, rep, noColon } = this;
+        const parent = this.parentComp;
         this._noColon = noColon != null ? noColon : parent.noColon;
         this._labelWidth = parent.nzLayout === 'horizontal' ? (labelWidth != null ? labelWidth : parent.labelWidth) : null;
         clsMap.forEach(cls => ren.removeClass(el, cls));
@@ -278,8 +262,12 @@ class SEComponent {
         }
         // auto required
         if (this.required !== true) {
-            const rawValidators = this.ngControl?._rawValidators;
-            this.required = rawValidators.find(w => w instanceof RequiredValidator) != null;
+            let required = this.ngControl?.control?.hasValidator(Validators.required);
+            if (required !== true) {
+                const rawValidators = this.ngControl?._rawValidators;
+                required = rawValidators.find(w => w instanceof RequiredValidator) != null;
+            }
+            this.required = required;
             this.cdr.detectChanges();
         }
     }
@@ -288,7 +276,7 @@ class SEComponent {
             return;
         }
         this.invalid =
-            !this.onceFlag && invalid && this.parent.ignoreDirty === false && !this.ngControl?.dirty ? false : invalid;
+            !this.onceFlag && invalid && this.parentComp.ignoreDirty === false && !this.ngControl?.dirty ? false : invalid;
         const errors = this.ngControl?.errors;
         if (errors != null && Object.keys(errors).length > 0) {
             const key = Object.keys(errors)[0] || '';
@@ -312,7 +300,7 @@ class SEComponent {
         this.checkContent();
     }
     ngOnChanges() {
-        this.onceFlag = this.parent.firstVisual;
+        this.onceFlag = this.parentComp.firstVisual;
         if (this.inited) {
             this.setClass().bindModel();
         }
@@ -327,28 +315,10 @@ class SEComponent {
             });
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEComponent, deps: [{ token: i0.ElementRef }, { token: SEContainerComponent, host: true, optional: true }, { token: i2.NzFormStatusService }, { token: i3$1.ResponsiveService }, { token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: SEComponent, selector: "se", inputs: { optional: "optional", optionalHelp: "optionalHelp", optionalHelpColor: "optionalHelpColor", error: "error", extra: "extra", label: "label", col: "col", required: "required", controlClass: "controlClass", line: "line", labelWidth: "labelWidth", noColon: "noColon", hideLabel: "hideLabel", id: "id" }, host: { properties: { "style.padding-left.px": "paddingValue", "style.padding-right.px": "paddingValue", "class.se__hide-label": "hideLabel", "class.ant-form-item-has-error": "invalid", "class.ant-form-item-with-help": "showErr" } }, providers: [NzFormStatusService], queries: [{ propertyName: "ngModel", first: true, predicate: NgModel, descendants: true, static: true }, { propertyName: "formControlName", first: true, predicate: FormControlName, descendants: true, static: true }], viewQueries: [{ propertyName: "contentElement", first: true, predicate: ["contentElement"], descendants: true, static: true }], exportAs: ["se"], usesOnChanges: true, ngImport: i0, template: "<div class=\"ant-form-item-label\" [class.se__nolabel]=\"hideLabel || !label\" [style.width.px]=\"_labelWidth\">\n  <label\n    *ngIf=\"label\"\n    [attr.for]=\"_id\"\n    class=\"se__label\"\n    [ngClass]=\"{ 'ant-form-item-required': required, 'se__no-colon': _noColon }\"\n  >\n    <span class=\"se__label-text\">\n      <ng-container *nzStringTemplateOutlet=\"label\">{{ label }}</ng-container>\n    </span>\n    <span *ngIf=\"optional || optionalHelp\" class=\"se__label-optional\" [class.se__label-optional-no-text]=\"!optional\">\n      <ng-container *nzStringTemplateOutlet=\"optional\">{{ optional }}</ng-container>\n      <i\n        *ngIf=\"optionalHelp\"\n        nz-tooltip\n        [nzTooltipTitle]=\"optionalHelp\"\n        [nzTooltipColor]=\"optionalHelpColor\"\n        nz-icon\n        nzType=\"question-circle\"\n      ></i>\n    </span>\n  </label>\n</div>\n<div class=\"ant-form-item-control se__control\">\n  <div class=\"ant-form-item-control-input {{ controlClass }}\">\n    <div class=\"ant-form-item-control-input-content\" (cdkObserveContent)=\"checkContent()\" #contentElement>\n      <ng-content></ng-content>\n    </div>\n  </div>\n  <div @helpMotion class=\"ant-form-item-explain ant-form-item-explain-connected\" *ngIf=\"showErr\">\n    <div role=\"alert\" class=\"ant-form-item-explain-error\">\n      <ng-container *nzStringTemplateOutlet=\"_error\">{{ _error }}</ng-container>\n    </div>\n  </div>\n  <div *ngIf=\"extra && !compact\" class=\"ant-form-item-extra\">\n    <ng-container *nzStringTemplateOutlet=\"extra\">{{ extra }}</ng-container>\n  </div>\n</div>\n", dependencies: [{ kind: "directive", type: i4.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i4.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i5.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i6.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: i3.NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }], animations: [helpMotion], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: SEComponent, isStandalone: true, selector: "se", inputs: { optional: "optional", optionalHelp: "optionalHelp", optionalHelpColor: "optionalHelpColor", error: "error", extra: "extra", label: "label", col: ["col", "col", (v) => (v == null ? null : numberAttribute(v))], required: ["required", "required", booleanAttribute], controlClass: "controlClass", line: ["line", "line", (v) => (v == null ? null : booleanAttribute(v))], labelWidth: ["labelWidth", "labelWidth", (v) => (v == null ? null : numberAttribute(v))], noColon: ["noColon", "noColon", (v) => (v == null ? null : booleanAttribute(v))], hideLabel: ["hideLabel", "hideLabel", booleanAttribute], id: "id" }, host: { properties: { "style.padding-left.px": "paddingValue", "style.padding-right.px": "paddingValue", "class.se__hide-label": "hideLabel", "class.ant-form-item-has-error": "invalid", "class.ant-form-item-with-help": "showErr" } }, providers: [NzFormStatusService], queries: [{ propertyName: "ngModel", first: true, predicate: NgModel, descendants: true, static: true }, { propertyName: "formControlName", first: true, predicate: FormControlName, descendants: true, static: true }], viewQueries: [{ propertyName: "contentElement", first: true, predicate: ["contentElement"], descendants: true, static: true }], exportAs: ["se"], usesOnChanges: true, ngImport: i0, template: "<div class=\"ant-form-item-label\" [class.se__nolabel]=\"hideLabel || !label\" [style.width.px]=\"_labelWidth\">\n  @if (label) {\n    <label\n      [attr.for]=\"_id\"\n      class=\"se__label\"\n      [ngClass]=\"{ 'ant-form-item-required': required, 'se__no-colon': _noColon }\"\n    >\n      <span class=\"se__label-text\">\n        <ng-container *nzStringTemplateOutlet=\"label\">{{ label }}</ng-container>\n      </span>\n      @if (optional || optionalHelp) {\n        <span class=\"se__label-optional\" [class.se__label-optional-no-text]=\"!optional\">\n          <ng-container *nzStringTemplateOutlet=\"optional\">{{ optional }}</ng-container>\n          @if (optionalHelp) {\n            <i\n              nz-tooltip\n              [nzTooltipTitle]=\"optionalHelp\"\n              [nzTooltipColor]=\"optionalHelpColor\"\n              nz-icon\n              nzType=\"question-circle\"\n            ></i>\n          }\n        </span>\n      }\n    </label>\n  }\n</div>\n<div class=\"ant-form-item-control se__control\">\n  <div class=\"ant-form-item-control-input {{ controlClass }}\">\n    <div class=\"ant-form-item-control-input-content\" (cdkObserveContent)=\"checkContent()\" #contentElement>\n      <ng-content />\n    </div>\n  </div>\n  @if (showErr) {\n    <div @helpMotion class=\"ant-form-item-explain ant-form-item-explain-connected\">\n      <div role=\"alert\" class=\"ant-form-item-explain-error\">\n        <ng-container *nzStringTemplateOutlet=\"_error\">{{ _error }}</ng-container>\n      </div>\n    </div>\n  }\n  @if (extra && !compact) {\n    <div class=\"ant-form-item-extra\">\n      <ng-container *nzStringTemplateOutlet=\"extra\">{{ extra }}</ng-container>\n    </div>\n  }\n</div>\n", dependencies: [{ kind: "directive", type: NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }, { kind: "directive", type: NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: CdkObserveContent, selector: "[cdkObserveContent]", inputs: ["cdkObserveContentDisabled", "debounce"], outputs: ["cdkObserveContent"], exportAs: ["cdkObserveContent"] }], animations: [helpMotion], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputNumber(null)
-], SEComponent.prototype, "col", void 0);
-__decorate([
-    InputBoolean()
-], SEComponent.prototype, "required", void 0);
-__decorate([
-    InputBoolean(null)
-], SEComponent.prototype, "line", void 0);
-__decorate([
-    InputNumber(null)
-], SEComponent.prototype, "labelWidth", void 0);
-__decorate([
-    InputBoolean(null)
-], SEComponent.prototype, "noColon", void 0);
-__decorate([
-    InputBoolean()
-], SEComponent.prototype, "hideLabel", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEComponent, decorators: [{
             type: Component,
             args: [{ selector: 'se', exportAs: 'se', host: {
                         '[style.padding-left.px]': 'paddingValue',
@@ -356,12 +326,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                         '[class.se__hide-label]': 'hideLabel',
                         '[class.ant-form-item-has-error]': 'invalid',
                         '[class.ant-form-item-with-help]': 'showErr'
-                    }, preserveWhitespaces: false, providers: [NzFormStatusService], animations: [helpMotion], changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<div class=\"ant-form-item-label\" [class.se__nolabel]=\"hideLabel || !label\" [style.width.px]=\"_labelWidth\">\n  <label\n    *ngIf=\"label\"\n    [attr.for]=\"_id\"\n    class=\"se__label\"\n    [ngClass]=\"{ 'ant-form-item-required': required, 'se__no-colon': _noColon }\"\n  >\n    <span class=\"se__label-text\">\n      <ng-container *nzStringTemplateOutlet=\"label\">{{ label }}</ng-container>\n    </span>\n    <span *ngIf=\"optional || optionalHelp\" class=\"se__label-optional\" [class.se__label-optional-no-text]=\"!optional\">\n      <ng-container *nzStringTemplateOutlet=\"optional\">{{ optional }}</ng-container>\n      <i\n        *ngIf=\"optionalHelp\"\n        nz-tooltip\n        [nzTooltipTitle]=\"optionalHelp\"\n        [nzTooltipColor]=\"optionalHelpColor\"\n        nz-icon\n        nzType=\"question-circle\"\n      ></i>\n    </span>\n  </label>\n</div>\n<div class=\"ant-form-item-control se__control\">\n  <div class=\"ant-form-item-control-input {{ controlClass }}\">\n    <div class=\"ant-form-item-control-input-content\" (cdkObserveContent)=\"checkContent()\" #contentElement>\n      <ng-content></ng-content>\n    </div>\n  </div>\n  <div @helpMotion class=\"ant-form-item-explain ant-form-item-explain-connected\" *ngIf=\"showErr\">\n    <div role=\"alert\" class=\"ant-form-item-explain-error\">\n      <ng-container *nzStringTemplateOutlet=\"_error\">{{ _error }}</ng-container>\n    </div>\n  </div>\n  <div *ngIf=\"extra && !compact\" class=\"ant-form-item-extra\">\n    <ng-container *nzStringTemplateOutlet=\"extra\">{{ extra }}</ng-container>\n  </div>\n</div>\n" }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: SEContainerComponent, decorators: [{
-                    type: Optional
-                }, {
-                    type: Host
-                }] }, { type: i2.NzFormStatusService }, { type: i3$1.ResponsiveService }, { type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { ngModel: [{
+                    }, preserveWhitespaces: false, providers: [NzFormStatusService], animations: [helpMotion], changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, standalone: true, imports: [NgClass, NzStringTemplateOutletDirective, NzTooltipDirective, NzIconDirective, CdkObserveContent], template: "<div class=\"ant-form-item-label\" [class.se__nolabel]=\"hideLabel || !label\" [style.width.px]=\"_labelWidth\">\n  @if (label) {\n    <label\n      [attr.for]=\"_id\"\n      class=\"se__label\"\n      [ngClass]=\"{ 'ant-form-item-required': required, 'se__no-colon': _noColon }\"\n    >\n      <span class=\"se__label-text\">\n        <ng-container *nzStringTemplateOutlet=\"label\">{{ label }}</ng-container>\n      </span>\n      @if (optional || optionalHelp) {\n        <span class=\"se__label-optional\" [class.se__label-optional-no-text]=\"!optional\">\n          <ng-container *nzStringTemplateOutlet=\"optional\">{{ optional }}</ng-container>\n          @if (optionalHelp) {\n            <i\n              nz-tooltip\n              [nzTooltipTitle]=\"optionalHelp\"\n              [nzTooltipColor]=\"optionalHelpColor\"\n              nz-icon\n              nzType=\"question-circle\"\n            ></i>\n          }\n        </span>\n      }\n    </label>\n  }\n</div>\n<div class=\"ant-form-item-control se__control\">\n  <div class=\"ant-form-item-control-input {{ controlClass }}\">\n    <div class=\"ant-form-item-control-input-content\" (cdkObserveContent)=\"checkContent()\" #contentElement>\n      <ng-content />\n    </div>\n  </div>\n  @if (showErr) {\n    <div @helpMotion class=\"ant-form-item-explain ant-form-item-explain-connected\">\n      <div role=\"alert\" class=\"ant-form-item-explain-error\">\n        <ng-container *nzStringTemplateOutlet=\"_error\">{{ _error }}</ng-container>\n      </div>\n    </div>\n  }\n  @if (extra && !compact) {\n    <div class=\"ant-form-item-extra\">\n      <ng-container *nzStringTemplateOutlet=\"extra\">{{ extra }}</ng-container>\n    </div>\n  }\n</div>\n" }]
+        }], ctorParameters: () => [], propDecorators: { ngModel: [{
                 type: ContentChild,
                 args: [NgModel, { static: true }]
             }], formControlName: [{
@@ -383,34 +349,39 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
             }], label: [{
                 type: Input
             }], col: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : numberAttribute(v)) }]
             }], required: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], controlClass: [{
                 type: Input
             }], line: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : booleanAttribute(v)) }]
             }], labelWidth: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : numberAttribute(v)) }]
             }], noColon: [{
-                type: Input
+                type: Input,
+                args: [{ transform: (v) => (v == null ? null : booleanAttribute(v)) }]
             }], hideLabel: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], id: [{
                 type: Input
             }] } });
 
 const COMPONENTS = [SEContainerComponent, SEComponent, SETitleComponent];
 class SEModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: SEModule, declarations: [SEContainerComponent, SEComponent, SETitleComponent], imports: [CommonModule, NzToolTipModule, NzIconModule, NzOutletModule], exports: [SEContainerComponent, SEComponent, SETitleComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEModule, imports: [CommonModule, NzToolTipModule, NzIconModule, NzOutletModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: SEModule, imports: [CommonModule, NzToolTipModule, NzIconModule, NzOutletModule, SEContainerComponent, SEComponent, SETitleComponent], exports: [SEContainerComponent, SEComponent, SETitleComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEModule, imports: [CommonModule, NzToolTipModule, NzIconModule, NzOutletModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SEModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SEModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule, NzToolTipModule, NzIconModule, NzOutletModule],
-                    declarations: COMPONENTS,
+                    imports: [CommonModule, NzToolTipModule, NzIconModule, NzOutletModule, ...COMPONENTS],
                     exports: COMPONENTS
                 }]
         }] });

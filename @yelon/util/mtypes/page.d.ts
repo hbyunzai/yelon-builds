@@ -1,3 +1,4 @@
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface YunzaiPageParam<T> {
     pageNum?: number;
     pageSize?: number;
@@ -29,7 +30,7 @@ export interface YunzaiPageResult<T> {
     totalElements: number;
     totalPages: number;
 }
-export declare class YunzaiPageBuilder<T extends any | unknown> {
+export declare class YunzaiPageBuilder<T extends NzSafeAny | unknown> {
     private page;
     pageNum(pageNum: number): this;
     pageSize(pageSize: number): this;

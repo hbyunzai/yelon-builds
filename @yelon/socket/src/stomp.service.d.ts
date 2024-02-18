@@ -4,6 +4,7 @@ import { RxStomp } from '@stomp/rx-stomp';
 import { IRxStompPublishParams } from '@stomp/rx-stomp/esm6/i-rx-stomp-publish-params';
 import { IMessage, StompHeaders } from '@stomp/stompjs';
 import { YunzaiConfigService, YunzaiSocketConfig, YunzaiUser } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NotificationService } from './notification.service';
 import * as i0 from "@angular/core";
 export declare class StompService implements OnDestroy {
@@ -15,7 +16,7 @@ export declare class StompService implements OnDestroy {
     rxStomp: RxStomp;
     user?: YunzaiUser;
     destroy$: Subject<unknown>;
-    constructor(configService: YunzaiConfigService, injector: Injector, notifyService: NotificationService, win: any);
+    constructor(configService: YunzaiConfigService, injector: Injector, notifyService: NotificationService, win: NzSafeAny);
     ngOnDestroy(): void;
     listen(): void;
     logoutChannel(): Observable<IMessage>;

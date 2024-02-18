@@ -1,43 +1,45 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import { YelonFormModule } from '@yelon/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { YunzaiDormitoryTreeComponent } from './yunzai-dormitory-tree.component';
 import * as i0 from "@angular/core";
+const COMPONENTS = [YunzaiDormitoryTreeComponent];
 export class YunzaiDormitoryTreeModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDormitoryTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDormitoryTreeModule, declarations: [YunzaiDormitoryTreeComponent], imports: [HttpClientModule,
-            CommonModule,
-            FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedZorroModule,
-            YunzaiSharedYelonModule], exports: [YunzaiDormitoryTreeComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDormitoryTreeModule, imports: [HttpClientModule,
-            CommonModule,
-            FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedZorroModule,
-            YunzaiSharedYelonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDormitoryTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDormitoryTreeModule, imports: [CommonModule,
+            YelonFormModule,
+            NzIconModule,
+            NzEmptyModule,
+            NzTreeModule,
+            NzSpinModule,
+            NzCardModule, YunzaiDormitoryTreeComponent], exports: [YunzaiDormitoryTreeComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDormitoryTreeModule, imports: [CommonModule,
+            YelonFormModule,
+            NzIconModule,
+            NzEmptyModule,
+            NzTreeModule,
+            NzSpinModule,
+            NzCardModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiDormitoryTreeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiDormitoryTreeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
-                        HttpClientModule,
                         CommonModule,
-                        FormsModule,
-                        RouterModule,
-                        ReactiveFormsModule,
-                        YunzaiSharedZorroModule,
-                        YunzaiSharedYelonModule
+                        YelonFormModule,
+                        NzIconModule,
+                        NzEmptyModule,
+                        NzTreeModule,
+                        NzSpinModule,
+                        NzCardModule,
+                        ...COMPONENTS
                     ],
-                    declarations: [YunzaiDormitoryTreeComponent],
-                    exports: [YunzaiDormitoryTreeComponent]
+                    exports: COMPONENTS
                 }]
         }] });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXVuemFpLWRvcm1pdG9yeS10cmVlLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2Jjcy95dW56YWktZG9ybWl0b3J5LXRyZWUveXVuemFpLWRvcm1pdG9yeS10cmVlLm1vZHVsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFDL0MsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sc0JBQXNCLENBQUM7QUFDeEQsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsV0FBVyxFQUFFLG1CQUFtQixFQUFFLE1BQU0sZ0JBQWdCLENBQUM7QUFDbEUsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBRS9DLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxNQUFNLGdDQUFnQyxDQUFDO0FBQ3pFLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxNQUFNLGdDQUFnQyxDQUFDO0FBRXpFLE9BQU8sRUFBRSw0QkFBNEIsRUFBRSxNQUFNLG1DQUFtQyxDQUFDOztBQWVqRixNQUFNLE9BQU8seUJBQXlCOytHQUF6Qix5QkFBeUI7Z0hBQXpCLHlCQUF5QixpQkFIckIsNEJBQTRCLGFBUnpDLGdCQUFnQjtZQUNoQixZQUFZO1lBQ1osV0FBVztZQUNYLFlBQVk7WUFDWixtQkFBbUI7WUFDbkIsdUJBQXVCO1lBQ3ZCLHVCQUF1QixhQUdmLDRCQUE0QjtnSEFFM0IseUJBQXlCLFlBWGxDLGdCQUFnQjtZQUNoQixZQUFZO1lBQ1osV0FBVztZQUNYLFlBQVk7WUFDWixtQkFBbUI7WUFDbkIsdUJBQXVCO1lBQ3ZCLHVCQUF1Qjs7NEZBS2QseUJBQXlCO2tCQWJyQyxRQUFRO21CQUFDO29CQUNSLE9BQU8sRUFBRTt3QkFDUCxnQkFBZ0I7d0JBQ2hCLFlBQVk7d0JBQ1osV0FBVzt3QkFDWCxZQUFZO3dCQUNaLG1CQUFtQjt3QkFDbkIsdUJBQXVCO3dCQUN2Qix1QkFBdUI7cUJBQ3hCO29CQUNELFlBQVksRUFBRSxDQUFDLDRCQUE0QixDQUFDO29CQUM1QyxPQUFPLEVBQUUsQ0FBQyw0QkFBNEIsQ0FBQztpQkFDeEMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21tb25Nb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb21tb24nO1xuaW1wb3J0IHsgSHR0cENsaWVudE1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbi9odHRwJztcbmltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBGb3Jtc01vZHVsZSwgUmVhY3RpdmVGb3Jtc01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcbmltcG9ydCB7IFJvdXRlck1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL3JvdXRlcic7XG5cbmltcG9ydCB7IFl1bnphaVNoYXJlZFllbG9uTW9kdWxlIH0gZnJvbSAnQHllbG9uL2Jjcy95dW56YWktc2hhcmVkLXllbG9uJztcbmltcG9ydCB7IFl1bnphaVNoYXJlZFpvcnJvTW9kdWxlIH0gZnJvbSAnQHllbG9uL2Jjcy95dW56YWktc2hhcmVkLXpvcnJvJztcblxuaW1wb3J0IHsgWXVuemFpRG9ybWl0b3J5VHJlZUNvbXBvbmVudCB9IGZyb20gJy4veXVuemFpLWRvcm1pdG9yeS10cmVlLmNvbXBvbmVudCc7XG5cbkBOZ01vZHVsZSh7XG4gIGltcG9ydHM6IFtcbiAgICBIdHRwQ2xpZW50TW9kdWxlLFxuICAgIENvbW1vbk1vZHVsZSxcbiAgICBGb3Jtc01vZHVsZSxcbiAgICBSb3V0ZXJNb2R1bGUsXG4gICAgUmVhY3RpdmVGb3Jtc01vZHVsZSxcbiAgICBZdW56YWlTaGFyZWRab3Jyb01vZHVsZSxcbiAgICBZdW56YWlTaGFyZWRZZWxvbk1vZHVsZVxuICBdLFxuICBkZWNsYXJhdGlvbnM6IFtZdW56YWlEb3JtaXRvcnlUcmVlQ29tcG9uZW50XSxcbiAgZXhwb3J0czogW1l1bnphaURvcm1pdG9yeVRyZWVDb21wb25lbnRdXG59KVxuZXhwb3J0IGNsYXNzIFl1bnphaURvcm1pdG9yeVRyZWVNb2R1bGUge31cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXVuemFpLWRvcm1pdG9yeS10cmVlLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL2Jjcy95dW56YWktZG9ybWl0b3J5LXRyZWUveXVuemFpLWRvcm1pdG9yeS10cmVlLm1vZHVsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFDL0MsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUV6QyxPQUFPLEVBQUUsZUFBZSxFQUFFLE1BQU0sYUFBYSxDQUFDO0FBQzlDLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQUNsRCxPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0scUJBQXFCLENBQUM7QUFDcEQsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLG9CQUFvQixDQUFDO0FBQ2xELE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQUNsRCxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0sb0JBQW9CLENBQUM7QUFFbEQsT0FBTyxFQUFFLDRCQUE0QixFQUFFLE1BQU0sbUNBQW1DLENBQUM7O0FBRWpGLE1BQU0sVUFBVSxHQUFHLENBQUMsNEJBQTRCLENBQUMsQ0FBQztBQWVsRCxNQUFNLE9BQU8seUJBQXlCOzhHQUF6Qix5QkFBeUI7K0dBQXpCLHlCQUF5QixZQVhsQyxZQUFZO1lBQ1osZUFBZTtZQUNmLFlBQVk7WUFDWixhQUFhO1lBQ2IsWUFBWTtZQUNaLFlBQVk7WUFDWixZQUFZLEVBVkksNEJBQTRCLGFBQTVCLDRCQUE0QjsrR0FlbkMseUJBQXlCLFlBWGxDLFlBQVk7WUFDWixlQUFlO1lBQ2YsWUFBWTtZQUNaLGFBQWE7WUFDYixZQUFZO1lBQ1osWUFBWTtZQUNaLFlBQVksRUFDVCxVQUFVOzsyRkFJSix5QkFBeUI7a0JBYnJDLFFBQVE7bUJBQUM7b0JBQ1IsT0FBTyxFQUFFO3dCQUNQLFlBQVk7d0JBQ1osZUFBZTt3QkFDZixZQUFZO3dCQUNaLGFBQWE7d0JBQ2IsWUFBWTt3QkFDWixZQUFZO3dCQUNaLFlBQVk7d0JBQ1osR0FBRyxVQUFVO3FCQUNkO29CQUNELE9BQU8sRUFBRSxVQUFVO2lCQUNwQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbW1vbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbic7XG5pbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5pbXBvcnQgeyBZZWxvbkZvcm1Nb2R1bGUgfSBmcm9tICdAeWVsb24vZm9ybSc7XG5pbXBvcnQgeyBOekNhcmRNb2R1bGUgfSBmcm9tICduZy16b3Jyby1hbnRkL2NhcmQnO1xuaW1wb3J0IHsgTnpFbXB0eU1vZHVsZSB9IGZyb20gJ25nLXpvcnJvLWFudGQvZW1wdHknO1xuaW1wb3J0IHsgTnpJY29uTW9kdWxlIH0gZnJvbSAnbmctem9ycm8tYW50ZC9pY29uJztcbmltcG9ydCB7IE56U3Bpbk1vZHVsZSB9IGZyb20gJ25nLXpvcnJvLWFudGQvc3Bpbic7XG5pbXBvcnQgeyBOelRyZWVNb2R1bGUgfSBmcm9tICduZy16b3Jyby1hbnRkL3RyZWUnO1xuXG5pbXBvcnQgeyBZdW56YWlEb3JtaXRvcnlUcmVlQ29tcG9uZW50IH0gZnJvbSAnLi95dW56YWktZG9ybWl0b3J5LXRyZWUuY29tcG9uZW50JztcblxuY29uc3QgQ09NUE9ORU5UUyA9IFtZdW56YWlEb3JtaXRvcnlUcmVlQ29tcG9uZW50XTtcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW1xuICAgIENvbW1vbk1vZHVsZSxcbiAgICBZZWxvbkZvcm1Nb2R1bGUsXG4gICAgTnpJY29uTW9kdWxlLFxuICAgIE56RW1wdHlNb2R1bGUsXG4gICAgTnpUcmVlTW9kdWxlLFxuICAgIE56U3Bpbk1vZHVsZSxcbiAgICBOekNhcmRNb2R1bGUsXG4gICAgLi4uQ09NUE9ORU5UU1xuICBdLFxuICBleHBvcnRzOiBDT01QT05FTlRTXG59KVxuZXhwb3J0IGNsYXNzIFl1bnphaURvcm1pdG9yeVRyZWVNb2R1bGUge31cbiJdfQ==

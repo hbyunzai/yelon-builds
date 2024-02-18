@@ -1,25 +1,22 @@
-import { __decorate } from 'tslib';
+import { Directionality } from '@angular/cdk/bidi';
+import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { inject, DestroyRef, Component, ChangeDetectionStrategy, ViewEncapsulation, Inject, Optional, Input, NgModule } from '@angular/core';
+import { inject, ElementRef, ChangeDetectorRef, DestroyRef, numberAttribute, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, NgModule } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
-import { InputNumber } from '@yelon/util/decorator';
+import { NzIconDirective, NzIconModule } from 'ng-zorro-antd/icon';
 import * as i1 from '@yelon/util/config';
-import * as i2 from '@angular/cdk/bidi';
-import * as i3 from '@angular/cdk/platform';
-import * as i4 from 'ng-zorro-antd/icon';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 class ErrorCollectComponent {
-    constructor(el, cdr, doc, configSrv, directionality, platform) {
-        this.el = el;
-        this.cdr = cdr;
-        this.doc = doc;
-        this.directionality = directionality;
-        this.platform = platform;
-        this.formEl = null;
+    constructor(configSrv) {
+        this.el = inject(ElementRef).nativeElement;
+        this.cdr = inject(ChangeDetectorRef);
+        this.doc = inject(DOCUMENT);
+        this.directionality = inject(Directionality, { optional: true });
+        this.platform = inject(Platform);
         this.destroy$ = inject(DestroyRef);
+        this.formEl = null;
         this._hiden = true;
         this.count = 0;
         this.dir = 'ltr';
@@ -48,8 +45,8 @@ class ErrorCollectComponent {
         return true;
     }
     install() {
-        this.dir = this.directionality.value;
-        this.directionality.change?.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction) => {
+        this.dir = this.directionality?.value;
+        this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
             this.dir = direction;
             this.cdr.detectChanges();
         });
@@ -72,24 +69,18 @@ class ErrorCollectComponent {
     ngOnInit() {
         if (!this.platform.isBrowser)
             return;
-        this.formEl = this.findParent(this.el.nativeElement, 'form');
+        this.formEl = this.findParent(this.el, 'form');
         if (this.formEl === null)
             throw new Error('No found form element');
         this.install();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ErrorCollectComponent, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: DOCUMENT }, { token: i1.YunzaiConfigService }, { token: i2.Directionality, optional: true }, { token: i3.Platform }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: ErrorCollectComponent, selector: "error-collect, [error-collect]", inputs: { freq: "freq", offsetTop: "offsetTop" }, host: { listeners: { "click": "_click()" }, properties: { "class.error-collect": "true", "class.error-collect-rtl": "dir === 'rtl'", "class.d-none": "_hiden" } }, exportAs: ["errorCollect"], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ErrorCollectComponent, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "16.1.0", version: "17.2.1", type: ErrorCollectComponent, isStandalone: true, selector: "error-collect, [error-collect]", inputs: { freq: ["freq", "freq", numberAttribute], offsetTop: ["offsetTop", "offsetTop", numberAttribute] }, host: { listeners: { "click": "_click()" }, properties: { "class.error-collect": "true", "class.error-collect-rtl": "dir === 'rtl'", "class.d-none": "_hiden" } }, exportAs: ["errorCollect"], ngImport: i0, template: `
     <i nz-icon nzType="exclamation-circle"></i>
     <span class="error-collect__count">{{ count }}</span>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i4.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputNumber()
-], ErrorCollectComponent.prototype, "freq", void 0);
-__decorate([
-    InputNumber()
-], ErrorCollectComponent.prototype, "offsetTop", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ErrorCollectComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ErrorCollectComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'error-collect, [error-collect]',
@@ -106,30 +97,28 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     },
                     preserveWhitespaces: false,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
+                    encapsulation: ViewEncapsulation.None,
+                    standalone: true,
+                    imports: [NzIconDirective]
                 }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }, { type: i1.YunzaiConfigService }, { type: i2.Directionality, decorators: [{
-                    type: Optional
-                }] }, { type: i3.Platform }]; }, propDecorators: { freq: [{
-                type: Input
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }], propDecorators: { freq: [{
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], offsetTop: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }] } });
 
 const COMPONENTS = [ErrorCollectComponent];
 class ErrorCollectModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ErrorCollectModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: ErrorCollectModule, declarations: [ErrorCollectComponent], imports: [CommonModule, NzIconModule], exports: [ErrorCollectComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ErrorCollectModule, imports: [CommonModule, NzIconModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ErrorCollectModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: ErrorCollectModule, imports: [CommonModule, NzIconModule, ErrorCollectComponent], exports: [ErrorCollectComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ErrorCollectModule, imports: [CommonModule, NzIconModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ErrorCollectModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ErrorCollectModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule, NzIconModule],
-                    declarations: COMPONENTS,
+                    imports: [CommonModule, NzIconModule, ...COMPONENTS],
                     exports: COMPONENTS
                 }]
         }] });

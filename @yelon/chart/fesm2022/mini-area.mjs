@@ -1,8 +1,6 @@
-import { __decorate } from 'tslib';
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Output, NgModule } from '@angular/core';
+import { EventEmitter, numberAttribute, booleanAttribute, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, Output, NgModule } from '@angular/core';
 import { G2BaseComponent, genMiniTooltipOptions } from '@yelon/chart/core';
-import { InputNumber, InputBoolean } from '@yelon/util/decorator';
 import { CommonModule } from '@angular/common';
 
 class G2MiniAreaComponent extends G2BaseComponent {
@@ -73,25 +71,10 @@ class G2MiniAreaComponent extends G2BaseComponent {
             return;
         _chart.changeData(data);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2MiniAreaComponent, deps: null, target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: G2MiniAreaComponent, selector: "g2-mini-area", inputs: { color: "color", borderColor: "borderColor", borderWidth: "borderWidth", height: "height", fit: "fit", line: "line", animate: "animate", xAxis: "xAxis", yAxis: "yAxis", padding: "padding", data: "data", yTooltipSuffix: "yTooltipSuffix", tooltipType: "tooltipType" }, outputs: { clickItem: "clickItem" }, host: { properties: { "style.height.px": "height" } }, exportAs: ["g2MiniArea"], usesInheritance: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2MiniAreaComponent, deps: null, target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "16.1.0", version: "17.2.1", type: G2MiniAreaComponent, isStandalone: true, selector: "g2-mini-area", inputs: { color: "color", borderColor: "borderColor", borderWidth: ["borderWidth", "borderWidth", numberAttribute], height: ["height", "height", numberAttribute], fit: ["fit", "fit", booleanAttribute], line: ["line", "line", booleanAttribute], animate: ["animate", "animate", booleanAttribute], xAxis: "xAxis", yAxis: "yAxis", padding: "padding", data: "data", yTooltipSuffix: "yTooltipSuffix", tooltipType: "tooltipType" }, outputs: { clickItem: "clickItem" }, host: { properties: { "style.height.px": "height" } }, exportAs: ["g2MiniArea"], usesInheritance: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputNumber()
-], G2MiniAreaComponent.prototype, "borderWidth", void 0);
-__decorate([
-    InputNumber()
-], G2MiniAreaComponent.prototype, "height", void 0);
-__decorate([
-    InputBoolean()
-], G2MiniAreaComponent.prototype, "fit", void 0);
-__decorate([
-    InputBoolean()
-], G2MiniAreaComponent.prototype, "line", void 0);
-__decorate([
-    InputBoolean()
-], G2MiniAreaComponent.prototype, "animate", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2MiniAreaComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2MiniAreaComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'g2-mini-area',
@@ -102,22 +85,28 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     },
                     preserveWhitespaces: false,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
+                    encapsulation: ViewEncapsulation.None,
+                    standalone: true
                 }]
         }], propDecorators: { color: [{
                 type: Input
             }], borderColor: [{
                 type: Input
             }], borderWidth: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], height: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], fit: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], line: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], animate: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], xAxis: [{
                 type: Input
             }], yAxis: [{
@@ -136,15 +125,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
 
 const COMPONENTS = [G2MiniAreaComponent];
 class G2MiniAreaModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2MiniAreaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: G2MiniAreaModule, declarations: [G2MiniAreaComponent], imports: [CommonModule], exports: [G2MiniAreaComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2MiniAreaModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2MiniAreaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: G2MiniAreaModule, imports: [CommonModule, G2MiniAreaComponent], exports: [G2MiniAreaComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2MiniAreaModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: G2MiniAreaModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: G2MiniAreaModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule],
-                    declarations: COMPONENTS,
+                    imports: [CommonModule, ...COMPONENTS],
                     exports: COMPONENTS
                 }]
         }] });

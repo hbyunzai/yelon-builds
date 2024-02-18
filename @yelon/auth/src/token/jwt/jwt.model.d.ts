@@ -33,8 +33,8 @@ export interface JWT {
 }
 export declare class JWTTokenModel implements ITokenModel {
     [key: string]: any;
-    access_token: string | null | undefined;
-    expires_in?: number;
+    token: string | null | undefined;
+    expired?: number;
     /**
      * 获取载荷信息
      */

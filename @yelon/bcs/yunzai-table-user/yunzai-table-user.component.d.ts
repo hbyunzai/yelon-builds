@@ -1,8 +1,9 @@
 import { AfterViewInit, EventEmitter, OnInit } from '@angular/core';
 import { STComponent, STData } from '@yelon/abc/st';
 import { SFComponent, SFSchema, SFValue } from '@yelon/form';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { YunzaiTableUserService } from './yunzai-table-user.service';
 import { YunzaiTableUser, YunzaiTableUserParam, YunzaiTableUserProps, YunzaiTableUserRole, YunzaiTableUserState } from './yunzai-table-user.types';
-import { YunzaiTableUserService } from "./yunzai-table-user.service";
 import * as i0 from "@angular/core";
 export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     private service;
@@ -43,10 +44,10 @@ export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     setupTableResponse(): void;
     resetChecked(): void;
     onCheckedItem(data: YunzaiTableUser): void;
-    onCheckedAll(e: any): void;
+    onCheckedAll(e: NzSafeAny): void;
     isChecked(data: STData): boolean;
     isAllChecked(): boolean;
-    isArraySubset(subset: any[], superset: any[]): boolean;
+    isArraySubset(subset: NzSafeAny[], superset: NzSafeAny[]): boolean;
     renderRoles(roles: YunzaiTableUserRole[]): string;
     unCheck(user: YunzaiTableUser): void;
     unCheckAll(): void;
@@ -56,5 +57,5 @@ export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     onQuery(): void;
     setTableParam(param: YunzaiTableUserParam): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiTableUserComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiTableUserComponent, "yunzai-table-user", never, { "props": { "alias": "props"; "required": false; }; }, { "onChecked": "onChecked"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiTableUserComponent, "yunzai-table-user", never, { "props": { "alias": "props"; "required": false; }; }, { "onChecked": "onChecked"; }, never, never, true, never>;
 }

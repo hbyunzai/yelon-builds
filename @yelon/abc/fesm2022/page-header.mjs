@@ -1,31 +1,21 @@
-import { __decorate } from 'tslib';
+import { Directionality } from '@angular/cdk/bidi';
+import { CdkObserveContent, ObserversModule } from '@angular/cdk/observers';
+import { NgTemplateOutlet, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { TemplateRef, Component, ChangeDetectionStrategy, ViewEncapsulation, Optional, Inject, ViewChild, Input, NgModule } from '@angular/core';
+import { TemplateRef, inject, Renderer2, ChangeDetectorRef, DestroyRef, booleanAttribute, numberAttribute, Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, Input, NgModule } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import * as i2 from '@angular/router';
-import { NavigationEnd, RouterModule } from '@angular/router';
+import { Router, NavigationEnd, RouterLink, RouterModule } from '@angular/router';
 import { filter, merge } from 'rxjs';
-import * as i12 from '@yelon/abc/reuse-tab';
 import { ReuseTabService } from '@yelon/abc/reuse-tab';
 import * as i1 from '@yelon/theme';
-import { YUNZAI_I18N_TOKEN, TitleService } from '@yelon/theme';
+import { MenuService, YUNZAI_I18N_TOKEN, TitleService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
-import { InputBoolean, InputNumber } from '@yelon/util/decorator';
-import * as i3 from '@yelon/util/config';
-import * as i4 from '@angular/cdk/platform';
-import * as i5 from '@angular/cdk/bidi';
-import * as i6 from '@angular/common';
-import { CommonModule } from '@angular/common';
-import * as i7 from '@angular/cdk/observers';
-import { ObserversModule } from '@angular/cdk/observers';
-import * as i8 from 'ng-zorro-antd/affix';
-import { NzAffixModule } from 'ng-zorro-antd/affix';
-import * as i9 from 'ng-zorro-antd/skeleton';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
-import * as i10 from 'ng-zorro-antd/breadcrumb';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import * as i11 from 'ng-zorro-antd/core/outlet';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
+import { NzAffixComponent, NzAffixModule } from 'ng-zorro-antd/affix';
+import { NzBreadCrumbComponent, NzBreadCrumbItemComponent, NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzStringTemplateOutletDirective, NzOutletModule } from 'ng-zorro-antd/core/outlet';
+import { NzSkeletonComponent, NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import * as i2 from '@yelon/util/config';
+import * as i3 from '@angular/cdk/platform';
 
 class PageHeaderComponent {
     get menus() {
@@ -43,16 +33,16 @@ class PageHeaderComponent {
         }
     }
     // #endregion
-    constructor(settings, renderer, router, menuSrv, i18nSrv, titleSrv, reuseSrv, cdr, configSrv, platform, directionality) {
-        this.renderer = renderer;
-        this.router = router;
-        this.menuSrv = menuSrv;
-        this.i18nSrv = i18nSrv;
-        this.titleSrv = titleSrv;
-        this.reuseSrv = reuseSrv;
-        this.cdr = cdr;
-        this.directionality = directionality;
-        this.dir$ = this.directionality.change?.pipe(takeUntilDestroyed());
+    constructor(settings, configSrv, platform) {
+        this.renderer = inject(Renderer2);
+        this.router = inject(Router);
+        this.cdr = inject(ChangeDetectorRef);
+        this.menuSrv = inject(MenuService);
+        this.i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
+        this.titleSrv = inject(TitleService, { optional: true });
+        this.reuseSrv = inject(ReuseTabService, { optional: true });
+        this.directionality = inject(Directionality, { optional: true });
+        this.destroy$ = inject(DestroyRef);
         this.inited = false;
         this.isBrowser = true;
         this.dir = 'ltr';
@@ -83,7 +73,12 @@ class PageHeaderComponent {
         settings.notify
             .pipe(takeUntilDestroyed(), filter(w => this.affix && w.type === 'layout' && w.name === 'collapsed'))
             .subscribe(() => this.affix.updatePosition({}));
-        merge(menuSrv.change, router.events.pipe(filter(ev => ev instanceof NavigationEnd)), i18nSrv.change)
+        const obsList = [this.router.events.pipe(filter(ev => ev instanceof NavigationEnd))];
+        if (this.menuSrv != null)
+            obsList.push(this.menuSrv.change);
+        if (this.i18nSrv != null)
+            obsList.push(this.i18nSrv.change);
+        merge(...obsList)
             .pipe(takeUntilDestroyed(), filter(() => this.inited))
             .subscribe(() => this.refresh());
     }
@@ -142,8 +137,8 @@ class PageHeaderComponent {
         }
     }
     ngOnInit() {
-        this.dir = this.directionality.value;
-        this.dir$.subscribe((direction) => {
+        this.dir = this.directionality?.value;
+        this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
             this.dir = direction;
             this.cdr.detectChanges();
         });
@@ -158,54 +153,22 @@ class PageHeaderComponent {
             this.refresh();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PageHeaderComponent, deps: [{ token: i1.SettingsService }, { token: i0.Renderer2 }, { token: i2.Router }, { token: i1.MenuService }, { token: YUNZAI_I18N_TOKEN, optional: true }, { token: TitleService, optional: true }, { token: ReuseTabService, optional: true }, { token: i0.ChangeDetectorRef }, { token: i3.YunzaiConfigService }, { token: i4.Platform }, { token: i5.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: PageHeaderComponent, selector: "page-header", inputs: { title: "title", titleSub: "titleSub", loading: "loading", wide: "wide", home: "home", homeLink: "homeLink", homeI18n: "homeI18n", autoBreadcrumb: "autoBreadcrumb", autoTitle: "autoTitle", syncTitle: "syncTitle", fixed: "fixed", fixedOffsetTop: "fixedOffsetTop", breadcrumb: "breadcrumb", recursiveBreadcrumb: "recursiveBreadcrumb", logo: "logo", action: "action", content: "content", extra: "extra", tab: "tab" }, viewQueries: [{ propertyName: "conTpl", first: true, predicate: ["conTpl"], descendants: true }, { propertyName: "affix", first: true, predicate: ["affix"], descendants: true }], exportAs: ["pageHeader"], usesOnChanges: true, ngImport: i0, template: "<nz-affix #affix *ngIf=\"isBrowser && fixed; else phTpl\" [nzOffsetTop]=\"fixedOffsetTop\">\n  <ng-template [ngTemplateOutlet]=\"phTpl\" />\n</nz-affix>\n<ng-template #phTpl>\n  <div class=\"page-header\" [class.page-header-rtl]=\"dir === 'rtl'\">\n    <div [ngClass]=\"{ 'page-header__wide': wide }\">\n      <nz-skeleton\n        [nzLoading]=\"loading\"\n        [nzTitle]=\"false\"\n        [nzActive]=\"true\"\n        [nzParagraph]=\"{ rows: 3 }\"\n        [nzAvatar]=\"{ size: 'large', shape: 'circle' }\"\n        class=\"d-block\"\n      >\n        <ng-container *ngIf=\"!breadcrumb; else breadcrumb!\">\n          <nz-breadcrumb *ngIf=\"paths && paths.length > 0\">\n            <nz-breadcrumb-item *ngFor=\"let i of paths\">\n              <ng-container *ngIf=\"i.link\">\n                <a [routerLink]=\"i.link\">{{ i.title }}</a>\n              </ng-container>\n              <ng-container *ngIf=\"!i.link\">{{ i.title }}</ng-container>\n            </nz-breadcrumb-item>\n          </nz-breadcrumb>\n        </ng-container>\n        <div class=\"page-header__detail\">\n          <div *ngIf=\"logo\" class=\"page-header__logo\">\n            <ng-template [ngTemplateOutlet]=\"logo\" />\n          </div>\n          <div class=\"page-header__main\">\n            <div class=\"page-header__row\">\n              <h1 *ngIf=\"_titleVal || _titleTpl\" class=\"page-header__title\">\n                <ng-container *ngIf=\"_titleVal; else _titleTpl\">\n                  {{ _titleVal }}\n                  <small *ngIf=\"titleSub\">\n                    <ng-container *nzStringTemplateOutlet=\"titleSub\">{{ titleSub }}</ng-container>\n                  </small>\n                </ng-container>\n              </h1>\n              <div *ngIf=\"action\" class=\"page-header__action\">\n                <ng-template [ngTemplateOutlet]=\"action\" />\n              </div>\n            </div>\n            <div class=\"page-header__row\">\n              <div class=\"page-header__desc\" (cdkObserveContent)=\"checkContent()\" #conTpl>\n                <ng-content />\n                <ng-template [ngTemplateOutlet]=\"content!\" />\n              </div>\n              <div *ngIf=\"extra\" class=\"page-header__extra\">\n                <ng-template [ngTemplateOutlet]=\"extra\" />\n              </div>\n            </div>\n          </div>\n        </div>\n        <ng-template [ngTemplateOutlet]=\"tab!\" />\n      </nz-skeleton>\n    </div>\n  </div>\n</ng-template>\n", dependencies: [{ kind: "directive", type: i6.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i6.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i6.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i6.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i2.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "directive", type: i7.CdkObserveContent, selector: "[cdkObserveContent]", inputs: ["cdkObserveContentDisabled", "debounce"], outputs: ["cdkObserveContent"], exportAs: ["cdkObserveContent"] }, { kind: "component", type: i8.NzAffixComponent, selector: "nz-affix", inputs: ["nzTarget", "nzOffsetTop", "nzOffsetBottom"], outputs: ["nzChange"], exportAs: ["nzAffix"] }, { kind: "component", type: i9.NzSkeletonComponent, selector: "nz-skeleton", inputs: ["nzActive", "nzLoading", "nzRound", "nzTitle", "nzAvatar", "nzParagraph"], exportAs: ["nzSkeleton"] }, { kind: "component", type: i10.NzBreadCrumbComponent, selector: "nz-breadcrumb", inputs: ["nzAutoGenerate", "nzSeparator", "nzRouteLabel", "nzRouteLabelFn"], exportAs: ["nzBreadcrumb"] }, { kind: "component", type: i10.NzBreadCrumbItemComponent, selector: "nz-breadcrumb-item", inputs: ["nzOverlay"], exportAs: ["nzBreadcrumbItem"] }, { kind: "directive", type: i11.NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PageHeaderComponent, deps: [{ token: i1.SettingsService }, { token: i2.YunzaiConfigService }, { token: i3.Platform }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.2.1", type: PageHeaderComponent, isStandalone: true, selector: "page-header", inputs: { title: "title", titleSub: "titleSub", loading: ["loading", "loading", booleanAttribute], wide: ["wide", "wide", booleanAttribute], home: "home", homeLink: "homeLink", homeI18n: "homeI18n", autoBreadcrumb: ["autoBreadcrumb", "autoBreadcrumb", booleanAttribute], autoTitle: ["autoTitle", "autoTitle", booleanAttribute], syncTitle: ["syncTitle", "syncTitle", booleanAttribute], fixed: ["fixed", "fixed", booleanAttribute], fixedOffsetTop: ["fixedOffsetTop", "fixedOffsetTop", numberAttribute], breadcrumb: "breadcrumb", recursiveBreadcrumb: ["recursiveBreadcrumb", "recursiveBreadcrumb", booleanAttribute], logo: "logo", action: "action", content: "content", extra: "extra", tab: "tab" }, viewQueries: [{ propertyName: "conTpl", first: true, predicate: ["conTpl"], descendants: true }, { propertyName: "affix", first: true, predicate: ["affix"], descendants: true }], exportAs: ["pageHeader"], usesOnChanges: true, ngImport: i0, template: "@if (isBrowser && fixed) {\n  <nz-affix #affix [nzOffsetTop]=\"fixedOffsetTop\">\n    <ng-template [ngTemplateOutlet]=\"phTpl\" />\n  </nz-affix>\n} @else {\n  <ng-template [ngTemplateOutlet]=\"phTpl\" />\n}\n<ng-template #phTpl>\n  <div class=\"page-header\" [class.page-header-rtl]=\"dir === 'rtl'\">\n    <div [class.page-header__wide]=\"wide\">\n      <nz-skeleton\n        [nzLoading]=\"loading\"\n        [nzTitle]=\"false\"\n        [nzActive]=\"true\"\n        [nzParagraph]=\"{ rows: 3 }\"\n        [nzAvatar]=\"{ size: 'large', shape: 'circle' }\"\n        class=\"d-block\"\n      >\n        @if (breadcrumb) {\n          <ng-template [ngTemplateOutlet]=\"breadcrumb\" />\n        } @else {\n          @if (paths && paths.length > 0) {\n            <nz-breadcrumb>\n              @for (i of paths; track $index) {\n                <nz-breadcrumb-item>\n                  @if (i.link) {\n                    <a [routerLink]=\"i.link\">{{ i.title }}</a>\n                  } @else {\n                    {{ i.title }}\n                  }\n                </nz-breadcrumb-item>\n              }\n            </nz-breadcrumb>\n          }\n        }\n        <div class=\"page-header__detail\">\n          @if (logo) {\n            <div class=\"page-header__logo\">\n              <ng-template [ngTemplateOutlet]=\"logo\" />\n            </div>\n          }\n          <div class=\"page-header__main\">\n            <div class=\"page-header__row\">\n              @if (_titleVal || _titleTpl) {\n                <h1 class=\"page-header__title\">\n                  @if (_titleTpl) {\n                    <ng-template [ngTemplateOutlet]=\"_titleTpl\" />\n                  } @else {\n                    {{ _titleVal }}\n                    @if (titleSub) {\n                      <small>\n                        <ng-container *nzStringTemplateOutlet=\"titleSub\">{{ titleSub }}</ng-container>\n                      </small>\n                    }\n                  }\n                </h1>\n              }\n              @if (action) {\n                <div class=\"page-header__action\">\n                  <ng-template [ngTemplateOutlet]=\"action\" />\n                </div>\n              }\n            </div>\n            <div class=\"page-header__row\">\n              <div class=\"page-header__desc\" (cdkObserveContent)=\"checkContent()\" #conTpl>\n                <ng-content />\n                <ng-template [ngTemplateOutlet]=\"content!\" />\n              </div>\n              @if (extra) {\n                <div class=\"page-header__extra\">\n                  <ng-template [ngTemplateOutlet]=\"extra\" />\n                </div>\n              }\n            </div>\n          </div>\n        </div>\n        <ng-template [ngTemplateOutlet]=\"tab!\" />\n      </nz-skeleton>\n    </div>\n  </div>\n</ng-template>\n", dependencies: [{ kind: "component", type: NzAffixComponent, selector: "nz-affix", inputs: ["nzTarget", "nzOffsetTop", "nzOffsetBottom"], outputs: ["nzChange"], exportAs: ["nzAffix"] }, { kind: "directive", type: NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "component", type: NzSkeletonComponent, selector: "nz-skeleton", inputs: ["nzActive", "nzLoading", "nzRound", "nzTitle", "nzAvatar", "nzParagraph"], exportAs: ["nzSkeleton"] }, { kind: "component", type: NzBreadCrumbComponent, selector: "nz-breadcrumb", inputs: ["nzAutoGenerate", "nzSeparator", "nzRouteLabel", "nzRouteLabelFn"], exportAs: ["nzBreadcrumb"] }, { kind: "component", type: NzBreadCrumbItemComponent, selector: "nz-breadcrumb-item", inputs: ["nzOverlay"], exportAs: ["nzBreadcrumbItem"] }, { kind: "directive", type: RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "info", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "directive", type: NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }, { kind: "directive", type: CdkObserveContent, selector: "[cdkObserveContent]", inputs: ["cdkObserveContentDisabled", "debounce"], outputs: ["cdkObserveContent"], exportAs: ["cdkObserveContent"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "loading", void 0);
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "wide", void 0);
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "autoBreadcrumb", void 0);
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "autoTitle", void 0);
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "syncTitle", void 0);
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "fixed", void 0);
-__decorate([
-    InputNumber()
-], PageHeaderComponent.prototype, "fixedOffsetTop", void 0);
-__decorate([
-    InputBoolean()
-], PageHeaderComponent.prototype, "recursiveBreadcrumb", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PageHeaderComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PageHeaderComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'page-header', exportAs: 'pageHeader', preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<nz-affix #affix *ngIf=\"isBrowser && fixed; else phTpl\" [nzOffsetTop]=\"fixedOffsetTop\">\n  <ng-template [ngTemplateOutlet]=\"phTpl\" />\n</nz-affix>\n<ng-template #phTpl>\n  <div class=\"page-header\" [class.page-header-rtl]=\"dir === 'rtl'\">\n    <div [ngClass]=\"{ 'page-header__wide': wide }\">\n      <nz-skeleton\n        [nzLoading]=\"loading\"\n        [nzTitle]=\"false\"\n        [nzActive]=\"true\"\n        [nzParagraph]=\"{ rows: 3 }\"\n        [nzAvatar]=\"{ size: 'large', shape: 'circle' }\"\n        class=\"d-block\"\n      >\n        <ng-container *ngIf=\"!breadcrumb; else breadcrumb!\">\n          <nz-breadcrumb *ngIf=\"paths && paths.length > 0\">\n            <nz-breadcrumb-item *ngFor=\"let i of paths\">\n              <ng-container *ngIf=\"i.link\">\n                <a [routerLink]=\"i.link\">{{ i.title }}</a>\n              </ng-container>\n              <ng-container *ngIf=\"!i.link\">{{ i.title }}</ng-container>\n            </nz-breadcrumb-item>\n          </nz-breadcrumb>\n        </ng-container>\n        <div class=\"page-header__detail\">\n          <div *ngIf=\"logo\" class=\"page-header__logo\">\n            <ng-template [ngTemplateOutlet]=\"logo\" />\n          </div>\n          <div class=\"page-header__main\">\n            <div class=\"page-header__row\">\n              <h1 *ngIf=\"_titleVal || _titleTpl\" class=\"page-header__title\">\n                <ng-container *ngIf=\"_titleVal; else _titleTpl\">\n                  {{ _titleVal }}\n                  <small *ngIf=\"titleSub\">\n                    <ng-container *nzStringTemplateOutlet=\"titleSub\">{{ titleSub }}</ng-container>\n                  </small>\n                </ng-container>\n              </h1>\n              <div *ngIf=\"action\" class=\"page-header__action\">\n                <ng-template [ngTemplateOutlet]=\"action\" />\n              </div>\n            </div>\n            <div class=\"page-header__row\">\n              <div class=\"page-header__desc\" (cdkObserveContent)=\"checkContent()\" #conTpl>\n                <ng-content />\n                <ng-template [ngTemplateOutlet]=\"content!\" />\n              </div>\n              <div *ngIf=\"extra\" class=\"page-header__extra\">\n                <ng-template [ngTemplateOutlet]=\"extra\" />\n              </div>\n            </div>\n          </div>\n        </div>\n        <ng-template [ngTemplateOutlet]=\"tab!\" />\n      </nz-skeleton>\n    </div>\n  </div>\n</ng-template>\n" }]
-        }], ctorParameters: function () { return [{ type: i1.SettingsService }, { type: i0.Renderer2 }, { type: i2.Router }, { type: i1.MenuService }, { type: undefined, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [YUNZAI_I18N_TOKEN]
-                }] }, { type: i1.TitleService, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [TitleService]
-                }] }, { type: i12.ReuseTabService, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [ReuseTabService]
-                }] }, { type: i0.ChangeDetectorRef }, { type: i3.YunzaiConfigService }, { type: i4.Platform }, { type: i5.Directionality, decorators: [{
-                    type: Optional
-                }] }]; }, propDecorators: { conTpl: [{
+            args: [{ selector: 'page-header', exportAs: 'pageHeader', preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, standalone: true, imports: [
+                        NzAffixComponent,
+                        NgTemplateOutlet,
+                        NzSkeletonComponent,
+                        NzBreadCrumbComponent,
+                        NzBreadCrumbItemComponent,
+                        RouterLink,
+                        NzStringTemplateOutletDirective,
+                        CdkObserveContent
+                    ], template: "@if (isBrowser && fixed) {\n  <nz-affix #affix [nzOffsetTop]=\"fixedOffsetTop\">\n    <ng-template [ngTemplateOutlet]=\"phTpl\" />\n  </nz-affix>\n} @else {\n  <ng-template [ngTemplateOutlet]=\"phTpl\" />\n}\n<ng-template #phTpl>\n  <div class=\"page-header\" [class.page-header-rtl]=\"dir === 'rtl'\">\n    <div [class.page-header__wide]=\"wide\">\n      <nz-skeleton\n        [nzLoading]=\"loading\"\n        [nzTitle]=\"false\"\n        [nzActive]=\"true\"\n        [nzParagraph]=\"{ rows: 3 }\"\n        [nzAvatar]=\"{ size: 'large', shape: 'circle' }\"\n        class=\"d-block\"\n      >\n        @if (breadcrumb) {\n          <ng-template [ngTemplateOutlet]=\"breadcrumb\" />\n        } @else {\n          @if (paths && paths.length > 0) {\n            <nz-breadcrumb>\n              @for (i of paths; track $index) {\n                <nz-breadcrumb-item>\n                  @if (i.link) {\n                    <a [routerLink]=\"i.link\">{{ i.title }}</a>\n                  } @else {\n                    {{ i.title }}\n                  }\n                </nz-breadcrumb-item>\n              }\n            </nz-breadcrumb>\n          }\n        }\n        <div class=\"page-header__detail\">\n          @if (logo) {\n            <div class=\"page-header__logo\">\n              <ng-template [ngTemplateOutlet]=\"logo\" />\n            </div>\n          }\n          <div class=\"page-header__main\">\n            <div class=\"page-header__row\">\n              @if (_titleVal || _titleTpl) {\n                <h1 class=\"page-header__title\">\n                  @if (_titleTpl) {\n                    <ng-template [ngTemplateOutlet]=\"_titleTpl\" />\n                  } @else {\n                    {{ _titleVal }}\n                    @if (titleSub) {\n                      <small>\n                        <ng-container *nzStringTemplateOutlet=\"titleSub\">{{ titleSub }}</ng-container>\n                      </small>\n                    }\n                  }\n                </h1>\n              }\n              @if (action) {\n                <div class=\"page-header__action\">\n                  <ng-template [ngTemplateOutlet]=\"action\" />\n                </div>\n              }\n            </div>\n            <div class=\"page-header__row\">\n              <div class=\"page-header__desc\" (cdkObserveContent)=\"checkContent()\" #conTpl>\n                <ng-content />\n                <ng-template [ngTemplateOutlet]=\"content!\" />\n              </div>\n              @if (extra) {\n                <div class=\"page-header__extra\">\n                  <ng-template [ngTemplateOutlet]=\"extra\" />\n                </div>\n              }\n            </div>\n          </div>\n        </div>\n        <ng-template [ngTemplateOutlet]=\"tab!\" />\n      </nz-skeleton>\n    </div>\n  </div>\n</ng-template>\n" }]
+        }], ctorParameters: () => [{ type: i1.SettingsService }, { type: i2.YunzaiConfigService }, { type: i3.Platform }], propDecorators: { conTpl: [{
                 type: ViewChild,
                 args: ['conTpl', { static: false }]
             }], affix: [{
@@ -216,9 +179,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
             }], titleSub: [{
                 type: Input
             }], loading: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], wide: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], home: [{
                 type: Input
             }], homeLink: [{
@@ -226,19 +191,25 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
             }], homeI18n: [{
                 type: Input
             }], autoBreadcrumb: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], autoTitle: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], syncTitle: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], fixed: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], fixedOffsetTop: [{
-                type: Input
+                type: Input,
+                args: [{ transform: numberAttribute }]
             }], breadcrumb: [{
                 type: Input
             }], recursiveBreadcrumb: [{
-                type: Input
+                type: Input,
+                args: [{ transform: booleanAttribute }]
             }], logo: [{
                 type: Input
             }], action: [{
@@ -253,23 +224,23 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
 
 const COMPONENTS = [PageHeaderComponent];
 class PageHeaderModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PageHeaderModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: PageHeaderModule, declarations: [PageHeaderComponent], imports: [CommonModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PageHeaderModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: PageHeaderModule, imports: [CommonModule,
             RouterModule,
             ObserversModule,
             NzAffixModule,
             NzSkeletonModule,
             NzBreadCrumbModule,
-            NzOutletModule], exports: [PageHeaderComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PageHeaderModule, imports: [CommonModule,
+            NzOutletModule, PageHeaderComponent], exports: [PageHeaderComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PageHeaderModule, imports: [CommonModule,
             RouterModule,
             ObserversModule,
             NzAffixModule,
             NzSkeletonModule,
             NzBreadCrumbModule,
-            NzOutletModule] }); }
+            NzOutletModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PageHeaderModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PageHeaderModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
@@ -279,9 +250,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                         NzAffixModule,
                         NzSkeletonModule,
                         NzBreadCrumbModule,
-                        NzOutletModule
+                        NzOutletModule,
+                        ...COMPONENTS
                     ],
-                    declarations: COMPONENTS,
                     exports: COMPONENTS
                 }]
         }] });

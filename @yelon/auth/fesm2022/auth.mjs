@@ -1,25 +1,21 @@
 import { DOCUMENT } from '@angular/common';
 import * as i0 from '@angular/core';
-import { InjectionToken, inject, Injectable, Inject, Optional, NgModule } from '@angular/core';
+import { InjectionToken, inject, Injectable, makeEnvironmentProviders } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, BehaviorSubject, share, interval, map, filter, Observable } from 'rxjs';
 import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService } from '@yelon/util/config';
-import * as i1$1 from '@angular/router';
-import { Router } from '@angular/router';
-import { HttpContextToken, HttpParams, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { log } from '@yelon/util/other';
+import { CookieService } from '@yelon/util/browser';
+import { HttpContextToken, HttpErrorResponse } from '@angular/common/http';
 
 const AUTH_DEFAULT_CONFIG = {
-    store_key: `_yz_token`,
+    store_key: `_token`,
     token_invalid_redirect: true,
     token_exp_offset: 10,
-    token_send_key: `Authorization`,
-    token_send_template: 'Bearer ${access_token}',
+    token_send_key: `token`,
+    token_send_template: '${token}',
     token_send_place: 'header',
     login_url: '/login',
-    ignores: [/\/login/, /assets\//, /passport\//, /\/auth\/oauth\/getOrCreateToken\/webapp/, /\/auth\/oauth\/token/],
-    allow_anonymous_key: `_allow_anonymous`,
-    executeOtherInterceptors: true,
     refreshTime: 3000,
     refreshOffset: 6000
 };
@@ -34,8 +30,7 @@ function YA_STORE_TOKEN_LOCAL_FACTORY() {
  * `localStorage` storage, **not lost after closing the browser**.
  *
  * ```ts
- * // global-config.module.ts
- * { provide: YA_STORE_TOKEN, useClass: LocalStorageStore }
+ * provideAuth(withJWT(), withLocalStorage())
  * ```
  */
 class LocalStorageStore {
@@ -57,14 +52,14 @@ const YA_STORE_TOKEN = new InjectionToken('AUTH_STORE_TOKEN', {
 });
 
 function YA_SERVICE_TOKEN_FACTORY() {
-    return new TokenService(inject(YunzaiConfigService), inject(YA_STORE_TOKEN));
+    return new TokenService(inject(YunzaiConfigService));
 }
 /**
  * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
  */
 class TokenService {
-    constructor(configSrv, store) {
-        this.store = store;
+    constructor(configSrv) {
+        this.store = inject(YA_STORE_TOKEN);
         this.refresh$ = new Subject();
         this.change$ = new BehaviorSubject(null);
         this._referrer = {};
@@ -84,9 +79,6 @@ class TokenService {
         return this._options;
     }
     set(data) {
-        if (data.expires_in) {
-            data.expires_in = data.expires_in * 60;
-        }
         const res = this.store.set(this._options.store_key, data);
         this.change$.next(data);
         return res;
@@ -133,28 +125,27 @@ class TokenService {
     ngOnDestroy() {
         this.cleanRefresh();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: TokenService, deps: [{ token: i1.YunzaiConfigService }, { token: YA_STORE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: TokenService }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: TokenService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: TokenService }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: TokenService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: TokenService, decorators: [{
             type: Injectable
-        }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YA_STORE_TOKEN]
-                }] }]; } });
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const YA_SERVICE_TOKEN = new InjectionToken('YA_SERVICE_TOKEN', {
     providedIn: 'root',
     factory: YA_SERVICE_TOKEN_FACTORY
 });
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const OPENTYPE = '_yelonAuthSocialType';
 const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
 class SocialService {
-    constructor(tokenService, doc, router) {
-        this.tokenService = tokenService;
-        this.doc = doc;
-        this.router = router;
+    constructor() {
+        this.tokenService = inject(YA_SERVICE_TOKEN);
+        this.doc = inject(DOCUMENT);
+        this.router = inject(Router);
         this._win = null;
     }
     /**
@@ -207,7 +198,7 @@ class SocialService {
             throw new Error(`url muse contain a ?`);
         }
         // parse
-        let data = { access_token: `` };
+        let data = { token: `` };
         if (typeof rawData === 'string') {
             const rightUrl = rawData.split('?')[1].split('#')[0];
             data = this.router.parseUrl(`./?${rightUrl}`).queryParams;
@@ -234,26 +225,15 @@ class SocialService {
         clearInterval(this._winTime);
         this._winTime = null;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SocialService, deps: [{ token: YA_SERVICE_TOKEN }, { token: DOCUMENT }, { token: i1$1.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SocialService }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SocialService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SocialService }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SocialService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: SocialService, decorators: [{
             type: Injectable
-        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YA_SERVICE_TOKEN]
-                }] }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }, { type: i1$1.Router }]; } });
+        }] });
 
 /**
  * 内存存储，关掉浏览器标签后**丢失**。
- *
- * ```ts
- * // global-config.module.ts
- * { provide: YA_STORE_TOKEN, useClass: MemoryStore }
- * ```
  */
 class MemoryStore {
     constructor() {
@@ -275,8 +255,7 @@ class MemoryStore {
  * `sessionStorage` storage, **lost after closing the browser**.
  *
  * ```ts
- * // global-config.module.ts
- * { provide: YA_STORE_TOKEN, useClass: SessionStorageStore }
+ * provideAuth(withJWT(), withSessionStorage())
  * ```
  */
 class SessionStorageStore {
@@ -296,13 +275,12 @@ class SessionStorageStore {
  * `cookie` storage
  *
  * ```ts
- * // global-config.module.ts
- * { provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }
+ * provideAuth(withJWT(), withCookie())
  * ```
  */
 class CookieStorageStore {
-    constructor(srv) {
-        this.srv = srv;
+    constructor() {
+        this.srv = inject(CookieService);
     }
     get(key) {
         try {
@@ -324,134 +302,6 @@ class CookieStorageStore {
         this.srv.remove(key);
     }
 }
-
-function CheckSimple(model) {
-    return model != null && typeof model.access_token === 'string' && model.access_token.length > 0;
-}
-function CheckJwt(model, offset) {
-    try {
-        return model != null && !!model.access_token && !model.isExpired(offset);
-    }
-    catch (err) {
-        if (typeof ngDevMode === 'undefined' || ngDevMode) {
-            console.warn(`${err.message}, jump to login_url`);
-        }
-        return false;
-    }
-}
-function ToLogin(options, injector, url) {
-    const router = injector.get(Router);
-    injector.get(YA_SERVICE_TOKEN).referrer.url = url || router.url;
-    if (options.token_invalid_redirect === true) {
-        setTimeout(() => {
-            if (/^https?:\/\//g.test(options.login_url)) {
-                injector.get(DOCUMENT).location.href = options.login_url;
-            }
-            else {
-                router.navigate([options.login_url]);
-            }
-        });
-    }
-}
-
-/**
- * Whether to allow anonymous login
- *
- * 是否允许匿名登录
- *
- * @example
- * this.http.post(`login`, {
- *  name: 'devcui', pwd: '123456'
- * }, {
- *  context: new HttpContext().set(ALLOW_ANONYMOUS, true)
- * })
- */
-const ALLOW_ANONYMOUS = new HttpContextToken(() => false);
-
-class HttpAuthInterceptorHandler {
-    constructor(next, interceptor) {
-        this.next = next;
-        this.interceptor = interceptor;
-    }
-    handle(req) {
-        return this.interceptor.intercept(req, this.next);
-    }
-}
-class BaseInterceptor {
-    constructor(injector) {
-        this.injector = injector;
-    }
-    intercept(req, next) {
-        if (req.context.get(ALLOW_ANONYMOUS))
-            return next.handle(req);
-        const options = mergeConfig(this.injector.get(YunzaiConfigService));
-        if (Array.isArray(options.ignores)) {
-            for (const item of options.ignores) {
-                if (item.test(req.url))
-                    return next.handle(req);
-            }
-        }
-        const ignoreKey = options.allow_anonymous_key;
-        let ignored = false;
-        let params = req.params;
-        let url = req.url;
-        if (req.params.has(ignoreKey)) {
-            params = req.params.delete(ignoreKey);
-            ignored = true;
-        }
-        const urlArr = req.url.split('?');
-        if (urlArr.length > 1) {
-            const queryStringParams = new HttpParams({ fromString: urlArr[1] });
-            if (queryStringParams.has(ignoreKey)) {
-                const queryString = queryStringParams.delete(ignoreKey).toString();
-                url = queryString.length > 0 ? `${urlArr[0]}?${queryString}` : urlArr[0];
-                ignored = true;
-            }
-        }
-        if (ignored) {
-            return next.handle(req.clone({ params, url }));
-        }
-        if (this.isAuth(options)) {
-            req = this.setReq(req, options);
-        }
-        else {
-            ToLogin(options, this.injector);
-            // Interrupt Http request, so need to generate a new Observable
-            const err$ = new Observable((observer) => {
-                let statusText = '';
-                if (typeof ngDevMode === 'undefined' || ngDevMode) {
-                    statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 [url?_allow_anonymous=true] 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add [url?_allow_anonymous=true] to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`;
-                }
-                const res = new HttpErrorResponse({
-                    url: req.url,
-                    headers: req.headers,
-                    status: 401,
-                    statusText
-                });
-                observer.error(res);
-            });
-            if (options.executeOtherInterceptors) {
-                const interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
-                const lastInterceptors = interceptors.slice(interceptors.indexOf(this) + 1);
-                if (lastInterceptors.length > 0) {
-                    const chain = lastInterceptors.reduceRight((_next, _interceptor) => new HttpAuthInterceptorHandler(_next, _interceptor), {
-                        handle: (_) => err$
-                    });
-                    return chain.handle(req);
-                }
-            }
-            return err$;
-        }
-        return next.handle(req);
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: BaseInterceptor, deps: [{ token: i0.Injector, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: BaseInterceptor }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: BaseInterceptor, decorators: [{
-            type: Injectable
-        }], ctorParameters: function () { return [{ type: i0.Injector, decorators: [{
-                    type: Optional
-                }] }]; } });
 
 function urlBase64Decode(str) {
     let output = str.replace(/-/g, '+').replace(/_/g, '/');
@@ -479,6 +329,7 @@ function b64decode(str) {
     str = String(str).replace(/=+$/, '');
     for (
     // initialize result and counters
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let bc = 0, bs, buffer, idx = 0; 
     // get next character
     (buffer = str.charAt(idx++)); 
@@ -504,12 +355,13 @@ function b64DecodeUnicode(str) {
         .join(''));
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 class JWTTokenModel {
     /**
      * 获取载荷信息
      */
     get payload() {
-        const parts = (this.access_token || '').split('.');
+        const parts = (this.token || '').split('.');
         if (parts.length !== 3)
             throw new Error('JWT must have 3 parts');
         const decoded = urlBase64Decode(parts[1]);
@@ -539,56 +391,56 @@ class JWTTokenModel {
     }
 }
 
-/**
- * JWT 拦截器
- *
- * ```
- * // app.module.ts
- * { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true}
- * ```
- */
-class JWTInterceptor extends BaseInterceptor {
-    isAuth(options) {
-        this.model = this.injector.get(YA_SERVICE_TOKEN).get(JWTTokenModel);
-        return CheckJwt(this.model, options.token_exp_offset);
+function CheckSimple(model) {
+    return model != null && typeof model.token === 'string' && model.token.length > 0;
+}
+function CheckJwt(model, offset) {
+    try {
+        return model != null && !!model.token && !model.isExpired(offset);
     }
-    setReq(req, _options) {
-        return req.clone({
-            setHeaders: {
-                Authorization: `Bearer ${this.model.access_token}`
+    catch (err) {
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+            console.warn(`${err.message}, jump to login_url`);
+        }
+        return false;
+    }
+}
+function ToLogin(options, url) {
+    const router = inject(Router);
+    const token = inject(YA_SERVICE_TOKEN);
+    const doc = inject(DOCUMENT);
+    token.referrer.url = url || router.url;
+    if (options.token_invalid_redirect === true) {
+        setTimeout(() => {
+            if (/^https?:\/\//g.test(options.login_url)) {
+                doc.location.href = options.login_url;
+            }
+            else {
+                router.navigate([options.login_url]);
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: JWTInterceptor, deps: null, target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: JWTInterceptor }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: JWTInterceptor, decorators: [{
-            type: Injectable
-        }] });
 
 class AuthJWTGuardService {
-    constructor(srv, injector) {
-        this.srv = srv;
-        this.injector = injector;
+    constructor() {
+        this.srv = inject(YA_SERVICE_TOKEN);
     }
     process(url) {
         const cog = this.srv.options;
         const res = CheckJwt(this.srv.get(JWTTokenModel), cog.token_exp_offset);
         if (!res) {
-            ToLogin(cog, this.injector, url);
+            ToLogin(cog, url);
         }
         return res;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: AuthJWTGuardService, deps: [{ token: YA_SERVICE_TOKEN }, { token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: AuthJWTGuardService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: AuthJWTGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: AuthJWTGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: AuthJWTGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: AuthJWTGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YA_SERVICE_TOKEN]
-                }] }, { type: i0.Injector }]; } });
+        }] });
 /**
  * JWT 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
  *
@@ -626,78 +478,85 @@ const authJWTCanActivateChild = (_, state) => inject(AuthJWTGuardService).proces
  */
 const authJWTCanMatch = route => inject(AuthJWTGuardService).process(route.path);
 
-class SimpleTokenModel {
+/**
+ * Whether to allow anonymous login
+ *
+ * 是否允许匿名登录
+ *
+ * @example
+ * this.http.post(`login`, {
+ *  name: 'yunzai-bot', pwd: '123456'
+ * }, {
+ *  context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+ * })
+ */
+const ALLOW_ANONYMOUS = new HttpContextToken(() => false);
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function isAnonymous(req, options) {
+    if (req.context.get(ALLOW_ANONYMOUS))
+        return true;
+    if (Array.isArray(options.ignores)) {
+        for (const item of options.ignores) {
+            if (item.test(req.url))
+                return true;
+        }
+    }
+    return false;
+}
+function throwErr(req, options) {
+    ToLogin(options);
+    // Interrupt Http request, so need to generate a new Observable
+    return new Observable((observer) => {
+        let statusText = '';
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+            statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 new HttpContext().set(ALLOW_ANONYMOUS, true) 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add new HttpContext().set(ALLOW_ANONYMOUS, true) to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`;
+        }
+        const res = new HttpErrorResponse({
+            url: req.url,
+            headers: req.headers,
+            status: 401,
+            statusText
+        });
+        observer.error(res);
+    });
 }
 
-/**
- * Simple 拦截器
- *
- * ```
- * // app.module.ts
- * { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true}
- * ```
- */
-class SimpleInterceptor extends BaseInterceptor {
-    isAuth(_options) {
-        this.model = this.injector.get(YA_SERVICE_TOKEN).get();
-        return CheckSimple(this.model);
-    }
-    setReq(req, options) {
-        const { token_send_template, token_send_key } = options;
-        const access_token = token_send_template.replace(/\$\{([\w]+)\}/g, (_, g) => this.model[g]);
-        log('simple.interceptor.ts: release', token_send_template, token_send_key, access_token);
-        switch (options.token_send_place) {
-            case 'header':
-                const obj = {};
-                obj[token_send_key] = access_token;
-                req = req.clone({
-                    setHeaders: obj
-                });
-                break;
-            case 'body':
-                const body = req.body || {};
-                body[token_send_key] = access_token;
-                req = req.clone({
-                    body
-                });
-                break;
-            case 'url':
-                req = req.clone({
-                    params: req.params.append(token_send_key, access_token)
-                });
-                break;
+function newReq$1(req, model) {
+    return req.clone({
+        setHeaders: {
+            Authorization: `Bearer ${model.token}`
         }
-        return req;
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SimpleInterceptor, deps: null, target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SimpleInterceptor }); }
+    });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: SimpleInterceptor, decorators: [{
-            type: Injectable
-        }] });
+const authJWTInterceptor = (req, next) => {
+    const options = mergeConfig(inject(YunzaiConfigService));
+    if (isAnonymous(req, options))
+        return next(req);
+    const model = inject(YA_SERVICE_TOKEN).get(JWTTokenModel);
+    if (CheckJwt(model, options.token_exp_offset))
+        return next(newReq$1(req, model));
+    return throwErr(req, options);
+};
 
 class AuthSimpleGuardService {
-    constructor(srv, injector) {
-        this.srv = srv;
-        this.injector = injector;
+    constructor() {
+        this.srv = inject(YA_SERVICE_TOKEN);
     }
     process(url) {
         const res = CheckSimple(this.srv.get());
         if (!res) {
-            ToLogin(this.srv.options, this.injector, url);
+            ToLogin(this.srv.options, url);
         }
         return res;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: AuthSimpleGuardService, deps: [{ token: YA_SERVICE_TOKEN }, { token: i0.Injector }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: AuthSimpleGuardService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: AuthSimpleGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: AuthSimpleGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: AuthSimpleGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: AuthSimpleGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YA_SERVICE_TOKEN]
-                }] }, { type: i0.Injector }]; } });
+        }] });
 /**
  * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
  *
@@ -735,19 +594,87 @@ const authSimpleCanActivateChild = (_, state) => inject(AuthSimpleGuardService).
  */
 const authSimpleCanMatch = route => inject(AuthSimpleGuardService).process(route.path);
 
-class YelonAuthModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YelonAuthModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: YelonAuthModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YelonAuthModule }); }
+function newReq(req, model, options) {
+    const { token_send_template, token_send_key } = options;
+    const token = token_send_template.replace(/\$\{([\w]+)\}/g, (_, g) => model[g]);
+    switch (options.token_send_place) {
+        case 'header':
+            const obj = {};
+            obj[token_send_key] = token;
+            req = req.clone({
+                setHeaders: obj
+            });
+            break;
+        case 'body':
+            const body = req.body || {};
+            body[token_send_key] = token;
+            req = req.clone({
+                body
+            });
+            break;
+        case 'url':
+            req = req.clone({
+                params: req.params.append(token_send_key, token)
+            });
+            break;
+    }
+    return req;
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YelonAuthModule, decorators: [{
-            type: NgModule,
-            args: [{}]
-        }] });
+const authSimpleInterceptor = (req, next) => {
+    const options = mergeConfig(inject(YunzaiConfigService));
+    if (isAnonymous(req, options))
+        return next(req);
+    const model = inject(YA_SERVICE_TOKEN).get();
+    if (CheckSimple(model))
+        return next(newReq(req, model, options));
+    return throwErr(req, options);
+};
+
+class SimpleTokenModel {
+}
+
+var AuthFeatureKind;
+(function (AuthFeatureKind) {
+    AuthFeatureKind[AuthFeatureKind["Store"] = 0] = "Store";
+})(AuthFeatureKind || (AuthFeatureKind = {}));
+function makeAuthFeature(kind, providers) {
+    return {
+        ɵkind: kind,
+        ɵproviders: providers
+    };
+}
+/**
+ * Configures authentication process service to be available for injection.
+ *
+ * @see {@link withCookie}
+ * @see {@link withLocalStorage}
+ * @see {@link withSessionStorage}
+ */
+function provideAuth(store) {
+    return makeEnvironmentProviders([(store ?? withLocalStorage()).ɵproviders]);
+}
+/** `cookie` storage */
+function withCookie() {
+    return makeAuthFeature(AuthFeatureKind.Store, [
+        { provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }
+    ]);
+}
+/** `localStorage` storage, **not lost after closing the browser**. */
+function withLocalStorage() {
+    return makeAuthFeature(AuthFeatureKind.Store, [{ provide: YA_STORE_TOKEN, useClass: LocalStorageStore }]);
+}
+/** `sessionStorage` storage, **lost after closing the browser**. */
+function withSessionStorage() {
+    return makeAuthFeature(AuthFeatureKind.Store, [{ provide: YA_STORE_TOKEN, useClass: SessionStorageStore }]);
+}
+/** Memory storage, **lost after closing the browser tab**. */
+function withMemoryStorage() {
+    return makeAuthFeature(AuthFeatureKind.Store, [{ provide: YA_STORE_TOKEN, useClass: MemoryStore }]);
+}
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { ALLOW_ANONYMOUS, AUTH_DEFAULT_CONFIG, AuthJWTGuardService, AuthSimpleGuardService, BaseInterceptor, CookieStorageStore, JWTInterceptor, JWTTokenModel, LocalStorageStore, MemoryStore, SessionStorageStore, SimpleInterceptor, SimpleTokenModel, SocialService, TokenService, YA_SERVICE_TOKEN, YA_SERVICE_TOKEN_FACTORY, YA_STORE_TOKEN, YA_STORE_TOKEN_LOCAL_FACTORY, YelonAuthModule, authJWTCanActivate, authJWTCanActivateChild, authJWTCanMatch, authSimpleCanActivate, authSimpleCanActivateChild, authSimpleCanMatch, mergeConfig, urlBase64Decode };
+export { ALLOW_ANONYMOUS, AUTH_DEFAULT_CONFIG, AuthFeatureKind, AuthJWTGuardService, AuthSimpleGuardService, CookieStorageStore, JWTTokenModel, LocalStorageStore, MemoryStore, SessionStorageStore, SimpleTokenModel, SocialService, TokenService, YA_SERVICE_TOKEN, YA_SERVICE_TOKEN_FACTORY, YA_STORE_TOKEN, YA_STORE_TOKEN_LOCAL_FACTORY, authJWTCanActivate, authJWTCanActivateChild, authJWTCanMatch, authJWTInterceptor, authSimpleCanActivate, authSimpleCanActivateChild, authSimpleCanMatch, authSimpleInterceptor, isAnonymous, mergeConfig, provideAuth, throwErr, urlBase64Decode, withCookie, withLocalStorage, withMemoryStorage, withSessionStorage };
 //# sourceMappingURL=auth.mjs.map

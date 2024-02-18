@@ -1,20 +1,21 @@
+import { Platform } from '@angular/cdk/platform';
+import { HttpClient, HttpContextToken, HttpResponseBase } from '@angular/common/http';
 import * as i0 from '@angular/core';
-import { InjectionToken, inject, Injectable, Inject, NgModule } from '@angular/core';
+import { InjectionToken, inject, Injectable } from '@angular/core';
 import { Observable, tap, map, of, BehaviorSubject } from 'rxjs';
 import { addSeconds } from 'date-fns';
+import { YunzaiConfigService } from '@yelon/util/config';
 import { deepGet } from '@yelon/util/other';
-import * as i3 from '@angular/cdk/platform';
-import { Platform } from '@angular/cdk/platform';
-import * as i1 from '@yelon/util/config';
-import * as i2 from '@angular/common/http';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const DC_STORE_STORAGE_TOKEN = new InjectionToken('DC_STORE_STORAGE_TOKEN', {
     providedIn: 'root',
-    factory: () => new LocalStorageCacheService(inject(Platform))
+    factory: () => new LocalStorageCacheService()
 });
 class LocalStorageCacheService {
-    constructor(platform) {
-        this.platform = platform;
+    constructor() {
+        this.platform = inject(Platform);
     }
     get(key) {
         if (!this.platform.isBrowser) {
@@ -37,22 +38,23 @@ class LocalStorageCacheService {
     }
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 class CacheService {
-    constructor(cogSrv, store, http, platform) {
-        this.store = store;
-        this.http = http;
-        this.platform = platform;
+    constructor() {
+        this.store = inject(DC_STORE_STORAGE_TOKEN);
+        this.http = inject(HttpClient);
+        this.platform = inject(Platform);
         this.memory = new Map();
         this.notifyBuffer = new Map();
         this.meta = new Set();
         this.freqTick = 3000;
-        this.cog = cogSrv.merge('cache', {
+        this.cog = inject(YunzaiConfigService).merge('cache', {
             mode: 'promise',
             reName: '',
             prefix: '',
             meta_key: '__cache_meta'
         });
-        if (!platform.isBrowser)
+        if (!this.platform.isBrowser)
             return;
         this.loadMeta();
         this.startExpireNotify();
@@ -266,30 +268,83 @@ class CacheService {
         this.abortExpireNotify();
         this.clearNotify();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: CacheService, deps: [{ token: i1.YunzaiConfigService }, { token: DC_STORE_STORAGE_TOKEN }, { token: i2.HttpClient }, { token: i3.Platform }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: CacheService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: CacheService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: CacheService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: CacheService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: CacheService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DC_STORE_STORAGE_TOKEN]
-                }] }, { type: i2.HttpClient }, { type: i3.Platform }]; } });
+        }], ctorParameters: () => [] });
 
-class YelonCacheModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YelonCacheModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: YelonCacheModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YelonCacheModule }); }
+/**
+ * Cache options (Don't forget to register `CacheInterceptor`)
+ *
+ * 缓存配置项（不要忘记注册 `CacheInterceptor`）
+ *
+ * @example
+ * this.http.get(`my`, {
+ *  context: new HttpContext().set(CACHE, { key: 'user-data' })
+ * })
+ */
+const CACHE = new HttpContextToken(() => ({}));
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * Cache interceptor
+ *
+ * 缓存拦截器
+ *
+ * @example
+ * provideHttpClient(withInterceptors([httpCacheInterceptor])),
+ */
+const httpCacheInterceptor = (req, next) => {
+    const cog = inject(YunzaiConfigService).merge('cache', {}).interceptor;
+    const options = {
+        enabled: true,
+        emitNotify: true,
+        saveType: 'm',
+        ...cog,
+        ...req.context.get(CACHE)
+    };
+    const srv = inject(CacheService);
+    const mapPipe = map(ev => save(srv, ev, options));
+    if (options.enabled === false) {
+        return next(req).pipe(mapPipe);
+    }
+    if (options.key == null) {
+        options.key = req.urlWithParams;
+    }
+    const cacheData = srv.getNone(options.key);
+    if (cacheData != null) {
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+            console.log(`%c👽${req.method}->${req.urlWithParams}->from cache(onle in development)`, 'background:#000;color:#1890ff', req, cacheData);
+        }
+        return of(cacheData);
+    }
+    return next(req).pipe(mapPipe);
+};
+function save(srv, ev, options) {
+    if (!(ev instanceof HttpResponseBase) || !(ev.status >= 200 && ev.status < 300))
+        return ev;
+    let expire = options.expire;
+    if (expire == null) {
+        const ageMatch = /max-age=(\d+)/g.exec(ev.headers.get('cache-control')?.toLowerCase() ?? '');
+        if (ageMatch == null)
+            return ev;
+        expire = +ageMatch[1];
+    }
+    if (expire > 0) {
+        srv.set(options.key, ev, {
+            type: options.saveType,
+            expire: expire
+        });
+    }
+    return ev;
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YelonCacheModule, decorators: [{
-            type: NgModule,
-            args: [{}]
-        }] });
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { CacheService, YelonCacheModule };
+export { CACHE, CacheService, httpCacheInterceptor };
 //# sourceMappingURL=cache.mjs.map

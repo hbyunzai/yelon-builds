@@ -1,5 +1,6 @@
 import { STColumn, STData } from '@yelon/abc/st';
 import { SFSchema } from '@yelon/form';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface YunzaiTableUser {
     userId: string;
     account: string;
@@ -42,7 +43,7 @@ export interface YunzaiTableUserRole {
     roleDesc: string | null;
     displayIndex: number | null;
     landingPageUrl: string | null;
-    roleGroups: any;
+    roleGroups: NzSafeAny;
     thisDepartment: boolean;
     onlyOne: boolean;
     onlyDeptOne: boolean;
@@ -54,11 +55,11 @@ export interface YunzaiTableUserDept {
     deptName: string;
     deptType: string;
     deptComment: string | null;
-    leaf: any;
+    leaf: NzSafeAny;
     displayIndex: number;
     deptCode: string;
     status: number;
-    deptLevel: any;
+    deptLevel: NzSafeAny;
     children: YunzaiTableUserDept[];
     pid: string | null;
     expand: boolean;
@@ -82,7 +83,7 @@ export interface YunzaiTableUserProps {
     filteredColumns?: string[];
     customColumns?: STColumn[];
     additionalColumns?: STColumn[];
-    page?: any;
+    page?: NzSafeAny;
     list?: boolean;
     scroll?: {
         x?: string | null;
@@ -98,7 +99,7 @@ export interface YunzaiTableUserState {
     data: YunzaiTableUser[] | string;
     dataBackup: YunzaiTableUser[] | string;
     columns: STColumn[];
-    page: any;
+    page: NzSafeAny;
     schema: SFSchema;
     check: {
         data: STData[];

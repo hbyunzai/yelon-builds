@@ -1,77 +1,118 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import { NoticeIconModule } from '@yelon/abc/notice-icon';
+import { ReuseTabModule } from '@yelon/abc/reuse-tab';
+import { YunzaiThemeModule } from '@yelon/theme';
+import { LayoutDefaultModule } from '@yelon/theme/layout-default';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
-import { YunzaiLayoutBasicComponent } from './layout-basic/layout-basic.component';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { YunzaiLayoutBasicComponent } from './layout-basic';
 import { LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent } from './layout-nav';
-import { YunzaiClearStorageComponent, YunzaiFullScreenComponent, YunzaiI18NComponent, YunzaiNotifyComponent, YunzaiThemBtnComponent, YunzaiUserComponent } from './widgets';
+import { YunzaiClearStorageComponent, YunzaiFullScreenComponent, YunzaiI18NComponent, YunzaiNotifyComponent, YunzaiThemeBtnComponent, YunzaiUserComponent } from './widgets';
 import * as i0 from "@angular/core";
-const WIDGETS = [
+const COMPONENTS = [
     YunzaiClearStorageComponent,
     YunzaiFullScreenComponent,
     YunzaiI18NComponent,
     YunzaiNotifyComponent,
-    YunzaiThemBtnComponent,
-    YunzaiUserComponent
+    YunzaiThemeBtnComponent,
+    YunzaiUserComponent,
+    YunzaiLayoutBasicComponent,
+    LayoutNavApplicationComponent,
+    LayoutNavGroupComponent,
+    LayoutNavTileComponent
 ];
-const LAYOUT_NAV_COMPONENTS = [LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent];
-const COMPONENTS = [YunzaiLayoutBasicComponent];
 export class YunzaiLayoutModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, declarations: [YunzaiLayoutBasicComponent, YunzaiClearStorageComponent,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, declarations: [YunzaiClearStorageComponent,
             YunzaiFullScreenComponent,
             YunzaiI18NComponent,
             YunzaiNotifyComponent,
-            YunzaiThemBtnComponent,
-            YunzaiUserComponent, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent], imports: [HttpClientModule,
+            YunzaiThemeBtnComponent,
+            YunzaiUserComponent,
+            YunzaiLayoutBasicComponent,
+            LayoutNavApplicationComponent,
+            LayoutNavGroupComponent,
+            LayoutNavTileComponent], imports: [RouterModule,
+            ReuseTabModule,
+            LayoutDefaultModule,
             CommonModule,
+            NzTabsModule,
+            NgOptimizedImage,
+            NzToolTipModule,
+            NzDropDownModule,
+            NzAvatarModule,
+            NoticeIconModule,
             FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedYelonModule,
-            YunzaiSharedZorroModule], exports: [YunzaiLayoutBasicComponent, YunzaiClearStorageComponent,
+            NzGridModule,
+            YunzaiThemeModule,
+            NzInputModule,
+            NzIconModule], exports: [YunzaiClearStorageComponent,
             YunzaiFullScreenComponent,
             YunzaiI18NComponent,
             YunzaiNotifyComponent,
-            YunzaiThemBtnComponent,
-            YunzaiUserComponent, LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, providers: [
+            YunzaiThemeBtnComponent,
+            YunzaiUserComponent,
+            YunzaiLayoutBasicComponent,
+            LayoutNavApplicationComponent,
+            LayoutNavGroupComponent,
+            LayoutNavTileComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, providers: [
             {
                 provide: YUNZAI_THEME_BTN_KEYS,
                 useValue: 'site-theme'
             }
-        ], imports: [HttpClientModule,
+        ], imports: [RouterModule,
+            ReuseTabModule,
+            LayoutDefaultModule,
             CommonModule,
+            NzTabsModule,
+            NzToolTipModule,
+            NzDropDownModule,
+            NzAvatarModule,
+            NoticeIconModule,
             FormsModule,
-            RouterModule,
-            ReactiveFormsModule,
-            YunzaiSharedYelonModule,
-            YunzaiSharedZorroModule] }); }
+            NzGridModule,
+            YunzaiThemeModule,
+            NzInputModule,
+            NzIconModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
-                        HttpClientModule,
-                        CommonModule,
-                        FormsModule,
                         RouterModule,
-                        ReactiveFormsModule,
-                        YunzaiSharedYelonModule,
-                        YunzaiSharedZorroModule
+                        ReuseTabModule,
+                        LayoutDefaultModule,
+                        CommonModule,
+                        NzTabsModule,
+                        NgOptimizedImage,
+                        NzToolTipModule,
+                        NzDropDownModule,
+                        NzAvatarModule,
+                        NoticeIconModule,
+                        FormsModule,
+                        NzGridModule,
+                        YunzaiThemeModule,
+                        NzInputModule,
+                        NzIconModule
                     ],
+                    declarations: COMPONENTS,
                     providers: [
                         {
                             provide: YUNZAI_THEME_BTN_KEYS,
                             useValue: 'site-theme'
                         }
                     ],
-                    declarations: [...COMPONENTS, ...WIDGETS, ...LAYOUT_NAV_COMPONENTS],
-                    exports: [...COMPONENTS, ...WIDGETS, ...LAYOUT_NAV_COMPONENTS]
+                    exports: COMPONENTS
                 }]
         }] });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXVuemFpLWxheW91dC5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy9iaXMvbGF5b3V0L3l1bnphaS1sYXlvdXQubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUMvQyxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUN4RCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQ3pDLE9BQU8sRUFBRSxXQUFXLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUNsRSxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFFL0MsT0FBTyxFQUFFLHVCQUF1QixFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFDekUsT0FBTyxFQUFFLHVCQUF1QixFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFDekUsT0FBTyxFQUFFLHFCQUFxQixFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFFL0QsT0FBTyxFQUFFLDBCQUEwQixFQUFFLE1BQU0sdUNBQXVDLENBQUM7QUFDbkYsT0FBTyxFQUFFLDZCQUE2QixFQUFFLHVCQUF1QixFQUFFLHNCQUFzQixFQUFFLE1BQU0sY0FBYyxDQUFDO0FBQzlHLE9BQU8sRUFDTCwyQkFBMkIsRUFDM0IseUJBQXlCLEVBQ3pCLG1CQUFtQixFQUNuQixxQkFBcUIsRUFDckIsc0JBQXNCLEVBQ3RCLG1CQUFtQixFQUNwQixNQUFNLFdBQVcsQ0FBQzs7QUFFbkIsTUFBTSxPQUFPLEdBQUc7SUFDZCwyQkFBMkI7SUFDM0IseUJBQXlCO0lBQ3pCLG1CQUFtQjtJQUNuQixxQkFBcUI7SUFDckIsc0JBQXNCO0lBQ3RCLG1CQUFtQjtDQUNwQixDQUFDO0FBRUYsTUFBTSxxQkFBcUIsR0FBRyxDQUFDLDZCQUE2QixFQUFFLHVCQUF1QixFQUFFLHNCQUFzQixDQUFDLENBQUM7QUFFL0csTUFBTSxVQUFVLEdBQUcsQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO0FBcUJoRCxNQUFNLE9BQU8sa0JBQWtCOytHQUFsQixrQkFBa0I7Z0hBQWxCLGtCQUFrQixpQkFyQlgsMEJBQTBCLEVBVjVDLDJCQUEyQjtZQUMzQix5QkFBeUI7WUFDekIsbUJBQW1CO1lBQ25CLHFCQUFxQjtZQUNyQixzQkFBc0I7WUFDdEIsbUJBQW1CLEVBR1UsNkJBQTZCLEVBQUUsdUJBQXVCLEVBQUUsc0JBQXNCLGFBTXpHLGdCQUFnQjtZQUNoQixZQUFZO1lBQ1osV0FBVztZQUNYLFlBQVk7WUFDWixtQkFBbUI7WUFDbkIsdUJBQXVCO1lBQ3ZCLHVCQUF1QixhQVZQLDBCQUEwQixFQVY1QywyQkFBMkI7WUFDM0IseUJBQXlCO1lBQ3pCLG1CQUFtQjtZQUNuQixxQkFBcUI7WUFDckIsc0JBQXNCO1lBQ3RCLG1CQUFtQixFQUdVLDZCQUE2QixFQUFFLHVCQUF1QixFQUFFLHNCQUFzQjtnSEF1QmhHLGtCQUFrQixhQVRsQjtZQUNUO2dCQUNFLE9BQU8sRUFBRSxxQkFBcUI7Z0JBQzlCLFFBQVEsRUFBRSxZQUFZO2FBQ3ZCO1NBQ0YsWUFiQyxnQkFBZ0I7WUFDaEIsWUFBWTtZQUNaLFdBQVc7WUFDWCxZQUFZO1lBQ1osbUJBQW1CO1lBQ25CLHVCQUF1QjtZQUN2Qix1QkFBdUI7OzRGQVdkLGtCQUFrQjtrQkFuQjlCLFFBQVE7bUJBQUM7b0JBQ1IsT0FBTyxFQUFFO3dCQUNQLGdCQUFnQjt3QkFDaEIsWUFBWTt3QkFDWixXQUFXO3dCQUNYLFlBQVk7d0JBQ1osbUJBQW1CO3dCQUNuQix1QkFBdUI7d0JBQ3ZCLHVCQUF1QjtxQkFDeEI7b0JBQ0QsU0FBUyxFQUFFO3dCQUNUOzRCQUNFLE9BQU8sRUFBRSxxQkFBcUI7NEJBQzlCLFFBQVEsRUFBRSxZQUFZO3lCQUN2QjtxQkFDRjtvQkFDRCxZQUFZLEVBQUUsQ0FBQyxHQUFHLFVBQVUsRUFBRSxHQUFHLE9BQU8sRUFBRSxHQUFHLHFCQUFxQixDQUFDO29CQUNuRSxPQUFPLEVBQUUsQ0FBQyxHQUFHLFVBQVUsRUFBRSxHQUFHLE9BQU8sRUFBRSxHQUFHLHFCQUFxQixDQUFDO2lCQUMvRCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbW1vbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbic7XG5pbXBvcnQgeyBIdHRwQ2xpZW50TW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29tbW9uL2h0dHAnO1xuaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEZvcm1zTW9kdWxlLCBSZWFjdGl2ZUZvcm1zTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuaW1wb3J0IHsgUm91dGVyTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvcm91dGVyJztcblxuaW1wb3J0IHsgWXVuemFpU2hhcmVkWWVsb25Nb2R1bGUgfSBmcm9tICdAeWVsb24vYmNzL3l1bnphaS1zaGFyZWQteWVsb24nO1xuaW1wb3J0IHsgWXVuemFpU2hhcmVkWm9ycm9Nb2R1bGUgfSBmcm9tICdAeWVsb24vYmNzL3l1bnphaS1zaGFyZWQtem9ycm8nO1xuaW1wb3J0IHsgWVVOWkFJX1RIRU1FX0JUTl9LRVlTIH0gZnJvbSAnQHllbG9uL3RoZW1lL3RoZW1lLWJ0bic7XG5cbmltcG9ydCB7IFl1bnphaUxheW91dEJhc2ljQ29tcG9uZW50IH0gZnJvbSAnLi9sYXlvdXQtYmFzaWMvbGF5b3V0LWJhc2ljLmNvbXBvbmVudCc7XG5pbXBvcnQgeyBMYXlvdXROYXZBcHBsaWNhdGlvbkNvbXBvbmVudCwgTGF5b3V0TmF2R3JvdXBDb21wb25lbnQsIExheW91dE5hdlRpbGVDb21wb25lbnQgfSBmcm9tICcuL2xheW91dC1uYXYnO1xuaW1wb3J0IHtcbiAgWXVuemFpQ2xlYXJTdG9yYWdlQ29tcG9uZW50LFxuICBZdW56YWlGdWxsU2NyZWVuQ29tcG9uZW50LFxuICBZdW56YWlJMThOQ29tcG9uZW50LFxuICBZdW56YWlOb3RpZnlDb21wb25lbnQsXG4gIFl1bnphaVRoZW1CdG5Db21wb25lbnQsXG4gIFl1bnphaVVzZXJDb21wb25lbnRcbn0gZnJvbSAnLi93aWRnZXRzJztcblxuY29uc3QgV0lER0VUUyA9IFtcbiAgWXVuemFpQ2xlYXJTdG9yYWdlQ29tcG9uZW50LFxuICBZdW56YWlGdWxsU2NyZWVuQ29tcG9uZW50LFxuICBZdW56YWlJMThOQ29tcG9uZW50LFxuICBZdW56YWlOb3RpZnlDb21wb25lbnQsXG4gIFl1bnphaVRoZW1CdG5Db21wb25lbnQsXG4gIFl1bnphaVVzZXJDb21wb25lbnRcbl07XG5cbmNvbnN0IExBWU9VVF9OQVZfQ09NUE9ORU5UUyA9IFtMYXlvdXROYXZBcHBsaWNhdGlvbkNvbXBvbmVudCwgTGF5b3V0TmF2R3JvdXBDb21wb25lbnQsIExheW91dE5hdlRpbGVDb21wb25lbnRdO1xuXG5jb25zdCBDT01QT05FTlRTID0gW1l1bnphaUxheW91dEJhc2ljQ29tcG9uZW50XTtcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW1xuICAgIEh0dHBDbGllbnRNb2R1bGUsXG4gICAgQ29tbW9uTW9kdWxlLFxuICAgIEZvcm1zTW9kdWxlLFxuICAgIFJvdXRlck1vZHVsZSxcbiAgICBSZWFjdGl2ZUZvcm1zTW9kdWxlLFxuICAgIFl1bnphaVNoYXJlZFllbG9uTW9kdWxlLFxuICAgIFl1bnphaVNoYXJlZFpvcnJvTW9kdWxlXG4gIF0sXG4gIHByb3ZpZGVyczogW1xuICAgIHtcbiAgICAgIHByb3ZpZGU6IFlVTlpBSV9USEVNRV9CVE5fS0VZUyxcbiAgICAgIHVzZVZhbHVlOiAnc2l0ZS10aGVtZSdcbiAgICB9XG4gIF0sXG4gIGRlY2xhcmF0aW9uczogWy4uLkNPTVBPTkVOVFMsIC4uLldJREdFVFMsIC4uLkxBWU9VVF9OQVZfQ09NUE9ORU5UU10sXG4gIGV4cG9ydHM6IFsuLi5DT01QT05FTlRTLCAuLi5XSURHRVRTLCAuLi5MQVlPVVRfTkFWX0NPTVBPTkVOVFNdXG59KVxuZXhwb3J0IGNsYXNzIFl1bnphaUxheW91dE1vZHVsZSB7fVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXVuemFpLWxheW91dC5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9wYWNrYWdlcy9iaXMvbGF5b3V0L3l1bnphaS1sYXlvdXQubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxZQUFZLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUNqRSxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQ3pDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUM3QyxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFFL0MsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFDMUQsT0FBTyxFQUFFLGNBQWMsRUFBRSxNQUFNLHNCQUFzQixDQUFDO0FBQ3RELE9BQU8sRUFBRSxpQkFBaUIsRUFBRSxNQUFNLGNBQWMsQ0FBQztBQUNqRCxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSw2QkFBNkIsQ0FBQztBQUNsRSxPQUFPLEVBQUUscUJBQXFCLEVBQUUsTUFBTSx3QkFBd0IsQ0FBQztBQUMvRCxPQUFPLEVBQUUsY0FBYyxFQUFFLE1BQU0sc0JBQXNCLENBQUM7QUFDdEQsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFDMUQsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLG9CQUFvQixDQUFDO0FBQ2xELE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQUNsRCxPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0scUJBQXFCLENBQUM7QUFDcEQsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLG9CQUFvQixDQUFDO0FBQ2xELE9BQU8sRUFBRSxlQUFlLEVBQUUsTUFBTSx1QkFBdUIsQ0FBQztBQUV4RCxPQUFPLEVBQUUsMEJBQTBCLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUM1RCxPQUFPLEVBQUUsNkJBQTZCLEVBQUUsdUJBQXVCLEVBQUUsc0JBQXNCLEVBQUUsTUFBTSxjQUFjLENBQUM7QUFDOUcsT0FBTyxFQUNMLDJCQUEyQixFQUMzQix5QkFBeUIsRUFDekIsbUJBQW1CLEVBQ25CLHFCQUFxQixFQUNyQix1QkFBdUIsRUFDdkIsbUJBQW1CLEVBQ3BCLE1BQU0sV0FBVyxDQUFDOztBQUVuQixNQUFNLFVBQVUsR0FBRztJQUNqQiwyQkFBMkI7SUFDM0IseUJBQXlCO0lBQ3pCLG1CQUFtQjtJQUNuQixxQkFBcUI7SUFDckIsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQiwwQkFBMEI7SUFDMUIsNkJBQTZCO0lBQzdCLHVCQUF1QjtJQUN2QixzQkFBc0I7Q0FDdkIsQ0FBQztBQTZCRixNQUFNLE9BQU8sa0JBQWtCOzhHQUFsQixrQkFBa0I7K0dBQWxCLGtCQUFrQixpQkF2QzdCLDJCQUEyQjtZQUMzQix5QkFBeUI7WUFDekIsbUJBQW1CO1lBQ25CLHFCQUFxQjtZQUNyQix1QkFBdUI7WUFDdkIsbUJBQW1CO1lBQ25CLDBCQUEwQjtZQUMxQiw2QkFBNkI7WUFDN0IsdUJBQXVCO1lBQ3ZCLHNCQUFzQixhQUtwQixZQUFZO1lBQ1osY0FBYztZQUNkLG1CQUFtQjtZQUNuQixZQUFZO1lBQ1osWUFBWTtZQUNaLGdCQUFnQjtZQUNoQixlQUFlO1lBQ2YsZ0JBQWdCO1lBQ2hCLGNBQWM7WUFDZCxnQkFBZ0I7WUFDaEIsV0FBVztZQUNYLFlBQVk7WUFDWixpQkFBaUI7WUFDakIsYUFBYTtZQUNiLFlBQVksYUE1QmQsMkJBQTJCO1lBQzNCLHlCQUF5QjtZQUN6QixtQkFBbUI7WUFDbkIscUJBQXFCO1lBQ3JCLHVCQUF1QjtZQUN2QixtQkFBbUI7WUFDbkIsMEJBQTBCO1lBQzFCLDZCQUE2QjtZQUM3Qix1QkFBdUI7WUFDdkIsc0JBQXNCOytHQThCWCxrQkFBa0IsYUFSbEI7WUFDVDtnQkFDRSxPQUFPLEVBQUUscUJBQXFCO2dCQUM5QixRQUFRLEVBQUUsWUFBWTthQUN2QjtTQUNGLFlBdEJDLFlBQVk7WUFDWixjQUFjO1lBQ2QsbUJBQW1CO1lBQ25CLFlBQVk7WUFDWixZQUFZO1lBRVosZUFBZTtZQUNmLGdCQUFnQjtZQUNoQixjQUFjO1lBQ2QsZ0JBQWdCO1lBQ2hCLFdBQVc7WUFDWCxZQUFZO1lBQ1osaUJBQWlCO1lBQ2pCLGFBQWE7WUFDYixZQUFZOzsyRkFXSCxrQkFBa0I7a0JBM0I5QixRQUFRO21CQUFDO29CQUNSLE9BQU8sRUFBRTt3QkFDUCxZQUFZO3dCQUNaLGNBQWM7d0JBQ2QsbUJBQW1CO3dCQUNuQixZQUFZO3dCQUNaLFlBQVk7d0JBQ1osZ0JBQWdCO3dCQUNoQixlQUFlO3dCQUNmLGdCQUFnQjt3QkFDaEIsY0FBYzt3QkFDZCxnQkFBZ0I7d0JBQ2hCLFdBQVc7d0JBQ1gsWUFBWTt3QkFDWixpQkFBaUI7d0JBQ2pCLGFBQWE7d0JBQ2IsWUFBWTtxQkFDYjtvQkFDRCxZQUFZLEVBQUUsVUFBVTtvQkFDeEIsU0FBUyxFQUFFO3dCQUNUOzRCQUNFLE9BQU8sRUFBRSxxQkFBcUI7NEJBQzlCLFFBQVEsRUFBRSxZQUFZO3lCQUN2QjtxQkFDRjtvQkFDRCxPQUFPLEVBQUUsVUFBVTtpQkFDcEIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21tb25Nb2R1bGUsIE5nT3B0aW1pemVkSW1hZ2UgfSBmcm9tICdAYW5ndWxhci9jb21tb24nO1xuaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEZvcm1zTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuaW1wb3J0IHsgUm91dGVyTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvcm91dGVyJztcblxuaW1wb3J0IHsgTm90aWNlSWNvbk1vZHVsZSB9IGZyb20gJ0B5ZWxvbi9hYmMvbm90aWNlLWljb24nO1xuaW1wb3J0IHsgUmV1c2VUYWJNb2R1bGUgfSBmcm9tICdAeWVsb24vYWJjL3JldXNlLXRhYic7XG5pbXBvcnQgeyBZdW56YWlUaGVtZU1vZHVsZSB9IGZyb20gJ0B5ZWxvbi90aGVtZSc7XG5pbXBvcnQgeyBMYXlvdXREZWZhdWx0TW9kdWxlIH0gZnJvbSAnQHllbG9uL3RoZW1lL2xheW91dC1kZWZhdWx0JztcbmltcG9ydCB7IFlVTlpBSV9USEVNRV9CVE5fS0VZUyB9IGZyb20gJ0B5ZWxvbi90aGVtZS90aGVtZS1idG4nO1xuaW1wb3J0IHsgTnpBdmF0YXJNb2R1bGUgfSBmcm9tICduZy16b3Jyby1hbnRkL2F2YXRhcic7XG5pbXBvcnQgeyBOekRyb3BEb3duTW9kdWxlIH0gZnJvbSAnbmctem9ycm8tYW50ZC9kcm9wZG93bic7XG5pbXBvcnQgeyBOekdyaWRNb2R1bGUgfSBmcm9tICduZy16b3Jyby1hbnRkL2dyaWQnO1xuaW1wb3J0IHsgTnpJY29uTW9kdWxlIH0gZnJvbSAnbmctem9ycm8tYW50ZC9pY29uJztcbmltcG9ydCB7IE56SW5wdXRNb2R1bGUgfSBmcm9tICduZy16b3Jyby1hbnRkL2lucHV0JztcbmltcG9ydCB7IE56VGFic01vZHVsZSB9IGZyb20gJ25nLXpvcnJvLWFudGQvdGFicyc7XG5pbXBvcnQgeyBOelRvb2xUaXBNb2R1bGUgfSBmcm9tICduZy16b3Jyby1hbnRkL3Rvb2x0aXAnO1xuXG5pbXBvcnQgeyBZdW56YWlMYXlvdXRCYXNpY0NvbXBvbmVudCB9IGZyb20gJy4vbGF5b3V0LWJhc2ljJztcbmltcG9ydCB7IExheW91dE5hdkFwcGxpY2F0aW9uQ29tcG9uZW50LCBMYXlvdXROYXZHcm91cENvbXBvbmVudCwgTGF5b3V0TmF2VGlsZUNvbXBvbmVudCB9IGZyb20gJy4vbGF5b3V0LW5hdic7XG5pbXBvcnQge1xuICBZdW56YWlDbGVhclN0b3JhZ2VDb21wb25lbnQsXG4gIFl1bnphaUZ1bGxTY3JlZW5Db21wb25lbnQsXG4gIFl1bnphaUkxOE5Db21wb25lbnQsXG4gIFl1bnphaU5vdGlmeUNvbXBvbmVudCxcbiAgWXVuemFpVGhlbWVCdG5Db21wb25lbnQsXG4gIFl1bnphaVVzZXJDb21wb25lbnRcbn0gZnJvbSAnLi93aWRnZXRzJztcblxuY29uc3QgQ09NUE9ORU5UUyA9IFtcbiAgWXVuemFpQ2xlYXJTdG9yYWdlQ29tcG9uZW50LFxuICBZdW56YWlGdWxsU2NyZWVuQ29tcG9uZW50LFxuICBZdW56YWlJMThOQ29tcG9uZW50LFxuICBZdW56YWlOb3RpZnlDb21wb25lbnQsXG4gIFl1bnphaVRoZW1lQnRuQ29tcG9uZW50LFxuICBZdW56YWlVc2VyQ29tcG9uZW50LFxuICBZdW56YWlMYXlvdXRCYXNpY0NvbXBvbmVudCxcbiAgTGF5b3V0TmF2QXBwbGljYXRpb25Db21wb25lbnQsXG4gIExheW91dE5hdkdyb3VwQ29tcG9uZW50LFxuICBMYXlvdXROYXZUaWxlQ29tcG9uZW50XG5dO1xuXG5ATmdNb2R1bGUoe1xuICBpbXBvcnRzOiBbXG4gICAgUm91dGVyTW9kdWxlLFxuICAgIFJldXNlVGFiTW9kdWxlLFxuICAgIExheW91dERlZmF1bHRNb2R1bGUsXG4gICAgQ29tbW9uTW9kdWxlLFxuICAgIE56VGFic01vZHVsZSxcbiAgICBOZ09wdGltaXplZEltYWdlLFxuICAgIE56VG9vbFRpcE1vZHVsZSxcbiAgICBOekRyb3BEb3duTW9kdWxlLFxuICAgIE56QXZhdGFyTW9kdWxlLFxuICAgIE5vdGljZUljb25Nb2R1bGUsXG4gICAgRm9ybXNNb2R1bGUsXG4gICAgTnpHcmlkTW9kdWxlLFxuICAgIFl1bnphaVRoZW1lTW9kdWxlLFxuICAgIE56SW5wdXRNb2R1bGUsXG4gICAgTnpJY29uTW9kdWxlXG4gIF0sXG4gIGRlY2xhcmF0aW9uczogQ09NUE9ORU5UUyxcbiAgcHJvdmlkZXJzOiBbXG4gICAge1xuICAgICAgcHJvdmlkZTogWVVOWkFJX1RIRU1FX0JUTl9LRVlTLFxuICAgICAgdXNlVmFsdWU6ICdzaXRlLXRoZW1lJ1xuICAgIH1cbiAgXSxcbiAgZXhwb3J0czogQ09NUE9ORU5UU1xufSlcbmV4cG9ydCBjbGFzcyBZdW56YWlMYXlvdXRNb2R1bGUge31cbiJdfQ==

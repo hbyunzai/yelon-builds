@@ -1,17 +1,15 @@
-import { Platform } from '@angular/cdk/platform';
-import { ChangeDetectorRef, EventEmitter, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { NumberInput } from '@yelon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { ChartEChartsService } from './echarts.service';
 import { ChartECharts, ChartEChartsEvent, ChartEChartsOn, ChartEChartsOption } from './echarts.types';
 import * as i0 from "@angular/core";
 export declare class ChartEChartsComponent implements OnInit, OnDestroy {
-    private srv;
-    private cdr;
-    private ngZone;
-    private platform;
     static ngAcceptInputType_width: NumberInput;
     static ngAcceptInputType_height: NumberInput;
+    private readonly srv;
+    private readonly cdr;
+    private readonly ngZone;
+    private readonly platform;
     private node;
     private destroy$;
     private _chart;
@@ -29,7 +27,7 @@ export declare class ChartEChartsComponent implements OnInit, OnDestroy {
     readonly events: EventEmitter<ChartEChartsEvent>;
     get chart(): ChartECharts | null;
     loaded: boolean;
-    constructor(srv: ChartEChartsService, cdr: ChangeDetectorRef, ngZone: NgZone, platform: Platform);
+    constructor();
     private emit;
     private load;
     install(): this;
@@ -38,5 +36,5 @@ export declare class ChartEChartsComponent implements OnInit, OnDestroy {
     ngOnInit(): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ChartEChartsComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<ChartEChartsComponent, "chart-echarts, [chart-echarts]", ["chartECharts"], { "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "theme": { "alias": "theme"; "required": false; }; "initOpt": { "alias": "initOpt"; "required": false; }; "option": { "alias": "option"; "required": false; }; "on": { "alias": "on"; "required": false; }; }, { "events": "events"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ChartEChartsComponent, "chart-echarts, [chart-echarts]", ["chartECharts"], { "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "theme": { "alias": "theme"; "required": false; }; "initOpt": { "alias": "initOpt"; "required": false; }; "option": { "alias": "option"; "required": false; }; "on": { "alias": "on"; "required": false; }; }, { "events": "events"; }, never, never, true, never>;
 }

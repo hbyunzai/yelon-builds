@@ -1,9 +1,8 @@
 import * as i0 from '@angular/core';
-import { EventEmitter, Directive, Input, Output, NgModule } from '@angular/core';
+import { inject, ElementRef, EventEmitter, Directive, Input, Output, NgModule } from '@angular/core';
 import { finalize } from 'rxjs';
 import { saveAs } from 'file-saver';
-import * as i1 from '@yelon/theme';
-import { YunzaiThemeModule } from '@yelon/theme';
+import { _HttpClient, YunzaiThemeModule } from '@yelon/theme';
 import { CommonModule } from '@angular/common';
 
 class DownFileDirective {
@@ -21,25 +20,23 @@ class DownFileDirective {
         });
         return arr.reduce((_o, item) => item, {});
     }
-    constructor(el, _http) {
-        this.el = el;
-        this._http = _http;
-        this.isFileSaverSupported = true;
+    constructor() {
+        this.el = inject(ElementRef).nativeElement;
+        this._http = inject(_HttpClient);
         this.httpMethod = 'get';
         this.success = new EventEmitter();
         this.error = new EventEmitter();
-        let isFileSaverSupported = false;
+        this.isFileSaverSupported = false;
         try {
-            isFileSaverSupported = !!new Blob();
+            this.isFileSaverSupported = !!new Blob();
         }
         catch { }
-        this.isFileSaverSupported = isFileSaverSupported;
-        if (!isFileSaverSupported) {
-            el.nativeElement.classList.add(`down-file__not-support`);
+        if (!this.isFileSaverSupported) {
+            this.el.classList.add(`down-file__not-support`);
         }
     }
     setDisabled(status) {
-        const el = this.el.nativeElement;
+        const el = this.el;
         el.disabled = status;
         el.classList[status ? 'add' : 'remove'](`down-file__disabled`);
     }
@@ -80,19 +77,20 @@ class DownFileDirective {
             error: err => this.error.emit(err)
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: DownFileDirective, deps: [{ token: i0.ElementRef }, { token: i1._HttpClient }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.2.12", type: DownFileDirective, selector: "[down-file]", inputs: { httpData: ["http-data", "httpData"], httpBody: ["http-body", "httpBody"], httpMethod: ["http-method", "httpMethod"], httpUrl: ["http-url", "httpUrl"], fileName: ["file-name", "fileName"], pre: "pre" }, outputs: { success: "success", error: "error" }, host: { listeners: { "click": "_click($event)" } }, exportAs: ["downFile"], ngImport: i0 }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: DownFileDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "17.2.1", type: DownFileDirective, isStandalone: true, selector: "[down-file]", inputs: { httpData: ["http-data", "httpData"], httpBody: ["http-body", "httpBody"], httpMethod: ["http-method", "httpMethod"], httpUrl: ["http-url", "httpUrl"], fileName: ["file-name", "fileName"], pre: "pre" }, outputs: { success: "success", error: "error" }, host: { listeners: { "click": "_click($event)" } }, exportAs: ["downFile"], ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: DownFileDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: DownFileDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[down-file]',
                     exportAs: 'downFile',
                     host: {
                         '(click)': '_click($event)'
-                    }
+                    },
+                    standalone: true
                 }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i1._HttpClient }]; }, propDecorators: { httpData: [{
+        }], ctorParameters: () => [], propDecorators: { httpData: [{
                 type: Input,
                 args: ['http-data']
             }], httpBody: [{
@@ -117,16 +115,15 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
 
 const DIRECTIVES = [DownFileDirective];
 class DownFileModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: DownFileModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: DownFileModule, declarations: [DownFileDirective], imports: [CommonModule, YunzaiThemeModule], exports: [DownFileDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: DownFileModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule, DownFileDirective], exports: [DownFileDirective] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: DownFileModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: DownFileModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule, YunzaiThemeModule],
-                    declarations: [...DIRECTIVES],
-                    exports: [...DIRECTIVES]
+                    imports: [CommonModule, YunzaiThemeModule, ...DIRECTIVES],
+                    exports: DIRECTIVES
                 }]
         }] });
 

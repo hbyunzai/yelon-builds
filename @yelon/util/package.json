@@ -1,7 +1,7 @@
 {
   "name": "@yelon/util",
-  "version": "16.4.6",
-  "author": "devcui<devcui@outlook.com>",
+  "version": "17.2.0-c502481",
+  "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -35,17 +35,17 @@
       "esm": "./esm2022/yelon-util.mjs",
       "default": "./fesm2022/yelon-util.mjs"
     },
-    "./analysis": {
-      "types": "./analysis/index.d.ts",
-      "esm2022": "./esm2022/analysis/analysis.mjs",
-      "esm": "./esm2022/analysis/analysis.mjs",
-      "default": "./fesm2022/analysis.mjs"
-    },
     "./array": {
       "types": "./array/index.d.ts",
       "esm2022": "./esm2022/array/array.mjs",
       "esm": "./esm2022/array/array.mjs",
       "default": "./fesm2022/array.mjs"
+    },
+    "./browser": {
+      "types": "./browser/index.d.ts",
+      "esm2022": "./esm2022/browser/browser.mjs",
+      "esm": "./esm2022/browser/browser.mjs",
+      "default": "./fesm2022/browser.mjs"
     },
     "./config": {
       "types": "./config/index.d.ts",
@@ -58,12 +58,6 @@
       "esm2022": "./esm2022/date-time/date-time.mjs",
       "esm": "./esm2022/date-time/date-time.mjs",
       "default": "./fesm2022/date-time.mjs"
-    },
-    "./browser": {
-      "types": "./browser/index.d.ts",
-      "esm2022": "./esm2022/browser/browser.mjs",
-      "esm": "./esm2022/browser/browser.mjs",
-      "default": "./fesm2022/browser.mjs"
     },
     "./decorator": {
       "types": "./decorator/index.d.ts",
@@ -95,17 +89,17 @@
       "esm": "./esm2022/mcache/mcache.mjs",
       "default": "./fesm2022/mcache.mjs"
     },
-    "./other": {
-      "types": "./other/index.d.ts",
-      "esm2022": "./esm2022/other/other.mjs",
-      "esm": "./esm2022/other/other.mjs",
-      "default": "./fesm2022/other.mjs"
-    },
     "./mtypes": {
       "types": "./mtypes/index.d.ts",
       "esm2022": "./esm2022/mtypes/mtypes.mjs",
       "esm": "./esm2022/mtypes/mtypes.mjs",
       "default": "./fesm2022/mtypes.mjs"
+    },
+    "./other": {
+      "types": "./other/index.d.ts",
+      "esm2022": "./esm2022/other/other.mjs",
+      "esm": "./esm2022/other/other.mjs",
+      "default": "./fesm2022/other.mjs"
     },
     "./pipes": {
       "types": "./pipes/index.d.ts",

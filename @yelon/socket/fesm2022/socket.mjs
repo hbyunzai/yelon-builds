@@ -17,7 +17,7 @@ const SOCKET_DEFAULT_CONFIG = {
     heartbeatIncoming: 1000 * 60,
     heartbeatOutgoing: 1000 * 60,
     reconnectDelay: 30000000,
-    debug: msg => {
+    debug: (msg) => {
         log(msg);
     }
 };
@@ -35,13 +35,13 @@ class NotificationService {
     notifyWithHtml(message) {
         this.notifyService.create(message.type, message.title, `<a href=${message.href}>${message.content}</a>`);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: NotificationService, deps: [{ token: i1.NzNotificationService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: NotificationService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: NotificationService, deps: [{ token: i1.NzNotificationService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: NotificationService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: NotificationService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: NotificationService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1.NzNotificationService }]; } });
+        }], ctorParameters: () => [{ type: i1.NzNotificationService }] });
 
 class StompService {
     constructor(configService, injector, notifyService, win) {
@@ -108,16 +108,16 @@ class StompService {
     watch(destination, headers) {
         return this.rxStomp.watch(destination, headers);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: StompService, deps: [{ token: i1$1.YunzaiConfigService }, { token: i0.Injector }, { token: NotificationService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: StompService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: StompService, deps: [{ token: i1$1.YunzaiConfigService }, { token: i0.Injector }, { token: NotificationService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: StompService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: StompService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: StompService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1$1.YunzaiConfigService }, { type: i0.Injector }, { type: NotificationService }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i1$1.YunzaiConfigService }, { type: i0.Injector }, { type: NotificationService }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [WINDOW]
-                }] }]; } });
+                }] }] });
 
 /**
  * Generated bundle index. Do not edit.

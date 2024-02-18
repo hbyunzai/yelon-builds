@@ -10,8 +10,8 @@ export declare class YunzaiDeptTreeComponent implements OnInit, AfterViewInit, O
     private gradeService;
     sf: SFComponent;
     props?: YunzaiDeptTreeProps;
-    onQueryComplete: EventEmitter<YunzaiDeptTree[]>;
-    onSelect: EventEmitter<YunzaiDeptTree[]>;
+    readonly onQueryComplete: EventEmitter<YunzaiDeptTree[]>;
+    readonly onSelect: EventEmitter<YunzaiDeptTree[]>;
     private $destroy;
     state: YunzaiDeptTreeState;
     get data(): YunzaiDeptTree[];
@@ -39,5 +39,5 @@ export declare class YunzaiDeptTreeComponent implements OnInit, AfterViewInit, O
     open(data: NzTreeNode | NzFormatEmitEvent): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiDeptTreeComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiDeptTreeComponent, "yunzai-dept-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiDeptTreeComponent, "yunzai-dept-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, true, never>;
 }

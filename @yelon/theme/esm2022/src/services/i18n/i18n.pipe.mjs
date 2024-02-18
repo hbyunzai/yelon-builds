@@ -1,21 +1,18 @@
-import { Inject, Pipe } from '@angular/core';
+import { Pipe, inject } from '@angular/core';
 import { YUNZAI_I18N_TOKEN } from './i18n';
 import * as i0 from "@angular/core";
 export class I18nPipe {
-    constructor(i18n) {
-        this.i18n = i18n;
+    constructor() {
+        this.i18n = inject(YUNZAI_I18N_TOKEN);
     }
     transform(key, params) {
         return this.i18n.fanyi(key, params);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: I18nPipe, deps: [{ token: YUNZAI_I18N_TOKEN }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: I18nPipe, name: "i18n" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: I18nPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: I18nPipe, isStandalone: true, name: "i18n" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: I18nPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: I18nPipe, decorators: [{
             type: Pipe,
-            args: [{ name: 'i18n' }]
-        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YUNZAI_I18N_TOKEN]
-                }] }]; } });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaTE4bi5waXBlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvdGhlbWUvc3JjL3NlcnZpY2VzL2kxOG4vaTE4bi5waXBlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFpQixNQUFNLGVBQWUsQ0FBQztBQUU1RCxPQUFPLEVBQXFCLGlCQUFpQixFQUFFLE1BQU0sUUFBUSxDQUFDOztBQUc5RCxNQUFNLE9BQU8sUUFBUTtJQUNuQixZQUErQyxJQUF1QjtRQUF2QixTQUFJLEdBQUosSUFBSSxDQUFtQjtJQUFHLENBQUM7SUFFMUUsU0FBUyxDQUFDLEdBQVcsRUFBRSxNQUFnQztRQUNyRCxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsRUFBRSxNQUFNLENBQUMsQ0FBQztJQUN0QyxDQUFDOytHQUxVLFFBQVEsa0JBQ0MsaUJBQWlCOzZHQUQxQixRQUFROzs0RkFBUixRQUFRO2tCQURwQixJQUFJO21CQUFDLEVBQUUsSUFBSSxFQUFFLE1BQU0sRUFBRTs7MEJBRVAsTUFBTTsyQkFBQyxpQkFBaUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3QsIFBpcGUsIFBpcGVUcmFuc2Zvcm0gfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuaW1wb3J0IHsgWXVuemFpSTE4TlNlcnZpY2UsIFlVTlpBSV9JMThOX1RPS0VOIH0gZnJvbSAnLi9pMThuJztcblxuQFBpcGUoeyBuYW1lOiAnaTE4bicgfSlcbmV4cG9ydCBjbGFzcyBJMThuUGlwZSBpbXBsZW1lbnRzIFBpcGVUcmFuc2Zvcm0ge1xuICBjb25zdHJ1Y3RvcihASW5qZWN0KFlVTlpBSV9JMThOX1RPS0VOKSBwcml2YXRlIGkxOG46IFl1bnphaUkxOE5TZXJ2aWNlKSB7fVxuXG4gIHRyYW5zZm9ybShrZXk6IHN0cmluZywgcGFyYW1zPzogUmVjb3JkPHN0cmluZywgdW5rbm93bj4pOiBzdHJpbmcge1xuICAgIHJldHVybiB0aGlzLmkxOG4uZmFueWkoa2V5LCBwYXJhbXMpO1xuICB9XG59XG4iXX0=
+            args: [{ name: 'i18n', standalone: true }]
+        }] });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaTE4bi5waXBlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvdGhlbWUvc3JjL3NlcnZpY2VzL2kxOG4vaTE4bi5waXBlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxJQUFJLEVBQWlCLE1BQU0sRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUU1RCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSxRQUFRLENBQUM7O0FBRzNDLE1BQU0sT0FBTyxRQUFRO0lBRHJCO1FBRW1CLFNBQUksR0FBRyxNQUFNLENBQUMsaUJBQWlCLENBQUMsQ0FBQztLQUtuRDtJQUhDLFNBQVMsQ0FBQyxHQUFXLEVBQUUsTUFBNEI7UUFDakQsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFDdEMsQ0FBQzs4R0FMVSxRQUFROzRHQUFSLFFBQVE7OzJGQUFSLFFBQVE7a0JBRHBCLElBQUk7bUJBQUMsRUFBRSxJQUFJLEVBQUUsTUFBTSxFQUFFLFVBQVUsRUFBRSxJQUFJLEVBQUUiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBQaXBlLCBQaXBlVHJhbnNmb3JtLCBpbmplY3QgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuaW1wb3J0IHsgWVVOWkFJX0kxOE5fVE9LRU4gfSBmcm9tICcuL2kxOG4nO1xuXG5AUGlwZSh7IG5hbWU6ICdpMThuJywgc3RhbmRhbG9uZTogdHJ1ZSB9KVxuZXhwb3J0IGNsYXNzIEkxOG5QaXBlIGltcGxlbWVudHMgUGlwZVRyYW5zZm9ybSB7XG4gIHByaXZhdGUgcmVhZG9ubHkgaTE4biA9IGluamVjdChZVU5aQUlfSTE4Tl9UT0tFTik7XG5cbiAgdHJhbnNmb3JtKGtleTogc3RyaW5nLCBwYXJhbXM/OiB1bmtub3duIHwgdW5rbm93bltdKTogc3RyaW5nIHtcbiAgICByZXR1cm4gdGhpcy5pMThuLmZhbnlpKGtleSwgcGFyYW1zKTtcbiAgfVxufVxuIl19

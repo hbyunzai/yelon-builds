@@ -49,13 +49,15 @@ function createYunzaiApp(ngAddOptions) {
     });
 }
 exports.createYunzaiApp = createYunzaiApp;
-function createYunzaiAndModuleApp(name = 'trade', ngAddOptions, yunzaiData) {
+function createYunzaiAndModuleApp(options) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield createYunzaiApp(ngAddOptions);
-        if (yunzaiData != null) {
-            res.tree.create('ng-yunzai.json', JSON.stringify(yunzaiData));
+        const res = yield createYunzaiApp(options === null || options === void 0 ? void 0 : options.ngAddSchema);
+        if ((options === null || options === void 0 ? void 0 : options.yunzaiData) != null) {
+            res.tree.create('ng-yunzai.json', JSON.stringify(options === null || options === void 0 ? void 0 : options.yunzaiData));
         }
-        res.tree = yield res.runner.runSchematic('module', { name, project: exports.APPNAME, routing: true }, res.tree);
+        const moduleOptions = Object.assign({ name: (_a = options === null || options === void 0 ? void 0 : options.name) !== null && _a !== void 0 ? _a : 'trade', project: exports.APPNAME, routing: true }, options === null || options === void 0 ? void 0 : options.moduleSchema);
+        res.tree = yield res.runner.runSchematic('module', moduleOptions, res.tree);
         return res;
     });
 }

@@ -1,16 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { NgZone } from '@angular/core';
 import type jsZipType from 'jszip';
 import { YunzaiConfigService } from '@yelon/util/config';
-import { LazyService } from '@yelon/util/other';
 import { ZipSaveOptions } from './zip.types';
 import * as i0 from "@angular/core";
 export declare class ZipService {
-    private http;
-    private lazy;
-    private ngZone;
+    private readonly http;
+    private readonly lazy;
+    private readonly ngZone;
     private cog;
-    constructor(http: HttpClient, lazy: LazyService, configSrv: YunzaiConfigService, ngZone: NgZone);
+    constructor(configSrv: YunzaiConfigService);
     private init;
     private check;
     /** 解压 */

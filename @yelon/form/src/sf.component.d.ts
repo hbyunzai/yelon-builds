@@ -1,10 +1,6 @@
-import { Platform } from '@angular/cdk/platform';
-import { ChangeDetectorRef, EventEmitter, Injector, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ACLService } from '@yelon/acl';
-import { YunzaiI18NService, YelonLocaleService, LocaleData } from '@yelon/theme';
+import { EventEmitter, Injector, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
-import { BooleanInput } from '@yelon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 import type { ErrorData } from './errors';
@@ -13,28 +9,18 @@ import { FormProperty } from './model/form.property';
 import { FormPropertyFactory } from './model/form.property.factory';
 import type { SFSchema } from './schema/index';
 import type { SFUISchema } from './schema/ui';
-import { TerminatorService } from './terminator.service';
 import { SchemaValidatorFactory } from './validator.factory';
 import * as i0 from "@angular/core";
 export declare function useFactory(injector: Injector, schemaValidatorFactory: SchemaValidatorFactory, cogSrv: YunzaiConfigService): FormPropertyFactory;
 export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
-    private formPropertyFactory;
-    private terminator;
-    private dom;
-    private cdr;
-    private localeSrv;
-    private aclSrv;
-    private i18nSrv;
-    private platform;
-    static ngAcceptInputType_liveValidate: BooleanInput;
-    static ngAcceptInputType_firstVisual: BooleanInput;
-    static ngAcceptInputType_onlyVisual: BooleanInput;
-    static ngAcceptInputType_compact: BooleanInput;
-    static ngAcceptInputType_loading: BooleanInput;
-    static ngAcceptInputType_disabled: BooleanInput;
-    static ngAcceptInputType_noColon: BooleanInput;
-    static ngAcceptInputType_cleanValue: BooleanInput;
-    static ngAcceptInputType_delay: BooleanInput;
+    private readonly formPropertyFactory;
+    private readonly terminator;
+    private readonly dom;
+    private readonly cdr;
+    private readonly localeSrv;
+    private readonly aclSrv;
+    private readonly i18nSrv;
+    private readonly platform;
     private _renders;
     private _item;
     private _valid;
@@ -138,6 +124,18 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
      */
     setValue(path: string, value: NzSafeAny): this;
     /**
+     * Set form element new `disabled` based on [path](https://ng.yunzainfo.com/form/qa#path)
+     *
+     * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素 `disabled` 状态
+     */
+    setDisabled(path: string, status: boolean): this;
+    /**
+     * Set form element new `required` based on [path](https://ng.yunzainfo.com/form/qa#path)
+     *
+     * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素 `required` 状态
+     */
+    setRequired(path: string, status: boolean): this;
+    /**
      * Update the feedback status of the widget
      *
      * 更新小部件的反馈状态
@@ -151,7 +149,7 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
      */
     updateFeedback(path: string, status?: NzFormControlStatusType): this;
     onSubmit(e: Event): void;
-    constructor(formPropertyFactory: FormPropertyFactory, terminator: TerminatorService, dom: DomSanitizer, cdr: ChangeDetectorRef, localeSrv: YelonLocaleService, aclSrv: ACLService, i18nSrv: YunzaiI18NService, cogSrv: YunzaiConfigService, platform: Platform);
+    constructor(cogSrv: YunzaiConfigService);
     protected fanyi(key: string): string;
     private inheritUI;
     private coverProperty;
@@ -198,6 +196,15 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     reset(emit?: boolean): this;
     private cleanRootSub;
     ngOnDestroy(): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<SFComponent, [null, null, null, null, null, { optional: true; }, { optional: true; }, null, null]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SFComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<SFComponent, "sf, [sf]", ["sf"], { "layout": { "alias": "layout"; "required": false; }; "schema": { "alias": "schema"; "required": false; }; "ui": { "alias": "ui"; "required": false; }; "formData": { "alias": "formData"; "required": false; }; "button": { "alias": "button"; "required": false; }; "liveValidate": { "alias": "liveValidate"; "required": false; }; "autocomplete": { "alias": "autocomplete"; "required": false; }; "firstVisual": { "alias": "firstVisual"; "required": false; }; "onlyVisual": { "alias": "onlyVisual"; "required": false; }; "compact": { "alias": "compact"; "required": false; }; "mode": { "alias": "mode"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "noColon": { "alias": "noColon"; "required": false; }; "cleanValue": { "alias": "cleanValue"; "required": false; }; "delay": { "alias": "delay"; "required": false; }; }, { "formValueChange": "formValueChange"; "formChange": "formChange"; "formSubmit": "formSubmit"; "formReset": "formReset"; "formError": "formError"; }, never, ["*"], false, never>;
+    static ngAcceptInputType_liveValidate: unknown;
+    static ngAcceptInputType_firstVisual: unknown;
+    static ngAcceptInputType_onlyVisual: unknown;
+    static ngAcceptInputType_compact: unknown;
+    static ngAcceptInputType_loading: unknown;
+    static ngAcceptInputType_disabled: unknown;
+    static ngAcceptInputType_noColon: unknown;
+    static ngAcceptInputType_cleanValue: unknown;
+    static ngAcceptInputType_delay: unknown;
 }

@@ -1,5 +1,5 @@
-import { InjectionToken } from '@angular/core';
-import { YunzaiDateRangePickerConfig, YunzaiErrorCollectConfig, YunzaiExceptionType, YunzaiImageConfig, YunzaiLoadingConfig, YunzaiLodopConfig, YunzaiMediaConfig, YunzaiOnboardingConfig, YunzaiPageHeaderConfig, YunzaiPdfConfig, YunzaiQRConfig, YunzaiSEConfig, YunzaiSGConfig, YunzaiSTConfig, YunzaiSVConfig, YunzaiXlsxConfig, YunzaiZipConfig, YunzaiCellConfig } from './abc/index';
+import { EnvironmentProviders, InjectionToken } from '@angular/core';
+import { YunzaiCellConfig, YunzaiDateRangePickerConfig, YunzaiErrorCollectConfig, YunzaiExceptionType, YunzaiImageConfig, YunzaiLoadingConfig, YunzaiLodopConfig, YunzaiMediaConfig, YunzaiOnboardingConfig, YunzaiPageHeaderConfig, YunzaiPdfConfig, YunzaiQRConfig, YunzaiSEConfig, YunzaiSGConfig, YunzaiSTConfig, YunzaiSVConfig, YunzaiXlsxConfig, YunzaiZipConfig } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
 import { YunzaiBusinessConfig } from './bis/bis.type';
@@ -9,6 +9,7 @@ import { YunzaiMockConfig } from './mock/mock.type';
 import { YunzaiSFConfig } from './sf/sf.type';
 import { YunzaiSocketConfig } from './socket/socket.type';
 import { YunzaiThemeHttpClientConfig, YunzaiThemeResponsiveConfig, YunzaiThemeI18nConfig } from './theme/index';
+import { YunzaiThemePipeConfig } from './theme/pipe.type';
 import { YunzaiUtilArrayConfig } from './util/array.type';
 import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 export interface YunzaiConfig {
@@ -43,7 +44,9 @@ export interface YunzaiConfig {
     themeHttp?: YunzaiThemeHttpClientConfig;
     themeResponsive?: YunzaiThemeResponsiveConfig;
     themeI18n?: YunzaiThemeI18nConfig;
+    themePipe?: YunzaiThemePipeConfig;
 }
 export type YunzaiConfigKey = keyof YunzaiConfig;
 export declare const YUNZAI_CONFIG: InjectionToken<YunzaiConfig>;
 export declare function YUNZAI_CONFIG_FACTORY(): YunzaiConfig;
+export declare function provideYunzaiConfig(config: YunzaiConfig): EnvironmentProviders;

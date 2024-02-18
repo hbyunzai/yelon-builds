@@ -21,5 +21,5 @@ export declare class YunzaiFriendGroupComponent implements OnInit, AfterViewInit
     query(): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiFriendGroupComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiFriendGroupComponent, "yunzai-friend-group", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiFriendGroupComponent, "yunzai-friend-group", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, true, never>;
 }

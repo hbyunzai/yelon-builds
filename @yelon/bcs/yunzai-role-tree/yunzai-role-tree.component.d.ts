@@ -32,5 +32,5 @@ export declare class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, O
     open(data: NzTreeNode | NzFormatEmitEvent): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiRoleTreeComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiRoleTreeComponent, "yunzai-role-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<YunzaiRoleTreeComponent, "yunzai-role-tree", never, { "props": { "alias": "props"; "required": false; }; }, { "onQueryComplete": "onQueryComplete"; "onSelect": "onSelect"; }, never, never, true, never>;
 }

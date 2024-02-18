@@ -1,12 +1,11 @@
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
-import { LazyService } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { LodopPrintResult, LodopResult } from './lodop.types';
 import * as i0 from "@angular/core";
 export declare class LodopService implements OnDestroy {
-    private scriptSrv;
+    private readonly scriptSrv;
     private defaultConfig;
     private _cog;
     private pending;
@@ -14,7 +13,7 @@ export declare class LodopService implements OnDestroy {
     private _init;
     private _events;
     private printBuffer;
-    constructor(scriptSrv: LazyService, configSrv: YunzaiConfigService);
+    constructor(configSrv: YunzaiConfigService);
     /**
      * Get or set configuration, **Note:** Resetting will invert and reload script resources
      *

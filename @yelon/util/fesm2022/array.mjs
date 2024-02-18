@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NzTreeNode } from 'ng-zorro-antd/core/tree';
 import * as i1 from '@yelon/util/config';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 class ArrayService {
     constructor(cog) {
         this.c = cog.merge('utilArray', {
@@ -268,13 +269,13 @@ class ArrayService {
         }, new Map())
             .values());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ArrayService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ArrayService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ArrayService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ArrayService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ArrayService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ArrayService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: i1.YunzaiConfigService }]; } });
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
 
 /**
  * Generated bundle index. Do not edit.

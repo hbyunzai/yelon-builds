@@ -1,7 +1,7 @@
 import extend from 'extend';
 import { DOCUMENT } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Injectable, Inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, share, filter, isObservable } from 'rxjs';
 
 /**
@@ -120,8 +120,8 @@ const log = (...args) => {
  * 延迟加载资源（js 或 css）服务
  */
 class LazyService {
-    constructor(doc) {
-        this.doc = doc;
+    constructor() {
+        this.doc = inject(DOCUMENT);
         this.list = {};
         this.cached = {};
         this._notify = new BehaviorSubject([]);
@@ -231,19 +231,16 @@ class LazyService {
             resolve(item);
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LazyService, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LazyService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LazyService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LazyService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: LazyService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: LazyService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }]; } });
+        }] });
 
 function throwError(msg, actual, expected, comparison) {
-    if (ngDevMode) {
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
         throw new Error(`ASSERTION ERROR: ${msg}${comparison == null ? '' : ` [Expected=> ${expected} ${comparison} ${actual} <=Actual]`}`);
     }
 }
@@ -308,10 +305,6 @@ function assertObservable(obj, msg) {
     }
 }
 
-const resizeWindow = () => {
-    window.dispatchEvent(new Event('resize'));
-};
-
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 class PathToRegexpService {
     constructor() {
@@ -374,7 +367,7 @@ class PathToRegexpService {
                     : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
             });
         }
-        // Push any remaining characters.
+        // Push NzSafeAny remaining characters.
         if (path || index < str.length) {
             tokens.push(path + str.substr(index));
         }
@@ -539,15 +532,19 @@ class PathToRegexpService {
         }
         return this.stringToRegexp(/** @type {string} */ path, keys, options);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PathToRegexpService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PathToRegexpService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PathToRegexpService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PathToRegexpService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: PathToRegexpService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: PathToRegexpService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
                 }]
-        }], ctorParameters: function () { return []; } });
+        }], ctorParameters: () => [] });
+
+const resizeWindow = () => {
+    window.dispatchEvent(new Event('resize'));
+};
 
 function setFavicon(path) {
     const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
