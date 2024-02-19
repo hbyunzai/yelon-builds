@@ -1,24 +1,17 @@
-import * as i0 from '@angular/core';
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { map } from 'rxjs';
-import * as i1 from '@yelon/theme';
+import { _HttpClient } from '@yelon/theme';
 
 class YunzaiGradeService {
-    constructor(http) {
-        this.http = http;
+    constructor() {
+        this.http = inject(_HttpClient);
     }
     grades() {
         return this.http.get(`/auth/gradeYear/queryListForPage`).pipe(map((response) => {
             return response.data;
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiGradeService, deps: [{ token: i1._HttpClient }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiGradeService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiGradeService, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1._HttpClient }] });
 
 /**
  * Generated bundle index. Do not edit.

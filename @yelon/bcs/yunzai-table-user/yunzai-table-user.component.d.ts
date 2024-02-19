@@ -2,15 +2,14 @@ import { AfterViewInit, EventEmitter, OnInit } from '@angular/core';
 import { STComponent, STData } from '@yelon/abc/st';
 import { SFComponent, SFSchema, SFValue } from '@yelon/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { YunzaiTableUserService } from './yunzai-table-user.service';
 import { YunzaiTableUser, YunzaiTableUserParam, YunzaiTableUserProps, YunzaiTableUserRole, YunzaiTableUserState } from './yunzai-table-user.types';
 import * as i0 from "@angular/core";
 export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
-    private service;
     st: STComponent;
     sf: SFComponent;
     props?: YunzaiTableUserProps;
     readonly onChecked: EventEmitter<YunzaiTableUser[]>;
+    private readonly service;
     private $destroy;
     state: YunzaiTableUserState;
     get wrapped(): boolean;
@@ -26,7 +25,6 @@ export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     };
     get inSearch(): boolean;
     get userIds(): string[];
-    constructor(service: YunzaiTableUserService);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     setupPropsToState(): void;

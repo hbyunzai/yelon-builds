@@ -1,15 +1,14 @@
 import { AfterViewInit, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { SFComponent } from '@yelon/form';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
-import { YunzaiRoleTreeService } from './yunzai-role-tree.service';
 import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunzai-role-tree.types';
 import * as i0 from "@angular/core";
 export declare class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy {
-    private roleTreeService;
     sf: SFComponent;
     props?: YunzaiRoleTreeProps;
     readonly onQueryComplete: EventEmitter<YunzaiRoleTree[]>;
     readonly onSelect: EventEmitter<YunzaiRoleTree[]>;
+    private readonly service;
     private $destroy;
     state: YunzaiRoleTreeState;
     get data(): YunzaiRoleTree[];
@@ -19,7 +18,6 @@ export declare class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, O
     get roleGroupCode(): string | undefined;
     get isWrapped(): boolean;
     get isExpanded(): boolean;
-    constructor(roleTreeService: YunzaiRoleTreeService);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     hookFormChange(): void;
