@@ -1,6 +1,6 @@
 {
   "name": "@yelon/form",
-  "version": "17.2.0-3b4f2df",
+  "version": "17.2.1",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -30,9 +30,9 @@
   "dependencies": {
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
-    "@yelon/theme": "^17.2.0-3b4f2df",
-    "@yelon/acl": "^17.2.0-3b4f2df",
-    "@yelon/util": "^17.2.0-3b4f2df",
+    "@yelon/theme": "^17.2.1",
+    "@yelon/acl": "^17.2.1",
+    "@yelon/util": "^17.2.1",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/form.mjs",
