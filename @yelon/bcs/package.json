@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "17.2.1-c4f69cc",
+  "version": "17.2.1-cf13cf3",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^17.2.0",
-    "@yelon/theme": "^17.2.1-c4f69cc",
-    "@yelon/form": "^17.2.1-c4f69cc",
-    "@yelon/abc": "^17.2.1-c4f69cc",
-    "@yelon/util": "^17.2.1-c4f69cc",
+    "@yelon/theme": "^17.2.1-cf13cf3",
+    "@yelon/form": "^17.2.1-cf13cf3",
+    "@yelon/abc": "^17.2.1-cf13cf3",
+    "@yelon/util": "^17.2.1-cf13cf3",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -39,6 +39,18 @@
       "esm2022": "./esm2022/bcs.mjs",
       "esm": "./esm2022/bcs.mjs",
       "default": "./fesm2022/bcs.mjs"
+    },
+    "./yunzai-contact": {
+      "types": "./yunzai-contact/index.d.ts",
+      "esm2022": "./esm2022/yunzai-contact/yunzai-contact.mjs",
+      "esm": "./esm2022/yunzai-contact/yunzai-contact.mjs",
+      "default": "./fesm2022/yunzai-contact.mjs"
+    },
+    "./yunzai-dept-tree": {
+      "types": "./yunzai-dept-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
+      "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
+      "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
     "./yunzai-dormitory-tree": {
       "types": "./yunzai-dormitory-tree/index.d.ts",
