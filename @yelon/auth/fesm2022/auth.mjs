@@ -107,7 +107,7 @@ class TokenService {
         this.interval$ = interval(refreshTime)
             .pipe(map(() => {
             const item = this.get();
-            const expired = item.expires_in || 0;
+            const expired = item.expires_in || item.exp || 0;
             if (expired <= 0) {
                 return null;
             }
