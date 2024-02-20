@@ -1,6 +1,6 @@
 {
   "name": "@yelon/theme",
-  "version": "17.2.1-7825f2a",
+  "version": "17.2.1-c4f69cc",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^17.2.0",
-    "@yelon/acl": "^17.2.1-7825f2a",
-    "@yelon/util": "^17.2.1-7825f2a",
+    "@yelon/acl": "^17.2.1-c4f69cc",
+    "@yelon/util": "^17.2.1-c4f69cc",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/theme.mjs",

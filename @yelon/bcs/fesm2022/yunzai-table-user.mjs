@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { inject, EventEmitter, Component, ViewChild, Input, Output, NgModule } from '@angular/core';
+import { inject, Injectable, EventEmitter, Component, ViewChild, Input, Output, NgModule } from '@angular/core';
 import { map, catchError, throwError, Subject, takeUntil, debounceTime } from 'rxjs';
 import { _HttpClient, I18nPipe } from '@yelon/theme';
 import * as i1 from '@angular/common';
@@ -41,7 +41,12 @@ class YunzaiTableUserService {
             return response.data;
         }));
     }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiTableUserService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiTableUserService }); }
 }
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiTableUserService, decorators: [{
+            type: Injectable
+        }] });
 
 class YunzaiTableUserComponent {
     constructor() {

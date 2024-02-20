@@ -1,6 +1,6 @@
 {
   "name": "@yelon/chart",
-  "version": "17.2.1-7825f2a",
+  "version": "17.2.1-c4f69cc",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,8 +28,8 @@
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.10",
     "echarts": "^5.4.3",
-    "@yelon/util": "^17.2.1-7825f2a",
-    "@yelon/theme": "^17.2.1-7825f2a",
+    "@yelon/util": "^17.2.1-c4f69cc",
+    "@yelon/theme": "^17.2.1-c4f69cc",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/chart.mjs",
