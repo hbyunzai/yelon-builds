@@ -4,7 +4,8 @@ import { YunzaiAuthConfig } from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export declare const YA_SERVICE_TOKEN: InjectionToken<ITokenService>;
 export interface ITokenModel {
-    access_token?: string;
+    [key: string]: NzSafeAny;
+    access_token?: string | null;
     expires_in?: number;
     refresh_token?: string;
     scope?: string;

@@ -369,7 +369,7 @@ class JWTTokenModel {
      */
     get exp() {
         const decoded = this.payload;
-        if (!decoded.hasOwnProperty('expires_in'))
+        if (!decoded.hasOwnProperty('exp'))
             return null;
         const date = new Date(0);
         date.setUTCSeconds(decoded.exp);

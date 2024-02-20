@@ -33,7 +33,8 @@ export interface JWT {
     [key: number]: NzSafeAny;
 }
 export declare class JWTTokenModel implements ITokenModel {
-    access_token?: string;
+    [key: string]: NzSafeAny;
+    access_token?: string | null;
     expires_in?: number;
     refresh_token?: string;
     scope?: string;
