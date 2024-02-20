@@ -6,16 +6,18 @@ import { Subject, BehaviorSubject, share, interval, map, filter, Observable } fr
 import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { CookieService } from '@yelon/util/browser';
-import { HttpContextToken, HttpErrorResponse } from '@angular/common/http';
+import { HttpContextToken, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 const AUTH_DEFAULT_CONFIG = {
-    store_key: `_token`,
+    store_key: `_yz_token`,
     token_invalid_redirect: true,
     token_exp_offset: 10,
-    token_send_key: `token`,
-    token_send_template: '${token}',
+    token_send_key: `Authorization`,
+    token_send_template: 'Bearer ${access_token}',
     token_send_place: 'header',
     login_url: '/login',
+    ignores: [/\/login/, /assets\//, /passport\//, /\/auth\/oauth\/getOrCreateToken\/webapp/, /\/auth\/oauth\/token/],
+    allow_anonymous_key: `_allow_anonymous`,
     refreshTime: 3000,
     refreshOffset: 6000
 };
@@ -54,9 +56,6 @@ const YA_STORE_TOKEN = new InjectionToken('AUTH_STORE_TOKEN', {
 function YA_SERVICE_TOKEN_FACTORY() {
     return new TokenService(inject(YunzaiConfigService));
 }
-/**
- * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
- */
 class TokenService {
     constructor(configSrv) {
         this.store = inject(YA_STORE_TOKEN);
@@ -91,7 +90,7 @@ class TokenService {
         let data = null;
         if (options.onlyToken === true) {
             data = this.get();
-            data.token = ``;
+            data.access_token = ``;
             this.set(data);
         }
         else {
@@ -108,7 +107,7 @@ class TokenService {
         this.interval$ = interval(refreshTime)
             .pipe(map(() => {
             const item = this.get();
-            const expired = item.expired || item.exp || 0;
+            const expired = item.expires_in || 0;
             if (expired <= 0) {
                 return null;
             }
@@ -132,15 +131,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
             type: Injectable
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const YA_SERVICE_TOKEN = new InjectionToken('YA_SERVICE_TOKEN', {
     providedIn: 'root',
     factory: YA_SERVICE_TOKEN_FACTORY
 });
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const OPENTYPE = '_yelonAuthSocialType';
-const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
+const OPENTYPE = '_delonAuthSocialType';
+const HREFCALLBACK = '_delonAuthSocialCallbackByHref';
 class SocialService {
     constructor() {
         this.tokenService = inject(YA_SERVICE_TOKEN);
@@ -173,7 +171,7 @@ class SocialService {
             if (this._win && this._win.closed) {
                 this.ngOnDestroy();
                 let model = this.tokenService.get();
-                if (model && !model.token)
+                if (model && !model.access_token)
                     model = null;
                 // 触发变更通知
                 if (model) {
@@ -198,7 +196,7 @@ class SocialService {
             throw new Error(`url muse contain a ?`);
         }
         // parse
-        let data = { token: `` };
+        let data = { access_token: `` };
         if (typeof rawData === 'string') {
             const rightUrl = rawData.split('?')[1].split('#')[0];
             data = this.router.parseUrl(`./?${rightUrl}`).queryParams;
@@ -206,7 +204,7 @@ class SocialService {
         else {
             data = rawData;
         }
-        if (!data || !data.token)
+        if (!data || !data.access_token)
             throw new Error(`invalide token data`);
         this.tokenService.set(data);
         const url = localStorage.getItem(HREFCALLBACK) || '/';
@@ -294,7 +292,7 @@ class CookieStorageStore {
         }
     }
     set(key, value) {
-        const expires = (value?.expired ?? 0) / 1e3;
+        const expires = (value?.expires_in ?? 0) / 1e3;
         this.srv.put(key, JSON.stringify(value ?? {}), { expires });
         return true;
     }
@@ -355,13 +353,12 @@ function b64DecodeUnicode(str) {
         .join(''));
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 class JWTTokenModel {
     /**
      * 获取载荷信息
      */
     get payload() {
-        const parts = (this.token || '').split('.');
+        const parts = (this.access_token || '').split('.');
         if (parts.length !== 3)
             throw new Error('JWT must have 3 parts');
         const decoded = urlBase64Decode(parts[1]);
@@ -372,7 +369,7 @@ class JWTTokenModel {
      */
     get exp() {
         const decoded = this.payload;
-        if (!decoded.hasOwnProperty('exp'))
+        if (!decoded.hasOwnProperty('expires_in'))
             return null;
         const date = new Date(0);
         date.setUTCSeconds(decoded.exp);
@@ -392,11 +389,11 @@ class JWTTokenModel {
 }
 
 function CheckSimple(model) {
-    return model != null && typeof model.token === 'string' && model.token.length > 0;
+    return model != null && typeof model.access_token === 'string' && model.access_token.length > 0;
 }
 function CheckJwt(model, offset) {
     try {
-        return model != null && !!model.token && !model.isExpired(offset);
+        return model != null && !!model.access_token && !model.isExpired(offset);
     }
     catch (err) {
         if (typeof ngDevMode === 'undefined' || ngDevMode) {
@@ -485,14 +482,13 @@ const authJWTCanMatch = route => inject(AuthJWTGuardService).process(route.path)
  *
  * @example
  * this.http.post(`login`, {
- *  name: 'yunzai-bot', pwd: '123456'
+ *  name: 'cipchk', pwd: '123456'
  * }, {
  *  context: new HttpContext().set(ALLOW_ANONYMOUS, true)
  * })
  */
 const ALLOW_ANONYMOUS = new HttpContextToken(() => false);
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 function isAnonymous(req, options) {
     if (req.context.get(ALLOW_ANONYMOUS))
         return true;
@@ -502,7 +498,19 @@ function isAnonymous(req, options) {
                 return true;
         }
     }
-    return false;
+    const ignoreKey = options.allow_anonymous_key;
+    let ignored = false;
+    if (req.params.has(ignoreKey)) {
+        ignored = true;
+    }
+    const urlArr = req.url.split('?');
+    if (urlArr.length > 1) {
+        const queryStringParams = new HttpParams({ fromString: urlArr[1] });
+        if (queryStringParams.has(ignoreKey)) {
+            ignored = true;
+        }
+    }
+    return ignored;
 }
 function throwErr(req, options) {
     ToLogin(options);
@@ -525,7 +533,7 @@ function throwErr(req, options) {
 function newReq$1(req, model) {
     return req.clone({
         setHeaders: {
-            Authorization: `Bearer ${model.token}`
+            Authorization: `Bearer ${model.access_token}`
         }
     });
 }

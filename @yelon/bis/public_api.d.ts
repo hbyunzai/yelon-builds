@@ -1,2 +1,1 @@
-declare const _default: undefined;
-export default _default;
+export * from './src/bis.module';

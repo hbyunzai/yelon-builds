@@ -1,15 +1,14 @@
 import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
-import { YunzaiAuthConfig } from '@yelon/util/config';
+import { YunzaiAuthConfig } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export declare const YA_SERVICE_TOKEN: InjectionToken<ITokenService>;
 export interface ITokenModel {
-    [key: string]: any;
-    token: string | null | undefined;
-    /**
-     * 过期时间，单位：ms
-     * - 不管Simple、JWT模式都必须指定
-     */
-    expired?: number;
+    access_token?: string;
+    expires_in?: number;
+    refresh_token?: string;
+    scope?: string;
+    token_type?: string;
 }
 export interface AuthReferrer {
     url?: string | null | undefined;
@@ -39,13 +38,13 @@ export interface ITokenService {
      * - `get()` 获取 Simple Token
      * - `get<JWTTokenModel>(JWTTokenModel)` 获取 JWT Token
      */
-    get(type?: any): ITokenModel | null;
+    get(type?: NzSafeAny): ITokenModel | null;
     /**
      * 获取Token，形式包括：
      * - `get()` 获取 Simple Token
      * - `get<JWTTokenModel>(JWTTokenModel)` 获取 JWT Token
      */
-    get<T extends ITokenModel>(type?: any): T;
+    get<T extends ITokenModel>(type?: NzSafeAny): T;
     /**
      * 清除 Token 信息，当用户退出登录时调用。
      * ```

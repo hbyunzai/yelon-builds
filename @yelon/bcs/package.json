@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "17.2.1-c7d9bf2",
+  "version": "17.2.1-fc19e32",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^17.2.0",
-    "@yelon/theme": "^17.2.1-c7d9bf2",
-    "@yelon/form": "^17.2.1-c7d9bf2",
-    "@yelon/abc": "^17.2.1-c7d9bf2",
-    "@yelon/util": "^17.2.1-c7d9bf2",
+    "@yelon/theme": "^17.2.1-fc19e32",
+    "@yelon/form": "^17.2.1-fc19e32",
+    "@yelon/abc": "^17.2.1-fc19e32",
+    "@yelon/util": "^17.2.1-fc19e32",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -87,6 +87,12 @@
       "esm2022": "./esm2022/yunzai-table-user/yunzai-table-user.mjs",
       "esm": "./esm2022/yunzai-table-user/yunzai-table-user.mjs",
       "default": "./fesm2022/yunzai-table-user.mjs"
+    },
+    "./yunzai-widgets": {
+      "types": "./yunzai-widgets/index.d.ts",
+      "esm2022": "./esm2022/yunzai-widgets/yunzai-widgets.mjs",
+      "esm": "./esm2022/yunzai-widgets/yunzai-widgets.mjs",
+      "default": "./fesm2022/yunzai-widgets.mjs"
     }
   },
   "sideEffects": false

@@ -1,3 +1,4 @@
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ITokenModel } from '../interface';
 export interface JWT {
     /**
@@ -28,13 +29,15 @@ export interface JWT {
      * JWT ID
      */
     jti: string;
-    [key: string]: any;
-    [key: number]: any;
+    [key: string]: NzSafeAny;
+    [key: number]: NzSafeAny;
 }
 export declare class JWTTokenModel implements ITokenModel {
-    [key: string]: any;
-    token: string | null | undefined;
-    expired?: number;
+    access_token?: string;
+    expires_in?: number;
+    refresh_token?: string;
+    scope?: string;
+    token_type?: string;
     /**
      * 获取载荷信息
      */

@@ -4,9 +4,6 @@ import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 import * as i0 from "@angular/core";
 export declare function YA_SERVICE_TOKEN_FACTORY(): ITokenService;
-/**
- * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
- */
 export declare class TokenService implements ITokenService, OnDestroy {
     private readonly store;
     private refresh$;

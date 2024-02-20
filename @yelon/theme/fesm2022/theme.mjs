@@ -1,25 +1,42 @@
-import { DOCUMENT, isPlatformServer, CommonModule, registerLocaleData } from '@angular/common';
+import { DOCUMENT, isPlatformServer, registerLocaleData, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, Pipe, Inject, Optional, SkipSelf, NgModule, importProvidersFrom, LOCALE_ID, ENVIRONMENT_INITIALIZER, makeEnvironmentProviders, Version } from '@angular/core';
-import { filter, BehaviorSubject, of, share, Subject, map, delay, isObservable, switchMap, Observable, take, tap, finalize, throwError, catchError } from 'rxjs';
+import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, Pipe, Optional, Inject, SkipSelf, NgModule, importProvidersFrom, LOCALE_ID, ENVIRONMENT_INITIALIZER, makeEnvironmentProviders, Version } from '@angular/core';
+import { filter, BehaviorSubject, share, Subject, map, of, delay, isObservable, switchMap, tap, finalize, takeUntil, catchError, Observable, take, throwError } from 'rxjs';
 import { ACLService } from '@yelon/acl';
 import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService, YUNZAI_CONFIG } from '@yelon/util/config';
+import * as i5 from '@angular/cdk/platform';
 import { Platform } from '@angular/cdk/platform';
 import { Directionality } from '@angular/cdk/bidi';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title, DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import ngElGr from '@angular/common/locales/el';
+import ngEn from '@angular/common/locales/en';
+import ngEsEs from '@angular/common/locales/es';
+import ngFr from '@angular/common/locales/fr';
+import ngHr from '@angular/common/locales/hr';
+import ngIt from '@angular/common/locales/it';
+import ngKo from '@angular/common/locales/ko';
+import ngPl from '@angular/common/locales/pl';
+import ngSl from '@angular/common/locales/sl';
+import ngTr from '@angular/common/locales/tr';
+import ngZh from '@angular/common/locales/zh';
+import ngZhTw from '@angular/common/locales/zh-Hant';
+import { zhCN as zhCN$1, zhTW, enUS, el, es, fr, hr, it, ko, pl, sl, tr } from 'date-fns/locale';
+import * as i3 from 'ng-zorro-antd/i18n';
+import { zh_CN, zh_TW, en_US, el_GR, es_ES, fr_FR, hr_HR, it_IT, ko_KR, pl_PL, sl_SI, tr_TR, NzI18nService, NzI18nModule, provideNzI18n, NZ_DATE_LOCALE } from 'ng-zorro-antd/i18n';
+import { map as map$1 } from 'rxjs/operators';
+import { YA_SERVICE_TOKEN } from '@yelon/auth';
+import { HttpClient, HttpParams, HttpContextToken } from '@angular/common/http';
 import { DragDrop } from '@angular/cdk/drag-drop';
 import { deepMerge } from '@yelon/util/other';
 import { NzModalService, NzModalModule } from 'ng-zorro-antd/modal';
 import { NzDrawerService, NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { HttpClient, HttpParams, HttpContextToken } from '@angular/common/http';
 import { formatDate } from '@yelon/util/date-time';
-import { NzI18nService, NzI18nModule, provideNzI18n, NZ_DATE_LOCALE } from 'ng-zorro-antd/i18n';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { BellOutline, DeleteOutline, PlusOutline, InboxOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
+import { AccountBookTwoTone, AccountBookFill, AccountBookOutline, AlertTwoTone, AlertFill, AlibabaOutline, AimOutline, AlipayCircleFill, AlertOutline, AlignCenterOutline, AlipayCircleOutline, AlipayOutline, AlignLeftOutline, AlignRightOutline, AmazonOutline, AliwangwangOutline, AliyunOutline, AlipaySquareFill, AmazonCircleFill, AndroidFill, AliwangwangFill, AntCloudOutline, AmazonSquareFill, AndroidOutline, ApartmentOutline, ApiTwoTone, ApiFill, ApiOutline, AntDesignOutline, AppstoreAddOutline, AppstoreFill, AppleOutline, AppstoreOutline, ArrowDownOutline, AppleFill, ArrowsAltOutline, AppstoreTwoTone, ArrowUpOutline, AreaChartOutline, ArrowLeftOutline, AudioFill, ArrowRightOutline, AudioTwoTone, AuditOutline, AudioMutedOutline, BackwardFill, AudioOutline, BackwardOutline, BankFill, BarcodeOutline, BellFill, BankTwoTone, BarsOutline, BankOutline, BehanceCircleFill, BehanceSquareFill, BoldOutline, BellOutline, BehanceOutline, BlockOutline, BehanceSquareOutline, BgColorsOutline, BellTwoTone, BarChartOutline, BookTwoTone, BookFill, BorderOuterOutline, BorderLeftOutline, BorderBottomOutline, BorderHorizontalOutline, BorderTopOutline, BorderOutline, BorderInnerOutline, BorderRightOutline, BoxPlotOutline, BoxPlotFill, BoxPlotTwoTone, BookOutline, BorderlessTableOutline, BorderVerticleOutline, BuildTwoTone, BuildOutline, BugFill, BugOutline, BugTwoTone, BulbFill, BulbTwoTone, BuildFill, BulbOutline, CalculatorFill, CalculatorTwoTone, CalendarFill, CalendarOutline, CalculatorOutline, CalendarTwoTone, CameraOutline, CameraFill, CameraTwoTone, CarTwoTone, CaretDownOutline, CarOutline, CaretLeftFill, CarFill, CaretRightOutline, CaretDownFill, CaretUpOutline, CaretRightFill, CarryOutFill, CarryOutOutline, CaretLeftOutline, CaretUpFill, BranchesOutline, CarryOutTwoTone, CheckCircleFill, CheckCircleOutline, CheckSquareOutline, CheckCircleTwoTone, CiCircleTwoTone, CheckOutline, CheckSquareTwoTone, CiOutline, CheckSquareFill, CiTwoTone, ChromeOutline, ClockCircleOutline, CiCircleOutline, ChromeFill, ClearOutline, CloseCircleTwoTone, CiCircleFill, CloseCircleOutline, ClockCircleFill, CloseCircleFill, ClockCircleTwoTone, CloseOutline, CloseSquareOutline, CloseSquareFill, CloudFill, CloseSquareTwoTone, CloudDownloadOutline, CloudTwoTone, CloudServerOutline, CloudUploadOutline, CloudSyncOutline, ClusterOutline, CodeSandboxCircleFill, CodeFill, CodepenCircleOutline, CloudOutline, CodeSandboxOutline, CodeOutline, CodeSandboxSquareFill, CodeTwoTone, CodepenSquareFill, CodepenOutline, CoffeeOutline, ColumnWidthOutline, CompressOutline, ColumnHeightOutline, CodepenCircleFill, CompassTwoTone, CommentOutline, ContainerFill, CompassOutline, ConsoleSqlOutline, ContactsOutline, ContainerTwoTone, ContactsFill, ContactsTwoTone, ContainerOutline, ControlFill, CopyFill, CopyOutline, CompassFill, CopyTwoTone, CopyrightOutline, CopyrightCircleOutline, ControlTwoTone, ControlOutline, CreditCardFill, CopyrightTwoTone, CrownFill, CopyrightCircleFill, CrownOutline, CustomerServiceTwoTone, CreditCardOutline, CustomerServiceOutline, DashboardTwoTone, CrownTwoTone, CreditCardTwoTone, CustomerServiceFill, DashboardFill, DashOutline, DatabaseOutline, DatabaseTwoTone, DatabaseFill, DashboardOutline, DeleteTwoTone, DeleteRowOutline, DeleteColumnOutline, DeliveredProcedureOutline, DeleteOutline, CopyrightCircleTwoTone, DesktopOutline, DeleteFill, DiffOutline, DiffFill, DeploymentUnitOutline, DiffTwoTone, DingtalkOutline, DollarCircleFill, DislikeFill, DingtalkSquareFill, DisconnectOutline, DollarCircleTwoTone, DollarOutline, DingtalkCircleFill, DislikeTwoTone, DollarTwoTone, DownCircleFill, DislikeOutline, DollarCircleOutline, DoubleLeftOutline, DownSquareFill, DownOutline, DownSquareOutline, DownSquareTwoTone, DownCircleTwoTone, DoubleRightOutline, DownCircleOutline, DownloadOutline, DotChartOutline, DribbbleCircleFill, DribbbleOutline, DribbbleSquareOutline, DropboxCircleFill, DingdingOutline, EditOutline, DribbbleSquareFill, DropboxSquareFill, EllipsisOutline, EnvironmentFill, EditFill, EnterOutline, EuroCircleFill, EuroTwoTone, EuroCircleOutline, EditTwoTone, EuroOutline, EnvironmentTwoTone, ExclamationCircleFill, ExpandAltOutline, EuroCircleTwoTone, ExclamationCircleTwoTone, EnvironmentOutline, ExperimentOutline, ExperimentFill, ExpandOutline, ExceptionOutline, ExportOutline, ExperimentTwoTone, ExclamationCircleOutline, ExclamationOutline, EyeFill, EyeInvisibleFill, EyeInvisibleTwoTone, DropboxOutline, DragOutline, FacebookOutline, FacebookFill, EyeTwoTone, EyeOutline, FastForwardFill, FieldBinaryOutline, FieldNumberOutline, FastBackwardOutline, FileAddFill, FastBackwardFill, FileExcelFill, FastForwardOutline, FieldStringOutline, FileDoneOutline, FileAddTwoTone, FileExcelTwoTone, FileExclamationFill, FileAddOutline, FileExclamationOutline, FieldTimeOutline, FileImageTwoTone, FileExcelOutline, FileExclamationTwoTone, FileImageFill, FileGifOutline, FileFill, FileMarkdownTwoTone, FileMarkdownOutline, FallOutline, FileImageOutline, EyeInvisibleOutline, FilePdfOutline, FileSearchOutline, FilePptTwoTone, FilePdfTwoTone, FileJpgOutline, FileTextFill, FilePptOutline, FileSyncOutline, FilePptFill, FileUnknownOutline, FileProtectOutline, FileTextTwoTone, FileWordFill, FileUnknownTwoTone, FileWordTwoTone, FileUnknownFill, FileTextOutline, FileZipFill, FilterTwoTone, FilterFill, FileWordOutline, FireOutline, FireTwoTone, FileZipOutline, FilterOutline, FlagTwoTone, FileTwoTone, FilePdfFill, FileOutline, FileMarkdownFill, FileZipTwoTone, FlagOutline, FolderAddTwoTone, FolderOpenFill, FireFill, FlagFill, FolderOutline, FolderViewOutline, FolderTwoTone, FontColorsOutline, FolderOpenTwoTone, FolderFill, ForwardOutline, FolderOpenOutline, ForkOutline, ForwardFill, FormatPainterOutline, FormatPainterFill, FormOutline, FrownFill, FrownTwoTone, FullscreenOutline, FontSizeOutline, FundFill, FunctionOutline, FundViewOutline, FullscreenExitOutline, GifOutline, FundProjectionScreenOutline, FundTwoTone, FolderAddFill, FunnelPlotTwoTone, GiftOutline, FunnelPlotFill, FundOutline, FrownOutline, GithubOutline, GoldFill, FolderAddOutline, GitlabFill, GiftFill, GitlabOutline, GoldTwoTone, GoogleCircleFill, GiftTwoTone, GooglePlusCircleFill, GoldOutline, GithubFill, GoogleOutline, GooglePlusOutline, GoogleSquareFill, GoldenFill, HddTwoTone, GooglePlusSquareFill, GlobalOutline, HeartOutline, HeartTwoTone, GroupOutline, HeartFill, HeatMapOutline, GatewayOutline, FunnelPlotOutline, HddFill, HomeFill, HighlightFill, HomeOutline, HistoryOutline, HighlightOutline, HddOutline, HourglassFill, HomeTwoTone, HourglassTwoTone, Html5Outline, Html5Fill, IdcardFill, Html5TwoTone, HourglassOutline, IdcardTwoTone, IdcardOutline, IeOutline, IeCircleFill, IeSquareFill, InboxOutline, ImportOutline, InfoCircleOutline, InfoCircleTwoTone, InsertRowAboveOutline, InsertRowRightOutline, InfoCircleFill, InfoOutline, InsertRowBelowOutline, HighlightTwoTone, InsuranceFill, InstagramFill, InteractionFill, InsertRowLeftOutline, InstagramOutline, InteractionOutline, ItalicOutline, InteractionTwoTone, LayoutOutline, IssuesCloseOutline, LayoutFill, LaptopOutline, LeftCircleFill, LayoutTwoTone, KeyOutline, LeftOutline, LeftCircleOutline, LeftSquareOutline, LeftSquareFill, LeftCircleTwoTone, LikeFill, LeftSquareTwoTone, LineOutline, LikeTwoTone, LinkedinOutline, LineChartOutline, LineHeightOutline, LinkedinFill, LinkOutline, LikeOutline, InsuranceOutline, Loading3QuartersOutline, LockFill, InsuranceTwoTone, MacCommandOutline, LockTwoTone, LoadingOutline, MailOutline, LoginOutline, MedicineBoxOutline, MailFill, MailTwoTone, MacCommandFill, ManOutline, MedicineBoxFill, MedicineBoxTwoTone, MediumCircleFill, MediumOutline, MehFill, MediumWorkmarkOutline, MenuFoldOutline, MehOutline, MediumSquareFill, MessageTwoTone, MehTwoTone, MergeCellsOutline, MinusCircleFill, MenuOutline, MenuUnfoldOutline, MessageFill, MinusCircleTwoTone, LockOutline, MinusOutline, MinusCircleOutline, LogoutOutline, MessageOutline, MoneyCollectFill, MinusSquareOutline, MinusSquareTwoTone, MobileOutline, MobileTwoTone, MoneyCollectOutline, MoreOutline, NotificationFill, NotificationOutline, MoneyCollectTwoTone, NodeIndexOutline, NodeExpandOutline, MonitorOutline, OrderedListOutline, NodeCollapseOutline, NumberOutline, PaperClipOutline, NotificationTwoTone, PauseCircleFill, PartitionOutline, PauseOutline, OneToOneOutline, PayCircleOutline, PayCircleFill, MinusSquareFill, PauseCircleOutline, PauseCircleTwoTone, PicCenterOutline, PicRightOutline, PercentageOutline, MobileFill, PictureOutline, PictureFill, PhoneTwoTone, PhoneFill, PieChartFill, PictureTwoTone, PieChartOutline, PlaySquareFill, PlayCircleTwoTone, PlayCircleFill, PlusCircleFill, PlaySquareTwoTone, PlaySquareOutline, PlayCircleOutline, PieChartTwoTone, PlusCircleOutline, PlusSquareFill, PoundCircleFill, PlusSquareOutline, PlusOutline, PoundOutline, PoundCircleOutline, PlusSquareTwoTone, PlusCircleTwoTone, PoweroffOutline, PoundCircleTwoTone, PhoneOutline, PrinterFill, PicLeftOutline, ProjectTwoTone, PrinterOutline, ProjectFill, ProfileOutline, ProfileTwoTone, ProjectOutline, PropertySafetyFill, PullRequestOutline, PropertySafetyOutline, PushpinOutline, PushpinTwoTone, PropertySafetyTwoTone, PushpinFill, QqOutline, QqCircleFill, QrcodeOutline, QqSquareFill, QuestionCircleTwoTone, QuestionCircleFill, RadarChartOutline, RadiusUprightOutline, QuestionCircleOutline, QuestionOutline, ReadFill, RadiusUpleftOutline, RadiusBottomleftOutline, RadiusSettingOutline, RadiusBottomrightOutline, ProfileFill, PrinterTwoTone, ReadOutline, ReconciliationFill, ReloadOutline, ReconciliationOutline, RedEnvelopeTwoTone, RedditCircleFill, RedoOutline, RedEnvelopeFill, RedditOutline, RestTwoTone, RightCircleOutline, RestOutline, RedditSquareFill, RestFill, RightCircleTwoTone, RightOutline, RightSquareFill, RightCircleFill, RightSquareOutline, RetweetOutline, RiseOutline, RightSquareTwoTone, RobotFill, RocketOutline, RobotOutline, RocketTwoTone, RocketFill, RedEnvelopeOutline, RollbackOutline, RotateRightOutline, RotateLeftOutline, ReconciliationTwoTone, SafetyCertificateTwoTone, SaveOutline, SafetyOutline, SaveFill, SaveTwoTone, ScheduleFill, SafetyCertificateOutline, ScanOutline, ScheduleTwoTone, SearchOutline, ScheduleOutline, SecurityScanTwoTone, SecurityScanOutline, ScissorOutline, SelectOutline, SecurityScanFill, SendOutline, SettingOutline, SettingTwoTone, SettingFill, ShareAltOutline, ShopOutline, ShopFill, ShopTwoTone, ShrinkOutline, ShakeOutline, ShoppingOutline, ShoppingCartOutline, ShoppingFill, SisternodeOutline, ShoppingTwoTone, SafetyCertificateFill, SkinOutline, SignalFill, SketchOutline, SkinTwoTone, SketchSquareFill, SkypeFill, SkinFill, SlackCircleFill, SlackSquareFill, SlidersTwoTone, SkypeOutline, SlidersFill, SlackSquareOutline, SmallDashOutline, SmileTwoTone, SlidersOutline, SnippetsFill, SnippetsOutline, SmileOutline, SolutionOutline, SlackOutline, SnippetsTwoTone, SoundTwoTone, SortAscendingOutline, SoundFill, SortDescendingOutline, SmileFill, SoundOutline, SplitCellsOutline, SketchCircleFill, StarOutline, StockOutline, StarTwoTone, StepForwardFill, StarFill, StepBackwardFill, StepForwardOutline, StopFill, SubnodeOutline, SwapLeftOutline, StopOutline, StopTwoTone, SwapRightOutline, SwapOutline, SwitcherTwoTone, SwitcherOutline, SyncOutline, StrikethroughOutline, SwitcherFill, TagOutline, TabletTwoTone, TabletOutline, TabletFill, TableOutline, TagsFill, TagFill, TagsTwoTone, TaobaoCircleOutline, StepBackwardOutline, TagsOutline, TagTwoTone, TaobaoOutline, ThunderboltOutline, TaobaoSquareFill, TeamOutline, TaobaoCircleFill, ThunderboltTwoTone, ToolFill, ThunderboltFill, ToTopOutline, ToolOutline, ToolTwoTone, TrademarkCircleFill, TrophyFill, TrademarkCircleTwoTone, TransactionOutline, TrademarkCircleOutline, TranslationOutline, TwitterCircleFill, TrophyOutline, TrademarkOutline, TrophyTwoTone, TwitterSquareFill, UnlockFill, TwitterOutline, UnderlineOutline, UndoOutline, UpCircleFill, UngroupOutline, UnlockTwoTone, UnlockOutline, UpOutline, UsbFill, UpCircleOutline, UnorderedListOutline, UpCircleTwoTone, UpSquareFill, UpSquareOutline, UserAddOutline, UsbTwoTone, UsergroupDeleteOutline, UpSquareTwoTone, UserOutline, UsbOutline, UserDeleteOutline, UserSwitchOutline, VerticalLeftOutline, VerticalAlignBottomOutline, VerifiedOutline, UsergroupAddOutline, UploadOutline, VerticalAlignMiddleOutline, VerticalAlignTopOutline, VerticalRightOutline, VideoCameraOutline, VideoCameraAddOutline, VideoCameraTwoTone, VideoCameraFill, WalletOutline, WalletFill, WarningFill, WarningOutline, WechatOutline, WalletTwoTone, WeiboCircleFill, WarningTwoTone, WeiboSquareFill, WeiboOutline, WeiboSquareOutline, WeiboCircleOutline, WechatFill, WhatsAppOutline, WifiOutline, WomanOutline, YoutubeFill, YahooOutline, WindowsFill, WindowsOutline, YoutubeOutline, YuqueOutline, ZhihuCircleFill, YuqueFill, ZhihuOutline, ZhihuSquareFill, ZoomInOutline, ZoomOutOutline, YahooFill } from '@ant-design/icons-angular/icons';
 import * as i1$1 from 'ng-zorro-antd/icon';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
@@ -110,10 +127,14 @@ class YunzaiI18nBaseService {
         let content = this._data[path] || '';
         if (!content)
             return path;
-        if (params) {
+        if (!params)
+            return content;
+        if (typeof params === 'object') {
             const interpolation = this.cog.interpolation;
-            Object.keys(params).forEach(key => (content = content.replace(new RegExp(`${interpolation[0]}\s?${key}\s?${interpolation[1]}`, 'g'), `${params[key]}`)));
+            const objParams = params;
+            Object.keys(objParams).forEach(key => (content = content.replace(new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'), `${objParams[key]}`)));
         }
+        (Array.isArray(params) ? params : [params]).forEach((item, index) => (content = content.replace(new RegExp(`\\{\\s?${index}\\s?\\}`, 'g'), `${item}`)));
         return content;
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18nBaseService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
@@ -129,7 +150,7 @@ class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
         this._change$.next(lang);
     }
     getLangs() {
-        return of([]);
+        return [];
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' }); }
@@ -819,24 +840,29 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
         }] });
 
 class YunzaiI18NGuardService {
-    constructor() {
-        this.i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
-        this.cogSrv = inject(YunzaiConfigService);
+    constructor(i18nSrv, cogSrv) {
+        this.i18nSrv = i18nSrv;
+        this.cogSrv = cogSrv;
     }
     process(route) {
         const lang = route.params && route.params[this.cogSrv.get('themeI18n')?.paramNameOfUrlGuard ?? 'i18n'];
         if (lang != null) {
-            this.i18nSrv?.use(lang);
+            this.i18nSrv.use(lang);
         }
         return of(true);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NGuardService, deps: [{ token: YUNZAI_I18N_TOKEN, optional: true }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NGuardService, providedIn: 'root' }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiI18NGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }] });
+        }], ctorParameters: () => [{ type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [YUNZAI_I18N_TOKEN]
+                }] }, { type: i1.YunzaiConfigService }] });
 /**
  * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
  *
@@ -863,6 +889,1347 @@ const yunzaiI18nCanActivate = childRoute => inject(YunzaiI18NGuardService).proce
  * ```
  */
 const yunzaiI18nCanActivateChild = route => inject(YunzaiI18NGuardService).process(route);
+
+var yelonElGR = {
+    abbr: 'el-GR',
+    exception: {
+        403: `Λυπούμαστε, δεν έχετε πρόσβαση σε αυτήν τη σελίδα`,
+        404: `Λυπούμαστε, η σελίδα αυτή δεν βρέθηκε`,
+        500: `Λυπούμαστε, σφάλμα διακομιστή`,
+        backToHome: 'Επιστροφή στην αρχική σελίδα'
+    },
+    noticeIcon: {
+        emptyText: 'Δεν υπάρχουν δεδομένα',
+        clearText: 'Καθαρισμός'
+    },
+    reuseTab: {
+        close: 'Κλείσιμο καρτέλας',
+        closeOther: 'Κλείσιμο των άλλων καρτέλων',
+        closeRight: 'Κλείσιμο των καρτελών δεξιά',
+        refresh: 'Ανανέωση'
+    },
+    tagSelect: {
+        expand: 'Επέκταση',
+        collapse: 'Σύμπτυξη'
+    },
+    miniProgress: {
+        target: 'Στόχος: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} από {{total}}',
+        filterConfirm: 'ΟΚ',
+        filterReset: 'Επαναφορά'
+    },
+    sf: {
+        submit: 'Υποβολή',
+        reset: 'Επαναφορά',
+        search: 'Αναζήτηση',
+        edit: 'Αποθήκευση',
+        addText: 'Προσθήκη',
+        removeText: 'Αφαίρεση',
+        checkAllText: 'Επιλογή όλων',
+        error: {
+            'false schema': `Η δυαδική δομή είναι ψευδής`,
+            $ref: `Δεν είναι δυνατή η επίλυση της αναφοράς {ref}`,
+            additionalItems: `Δεν πρέπει να έχει περισσότερα από {limit} στοιχεία`,
+            additionalProperties: `Δεν πρέπει να έχει επιπλέον χαρακτηριστικά`,
+            anyOf: `Πρέπει να ταιριάζει με κάποια απο τις δομές στο "anyOf"`,
+            dependencies: `τα χαρακτηριστικά {deps} είναι απαραίτητα, όταν υπάρχει το χαρακτηριστικό {property}`,
+            enum: `Πρέπει να είναι ίσο με μία από τις προκαθορισμένες τιμές`,
+            format: `Πρέπει να έχει την μορφή "{format}"`,
+            type: `Πρέπει να είναι {type}`,
+            required: `Απαιτείται`,
+            maxLength: `Δεν πρέπει να είναι μεγαλύτερο από {limit} χαρακτήρες`,
+            minLength: `Δεν πρέπει να είναι μικρότερο από {limit} χαρακτήρες`,
+            minimum: `Πρέπει να είναι {comparison} {limit}`,
+            formatMinimum: `Πρέπει να είναι {comparison} {limit}`,
+            maximum: `Πρέπει να είναι {comparison} {limit}`,
+            formatMaximum: `Πρέπει να είναι {comparison} {limit}`,
+            maxItems: `Δεν πρέπει να έχει περισσότερα από {limit} στοιχεία`,
+            minItems: `Δεν πρέπει να έχει λιγότερα από {limit} στοιχεία`,
+            maxProperties: `Δεν πρέπει να έχει περισσότερα από {limit} χαρακτηριστικά`,
+            minProperties: `Δεν πρέπει να έχει λιγότερα από {limit} χαρακτηριστικά`,
+            multipleOf: `Πρέπει να είναι πολλαπλάσιο του {multipleOf}`,
+            not: `Δεν πρέπει να είναι εγκύρο, σύμφωνα με την δομή στο "not"`,
+            oneOf: `Πρέπει να ταιριάζει με ακριβώς μια απο τις δομές στο "oneOf"`,
+            pattern: `Πρέπει να ταιριάζει με το πρότυπο "{pattern}"`,
+            uniqueItems: `Τα στοιχεία δεν πρέπει να επαναλαμβάνονται (τα στοιχεία ## {j} και {i} είναι ίδια)`,
+            custom: `Πρέπει να έχει την μορφή`,
+            propertyNames: `Το όνομα του χαρακτηριστικού "{propertyName}" δεν είναι έγκυρο`,
+            patternRequired: `Πρέπει να υπάρχει το χαρακτηριστικό αντιπαραβολής προτύπου "{missingPattern}"`,
+            switch: `Πρέπει να περάσει ο έλεγχος εγκυρότητας της λέξης-κλειδιού με την χρήση της "switch", η περίπτωση {caseIndex} αποτυγχάνει`,
+            const: `Πρέπει να είναι ίσο με σταθερά`,
+            contains: `Πρέπει να περιέχει κάποιο έγκυρο στοιχείο`,
+            formatExclusiveMaximum: `formatExclusiveMaximum πρέπει να είναι boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum πρέπει να είναι boolean`,
+            if: `Πρέπει να ταιριάζει στην δομή "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `Παράλειψη`,
+        prev: `Προηγούμενο`,
+        next: `Επόμενο`,
+        done: `Ολοκληρώθηκε`
+    }
+};
+
+var yelonEnUS = {
+    abbr: 'en-US',
+    exception: {
+        403: `Sorry, you don't have access to this page`,
+        404: `Sorry, the page you visited does not exist`,
+        500: `Sorry, the server is reporting an error`,
+        backToHome: 'Back To Home'
+    },
+    noticeIcon: {
+        emptyText: 'No data',
+        clearText: 'Clear'
+    },
+    reuseTab: {
+        close: 'Close tab',
+        closeOther: 'Close other tabs',
+        closeRight: 'Close tabs to right',
+        refresh: 'Refresh'
+    },
+    tagSelect: {
+        expand: 'Expand',
+        collapse: 'Collapse'
+    },
+    miniProgress: {
+        target: 'Target: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} of {{total}}',
+        filterConfirm: 'OK',
+        filterReset: 'Reset'
+    },
+    sf: {
+        submit: 'Submit',
+        reset: 'Reset',
+        search: 'Search',
+        edit: 'Save',
+        addText: 'Add',
+        removeText: 'Remove',
+        checkAllText: 'Check all',
+        error: {
+            'false schema': `Boolean schema is false`,
+            $ref: `Can't resolve reference {ref}`,
+            additionalItems: `Should not have more than {limit} item`,
+            additionalProperties: `Should not have additional properties`,
+            anyOf: `Should match some schema in "anyOf"`,
+            dependencies: `should have property {deps} when property {property} is present`,
+            enum: `Should be equal to one of predefined values`,
+            format: `Should match format "{format}"`,
+            type: `Should be {type}`,
+            required: `Required`,
+            maxLength: `Should not be longer than {limit} character`,
+            minLength: `Should not be shorter than {limit} character`,
+            minimum: `Should be {comparison} {limit}`,
+            formatMinimum: `Should be {comparison} {limit}`,
+            maximum: `Should be {comparison} {limit}`,
+            formatMaximum: `Should be {comparison} {limit}`,
+            maxItems: `Should not have more than {limit} item`,
+            minItems: `Should not have less than {limit} item`,
+            maxProperties: `Should not have more than {limit} property`,
+            minProperties: `Should not have less than {limit} property`,
+            multipleOf: `Should be a multiple of {multipleOf}`,
+            not: `Should not be valid according to schema in "not"`,
+            oneOf: `Should match exactly one schema in "oneOf"`,
+            pattern: `Should match pattern "{pattern}"`,
+            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
+            custom: `Should match format`,
+            propertyNames: `Property name "{propertyName}" is invalid`,
+            patternRequired: `Should have property matching pattern "{missingPattern}"`,
+            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
+            const: `Should be equal to constant`,
+            contains: `Should contain a valid item`,
+            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
+            if: `Should match "{failingKeyword}" schema`
+        }
+    },
+    onboarding: {
+        skip: `Skip`,
+        prev: `Prev`,
+        next: `Next`,
+        done: `Done`
+    }
+};
+
+var yelonEsES = {
+    abbr: 'es-ES',
+    exception: {
+        403: `Lo sentimos, no tiene acceso a esta página`,
+        404: `Lo sentimos, la página que ha visitado no existe`,
+        500: `Lo siento, error interno del servidor `,
+        backToHome: 'Volver a la página de inicio'
+    },
+    noticeIcon: {
+        emptyText: 'No hay datos',
+        clearText: 'Limpiar'
+    },
+    reuseTab: {
+        close: 'Cerrar pestaña',
+        closeOther: 'Cerrar otras pestañas',
+        closeRight: 'Cerrar pestañas a la derecha',
+        refresh: 'Actualizar'
+    },
+    tagSelect: {
+        expand: 'Expandir',
+        collapse: 'Ocultar'
+    },
+    miniProgress: {
+        target: 'Target: '
+    },
+    st: {
+        total: '{{rango[0]}} - {{rango[1]}} de {{total}}',
+        filterConfirm: 'Aceptar',
+        filterReset: 'Reiniciar'
+    },
+    sf: {
+        submit: 'Submit',
+        reset: 'Reiniciar',
+        search: 'Buscar',
+        edit: 'Guardar',
+        addText: 'Añadir',
+        removeText: 'Eliminar',
+        checkAllText: 'Comprobar todo',
+        error: {
+            'false schema': `Boolean schema is false`,
+            $ref: `Can't resolve reference {ref}`,
+            additionalItems: `Should not have more than {limit} item`,
+            additionalProperties: `Should not have additional properties`,
+            anyOf: `Should match some schema in "anyOf"`,
+            dependencies: `should have property {deps} when property {property} is present`,
+            enum: `Should be equal to one of predefined values`,
+            format: `Should match format "{format}"`,
+            type: `Should be {type}`,
+            required: `Required`,
+            maxLength: `Should not be longer than {limit} character`,
+            minLength: `Should not be shorter than {limit} character`,
+            minimum: `Should be {comparison} {limit}`,
+            formatMinimum: `Should be {comparison} {limit}`,
+            maximum: `Should be {comparison} {limit}`,
+            formatMaximum: `Should be {comparison} {limit}`,
+            maxItems: `Should not have more than {limit} item`,
+            minItems: `Should not have less than {limit} item`,
+            maxProperties: `Should not have more than {limit} property`,
+            minProperties: `Should not have less than {limit} property`,
+            multipleOf: `Should be a multiple of {multipleOf}`,
+            not: `Should not be valid according to schema in "not"`,
+            oneOf: `Should match exactly one schema in "oneOf"`,
+            pattern: `Should match pattern "{pattern}"`,
+            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
+            custom: `Should match format`,
+            propertyNames: `Property name "{propertyName}" is invalid`,
+            patternRequired: `Should have property matching pattern "{missingPattern}"`,
+            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
+            const: `Should be equal to constant`,
+            contains: `Should contain a valid item`,
+            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
+            if: `Should match "{failingKeyword}" schema`
+        }
+    },
+    onboarding: {
+        skip: `Omitir`,
+        prev: `Previo`,
+        next: `Siguiente`,
+        done: `Terminado`
+    }
+};
+
+var yelonFrFR = {
+    abbr: 'fr-FR',
+    exception: {
+        403: `Désolé, vous n'avez pas accès à cette page`,
+        404: `Désolé, la page que vous avez visitée n'existe pas`,
+        500: `Désolé, le serveur signale une erreur`,
+        backToHome: "Retour à l'accueil"
+    },
+    noticeIcon: {
+        emptyText: 'Pas de données',
+        clearText: 'Effacer'
+    },
+    reuseTab: {
+        close: "Fermer l'onglet",
+        closeOther: 'Fermer les autres onglets',
+        closeRight: 'Fermer les onglets à droite',
+        refresh: 'Rafraîchir'
+    },
+    tagSelect: {
+        expand: 'Etendre',
+        collapse: 'Effondrer'
+    },
+    miniProgress: {
+        target: 'Cible: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} de {{total}}',
+        filterConfirm: 'OK',
+        filterReset: 'Réinitialiser'
+    },
+    sf: {
+        submit: 'Soumettre',
+        reset: 'Réinitialiser',
+        search: 'Rechercher',
+        edit: 'Sauvegarder',
+        addText: 'Ajouter',
+        removeText: 'Supprimer',
+        checkAllText: 'Cochez toutes',
+        error: {
+            'false schema': `Boolean schema is false`,
+            $ref: `Can't resolve reference {ref}`,
+            additionalItems: `Should not have more than {limit} item`,
+            additionalProperties: `Should not have additional properties`,
+            anyOf: `Should match some schema in "anyOf"`,
+            dependencies: `should have property {deps} when property {property} is present`,
+            enum: `Should be equal to one of predefined values`,
+            format: `Should match format "{format}"`,
+            type: `Should be {type}`,
+            required: `Required`,
+            maxLength: `Should not be longer than {limit} character`,
+            minLength: `Should not be shorter than {limit} character`,
+            minimum: `Should be {comparison} {limit}`,
+            formatMinimum: `Should be {comparison} {limit}`,
+            maximum: `Should be {comparison} {limit}`,
+            formatMaximum: `Should be {comparison} {limit}`,
+            maxItems: `Should not have more than {limit} item`,
+            minItems: `Should not have less than {limit} item`,
+            maxProperties: `Should not have more than {limit} property`,
+            minProperties: `Should not have less than {limit} property`,
+            multipleOf: `Should be a multiple of {multipleOf}`,
+            not: `Should not be valid according to schema in "not"`,
+            oneOf: `Should match exactly one schema in "oneOf"`,
+            pattern: `Should match pattern "{pattern}"`,
+            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
+            custom: `Should match format`,
+            propertyNames: `Property name "{propertyName}" is invalid`,
+            patternRequired: `Should have property matching pattern "{missingPattern}"`,
+            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
+            const: `Should be equal to constant`,
+            contains: `Should contain a valid item`,
+            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
+            if: `Should match "{failingKeyword}" schema`
+        }
+    },
+    onboarding: {
+        skip: `Passer`,
+        prev: `Précédent`,
+        next: `Suivant`,
+        done: `Terminé`
+    }
+};
+
+var yelonHrHR = {
+    abbr: 'hr-HR',
+    exception: {
+        403: `Nažalost, nemate pristup ovoj lokaciji`,
+        404: `Nažalost, lokacija ne postoji`,
+        500: `Nažalost, server je javio pogrešku`,
+        backToHome: 'Nazad na početnu stranicu'
+    },
+    noticeIcon: {
+        emptyText: 'Nema podataka',
+        clearText: 'Obriši'
+    },
+    reuseTab: {
+        close: 'Zatvori karticu',
+        closeOther: 'Zatvori druge kartice',
+        closeRight: 'Zatvori kartice desno',
+        refresh: 'Refresh'
+    },
+    tagSelect: {
+        expand: 'Proširi',
+        collapse: 'Skupi'
+    },
+    miniProgress: {
+        target: 'Cilj: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} od {{total}}',
+        filterConfirm: 'U redu',
+        filterReset: 'Poništi'
+    },
+    sf: {
+        submit: 'Pošalji',
+        reset: 'Poništi',
+        search: 'Pretraži',
+        edit: 'Spremi',
+        addText: 'Dodaj',
+        removeText: 'Ukloni',
+        checkAllText: 'Označi sve'
+    },
+    onboarding: {
+        skip: `Preskočiti`,
+        prev: `Prethodna`,
+        next: `Sljedeći`,
+        done: `Sastavljeno`
+    }
+};
+
+var yelonItIT = {
+    abbr: 'it-IT',
+    exception: {
+        403: `Spiacenti, non hai accesso a questa pagina`,
+        404: `Spiacenti, la pagina che hai visitato non esiste`,
+        500: `Spiacenti, il server sta riscontrando un errore`,
+        backToHome: 'Torna alla Home'
+    },
+    noticeIcon: {
+        emptyText: 'Nessun dato',
+        clearText: 'Cancella memoria locale'
+    },
+    reuseTab: {
+        close: 'Chiudi la scheda',
+        closeOther: 'Chiudi le altre schede',
+        closeRight: 'Chiudi le schede a destra',
+        refresh: 'Aggiorna'
+    },
+    tagSelect: {
+        expand: 'Espandi',
+        collapse: 'Comprimi'
+    },
+    miniProgress: {
+        target: 'Obiettivo: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} di {{total}}',
+        filterConfirm: 'OK',
+        filterReset: 'Reimposta'
+    },
+    sf: {
+        submit: 'Invia',
+        reset: 'Reimposta',
+        search: 'Cerca',
+        edit: 'Salva',
+        addText: 'Aggiungi',
+        removeText: 'Rimuovi',
+        checkAllText: 'Seleziona tutto',
+        error: {
+            'false schema': `Lo schema booleano è falso`,
+            $ref: `Impossibile risolvere il riferimento {ref}`,
+            additionalItems: `Non deve avere più di {limit} elementi`,
+            additionalProperties: `Non deve avere proprietà aggiuntive`,
+            anyOf: `Deve corrispondere a uno schema in "anyOf"`,
+            dependencies: `Deve avere una proprietà {deps} quando è presente la proprietà {property}`,
+            enum: `Deve essere uguale a uno dei valori predefiniti`,
+            format: `Deve corrispondere al formato "{format}"`,
+            type: `Deve essere {type}`,
+            required: `Obbligatorio`,
+            maxLength: `Non deve essere superiore a {limit} caratteri`,
+            minLength: `Non deve essere superiore a {limit} caratteri`,
+            minimum: `Deve essere {comparison} {limit}`,
+            formatMinimum: `Deve essere {comparison} {limit}`,
+            maximum: `Deve essere {comparison} {limit}`,
+            formatMaximum: `Deve essere {comparison} {limit}`,
+            maxItems: `Non deve avere più di {limit} elementi`,
+            minItems: `Non deve avere meno di {limit} elementi`,
+            maxProperties: `Non deve avere più di {limit} proprietà`,
+            minProperties: `Non deve avere meno di {limit} proprietà`,
+            multipleOf: `Deve essere un multiplo di {multipleOf}`,
+            not: `Non deve essere valido secondo lo schema in "not"`,
+            oneOf: `Deve corrispondere esattamente a uno schema in "oneOf"`,
+            pattern: `Deve corrispondere al modello "{pattern}"`,
+            uniqueItems: `Non deve avere elementi duplicati (gli elementi ## {j} e {i} sono identici)`,
+            custom: `Deve corrispondere al formato "{format}"`,
+            propertyNames: `Il nome della proprietà "{propertyName}" non è valido`,
+            patternRequired: `Deve avere una proprietà corrispondete al modello "{missingPattern}"`,
+            switch: `Deve superare la convalida della parola chiave "switch", il caso {caseIndex} non è riuscito`,
+            const: `Deve essere uguale alla costante`,
+            contains: `Deve contenere un elemento valido`,
+            formatExclusiveMaximum: `formatExclusiveMaximum deve essere booleano`,
+            formatExclusiveMinimum: `formatExclusiveMaximum deve essere booleano`,
+            if: `Deve corrispondere allo schema "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `Salta`,
+        prev: `Precedente`,
+        next: `Successivo`,
+        done: `Fatto`
+    }
+};
+
+var yelonKoKR = {
+    abbr: 'ko-KR',
+    exception: {
+        403: `죄송합니다.이 페이지에 액세스 할 수 없습니다.`,
+        404: `죄송합니다. 해당 페이지가 없습니다.`,
+        500: `죄송합니다, 서버 오류가 있습니다.`,
+        backToHome: '홈으로 돌아갑니다.'
+    },
+    noticeIcon: {
+        emptyText: '데이터 없음',
+        clearText: '지우기'
+    },
+    reuseTab: {
+        close: '탭 닫기',
+        closeOther: '다른 탭 닫기',
+        closeRight: '오른쪽 탭 닫기',
+        refresh: '새롭게 하다'
+    },
+    tagSelect: {
+        expand: '펼치기',
+        collapse: '접기'
+    },
+    miniProgress: {
+        target: '대상: '
+    },
+    st: {
+        total: '전체 {{total}}건',
+        filterConfirm: '확인',
+        filterReset: '초기화'
+    },
+    sf: {
+        submit: '제출',
+        reset: '재설정',
+        search: '검색',
+        edit: '저장',
+        addText: '추가',
+        removeText: '제거',
+        checkAllText: '모두 확인',
+        error: {
+            'false schema': `Boolean schema is false`,
+            $ref: `Can't resolve reference {ref}`,
+            additionalItems: `Should not have more than {limit} item`,
+            additionalProperties: `Should not have additional properties`,
+            anyOf: `Should match some schema in "anyOf"`,
+            dependencies: `should have property {deps} when property {property} is present`,
+            enum: `Should be equal to one of predefined values`,
+            format: `Should match format "{format}"`,
+            type: `Should be {type}`,
+            required: `Required`,
+            maxLength: `Should not be longer than {limit} character`,
+            minLength: `Should not be shorter than {limit} character`,
+            minimum: `Should be {comparison} {limit}`,
+            formatMinimum: `Should be {comparison} {limit}`,
+            maximum: `Should be {comparison} {limit}`,
+            formatMaximum: `Should be {comparison} {limit}`,
+            maxItems: `Should not have more than {limit} item`,
+            minItems: `Should not have less than {limit} item`,
+            maxProperties: `Should not have more than {limit} property`,
+            minProperties: `Should not have less than {limit} property`,
+            multipleOf: `Should be a multiple of {multipleOf}`,
+            not: `Should not be valid according to schema in "not"`,
+            oneOf: `Should match exactly one schema in "oneOf"`,
+            pattern: `Should match pattern "{pattern}"`,
+            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
+            custom: `Should match format`,
+            propertyNames: `Property name "{propertyName}" is invalid`,
+            patternRequired: `Should have property matching pattern "{missingPattern}"`,
+            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
+            const: `Should be equal to constant`,
+            contains: `Should contain a valid item`,
+            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
+            if: `Should match "{failingKeyword}" schema`
+        }
+    },
+    onboarding: {
+        skip: `건너 뛰기`,
+        prev: `이전`,
+        next: `다음`,
+        done: `끝난`
+    }
+};
+
+var yelonPlPL = {
+    abbr: 'pl-PL',
+    exception: {
+        403: `Niestety, nie masz uprawnień do tej strony`,
+        404: `Niestety, ta strona nie istnieje`,
+        500: `Niestety, błąd serwera`,
+        backToHome: 'Powróć do strony głównej'
+    },
+    noticeIcon: {
+        emptyText: 'Brak danych',
+        clearText: 'Wyczyść'
+    },
+    reuseTab: {
+        close: 'Zamknij kartę',
+        closeOther: 'Zamknij inne karty',
+        closeRight: 'Zamknij karty po prawej',
+        refresh: 'Refresh'
+    },
+    tagSelect: {
+        expand: 'Rozszerz',
+        collapse: 'Zmniejsz'
+    },
+    miniProgress: {
+        target: 'Cel: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} z {{total}}',
+        filterConfirm: 'OK',
+        filterReset: 'Wyczyść'
+    },
+    sf: {
+        submit: 'Wyślij',
+        reset: 'Resetuj',
+        search: 'Szukaj',
+        edit: 'Zapisz',
+        addText: 'Dodaj',
+        removeText: 'Usuń',
+        checkAllText: 'Zaznacz wszystkie',
+        error: {
+            'false schema': `Boolean schema is false`,
+            $ref: `Can't resolve reference {ref}`,
+            additionalItems: `Should not have more than {limit} item`,
+            additionalProperties: `Should not have additional properties`,
+            anyOf: `Should match some schema in "anyOf"`,
+            dependencies: `should have property {deps} when property {property} is present`,
+            enum: `Should be equal to one of predefined values`,
+            format: `Should match format "{format}"`,
+            type: `Should be {type}`,
+            required: `Required`,
+            maxLength: `Should not be longer than {limit} character`,
+            minLength: `Should not be shorter than {limit} character`,
+            minimum: `Should be {comparison} {limit}`,
+            formatMinimum: `Should be {comparison} {limit}`,
+            maximum: `Should be {comparison} {limit}`,
+            formatMaximum: `Should be {comparison} {limit}`,
+            maxItems: `Should not have more than {limit} item`,
+            minItems: `Should not have less than {limit} item`,
+            maxProperties: `Should not have more than {limit} property`,
+            minProperties: `Should not have less than {limit} property`,
+            multipleOf: `Should be a multiple of {multipleOf}`,
+            not: `Should not be valid according to schema in "not"`,
+            oneOf: `Should match exactly one schema in "oneOf"`,
+            pattern: `Should match pattern "{pattern}"`,
+            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
+            custom: `Should match format`,
+            propertyNames: `Property name "{propertyName}" is invalid`,
+            patternRequired: `Should have property matching pattern "{missingPattern}"`,
+            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
+            const: `Should be equal to constant`,
+            contains: `Should contain a valid item`,
+            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
+            if: `Should match "{failingKeyword}" schema`
+        }
+    },
+    onboarding: {
+        skip: `Pominąć`,
+        prev: `Poprzedni`,
+        next: `Kolejny`,
+        done: `Gotowe`
+    }
+};
+
+var yelonSlSI = {
+    abbr: 'sl-SI',
+    exception: {
+        403: `Žal nimate dostopa do te strani`,
+        404: `Žal stran, ki ste jo obiskali, ne obstaja`,
+        500: `Žal strežnik poroča o napaki`,
+        backToHome: 'Nazaj domov'
+    },
+    noticeIcon: {
+        emptyText: 'Ni podatkov',
+        clearText: 'Počisti'
+    },
+    reuseTab: {
+        close: 'Zapri zavihek',
+        closeOther: 'Zaprite druge zavihke',
+        closeRight: 'Zaprite zavihke na desni'
+    },
+    tagSelect: {
+        expand: 'Razširi',
+        collapse: 'Strni'
+    },
+    miniProgress: {
+        target: 'Cilj: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} of {{total}}',
+        filterConfirm: 'OK',
+        filterReset: 'Reset'
+    },
+    sf: {
+        submit: 'Pošlji',
+        reset: 'Reset',
+        search: 'Išči',
+        edit: 'Shrani',
+        addText: 'Dodaj',
+        removeText: 'Odstrani',
+        checkAllText: 'Preveri vse',
+        error: {
+            'false schema': `Boolova shema je napačna`,
+            $ref: `Referenc ni mogoče razrešiti {ref}`,
+            additionalItems: `Ne sme imeti več kot {limit} artiklov`,
+            additionalProperties: `Ne bi smel imeti dodatnih lastnosti`,
+            anyOf: `Se mora ujemati s shemo v "anyOf"`,
+            dependencies: `mora imeti lastnosti {deps} ko je artikel {property} prisoten`,
+            enum: `Mora biti enaka eni od vnaprej določenih vrednosti`,
+            format: `Naj ustreza formatu "{format}"`,
+            type: `Naj bo {type}`,
+            required: `Zahtevano`,
+            maxLength: `Ne sme biti daljši od {limit} znakov`,
+            minLength: `Ne sme biti krajši od {limit} znakov`,
+            minimum: `Naj bo {comparison} {limit}`,
+            formatMinimum: `Naj bo {comparison} {limit}`,
+            maximum: `Naj bo {comparison} {limit}`,
+            formatMaximum: `Naj bo {comparison} {limit}`,
+            maxItems: `Ne sme imeti več kot {limit} artiklov`,
+            minItems: `Ne sme imeti manj kot {limit} artiklov`,
+            maxProperties: `Ne sme imeti več kot {limit} lastnosti`,
+            minProperties: `Ne sme imeti manj kot {limit} lastnosti`,
+            multipleOf: `Mora biti večkratnik od {multipleOf}`,
+            not: `Ne sme biti veljaven po shemi v "not"`,
+            oneOf: `Naj ustreza natančno eni shemi v "oneOf"`,
+            pattern: `Naj se ujema z vzorcem "{pattern}"`,
+            uniqueItems: `Ne bi smel imeti dvojnikov (items ## {j} in {i} so identični)`,
+            custom: `Naj ustreza formatu`,
+            propertyNames: `Ime artikla "{propertyName}" je neveljavno`,
+            patternRequired: `Mora imeti vzorec ujemanja lastnosti "{missingPattern}"`,
+            switch: `Mora prestati "switch" validacijo ključne besede, primer {caseIndex} ne uspe`,
+            const: `Naj bo enako konstanti`,
+            contains: `Naj vsebuje veljaven artikel`,
+            formatExclusiveMaximum: `formatExclusiveMaximum naj bo boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum naj bo boolean`,
+            if: `Naj se ujema s shemo "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `Preskoči`,
+        prev: `Prejšnje`,
+        next: `Naslednji`,
+        done: `Končano`
+    }
+};
+
+var yelonTrTR = {
+    abbr: 'tr-TR',
+    exception: {
+        403: `Üzgünüz, bu sayfaya erişiminiz yok`,
+        404: `Maalesef bu sayfa mevcut değil`,
+        500: `Üzgünüz, sunucu hatası`,
+        backToHome: `Ana Sayfa'ya geri dön`
+    },
+    noticeIcon: {
+        emptyText: 'Veri yok',
+        clearText: 'Temiz'
+    },
+    reuseTab: {
+        close: 'Sekmeyi Kapat',
+        closeOther: 'Diğer sekmeleri kapat',
+        closeRight: 'Sağdaki sekmeleri kapat',
+        refresh: 'täzele'
+    },
+    tagSelect: {
+        expand: 'Genişlet',
+        collapse: 'Daralt'
+    },
+    miniProgress: {
+        target: 'Hedef: '
+    },
+    st: {
+        total: '{{range[0]}} ile {{range[1]}} arasında {{total}}',
+        filterConfirm: 'Tamam',
+        filterReset: 'Sıfırla'
+    },
+    sf: {
+        submit: 'Gönder',
+        reset: 'Sıfırla',
+        search: 'Ara',
+        edit: 'Kaydet',
+        addText: 'Ekle',
+        removeText: 'Kaldır',
+        checkAllText: 'Tümünü kontrol et',
+        error: {
+            'false schema': `Boolean schema is false`,
+            $ref: `Can't resolve reference {ref}`,
+            additionalItems: `Should not have more than {limit} item`,
+            additionalProperties: `Should not have additional properties`,
+            anyOf: `Should match some schema in "anyOf"`,
+            dependencies: `should have property {deps} when property {property} is present`,
+            enum: `Should be equal to one of predefined values`,
+            format: `Should match format "{format}"`,
+            type: `Should be {type}`,
+            required: `Required`,
+            maxLength: `Should not be longer than {limit} character`,
+            minLength: `Should not be shorter than {limit} character`,
+            minimum: `Should be {comparison} {limit}`,
+            formatMinimum: `Should be {comparison} {limit}`,
+            maximum: `Should be {comparison} {limit}`,
+            formatMaximum: `Should be {comparison} {limit}`,
+            maxItems: `Should not have more than {limit} item`,
+            minItems: `Should not have less than {limit} item`,
+            maxProperties: `Should not have more than {limit} property`,
+            minProperties: `Should not have less than {limit} property`,
+            multipleOf: `Should be a multiple of {multipleOf}`,
+            not: `Should not be valid according to schema in "not"`,
+            oneOf: `Should match exactly one schema in "oneOf"`,
+            pattern: `Should match pattern "{pattern}"`,
+            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
+            custom: `Should match format`,
+            propertyNames: `Property name "{propertyName}" is invalid`,
+            patternRequired: `Should have property matching pattern "{missingPattern}"`,
+            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
+            const: `Should be equal to constant`,
+            contains: `Should contain a valid item`,
+            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
+            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
+            if: `Should match "{failingKeyword}" schema`
+        }
+    },
+    onboarding: {
+        skip: `Atla`,
+        prev: `Önceki`,
+        next: `Sonraki`,
+        done: `Bitti`
+    }
+};
+
+var zhCN = {
+    abbr: 'zh-CN',
+    exception: {
+        403: '抱歉，你无权访问该页面',
+        404: '抱歉，你访问的页面不存在',
+        500: '抱歉，服务器出错了',
+        backToHome: '返回首页'
+    },
+    noticeIcon: {
+        emptyText: '暂无数据',
+        clearText: '清空'
+    },
+    reuseTab: {
+        close: '关闭标签',
+        closeOther: '关闭其它标签',
+        closeRight: '关闭右侧标签',
+        refresh: '刷新'
+    },
+    tagSelect: {
+        expand: '展开',
+        collapse: '收起'
+    },
+    miniProgress: {
+        target: '目标值：'
+    },
+    st: {
+        total: '共 {{total}} 条',
+        filterConfirm: '确定',
+        filterReset: '重置'
+    },
+    sf: {
+        submit: '提交',
+        reset: '重置',
+        search: '搜索',
+        edit: '保存',
+        addText: '添加',
+        removeText: '移除',
+        checkAllText: '全选',
+        error: {
+            'false schema': `布尔模式出错`,
+            $ref: `无法找到引用{ref}`,
+            additionalItems: `不允许超过{limit}个元素`,
+            additionalProperties: `不允许有额外的属性`,
+            anyOf: `数据应为 anyOf 所指定的其中一个`,
+            dependencies: `应当拥有属性{property}的依赖属性{deps}`,
+            enum: `应当是预设定的枚举值之一`,
+            format: `格式不正确`,
+            type: `类型应当是 {type}`,
+            required: `必填项`,
+            maxLength: `至多 {limit} 个字符`,
+            minLength: `至少 {limit} 个字符以上`,
+            minimum: `必须 {comparison}{limit}`,
+            formatMinimum: `必须 {comparison}{limit}`,
+            maximum: `必须 {comparison}{limit}`,
+            formatMaximum: `必须 {comparison}{limit}`,
+            maxItems: `不应多于 {limit} 个项`,
+            minItems: `不应少于 {limit} 个项`,
+            maxProperties: `不应多于 {limit} 个属性`,
+            minProperties: `不应少于 {limit} 个属性`,
+            multipleOf: `应当是 {multipleOf} 的整数倍`,
+            not: `不应当匹配 "not" schema`,
+            oneOf: `只能匹配一个 "oneOf" 中的 schema`,
+            pattern: `数据格式不正确`,
+            uniqueItems: `不应当含有重复项 (第 {j} 项与第 {i} 项是重复的)`,
+            custom: `格式不正确`,
+            propertyNames: `属性名 "{propertyName}" 无效`,
+            patternRequired: `应当有属性匹配模式 {missingPattern}`,
+            switch: `由于 {caseIndex} 失败，未通过 "switch" 校验`,
+            const: `应当等于常量`,
+            contains: `应当包含一个有效项`,
+            formatExclusiveMaximum: `formatExclusiveMaximum 应当是布尔值`,
+            formatExclusiveMinimum: `formatExclusiveMinimum 应当是布尔值`,
+            if: `应当匹配模式 "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `跳过`,
+        prev: `上一项`,
+        next: `下一项`,
+        done: `完成`
+    }
+};
+
+var yelonZhTw = {
+    abbr: 'zh-TW',
+    exception: {
+        403: '抱歉，你無權訪問該頁面',
+        404: '抱歉，你訪問的頁面不存在',
+        500: '抱歉，服務器出錯了',
+        backToHome: '返回首頁'
+    },
+    noticeIcon: {
+        emptyText: '暫無數據',
+        clearText: '清空'
+    },
+    reuseTab: {
+        close: '關閉標簽',
+        closeOther: '關閉其它標簽',
+        closeRight: '關閉右側標簽',
+        refresh: '刷新'
+    },
+    tagSelect: {
+        expand: '展開',
+        collapse: '收起'
+    },
+    miniProgress: {
+        target: '目標值：'
+    },
+    st: {
+        total: '共 {{total}} 條',
+        filterConfirm: '確定',
+        filterReset: '重置'
+    },
+    sf: {
+        submit: '提交',
+        reset: '重置',
+        search: '搜索',
+        edit: '保存',
+        addText: '添加',
+        removeText: '移除',
+        checkAllText: '全選',
+        error: {
+            'false schema': `佈爾模式出錯`,
+            $ref: `無法找到引用{ref}`,
+            additionalItems: `不允許超過{ref}`,
+            additionalProperties: `不允許有額外的屬性`,
+            anyOf: `數據應為 anyOf 所指定的其中一個`,
+            dependencies: `應當擁有屬性{property}的依賴屬性{deps}`,
+            enum: `應當是預設定的枚舉值之一`,
+            format: `格式不正確`,
+            type: `類型應當是 {type}`,
+            required: `必填項`,
+            maxLength: `至多 {limit} 個字符`,
+            minLength: `至少 {limit} 個字符以上`,
+            minimum: `必須 {comparison}{limit}`,
+            formatMinimum: `必須 {comparison}{limit}`,
+            maximum: `必須 {comparison}{limit}`,
+            formatMaximum: `必須 {comparison}{limit}`,
+            maxItems: `不應多於 {limit} 個項`,
+            minItems: `不應少於 {limit} 個項`,
+            maxProperties: `不應多於 {limit} 個屬性`,
+            minProperties: `不應少於 {limit} 個屬性`,
+            multipleOf: `應當是 {multipleOf} 的整數倍`,
+            not: `不應當匹配 "not" schema`,
+            oneOf: `隻能匹配一個 "oneOf" 中的 schema`,
+            pattern: `數據格式不正確`,
+            uniqueItems: `不應當含有重複項 (第 {j} 項與第 {i} 項是重複的)`,
+            custom: `格式不正確`,
+            propertyNames: `屬性名 "{propertyName}" 無效`,
+            patternRequired: `應當有屬性匹配模式 {missingPattern}`,
+            switch: `由於 {caseIndex} 失敗，未通過 "switch" 校驗`,
+            const: `應當等於常量`,
+            contains: `應當包含一個有效項`,
+            formatExclusiveMaximum: `formatExclusiveMaximum 應當是佈爾值`,
+            formatExclusiveMinimum: `formatExclusiveMinimum 應當是佈爾值`,
+            if: `應當匹配模式 "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `跳過`,
+        prev: `上一項`,
+        next: `下一項`,
+        done: `完成`
+    }
+};
+
+const YUNZAI_LANGS = {
+    'zh-CN': {
+        text: '简体中文',
+        ng: ngZh,
+        zorro: zh_CN,
+        date: zhCN$1,
+        yelon: zhCN,
+        abbr: '🇨🇳'
+    },
+    'zh-TW': {
+        text: '繁体中文',
+        ng: ngZhTw,
+        zorro: zh_TW,
+        date: zhTW,
+        yelon: yelonZhTw,
+        abbr: '🇭🇰'
+    },
+    'en-US': {
+        text: 'English',
+        ng: ngEn,
+        zorro: en_US,
+        date: enUS,
+        yelon: yelonEnUS,
+        abbr: '🇬🇧'
+    },
+    'el-GR': {
+        text: 'Ελληνικά',
+        ng: ngElGr,
+        zorro: el_GR,
+        date: el,
+        yelon: yelonElGR,
+        abbr: '🇬🇷'
+    },
+    'es-ES': {
+        text: 'Español',
+        ng: ngEsEs,
+        zorro: es_ES,
+        date: es,
+        yelon: yelonEsES,
+        abbr: '🇪🇸'
+    },
+    'fr-FR': {
+        text: 'Français',
+        ng: ngFr,
+        zorro: fr_FR,
+        date: fr,
+        yelon: yelonFrFR,
+        abbr: '🇫🇷'
+    },
+    'hr-HR': {
+        text: 'Hrvatski',
+        ng: ngHr,
+        zorro: hr_HR,
+        date: hr,
+        yelon: yelonHrHR,
+        abbr: '🇭🇷'
+    },
+    'it-IT': {
+        text: 'Italiano',
+        ng: ngIt,
+        zorro: it_IT,
+        date: it,
+        yelon: yelonItIT,
+        abbr: '🇮🇹'
+    },
+    'ko-KR': {
+        text: '한국어',
+        ng: ngKo,
+        zorro: ko_KR,
+        date: ko,
+        yelon: yelonKoKR,
+        abbr: '🇰🇷'
+    },
+    'pl-PL': {
+        text: 'Polski',
+        ng: ngPl,
+        zorro: pl_PL,
+        date: pl,
+        yelon: yelonPlPL,
+        abbr: '🇵🇱'
+    },
+    'sl-SI': {
+        text: 'Slovenščina',
+        ng: ngSl,
+        zorro: sl_SI,
+        date: sl,
+        yelon: yelonSlSI,
+        abbr: '🇸🇮'
+    },
+    'tr-TR': {
+        text: 'Türkçe',
+        ng: ngTr,
+        zorro: tr_TR,
+        date: tr,
+        yelon: yelonTrTR,
+        abbr: '🇹🇷'
+    }
+};
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * 封装HttpClient，主要解决：
+ * + 优化HttpClient在参数上便利性
+ * + 统一实现 loading
+ * + 统一处理时间格式问题
+ */
+class _HttpClient {
+    constructor(cogSrv) {
+        this.http = inject(HttpClient);
+        this.lc = 0;
+        this.cog = cogSrv.merge('themeHttp', {
+            nullValueHandling: 'include',
+            dateValueHandling: 'timestamp'
+        });
+    }
+    /**
+     * Get whether it's loading
+     *
+     * 获取是否正在加载中
+     */
+    get loading() {
+        return this.lc > 0;
+    }
+    /**
+     * Get the currently loading count
+     *
+     * 获取当前加载中的数量
+     */
+    get loadingCount() {
+        return this.lc;
+    }
+    parseParams(params) {
+        const newParams = {};
+        if (params instanceof HttpParams) {
+            return params;
+        }
+        const { nullValueHandling, dateValueHandling } = this.cog;
+        Object.keys(params).forEach(key => {
+            let paramValue = params[key];
+            // 忽略空值
+            if (nullValueHandling === 'ignore' && paramValue == null)
+                return;
+            // 将时间转化为：时间戳 (秒)
+            if (paramValue instanceof Date &&
+                (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')) {
+                paramValue = dateValueHandling === 'timestamp' ? paramValue.valueOf() : Math.trunc(paramValue.valueOf() / 1000);
+            }
+            newParams[key] = paramValue;
+        });
+        return new HttpParams({ fromObject: newParams });
+    }
+    appliedUrl(url, params) {
+        if (!params)
+            return url;
+        url += ~url.indexOf('?') ? '' : '?';
+        const arr = [];
+        Object.keys(params).forEach(key => {
+            arr.push(`${key}=${params[key]}`);
+        });
+        return url + arr.join('&');
+    }
+    setCount(count) {
+        Promise.resolve(null).then(() => (this.lc = count <= 0 ? 0 : count));
+    }
+    push() {
+        this.setCount(++this.lc);
+    }
+    pop() {
+        this.setCount(--this.lc);
+    }
+    /**
+     * Clean loading count
+     *
+     * 清空加载中
+     */
+    cleanLoading() {
+        this.setCount(0);
+    }
+    get(url, params, options = {}) {
+        return this.request('GET', url, {
+            params,
+            ...options
+        });
+    }
+    post(url, body, params, options = {}) {
+        return this.request('POST', url, {
+            body,
+            params,
+            ...options
+        });
+    }
+    delete(url, params, options = {}) {
+        return this.request('DELETE', url, {
+            params,
+            ...options
+        });
+    }
+    // #endregion
+    // #region jsonp
+    /**
+     * **JSONP Request**
+     *
+     * @param callbackParam CALLBACK值，默认：JSONP_CALLBACK
+     */
+    jsonp(url, params, callbackParam = 'JSONP_CALLBACK') {
+        return of(null).pipe(
+        // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
+        delay(0), tap(() => this.push()), switchMap(() => this.http.jsonp(this.appliedUrl(url, params), callbackParam)), finalize(() => this.pop()));
+    }
+    patch(url, body, params, options = {}) {
+        return this.request('PATCH', url, {
+            body,
+            params,
+            ...options
+        });
+    }
+    put(url, body, params, options = {}) {
+        return this.request('PUT', url, {
+            body,
+            params,
+            ...options
+        });
+    }
+    form(url, body, params, options = {}) {
+        return this.request('POST', url, {
+            body,
+            params,
+            ...options,
+            headers: {
+                'content-type': `application/x-www-form-urlencoded`
+            }
+        });
+    }
+    request(method, url, options = {}) {
+        if (options.params)
+            options.params = this.parseParams(options.params);
+        return of(null).pipe(
+        // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
+        delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: _HttpClient, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: _HttpClient, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: _HttpClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
+
+const YELON_LOCALE = new InjectionToken('yelon-locale');
+
+class YelonLocaleService {
+    constructor(locale) {
+        this._locale = zhCN;
+        this.change$ = new BehaviorSubject(this._locale);
+        this.setLocale(locale || zhCN);
+    }
+    get change() {
+        return this.change$.asObservable();
+    }
+    setLocale(locale) {
+        if (this._locale && this._locale.abbr === locale.abbr) {
+            return;
+        }
+        this._locale = locale;
+        this.change$.next(locale);
+    }
+    get locale() {
+        return this._locale;
+    }
+    getData(path) {
+        return (this._locale[path] || {});
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleService }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleService, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [YELON_LOCALE]
+                }] }] });
+function YELON_LOCALE_SERVICE_PROVIDER_FACTORY(exist, locale) {
+    return exist || new YelonLocaleService(locale);
+}
+const YELON_LOCALE_SERVICE_PROVIDER = {
+    provide: YelonLocaleService,
+    useFactory: YELON_LOCALE_SERVICE_PROVIDER_FACTORY,
+    deps: [[new Optional(), new SkipSelf(), YelonLocaleService], YELON_LOCALE]
+};
+
+const DEFAULT = 'zh-CN';
+class YunzaiHttpI18NService extends YunzaiI18nBaseService {
+    constructor(http, settings, nzI18nService, yelonLocaleService, platform, tokenService, cogSrv) {
+        super(cogSrv);
+        this.http = http;
+        this.settings = settings;
+        this.nzI18nService = nzI18nService;
+        this.yelonLocaleService = yelonLocaleService;
+        this.platform = platform;
+        this.tokenService = tokenService;
+        this._defaultLang = DEFAULT;
+        this.$destroy = new Subject();
+        if (this.tokenService.get()?.access_token) {
+            const defaultLang = this.getDefaultLang();
+            this.getLangs()
+                .pipe(takeUntil(this.$destroy))
+                .subscribe(langs => {
+                this._defaultLang = langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
+            });
+        }
+    }
+    getDefaultLang() {
+        if (!this.platform.isBrowser) {
+            return DEFAULT;
+        }
+        if (this.settings.layout.lang) {
+            return this.settings.layout.lang;
+        }
+        let res = (navigator.languages ? navigator.languages[0] : null) || navigator.language;
+        const arr = res.split('-');
+        return arr.length <= 1 ? res : `${arr[0]}-${arr[1].toUpperCase()}`;
+    }
+    loadLangData(lang) {
+        if (ngDevMode) {
+            return this.http.get(`assets/tmp/i18n/${lang}.json`);
+        }
+        else {
+            return this.http
+                .get(`/i18n/api/v2/language/${lang}`)
+                .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
+        }
+    }
+    use(lang, data) {
+        if (this._currentLang === lang)
+            return;
+        this._data = this.flatData(data, []);
+        const item = YUNZAI_LANGS[lang];
+        if (item) {
+            registerLocaleData(item.ng);
+            this.nzI18nService.setLocale(item.zorro);
+            this.nzI18nService.setDateLocale(item.date);
+            this.yelonLocaleService.setLocale(item.yelon);
+            this._currentLang = lang;
+            this._change$.next(lang);
+        }
+        else {
+            registerLocaleData(ngEn);
+            this.nzI18nService.setLocale(en_US);
+            this.nzI18nService.setDateLocale(enUS);
+            this.yelonLocaleService.setLocale(yelonEnUS);
+            this._currentLang = lang;
+            this._change$.next(lang);
+        }
+    }
+    getLangs() {
+        const langs = Object.keys(YUNZAI_LANGS).map(code => {
+            const item = YUNZAI_LANGS[code];
+            return { code, text: item.text, abbr: item.abbr, image: undefined };
+        });
+        if (ngDevMode) {
+            return of(langs);
+        }
+        else {
+            return this.http.get(`/i18n/api/v2/language`).pipe(map$1((response) => {
+                return response.data;
+            }), catchError(() => of(langs)));
+        }
+    }
+    ngOnDestroy() {
+        this.$destroy.complete();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiHttpI18NService, deps: [{ token: _HttpClient }, { token: SettingsService }, { token: i3.NzI18nService }, { token: YelonLocaleService }, { token: i5.Platform }, { token: YA_SERVICE_TOKEN }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: _HttpClient }, { type: SettingsService }, { type: i3.NzI18nService }, { type: YelonLocaleService }, { type: i5.Platform }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [YA_SERVICE_TOKEN]
+                }] }, { type: i1.YunzaiConfigService }] });
 
 const CLS_DRAG = 'MODAL-DRAG';
 /**
@@ -1108,155 +2475,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
             args: [{ providedIn: 'root' }]
         }] });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/**
- * 封装HttpClient，主要解决：
- * + 优化HttpClient在参数上便利性
- * + 统一实现 loading
- * + 统一处理时间格式问题
- */
-class _HttpClient {
-    constructor(cogSrv) {
-        this.http = inject(HttpClient);
-        this.lc = 0;
-        this.cog = cogSrv.merge('themeHttp', {
-            nullValueHandling: 'include',
-            dateValueHandling: 'timestamp'
-        });
-    }
-    /**
-     * Get whether it's loading
-     *
-     * 获取是否正在加载中
-     */
-    get loading() {
-        return this.lc > 0;
-    }
-    /**
-     * Get the currently loading count
-     *
-     * 获取当前加载中的数量
-     */
-    get loadingCount() {
-        return this.lc;
-    }
-    parseParams(params) {
-        const newParams = {};
-        if (params instanceof HttpParams) {
-            return params;
-        }
-        const { nullValueHandling, dateValueHandling } = this.cog;
-        Object.keys(params).forEach(key => {
-            let paramValue = params[key];
-            // 忽略空值
-            if (nullValueHandling === 'ignore' && paramValue == null)
-                return;
-            // 将时间转化为：时间戳 (秒)
-            if (paramValue instanceof Date &&
-                (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')) {
-                paramValue = dateValueHandling === 'timestamp' ? paramValue.valueOf() : Math.trunc(paramValue.valueOf() / 1000);
-            }
-            newParams[key] = paramValue;
-        });
-        return new HttpParams({ fromObject: newParams });
-    }
-    appliedUrl(url, params) {
-        if (!params)
-            return url;
-        url += ~url.indexOf('?') ? '' : '?';
-        const arr = [];
-        Object.keys(params).forEach(key => {
-            arr.push(`${key}=${params[key]}`);
-        });
-        return url + arr.join('&');
-    }
-    setCount(count) {
-        Promise.resolve(null).then(() => (this.lc = count <= 0 ? 0 : count));
-    }
-    push() {
-        this.setCount(++this.lc);
-    }
-    pop() {
-        this.setCount(--this.lc);
-    }
-    /**
-     * Clean loading count
-     *
-     * 清空加载中
-     */
-    cleanLoading() {
-        this.setCount(0);
-    }
-    get(url, params, options = {}) {
-        return this.request('GET', url, {
-            params,
-            ...options
-        });
-    }
-    post(url, body, params, options = {}) {
-        return this.request('POST', url, {
-            body,
-            params,
-            ...options
-        });
-    }
-    delete(url, params, options = {}) {
-        return this.request('DELETE', url, {
-            params,
-            ...options
-        });
-    }
-    // #endregion
-    // #region jsonp
-    /**
-     * **JSONP Request**
-     *
-     * @param callbackParam CALLBACK值，默认：JSONP_CALLBACK
-     */
-    jsonp(url, params, callbackParam = 'JSONP_CALLBACK') {
-        return of(null).pipe(
-        // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
-        delay(0), tap(() => this.push()), switchMap(() => this.http.jsonp(this.appliedUrl(url, params), callbackParam)), finalize(() => this.pop()));
-    }
-    patch(url, body, params, options = {}) {
-        return this.request('PATCH', url, {
-            body,
-            params,
-            ...options
-        });
-    }
-    put(url, body, params, options = {}) {
-        return this.request('PUT', url, {
-            body,
-            params,
-            ...options
-        });
-    }
-    form(url, body, params, options = {}) {
-        return this.request('POST', url, {
-            body,
-            params,
-            ...options,
-            headers: {
-                'content-type': `application/x-www-form-urlencoded`
-            }
-        });
-    }
-    request(method, url, options = {}) {
-        if (options.params)
-            options.params = this.parseParams(options.params);
-        return of(null).pipe(
-        // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
-        delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: _HttpClient, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: _HttpClient, providedIn: 'root' }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: _HttpClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
-
 /**
  * Every http decorator must be based on `BaseAPI`, Like this:
  * ```ts
@@ -1501,131 +2719,6 @@ const IGNORE_BASE_URL = new HttpContextToken(() => false);
  */
 const RAW_BODY = new HttpContextToken(() => false);
 
-const YELON_LOCALE = new InjectionToken('yelon-locale');
-
-var zhCN = {
-    abbr: 'zh-CN',
-    exception: {
-        403: '抱歉，你无权访问该页面',
-        404: '抱歉，你访问的页面不存在',
-        500: '抱歉，服务器出错了',
-        backToHome: '返回首页'
-    },
-    noticeIcon: {
-        emptyText: '暂无数据',
-        clearText: '清空'
-    },
-    reuseTab: {
-        close: '关闭标签',
-        closeOther: '关闭其它标签',
-        closeRight: '关闭右侧标签',
-        refresh: '刷新'
-    },
-    tagSelect: {
-        expand: '展开',
-        collapse: '收起'
-    },
-    miniProgress: {
-        target: '目标值：'
-    },
-    st: {
-        total: '共 {{total}} 条',
-        filterConfirm: '确定',
-        filterReset: '重置'
-    },
-    sf: {
-        submit: '提交',
-        reset: '重置',
-        search: '搜索',
-        edit: '保存',
-        addText: '添加',
-        removeText: '移除',
-        checkAllText: '全选',
-        error: {
-            'false schema': `布尔模式出错`,
-            $ref: `无法找到引用{ref}`,
-            additionalItems: `不允许超过{limit}个元素`,
-            additionalProperties: `不允许有额外的属性`,
-            anyOf: `数据应为 anyOf 所指定的其中一个`,
-            dependencies: `应当拥有属性{property}的依赖属性{deps}`,
-            enum: `应当是预设定的枚举值之一`,
-            format: `格式不正确`,
-            type: `类型应当是 {type}`,
-            required: `必填项`,
-            maxLength: `至多 {limit} 个字符`,
-            minLength: `至少 {limit} 个字符以上`,
-            minimum: `必须 {comparison}{limit}`,
-            formatMinimum: `必须 {comparison}{limit}`,
-            maximum: `必须 {comparison}{limit}`,
-            formatMaximum: `必须 {comparison}{limit}`,
-            maxItems: `不应多于 {limit} 个项`,
-            minItems: `不应少于 {limit} 个项`,
-            maxProperties: `不应多于 {limit} 个属性`,
-            minProperties: `不应少于 {limit} 个属性`,
-            multipleOf: `应当是 {multipleOf} 的整数倍`,
-            not: `不应当匹配 "not" schema`,
-            oneOf: `只能匹配一个 "oneOf" 中的 schema`,
-            pattern: `数据格式不正确`,
-            uniqueItems: `不应当含有重复项 (第 {j} 项与第 {i} 项是重复的)`,
-            custom: `格式不正确`,
-            propertyNames: `属性名 "{propertyName}" 无效`,
-            patternRequired: `应当有属性匹配模式 {missingPattern}`,
-            switch: `由于 {caseIndex} 失败，未通过 "switch" 校验`,
-            const: `应当等于常量`,
-            contains: `应当包含一个有效项`,
-            formatExclusiveMaximum: `formatExclusiveMaximum 应当是布尔值`,
-            formatExclusiveMinimum: `formatExclusiveMinimum 应当是布尔值`,
-            if: `应当匹配模式 "{failingKeyword}"`
-        }
-    },
-    onboarding: {
-        skip: `跳过`,
-        prev: `上一项`,
-        next: `下一项`,
-        done: `完成`
-    }
-};
-
-class YelonLocaleService {
-    constructor(locale) {
-        this._locale = zhCN;
-        this.change$ = new BehaviorSubject(this._locale);
-        this.setLocale(locale || zhCN);
-    }
-    get change() {
-        return this.change$.asObservable();
-    }
-    setLocale(locale) {
-        if (this._locale && this._locale.abbr === locale.abbr) {
-            return;
-        }
-        this._locale = locale;
-        this.change$.next(locale);
-    }
-    get locale() {
-        return this._locale;
-    }
-    getData(path) {
-        return (this._locale[path] || {});
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleService }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleService, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YELON_LOCALE]
-                }] }] });
-function YELON_LOCALE_SERVICE_PROVIDER_FACTORY(exist, locale) {
-    return exist || new YelonLocaleService(locale);
-}
-const YELON_LOCALE_SERVICE_PROVIDER = {
-    provide: YelonLocaleService,
-    useFactory: YELON_LOCALE_SERVICE_PROVIDER_FACTORY,
-    deps: [[new Optional(), new SkipSelf(), YelonLocaleService], YELON_LOCALE]
-};
-
 class YelonLocaleModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
     static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YelonLocaleModule }); }
@@ -1637,551 +2730,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
                     providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER]
                 }]
         }] });
-
-var enUS = {
-    abbr: 'en-US',
-    exception: {
-        403: `Sorry, you don't have access to this page`,
-        404: `Sorry, the page you visited does not exist`,
-        500: `Sorry, the server is reporting an error`,
-        backToHome: 'Back To Home'
-    },
-    noticeIcon: {
-        emptyText: 'No data',
-        clearText: 'Clear'
-    },
-    reuseTab: {
-        close: 'Close tab',
-        closeOther: 'Close other tabs',
-        closeRight: 'Close tabs to right',
-        refresh: 'Refresh'
-    },
-    tagSelect: {
-        expand: 'Expand',
-        collapse: 'Collapse'
-    },
-    miniProgress: {
-        target: 'Target: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} of {{total}}',
-        filterConfirm: 'OK',
-        filterReset: 'Reset'
-    },
-    sf: {
-        submit: 'Submit',
-        reset: 'Reset',
-        search: 'Search',
-        edit: 'Save',
-        addText: 'Add',
-        removeText: 'Remove',
-        checkAllText: 'Check all',
-        error: {
-            'false schema': `Boolean schema is false`,
-            $ref: `Can't resolve reference {ref}`,
-            additionalItems: `Should not have more than {limit} item`,
-            additionalProperties: `Should not have additional properties`,
-            anyOf: `Should match some schema in "anyOf"`,
-            dependencies: `should have property {deps} when property {property} is present`,
-            enum: `Should be equal to one of predefined values`,
-            format: `Should match format "{format}"`,
-            type: `Should be {type}`,
-            required: `Required`,
-            maxLength: `Should not be longer than {limit} character`,
-            minLength: `Should not be shorter than {limit} character`,
-            minimum: `Should be {comparison} {limit}`,
-            formatMinimum: `Should be {comparison} {limit}`,
-            maximum: `Should be {comparison} {limit}`,
-            formatMaximum: `Should be {comparison} {limit}`,
-            maxItems: `Should not have more than {limit} item`,
-            minItems: `Should not have less than {limit} item`,
-            maxProperties: `Should not have more than {limit} property`,
-            minProperties: `Should not have less than {limit} property`,
-            multipleOf: `Should be a multiple of {multipleOf}`,
-            not: `Should not be valid according to schema in "not"`,
-            oneOf: `Should match exactly one schema in "oneOf"`,
-            pattern: `Should match pattern "{pattern}"`,
-            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
-            custom: `Should match format`,
-            propertyNames: `Property name "{propertyName}" is invalid`,
-            patternRequired: `Should have property matching pattern "{missingPattern}"`,
-            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
-            const: `Should be equal to constant`,
-            contains: `Should contain a valid item`,
-            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
-            if: `Should match "{failingKeyword}" schema`
-        }
-    },
-    onboarding: {
-        skip: `Skip`,
-        prev: `Prev`,
-        next: `Next`,
-        done: `Done`
-    }
-};
-
-var zhTW = {
-    abbr: 'zh-TW',
-    exception: {
-        403: '抱歉，你無權訪問該頁面',
-        404: '抱歉，你訪問的頁面不存在',
-        500: '抱歉，服務器出錯了',
-        backToHome: '返回首頁'
-    },
-    noticeIcon: {
-        emptyText: '暫無數據',
-        clearText: '清空'
-    },
-    reuseTab: {
-        close: '關閉標簽',
-        closeOther: '關閉其它標簽',
-        closeRight: '關閉右側標簽',
-        refresh: '刷新'
-    },
-    tagSelect: {
-        expand: '展開',
-        collapse: '收起'
-    },
-    miniProgress: {
-        target: '目標值：'
-    },
-    st: {
-        total: '共 {{total}} 條',
-        filterConfirm: '確定',
-        filterReset: '重置'
-    },
-    sf: {
-        submit: '提交',
-        reset: '重置',
-        search: '搜索',
-        edit: '保存',
-        addText: '添加',
-        removeText: '移除',
-        checkAllText: '全選',
-        error: {
-            'false schema': `佈爾模式出錯`,
-            $ref: `無法找到引用{ref}`,
-            additionalItems: `不允許超過{ref}`,
-            additionalProperties: `不允許有額外的屬性`,
-            anyOf: `數據應為 anyOf 所指定的其中一個`,
-            dependencies: `應當擁有屬性{property}的依賴屬性{deps}`,
-            enum: `應當是預設定的枚舉值之一`,
-            format: `格式不正確`,
-            type: `類型應當是 {type}`,
-            required: `必填項`,
-            maxLength: `至多 {limit} 個字符`,
-            minLength: `至少 {limit} 個字符以上`,
-            minimum: `必須 {comparison}{limit}`,
-            formatMinimum: `必須 {comparison}{limit}`,
-            maximum: `必須 {comparison}{limit}`,
-            formatMaximum: `必須 {comparison}{limit}`,
-            maxItems: `不應多於 {limit} 個項`,
-            minItems: `不應少於 {limit} 個項`,
-            maxProperties: `不應多於 {limit} 個屬性`,
-            minProperties: `不應少於 {limit} 個屬性`,
-            multipleOf: `應當是 {multipleOf} 的整數倍`,
-            not: `不應當匹配 "not" schema`,
-            oneOf: `隻能匹配一個 "oneOf" 中的 schema`,
-            pattern: `數據格式不正確`,
-            uniqueItems: `不應當含有重複項 (第 {j} 項與第 {i} 項是重複的)`,
-            custom: `格式不正確`,
-            propertyNames: `屬性名 "{propertyName}" 無效`,
-            patternRequired: `應當有屬性匹配模式 {missingPattern}`,
-            switch: `由於 {caseIndex} 失敗，未通過 "switch" 校驗`,
-            const: `應當等於常量`,
-            contains: `應當包含一個有效項`,
-            formatExclusiveMaximum: `formatExclusiveMaximum 應當是佈爾值`,
-            formatExclusiveMinimum: `formatExclusiveMinimum 應當是佈爾值`,
-            if: `應當匹配模式 "{failingKeyword}"`
-        }
-    },
-    onboarding: {
-        skip: `跳過`,
-        prev: `上一項`,
-        next: `下一項`,
-        done: `完成`
-    }
-};
-
-var trTR = {
-    abbr: 'tr-TR',
-    exception: {
-        403: `Üzgünüz, bu sayfaya erişiminiz yok`,
-        404: `Maalesef bu sayfa mevcut değil`,
-        500: `Üzgünüz, sunucu hatası`,
-        backToHome: `Ana Sayfa'ya geri dön`
-    },
-    noticeIcon: {
-        emptyText: 'Veri yok',
-        clearText: 'Temiz'
-    },
-    reuseTab: {
-        close: 'Sekmeyi Kapat',
-        closeOther: 'Diğer sekmeleri kapat',
-        closeRight: 'Sağdaki sekmeleri kapat',
-        refresh: 'täzele'
-    },
-    tagSelect: {
-        expand: 'Genişlet',
-        collapse: 'Daralt'
-    },
-    miniProgress: {
-        target: 'Hedef: '
-    },
-    st: {
-        total: '{{range[0]}} ile {{range[1]}} arasında {{total}}',
-        filterConfirm: 'Tamam',
-        filterReset: 'Sıfırla'
-    },
-    sf: {
-        submit: 'Gönder',
-        reset: 'Sıfırla',
-        search: 'Ara',
-        edit: 'Kaydet',
-        addText: 'Ekle',
-        removeText: 'Kaldır',
-        checkAllText: 'Tümünü kontrol et',
-        error: {
-            'false schema': `Boolean schema is false`,
-            $ref: `Can't resolve reference {ref}`,
-            additionalItems: `Should not have more than {limit} item`,
-            additionalProperties: `Should not have additional properties`,
-            anyOf: `Should match some schema in "anyOf"`,
-            dependencies: `should have property {deps} when property {property} is present`,
-            enum: `Should be equal to one of predefined values`,
-            format: `Should match format "{format}"`,
-            type: `Should be {type}`,
-            required: `Required`,
-            maxLength: `Should not be longer than {limit} character`,
-            minLength: `Should not be shorter than {limit} character`,
-            minimum: `Should be {comparison} {limit}`,
-            formatMinimum: `Should be {comparison} {limit}`,
-            maximum: `Should be {comparison} {limit}`,
-            formatMaximum: `Should be {comparison} {limit}`,
-            maxItems: `Should not have more than {limit} item`,
-            minItems: `Should not have less than {limit} item`,
-            maxProperties: `Should not have more than {limit} property`,
-            minProperties: `Should not have less than {limit} property`,
-            multipleOf: `Should be a multiple of {multipleOf}`,
-            not: `Should not be valid according to schema in "not"`,
-            oneOf: `Should match exactly one schema in "oneOf"`,
-            pattern: `Should match pattern "{pattern}"`,
-            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
-            custom: `Should match format`,
-            propertyNames: `Property name "{propertyName}" is invalid`,
-            patternRequired: `Should have property matching pattern "{missingPattern}"`,
-            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
-            const: `Should be equal to constant`,
-            contains: `Should contain a valid item`,
-            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
-            if: `Should match "{failingKeyword}" schema`
-        }
-    },
-    onboarding: {
-        skip: `Atla`,
-        prev: `Önceki`,
-        next: `Sonraki`,
-        done: `Bitti`
-    }
-};
-
-var plPL = {
-    abbr: 'pl-PL',
-    exception: {
-        403: `Niestety, nie masz uprawnień do tej strony`,
-        404: `Niestety, ta strona nie istnieje`,
-        500: `Niestety, błąd serwera`,
-        backToHome: 'Powróć do strony głównej'
-    },
-    noticeIcon: {
-        emptyText: 'Brak danych',
-        clearText: 'Wyczyść'
-    },
-    reuseTab: {
-        close: 'Zamknij kartę',
-        closeOther: 'Zamknij inne karty',
-        closeRight: 'Zamknij karty po prawej',
-        refresh: 'Refresh'
-    },
-    tagSelect: {
-        expand: 'Rozszerz',
-        collapse: 'Zmniejsz'
-    },
-    miniProgress: {
-        target: 'Cel: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} z {{total}}',
-        filterConfirm: 'OK',
-        filterReset: 'Wyczyść'
-    },
-    sf: {
-        submit: 'Wyślij',
-        reset: 'Resetuj',
-        search: 'Szukaj',
-        edit: 'Zapisz',
-        addText: 'Dodaj',
-        removeText: 'Usuń',
-        checkAllText: 'Zaznacz wszystkie',
-        error: {
-            'false schema': `Boolean schema is false`,
-            $ref: `Can't resolve reference {ref}`,
-            additionalItems: `Should not have more than {limit} item`,
-            additionalProperties: `Should not have additional properties`,
-            anyOf: `Should match some schema in "anyOf"`,
-            dependencies: `should have property {deps} when property {property} is present`,
-            enum: `Should be equal to one of predefined values`,
-            format: `Should match format "{format}"`,
-            type: `Should be {type}`,
-            required: `Required`,
-            maxLength: `Should not be longer than {limit} character`,
-            minLength: `Should not be shorter than {limit} character`,
-            minimum: `Should be {comparison} {limit}`,
-            formatMinimum: `Should be {comparison} {limit}`,
-            maximum: `Should be {comparison} {limit}`,
-            formatMaximum: `Should be {comparison} {limit}`,
-            maxItems: `Should not have more than {limit} item`,
-            minItems: `Should not have less than {limit} item`,
-            maxProperties: `Should not have more than {limit} property`,
-            minProperties: `Should not have less than {limit} property`,
-            multipleOf: `Should be a multiple of {multipleOf}`,
-            not: `Should not be valid according to schema in "not"`,
-            oneOf: `Should match exactly one schema in "oneOf"`,
-            pattern: `Should match pattern "{pattern}"`,
-            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
-            custom: `Should match format`,
-            propertyNames: `Property name "{propertyName}" is invalid`,
-            patternRequired: `Should have property matching pattern "{missingPattern}"`,
-            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
-            const: `Should be equal to constant`,
-            contains: `Should contain a valid item`,
-            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
-            if: `Should match "{failingKeyword}" schema`
-        }
-    },
-    onboarding: {
-        skip: `Pominąć`,
-        prev: `Poprzedni`,
-        next: `Kolejny`,
-        done: `Gotowe`
-    }
-};
-
-var elGR = {
-    abbr: 'el-GR',
-    exception: {
-        403: `Λυπούμαστε, δεν έχετε πρόσβαση σε αυτήν τη σελίδα`,
-        404: `Λυπούμαστε, η σελίδα αυτή δεν βρέθηκε`,
-        500: `Λυπούμαστε, σφάλμα διακομιστή`,
-        backToHome: 'Επιστροφή στην αρχική σελίδα'
-    },
-    noticeIcon: {
-        emptyText: 'Δεν υπάρχουν δεδομένα',
-        clearText: 'Καθαρισμός'
-    },
-    reuseTab: {
-        close: 'Κλείσιμο καρτέλας',
-        closeOther: 'Κλείσιμο των άλλων καρτέλων',
-        closeRight: 'Κλείσιμο των καρτελών δεξιά',
-        refresh: 'Ανανέωση'
-    },
-    tagSelect: {
-        expand: 'Επέκταση',
-        collapse: 'Σύμπτυξη'
-    },
-    miniProgress: {
-        target: 'Στόχος: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} από {{total}}',
-        filterConfirm: 'ΟΚ',
-        filterReset: 'Επαναφορά'
-    },
-    sf: {
-        submit: 'Υποβολή',
-        reset: 'Επαναφορά',
-        search: 'Αναζήτηση',
-        edit: 'Αποθήκευση',
-        addText: 'Προσθήκη',
-        removeText: 'Αφαίρεση',
-        checkAllText: 'Επιλογή όλων',
-        error: {
-            'false schema': `Η δυαδική δομή είναι ψευδής`,
-            $ref: `Δεν είναι δυνατή η επίλυση της αναφοράς {ref}`,
-            additionalItems: `Δεν πρέπει να έχει περισσότερα από {limit} στοιχεία`,
-            additionalProperties: `Δεν πρέπει να έχει επιπλέον χαρακτηριστικά`,
-            anyOf: `Πρέπει να ταιριάζει με κάποια απο τις δομές στο "anyOf"`,
-            dependencies: `τα χαρακτηριστικά {deps} είναι απαραίτητα, όταν υπάρχει το χαρακτηριστικό {property}`,
-            enum: `Πρέπει να είναι ίσο με μία από τις προκαθορισμένες τιμές`,
-            format: `Πρέπει να έχει την μορφή "{format}"`,
-            type: `Πρέπει να είναι {type}`,
-            required: `Απαιτείται`,
-            maxLength: `Δεν πρέπει να είναι μεγαλύτερο από {limit} χαρακτήρες`,
-            minLength: `Δεν πρέπει να είναι μικρότερο από {limit} χαρακτήρες`,
-            minimum: `Πρέπει να είναι {comparison} {limit}`,
-            formatMinimum: `Πρέπει να είναι {comparison} {limit}`,
-            maximum: `Πρέπει να είναι {comparison} {limit}`,
-            formatMaximum: `Πρέπει να είναι {comparison} {limit}`,
-            maxItems: `Δεν πρέπει να έχει περισσότερα από {limit} στοιχεία`,
-            minItems: `Δεν πρέπει να έχει λιγότερα από {limit} στοιχεία`,
-            maxProperties: `Δεν πρέπει να έχει περισσότερα από {limit} χαρακτηριστικά`,
-            minProperties: `Δεν πρέπει να έχει λιγότερα από {limit} χαρακτηριστικά`,
-            multipleOf: `Πρέπει να είναι πολλαπλάσιο του {multipleOf}`,
-            not: `Δεν πρέπει να είναι εγκύρο, σύμφωνα με την δομή στο "not"`,
-            oneOf: `Πρέπει να ταιριάζει με ακριβώς μια απο τις δομές στο "oneOf"`,
-            pattern: `Πρέπει να ταιριάζει με το πρότυπο "{pattern}"`,
-            uniqueItems: `Τα στοιχεία δεν πρέπει να επαναλαμβάνονται (τα στοιχεία ## {j} και {i} είναι ίδια)`,
-            custom: `Πρέπει να έχει την μορφή`,
-            propertyNames: `Το όνομα του χαρακτηριστικού "{propertyName}" δεν είναι έγκυρο`,
-            patternRequired: `Πρέπει να υπάρχει το χαρακτηριστικό αντιπαραβολής προτύπου "{missingPattern}"`,
-            switch: `Πρέπει να περάσει ο έλεγχος εγκυρότητας της λέξης-κλειδιού με την χρήση της "switch", η περίπτωση {caseIndex} αποτυγχάνει`,
-            const: `Πρέπει να είναι ίσο με σταθερά`,
-            contains: `Πρέπει να περιέχει κάποιο έγκυρο στοιχείο`,
-            formatExclusiveMaximum: `formatExclusiveMaximum πρέπει να είναι boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum πρέπει να είναι boolean`,
-            if: `Πρέπει να ταιριάζει στην δομή "{failingKeyword}"`
-        }
-    },
-    onboarding: {
-        skip: `Παράλειψη`,
-        prev: `Προηγούμενο`,
-        next: `Επόμενο`,
-        done: `Ολοκληρώθηκε`
-    }
-};
-
-var koKR = {
-    abbr: 'ko-KR',
-    exception: {
-        403: `죄송합니다.이 페이지에 액세스 할 수 없습니다.`,
-        404: `죄송합니다. 해당 페이지가 없습니다.`,
-        500: `죄송합니다, 서버 오류가 있습니다.`,
-        backToHome: '홈으로 돌아갑니다.'
-    },
-    noticeIcon: {
-        emptyText: '데이터 없음',
-        clearText: '지우기'
-    },
-    reuseTab: {
-        close: '탭 닫기',
-        closeOther: '다른 탭 닫기',
-        closeRight: '오른쪽 탭 닫기',
-        refresh: '새롭게 하다'
-    },
-    tagSelect: {
-        expand: '펼치기',
-        collapse: '접기'
-    },
-    miniProgress: {
-        target: '대상: '
-    },
-    st: {
-        total: '전체 {{total}}건',
-        filterConfirm: '확인',
-        filterReset: '초기화'
-    },
-    sf: {
-        submit: '제출',
-        reset: '재설정',
-        search: '검색',
-        edit: '저장',
-        addText: '추가',
-        removeText: '제거',
-        checkAllText: '모두 확인',
-        error: {
-            'false schema': `Boolean schema is false`,
-            $ref: `Can't resolve reference {ref}`,
-            additionalItems: `Should not have more than {limit} item`,
-            additionalProperties: `Should not have additional properties`,
-            anyOf: `Should match some schema in "anyOf"`,
-            dependencies: `should have property {deps} when property {property} is present`,
-            enum: `Should be equal to one of predefined values`,
-            format: `Should match format "{format}"`,
-            type: `Should be {type}`,
-            required: `Required`,
-            maxLength: `Should not be longer than {limit} character`,
-            minLength: `Should not be shorter than {limit} character`,
-            minimum: `Should be {comparison} {limit}`,
-            formatMinimum: `Should be {comparison} {limit}`,
-            maximum: `Should be {comparison} {limit}`,
-            formatMaximum: `Should be {comparison} {limit}`,
-            maxItems: `Should not have more than {limit} item`,
-            minItems: `Should not have less than {limit} item`,
-            maxProperties: `Should not have more than {limit} property`,
-            minProperties: `Should not have less than {limit} property`,
-            multipleOf: `Should be a multiple of {multipleOf}`,
-            not: `Should not be valid according to schema in "not"`,
-            oneOf: `Should match exactly one schema in "oneOf"`,
-            pattern: `Should match pattern "{pattern}"`,
-            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
-            custom: `Should match format`,
-            propertyNames: `Property name "{propertyName}" is invalid`,
-            patternRequired: `Should have property matching pattern "{missingPattern}"`,
-            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
-            const: `Should be equal to constant`,
-            contains: `Should contain a valid item`,
-            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
-            if: `Should match "{failingKeyword}" schema`
-        }
-    },
-    onboarding: {
-        skip: `건너 뛰기`,
-        prev: `이전`,
-        next: `다음`,
-        done: `끝난`
-    }
-};
-
-var hrHR = {
-    abbr: 'hr-HR',
-    exception: {
-        403: `Nažalost, nemate pristup ovoj lokaciji`,
-        404: `Nažalost, lokacija ne postoji`,
-        500: `Nažalost, server je javio pogrešku`,
-        backToHome: 'Nazad na početnu stranicu'
-    },
-    noticeIcon: {
-        emptyText: 'Nema podataka',
-        clearText: 'Obriši'
-    },
-    reuseTab: {
-        close: 'Zatvori karticu',
-        closeOther: 'Zatvori druge kartice',
-        closeRight: 'Zatvori kartice desno',
-        refresh: 'Refresh'
-    },
-    tagSelect: {
-        expand: 'Proširi',
-        collapse: 'Skupi'
-    },
-    miniProgress: {
-        target: 'Cilj: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} od {{total}}',
-        filterConfirm: 'U redu',
-        filterReset: 'Poništi'
-    },
-    sf: {
-        submit: 'Pošalji',
-        reset: 'Poništi',
-        search: 'Pretraži',
-        edit: 'Spremi',
-        addText: 'Dodaj',
-        removeText: 'Ukloni',
-        checkAllText: 'Označi sve'
-    },
-    onboarding: {
-        skip: `Preskočiti`,
-        prev: `Prethodna`,
-        next: `Sljedeći`,
-        done: `Sastavljeno`
-    }
-};
 
 var jaJP = {
     abbr: 'ja-JP',
@@ -2263,337 +2811,6 @@ var jaJP = {
         prev: `前へ`,
         next: `次`,
         done: `できた`
-    }
-};
-
-var slSI = {
-    abbr: 'sl-SI',
-    exception: {
-        403: `Žal nimate dostopa do te strani`,
-        404: `Žal stran, ki ste jo obiskali, ne obstaja`,
-        500: `Žal strežnik poroča o napaki`,
-        backToHome: 'Nazaj domov'
-    },
-    noticeIcon: {
-        emptyText: 'Ni podatkov',
-        clearText: 'Počisti'
-    },
-    reuseTab: {
-        close: 'Zapri zavihek',
-        closeOther: 'Zaprite druge zavihke',
-        closeRight: 'Zaprite zavihke na desni'
-    },
-    tagSelect: {
-        expand: 'Razširi',
-        collapse: 'Strni'
-    },
-    miniProgress: {
-        target: 'Cilj: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} of {{total}}',
-        filterConfirm: 'OK',
-        filterReset: 'Reset'
-    },
-    sf: {
-        submit: 'Pošlji',
-        reset: 'Reset',
-        search: 'Išči',
-        edit: 'Shrani',
-        addText: 'Dodaj',
-        removeText: 'Odstrani',
-        checkAllText: 'Preveri vse',
-        error: {
-            'false schema': `Boolova shema je napačna`,
-            $ref: `Referenc ni mogoče razrešiti {ref}`,
-            additionalItems: `Ne sme imeti več kot {limit} artiklov`,
-            additionalProperties: `Ne bi smel imeti dodatnih lastnosti`,
-            anyOf: `Se mora ujemati s shemo v "anyOf"`,
-            dependencies: `mora imeti lastnosti {deps} ko je artikel {property} prisoten`,
-            enum: `Mora biti enaka eni od vnaprej določenih vrednosti`,
-            format: `Naj ustreza formatu "{format}"`,
-            type: `Naj bo {type}`,
-            required: `Zahtevano`,
-            maxLength: `Ne sme biti daljši od {limit} znakov`,
-            minLength: `Ne sme biti krajši od {limit} znakov`,
-            minimum: `Naj bo {comparison} {limit}`,
-            formatMinimum: `Naj bo {comparison} {limit}`,
-            maximum: `Naj bo {comparison} {limit}`,
-            formatMaximum: `Naj bo {comparison} {limit}`,
-            maxItems: `Ne sme imeti več kot {limit} artiklov`,
-            minItems: `Ne sme imeti manj kot {limit} artiklov`,
-            maxProperties: `Ne sme imeti več kot {limit} lastnosti`,
-            minProperties: `Ne sme imeti manj kot {limit} lastnosti`,
-            multipleOf: `Mora biti večkratnik od {multipleOf}`,
-            not: `Ne sme biti veljaven po shemi v "not"`,
-            oneOf: `Naj ustreza natančno eni shemi v "oneOf"`,
-            pattern: `Naj se ujema z vzorcem "{pattern}"`,
-            uniqueItems: `Ne bi smel imeti dvojnikov (items ## {j} in {i} so identični)`,
-            custom: `Naj ustreza formatu`,
-            propertyNames: `Ime artikla "{propertyName}" je neveljavno`,
-            patternRequired: `Mora imeti vzorec ujemanja lastnosti "{missingPattern}"`,
-            switch: `Mora prestati "switch" validacijo ključne besede, primer {caseIndex} ne uspe`,
-            const: `Naj bo enako konstanti`,
-            contains: `Naj vsebuje veljaven artikel`,
-            formatExclusiveMaximum: `formatExclusiveMaximum naj bo boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum naj bo boolean`,
-            if: `Naj se ujema s shemo "{failingKeyword}"`
-        }
-    },
-    onboarding: {
-        skip: `Preskoči`,
-        prev: `Prejšnje`,
-        next: `Naslednji`,
-        done: `Končano`
-    }
-};
-
-var frFR = {
-    abbr: 'fr-FR',
-    exception: {
-        403: `Désolé, vous n'avez pas accès à cette page`,
-        404: `Désolé, la page que vous avez visitée n'existe pas`,
-        500: `Désolé, le serveur signale une erreur`,
-        backToHome: "Retour à l'accueil"
-    },
-    noticeIcon: {
-        emptyText: 'Pas de données',
-        clearText: 'Effacer'
-    },
-    reuseTab: {
-        close: "Fermer l'onglet",
-        closeOther: 'Fermer les autres onglets',
-        closeRight: 'Fermer les onglets à droite',
-        refresh: 'Rafraîchir'
-    },
-    tagSelect: {
-        expand: 'Etendre',
-        collapse: 'Effondrer'
-    },
-    miniProgress: {
-        target: 'Cible: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} de {{total}}',
-        filterConfirm: 'OK',
-        filterReset: 'Réinitialiser'
-    },
-    sf: {
-        submit: 'Soumettre',
-        reset: 'Réinitialiser',
-        search: 'Rechercher',
-        edit: 'Sauvegarder',
-        addText: 'Ajouter',
-        removeText: 'Supprimer',
-        checkAllText: 'Cochez toutes',
-        error: {
-            'false schema': `Boolean schema is false`,
-            $ref: `Can't resolve reference {ref}`,
-            additionalItems: `Should not have more than {limit} item`,
-            additionalProperties: `Should not have additional properties`,
-            anyOf: `Should match some schema in "anyOf"`,
-            dependencies: `should have property {deps} when property {property} is present`,
-            enum: `Should be equal to one of predefined values`,
-            format: `Should match format "{format}"`,
-            type: `Should be {type}`,
-            required: `Required`,
-            maxLength: `Should not be longer than {limit} character`,
-            minLength: `Should not be shorter than {limit} character`,
-            minimum: `Should be {comparison} {limit}`,
-            formatMinimum: `Should be {comparison} {limit}`,
-            maximum: `Should be {comparison} {limit}`,
-            formatMaximum: `Should be {comparison} {limit}`,
-            maxItems: `Should not have more than {limit} item`,
-            minItems: `Should not have less than {limit} item`,
-            maxProperties: `Should not have more than {limit} property`,
-            minProperties: `Should not have less than {limit} property`,
-            multipleOf: `Should be a multiple of {multipleOf}`,
-            not: `Should not be valid according to schema in "not"`,
-            oneOf: `Should match exactly one schema in "oneOf"`,
-            pattern: `Should match pattern "{pattern}"`,
-            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
-            custom: `Should match format`,
-            propertyNames: `Property name "{propertyName}" is invalid`,
-            patternRequired: `Should have property matching pattern "{missingPattern}"`,
-            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
-            const: `Should be equal to constant`,
-            contains: `Should contain a valid item`,
-            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
-            if: `Should match "{failingKeyword}" schema`
-        }
-    },
-    onboarding: {
-        skip: `Passer`,
-        prev: `Précédent`,
-        next: `Suivant`,
-        done: `Terminé`
-    }
-};
-
-var esES = {
-    abbr: 'es-ES',
-    exception: {
-        403: `Lo sentimos, no tiene acceso a esta página`,
-        404: `Lo sentimos, la página que ha visitado no existe`,
-        500: `Lo siento, error interno del servidor `,
-        backToHome: 'Volver a la página de inicio'
-    },
-    noticeIcon: {
-        emptyText: 'No hay datos',
-        clearText: 'Limpiar'
-    },
-    reuseTab: {
-        close: 'Cerrar pestaña',
-        closeOther: 'Cerrar otras pestañas',
-        closeRight: 'Cerrar pestañas a la derecha',
-        refresh: 'Actualizar'
-    },
-    tagSelect: {
-        expand: 'Expandir',
-        collapse: 'Ocultar'
-    },
-    miniProgress: {
-        target: 'Target: '
-    },
-    st: {
-        total: '{{rango[0]}} - {{rango[1]}} de {{total}}',
-        filterConfirm: 'Aceptar',
-        filterReset: 'Reiniciar'
-    },
-    sf: {
-        submit: 'Submit',
-        reset: 'Reiniciar',
-        search: 'Buscar',
-        edit: 'Guardar',
-        addText: 'Añadir',
-        removeText: 'Eliminar',
-        checkAllText: 'Comprobar todo',
-        error: {
-            'false schema': `Boolean schema is false`,
-            $ref: `Can't resolve reference {ref}`,
-            additionalItems: `Should not have more than {limit} item`,
-            additionalProperties: `Should not have additional properties`,
-            anyOf: `Should match some schema in "anyOf"`,
-            dependencies: `should have property {deps} when property {property} is present`,
-            enum: `Should be equal to one of predefined values`,
-            format: `Should match format "{format}"`,
-            type: `Should be {type}`,
-            required: `Required`,
-            maxLength: `Should not be longer than {limit} character`,
-            minLength: `Should not be shorter than {limit} character`,
-            minimum: `Should be {comparison} {limit}`,
-            formatMinimum: `Should be {comparison} {limit}`,
-            maximum: `Should be {comparison} {limit}`,
-            formatMaximum: `Should be {comparison} {limit}`,
-            maxItems: `Should not have more than {limit} item`,
-            minItems: `Should not have less than {limit} item`,
-            maxProperties: `Should not have more than {limit} property`,
-            minProperties: `Should not have less than {limit} property`,
-            multipleOf: `Should be a multiple of {multipleOf}`,
-            not: `Should not be valid according to schema in "not"`,
-            oneOf: `Should match exactly one schema in "oneOf"`,
-            pattern: `Should match pattern "{pattern}"`,
-            uniqueItems: `Should not have duplicate items (items ## {j} and {i} are identical)`,
-            custom: `Should match format`,
-            propertyNames: `Property name "{propertyName}" is invalid`,
-            patternRequired: `Should have property matching pattern "{missingPattern}"`,
-            switch: `Should pass "switch" keyword validation, case {caseIndex} fails`,
-            const: `Should be equal to constant`,
-            contains: `Should contain a valid item`,
-            formatExclusiveMaximum: `formatExclusiveMaximum should be boolean`,
-            formatExclusiveMinimum: `formatExclusiveMinimum should be boolean`,
-            if: `Should match "{failingKeyword}" schema`
-        }
-    },
-    onboarding: {
-        skip: `Omitir`,
-        prev: `Previo`,
-        next: `Siguiente`,
-        done: `Terminado`
-    }
-};
-
-var itIT = {
-    abbr: 'it-IT',
-    exception: {
-        403: `Spiacenti, non hai accesso a questa pagina`,
-        404: `Spiacenti, la pagina che hai visitato non esiste`,
-        500: `Spiacenti, il server sta riscontrando un errore`,
-        backToHome: 'Torna alla Home'
-    },
-    noticeIcon: {
-        emptyText: 'Nessun dato',
-        clearText: 'Cancella memoria locale'
-    },
-    reuseTab: {
-        close: 'Chiudi la scheda',
-        closeOther: 'Chiudi le altre schede',
-        closeRight: 'Chiudi le schede a destra',
-        refresh: 'Aggiorna'
-    },
-    tagSelect: {
-        expand: 'Espandi',
-        collapse: 'Comprimi'
-    },
-    miniProgress: {
-        target: 'Obiettivo: '
-    },
-    st: {
-        total: '{{range[0]}} - {{range[1]}} di {{total}}',
-        filterConfirm: 'OK',
-        filterReset: 'Reimposta'
-    },
-    sf: {
-        submit: 'Invia',
-        reset: 'Reimposta',
-        search: 'Cerca',
-        edit: 'Salva',
-        addText: 'Aggiungi',
-        removeText: 'Rimuovi',
-        checkAllText: 'Seleziona tutto',
-        error: {
-            'false schema': `Lo schema booleano è falso`,
-            $ref: `Impossibile risolvere il riferimento {ref}`,
-            additionalItems: `Non deve avere più di {limit} elementi`,
-            additionalProperties: `Non deve avere proprietà aggiuntive`,
-            anyOf: `Deve corrispondere a uno schema in "anyOf"`,
-            dependencies: `Deve avere una proprietà {deps} quando è presente la proprietà {property}`,
-            enum: `Deve essere uguale a uno dei valori predefiniti`,
-            format: `Deve corrispondere al formato "{format}"`,
-            type: `Deve essere {type}`,
-            required: `Obbligatorio`,
-            maxLength: `Non deve essere superiore a {limit} caratteri`,
-            minLength: `Non deve essere superiore a {limit} caratteri`,
-            minimum: `Deve essere {comparison} {limit}`,
-            formatMinimum: `Deve essere {comparison} {limit}`,
-            maximum: `Deve essere {comparison} {limit}`,
-            formatMaximum: `Deve essere {comparison} {limit}`,
-            maxItems: `Non deve avere più di {limit} elementi`,
-            minItems: `Non deve avere meno di {limit} elementi`,
-            maxProperties: `Non deve avere più di {limit} proprietà`,
-            minProperties: `Non deve avere meno di {limit} proprietà`,
-            multipleOf: `Deve essere un multiplo di {multipleOf}`,
-            not: `Non deve essere valido secondo lo schema in "not"`,
-            oneOf: `Deve corrispondere esattamente a uno schema in "oneOf"`,
-            pattern: `Deve corrispondere al modello "{pattern}"`,
-            uniqueItems: `Non deve avere elementi duplicati (gli elementi ## {j} e {i} sono identici)`,
-            custom: `Deve corrispondere al formato "{format}"`,
-            propertyNames: `Il nome della proprietà "{propertyName}" non è valido`,
-            patternRequired: `Deve avere una proprietà corrispondete al modello "{missingPattern}"`,
-            switch: `Deve superare la convalida della parola chiave "switch", il caso {caseIndex} non è riuscito`,
-            const: `Deve essere uguale alla costante`,
-            contains: `Deve contenere un elemento valido`,
-            formatExclusiveMaximum: `formatExclusiveMaximum deve essere booleano`,
-            formatExclusiveMinimum: `formatExclusiveMaximum deve essere booleano`,
-            if: `Deve corrispondere allo schema "{failingKeyword}"`
-        }
-    },
-    onboarding: {
-        skip: `Salta`,
-        prev: `Precedente`,
-        next: `Successivo`,
-        done: `Fatto`
     }
 };
 
@@ -2785,11 +3002,805 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
             args: [{ name: 'url', standalone: true }]
         }] });
 
+/*
+ * Automatically generated by 'ng g ng-yunzai:plugin icon'
+ * @see https://ng.yunzainfo.com/cli/plugin#icon
+ */
+const ICONS = [
+    AccountBookTwoTone,
+    AccountBookFill,
+    AccountBookOutline,
+    AlertTwoTone,
+    AlertFill,
+    AlibabaOutline,
+    AimOutline,
+    AlipayCircleFill,
+    AlertOutline,
+    AlignCenterOutline,
+    AlipayCircleOutline,
+    AlipayOutline,
+    AlignLeftOutline,
+    AlignRightOutline,
+    AmazonOutline,
+    AliwangwangOutline,
+    AliyunOutline,
+    AlipaySquareFill,
+    AmazonCircleFill,
+    AndroidFill,
+    AliwangwangFill,
+    AntCloudOutline,
+    AmazonSquareFill,
+    AndroidOutline,
+    ApartmentOutline,
+    ApiTwoTone,
+    ApiFill,
+    ApiOutline,
+    AntDesignOutline,
+    AppstoreAddOutline,
+    AppstoreFill,
+    AppleOutline,
+    AppstoreOutline,
+    ArrowDownOutline,
+    AppleFill,
+    ArrowsAltOutline,
+    AppstoreTwoTone,
+    ArrowUpOutline,
+    AreaChartOutline,
+    ArrowLeftOutline,
+    AudioFill,
+    ArrowRightOutline,
+    AudioTwoTone,
+    AuditOutline,
+    AudioMutedOutline,
+    BackwardFill,
+    AudioOutline,
+    BackwardOutline,
+    BankFill,
+    BarcodeOutline,
+    BellFill,
+    BankTwoTone,
+    BarsOutline,
+    BankOutline,
+    BehanceCircleFill,
+    BehanceSquareFill,
+    BoldOutline,
+    BellOutline,
+    BehanceOutline,
+    BlockOutline,
+    BehanceSquareOutline,
+    BgColorsOutline,
+    BellTwoTone,
+    BarChartOutline,
+    BookTwoTone,
+    BookFill,
+    BorderOuterOutline,
+    BorderLeftOutline,
+    BorderBottomOutline,
+    BorderHorizontalOutline,
+    BorderTopOutline,
+    BorderOutline,
+    BorderInnerOutline,
+    BorderRightOutline,
+    BoxPlotOutline,
+    BoxPlotFill,
+    BoxPlotTwoTone,
+    BookOutline,
+    BorderlessTableOutline,
+    BorderVerticleOutline,
+    BuildTwoTone,
+    BuildOutline,
+    BugFill,
+    BugOutline,
+    BugTwoTone,
+    BulbFill,
+    BulbTwoTone,
+    BuildFill,
+    BulbOutline,
+    CalculatorFill,
+    CalculatorTwoTone,
+    CalendarFill,
+    CalendarOutline,
+    CalculatorOutline,
+    CalendarTwoTone,
+    CameraOutline,
+    CameraFill,
+    CameraTwoTone,
+    CarTwoTone,
+    CaretDownOutline,
+    CarOutline,
+    CaretLeftFill,
+    CarFill,
+    CaretRightOutline,
+    CaretDownFill,
+    CaretUpOutline,
+    CaretRightFill,
+    CarryOutFill,
+    CarryOutOutline,
+    CaretLeftOutline,
+    CaretUpFill,
+    BranchesOutline,
+    CarryOutTwoTone,
+    CheckCircleFill,
+    CheckCircleOutline,
+    CheckSquareOutline,
+    CheckCircleTwoTone,
+    CiCircleTwoTone,
+    CheckOutline,
+    CheckSquareTwoTone,
+    CiOutline,
+    CheckSquareFill,
+    CiTwoTone,
+    ChromeOutline,
+    ClockCircleOutline,
+    CiCircleOutline,
+    ChromeFill,
+    ClearOutline,
+    CloseCircleTwoTone,
+    CiCircleFill,
+    CloseCircleOutline,
+    ClockCircleFill,
+    CloseCircleFill,
+    ClockCircleTwoTone,
+    CloseOutline,
+    CloseSquareOutline,
+    CloseSquareFill,
+    CloudFill,
+    CloseSquareTwoTone,
+    CloudDownloadOutline,
+    CloudTwoTone,
+    CloudServerOutline,
+    CloudUploadOutline,
+    CloudSyncOutline,
+    ClusterOutline,
+    CodeSandboxCircleFill,
+    CodeFill,
+    CodepenCircleOutline,
+    CloudOutline,
+    CodeSandboxOutline,
+    CodeOutline,
+    CodeSandboxSquareFill,
+    CodeTwoTone,
+    CodepenSquareFill,
+    CodepenOutline,
+    CoffeeOutline,
+    ColumnWidthOutline,
+    CompressOutline,
+    ColumnHeightOutline,
+    CodepenCircleFill,
+    CompassTwoTone,
+    CommentOutline,
+    ContainerFill,
+    CompassOutline,
+    ConsoleSqlOutline,
+    ContactsOutline,
+    ContainerTwoTone,
+    ContactsFill,
+    ContactsTwoTone,
+    ContainerOutline,
+    ControlFill,
+    CopyFill,
+    CopyOutline,
+    CompassFill,
+    CopyTwoTone,
+    CopyrightOutline,
+    CopyrightCircleOutline,
+    ControlTwoTone,
+    ControlOutline,
+    CreditCardFill,
+    CopyrightTwoTone,
+    CrownFill,
+    CopyrightCircleFill,
+    CrownOutline,
+    CustomerServiceTwoTone,
+    CreditCardOutline,
+    CustomerServiceOutline,
+    DashboardTwoTone,
+    CrownTwoTone,
+    CreditCardTwoTone,
+    CustomerServiceFill,
+    DashboardFill,
+    DashOutline,
+    DatabaseOutline,
+    DatabaseTwoTone,
+    DatabaseFill,
+    DashboardOutline,
+    DeleteTwoTone,
+    DeleteRowOutline,
+    DeleteColumnOutline,
+    DeliveredProcedureOutline,
+    DeleteOutline,
+    CopyrightCircleTwoTone,
+    DesktopOutline,
+    DeleteFill,
+    DiffOutline,
+    DiffFill,
+    DeploymentUnitOutline,
+    DiffTwoTone,
+    DingtalkOutline,
+    DollarCircleFill,
+    DislikeFill,
+    DingtalkSquareFill,
+    DisconnectOutline,
+    DollarCircleTwoTone,
+    DollarOutline,
+    DingtalkCircleFill,
+    DislikeTwoTone,
+    DollarTwoTone,
+    DownCircleFill,
+    DislikeOutline,
+    DollarCircleOutline,
+    DoubleLeftOutline,
+    DownSquareFill,
+    DownOutline,
+    DownSquareOutline,
+    DownSquareTwoTone,
+    DownCircleTwoTone,
+    DoubleRightOutline,
+    DownCircleOutline,
+    DownloadOutline,
+    DotChartOutline,
+    DribbbleCircleFill,
+    DribbbleOutline,
+    DribbbleSquareOutline,
+    DropboxCircleFill,
+    DingdingOutline,
+    EditOutline,
+    DribbbleSquareFill,
+    DropboxSquareFill,
+    EllipsisOutline,
+    EnvironmentFill,
+    EditFill,
+    EnterOutline,
+    EuroCircleFill,
+    EuroTwoTone,
+    EuroCircleOutline,
+    EditTwoTone,
+    EuroOutline,
+    EnvironmentTwoTone,
+    ExclamationCircleFill,
+    ExpandAltOutline,
+    EuroCircleTwoTone,
+    ExclamationCircleTwoTone,
+    EnvironmentOutline,
+    ExperimentOutline,
+    ExperimentFill,
+    ExpandOutline,
+    ExceptionOutline,
+    ExportOutline,
+    ExperimentTwoTone,
+    ExclamationCircleOutline,
+    ExclamationOutline,
+    EyeFill,
+    EyeInvisibleFill,
+    EyeInvisibleTwoTone,
+    DropboxOutline,
+    DragOutline,
+    FacebookOutline,
+    FacebookFill,
+    EyeTwoTone,
+    EyeOutline,
+    FastForwardFill,
+    FieldBinaryOutline,
+    FieldNumberOutline,
+    FastBackwardOutline,
+    FileAddFill,
+    FastBackwardFill,
+    FileExcelFill,
+    FastForwardOutline,
+    FieldStringOutline,
+    FileDoneOutline,
+    FileAddTwoTone,
+    FileExcelTwoTone,
+    FileExclamationFill,
+    FileAddOutline,
+    FileExclamationOutline,
+    FieldTimeOutline,
+    FileImageTwoTone,
+    FileExcelOutline,
+    FileExclamationTwoTone,
+    FileImageFill,
+    FileGifOutline,
+    FileFill,
+    FileMarkdownTwoTone,
+    FileMarkdownOutline,
+    FallOutline,
+    FileImageOutline,
+    EyeInvisibleOutline,
+    FilePdfOutline,
+    FileSearchOutline,
+    FilePptTwoTone,
+    FilePdfTwoTone,
+    FileJpgOutline,
+    FileTextFill,
+    FilePptOutline,
+    FileSyncOutline,
+    FilePptFill,
+    FileUnknownOutline,
+    FileProtectOutline,
+    FileTextTwoTone,
+    FileWordFill,
+    FileUnknownTwoTone,
+    FileWordTwoTone,
+    FileUnknownFill,
+    FileTextOutline,
+    FileZipFill,
+    FilterTwoTone,
+    FilterFill,
+    FileWordOutline,
+    FireOutline,
+    FireTwoTone,
+    FileZipOutline,
+    FilterOutline,
+    FlagTwoTone,
+    FileTwoTone,
+    FilePdfFill,
+    FileOutline,
+    FileMarkdownFill,
+    FileZipTwoTone,
+    FlagOutline,
+    FolderAddTwoTone,
+    FolderOpenFill,
+    FireFill,
+    FlagFill,
+    FolderOutline,
+    FolderViewOutline,
+    FolderTwoTone,
+    FontColorsOutline,
+    FolderOpenTwoTone,
+    FolderFill,
+    ForwardOutline,
+    FolderOpenOutline,
+    ForkOutline,
+    ForwardFill,
+    FormatPainterOutline,
+    FormatPainterFill,
+    FormOutline,
+    FrownFill,
+    FrownTwoTone,
+    FullscreenOutline,
+    FontSizeOutline,
+    FundFill,
+    FunctionOutline,
+    FundViewOutline,
+    FullscreenExitOutline,
+    GifOutline,
+    FundProjectionScreenOutline,
+    FundTwoTone,
+    FolderAddFill,
+    FunnelPlotTwoTone,
+    GiftOutline,
+    FunnelPlotFill,
+    FundOutline,
+    FrownOutline,
+    GithubOutline,
+    GoldFill,
+    FolderAddOutline,
+    GitlabFill,
+    GiftFill,
+    GitlabOutline,
+    GoldTwoTone,
+    GoogleCircleFill,
+    GiftTwoTone,
+    GooglePlusCircleFill,
+    GoldOutline,
+    GithubFill,
+    GoogleOutline,
+    GooglePlusOutline,
+    GoogleSquareFill,
+    GoldenFill,
+    HddTwoTone,
+    GooglePlusSquareFill,
+    GlobalOutline,
+    HeartOutline,
+    HeartTwoTone,
+    GroupOutline,
+    HeartFill,
+    HeatMapOutline,
+    GatewayOutline,
+    FunnelPlotOutline,
+    HddFill,
+    HomeFill,
+    HighlightFill,
+    HomeOutline,
+    HistoryOutline,
+    HighlightOutline,
+    HddOutline,
+    HourglassFill,
+    HomeTwoTone,
+    HourglassTwoTone,
+    Html5Outline,
+    Html5Fill,
+    IdcardFill,
+    Html5TwoTone,
+    HourglassOutline,
+    IdcardTwoTone,
+    IdcardOutline,
+    IeOutline,
+    IeCircleFill,
+    IeSquareFill,
+    InboxOutline,
+    ImportOutline,
+    InfoCircleOutline,
+    InfoCircleTwoTone,
+    InsertRowAboveOutline,
+    InsertRowRightOutline,
+    InfoCircleFill,
+    InfoOutline,
+    InsertRowBelowOutline,
+    HighlightTwoTone,
+    InsuranceFill,
+    InstagramFill,
+    InteractionFill,
+    InsertRowLeftOutline,
+    InstagramOutline,
+    InteractionOutline,
+    ItalicOutline,
+    InteractionTwoTone,
+    LayoutOutline,
+    IssuesCloseOutline,
+    LayoutFill,
+    LaptopOutline,
+    LeftCircleFill,
+    LayoutTwoTone,
+    KeyOutline,
+    LeftOutline,
+    LeftCircleOutline,
+    LeftSquareOutline,
+    LeftSquareFill,
+    LeftCircleTwoTone,
+    LikeFill,
+    LeftSquareTwoTone,
+    LineOutline,
+    LikeTwoTone,
+    LinkedinOutline,
+    LineChartOutline,
+    LineHeightOutline,
+    LinkedinFill,
+    LinkOutline,
+    LikeOutline,
+    InsuranceOutline,
+    Loading3QuartersOutline,
+    LockFill,
+    InsuranceTwoTone,
+    MacCommandOutline,
+    LockTwoTone,
+    LoadingOutline,
+    MailOutline,
+    LoginOutline,
+    MedicineBoxOutline,
+    MailFill,
+    MailTwoTone,
+    MacCommandFill,
+    ManOutline,
+    MedicineBoxFill,
+    MedicineBoxTwoTone,
+    MediumCircleFill,
+    MediumOutline,
+    MehFill,
+    MediumWorkmarkOutline,
+    MenuFoldOutline,
+    MehOutline,
+    MediumSquareFill,
+    MessageTwoTone,
+    MehTwoTone,
+    MergeCellsOutline,
+    MinusCircleFill,
+    MenuOutline,
+    MenuUnfoldOutline,
+    MessageFill,
+    MinusCircleTwoTone,
+    LockOutline,
+    MinusOutline,
+    MinusCircleOutline,
+    LogoutOutline,
+    MessageOutline,
+    MoneyCollectFill,
+    MinusSquareOutline,
+    MinusSquareTwoTone,
+    MobileOutline,
+    MobileTwoTone,
+    MoneyCollectOutline,
+    MoreOutline,
+    NotificationFill,
+    NotificationOutline,
+    MoneyCollectTwoTone,
+    NodeIndexOutline,
+    NodeExpandOutline,
+    MonitorOutline,
+    OrderedListOutline,
+    NodeCollapseOutline,
+    NumberOutline,
+    PaperClipOutline,
+    NotificationTwoTone,
+    PauseCircleFill,
+    PartitionOutline,
+    PauseOutline,
+    OneToOneOutline,
+    PayCircleOutline,
+    PayCircleFill,
+    MinusSquareFill,
+    PauseCircleOutline,
+    PauseCircleTwoTone,
+    PicCenterOutline,
+    PicRightOutline,
+    PercentageOutline,
+    MobileFill,
+    PictureOutline,
+    PictureFill,
+    PhoneTwoTone,
+    PhoneFill,
+    PieChartFill,
+    PictureTwoTone,
+    PieChartOutline,
+    PlaySquareFill,
+    PlayCircleTwoTone,
+    PlayCircleFill,
+    PlusCircleFill,
+    PlaySquareTwoTone,
+    PlaySquareOutline,
+    PlayCircleOutline,
+    PieChartTwoTone,
+    PlusCircleOutline,
+    PlusSquareFill,
+    PoundCircleFill,
+    PlusSquareOutline,
+    PlusOutline,
+    PoundOutline,
+    PoundCircleOutline,
+    PlusSquareTwoTone,
+    PlusCircleTwoTone,
+    PoweroffOutline,
+    PoundCircleTwoTone,
+    PhoneOutline,
+    PrinterFill,
+    PicLeftOutline,
+    ProjectTwoTone,
+    PrinterOutline,
+    ProjectFill,
+    ProfileOutline,
+    ProfileTwoTone,
+    ProjectOutline,
+    PropertySafetyFill,
+    PullRequestOutline,
+    PropertySafetyOutline,
+    PushpinOutline,
+    PushpinTwoTone,
+    PropertySafetyTwoTone,
+    PushpinFill,
+    QqOutline,
+    QqCircleFill,
+    QrcodeOutline,
+    QqSquareFill,
+    QuestionCircleTwoTone,
+    QuestionCircleFill,
+    RadarChartOutline,
+    RadiusUprightOutline,
+    QuestionCircleOutline,
+    QuestionOutline,
+    ReadFill,
+    RadiusUpleftOutline,
+    RadiusBottomleftOutline,
+    RadiusSettingOutline,
+    RadiusBottomrightOutline,
+    ProfileFill,
+    PrinterTwoTone,
+    ReadOutline,
+    ReconciliationFill,
+    ReloadOutline,
+    ReconciliationOutline,
+    RedEnvelopeTwoTone,
+    RedditCircleFill,
+    RedoOutline,
+    RedEnvelopeFill,
+    RedditOutline,
+    RestTwoTone,
+    RightCircleOutline,
+    RestOutline,
+    RedditSquareFill,
+    RestFill,
+    RightCircleTwoTone,
+    RightOutline,
+    RightSquareFill,
+    RightCircleFill,
+    RightSquareOutline,
+    RetweetOutline,
+    RiseOutline,
+    RightSquareTwoTone,
+    RobotFill,
+    RocketOutline,
+    RobotOutline,
+    RocketTwoTone,
+    RocketFill,
+    RedEnvelopeOutline,
+    RollbackOutline,
+    RotateRightOutline,
+    RotateLeftOutline,
+    ReconciliationTwoTone,
+    SafetyCertificateTwoTone,
+    SaveOutline,
+    SafetyOutline,
+    SaveFill,
+    SaveTwoTone,
+    ScheduleFill,
+    SafetyCertificateOutline,
+    ScanOutline,
+    ScheduleTwoTone,
+    SearchOutline,
+    ScheduleOutline,
+    SecurityScanTwoTone,
+    SecurityScanOutline,
+    ScissorOutline,
+    SelectOutline,
+    SecurityScanFill,
+    SendOutline,
+    SettingOutline,
+    SettingTwoTone,
+    SettingFill,
+    ShareAltOutline,
+    ShopOutline,
+    ShopFill,
+    ShopTwoTone,
+    ShrinkOutline,
+    ShakeOutline,
+    ShoppingOutline,
+    ShoppingCartOutline,
+    ShoppingFill,
+    SisternodeOutline,
+    ShoppingTwoTone,
+    SafetyCertificateFill,
+    SkinOutline,
+    SignalFill,
+    SketchOutline,
+    SkinTwoTone,
+    SketchSquareFill,
+    SkypeFill,
+    SkinFill,
+    SlackCircleFill,
+    SlackSquareFill,
+    SlidersTwoTone,
+    SkypeOutline,
+    SlidersFill,
+    SlackSquareOutline,
+    SmallDashOutline,
+    SmileTwoTone,
+    SlidersOutline,
+    SnippetsFill,
+    SnippetsOutline,
+    SmileOutline,
+    SolutionOutline,
+    SlackOutline,
+    SnippetsTwoTone,
+    SoundTwoTone,
+    SortAscendingOutline,
+    SoundFill,
+    SortDescendingOutline,
+    SmileFill,
+    SoundOutline,
+    SplitCellsOutline,
+    SketchCircleFill,
+    StarOutline,
+    StockOutline,
+    StarTwoTone,
+    StepForwardFill,
+    StarFill,
+    StepBackwardFill,
+    StepForwardOutline,
+    StopFill,
+    SubnodeOutline,
+    SwapLeftOutline,
+    StopOutline,
+    StopTwoTone,
+    SwapRightOutline,
+    SwapOutline,
+    SwitcherTwoTone,
+    SwitcherOutline,
+    SyncOutline,
+    StrikethroughOutline,
+    SwitcherFill,
+    TagOutline,
+    TabletTwoTone,
+    TabletOutline,
+    TabletFill,
+    TableOutline,
+    TagsFill,
+    TagFill,
+    TagsTwoTone,
+    TaobaoCircleOutline,
+    StepBackwardOutline,
+    TagsOutline,
+    TagTwoTone,
+    TaobaoOutline,
+    ThunderboltOutline,
+    TaobaoSquareFill,
+    TeamOutline,
+    TaobaoCircleFill,
+    ThunderboltTwoTone,
+    ToolFill,
+    ThunderboltFill,
+    ToTopOutline,
+    ToolOutline,
+    ToolTwoTone,
+    TrademarkCircleFill,
+    TrophyFill,
+    TrademarkCircleTwoTone,
+    TransactionOutline,
+    TrademarkCircleOutline,
+    TranslationOutline,
+    TwitterCircleFill,
+    TrophyOutline,
+    TrademarkOutline,
+    TrophyTwoTone,
+    TwitterSquareFill,
+    UnlockFill,
+    TwitterOutline,
+    UnderlineOutline,
+    UndoOutline,
+    UpCircleFill,
+    UngroupOutline,
+    UnlockTwoTone,
+    UnlockOutline,
+    UpOutline,
+    UsbFill,
+    UpCircleOutline,
+    UnorderedListOutline,
+    UpCircleTwoTone,
+    UpSquareFill,
+    UpSquareOutline,
+    UserAddOutline,
+    UsbTwoTone,
+    UsergroupDeleteOutline,
+    UpSquareTwoTone,
+    UserOutline,
+    UsbOutline,
+    UserDeleteOutline,
+    UserSwitchOutline,
+    VerticalLeftOutline,
+    VerticalAlignBottomOutline,
+    VerifiedOutline,
+    UsergroupAddOutline,
+    UploadOutline,
+    VerticalAlignMiddleOutline,
+    VerticalAlignTopOutline,
+    VerticalRightOutline,
+    VideoCameraOutline,
+    VideoCameraAddOutline,
+    VideoCameraTwoTone,
+    VideoCameraFill,
+    WalletOutline,
+    WalletFill,
+    WarningFill,
+    WarningOutline,
+    WechatOutline,
+    WalletTwoTone,
+    WeiboCircleFill,
+    WarningTwoTone,
+    WeiboSquareFill,
+    WeiboOutline,
+    WeiboSquareOutline,
+    WeiboCircleOutline,
+    WechatFill,
+    WhatsAppOutline,
+    WifiOutline,
+    WomanOutline,
+    YoutubeFill,
+    YahooOutline,
+    WindowsFill,
+    WindowsOutline,
+    YoutubeOutline,
+    YuqueOutline,
+    ZhihuCircleFill,
+    YuqueFill,
+    ZhihuOutline,
+    ZhihuSquareFill,
+    ZoomInOutline,
+    ZoomOutOutline,
+    YahooFill
+];
+
 /* eslint-disable import/order */
 // #region import
 const HELPERS = [ModalHelper, DrawerHelper];
 const PIPES = [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe];
-const ICONS = [BellOutline, DeleteOutline, PlusOutline, InboxOutline];
 // #endregion
 class YunzaiThemeModule {
     constructor(iconSrv) {
@@ -2885,5 +3896,5 @@ const VERSION = new Version('17.2.1');
  * Generated bundle index. Do not edit.
  */
 
-export { BaseApi, BaseHeaders, BaseUrl, Body, CUSTOM_ERROR, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, IGNORE_BASE_URL, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, RAW_BODY, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SPAN_MAX, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_SETTING_DEFAULT, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiI18NGuardService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, elGR as el_GR, enUS as en_US, esES as es_ES, frFR as fr_FR, hrHR as hr_HR, itIT as it_IT, jaJP as ja_JP, koKR as ko_KR, plPL as pl_PL, provideYunzai, slSI as sl_SI, stepPreloader, trTR as tr_TR, viVI as vi_VI, yn, yunzaiI18nCanActivate, yunzaiI18nCanActivateChild, zhCN as zh_CN, zhTW as zh_TW };
+export { BaseApi, BaseHeaders, BaseUrl, Body, CUSTOM_ERROR, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, IGNORE_BASE_URL, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, RAW_BODY, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SPAN_MAX, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_LANGS, YUNZAI_SETTING_DEFAULT, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiHttpI18NService, YunzaiI18NGuardService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, yelonElGR as el_GR, yelonEnUS as en_US, yelonEsES as es_ES, yelonFrFR as fr_FR, yelonHrHR as hr_HR, yelonItIT as it_IT, jaJP as ja_JP, yelonKoKR as ko_KR, yelonPlPL as pl_PL, provideYunzai, yelonSlSI as sl_SI, stepPreloader, yelonTrTR as tr_TR, viVI as vi_VI, yn, yunzaiI18nCanActivate, yunzaiI18nCanActivateChild, zhCN as zh_CN, yelonZhTw as zh_TW };
 //# sourceMappingURL=theme.mjs.map
