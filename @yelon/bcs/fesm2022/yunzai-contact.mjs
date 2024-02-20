@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, Input, Output, ViewChild, Injectable } from '@angular/core';
+import { EventEmitter, Component, Input, Output, ViewChild, Injectable, NgModule } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import * as i7 from '@yelon/bcs/yunzai-dept-tree';
 import { YunzaiDeptTreeModule, YUNZAI_DEPT_TYPES } from '@yelon/bcs/yunzai-dept-tree';
@@ -338,9 +338,55 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
                 }]
         }], ctorParameters: () => [{ type: i1$1.NzModalService }] });
 
+const COMPONENTS = [YunzaiContactComponent];
+class YunzaiContactModule {
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, imports: [FormsModule,
+            CommonModule,
+            I18nPipe,
+            NzRadioModule,
+            NzGridModule,
+            NzCardModule,
+            YunzaiRoleTreeModule,
+            YunzaiDeptTreeModule,
+            YunzaiDormitoryTreeModule,
+            YunzaiFriendGroupModule,
+            YunzaiTableUserModule, YunzaiContactComponent], exports: [YunzaiContactComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, imports: [FormsModule,
+            CommonModule,
+            NzRadioModule,
+            NzGridModule,
+            NzCardModule,
+            YunzaiRoleTreeModule,
+            YunzaiDeptTreeModule,
+            YunzaiDormitoryTreeModule,
+            YunzaiFriendGroupModule,
+            YunzaiTableUserModule, COMPONENTS] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiContactModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        FormsModule,
+                        CommonModule,
+                        I18nPipe,
+                        NzRadioModule,
+                        NzGridModule,
+                        NzCardModule,
+                        YunzaiRoleTreeModule,
+                        YunzaiDeptTreeModule,
+                        YunzaiDormitoryTreeModule,
+                        YunzaiFriendGroupModule,
+                        YunzaiTableUserModule,
+                        ...COMPONENTS
+                    ],
+                    exports: COMPONENTS
+                }]
+        }] });
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { YunzaiContactService };
+export { YunzaiContactComponent, YunzaiContactModule, YunzaiContactService };
 //# sourceMappingURL=yunzai-contact.mjs.map
