@@ -1,9 +1,7 @@
 import * as i0 from '@angular/core';
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom, makeEnvironmentProviders } from '@angular/core';
 import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { YunzaiWidgetsModule } from '@yelon/bis/yunzai-widgets';
-
-var provide = void 0;
 
 class BisModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: BisModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
@@ -18,9 +16,15 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
                 }]
         }] });
 
+function provideYunzaiBis() {
+    const provides = [];
+    provides.push(importProvidersFrom(BisModule));
+    return makeEnvironmentProviders(provides);
+}
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BisModule };
+export { BisModule, provideYunzaiBis };
 //# sourceMappingURL=bis.mjs.map

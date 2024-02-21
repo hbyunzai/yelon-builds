@@ -1,2 +1,2 @@
-declare const _default: undefined;
-export default _default;
+import { EnvironmentProviders } from '@angular/core';
+export declare function provideYunzaiBis(): EnvironmentProviders;
