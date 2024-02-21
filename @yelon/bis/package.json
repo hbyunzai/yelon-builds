@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bis",
-  "version": "17.2.1-5163c15",
+  "version": "17.2.1-f80fb51",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,6 +22,16 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^17.2.0",
+    "@yelon/acl": "^17.2.1-f80fb51",
+    "@yelon/auth": "^17.2.1-f80fb51",
+    "@yelon/theme": "^17.2.1-f80fb51",
+    "@yelon/mock": "^17.2.1-f80fb51",
+    "@yelon/cache": "^17.2.1-f80fb51",
+    "@yelon/chart": "^17.2.1-f80fb51",
+    "@yelon/form": "^17.2.1-f80fb51",
+    "@yelon/testing": "^17.2.1-f80fb51",
+    "@yelon/util": "^17.2.1-f80fb51",
+    "@yelon/bcs": "^17.2.1-f80fb51",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bis.mjs",
@@ -35,6 +45,24 @@
       "esm2022": "./esm2022/bis.mjs",
       "esm": "./esm2022/bis.mjs",
       "default": "./fesm2022/bis.mjs"
+    },
+    "./config": {
+      "types": "./config/index.d.ts",
+      "esm2022": "./esm2022/config/config.mjs",
+      "esm": "./esm2022/config/config.mjs",
+      "default": "./fesm2022/config.mjs"
+    },
+    "./layout": {
+      "types": "./layout/index.d.ts",
+      "esm2022": "./esm2022/layout/layout.mjs",
+      "esm": "./esm2022/layout/layout.mjs",
+      "default": "./fesm2022/layout.mjs"
+    },
+    "./yunzai-widgets": {
+      "types": "./yunzai-widgets/index.d.ts",
+      "esm2022": "./esm2022/yunzai-widgets/yunzai-widgets.mjs",
+      "esm": "./esm2022/yunzai-widgets/yunzai-widgets.mjs",
+      "default": "./fesm2022/yunzai-widgets.mjs"
     }
   },
   "sideEffects": false
