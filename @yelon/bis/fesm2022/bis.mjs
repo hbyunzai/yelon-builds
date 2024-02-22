@@ -1,14 +1,18 @@
 import * as i0 from '@angular/core';
-import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, APP_INITIALIZER, Injector } from '@angular/core';
+import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, APP_INITIALIZER, Injector, Injectable, Inject } from '@angular/core';
 import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { YunzaiWidgetsModule } from '@yelon/bis/yunzai-widgets';
 import { Router } from 'express';
-import { YA_SERVICE_TOKEN } from '@yelon/auth';
-import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL } from '@yelon/theme';
+import { YA_SERVICE_TOKEN, TokenService } from '@yelon/auth';
+import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL, MenuService, TitleService, SettingsService } from '@yelon/theme';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
-import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap } from 'rxjs';
-import { log, YUNZAI_CONFIG } from '@yelon/util';
+import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, combineLatest, map } from 'rxjs';
+import { mergeBisConfig, BUSINESS_DEFAULT_CONFIG } from '@yelon/bis/config';
+import * as i1 from '@yelon/util';
+import { log, YUNZAI_CONFIG, YunzaiConfigService, useLocalStorageTenant, useLocalStorageUser, useLocalStorageHeader, useLocalStorageProjectInfo, useLocalStorageDefaultRoute, useLocalStorageCurrent, deepCopy, WINDOW } from '@yelon/util';
+import { ACLService } from '@yelon/acl';
+import * as i2 from '@angular/router';
 
 class BisModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: BisModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
@@ -178,7 +182,7 @@ function handleData(injector, ev, req, next) {
     }
 }
 const yunzaiDefaultInterceptor = (req, next) => {
-    const config = inject(YUNZAI_CONFIG).bis;
+    const config = mergeBisConfig(inject(YunzaiConfigService));
     const { baseUrl } = config;
     let url = req.url;
     if (!req.context.get(IGNORE_BASE_URL) && !url.startsWith('https://') && !url.startsWith('http://')) {
@@ -197,9 +201,357 @@ const yunzaiDefaultInterceptor = (req, next) => {
     }), catchError((err) => handleData(injector, err, newReq, next)));
 };
 
+function provideYunzaiStartup() {
+    return [
+        YunzaiStartupService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (startupService) => () => startupService.load(),
+            deps: [YunzaiStartupService],
+            multi: true
+        }
+    ];
+}
+class YunzaiStartupService {
+    constructor() {
+        this.config = mergeBisConfig(inject(YunzaiConfigService));
+        this.menuService = inject(MenuService);
+        this.aclService = inject(ACLService);
+        this.titleService = inject(TitleService);
+        this.tokenService = inject(TokenService);
+        this.httpClient = inject(HttpClient);
+        this.settingService = inject(SettingsService);
+        this.i18n = inject(YUNZAI_I18N_TOKEN);
+    }
+    load() {
+        let defaultLang = this.settingService.layout.lang || this.i18n.defaultLang;
+        const [setTenant] = useLocalStorageTenant();
+        const [setUser, getUser] = useLocalStorageUser();
+        const [setHeader] = useLocalStorageHeader();
+        const [setProject] = useLocalStorageProjectInfo();
+        const [setDefaultRoute] = useLocalStorageDefaultRoute();
+        const [setCurrent] = useLocalStorageCurrent();
+        return this.token().pipe(mergeMap((token) => {
+            inject(YunzaiConfigService).set('auth', {
+                token_send_key: 'Authorization',
+                token_send_template: `${token.token_type} \${access_token}`,
+                token_send_place: 'header'
+            });
+            this.tokenService.set(token);
+            return of(void 0);
+        }), mergeMap(() => {
+            return combineLatest([
+                this.httpClient.get(`/auth/user`),
+                this.httpClient.get(`/auth/allheader/v2`),
+                this.httpClient.get(`/app-manager/project/info`)
+            ]).pipe(map(([user, header, project]) => {
+                setUser(user.principal);
+                setTenant(user.tenantId);
+                setHeader(header.data);
+                setProject(project.data);
+                return void 0;
+            }));
+        }), mergeMap(() => {
+            return this.i18n.loadLangData(defaultLang).pipe(map((langData) => {
+                this.i18n.use(defaultLang, langData);
+                return void 0;
+            }));
+        }), mergeMap(() => {
+            const yunzaiUser = getUser();
+            const yunzaiMenus = deepCopy(yunzaiUser.menu).filter(m => m.systemCode && m.systemCode === this.config.systemCode);
+            const currentMenu = yunzaiMenus.pop();
+            if (currentMenu) {
+                this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
+                this.settingService.setUser({
+                    name: yunzaiUser.realname,
+                    avatar: `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}` || '',
+                    email: yunzaiUser.email
+                });
+                this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';
+                this.titleService.setTitle(currentMenu && currentMenu.text ? currentMenu.text : 'no title');
+                const abilities = [];
+                generateAbility([currentMenu], abilities, '');
+                this.aclService.attachRole(yunzaiUser?.roles
+                    .map((role) => {
+                    return role.roleValue;
+                })
+                    .filter((a) => !!a) || []);
+                this.aclService.attachAbility(abilities);
+                this.menuService.add([currentMenu]);
+                setCurrent({
+                    name: currentMenu.text,
+                    intro: currentMenu.intro || '',
+                    icon: currentMenu.appIconUrl || './assets/tmp/img/avatar.jpg'
+                });
+                const attributes = currentMenu.attribute;
+                if (attributes) {
+                    const attr = JSON.parse(attributes);
+                    if (attr && attr.defaultRoute) {
+                        setDefaultRoute(attr.defaultRoute);
+                    }
+                    else {
+                        setDefaultRoute('/displayIndex');
+                    }
+                }
+                else {
+                    setDefaultRoute('/displayIndex');
+                }
+            }
+            return of(void 0);
+        }));
+    }
+    token() {
+        if (this.config.loginForm) {
+            return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(map((response) => {
+                return response;
+            }));
+        }
+        else {
+            const uri = encodeURIComponent(inject(WINDOW).location.href);
+            return this.httpClient
+                .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
+                .pipe(map((response) => {
+                switch (response.errcode) {
+                    case 2000:
+                        return response.data;
+                    case 2001:
+                        inject(WINDOW).location.href = response.msg;
+                        throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
+                    default:
+                        if (response.data) {
+                            console.error(response.data);
+                            throw Error(response.data);
+                        }
+                        else if (response.msg) {
+                            console.error(response.msg);
+                            throw Error(response.msg);
+                        }
+                        else {
+                            console.error('cas unknown error');
+                            throw Error('Unknown Error: Cas auth exception!');
+                        }
+                }
+            }));
+        }
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiStartupService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiStartupService }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiStartupService, decorators: [{
+            type: Injectable
+        }] });
+function mapYzSideToYelonMenu(menus) {
+    menus.forEach(menu => {
+        if (menu.children && menu.hideChildren) {
+            menu.children.forEach(c => (c.hide = true));
+        }
+        menu.badgeDot = menu.badge_dot || null;
+        menu.badgeStatus = menu.badge_status || null;
+        menu.shortcutRoot = menu.shortcut_root || null;
+        menu.reuse = true;
+        if (menu.children) {
+            mapYzSideToYelonMenu(menu.children);
+        }
+    });
+}
+function generateAbility(menus, abilities, prefix) {
+    menus.forEach(menu => {
+        if (menu.link) {
+            prefix += menu.link;
+        }
+        else {
+            prefix += '';
+        }
+        if (menu.menuAuths) {
+            menu.menuAuths.forEach((a) => {
+                abilities.push(`${prefix}:${a}`);
+                abilities.push(a);
+            });
+        }
+        if (menu.children) {
+            generateAbility(menu.children, abilities, prefix);
+        }
+    });
+}
+
+class YunzaiAnalysisAddonGuardService {
+    constructor(configService, pathToRegexp, win, tokenService) {
+        this.configService = configService;
+        this.pathToRegexp = pathToRegexp;
+        this.win = win;
+        this.tokenService = tokenService;
+        this.bis = BUSINESS_DEFAULT_CONFIG;
+        this.menus = [];
+        this.links = [];
+        this.value = {};
+        this.bis = mergeBisConfig(this.configService);
+        const [, getUser] = useLocalStorageUser();
+        const user = getUser();
+        this.menus = deepCopy(user.menu || []).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
+        if (user) {
+            this.value = {
+                systemCode: this.bis.systemCode,
+                userid: user.id,
+                realname: user.realname,
+                usertype: user.userType,
+                usercode: user.userCode,
+                username: user.username,
+                account: user.username,
+                deptid: user.deptId,
+                deptname: user.deptName,
+                token: this.tokenService.get()?.access_token
+            };
+        }
+        if (this.menus && this.menus.length > 0) {
+            this.value['system'] = this.menus[0].text;
+        }
+        this.getAllLinks(this.menus, this.links);
+    }
+    process(url) {
+        let flag = false;
+        this.links.forEach(link => {
+            if (link.link === url.split('?')[0]) {
+                flag = true;
+                this.value['routename'] = link.title;
+                this.value['routeurl'] = link.link;
+                if (this.win['yunzai']) {
+                    this.win['yunzai'].setExtra(this.value);
+                }
+                return;
+            }
+            const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
+            if (regexp.test(url.split('?')[0])) {
+                flag = true;
+                this.value['routename'] = link.title;
+                this.value['routeurl'] = link.link;
+                if (this.win['yunzai']) {
+                    this.win['yunzai'].setExtra(this.value);
+                }
+                return;
+            }
+        });
+        if (!flag) {
+            this.value['routename'] = url;
+            this.value['routeurl'] = url;
+            if (this.win['yunzai']) {
+                this.win['yunzai'].setExtra(this.value);
+            }
+        }
+        return true;
+    }
+    getAllLinks(menu, links) {
+        menu.forEach((sider) => {
+            if (sider.link) {
+                links.push({ title: sider.text ? sider.text : sider.link, link: sider.link });
+            }
+            if (sider.children && sider.children.length > 0) {
+                this.getAllLinks(sider.children, links);
+            }
+        });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1.YunzaiConfigService }, { token: i1.PathToRegexpService }, { token: WINDOW }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAnalysisAddonGuardService, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiAnalysisAddonGuardService, decorators: [{
+            type: Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }, { type: i1.PathToRegexpService }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [WINDOW]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [YA_SERVICE_TOKEN]
+                }] }] });
+const analysisAddonCanActive = (_, state) => inject(YunzaiAnalysisAddonGuardService).process(state.url);
+const analysisAddonCanActiveChild = (_, state) => inject(YunzaiAnalysisAddonGuardService).process(state.url);
+
+class ActGuardService {
+    constructor(configService, pathToRegexp, router) {
+        this.configService = configService;
+        this.pathToRegexp = pathToRegexp;
+        this.router = router;
+        this.bis = BUSINESS_DEFAULT_CONFIG;
+        this.menus = [];
+        this.links = [];
+        log('act: ');
+        this.bis = mergeBisConfig(this.configService);
+        log('act: config ', this.bis);
+        const [, getUser] = useLocalStorageUser();
+        const user = getUser();
+        log('act: user ', user);
+        // @ts-ignore
+        this.menus = deepCopy(user.menu || []).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
+        log('act: menus ', this.menus);
+        this.getAllLinks(this.menus, this.links);
+        log('act: links ', this.links);
+    }
+    process(url) {
+        log('act: can activate ', url);
+        if (this.preHandle(url)) {
+            return true;
+        }
+        log('act: can activate child prehandle success');
+        let canactivate = false;
+        this.links.forEach((link) => {
+            // path = /xxx
+            if (link === url.split('?')[0]) {
+                canactivate = true;
+                log(`act: link value ${link} equals url value ${url}`);
+                return;
+            }
+            // paht = /xxx/:xx
+            const regexp = this.pathToRegexp.stringToRegexp(link, null, null);
+            log(`act: ${link} test ${url.split('?')[0]}`);
+            if (regexp.test(url.split('?')[0])) {
+                canactivate = true;
+                log(`act: test value ${canactivate}`);
+                return;
+            }
+        });
+        if (canactivate) {
+            log(`act: test sucess`);
+            return true;
+        }
+        else {
+            log(`act: test error`);
+            this.router.navigate(['displayIndex']);
+            return false;
+        }
+    }
+    preHandle(url) {
+        return (url.includes('error') ||
+            url.includes('exception') ||
+            url.includes('displayIndex') ||
+            url === '' ||
+            url === null ||
+            url === '/' ||
+            url.includes('iframePage'));
+    }
+    getAllLinks(menu, links) {
+        menu.forEach((sider) => {
+            if (sider.link) {
+                links.push(sider.link);
+            }
+            if (sider.children && sider.children.length > 0) {
+                this.getAllLinks(sider.children, links);
+            }
+        });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ActGuardService, deps: [{ token: i1.YunzaiConfigService }, { token: i1.PathToRegexpService }, { token: i2.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ActGuardService, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: ActGuardService, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }, { type: i1.PathToRegexpService }, { type: i2.Router }] });
+const actGuardCanActive = (_, state) => inject(ActGuardService).process(state.url);
+const actGuardCanActiveChild = (_, state) => inject(ActGuardService).process(state.url);
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BisModule, CODEMESSAGE, checkStatus, getAdditionalHeaders, goTo, provideYunzaiBindAuthRefresh, provideYunzaiBis, toLogin, tryRefreshToken, yunzaiDefaultInterceptor };
+export { ActGuardService, BisModule, CODEMESSAGE, YunzaiAnalysisAddonGuardService, YunzaiStartupService, actGuardCanActive, actGuardCanActiveChild, analysisAddonCanActive, analysisAddonCanActiveChild, checkStatus, generateAbility, getAdditionalHeaders, goTo, mapYzSideToYelonMenu, provideYunzaiBindAuthRefresh, provideYunzaiBis, provideYunzaiStartup, toLogin, tryRefreshToken, yunzaiDefaultInterceptor };
 //# sourceMappingURL=bis.mjs.map
