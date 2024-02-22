@@ -110,6 +110,7 @@ class YunzaiHeaderNotifyComponent {
         this.nzI18n = inject(NzI18nService);
         this.cdr = inject(ChangeDetectorRef);
         this.http = inject(_HttpClient);
+        this.win = inject(WINDOW);
         this.loading = false;
         this.count = 0;
         this.subs = [];
@@ -232,7 +233,7 @@ class YunzaiHeaderNotifyComponent {
         }
     }
     select(res) {
-        inject(WINDOW).open(res.item.url);
+        this.win.open(res.item.url);
         this.loadData();
     }
     ngOnDestroy() {
@@ -407,6 +408,7 @@ class YunzaiHeaderUserComponent {
         this.tokenService = inject(YA_SERVICE_TOKEN);
         this.configService = inject(YunzaiConfigService);
         this.config = mergeBisConfig(this.configService);
+        this.win = inject(WINDOW);
         this.icon = '';
         this.username = '';
         this.menus = [];
@@ -425,11 +427,11 @@ class YunzaiHeaderUserComponent {
     logout() {
         localStorage.clear();
         this.tokenService.clear();
-        inject(WINDOW).location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
+        this.win.location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
     }
     to(href) {
         if (href) {
-            inject(WINDOW).open(href);
+            this.win.open(href);
         }
         else {
             this.msg.error('该菜单没有配置链接!');

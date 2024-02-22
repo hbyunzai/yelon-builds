@@ -4,6 +4,7 @@ import * as i0 from "@angular/core";
 export declare class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
     private readonly http;
     private destroy$;
+    private readonly win;
     state: LayoutNavGroupState;
     ngOnInit(): void;
     open(topic: YunzaiNavTopic): void;

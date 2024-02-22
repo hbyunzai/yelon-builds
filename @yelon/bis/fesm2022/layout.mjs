@@ -391,6 +391,7 @@ class YunzaiLayoutNavGroupComponent {
     constructor() {
         this.http = inject(_HttpClient);
         this.destroy$ = new Subject();
+        this.win = inject(WINDOW);
         this.state = {
             topics: []
         };
@@ -411,16 +412,16 @@ class YunzaiLayoutNavGroupComponent {
         }
         switch (topic.target) {
             case 'href':
-                inject(WINDOW).location.href = topic.url;
+                this.win.location.href = topic.url;
                 break;
             case 'blank':
-                inject(WINDOW).location.href = topic.url;
+                this.win.location.href = topic.url;
                 break;
             case 'target':
-                inject(WINDOW).location.href = topic.url;
+                this.win.location.href = topic.url;
                 break;
             default:
-                inject(WINDOW).location.href = topic.url;
+                this.win.location.href = topic.url;
                 break;
         }
     }

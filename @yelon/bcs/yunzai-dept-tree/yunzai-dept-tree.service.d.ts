@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { YUNZAI_DEPT_TYPES, YunzaiDeptTree } from './yunzai-dept-tree.types';
 import * as i0 from "@angular/core";
 export declare class YunzaiDeptTreeService {
-    private http;
+    private readonly http;
     /**
      * @param includeClass include class
      * @param history include history class

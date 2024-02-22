@@ -10,6 +10,7 @@ export declare class YunzaiHeaderUserComponent implements OnInit {
     private readonly tokenService;
     private readonly configService;
     private readonly config;
+    private readonly win;
     icon: string;
     username: string;
     menus: UserLink[];

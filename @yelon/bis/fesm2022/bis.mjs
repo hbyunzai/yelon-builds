@@ -2,17 +2,17 @@ import * as i0 from '@angular/core';
 import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, APP_INITIALIZER, Injector, Injectable, Inject } from '@angular/core';
 import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { YunzaiWidgetsModule } from '@yelon/bis/yunzai-widgets';
-import { Router } from 'express';
-import { YA_SERVICE_TOKEN, TokenService } from '@yelon/auth';
+import * as i2 from '@angular/router';
+import { Router } from '@angular/router';
+import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL, MenuService, TitleService, SettingsService } from '@yelon/theme';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, combineLatest, map } from 'rxjs';
 import { mergeBisConfig, BUSINESS_DEFAULT_CONFIG } from '@yelon/bis/config';
 import * as i1 from '@yelon/util';
-import { log, YUNZAI_CONFIG, YunzaiConfigService, useLocalStorageTenant, useLocalStorageUser, useLocalStorageHeader, useLocalStorageProjectInfo, useLocalStorageDefaultRoute, useLocalStorageCurrent, deepCopy, WINDOW } from '@yelon/util';
+import { log, YUNZAI_CONFIG, YunzaiConfigService, WINDOW, useLocalStorageTenant, useLocalStorageUser, useLocalStorageHeader, useLocalStorageProjectInfo, useLocalStorageDefaultRoute, useLocalStorageCurrent, deepCopy } from '@yelon/util';
 import { ACLService } from '@yelon/acl';
-import * as i2 from '@angular/router';
 
 class BisModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: BisModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
@@ -218,10 +218,12 @@ class YunzaiStartupService {
         this.menuService = inject(MenuService);
         this.aclService = inject(ACLService);
         this.titleService = inject(TitleService);
-        this.tokenService = inject(TokenService);
+        this.tokenService = inject(YA_SERVICE_TOKEN);
         this.httpClient = inject(HttpClient);
         this.settingService = inject(SettingsService);
         this.i18n = inject(YUNZAI_I18N_TOKEN);
+        this.win = inject(WINDOW);
+        this.configService = inject(YunzaiConfigService);
     }
     load() {
         let defaultLang = this.settingService.layout.lang || this.i18n.defaultLang;
@@ -232,7 +234,7 @@ class YunzaiStartupService {
         const [setDefaultRoute] = useLocalStorageDefaultRoute();
         const [setCurrent] = useLocalStorageCurrent();
         return this.token().pipe(mergeMap((token) => {
-            inject(YunzaiConfigService).set('auth', {
+            this.configService.set('auth', {
                 token_send_key: 'Authorization',
                 token_send_template: `${token.token_type} \${access_token}`,
                 token_send_place: 'header'
@@ -307,7 +309,7 @@ class YunzaiStartupService {
             }));
         }
         else {
-            const uri = encodeURIComponent(inject(WINDOW).location.href);
+            const uri = encodeURIComponent(this.win.location.href);
             return this.httpClient
                 .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
                 .pipe(map((response) => {
@@ -315,7 +317,7 @@ class YunzaiStartupService {
                     case 2000:
                         return response.data;
                     case 2001:
-                        inject(WINDOW).location.href = response.msg;
+                        this.win.location.href = response.msg;
                         throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
                     default:
                         if (response.data) {

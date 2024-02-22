@@ -8,6 +8,7 @@ export declare class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
     private readonly nzI18n;
     private readonly cdr;
     private readonly http;
+    private readonly win;
     loading: boolean;
     count: number;
     subs: Subscription[];

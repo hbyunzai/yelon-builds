@@ -8,8 +8,8 @@ export declare class YunzaiDeptTreeComponent implements OnInit, OnDestroy, After
     props?: YunzaiDeptTreeProps;
     readonly onQueryComplete: EventEmitter<YunzaiDeptTree[]>;
     readonly onSelect: EventEmitter<YunzaiDeptTree[]>;
-    private deptTreeService;
-    private gradeService;
+    private readonly deptTreeService;
+    private readonly gradeService;
     private $destroy;
     state: YunzaiDeptTreeState;
     get data(): YunzaiDeptTree[];

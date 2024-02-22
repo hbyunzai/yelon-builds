@@ -3851,15 +3851,7 @@ function provideYunzai(options) {
     if (i18nCls) {
         provides.push({ provide: YUNZAI_I18N_TOKEN, useClass: i18nCls, multi: false });
     }
-    const icons = [
-        BellOutline,
-        DeleteOutline,
-        PlusOutline,
-        InboxOutline,
-        MenuFoldOutline,
-        MenuUnfoldOutline,
-        ...(options.icons ?? [])
-    ];
+    const icons = [...ICONS, ...(options.icons ?? [])];
     provides.push({
         provide: ENVIRONMENT_INITIALIZER,
         multi: true,
@@ -3896,5 +3888,5 @@ const VERSION = new Version('17.2.2');
  * Generated bundle index. Do not edit.
  */
 
-export { BaseApi, BaseHeaders, BaseUrl, Body, CUSTOM_ERROR, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, IGNORE_BASE_URL, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, RAW_BODY, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SPAN_MAX, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_LANGS, YUNZAI_SETTING_DEFAULT, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiHttpI18NService, YunzaiI18NGuardService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, yelonElGR as el_GR, yelonEnUS as en_US, yelonEsES as es_ES, yelonFrFR as fr_FR, yelonHrHR as hr_HR, yelonItIT as it_IT, jaJP as ja_JP, yelonKoKR as ko_KR, yelonPlPL as pl_PL, provideYunzai, yelonSlSI as sl_SI, stepPreloader, yelonTrTR as tr_TR, viVI as vi_VI, yn, yunzaiI18nCanActivate, yunzaiI18nCanActivateChild, zhCN as zh_CN, yelonZhTw as zh_TW };
+export { BaseApi, BaseHeaders, BaseUrl, Body, CUSTOM_ERROR, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, ICONS, IGNORE_BASE_URL, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, RAW_BODY, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SPAN_MAX, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_LANGS, YUNZAI_SETTING_DEFAULT, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiHttpI18NService, YunzaiI18NGuardService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, yelonElGR as el_GR, yelonEnUS as en_US, yelonEsES as es_ES, yelonFrFR as fr_FR, yelonHrHR as hr_HR, yelonItIT as it_IT, jaJP as ja_JP, yelonKoKR as ko_KR, yelonPlPL as pl_PL, provideYunzai, yelonSlSI as sl_SI, stepPreloader, yelonTrTR as tr_TR, viVI as vi_VI, yn, yunzaiI18nCanActivate, yunzaiI18nCanActivateChild, zhCN as zh_CN, yelonZhTw as zh_TW };
 //# sourceMappingURL=theme.mjs.map

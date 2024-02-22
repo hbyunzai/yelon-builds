@@ -7,8 +7,8 @@ export declare class YunzaiFriendGroupComponent implements OnInit, OnDestroy, Af
     readonly onQueryComplete: EventEmitter<YunzaiFriendGroup[]>;
     readonly onSelect: EventEmitter<YunzaiFriendGroup>;
     sf: SFComponent;
-    private $destroy;
-    private service;
+    private readonly $destroy;
+    private readonly service;
     state: YunzaiFriendGroupState;
     get isWrapped(): boolean;
     get data(): YunzaiFriendGroup[];
