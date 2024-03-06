@@ -4,7 +4,7 @@ import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, 
 import { filter, BehaviorSubject, share, Subject, map, of, delay, isObservable, switchMap, tap, finalize, takeUntil, catchError, Observable, take, throwError } from 'rxjs';
 import { ACLService } from '@yelon/acl';
 import * as i1 from '@yelon/util/config';
-import { YunzaiConfigService, YUNZAI_CONFIG } from '@yelon/util/config';
+import { YunzaiConfigService, YUNZAI_CONFIG as YUNZAI_CONFIG$1 } from '@yelon/util/config';
 import * as i5 from '@angular/cdk/platform';
 import { Platform } from '@angular/cdk/platform';
 import { Directionality } from '@angular/cdk/bidi';
@@ -12,6 +12,7 @@ import { NzConfigService } from 'ng-zorro-antd/core/config';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title, DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { YUNZAI_CONFIG, useLocalStorageUser, deepCopy, useLocalStorageProjectInfo } from '@yelon/util';
 import ngElGr from '@angular/common/locales/el';
 import ngEn from '@angular/common/locales/en';
 import ngEsEs from '@angular/common/locales/es';
@@ -709,6 +710,7 @@ class TitleService {
         this.title = inject(Title);
         this.menuSrv = inject(MenuService);
         this.i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
+        this.conf = inject(YUNZAI_CONFIG);
         /**
          * Set default title name
          *
@@ -716,6 +718,7 @@ class TitleService {
          */
         this.default = `Not Page Name`;
         this.i18nSrv?.change.pipe(takeUntilDestroyed()).subscribe(() => this.setTitle());
+        this.config = this.conf.bis;
     }
     /**
      * Set separator
@@ -785,13 +788,34 @@ class TitleService {
             title = this.i18nSrv.fanyi(item.i18n);
         return of(title || item.text);
     }
+    getBySystemSet() {
+        let title = '';
+        const [, getUser] = useLocalStorageUser();
+        const yunzaiUser = getUser();
+        const yunzaiMenus = deepCopy(yunzaiUser.menu).filter(m => m.systemCode && m.systemCode === this.config.systemCode);
+        let systemName = '';
+        const currentMenu = yunzaiMenus.pop();
+        if (currentMenu) {
+            systemName = currentMenu.text;
+        }
+        const [, getProjectInfo] = useLocalStorageProjectInfo();
+        const projectInfo = getProjectInfo();
+        const pageTitlePattern = projectInfo.pageTitlePattern;
+        if (pageTitlePattern) {
+            title = pageTitlePattern.replace(`$\{systemName}`, systemName);
+        }
+        else {
+            title = systemName;
+        }
+        return of(title);
+    }
     /**
      * Set the document title
      */
     setTitle(title) {
         this.tit$?.unsubscribe();
         this.tit$ = of(title)
-            .pipe(switchMap(tit => (tit ? of(tit) : this.getByRoute())), switchMap(tit => (tit ? of(tit) : this.getByMenu())), switchMap(tit => (tit ? of(tit) : this.getByElement())), map(tit => tit || this.default), map(title => (!Array.isArray(title) ? [title] : title)), takeUntilDestroyed(this.destroy$))
+            .pipe(switchMap(tit => (tit ? of(tit) : this.getByRoute())), switchMap(tit => (tit ? of(tit) : this.getBySystemSet())), switchMap(tit => (tit ? of(tit) : this.getByMenu())), switchMap(tit => (tit ? of(tit) : this.getByElement())), map(tit => tit || this.default), map(title => (!Array.isArray(title) ? [title] : title)), takeUntilDestroyed(this.destroy$))
             .subscribe(titles => {
             let newTitles = [];
             if (this._prefix) {
@@ -3834,7 +3858,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
 function provideYunzai(options) {
     const lang = options?.defaultLang;
     const provides = [
-        { provide: YUNZAI_CONFIG, useValue: options?.config },
+        { provide: YUNZAI_CONFIG$1, useValue: options?.config },
         { provide: YELON_LOCALE, useValue: lang?.yelon ?? zhCN },
         YELON_LOCALE_SERVICE_PROVIDER,
         importProvidersFrom([NzDrawerModule, NzModalModule]),

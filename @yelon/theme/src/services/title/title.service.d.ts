@@ -12,12 +12,14 @@ export declare class TitleService implements OnDestroy {
     private _separator;
     private _reverse;
     private tit$?;
+    private config;
     readonly DELAY_TIME = 25;
     private readonly doc;
     private readonly injector;
     private readonly title;
     private readonly menuSrv;
     private readonly i18nSrv;
+    private readonly conf;
     constructor();
     /**
      * Set separator
@@ -58,6 +60,7 @@ export declare class TitleService implements OnDestroy {
     private getByElement;
     private getByRoute;
     private getByMenu;
+    private getBySystemSet;
     /**
      * Set the document title
      */

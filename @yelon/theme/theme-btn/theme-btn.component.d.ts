@@ -4,6 +4,7 @@ import * as i0 from "@angular/core";
 export interface ThemeBtnType {
     key: string;
     text: string;
+    color?: string;
 }
 export declare const YUNZAI_THEME_BTN_KEYS: InjectionToken<string>;
 export declare class ThemeBtnComponent implements OnInit, OnDestroy {

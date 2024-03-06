@@ -2,7 +2,9 @@ var NavType;
 (function (NavType) {
     NavType["APPLICATION"] = "application";
     NavType["GROUP"] = "group";
-    NavType["TILE"] = "tile";
+    NavType["TILE"] = "tiled";
+    NavType["BLANK"] = "blank";
+    NavType["TABS"] = "tabs"; // 选项卡
 })(NavType || (NavType = {}));
 
 const YUNZAI_PAGE = {
