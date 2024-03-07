@@ -231,25 +231,25 @@ class YunzaiNavApplicationComponent {
     <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
         <div class="yz-application-topic-list">
-        @if (showAllMenu) {
-          <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')"
-            >{{ 'mode.nav.all' | i18n }}
-          </div>
-        }
-        @if (showMineMenu) {
-          <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')"
-            >{{ 'mode.nav.mine' | i18n }}
-          </div>
-        }
-        @for (nav of state.topics; track nav) {
-          <div
-            data-event-id="_nav_topic"
-            [attr.data-name]="nav.name | i18n"
-            class="yz-application-text"
-            (click)="attachNav('other', nav)"
-            >{{ nav.name | i18n }}
-          </div>
-        }
+          @if (showAllMenu) {
+            <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')"
+              >{{ 'mode.nav.all' | i18n }}
+            </div>
+          }
+          @if (showMineMenu) {
+            <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')"
+              >{{ 'mode.nav.mine' | i18n }}
+            </div>
+          }
+          @for (nav of state.topics; track nav) {
+            <div
+              data-event-id="_nav_topic"
+              [attr.data-name]="nav.name | i18n"
+              class="yz-application-text"
+              (click)="attachNav('other', nav)"
+              >{{ nav.name | i18n }}
+            </div>
+          }
         </div>
       </div>
       <div nz-col [nzSpan]="21" class="yz-application-container">
@@ -338,25 +338,25 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
     <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
         <div class="yz-application-topic-list">
-        @if (showAllMenu) {
-          <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')"
-            >{{ 'mode.nav.all' | i18n }}
-          </div>
-        }
-        @if (showMineMenu) {
-          <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')"
-            >{{ 'mode.nav.mine' | i18n }}
-          </div>
-        }
-        @for (nav of state.topics; track nav) {
-          <div
-            data-event-id="_nav_topic"
-            [attr.data-name]="nav.name | i18n"
-            class="yz-application-text"
-            (click)="attachNav('other', nav)"
-            >{{ nav.name | i18n }}
-          </div>
-        }
+          @if (showAllMenu) {
+            <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')"
+              >{{ 'mode.nav.all' | i18n }}
+            </div>
+          }
+          @if (showMineMenu) {
+            <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')"
+              >{{ 'mode.nav.mine' | i18n }}
+            </div>
+          }
+          @for (nav of state.topics; track nav) {
+            <div
+              data-event-id="_nav_topic"
+              [attr.data-name]="nav.name | i18n"
+              class="yz-application-text"
+              (click)="attachNav('other', nav)"
+              >{{ nav.name | i18n }}
+            </div>
+          }
         </div>
       </div>
       <div nz-col [nzSpan]="21" class="yz-application-container">
@@ -476,7 +476,7 @@ class YunzaiLayoutNavGroupComponent {
                           @if (item.icon) {
                             <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
                           }
-                        {{ item.name | i18n }}
+                          {{ item.name | i18n }}
                         </li>
                       </ng-container>
                     }
@@ -530,7 +530,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImpor
                           @if (item.icon) {
                             <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
                           }
-                        {{ item.name | i18n }}
+                          {{ item.name | i18n }}
                         </li>
                       </ng-container>
                     }
