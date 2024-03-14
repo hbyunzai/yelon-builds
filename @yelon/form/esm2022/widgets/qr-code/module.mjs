@@ -9,11 +9,11 @@ export class QrCodeWidgetModule {
     constructor(widgetRegistry) {
         widgetRegistry.register(QrCodeWidget.KEY, QrCodeWidget);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QrCodeWidgetModule, deps: [{ token: i1.WidgetRegistry }], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: QrCodeWidgetModule, imports: [FormsModule, YelonFormModule, NzQRCodeModule, QrCodeWidget] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QrCodeWidgetModule, imports: [FormsModule, YelonFormModule, NzQRCodeModule, QrCodeWidget] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: QrCodeWidgetModule, deps: [{ token: i1.WidgetRegistry }], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.0", ngImport: i0, type: QrCodeWidgetModule, imports: [FormsModule, YelonFormModule, NzQRCodeModule, QrCodeWidget] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: QrCodeWidgetModule, imports: [FormsModule, YelonFormModule, NzQRCodeModule, QrCodeWidget] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: QrCodeWidgetModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: QrCodeWidgetModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [FormsModule, YelonFormModule, NzQRCodeModule, QrCodeWidget]

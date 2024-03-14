@@ -81,6 +81,7 @@ function addSymbolToComponentMetadata(source, filePath, symbolName, metadataFiel
         }
         return [new change_1.InsertChange(filePath, position, toInsert)];
     }
+    // eslint-disable-next-line
     const assignment = matchingProperties[0];
     // If it's not an array, nothing we can do really.
     if (!ts.isPropertyAssignment(assignment) || !ts.isArrayLiteralExpression(assignment.initializer)) {

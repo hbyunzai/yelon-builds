@@ -20,8 +20,8 @@ const COMPONENTS = [
     YunzaiHeaderUserComponent
 ];
 export class YunzaiWidgetsModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiWidgetsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.2.1", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YunzaiWidgetsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.0", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule,
             RouterModule,
             NoticeIconModule,
             NzDropDownModule,
@@ -36,14 +36,14 @@ export class YunzaiWidgetsModule {
             YunzaiHeaderNotifyComponent,
             YunzaiHeaderI18nComponent,
             YunzaiHeaderUserComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule,
             RouterModule,
             NoticeIconModule,
             NzDropDownModule,
             CommonModule,
             NzIconModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.2.1", ngImport: i0, type: YunzaiWidgetsModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YunzaiWidgetsModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
