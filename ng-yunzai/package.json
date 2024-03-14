@@ -1,6 +1,6 @@
 {
   "name": "ng-yunzai",
-  "version": "17.3.0-b2f68df",
+  "version": "17.3.0",
   "description": "Schematics specific to ng-yunzai",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
