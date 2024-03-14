@@ -16,7 +16,7 @@ const AUTH_DEFAULT_CONFIG = {
     token_send_template: 'Bearer ${access_token}',
     token_send_place: 'header',
     login_url: '/login',
-    ignores: [/\/login/, /assets\//, /passport\//, /\/auth\/oauth\/getOrCreateToken\/webapp/, /\/auth\/oauth\/token/],
+    ignores: [/\/login/, /\/assets\//, /passport\//, /\/auth\/oauth\/getOrCreateToken\/webapp/, /\/auth\/oauth\/token/],
     allow_anonymous_key: `_allow_anonymous`,
     refreshTime: 3000,
     refreshOffset: 6000

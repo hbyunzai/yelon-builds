@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "17.2.3-70df29c",
+  "version": "17.2.3-f542903",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^17.2.0",
-    "@yelon/theme": "^17.2.3-70df29c",
-    "@yelon/form": "^17.2.3-70df29c",
-    "@yelon/abc": "^17.2.3-70df29c",
-    "@yelon/util": "^17.2.3-70df29c",
+    "@yelon/theme": "^17.2.3-f542903",
+    "@yelon/form": "^17.2.3-f542903",
+    "@yelon/abc": "^17.2.3-f542903",
+    "@yelon/util": "^17.2.3-f542903",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
