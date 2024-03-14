@@ -789,10 +789,14 @@ class TitleService {
         return of(title || item.text);
     }
     getBySystemSet() {
+        if (!this.config || !this.config.systemCode)
+            return of('');
         let title = '';
         const [, getUser] = useLocalStorageUser();
         const yunzaiUser = getUser();
         const yunzaiMenus = deepCopy(yunzaiUser.menu).filter(m => m.systemCode && m.systemCode === this.config.systemCode);
+        if (!yunzaiMenus || yunzaiMenus.length === 0)
+            return of('');
         let systemName = '';
         const currentMenu = yunzaiMenus.pop();
         if (currentMenu) {
@@ -800,7 +804,11 @@ class TitleService {
         }
         const [, getProjectInfo] = useLocalStorageProjectInfo();
         const projectInfo = getProjectInfo();
+        if (!projectInfo)
+            return of('');
         const pageTitlePattern = projectInfo.pageTitlePattern;
+        if (!pageTitlePattern)
+            return of('');
         if (pageTitlePattern) {
             title = pageTitlePattern.replace(`$\{systemName}`, systemName);
         }
