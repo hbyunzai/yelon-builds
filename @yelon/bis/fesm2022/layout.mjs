@@ -615,7 +615,7 @@ class YunzaiLayoutBasicComponent {
         if (!this.state.display.aside) {
             cascadingStyleSheet = {
                 ...cascadingStyleSheet,
-                left: '24px'
+                left: '0px'
             };
         }
         return cascadingStyleSheet;

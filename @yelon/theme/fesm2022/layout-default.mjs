@@ -722,10 +722,10 @@ class LayoutDefaultComponent {
     @if (showFetching) {
       <div class="yunzai-default__progress-bar"></div>
     }
-    @if (!opt.hideHeader) {
+    @if (!opt.hideHeader && displayNav) {
       <layout-default-header [items]="headerItems" />
     }
-    @if (!opt.hideAside) {
+    @if (!opt.hideAside && displayAside) {
       <div class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
@@ -764,10 +764,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0", ngImpor
     @if (showFetching) {
       <div class="yunzai-default__progress-bar"></div>
     }
-    @if (!opt.hideHeader) {
+    @if (!opt.hideHeader && displayNav) {
       <layout-default-header [items]="headerItems" />
     }
-    @if (!opt.hideAside) {
+    @if (!opt.hideAside && displayAside) {
       <div class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
