@@ -5,11 +5,11 @@ import { ACLDirective } from './acl.directive';
 import * as i0 from "@angular/core";
 const COMPONENTS = [ACLDirective, ACLIfDirective];
 export class YelonACLModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YelonACLModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.0", ngImport: i0, type: YelonACLModule, imports: [CommonModule, ACLDirective, ACLIfDirective], exports: [ACLDirective, ACLIfDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YelonACLModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YelonACLModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.1", ngImport: i0, type: YelonACLModule, imports: [CommonModule, ACLDirective, ACLIfDirective], exports: [ACLDirective, ACLIfDirective] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YelonACLModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YelonACLModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YelonACLModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, ...COMPONENTS],

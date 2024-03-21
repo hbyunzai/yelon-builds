@@ -9,11 +9,11 @@ export class CascaderWidgetModule {
     constructor(widgetRegistry) {
         widgetRegistry.register(CascaderWidget.KEY, CascaderWidget);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: CascaderWidgetModule, deps: [{ token: i1.WidgetRegistry }], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.0", ngImport: i0, type: CascaderWidgetModule, imports: [FormsModule, YelonFormModule, NzCascaderModule, CascaderWidget] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: CascaderWidgetModule, imports: [FormsModule, YelonFormModule, NzCascaderModule, CascaderWidget] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: CascaderWidgetModule, deps: [{ token: i1.WidgetRegistry }], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.1", ngImport: i0, type: CascaderWidgetModule, imports: [FormsModule, YelonFormModule, NzCascaderModule, CascaderWidget] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: CascaderWidgetModule, imports: [FormsModule, YelonFormModule, NzCascaderModule, CascaderWidget] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: CascaderWidgetModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: CascaderWidgetModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [FormsModule, YelonFormModule, NzCascaderModule, CascaderWidget]

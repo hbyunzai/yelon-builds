@@ -4,11 +4,11 @@ import { YunzaiDormitoryTreeService } from './yunzai-dormitory-tree.service';
 import * as i0 from "@angular/core";
 const COMPONENTS = [YunzaiDormitoryTreeComponent];
 export class YunzaiDormitoryTreeModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YunzaiDormitoryTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.0", ngImport: i0, type: YunzaiDormitoryTreeModule, imports: [YunzaiDormitoryTreeComponent], exports: [YunzaiDormitoryTreeComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YunzaiDormitoryTreeModule, providers: [YunzaiDormitoryTreeService], imports: [COMPONENTS] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDormitoryTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDormitoryTreeModule, imports: [YunzaiDormitoryTreeComponent], exports: [YunzaiDormitoryTreeComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDormitoryTreeModule, providers: [YunzaiDormitoryTreeService], imports: [COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.0", ngImport: i0, type: YunzaiDormitoryTreeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDormitoryTreeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [...COMPONENTS],

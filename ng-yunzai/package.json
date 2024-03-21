@@ -1,6 +1,6 @@
 {
   "name": "ng-yunzai",
-  "version": "17.3.1-931f613",
+  "version": "17.3.1-ad3d4b9",
   "description": "Schematics specific to ng-yunzai",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "swagger-typescript-api": "^12.0.4",
     "ng-yunzai-sts": "latest",
     "ng-yunzai-plugin-theme": "latest",
-    "@angular/cdk": "^17.1.0"
+    "@angular/cdk": "^17.2.0"
   },
   "ng-update": {
     "migrations": "./migration.json",
