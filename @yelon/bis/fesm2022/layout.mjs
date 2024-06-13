@@ -145,10 +145,10 @@ class YunzaiNavApplicationComponent {
                 this.win.location.href = topic.url;
                 break;
             case 'blank':
-                this.win.location.href = topic.url;
+                this.win.open(topic.url);
                 break;
             case 'target':
-                this.win.location.href = topic.url;
+                this.win.open(topic.url);
                 break;
             default:
                 this.win.location.href = topic.url;
@@ -426,10 +426,10 @@ class YunzaiLayoutNavGroupComponent {
                 this.win.location.href = topic.url;
                 break;
             case 'blank':
-                this.win.location.href = topic.url;
+                this.win.open(topic.url);
                 break;
             case 'target':
-                this.win.location.href = topic.url;
+                this.win.open(topic.url);
                 break;
             default:
                 this.win.location.href = topic.url;
@@ -467,17 +467,19 @@ class YunzaiLayoutNavGroupComponent {
                   <ul nz-menu nzSelectable>
                     @for (item of menu.children; track item) {
                       <ng-container>
-                        <li
-                          data-event-id="_nav_item"
-                          [attr.data-name]="item.name | i18n"
-                          nz-menu-item
-                          (click)="open(item)"
-                        >
-                          @if (item.icon) {
-                            <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
-                          }
-                          {{ item.name | i18n }}
-                        </li>
+                        @if (item.auth) {
+                            <li
+                              data-event-id="_nav_item"
+                              [attr.data-name]="item.name | i18n"
+                              nz-menu-item
+                              (click)="open(item)"
+                            >
+                              @if (item.icon) {
+                                 <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                              }
+                              {{ item.name | i18n }}
+                            </li>
+                        }
                       </ng-container>
                     }
                   </ul>
@@ -521,17 +523,19 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImpor
                   <ul nz-menu nzSelectable>
                     @for (item of menu.children; track item) {
                       <ng-container>
-                        <li
-                          data-event-id="_nav_item"
-                          [attr.data-name]="item.name | i18n"
-                          nz-menu-item
-                          (click)="open(item)"
-                        >
-                          @if (item.icon) {
-                            <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
-                          }
-                          {{ item.name | i18n }}
-                        </li>
+                        @if (item.auth) {
+                            <li
+                              data-event-id="_nav_item"
+                              [attr.data-name]="item.name | i18n"
+                              nz-menu-item
+                              (click)="open(item)"
+                            >
+                              @if (item.icon) {
+                                 <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                              }
+                              {{ item.name | i18n }}
+                            </li>
+                        }
                       </ng-container>
                     }
                   </ul>
@@ -814,10 +818,10 @@ class YunzaiLayoutBasicComponent {
     </layout-default>
     <ng-template #asideUserTpl>
       <div data-event-id="_route_user" class="yunzai-default__aside-user">
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
-          <p class="mb0">{{ aside.intro | i18n }}</p>
+          <p>{{ aside.intro | i18n }}</p>
         </div>
       </div>
       <nz-dropdown-menu #userMenu="nzDropdownMenu">
@@ -963,10 +967,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImpor
     </layout-default>
     <ng-template #asideUserTpl>
       <div data-event-id="_route_user" class="yunzai-default__aside-user">
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
-          <p class="mb0">{{ aside.intro | i18n }}</p>
+          <p>{{ aside.intro | i18n }}</p>
         </div>
       </div>
       <nz-dropdown-menu #userMenu="nzDropdownMenu">

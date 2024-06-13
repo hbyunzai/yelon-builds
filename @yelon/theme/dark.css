@@ -33390,7 +33390,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 24px 24px 0 24px;
+  margin: 24px 24px 8px 24px;
 }
 .yunzai-default__aside-user .ant-dropdown-trigger {
   display: flex;
@@ -33402,6 +33402,21 @@ body {
   color: rgba(255, 255, 255, 0.85);
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex-wrap: wrap;
+}
+.yunzai-default__aside-user-info strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.yunzai-default__aside-user-info p {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #8a8a8a;
+  margin-bottom: 0 !important;
 }
 .yunzai-default__aside-user-avatar {
   margin-right: 8px;
