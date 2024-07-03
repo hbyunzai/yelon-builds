@@ -12,15 +12,15 @@ import { YunzaiDeptTreeService } from './yunzai-dept-tree.service';
 import * as i0 from "@angular/core";
 const COMPONENTS = [YunzaiDeptTreeComponent];
 export class YunzaiDeptTreeModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDeptTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDeptTreeModule, imports: [NzSpinModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiDeptTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.0.5", ngImport: i0, type: YunzaiDeptTreeModule, imports: [NzSpinModule,
             NzCardModule,
             CommonModule,
             YelonFormModule,
             NzIconModule,
             NzEmptyModule,
             NzTreeModule, YunzaiDeptTreeComponent], exports: [YunzaiDeptTreeComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDeptTreeModule, providers: [YunzaiDeptTreeService, YunzaiGradeService], imports: [NzSpinModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiDeptTreeModule, providers: [YunzaiDeptTreeService, YunzaiGradeService], imports: [NzSpinModule,
             NzCardModule,
             CommonModule,
             YelonFormModule,
@@ -28,7 +28,7 @@ export class YunzaiDeptTreeModule {
             NzEmptyModule,
             NzTreeModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiDeptTreeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiDeptTreeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

@@ -1,5 +1,5 @@
 import { EnvironmentProviders, InjectionToken } from '@angular/core';
-import { YunzaiCellConfig, YunzaiDateRangePickerConfig, YunzaiErrorCollectConfig, YunzaiExceptionType, YunzaiImageConfig, YunzaiLoadingConfig, YunzaiLodopConfig, YunzaiMediaConfig, YunzaiOnboardingConfig, YunzaiPageHeaderConfig, YunzaiPdfConfig, YunzaiQRConfig, YunzaiSEConfig, YunzaiSGConfig, YunzaiSTConfig, YunzaiSVConfig, YunzaiXlsxConfig, YunzaiZipConfig } from './abc/index';
+import { YunzaiCellConfig, YunzaiDateRangePickerConfig, YunzaiErrorCollectConfig, YunzaiExceptionType, YunzaiImageConfig, YunzaiLoadingConfig, YunzaiLodopConfig, YunzaiMediaConfig, YunzaiOnboardingConfig, YunzaiPageHeaderConfig, YunzaiPdfConfig, YunzaiSEConfig, YunzaiSGConfig, YunzaiSTConfig, YunzaiSVConfig, YunzaiXlsxConfig, YunzaiZipConfig } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
 import { YunzaiBusinessConfig } from './bis/bis.type';
@@ -23,7 +23,6 @@ export interface YunzaiConfig {
     onboarding?: YunzaiOnboardingConfig;
     lodop?: YunzaiLodopConfig;
     pageHeader?: YunzaiPageHeaderConfig;
-    qr?: YunzaiQRConfig;
     se?: YunzaiSEConfig;
     sg?: YunzaiSGConfig;
     sv?: YunzaiSVConfig;

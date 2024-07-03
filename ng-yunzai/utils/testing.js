@@ -50,8 +50,8 @@ function createYunzaiApp(ngAddOptions) {
 }
 exports.createYunzaiApp = createYunzaiApp;
 function createYunzaiAndModuleApp(options) {
-    var _a;
     return __awaiter(this, void 0, void 0, function* () {
+        var _a;
         const res = yield createYunzaiApp(options === null || options === void 0 ? void 0 : options.ngAddSchema);
         if ((options === null || options === void 0 ? void 0 : options.yunzaiData) != null) {
             res.tree.create('ng-yunzai.json', JSON.stringify(options === null || options === void 0 ? void 0 : options.yunzaiData));

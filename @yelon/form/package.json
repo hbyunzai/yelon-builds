@@ -1,6 +1,6 @@
 {
   "name": "@yelon/form",
-  "version": "17.3.2-2b11775",
+  "version": "18.0.0-93b1c41d",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,11 +28,11 @@
     "component"
   ],
   "dependencies": {
-    "ajv": "^8.12.0",
-    "ajv-formats": "^2.1.1",
-    "@yelon/theme": "^17.3.2-2b11775",
-    "@yelon/acl": "^17.3.2-2b11775",
-    "@yelon/util": "^17.3.2-2b11775",
+    "ajv": "^8.16.0",
+    "ajv-formats": "^3.0.1",
+    "@yelon/theme": "^18.0.0-93b1c41d",
+    "@yelon/acl": "^18.0.0-93b1c41d",
+    "@yelon/util": "^18.0.0-93b1c41d",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/form.mjs",
@@ -65,17 +65,17 @@
       "esm": "./esm2022/widgets/color/widgets-color.mjs",
       "default": "./fesm2022/widgets-color.mjs"
     },
-    "./widgets/mention": {
-      "types": "./widgets/mention/index.d.ts",
-      "esm2022": "./esm2022/widgets/mention/widgets-mention.mjs",
-      "esm": "./esm2022/widgets/mention/widgets-mention.mjs",
-      "default": "./fesm2022/widgets-mention.mjs"
-    },
     "./widgets/qr-code": {
       "types": "./widgets/qr-code/index.d.ts",
       "esm2022": "./esm2022/widgets/qr-code/widgets-qr-code.mjs",
       "esm": "./esm2022/widgets/qr-code/widgets-qr-code.mjs",
       "default": "./fesm2022/widgets-qr-code.mjs"
+    },
+    "./widgets/mention": {
+      "types": "./widgets/mention/index.d.ts",
+      "esm2022": "./esm2022/widgets/mention/widgets-mention.mjs",
+      "esm": "./esm2022/widgets/mention/widgets-mention.mjs",
+      "default": "./fesm2022/widgets-mention.mjs"
     },
     "./widgets/rate": {
       "types": "./widgets/rate/index.d.ts",

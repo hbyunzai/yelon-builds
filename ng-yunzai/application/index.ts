@@ -16,7 +16,6 @@ import {
 } from '@angular-devkit/schematics';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
-import { Schema as ApplicationOptions } from './schema';
 import { getLangData } from '../core/lang.config';
 import {
   addAllowedCommonJsDependencies,
@@ -28,6 +27,7 @@ import {
   addPackage,
   addSchematicCollections,
   addStylePreprocessorOptions,
+  addStyleResources,
   BUILD_TARGET_BUILD,
   BUILD_TARGET_SERVE,
   DEFAULT_WORKSPACE_PATH,
@@ -47,6 +47,8 @@ import {
   ZORROVERSION
 } from '../utils';
 import { addESLintRule, UpgradeMainVersions } from '../utils/versions';
+import { Schema as ApplicationOptions } from './schema';
+
 
 let project: ProjectDefinition;
 let projectName: string;
@@ -59,7 +61,7 @@ function removeOrginalFiles(): Rule {
       `${project.root}/README.md`,
       `${project.sourceRoot}/main.ts`,
       `${project.sourceRoot}/styles.less`,
-      `${project.sourceRoot}/favicon.ico`,
+      `${project.sourceRoot}/public/favicon.ico`,
       `${project.sourceRoot}/app/app.component.spec.ts`,
       `${project.sourceRoot}/app/app.component.ts`,
       `${project.sourceRoot}/app/app.component.html`,
@@ -80,6 +82,7 @@ function fixAngularJson(): Rule {
     if (serveTarget.options == null) serveTarget.options = {};
     serveTarget.options.proxyConfig = 'proxy.conf.js';
 
+    addStyleResources(workspace, projectName);
     addStylePreprocessorOptions(workspace, projectName);
     addSchematicCollections(workspace);
     addFileReplacements(workspace, projectName);
@@ -187,13 +190,13 @@ function addCodeStylesToPackageJson(): Rule {
     addPackage(
       tree,
       [
-        `husky@^8.0.3`,
-        `lint-staged@^15.2.2`,
-        `prettier@^3.2.5`,
-        `stylelint@^16.2.1`,
+        `husky@^9.0.11`,
+        `lint-staged@^15.2.7`,
+        `prettier@^3.3.2`,
+        `stylelint@^16.6.1`,
         `stylelint-config-standard@^36.0.0`,
         `stylelint-declaration-block-no-ignored-properties@^2.8.0`,
-        `stylelint-config-clean-order@^5.4.1`
+        `stylelint-config-clean-order@^6.0.0`
       ],
       'devDependencies'
     );

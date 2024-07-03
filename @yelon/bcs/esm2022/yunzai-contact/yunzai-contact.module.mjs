@@ -14,8 +14,8 @@ import { YunzaiContactComponent } from './yunzai-contact.component';
 import * as i0 from "@angular/core";
 const COMPONENTS = [YunzaiContactComponent];
 export class YunzaiContactModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiContactModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.1", ngImport: i0, type: YunzaiContactModule, imports: [FormsModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiContactModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.0.5", ngImport: i0, type: YunzaiContactModule, imports: [FormsModule,
             CommonModule,
             I18nPipe,
             NzRadioModule,
@@ -26,7 +26,7 @@ export class YunzaiContactModule {
             YunzaiDormitoryTreeModule,
             YunzaiFriendGroupModule,
             YunzaiTableUserModule, YunzaiContactComponent], exports: [YunzaiContactComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiContactModule, imports: [FormsModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiContactModule, imports: [FormsModule,
             CommonModule,
             NzRadioModule,
             NzGridModule,
@@ -37,7 +37,7 @@ export class YunzaiContactModule {
             YunzaiFriendGroupModule,
             YunzaiTableUserModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.1", ngImport: i0, type: YunzaiContactModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiContactModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

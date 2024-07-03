@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "17.3.2-2b11775",
+  "version": "18.0.0-93b1c41d",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -21,11 +21,11 @@
     "component"
   ],
   "dependencies": {
-    "ng-zorro-antd": "^17.3.0",
-    "@yelon/theme": "^17.3.2-2b11775",
-    "@yelon/form": "^17.3.2-2b11775",
-    "@yelon/abc": "^17.3.2-2b11775",
-    "@yelon/util": "^17.3.2-2b11775",
+    "ng-zorro-antd": "^18.0.1",
+    "@yelon/theme": "^18.0.0-93b1c41d",
+    "@yelon/form": "^18.0.0-93b1c41d",
+    "@yelon/abc": "^18.0.0-93b1c41d",
+    "@yelon/util": "^18.0.0-93b1c41d",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -46,17 +46,17 @@
       "esm": "./esm2022/yunzai-contact/yunzai-contact.mjs",
       "default": "./fesm2022/yunzai-contact.mjs"
     },
-    "./yunzai-dept-tree": {
-      "types": "./yunzai-dept-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
-      "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
-      "default": "./fesm2022/yunzai-dept-tree.mjs"
-    },
     "./yunzai-dormitory-tree": {
       "types": "./yunzai-dormitory-tree/index.d.ts",
       "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
       "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
       "default": "./fesm2022/yunzai-dormitory-tree.mjs"
+    },
+    "./yunzai-dept-tree": {
+      "types": "./yunzai-dept-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
+      "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
+      "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
     "./yunzai-friend-group": {
       "types": "./yunzai-friend-group/index.d.ts",
@@ -76,17 +76,17 @@
       "esm": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
       "default": "./fesm2022/yunzai-iframe-page.mjs"
     },
-    "./yunzai-role-tree": {
-      "types": "./yunzai-role-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
-      "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
-      "default": "./fesm2022/yunzai-role-tree.mjs"
-    },
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
       "esm2022": "./esm2022/yunzai-table-user/yunzai-table-user.mjs",
       "esm": "./esm2022/yunzai-table-user/yunzai-table-user.mjs",
       "default": "./fesm2022/yunzai-table-user.mjs"
+    },
+    "./yunzai-role-tree": {
+      "types": "./yunzai-role-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
+      "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
+      "default": "./fesm2022/yunzai-role-tree.mjs"
     }
   },
   "sideEffects": false

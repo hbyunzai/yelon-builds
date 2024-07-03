@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Menu } from './interface';
 import * as i0 from "@angular/core";
 /**
- * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
+ * 菜单服务
  */
 export declare class MenuService implements OnDestroy {
     private readonly i18nSrv;
