@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "18.0.0-085d95bd",
+  "version": "18.0.0",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^18.0.1",
-    "@yelon/theme": "^18.0.0-085d95bd",
-    "@yelon/form": "^18.0.0-085d95bd",
-    "@yelon/abc": "^18.0.0-085d95bd",
-    "@yelon/util": "^18.0.0-085d95bd",
+    "@yelon/theme": "^18.0.0",
+    "@yelon/form": "^18.0.0",
+    "@yelon/abc": "^18.0.0",
+    "@yelon/util": "^18.0.0",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -46,23 +46,17 @@
       "esm": "./esm2022/yunzai-contact/yunzai-contact.mjs",
       "default": "./fesm2022/yunzai-contact.mjs"
     },
-    "./yunzai-dept-tree": {
-      "types": "./yunzai-dept-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
-      "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
-      "default": "./fesm2022/yunzai-dept-tree.mjs"
-    },
     "./yunzai-dormitory-tree": {
       "types": "./yunzai-dormitory-tree/index.d.ts",
       "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
       "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
       "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
-    "./yunzai-friend-group": {
-      "types": "./yunzai-friend-group/index.d.ts",
-      "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
-      "esm": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
-      "default": "./fesm2022/yunzai-friend-group.mjs"
+    "./yunzai-dept-tree": {
+      "types": "./yunzai-dept-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
+      "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
+      "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
     "./yunzai-grade": {
       "types": "./yunzai-grade/index.d.ts",
@@ -81,6 +75,12 @@
       "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
       "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
       "default": "./fesm2022/yunzai-role-tree.mjs"
+    },
+    "./yunzai-friend-group": {
+      "types": "./yunzai-friend-group/index.d.ts",
+      "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
+      "esm": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
+      "default": "./fesm2022/yunzai-friend-group.mjs"
     },
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
