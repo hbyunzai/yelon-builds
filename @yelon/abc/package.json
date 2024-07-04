@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "18.0.0-b5eed3a",
+  "version": "18.0.0-085d95b",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -27,10 +27,10 @@
     "xlsx": "^0.18.5",
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
-    "ngx-countdown": "^18.0.0-b5eed3a",
-    "@yelon/theme": "^18.0.0-b5eed3a",
-    "@yelon/util": "^18.0.0-b5eed3a",
-    "@yelon/acl": "^18.0.0-b5eed3a",
+    "ngx-countdown": "^18.0.0-085d95b",
+    "@yelon/theme": "^18.0.0-085d95b",
+    "@yelon/util": "^18.0.0-085d95b",
+    "@yelon/acl": "^18.0.0-085d95b",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
