@@ -468,17 +468,17 @@ class YunzaiLayoutNavGroupComponent {
                     @for (item of menu.children; track item) {
                       <ng-container>
                         @if (item.auth) {
-                            <li
-                              data-event-id="_nav_item"
-                              [attr.data-name]="item.name | i18n"
-                              nz-menu-item
-                              (click)="open(item)"
-                            >
-                              @if (item.icon) {
-                                 <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
-                              }
-                              {{ item.name | i18n }}
-                            </li>
+                          <li
+                            data-event-id="_nav_item"
+                            [attr.data-name]="item.name | i18n"
+                            nz-menu-item
+                            (click)="open(item)"
+                          >
+                            @if (item.icon) {
+                              <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                            }
+                            {{ item.name | i18n }}
+                          </li>
                         }
                       </ng-container>
                     }
@@ -524,17 +524,17 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImpor
                     @for (item of menu.children; track item) {
                       <ng-container>
                         @if (item.auth) {
-                            <li
-                              data-event-id="_nav_item"
-                              [attr.data-name]="item.name | i18n"
-                              nz-menu-item
-                              (click)="open(item)"
-                            >
-                              @if (item.icon) {
-                                 <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
-                              }
-                              {{ item.name | i18n }}
-                            </li>
+                          <li
+                            data-event-id="_nav_item"
+                            [attr.data-name]="item.name | i18n"
+                            nz-menu-item
+                            (click)="open(item)"
+                          >
+                            @if (item.icon) {
+                              <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                            }
+                            {{ item.name | i18n }}
+                          </li>
                         }
                       </ng-container>
                     }
@@ -818,7 +818,12 @@ class YunzaiLayoutBasicComponent {
     </layout-default>
     <ng-template #asideUserTpl>
       <div data-event-id="_route_user" class="yunzai-default__aside-user">
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+        <nz-avatar
+          class="yunzai-default__aside-user-avatar"
+          [nzSize]="40"
+          [nzSrc]="aside.icon"
+          (click)="aboutApplication()"
+        />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
           <p>{{ aside.intro | i18n }}</p>
@@ -967,7 +972,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImpor
     </layout-default>
     <ng-template #asideUserTpl>
       <div data-event-id="_route_user" class="yunzai-default__aside-user">
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+        <nz-avatar
+          class="yunzai-default__aside-user-avatar"
+          [nzSize]="40"
+          [nzSrc]="aside.icon"
+          (click)="aboutApplication()"
+        />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
           <p>{{ aside.intro | i18n }}</p>

@@ -301,6 +301,37 @@ class CookieStorageStore {
     }
 }
 
+function CheckSimple(model) {
+    return model != null && typeof model.access_token === 'string' && model.access_token.length > 0;
+}
+function CheckJwt(model, offset) {
+    try {
+        return model != null && !!model.access_token && !model.isExpired(offset);
+    }
+    catch (err) {
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+            console.warn(`${err.message}, jump to login_url`);
+        }
+        return false;
+    }
+}
+function ToLogin(options, url) {
+    const router = inject(Router);
+    const token = inject(YA_SERVICE_TOKEN);
+    const doc = inject(DOCUMENT);
+    token.referrer.url = url || router.url;
+    if (options.token_invalid_redirect === true) {
+        setTimeout(() => {
+            if (/^https?:\/\//g.test(options.login_url)) {
+                doc.location.href = options.login_url;
+            }
+            else {
+                router.navigate([options.login_url]);
+            }
+        });
+    }
+}
+
 function urlBase64Decode(str) {
     let output = str.replace(/-/g, '+').replace(/_/g, '/');
     switch (output.length % 4) {
@@ -385,37 +416,6 @@ class JWTTokenModel {
         if (exp == null)
             return null;
         return !(exp > new Date().valueOf() + offsetSeconds * 1000);
-    }
-}
-
-function CheckSimple(model) {
-    return model != null && typeof model.access_token === 'string' && model.access_token.length > 0;
-}
-function CheckJwt(model, offset) {
-    try {
-        return model != null && !!model.access_token && !model.isExpired(offset);
-    }
-    catch (err) {
-        if (typeof ngDevMode === 'undefined' || ngDevMode) {
-            console.warn(`${err.message}, jump to login_url`);
-        }
-        return false;
-    }
-}
-function ToLogin(options, url) {
-    const router = inject(Router);
-    const token = inject(YA_SERVICE_TOKEN);
-    const doc = inject(DOCUMENT);
-    token.referrer.url = url || router.url;
-    if (options.token_invalid_redirect === true) {
-        setTimeout(() => {
-            if (/^https?:\/\//g.test(options.login_url)) {
-                doc.location.href = options.login_url;
-            }
-            else {
-                router.navigate([options.login_url]);
-            }
-        });
     }
 }
 

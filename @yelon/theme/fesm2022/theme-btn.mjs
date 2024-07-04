@@ -4,13 +4,13 @@ import { DOCUMENT, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
 import { InjectionToken, inject, Renderer2, ChangeDetectorRef, DestroyRef, isDevMode, EventEmitter, Component, ChangeDetectionStrategy, Input, Output, NgModule } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { I18nPipe } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzDropDownDirective, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
-import { NzTooltipDirective, NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import * as i1 from 'ng-zorro-antd/icon';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { I18nPipe } from '@yelon/theme';
+import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
+import { NzTooltipDirective, NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 const YUNZAI_THEME_BTN_KEYS = new InjectionToken('YUNZAI_THEME_BTN_KEYS');
 class ThemeBtnComponent {
