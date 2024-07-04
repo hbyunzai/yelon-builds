@@ -144,8 +144,8 @@ export class YunzaiHeaderNotifyComponent {
     ngOnDestroy() {
         this.subs.forEach(a => a.unsubscribe());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiHeaderNotifyComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.0.5", type: YunzaiHeaderNotifyComponent, isStandalone: true, selector: "yunzai-header-notify", ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiHeaderNotifyComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.0.6", type: YunzaiHeaderNotifyComponent, isStandalone: true, selector: "yunzai-header-notify", ngImport: i0, template: `
     <notice-icon
       [data]="data"
       [count]="count"
@@ -157,7 +157,7 @@ export class YunzaiHeaderNotifyComponent {
     />
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: NoticeIconModule }, { kind: "component", type: i1.NoticeIconComponent, selector: "notice-icon", inputs: ["data", "count", "loading", "popoverVisible", "btnClass", "btnIconClass", "centered"], outputs: ["select", "clear", "popoverVisibleChange"], exportAs: ["noticeIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiHeaderNotifyComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiHeaderNotifyComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yunzai-header-notify`,

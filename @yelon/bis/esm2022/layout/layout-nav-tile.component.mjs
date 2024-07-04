@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import * as i0 from "@angular/core";
 export class YunzaiLayoutNavTileComponent {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiLayoutNavTileComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.0.5", type: YunzaiLayoutNavTileComponent, isStandalone: true, selector: "yunzai-layout-nav-tile", ngImport: i0, template: `<ng-template />`, isInline: true }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiLayoutNavTileComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.0.6", type: YunzaiLayoutNavTileComponent, isStandalone: true, selector: "yunzai-layout-nav-tile", ngImport: i0, template: `<ng-template />`, isInline: true }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiLayoutNavTileComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiLayoutNavTileComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yunzai-layout-nav-tile`,

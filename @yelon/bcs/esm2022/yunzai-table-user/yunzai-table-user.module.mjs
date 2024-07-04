@@ -15,8 +15,8 @@ import { YunzaiTableUserService } from './yunzai-table-user.service';
 import * as i0 from "@angular/core";
 export const COMPONENTS = [YunzaiTableUserComponent];
 export class YunzaiTableUserModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiTableUserModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.0.5", ngImport: i0, type: YunzaiTableUserModule, imports: [CommonModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiTableUserModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.0.6", ngImport: i0, type: YunzaiTableUserModule, imports: [CommonModule,
             YelonFormModule,
             STModule,
             I18nPipe,
@@ -27,7 +27,7 @@ export class YunzaiTableUserModule {
             NzIconModule,
             NzMenuModule,
             NzCardModule, YunzaiTableUserComponent], exports: [YunzaiTableUserComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiTableUserModule, providers: [YunzaiTableUserService], imports: [CommonModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiTableUserModule, providers: [YunzaiTableUserService], imports: [CommonModule,
             YelonFormModule,
             STModule,
             NzCheckboxModule,
@@ -38,7 +38,7 @@ export class YunzaiTableUserModule {
             NzMenuModule,
             NzCardModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.5", ngImport: i0, type: YunzaiTableUserModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiTableUserModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
