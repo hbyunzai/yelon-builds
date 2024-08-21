@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "18.0.1-a23aa77",
+  "version": "18.1.0-82ba20ff",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -41,17 +41,17 @@
       "esm": "./esm2022/array/array.mjs",
       "default": "./fesm2022/array.mjs"
     },
-    "./browser": {
-      "types": "./browser/index.d.ts",
-      "esm2022": "./esm2022/browser/browser.mjs",
-      "esm": "./esm2022/browser/browser.mjs",
-      "default": "./fesm2022/browser.mjs"
-    },
     "./config": {
       "types": "./config/index.d.ts",
       "esm2022": "./esm2022/config/config.mjs",
       "esm": "./esm2022/config/config.mjs",
       "default": "./fesm2022/config.mjs"
+    },
+    "./browser": {
+      "types": "./browser/index.d.ts",
+      "esm2022": "./esm2022/browser/browser.mjs",
+      "esm": "./esm2022/browser/browser.mjs",
+      "default": "./fesm2022/browser.mjs"
     },
     "./date-time": {
       "types": "./date-time/index.d.ts",
@@ -65,17 +65,17 @@
       "esm": "./esm2022/decorator/decorator.mjs",
       "default": "./fesm2022/decorator.mjs"
     },
-    "./form": {
-      "types": "./form/index.d.ts",
-      "esm2022": "./esm2022/form/form.mjs",
-      "esm": "./esm2022/form/form.mjs",
-      "default": "./fesm2022/form.mjs"
-    },
     "./format": {
       "types": "./format/index.d.ts",
       "esm2022": "./esm2022/format/format.mjs",
       "esm": "./esm2022/format/format.mjs",
       "default": "./fesm2022/format.mjs"
+    },
+    "./form": {
+      "types": "./form/index.d.ts",
+      "esm2022": "./esm2022/form/form.mjs",
+      "esm": "./esm2022/form/form.mjs",
+      "default": "./fesm2022/form.mjs"
     },
     "./math": {
       "types": "./math/index.d.ts",
