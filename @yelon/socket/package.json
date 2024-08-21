@@ -1,13 +1,13 @@
 {
   "name": "@yelon/socket",
-  "version": "18.1.0-82ba20ff",
+  "version": "18.1.0",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "ng-zorro-antd": "^18.1.0-82ba20ff",
+    "ng-zorro-antd": "^18.1.0",
     "@stomp/rx-stomp": "^2.0.0",
     "@stomp/stompjs": "^7.0.0",
-    "@yelon/util": "^18.1.0-82ba20ff",
+    "@yelon/util": "^18.1.0",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/socket.mjs",
