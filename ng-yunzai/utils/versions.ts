@@ -18,13 +18,13 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
   addPackage(
     tree,
     [
-      `@angular-eslint/builder@^18.0.1`,
-      `@angular-eslint/eslint-plugin@^18.0.0`,
-      `@angular-eslint/eslint-plugin-template@^18.0.0`,
-      `@angular-eslint/schematics@^18.0.0`,
-      `@angular-eslint/template-parser@^18.0.0`,
-      `@typescript-eslint/eslint-plugin@^7.11.0`,
-      `@typescript-eslint/parser@^7.11.0`,
+      `@angular-eslint/builder@^18.2.0`,
+      `@angular-eslint/eslint-plugin@^18.2.0`,
+      `@angular-eslint/eslint-plugin-template@^18.2.0`,
+      `@angular-eslint/schematics@^18.2.0`,
+      `@angular-eslint/template-parser@^18.2.0`,
+      `@typescript-eslint/eslint-plugin@^8.0.0`,
+      `@typescript-eslint/parser@^8.0.0`,
       `eslint@^8.28.0`,
       `eslint-config-prettier@~9.1.0`,
       `eslint-plugin-import@~2.25.3`,
@@ -32,12 +32,12 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
       `eslint-plugin-prefer-arrow@~1.2.2`,
       `eslint-plugin-prettier@~5.0.0`,
       `eslint-plugin-deprecation@^3.0.0`,
-      `prettier@^3.3.2`,
-      `husky@^9.0.11`,
+      `prettier@^3.3.3`,
+      `husky@^9.1.4`,
       `ng-yunzai@${version}`,
       `ng-yunzai-plugin-theme@latest`,
       `source-map-explorer@^2.5.3`,
-      `@angular/language-service@^18.0.0`,
+      `@angular/language-service@^18.1.0`,
       `ngx-tinymce@^18.0.0`,
       `@stomp/rx-stomp@^2.0.0`,
       `@stomp/stompjs@^7.0.0`,
@@ -46,7 +46,7 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
     ],
     'devDependencies'
   );
-  addPackage(tree, [`rxjs@~7.8.0`, `ng-zorro-antd@^18.0.1`]);
+  addPackage(tree, [`rxjs@~7.8.0`, `ng-zorro-antd@^18.1.0`]);
 }
 
 export function addESLintRule(projectName: string): Rule {
