@@ -14,8 +14,8 @@ import { YunzaiLayoutNavTileComponent } from './layout-nav-tile.component';
 import * as i0 from "@angular/core";
 const COMPONENTS = [YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent];
 export class YunzaiLayoutModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.0", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.0", ngImport: i0, type: YunzaiLayoutModule, imports: [I18nPipe,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.6", ngImport: i0, type: YunzaiLayoutModule, imports: [I18nPipe,
             FormsModule,
             NzFormModule,
             NzInputModule,
@@ -24,7 +24,7 @@ export class YunzaiLayoutModule {
             NzIconModule,
             NzDropDownModule,
             NzTabsModule, YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent], exports: [YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.0", ngImport: i0, type: YunzaiLayoutModule, imports: [FormsModule,
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiLayoutModule, imports: [FormsModule,
             NzFormModule,
             NzInputModule,
             CommonModule,
@@ -33,7 +33,7 @@ export class YunzaiLayoutModule {
             NzDropDownModule,
             NzTabsModule, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.0", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
