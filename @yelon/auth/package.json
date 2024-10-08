@@ -1,6 +1,6 @@
 {
   "name": "@yelon/auth",
-  "version": "18.1.0-45dd404",
+  "version": "18.1.0-a26551c",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^18.1.1",
-    "@yelon/util": "^18.1.0-45dd404",
+    "@yelon/util": "^18.1.0-a26551c",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/auth.mjs",
