@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = default_1;
 const schematics_1 = require("@angular-devkit/schematics");
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const utils_1 = require("../utils");
@@ -66,4 +65,5 @@ function default_1(options) {
         return (0, schematics_1.chain)(rules);
     });
 }
+exports.default = default_1;
 //# sourceMappingURL=index.js.map

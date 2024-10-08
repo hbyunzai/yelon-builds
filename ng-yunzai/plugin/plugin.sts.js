@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pluginSTS = pluginSTS;
+exports.pluginSTS = void 0;
 const schematics_1 = require("@angular-devkit/schematics");
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const utils_1 = require("../utils");
@@ -20,4 +20,5 @@ function installPackages() {
 function pluginSTS(options) {
     return [fixPackage(options), fixFiles(), installPackages()];
 }
+exports.pluginSTS = pluginSTS;
 //# sourceMappingURL=plugin.sts.js.map

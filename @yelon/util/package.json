@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "18.1.0-31049f6",
+  "version": "18.1.1-dde242b7",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -95,17 +95,17 @@
       "esm": "./esm2022/mtypes/mtypes.mjs",
       "default": "./fesm2022/mtypes.mjs"
     },
-    "./other": {
-      "types": "./other/index.d.ts",
-      "esm2022": "./esm2022/other/other.mjs",
-      "esm": "./esm2022/other/other.mjs",
-      "default": "./fesm2022/other.mjs"
-    },
     "./pipes": {
       "types": "./pipes/index.d.ts",
       "esm2022": "./esm2022/pipes/pipes.mjs",
       "esm": "./esm2022/pipes/pipes.mjs",
       "default": "./fesm2022/pipes.mjs"
+    },
+    "./other": {
+      "types": "./other/index.d.ts",
+      "esm2022": "./esm2022/other/other.mjs",
+      "esm": "./esm2022/other/other.mjs",
+      "default": "./fesm2022/other.mjs"
     },
     "./token": {
       "types": "./token/index.d.ts",
