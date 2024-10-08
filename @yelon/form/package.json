@@ -47,6 +47,18 @@
       "esm": "./esm2022/form.mjs",
       "default": "./fesm2022/form.mjs"
     },
+    "./widgets-third/monaco-editor": {
+      "types": "./widgets-third/monaco-editor/index.d.ts",
+      "esm2022": "./esm2022/widgets-third/monaco-editor/widgets-third-monaco-editor.mjs",
+      "esm": "./esm2022/widgets-third/monaco-editor/widgets-third-monaco-editor.mjs",
+      "default": "./fesm2022/widgets-third-monaco-editor.mjs"
+    },
+    "./widgets-third/tinymce": {
+      "types": "./widgets-third/tinymce/index.d.ts",
+      "esm2022": "./esm2022/widgets-third/tinymce/widgets-third-tinymce.mjs",
+      "esm": "./esm2022/widgets-third/tinymce/widgets-third-tinymce.mjs",
+      "default": "./fesm2022/widgets-third-tinymce.mjs"
+    },
     "./widgets/autocomplete": {
       "types": "./widgets/autocomplete/index.d.ts",
       "esm2022": "./esm2022/widgets/autocomplete/widgets-auto-complete.mjs",
@@ -124,18 +136,6 @@
       "esm2022": "./esm2022/widgets/upload/widgets-upload.mjs",
       "esm": "./esm2022/widgets/upload/widgets-upload.mjs",
       "default": "./fesm2022/widgets-upload.mjs"
-    },
-    "./widgets-third/monaco-editor": {
-      "types": "./widgets-third/monaco-editor/index.d.ts",
-      "esm2022": "./esm2022/widgets-third/monaco-editor/widgets-third-monaco-editor.mjs",
-      "esm": "./esm2022/widgets-third/monaco-editor/widgets-third-monaco-editor.mjs",
-      "default": "./fesm2022/widgets-third-monaco-editor.mjs"
-    },
-    "./widgets-third/tinymce": {
-      "types": "./widgets-third/tinymce/index.d.ts",
-      "esm2022": "./esm2022/widgets-third/tinymce/widgets-third-tinymce.mjs",
-      "esm": "./esm2022/widgets-third/tinymce/widgets-third-tinymce.mjs",
-      "default": "./fesm2022/widgets-third-tinymce.mjs"
     }
   },
   "sideEffects": false

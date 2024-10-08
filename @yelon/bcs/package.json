@@ -52,17 +52,17 @@
       "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
       "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
-    "./yunzai-dormitory-tree": {
-      "types": "./yunzai-dormitory-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
-    },
     "./yunzai-friend-group": {
       "types": "./yunzai-friend-group/index.d.ts",
       "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
       "esm": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
       "default": "./fesm2022/yunzai-friend-group.mjs"
+    },
+    "./yunzai-dormitory-tree": {
+      "types": "./yunzai-dormitory-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
     "./yunzai-grade": {
       "types": "./yunzai-grade/index.d.ts",
@@ -70,17 +70,17 @@
       "esm": "./esm2022/yunzai-grade/yunzai-grade.mjs",
       "default": "./fesm2022/yunzai-grade.mjs"
     },
-    "./yunzai-iframe-page": {
-      "types": "./yunzai-iframe-page/index.d.ts",
-      "esm2022": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
-      "esm": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
-      "default": "./fesm2022/yunzai-iframe-page.mjs"
-    },
     "./yunzai-role-tree": {
       "types": "./yunzai-role-tree/index.d.ts",
       "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
       "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
       "default": "./fesm2022/yunzai-role-tree.mjs"
+    },
+    "./yunzai-iframe-page": {
+      "types": "./yunzai-iframe-page/index.d.ts",
+      "esm2022": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
+      "esm": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
+      "default": "./fesm2022/yunzai-iframe-page.mjs"
     },
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
