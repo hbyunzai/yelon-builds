@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = default_1;
 const schematics_1 = require("@angular-devkit/schematics");
 function default_1(options) {
     const rules = [];
@@ -13,4 +12,5 @@ function default_1(options) {
     ].forEach(item => rules.push((0, schematics_1.schematic)(item.name, Object.assign(Object.assign({}, options), item.options))));
     return (0, schematics_1.chain)(rules);
 }
+exports.default = default_1;
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pluginDocker = pluginDocker;
+exports.pluginDocker = void 0;
 const utils_1 = require("../utils");
 function setIgnore(tree, options) {
     const filePath = `${options.root}/.dockerignore`;
@@ -120,4 +120,5 @@ function pluginDocker(options) {
         setNginx(tree, options);
     };
 }
+exports.pluginDocker = pluginDocker;
 //# sourceMappingURL=plugin.docker.js.map
