@@ -12,7 +12,7 @@ export declare class PathToRegexpService {
         repeat: boolean;
         pattern: any;
     })[];
-    compile(str: NzSafeAny, options: NzSafeAny): (data: NzSafeAny, options: NzSafeAny) => string;
+    compile(str: NzSafeAny, options: NzSafeAny): (data: any, options: any) => string;
     tokensToFunction(tokens: NzSafeAny, options: NzSafeAny): (data: NzSafeAny, options: NzSafeAny) => string;
     escapeString(str: NzSafeAny): any;
     escapeGroup(group: NzSafeAny): any;

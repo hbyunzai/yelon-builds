@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "18.1.2",
+  "version": "18.1.2-86084e12",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^18.0.0",
-    "@yelon/theme": "^18.1.2",
-    "@yelon/util": "^18.1.2",
-    "@yelon/acl": "^18.1.2",
+    "@yelon/theme": "^18.1.2-86084e12",
+    "@yelon/util": "^18.1.2-86084e12",
+    "@yelon/acl": "^18.1.2-86084e12",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -63,23 +63,11 @@
       "esm": "./esm2022/cell/cell.mjs",
       "default": "./fesm2022/cell.mjs"
     },
-    "./count-down": {
-      "types": "./count-down/index.d.ts",
-      "esm2022": "./esm2022/count-down/count-down.mjs",
-      "esm": "./esm2022/count-down/count-down.mjs",
-      "default": "./fesm2022/count-down.mjs"
-    },
     "./date-picker": {
       "types": "./date-picker/index.d.ts",
       "esm2022": "./esm2022/date-picker/date-picker.mjs",
       "esm": "./esm2022/date-picker/date-picker.mjs",
       "default": "./fesm2022/date-picker.mjs"
-    },
-    "./down-file": {
-      "types": "./down-file/index.d.ts",
-      "esm2022": "./esm2022/down-file/down-file.mjs",
-      "esm": "./esm2022/down-file/down-file.mjs",
-      "default": "./fesm2022/down-file.mjs"
     },
     "./ellipsis": {
       "types": "./ellipsis/index.d.ts",
@@ -87,11 +75,23 @@
       "esm": "./esm2022/ellipsis/ellipsis.mjs",
       "default": "./fesm2022/ellipsis.mjs"
     },
+    "./down-file": {
+      "types": "./down-file/index.d.ts",
+      "esm2022": "./esm2022/down-file/down-file.mjs",
+      "esm": "./esm2022/down-file/down-file.mjs",
+      "default": "./fesm2022/down-file.mjs"
+    },
     "./error-collect": {
       "types": "./error-collect/index.d.ts",
       "esm2022": "./esm2022/error-collect/error-collect.mjs",
       "esm": "./esm2022/error-collect/error-collect.mjs",
       "default": "./fesm2022/error-collect.mjs"
+    },
+    "./count-down": {
+      "types": "./count-down/index.d.ts",
+      "esm2022": "./esm2022/count-down/count-down.mjs",
+      "esm": "./esm2022/count-down/count-down.mjs",
+      "default": "./fesm2022/count-down.mjs"
     },
     "./exception": {
       "types": "./exception/index.d.ts",

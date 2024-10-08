@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readJSON = readJSON;
-exports.writeJSON = writeJSON;
-exports.modifyJSON = modifyJSON;
+exports.modifyJSON = exports.writeJSON = exports.readJSON = void 0;
 const jsonc_parser_1 = require("jsonc-parser");
 function readJSON(tree, jsonFile, type) {
     if (!tree.exists(jsonFile))
@@ -20,9 +18,11 @@ function readJSON(tree, jsonFile, type) {
         throw ex;
     }
 }
+exports.readJSON = readJSON;
 function writeJSON(tree, jsonFile, json) {
     tree.overwrite(jsonFile, JSON.stringify(json, null, 2));
 }
+exports.writeJSON = writeJSON;
 function modifyJSON(tree, jsonPath, modifies, options) {
     if (!tree.exists(jsonPath))
         return null;
@@ -41,4 +41,5 @@ function modifyJSON(tree, jsonPath, modifies, options) {
     });
     tree.overwrite(jsonPath, sourceText);
 }
+exports.modifyJSON = modifyJSON;
 //# sourceMappingURL=json.js.map

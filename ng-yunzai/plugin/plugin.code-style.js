@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pluginCodeStyle = pluginCodeStyle;
+exports.pluginCodeStyle = void 0;
 const utils_1 = require("../utils");
 const code_style_1 = require("../utils/code-style");
 function pluginCodeStyle(options) {
@@ -17,4 +17,5 @@ function pluginCodeStyle(options) {
         (0, utils_1.writePackage)(tree, json);
     };
 }
+exports.pluginCodeStyle = pluginCodeStyle;
 //# sourceMappingURL=plugin.code-style.js.map

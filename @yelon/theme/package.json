@@ -1,6 +1,6 @@
 {
   "name": "@yelon/theme",
-  "version": "18.1.2",
+  "version": "18.1.2-86084e12",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^18.1.1",
-    "@yelon/acl": "^18.1.2",
-    "@yelon/abc": "^18.1.2",
-    "@yelon/form": "^18.1.2",
-    "@yelon/util": "^18.1.2",
+    "@yelon/acl": "^18.1.2-86084e12",
+    "@yelon/abc": "^18.1.2-86084e12",
+    "@yelon/form": "^18.1.2-86084e12",
+    "@yelon/util": "^18.1.2-86084e12",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/theme.mjs",
