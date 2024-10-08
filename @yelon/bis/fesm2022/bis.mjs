@@ -225,7 +225,7 @@ class YunzaiStartupService {
         this.win = inject(WINDOW);
         this.configService = inject(YunzaiConfigService);
     }
-    load() {
+    load(param) {
         let defaultLang = this.settingService.layout.lang || this.i18n.defaultLang;
         const [setTenant] = useLocalStorageTenant();
         const [setUser, getUser] = useLocalStorageUser();
@@ -233,7 +233,7 @@ class YunzaiStartupService {
         const [setProject] = useLocalStorageProjectInfo();
         const [setDefaultRoute] = useLocalStorageDefaultRoute();
         const [setCurrent] = useLocalStorageCurrent();
-        return this.token().pipe(mergeMap((token) => {
+        return this.token(param).pipe(mergeMap((token) => {
             if (token === false) {
                 return this.i18n.loadLocaleData(defaultLang).pipe(mergeMap(() => EMPTY));
             }
@@ -308,25 +308,29 @@ class YunzaiStartupService {
             return of(void 0);
         }));
     }
-    token() {
+    token(param) {
+        const auto = this.configService.get('auth')?.auto;
+        const force = param?.force || undefined;
         if (this.config.loginForm) {
-            return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(map((response) => {
-                return response;
-            }));
+            if (this.tokenService.get()?.access_token || force || auto) {
+                return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(map((response) => {
+                    return response;
+                }));
+            }
+            return of(false);
         }
         else {
             const uri = encodeURIComponent(this.win.location.href);
             return this.httpClient
                 .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
                 .pipe(map((response) => {
-                const auto = this.configService.get('auth')?.auto;
-                if ((!response && !auto) || (!response.data && !auto) || (!response.data.access_token && !auto)) {
-                    return false;
-                }
                 switch (response.errcode) {
                     case 2000:
                         return response.data;
                     case 2001:
+                        if (!force && !auto) {
+                            return false;
+                        }
                         this.win.location.href = response.msg;
                         throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
                     default:
@@ -353,9 +357,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImpor
             type: Injectable
         }] });
 function mapYzSideToYelonMenu(menus) {
-    menus.forEach(menu => {
+    menus.forEach((menu) => {
         if (menu.children && menu.hideChildren) {
-            menu.children.forEach(c => (c.hide = true));
+            menu.children.forEach((c) => (c.hide = true));
         }
         menu.badgeDot = menu.badge_dot || null;
         menu.badgeStatus = menu.badge_status || null;
