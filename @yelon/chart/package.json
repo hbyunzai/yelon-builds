@@ -1,6 +1,6 @@
 {
   "name": "@yelon/chart",
-  "version": "18.1.1-dde242b7",
+  "version": "18.1.1",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,8 +28,8 @@
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.10",
     "echarts": "^5.5.1",
-    "@yelon/util": "^18.1.1-dde242b7",
-    "@yelon/theme": "^18.1.1-dde242b7",
+    "@yelon/util": "^18.1.1",
+    "@yelon/theme": "^18.1.1",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/chart.mjs",
@@ -56,17 +56,17 @@
       "esm": "./esm2022/card/card.mjs",
       "default": "./fesm2022/card.mjs"
     },
-    "./core": {
-      "types": "./core/index.d.ts",
-      "esm2022": "./esm2022/core/core.mjs",
-      "esm": "./esm2022/core/core.mjs",
-      "default": "./fesm2022/core.mjs"
-    },
     "./chart-echarts": {
       "types": "./chart-echarts/index.d.ts",
       "esm2022": "./esm2022/chart-echarts/chart-echarts.mjs",
       "esm": "./esm2022/chart-echarts/chart-echarts.mjs",
       "default": "./fesm2022/chart-echarts.mjs"
+    },
+    "./core": {
+      "types": "./core/index.d.ts",
+      "esm2022": "./esm2022/core/core.mjs",
+      "esm": "./esm2022/core/core.mjs",
+      "default": "./fesm2022/core.mjs"
     },
     "./custom": {
       "types": "./custom/index.d.ts",
@@ -116,17 +116,17 @@
       "esm": "./esm2022/radar/radar.mjs",
       "default": "./fesm2022/radar.mjs"
     },
-    "./tag-cloud": {
-      "types": "./tag-cloud/index.d.ts",
-      "esm2022": "./esm2022/tag-cloud/tag-cloud.mjs",
-      "esm": "./esm2022/tag-cloud/tag-cloud.mjs",
-      "default": "./fesm2022/tag-cloud.mjs"
-    },
     "./single-bar": {
       "types": "./single-bar/index.d.ts",
       "esm2022": "./esm2022/single-bar/single-bar.mjs",
       "esm": "./esm2022/single-bar/single-bar.mjs",
       "default": "./fesm2022/single-bar.mjs"
+    },
+    "./tag-cloud": {
+      "types": "./tag-cloud/index.d.ts",
+      "esm2022": "./esm2022/tag-cloud/tag-cloud.mjs",
+      "esm": "./esm2022/tag-cloud/tag-cloud.mjs",
+      "default": "./fesm2022/tag-cloud.mjs"
     },
     "./timeline": {
       "types": "./timeline/index.d.ts",
