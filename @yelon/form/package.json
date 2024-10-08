@@ -47,17 +47,17 @@
       "esm": "./esm2022/form.mjs",
       "default": "./fesm2022/form.mjs"
     },
-    "./widgets/autocomplete": {
-      "types": "./widgets/autocomplete/index.d.ts",
-      "esm2022": "./esm2022/widgets/autocomplete/widgets-auto-complete.mjs",
-      "esm": "./esm2022/widgets/autocomplete/widgets-auto-complete.mjs",
-      "default": "./fesm2022/widgets-auto-complete.mjs"
-    },
     "./widgets/cascader": {
       "types": "./widgets/cascader/index.d.ts",
       "esm2022": "./esm2022/widgets/cascader/widgets-cascader.mjs",
       "esm": "./esm2022/widgets/cascader/widgets-cascader.mjs",
       "default": "./fesm2022/widgets-cascader.mjs"
+    },
+    "./widgets/autocomplete": {
+      "types": "./widgets/autocomplete/index.d.ts",
+      "esm2022": "./esm2022/widgets/autocomplete/widgets-auto-complete.mjs",
+      "esm": "./esm2022/widgets/autocomplete/widgets-auto-complete.mjs",
+      "default": "./fesm2022/widgets-auto-complete.mjs"
     },
     "./widgets/color": {
       "types": "./widgets/color/index.d.ts",

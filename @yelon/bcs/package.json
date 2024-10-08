@@ -52,12 +52,6 @@
       "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
       "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
-    "./yunzai-dormitory-tree": {
-      "types": "./yunzai-dormitory-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
-    },
     "./yunzai-friend-group": {
       "types": "./yunzai-friend-group/index.d.ts",
       "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
@@ -81,6 +75,12 @@
       "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
       "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
       "default": "./fesm2022/yunzai-role-tree.mjs"
+    },
+    "./yunzai-dormitory-tree": {
+      "types": "./yunzai-dormitory-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
