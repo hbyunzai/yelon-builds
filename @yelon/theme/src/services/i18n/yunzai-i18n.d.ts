@@ -28,6 +28,7 @@ export declare class YunzaiHttpI18NService extends YunzaiI18nBaseService impleme
     constructor(http: _HttpClient, settings: SettingsService, nzI18nService: NzI18nService, yelonLocaleService: YelonLocaleService, platform: Platform, tokenService: ITokenService, cogSrv: YunzaiConfigService);
     private getDefaultLang;
     loadLangData(lang: string): Observable<NzSafeAny>;
+    loadLocaleData(lang: string): Observable<NzSafeAny>;
     use(lang: string, data: Record<string, unknown>): void;
     getLangs(): Observable<YunzaiI18NType[]>;
     ngOnDestroy(): void;

@@ -2180,6 +2180,9 @@ class YunzaiHttpI18NService extends YunzaiI18nBaseService {
                 .pipe(catchError(() => this.http.get(`./assets/tmp/i18n/${lang}.json`)));
         }
     }
+    loadLocaleData(lang) {
+        return this.http.get(`./assets/tmp/i18n/${lang}.json`);
+    }
     use(lang, data) {
         if (this._currentLang === lang)
             return;

@@ -9,6 +9,7 @@ import { CookieService } from '@yelon/util/browser';
 import { HttpContextToken, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 const AUTH_DEFAULT_CONFIG = {
+    auto: true,
     store_key: `_yz_token`,
     token_invalid_redirect: true,
     token_exp_offset: 10,
@@ -138,8 +139,8 @@ const YA_SERVICE_TOKEN = new InjectionToken('YA_SERVICE_TOKEN', {
 });
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const OPENTYPE = '_delonAuthSocialType';
-const HREFCALLBACK = '_delonAuthSocialCallbackByHref';
+const OPENTYPE = '_yelonAuthSocialType';
+const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
 class SocialService {
     constructor() {
         this.tokenService = inject(YA_SERVICE_TOKEN);

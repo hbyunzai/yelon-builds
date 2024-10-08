@@ -8,7 +8,7 @@ import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL, MenuService, TitleService, SettingsService } from '@yelon/theme';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
-import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, EMPTY, combineLatest, map } from 'rxjs';
 import { mergeBisConfig, BUSINESS_DEFAULT_CONFIG } from '@yelon/bis/config';
 import * as i1 from '@yelon/util';
 import { log, YUNZAI_CONFIG, YunzaiConfigService, WINDOW, useLocalStorageTenant, useLocalStorageUser, useLocalStorageHeader, useLocalStorageProjectInfo, useLocalStorageDefaultRoute, useLocalStorageCurrent, deepCopy } from '@yelon/util';
@@ -234,6 +234,9 @@ class YunzaiStartupService {
         const [setDefaultRoute] = useLocalStorageDefaultRoute();
         const [setCurrent] = useLocalStorageCurrent();
         return this.token().pipe(mergeMap((token) => {
+            if (token === false) {
+                return this.i18n.loadLocaleData(defaultLang).pipe(mergeMap(() => EMPTY));
+            }
             this.configService.set('auth', {
                 token_send_key: 'Authorization',
                 token_send_template: `${token.token_type} \${access_token}`,
@@ -300,6 +303,9 @@ class YunzaiStartupService {
                 }
             }
             return of(void 0);
+        }), catchError((error) => {
+            console.error('Error occurred:', error);
+            return of(void 0);
         }));
     }
     token() {
@@ -313,6 +319,10 @@ class YunzaiStartupService {
             return this.httpClient
                 .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
                 .pipe(map((response) => {
+                const auto = this.configService.get('auth')?.auto;
+                if ((!response && !auto) || (!response.data && !auto) || (!response.data.access_token && !auto)) {
+                    return false;
+                }
                 switch (response.errcode) {
                     case 2000:
                         return response.data;

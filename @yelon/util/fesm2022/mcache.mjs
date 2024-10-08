@@ -5,6 +5,7 @@ const YZ_HEADER_KEY = '_yz_header';
 const YZ_HEADER_TYPE_KEY = '_yz_header_type';
 const YZ_DEFAULT_ROUTE_KEY = '_yz_default_route';
 const YZ_TENANT_KEY = '_yz_tenant';
+const YZ_NEED_AUTH_KEY = '_yz_need_auth';
 // export const YZ_LANGS_KEY = '_yz_langs';
 // export const YZ_LANG_KEY = '_yz_lang';
 function get(key) {
@@ -61,5 +62,5 @@ function useLocalStorageTenant() {
  * Generated bundle index. Do not edit.
  */
 
-export { YZ_CURRENT_KEY, YZ_DEFAULT_ROUTE_KEY, YZ_HEADER_KEY, YZ_HEADER_TYPE_KEY, YZ_PROJECT_INFO_KEY, YZ_TENANT_KEY, YZ_USER_KEY, useLocalStorageCurrent, useLocalStorageDefaultRoute, useLocalStorageHeader, useLocalStorageHeaderType, useLocalStorageProjectInfo, useLocalStorageTenant, useLocalStorageUser };
+export { YZ_CURRENT_KEY, YZ_DEFAULT_ROUTE_KEY, YZ_HEADER_KEY, YZ_HEADER_TYPE_KEY, YZ_NEED_AUTH_KEY, YZ_PROJECT_INFO_KEY, YZ_TENANT_KEY, YZ_USER_KEY, useLocalStorageCurrent, useLocalStorageDefaultRoute, useLocalStorageHeader, useLocalStorageHeaderType, useLocalStorageProjectInfo, useLocalStorageTenant, useLocalStorageUser };
 //# sourceMappingURL=mcache.mjs.map

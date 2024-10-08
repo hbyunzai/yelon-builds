@@ -16,7 +16,7 @@ export declare class YunzaiStartupService {
     private readonly win;
     private readonly configService;
     load(): Observable<void>;
-    token(): Observable<ITokenModel>;
+    token(): Observable<ITokenModel | boolean>;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiStartupService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<YunzaiStartupService>;
 }

@@ -6,6 +6,7 @@ export declare const YZ_HEADER_KEY = "_yz_header";
 export declare const YZ_HEADER_TYPE_KEY = "_yz_header_type";
 export declare const YZ_DEFAULT_ROUTE_KEY = "_yz_default_route";
 export declare const YZ_TENANT_KEY = "_yz_tenant";
+export declare const YZ_NEED_AUTH_KEY = "_yz_need_auth";
 type returnSet<T> = (data: T) => void;
 type returnGet<T> = () => T | null;
 export declare function useLocalStorageUser(): [returnSet<YunzaiUser>, returnGet<YunzaiUser>];
