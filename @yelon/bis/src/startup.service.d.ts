@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { ITokenModel } from '@yelon/auth';
 import { YunzaiMenu } from '@yelon/util';
 import * as i0 from "@angular/core";
-export type LoadParam = {
+export interface LoadParam {
     force?: boolean;
-};
+}
 export declare function provideYunzaiStartup(): Provider[];
 export declare class YunzaiStartupService {
     private readonly config;
