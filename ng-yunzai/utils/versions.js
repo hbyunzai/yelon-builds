@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addESLintRule = exports.UpgradeMainVersions = void 0;
+exports.UpgradeMainVersions = UpgradeMainVersions;
+exports.addESLintRule = addESLintRule;
 const workspace_1 = require("@schematics/angular/utility/workspace");
 const lib_versions_1 = require("./lib-versions");
 const package_1 = require("./package");
@@ -48,7 +49,6 @@ function UpgradeMainVersions(tree, version = lib_versions_1.VERSION) {
     ], 'devDependencies');
     (0, package_1.addPackage)(tree, [`rxjs@~7.8.0`, `ng-zorro-antd@^18.1.1`]);
 }
-exports.UpgradeMainVersions = UpgradeMainVersions;
 function addESLintRule(projectName) {
     return (0, workspace_1.updateWorkspace)((workspace) => __awaiter(this, void 0, void 0, function* () {
         const project = (0, workspace_2.getProjectFromWorkspace)(workspace, projectName);
@@ -65,5 +65,4 @@ function addESLintRule(projectName) {
         });
     }));
 }
-exports.addESLintRule = addESLintRule;
 //# sourceMappingURL=versions.js.map
