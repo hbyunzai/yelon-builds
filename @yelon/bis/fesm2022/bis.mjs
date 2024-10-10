@@ -8,18 +8,18 @@ import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL, MenuService, TitleService, SettingsService } from '@yelon/theme';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
-import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, EMPTY, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, map, EMPTY, combineLatest } from 'rxjs';
 import { mergeBisConfig, BUSINESS_DEFAULT_CONFIG } from '@yelon/bis/config';
 import * as i1 from '@yelon/util';
 import { log, YUNZAI_CONFIG, YunzaiConfigService, WINDOW, useLocalStorageTenant, useLocalStorageUser, useLocalStorageHeader, useLocalStorageProjectInfo, useLocalStorageDefaultRoute, useLocalStorageCurrent, deepCopy } from '@yelon/util';
 import { ACLService } from '@yelon/acl';
 
 class BisModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: BisModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.0.6", ngImport: i0, type: BisModule, imports: [YunzaiLayoutModule, YunzaiWidgetsModule], exports: [YunzaiLayoutModule, YunzaiWidgetsModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: BisModule, imports: [YunzaiLayoutModule, YunzaiWidgetsModule, YunzaiLayoutModule, YunzaiWidgetsModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: BisModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.6", ngImport: i0, type: BisModule, imports: [YunzaiLayoutModule, YunzaiWidgetsModule], exports: [YunzaiLayoutModule, YunzaiWidgetsModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: BisModule, imports: [YunzaiLayoutModule, YunzaiWidgetsModule, YunzaiLayoutModule, YunzaiWidgetsModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: BisModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: BisModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [YunzaiLayoutModule, YunzaiWidgetsModule],
@@ -226,7 +226,7 @@ class YunzaiStartupService {
         this.configService = inject(YunzaiConfigService);
     }
     load(param) {
-        let defaultLang = this.settingService.layout.lang || this.i18n.defaultLang;
+        let defaultLang = this.settingService.layout.lang || this.i18n.defaultLang || 'zh-CN';
         const [setTenant] = useLocalStorageTenant();
         const [setUser, getUser] = useLocalStorageUser();
         const [setHeader] = useLocalStorageHeader();
@@ -235,7 +235,10 @@ class YunzaiStartupService {
         const [setCurrent] = useLocalStorageCurrent();
         return this.token(param).pipe(mergeMap((token) => {
             if (token === false) {
-                return this.i18n.loadLocaleData(defaultLang).pipe(mergeMap(() => EMPTY));
+                return this.i18n.loadLocaleData(defaultLang).pipe(map((langData) => {
+                    this.i18n.use(defaultLang, langData);
+                    this.settingService.setLayout('lang', defaultLang);
+                }), mergeMap(() => EMPTY));
             }
             this.configService.set('auth', {
                 token_send_key: 'Authorization',
@@ -354,10 +357,10 @@ class YunzaiStartupService {
             }));
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiStartupService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiStartupService }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiStartupService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiStartupService }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiStartupService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiStartupService, decorators: [{
             type: Injectable
         }] });
 function mapYzSideToYelonMenu(menus) {
@@ -469,10 +472,10 @@ class YunzaiAnalysisAddonGuardService {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1.YunzaiConfigService }, { token: i1.PathToRegexpService }, { token: WINDOW }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiAnalysisAddonGuardService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiAnalysisAddonGuardService, deps: [{ token: i1.YunzaiConfigService }, { token: i1.PathToRegexpService }, { token: WINDOW }, { token: YA_SERVICE_TOKEN }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiAnalysisAddonGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiAnalysisAddonGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiAnalysisAddonGuardService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -559,10 +562,10 @@ class ActGuardService {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: ActGuardService, deps: [{ token: i1.YunzaiConfigService }, { token: i1.PathToRegexpService }, { token: i2.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: ActGuardService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: ActGuardService, deps: [{ token: i1.YunzaiConfigService }, { token: i1.PathToRegexpService }, { token: i2.Router }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: ActGuardService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: ActGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: ActGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }, { type: i1.PathToRegexpService }, { type: i2.Router }] });

@@ -4,11 +4,11 @@ import { YunzaiIframePageComponent } from './yunzai-iframe-page.component';
 import * as i0 from "@angular/core";
 export const COMPONENTS = [YunzaiIframePageComponent];
 export class YunzaiIframePageModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiIframePageModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.0.6", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, YunzaiIframePageComponent], exports: [YunzaiIframePageComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, COMPONENTS] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiIframePageModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.6", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, YunzaiIframePageComponent], exports: [YunzaiIframePageComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, COMPONENTS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiIframePageModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiIframePageModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [NzSpinModule, ...COMPONENTS],
