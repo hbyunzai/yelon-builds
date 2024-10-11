@@ -1,11 +1,11 @@
 import * as i0 from '@angular/core';
-import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, APP_INITIALIZER, Injector, Injectable, Inject } from '@angular/core';
+import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, APP_INITIALIZER, Injector, Injectable, Inject, Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { YunzaiWidgetsModule } from '@yelon/bis/yunzai-widgets';
 import * as i2 from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
-import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL, MenuService, TitleService, SettingsService } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, IGNORE_BASE_URL, MenuService, TitleService, SettingsService, I18nPipe } from '@yelon/theme';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import { BehaviorSubject, throwError, filter, take, switchMap, catchError, of, mergeMap, map, EMPTY, combineLatest } from 'rxjs';
@@ -13,6 +13,13 @@ import { mergeBisConfig, BUSINESS_DEFAULT_CONFIG } from '@yelon/bis/config';
 import * as i1 from '@yelon/util';
 import { log, YUNZAI_CONFIG, YunzaiConfigService, WINDOW, useLocalStorageTenant, useLocalStorageUser, useLocalStorageHeader, useLocalStorageProjectInfo, useLocalStorageDefaultRoute, useLocalStorageCurrent, deepCopy } from '@yelon/util';
 import { ACLService } from '@yelon/acl';
+import { NgTemplateOutlet, NgFor, NgIf } from '@angular/common';
+import * as i2$1 from 'ng-zorro-antd/dropdown';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzI18nModule } from 'ng-zorro-antd/i18n';
+import * as i3 from 'ng-zorro-antd/icon';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import * as i1$1 from 'ng-zorro-antd/menu';
 
 class BisModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: BisModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
@@ -572,9 +579,169 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImpor
 const actGuardCanActive = (_, state) => inject(ActGuardService).process(state.url);
 const actGuardCanActiveChild = (_, state) => inject(ActGuardService).process(state.url);
 
+class YunzaiLayoutWebsite01Component {
+    constructor() {
+        this.logoAlt = 'logo';
+        this.slogan = '';
+        this.tokenService = inject(YA_SERVICE_TOKEN);
+        this.configService = inject(YunzaiConfigService);
+        this.startupSrv = inject(YunzaiStartupService);
+        this.win = inject(WINDOW);
+    }
+    get _logoSrc() {
+        return this.logoSrc;
+    }
+    get _logoAlt() {
+        return this.logoAlt || 'logo';
+    }
+    get _slogan() {
+        return this.slogan || '';
+    }
+    get _contentTpl() {
+        return this.contentTpl;
+    }
+    get _username() {
+        const [_, getUser] = useLocalStorageUser();
+        return getUser()?.realname || '';
+    }
+    get isLogin() {
+        const [_, getUser] = useLocalStorageUser();
+        return !!this.tokenService.get()?.access_token && !!getUser();
+    }
+    get _links() {
+        const [_, getProjectInfo] = useLocalStorageProjectInfo();
+        return getProjectInfo()?.profileList || [];
+    }
+    login() {
+        this.startupSrv.load({ force: true }).subscribe(() => { });
+    }
+    logout() {
+        const baseUrl = this.configService.get('bis')?.baseUrl || '/backstage';
+        this.win.location.href = `${baseUrl}/cas-proxy/app/logout`;
+    }
+    to(url) {
+        if (url)
+            this.win.location.href = url;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiLayoutWebsite01Component, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.6", type: YunzaiLayoutWebsite01Component, isStandalone: true, selector: "yunzai-layout-website-01", inputs: { logoSrc: "logoSrc", logoAlt: "logoAlt", slogan: "slogan", contentTpl: "contentTpl" }, ngImport: i0, template: `
+    <div class="yz-layout-website-01">
+      <div class="yz-layout-website-01-nav__user">
+        @if (isLogin) {
+          <a
+            class="yz-layout-website-01-link"
+            nz-dropdown
+            [nzDropdownMenu]="menu"
+            [nzOverlayStyle]="{ width: '120px' }"
+          >
+            <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              @for (link of _links; track $index) {
+                <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
+              }
+              <li nz-menu-item nzDanger class="yz-layout-website-01-link__li" (click)="logout()"
+                >{{ 'menu.account.logout' | i18n }}
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        } @else {
+          <a class="yz-layout-website-01-link" (click)="login()">
+            <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
+          >
+        }
+      </div>
+
+      <header class="yz-layout-website-01-nav">
+        @if (_logoSrc) {
+          <img [alt]="_logoAlt" class="yz-layout-website-01-nav__logo" [src]="_logoSrc" />
+        } @else {
+          <div class="yz-layout-website-01-nav__logo__full">LOGO</div>
+        }
+
+        <div class="yz-layout-website-01-nav__content">
+          <ng-template *ngTemplateOutlet="_contentTpl" />
+        </div>
+        <div class="yz-layout-website-01-nav__slogan">
+          {{ _slogan }}
+        </div>
+      </header>
+      <main class="yz-layout-website-01-container">
+        <router-outlet />
+      </main>
+    </div>
+  `, isInline: true, dependencies: [{ kind: "directive", type: RouterOutlet, selector: "router-outlet", inputs: ["name"], outputs: ["activate", "deactivate", "attach", "detach"], exportAs: ["outlet"] }, { kind: "pipe", type: I18nPipe, name: "i18n" }, { kind: "ngmodule", type: NzI18nModule }, { kind: "ngmodule", type: NzDropDownModule }, { kind: "directive", type: i1$1.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i1$1.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i2$1.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i2$1.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i2$1.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "ngmodule", type: NzIconModule }, { kind: "directive", type: i3.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiLayoutWebsite01Component, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'yunzai-layout-website-01',
+                    template: `
+    <div class="yz-layout-website-01">
+      <div class="yz-layout-website-01-nav__user">
+        @if (isLogin) {
+          <a
+            class="yz-layout-website-01-link"
+            nz-dropdown
+            [nzDropdownMenu]="menu"
+            [nzOverlayStyle]="{ width: '120px' }"
+          >
+            <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              @for (link of _links; track $index) {
+                <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
+              }
+              <li nz-menu-item nzDanger class="yz-layout-website-01-link__li" (click)="logout()"
+                >{{ 'menu.account.logout' | i18n }}
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        } @else {
+          <a class="yz-layout-website-01-link" (click)="login()">
+            <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
+          >
+        }
+      </div>
+
+      <header class="yz-layout-website-01-nav">
+        @if (_logoSrc) {
+          <img [alt]="_logoAlt" class="yz-layout-website-01-nav__logo" [src]="_logoSrc" />
+        } @else {
+          <div class="yz-layout-website-01-nav__logo__full">LOGO</div>
+        }
+
+        <div class="yz-layout-website-01-nav__content">
+          <ng-template *ngTemplateOutlet="_contentTpl" />
+        </div>
+        <div class="yz-layout-website-01-nav__slogan">
+          {{ _slogan }}
+        </div>
+      </header>
+      <main class="yz-layout-website-01-container">
+        <router-outlet />
+      </main>
+    </div>
+  `,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    standalone: true,
+                    imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet]
+                }]
+        }], propDecorators: { logoSrc: [{
+                type: Input
+            }], logoAlt: [{
+                type: Input
+            }], slogan: [{
+                type: Input
+            }], contentTpl: [{
+                type: Input
+            }] } });
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { ActGuardService, BisModule, CODEMESSAGE, YunzaiAnalysisAddonGuardService, YunzaiStartupService, actGuardCanActive, actGuardCanActiveChild, analysisAddonCanActive, analysisAddonCanActiveChild, checkStatus, generateAbility, getAdditionalHeaders, goTo, mapYzSideToYelonMenu, provideYunzaiBindAuthRefresh, provideYunzaiBis, provideYunzaiStartup, toLogin, tryRefreshToken, yunzaiDefaultInterceptor };
+export { ActGuardService, BisModule, CODEMESSAGE, YunzaiAnalysisAddonGuardService, YunzaiLayoutWebsite01Component, YunzaiStartupService, actGuardCanActive, actGuardCanActiveChild, analysisAddonCanActive, analysisAddonCanActiveChild, checkStatus, generateAbility, getAdditionalHeaders, goTo, mapYzSideToYelonMenu, provideYunzaiBindAuthRefresh, provideYunzaiBis, provideYunzaiStartup, toLogin, tryRefreshToken, yunzaiDefaultInterceptor };
 //# sourceMappingURL=bis.mjs.map
