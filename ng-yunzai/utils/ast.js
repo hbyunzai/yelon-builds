@@ -1,12 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ROUTINS_FILENAME = void 0;
-exports.getSourceFile = getSourceFile;
-exports.applyChanges = applyChanges;
-exports.findRoutesPath = findRoutesPath;
-exports.importInStandalone = importInStandalone;
-exports.addServiceToModuleOrStandalone = addServiceToModuleOrStandalone;
-exports.consoleTree = consoleTree;
+exports.consoleTree = exports.addServiceToModuleOrStandalone = exports.importInStandalone = exports.findRoutesPath = exports.applyChanges = exports.getSourceFile = exports.ROUTINS_FILENAME = void 0;
 const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
 const ast_utils_1 = require("@schematics/angular/utility/ast-utils");
@@ -23,6 +17,7 @@ function getSourceFile(tree, path) {
     const content = buffer.toString();
     return ts.createSourceFile(path, content, ts.ScriptTarget.Latest, true);
 }
+exports.getSourceFile = getSourceFile;
 function applyChanges(tree, path, changes) {
     const exportRecorder = tree.beginUpdate(path);
     for (const change of changes) {
@@ -32,6 +27,7 @@ function applyChanges(tree, path, changes) {
     }
     tree.commitUpdate(exportRecorder);
 }
+exports.applyChanges = applyChanges;
 function getComponentMetadata(source) {
     const allNodes = (0, ast_utils_1.getSourceNodes)(source);
     const identifier = 'Component';
@@ -135,6 +131,7 @@ function findRoutesPath(tree, path) {
     }
     return '';
 }
+exports.findRoutesPath = findRoutesPath;
 function importInStandalone(tree, filePath, componentName, componentPath, metadataField = 'imports') {
     // imports
     (0, yunzai_1.addImportToModule)(tree, filePath, componentName, componentPath);
@@ -143,6 +140,7 @@ function importInStandalone(tree, filePath, componentName, componentPath, metada
     const changes = addSymbolToComponentMetadata(source, filePath, componentName, metadataField);
     applyChanges(tree, filePath, changes);
 }
+exports.importInStandalone = importInStandalone;
 function addServiceToModuleOrStandalone(tree, standalone, filePath, serviceName, importPath) {
     const source = getSourceFile(tree, filePath);
     if (standalone) {
@@ -153,9 +151,11 @@ function addServiceToModuleOrStandalone(tree, standalone, filePath, serviceName,
         applyChanges(tree, filePath, changes);
     }
 }
+exports.addServiceToModuleOrStandalone = addServiceToModuleOrStandalone;
 function consoleTree(tree) {
     tree.visit(filePath => {
         console.log(filePath);
     });
 }
+exports.consoleTree = consoleTree;
 //# sourceMappingURL=ast.js.map
