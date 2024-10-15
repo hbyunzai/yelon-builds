@@ -100,10 +100,10 @@ export class YunzaiHttpI18NService extends YunzaiI18nBaseService {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiHttpI18NService, deps: [{ token: i1._HttpClient }, { token: i2.SettingsService }, { token: i3.NzI18nService }, { token: i4.YelonLocaleService }, { token: i5.Platform }, { token: YA_SERVICE_TOKEN }, { token: i6.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiHttpI18NService, deps: [{ token: i1._HttpClient }, { token: i2.SettingsService }, { token: i3.NzI18nService }, { token: i4.YelonLocaleService }, { token: i5.Platform }, { token: YA_SERVICE_TOKEN }, { token: i6.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.6", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.0.6", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i1._HttpClient }, { type: i2.SettingsService }, { type: i3.NzI18nService }, { type: i4.YelonLocaleService }, { type: i5.Platform }, { type: undefined, decorators: [{
