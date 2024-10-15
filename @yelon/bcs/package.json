@@ -70,17 +70,17 @@
       "esm": "./esm2022/yunzai-grade/yunzai-grade.mjs",
       "default": "./fesm2022/yunzai-grade.mjs"
     },
-    "./yunzai-role-tree": {
-      "types": "./yunzai-role-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
-      "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
-      "default": "./fesm2022/yunzai-role-tree.mjs"
-    },
     "./yunzai-iframe-page": {
       "types": "./yunzai-iframe-page/index.d.ts",
       "esm2022": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
       "esm": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
       "default": "./fesm2022/yunzai-iframe-page.mjs"
+    },
+    "./yunzai-role-tree": {
+      "types": "./yunzai-role-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
+      "esm": "./esm2022/yunzai-role-tree/yunzai-role-tree.mjs",
+      "default": "./fesm2022/yunzai-role-tree.mjs"
     },
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
