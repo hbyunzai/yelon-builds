@@ -29689,7 +29689,7 @@ a:focus {
     max-width: 900px;
   }
 }
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   .modal-xl .ant-modal {
     width: auto !important;
     max-width: 1200px;
@@ -33458,7 +33458,7 @@ body {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.2);
 }
-.yunzai-default__nav-item > i,
+.yunzai-default__nav-item > .anticon,
 .yunzai-default__nav-item-icon {
   transform: none !important;
   font-size: 16px !important;
@@ -33516,7 +33516,8 @@ body {
 .yunzai-default__search .ant-input-group-addon i,
 .yunzai-default__search .ant-input-affix-wrapper i {
   color: #fff;
-  transition: color 300ms, transform 400ms;
+  transition: color 300ms,
+          transform 400ms;
 }
 .yunzai-default__search-focus .ant-input,
 .yunzai-default__search-focus .ant-input-group-addon,

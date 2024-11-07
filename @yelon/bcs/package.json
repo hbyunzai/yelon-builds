@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "18.1.4-8f25aa01",
+  "version": "18.2.0-2f6cf706",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^18.1.1",
-    "@yelon/theme": "^18.1.4-8f25aa01",
-    "@yelon/form": "^18.1.4-8f25aa01",
-    "@yelon/abc": "^18.1.4-8f25aa01",
-    "@yelon/util": "^18.1.4-8f25aa01",
+    "@yelon/theme": "^18.2.0-2f6cf706",
+    "@yelon/form": "^18.2.0-2f6cf706",
+    "@yelon/abc": "^18.2.0-2f6cf706",
+    "@yelon/util": "^18.2.0-2f6cf706",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -52,17 +52,11 @@
       "esm": "./esm2022/yunzai-dept-tree/yunzai-dept-tree.mjs",
       "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
-    "./yunzai-dormitory-tree": {
-      "types": "./yunzai-dormitory-tree/index.d.ts",
-      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
-      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
-    },
-    "./yunzai-friend-group": {
-      "types": "./yunzai-friend-group/index.d.ts",
-      "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
-      "esm": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
-      "default": "./fesm2022/yunzai-friend-group.mjs"
+    "./yunzai-iframe-page": {
+      "types": "./yunzai-iframe-page/index.d.ts",
+      "esm2022": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
+      "esm": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
+      "default": "./fesm2022/yunzai-iframe-page.mjs"
     },
     "./yunzai-grade": {
       "types": "./yunzai-grade/index.d.ts",
@@ -70,11 +64,11 @@
       "esm": "./esm2022/yunzai-grade/yunzai-grade.mjs",
       "default": "./fesm2022/yunzai-grade.mjs"
     },
-    "./yunzai-iframe-page": {
-      "types": "./yunzai-iframe-page/index.d.ts",
-      "esm2022": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
-      "esm": "./esm2022/yunzai-iframe-page/yunzai-iframe-page.mjs",
-      "default": "./fesm2022/yunzai-iframe-page.mjs"
+    "./yunzai-friend-group": {
+      "types": "./yunzai-friend-group/index.d.ts",
+      "esm2022": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
+      "esm": "./esm2022/yunzai-friend-group/yunzai-friend-group.mjs",
+      "default": "./fesm2022/yunzai-friend-group.mjs"
     },
     "./yunzai-role-tree": {
       "types": "./yunzai-role-tree/index.d.ts",
@@ -87,6 +81,12 @@
       "esm2022": "./esm2022/yunzai-table-user/yunzai-table-user.mjs",
       "esm": "./esm2022/yunzai-table-user/yunzai-table-user.mjs",
       "default": "./fesm2022/yunzai-table-user.mjs"
+    },
+    "./yunzai-dormitory-tree": {
+      "types": "./yunzai-dormitory-tree/index.d.ts",
+      "esm2022": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "esm": "./esm2022/yunzai-dormitory-tree/yunzai-dormitory-tree.mjs",
+      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     }
   },
   "sideEffects": false
