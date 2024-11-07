@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "18.2.0-2f6cf706",
+  "version": "18.2.0",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^18.0.0",
-    "@yelon/theme": "^18.2.0-2f6cf706",
-    "@yelon/util": "^18.2.0-2f6cf706",
-    "@yelon/acl": "^18.2.0-2f6cf706",
+    "@yelon/theme": "^18.2.0",
+    "@yelon/util": "^18.2.0",
+    "@yelon/acl": "^18.2.0",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -51,6 +51,18 @@
       "esm": "./esm2022/auto-focus/auto-focus.mjs",
       "default": "./fesm2022/auto-focus.mjs"
     },
+    "./avatar-list": {
+      "types": "./avatar-list/index.d.ts",
+      "esm2022": "./esm2022/avatar-list/avatar-list.mjs",
+      "esm": "./esm2022/avatar-list/avatar-list.mjs",
+      "default": "./fesm2022/avatar-list.mjs"
+    },
+    "./cell": {
+      "types": "./cell/index.d.ts",
+      "esm2022": "./esm2022/cell/cell.mjs",
+      "esm": "./esm2022/cell/cell.mjs",
+      "default": "./fesm2022/cell.mjs"
+    },
     "./count-down": {
       "types": "./count-down/index.d.ts",
       "esm2022": "./esm2022/count-down/count-down.mjs",
@@ -69,23 +81,11 @@
       "esm": "./esm2022/down-file/down-file.mjs",
       "default": "./fesm2022/down-file.mjs"
     },
-    "./avatar-list": {
-      "types": "./avatar-list/index.d.ts",
-      "esm2022": "./esm2022/avatar-list/avatar-list.mjs",
-      "esm": "./esm2022/avatar-list/avatar-list.mjs",
-      "default": "./fesm2022/avatar-list.mjs"
-    },
     "./ellipsis": {
       "types": "./ellipsis/index.d.ts",
       "esm2022": "./esm2022/ellipsis/ellipsis.mjs",
       "esm": "./esm2022/ellipsis/ellipsis.mjs",
       "default": "./fesm2022/ellipsis.mjs"
-    },
-    "./cell": {
-      "types": "./cell/index.d.ts",
-      "esm2022": "./esm2022/cell/cell.mjs",
-      "esm": "./esm2022/cell/cell.mjs",
-      "default": "./fesm2022/cell.mjs"
     },
     "./error-collect": {
       "types": "./error-collect/index.d.ts",
