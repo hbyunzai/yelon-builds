@@ -161,7 +161,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
         }] });
 
 /**
- * 菜单服务
+ * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
 class MenuService {
     constructor() {
@@ -169,11 +169,11 @@ class MenuService {
         this.aclService = inject(ACLService);
         this._change$ = new BehaviorSubject([]);
         this.data = [];
+        this.$routerLink = new BehaviorSubject('');
         /**
          * 是否完全受控菜单打开状态，默认：`false`
          */
         this.openStrictly = false;
-        this.$routerLink = new BehaviorSubject('');
         this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
     }
     get change() {
@@ -181,6 +181,23 @@ class MenuService {
     }
     get menus() {
         return this.data;
+    }
+    /**
+     * Returns a default menu link
+     *
+     * 返回一个默认跳转的菜单链接
+     */
+    getDefaultRedirect(opt = {}) {
+        let ret;
+        this.visit(this.menus, (item) => {
+            if (typeof item.link !== 'string' || item.link.length <= 0 || !item._aclResult || item._hidden === true) {
+                return;
+            }
+            if (ret == null || ret.length <= 0 || item.link == opt?.redirectUrl) {
+                ret = item.link;
+            }
+        });
+        return ret;
     }
     visit(data, callback) {
         const inFn = (list, parentMenu, depth) => {

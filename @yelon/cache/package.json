@@ -1,6 +1,6 @@
 {
   "name": "@yelon/cache",
-  "version": "18.3.0-ab56b18",
+  "version": "18.3.0-aeb31cc",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -25,7 +25,7 @@
     "component"
   ],
   "dependencies": {
-    "@yelon/util": "^18.3.0-ab56b18",
+    "@yelon/util": "^18.3.0-aeb31cc",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/cache.mjs",

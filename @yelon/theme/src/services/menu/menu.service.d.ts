@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Menu } from './interface';
 import * as i0 from "@angular/core";
 /**
- * 菜单服务
+ * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
 export declare class MenuService implements OnDestroy {
     private readonly i18nSrv;
@@ -11,14 +11,22 @@ export declare class MenuService implements OnDestroy {
     private _change$;
     private i18n$?;
     private data;
+    private $routerLink;
     /**
      * 是否完全受控菜单打开状态，默认：`false`
      */
     openStrictly: boolean;
-    private $routerLink;
     constructor();
     get change(): Observable<Menu[]>;
     get menus(): Menu[];
+    /**
+     * Returns a default menu link
+     *
+     * 返回一个默认跳转的菜单链接
+     */
+    getDefaultRedirect(opt?: {
+        redirectUrl?: string;
+    }): string | null | undefined;
     visit<T extends Menu = Menu>(data: T[], callback: (item: T, parentMenum: T | null, depth?: number) => void): void;
     visit(data: Menu[], callback: (item: Menu, parentMenum: Menu | null, depth?: number) => void): void;
     add(items: Menu[]): void;
