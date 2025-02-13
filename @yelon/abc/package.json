@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "19.0.0-3541f31",
+  "version": "19.0.0-9a2a5c9",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -27,10 +27,10 @@
     "xlsx": "^0.18.5",
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
-    "ngx-countdown": "^19.0.0-3541f31",
-    "@yelon/theme": "^19.0.0-3541f31",
-    "@yelon/util": "^19.0.0-3541f31",
-    "@yelon/acl": "^19.0.0-3541f31",
+    "ngx-countdown": "^19.0.0-9a2a5c9",
+    "@yelon/theme": "^19.0.0-9a2a5c9",
+    "@yelon/util": "^19.0.0-9a2a5c9",
+    "@yelon/acl": "^19.0.0-9a2a5c9",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -94,10 +94,6 @@
     "./hotkey": {
       "types": "./hotkey/index.d.ts",
       "default": "./fesm2022/hotkey.mjs"
-    },
-    "./let": {
-      "types": "./let/index.d.ts",
-      "default": "./fesm2022/let.mjs"
     },
     "./loading": {
       "types": "./loading/index.d.ts",
