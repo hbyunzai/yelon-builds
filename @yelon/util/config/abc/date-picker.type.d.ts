@@ -1,4 +1,3 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { DisabledTimeFn, NzDateMode, PresetRanges, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 export interface YunzaiDateRangePickerConfig {
     /**
@@ -21,9 +20,7 @@ export interface YunzaiDateRangePickerConfig {
     /**
      * 默认：`{ position: 'relative' }`
      */
-    nzPopupStyle?: {
-        [klass: string]: unknown;
-    };
+    nzPopupStyle?: Record<string, unknown>;
     nzDropdownClassName?: string;
     nzRenderExtraFooter?: string;
     nzShowTime?: SupportTimeOptions | boolean;
@@ -46,7 +43,7 @@ export interface YunzaiDateRangePickerShortcut {
     list?: YunzaiDateRangePickerShortcutItem[];
 }
 export interface YunzaiDateRangePickerShortcutItem {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     text: string;
     fn: (value: Array<Date | null>) => [Date | null, Date | null];
 }

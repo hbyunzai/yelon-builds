@@ -1,12 +1,14 @@
 import * as i0 from '@angular/core';
-import { InjectionToken, makeEnvironmentProviders, Injectable, Optional, Inject, inject } from '@angular/core';
+import { InjectionToken, makeEnvironmentProviders, Optional, Inject, Injectable, inject } from '@angular/core';
 import * as i1 from '@yelon/util/config';
-import { HttpErrorResponse, HttpResponseBase, HttpResponse } from '@angular/common/http';
-import { of, isObservable, from, map, switchMap, throwError, delay as delay$1 } from 'rxjs';
+import { HttpErrorResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
+import { of, from, isObservable, map, switchMap, throwError, delay as delay$1 } from 'rxjs';
 import { deepCopy } from '@yelon/util/other';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 class MockStatusError {
+    status;
+    error;
+    statusText;
     constructor(status, error) {
         this.status = status;
         this.error = error;
@@ -24,10 +26,10 @@ function provideMockConfig(config) {
     return makeEnvironmentProviders([{ provide: YELON_MOCK_CONFIG, useValue: config }]);
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 class MockService {
+    cached = [];
+    config;
     constructor(cogSrv, options) {
-        this.cached = [];
         this.config = cogSrv.merge('mock', MOCK_DEFAULT_CONFIG);
         this.setData(options?.data);
     }
@@ -152,10 +154,10 @@ class MockService {
     ngOnDestroy() {
         this.clearCache();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MockService, deps: [{ token: i1.YunzaiConfigService }, { token: YELON_MOCK_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MockService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: MockService, deps: [{ token: i1.YunzaiConfigService }, { token: YELON_MOCK_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: MockService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MockService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: MockService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }, { type: undefined, decorators: [{
@@ -165,7 +167,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
                     args: [YELON_MOCK_CONFIG]
                 }] }] });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const mockInterceptor = (req, next) => {
     const src = inject(MockService);
     const config = src.config;
@@ -175,7 +176,7 @@ const mockInterceptor = (req, next) => {
     }
     let res$;
     switch (typeof rule.callback) {
-        case 'function':
+        case 'function': {
             const mockRequest = {
                 original: req,
                 body: req.body,
@@ -217,17 +218,20 @@ const mockInterceptor = (req, next) => {
                 }));
             }
             break;
+        }
         default:
             res$ = of(rule.callback);
             break;
     }
-    res$ = res$.pipe(map(res => res instanceof HttpResponseBase
-        ? res
-        : new HttpResponse({
-            status: 200,
-            url: req.url,
-            body: deepCopy(res)
-        })), map((res) => {
+    res$ = res$.pipe(map(res => {
+        return res instanceof HttpResponseBase
+            ? res
+            : new HttpResponse({
+                status: 200,
+                url: req.url,
+                body: deepCopy(res)
+            });
+    }), map((res) => {
         const anyRes = res;
         if (anyRes.body) {
             anyRes.body = deepCopy(anyRes.body);

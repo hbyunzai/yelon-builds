@@ -1,6 +1,5 @@
 import { HttpHeaders, HttpResponseBase } from '@angular/common/http';
 import { Injector } from '@angular/core';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export declare const CODEMESSAGE: {
     [key: number]: string;
 };
@@ -9,7 +8,7 @@ export declare function getAdditionalHeaders(headers?: HttpHeaders): {
 };
 export declare function checkStatus(injector: Injector, ev: HttpResponseBase): void;
 export interface ReThrowHttpError {
-    body: NzSafeAny;
+    body: any;
     _throw: true;
 }
 export declare function goTo(injector: Injector, url: string): void;

@@ -1,7 +1,6 @@
 import { OnDestroy } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ReuseComponentRef, ReuseHookOnReuseInitType, ReuseHookTypes, ReuseTabCached, ReuseTabMatchMode, ReuseTabNotify, ReuseTabRouteParamMatchMode, ReuseTitle } from './reuse-tab.interfaces';
 import * as i0 from "@angular/core";
 export declare class ReuseTabService implements OnDestroy {
@@ -145,7 +144,7 @@ export declare class ReuseTabService implements OnDestroy {
     /**
      * 刷新，触发一个 refresh 类型事件
      */
-    refresh(data?: NzSafeAny): void;
+    refresh(data?: any): void;
     private destroy;
     private di;
     constructor();
@@ -158,11 +157,11 @@ export declare class ReuseTabService implements OnDestroy {
      * 决定是否允许路由复用，若 `true` 会触发 `store`
      */
     shouldDetach(route: ActivatedRouteSnapshot): boolean;
-    saveCache(snapshot: ActivatedRouteSnapshot, _handle?: NzSafeAny, pos?: number): void;
+    saveCache(snapshot: ActivatedRouteSnapshot, _handle?: any, pos?: number): void;
     /**
      * 存储
      */
-    store(_snapshot: ActivatedRouteSnapshot, _handle: NzSafeAny): void;
+    store(_snapshot: ActivatedRouteSnapshot, _handle: any): void;
     /**
      * 决定是否允许应用缓存数据
      */
@@ -170,7 +169,7 @@ export declare class ReuseTabService implements OnDestroy {
     /**
      * 提取复用数据
      */
-    retrieve(route: ActivatedRouteSnapshot): NzSafeAny | null;
+    retrieve(route: ActivatedRouteSnapshot): any | null;
     /**
      * 决定是否应该进行复用路由处理
      */

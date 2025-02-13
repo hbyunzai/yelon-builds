@@ -1,20 +1,19 @@
 import { TemplateRef } from '@angular/core';
 import { YunzaiProfile } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class YunzaiLayoutWebsite01Component {
-    logoSrc?: string | NzSafeAny;
+    logoSrc?: string | any;
     logoAlt?: string;
     slogan?: string;
-    contentTpl?: TemplateRef<void> | NzSafeAny;
+    contentTpl?: TemplateRef<void> | any;
     private readonly tokenService;
     private readonly configService;
     private readonly startupSrv;
     private readonly win;
-    get _logoSrc(): string | NzSafeAny;
+    get _logoSrc(): string | any;
     get _logoAlt(): string;
     get _slogan(): string;
-    get _contentTpl(): TemplateRef<void> | NzSafeAny;
+    get _contentTpl(): TemplateRef<void> | any;
     get _username(): string;
     get isLogin(): boolean;
     get _links(): YunzaiProfile[];

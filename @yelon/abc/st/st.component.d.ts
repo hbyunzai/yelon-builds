@@ -3,13 +3,35 @@ import { AfterViewInit, EventEmitter, OnChanges, SimpleChange, SimpleChanges, Te
 import { Observable } from 'rxjs';
 import { LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
 import { NzResizeEvent } from 'ng-zorro-antd/resizable';
 import { NzTableComponent } from 'ng-zorro-antd/table';
-import type { STChange, STClickRowClassName, STColumn, STColumnButton, STColumnSelection, STContextmenuFn, STContextmenuItem, STCustomRequestOptions, STData, STError, STExportOptions, STLoadOptions, STPage, STReq, STRes, STResetColumnsOption, STResizable, STRowClassName, STSingleSort, STStatisticalResults, STWidthMode } from './st.interfaces';
+import type { STChange, STClickRowClassName, STColumn, STColumnButton, STColumnSelection, STContextmenuFn, STContextmenuItem, STCustomRequestOptions, STData, STDragOptions, STError, STExportOptions, STLoadOptions, STPage, STReq, STRes, STResetColumnsOption, STResizable, STRowClassName, STSingleSort, STStatisticalResults, STWidthMode } from './st.interfaces';
 import type { _STColumn, _STHeader, _STTdNotify } from './st.types';
 import * as i0 from "@angular/core";
+export declare class STTdComponent {
+    private readonly stComp;
+    private readonly router;
+    private readonly modalHelper;
+    private readonly drawerHelper;
+    c: _STColumn;
+    cIdx: number;
+    data: STData[];
+    i: STData;
+    index: number;
+    readonly n: EventEmitter<_STTdNotify>;
+    private get routerState();
+    private report;
+    _checkbox(value: boolean): void;
+    _radio(): void;
+    _link(e: Event): boolean;
+    _client(): void;
+    _stopPropagation(ev: Event): void;
+    _btn(btn: STColumnButton, ev?: Event): void;
+    private btnCallback;
+    static ɵfac: i0.ɵɵFactoryDeclaration<STTdComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<STTdComponent, "st-td", never, { "c": { "alias": "c"; "required": false; }; "cIdx": { "alias": "cIdx"; "required": false; }; "data": { "alias": "data"; "required": false; }; "i": { "alias": "i"; "required": false; }; "index": { "alias": "index"; "required": false; }; }, { "n": "n"; }, never, never, true, never>;
+}
 export declare class STComponent implements AfterViewInit, OnChanges {
     private readonly i18nSrv;
     private readonly el;
@@ -18,7 +40,7 @@ export declare class STComponent implements AfterViewInit, OnChanges {
     private readonly exportSrv;
     private readonly columnSource;
     private readonly dataSource;
-    private readonly yelonI18n;
+    private readonly yunzaiI18n;
     private readonly cms;
     private readonly destroy$;
     private totalTpl;
@@ -65,10 +87,11 @@ export declare class STComponent implements AfterViewInit, OnChanges {
         x?: string | null;
         y?: string | null;
     };
+    drag: import("@angular/core").InputSignalWithTransform<STDragOptions | null, unknown>;
     singleSort?: STSingleSort | null;
     private _multiSort?;
-    get multiSort(): NzSafeAny;
-    set multiSort(value: NzSafeAny);
+    get multiSort(): any;
+    set multiSort(value: any);
     rowClassName?: STRowClassName | null;
     clickRowClassName?: STClickRowClassName | null;
     set widthMode(value: STWidthMode);
@@ -104,7 +127,7 @@ export declare class STComponent implements AfterViewInit, OnChanges {
     virtualItemSize: number;
     virtualMaxBufferPx: number;
     virtualMinBufferPx: number;
-    customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
+    customRequest?: (options: STCustomRequestOptions) => Observable<any>;
     virtualForTrackBy: TrackByFunction<STData>;
     trackBy: TrackByFunction<STData>;
     /**
@@ -143,13 +166,13 @@ export declare class STComponent implements AfterViewInit, OnChanges {
      * @param extraParams 重新指定 `extraParams` 值
      * @param options 选项
      */
-    load(pi?: number, extraParams?: NzSafeAny, options?: STLoadOptions): this;
+    load(pi?: number, extraParams?: any, options?: STLoadOptions): this;
     /**
      * 重新刷新当前页
      *
      * @param extraParams 重新指定 `extraParams` 值
      */
-    reload(extraParams?: NzSafeAny, options?: STLoadOptions): this;
+    reload(extraParams?: any, options?: STLoadOptions): this;
     /**
      * 重置且重新设置 `pi` 为 `1`，包含以下值：
      * - `check` 数据
@@ -159,7 +182,7 @@ export declare class STComponent implements AfterViewInit, OnChanges {
      *
      * @param extraParams 重新指定 `extraParams` 值
      */
-    reset(extraParams?: NzSafeAny, options?: STLoadOptions): this;
+    reset(extraParams?: any, options?: STLoadOptions): this;
     private _toTop;
     _change(type: 'pi' | 'ps', options?: STLoadOptions): void;
     private closeOtherExpand;
@@ -206,8 +229,15 @@ export declare class STComponent implements AfterViewInit, OnChanges {
     setRow(index: number | STData, item: STData, options?: {
         refreshSchema?: boolean;
         emitReload?: boolean;
+        /**
+         *
+         * @param arrayProcessMethod 数组处理方式
+         *  - `true` 表示替换新值，不管新值为哪种类型
+         *  - `false` 表示会合并整个数组（将旧数据与新数据合并成新数组）
+         */
+        arrayProcessMethod?: boolean;
     }): this;
-    sort(col: _STColumn, value: NzSafeAny): void;
+    sort(col: _STColumn, value: any): void;
     clearSort(): this;
     _handleFilter(col: _STColumn, confirm: boolean): void;
     handleFilterNotify(value?: unknown): void;
@@ -246,7 +276,7 @@ export declare class STComponent implements AfterViewInit, OnChanges {
         [P in keyof this]?: SimpleChange;
     } & SimpleChanges): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<STComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<STComponent, "st", ["st"], { "req": { "alias": "req"; "required": false; }; "res": { "alias": "res"; "required": false; }; "page": { "alias": "page"; "required": false; }; "data": { "alias": "data"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "contextmenu": { "alias": "contextmenu"; "required": false; }; "ps": { "alias": "ps"; "required": false; }; "pi": { "alias": "pi"; "required": false; }; "total": { "alias": "total"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "loadingDelay": { "alias": "loadingDelay"; "required": false; }; "loadingIndicator": { "alias": "loadingIndicator"; "required": false; }; "bordered": { "alias": "bordered"; "required": false; }; "size": { "alias": "size"; "required": false; }; "scroll": { "alias": "scroll"; "required": false; }; "singleSort": { "alias": "singleSort"; "required": false; }; "multiSort": { "alias": "multiSort"; "required": false; }; "rowClassName": { "alias": "rowClassName"; "required": false; }; "clickRowClassName": { "alias": "clickRowClassName"; "required": false; }; "widthMode": { "alias": "widthMode"; "required": false; }; "widthConfig": { "alias": "widthConfig"; "required": false; }; "resizable": { "alias": "resizable"; "required": false; }; "header": { "alias": "header"; "required": false; }; "showHeader": { "alias": "showHeader"; "required": false; }; "footer": { "alias": "footer"; "required": false; }; "bodyHeader": { "alias": "bodyHeader"; "required": false; }; "body": { "alias": "body"; "required": false; }; "expandRowByClick": { "alias": "expandRowByClick"; "required": false; }; "expandAccordion": { "alias": "expandAccordion"; "required": false; }; "expand": { "alias": "expand"; "required": false; }; "expandIcon": { "alias": "expandIcon"; "required": false; }; "noResult": { "alias": "noResult"; "required": false; }; "responsive": { "alias": "responsive"; "required": false; }; "responsiveHideHeaderFooter": { "alias": "responsiveHideHeaderFooter"; "required": false; }; "virtualScroll": { "alias": "virtualScroll"; "required": false; }; "virtualItemSize": { "alias": "virtualItemSize"; "required": false; }; "virtualMaxBufferPx": { "alias": "virtualMaxBufferPx"; "required": false; }; "virtualMinBufferPx": { "alias": "virtualMinBufferPx"; "required": false; }; "customRequest": { "alias": "customRequest"; "required": false; }; "virtualForTrackBy": { "alias": "virtualForTrackBy"; "required": false; }; "trackBy": { "alias": "trackBy"; "required": false; }; }, { "error": "error"; "change": "change"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<STComponent, "st", ["st"], { "req": { "alias": "req"; "required": false; }; "res": { "alias": "res"; "required": false; }; "page": { "alias": "page"; "required": false; }; "data": { "alias": "data"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "contextmenu": { "alias": "contextmenu"; "required": false; }; "ps": { "alias": "ps"; "required": false; }; "pi": { "alias": "pi"; "required": false; }; "total": { "alias": "total"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "loadingDelay": { "alias": "loadingDelay"; "required": false; }; "loadingIndicator": { "alias": "loadingIndicator"; "required": false; }; "bordered": { "alias": "bordered"; "required": false; }; "size": { "alias": "size"; "required": false; }; "scroll": { "alias": "scroll"; "required": false; }; "drag": { "alias": "drag"; "required": false; "isSignal": true; }; "singleSort": { "alias": "singleSort"; "required": false; }; "multiSort": { "alias": "multiSort"; "required": false; }; "rowClassName": { "alias": "rowClassName"; "required": false; }; "clickRowClassName": { "alias": "clickRowClassName"; "required": false; }; "widthMode": { "alias": "widthMode"; "required": false; }; "widthConfig": { "alias": "widthConfig"; "required": false; }; "resizable": { "alias": "resizable"; "required": false; }; "header": { "alias": "header"; "required": false; }; "showHeader": { "alias": "showHeader"; "required": false; }; "footer": { "alias": "footer"; "required": false; }; "bodyHeader": { "alias": "bodyHeader"; "required": false; }; "body": { "alias": "body"; "required": false; }; "expandRowByClick": { "alias": "expandRowByClick"; "required": false; }; "expandAccordion": { "alias": "expandAccordion"; "required": false; }; "expand": { "alias": "expand"; "required": false; }; "expandIcon": { "alias": "expandIcon"; "required": false; }; "noResult": { "alias": "noResult"; "required": false; }; "responsive": { "alias": "responsive"; "required": false; }; "responsiveHideHeaderFooter": { "alias": "responsiveHideHeaderFooter"; "required": false; }; "virtualScroll": { "alias": "virtualScroll"; "required": false; }; "virtualItemSize": { "alias": "virtualItemSize"; "required": false; }; "virtualMaxBufferPx": { "alias": "virtualMaxBufferPx"; "required": false; }; "virtualMinBufferPx": { "alias": "virtualMinBufferPx"; "required": false; }; "customRequest": { "alias": "customRequest"; "required": false; }; "virtualForTrackBy": { "alias": "virtualForTrackBy"; "required": false; }; "trackBy": { "alias": "trackBy"; "required": false; }; }, { "error": "error"; "change": "change"; }, never, never, true, never>;
     static ngAcceptInputType_ps: unknown;
     static ngAcceptInputType_pi: unknown;
     static ngAcceptInputType_total: unknown;
@@ -261,26 +291,4 @@ export declare class STComponent implements AfterViewInit, OnChanges {
     static ngAcceptInputType_virtualItemSize: unknown;
     static ngAcceptInputType_virtualMaxBufferPx: unknown;
     static ngAcceptInputType_virtualMinBufferPx: unknown;
-}
-export declare class STTdComponent {
-    private readonly stComp;
-    private readonly router;
-    private readonly modalHelper;
-    private readonly drawerHelper;
-    c: _STColumn;
-    cIdx: number;
-    data: STData[];
-    i: STData;
-    index: number;
-    readonly n: EventEmitter<_STTdNotify>;
-    private get routerState();
-    private report;
-    _checkbox(value: boolean): void;
-    _radio(): void;
-    _link(e: Event): boolean;
-    _stopPropagation(ev: Event): void;
-    _btn(btn: STColumnButton, ev?: Event): void;
-    private btnCallback;
-    static ɵfac: i0.ɵɵFactoryDeclaration<STTdComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<STTdComponent, "st-td", never, { "c": { "alias": "c"; "required": false; }; "cIdx": { "alias": "cIdx"; "required": false; }; "data": { "alias": "data"; "required": false; }; "i": { "alias": "i"; "required": false; }; "index": { "alias": "index"; "required": false; }; }, { "n": "n"; }, never, never, false, never>;
 }

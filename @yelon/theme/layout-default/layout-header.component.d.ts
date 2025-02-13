@@ -1,11 +1,10 @@
 import { AfterViewInit, QueryList, TemplateRef } from '@angular/core';
 import { App } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultHeaderItemDirection, LayoutDefaultHeaderItemHidden, LayoutDefaultOptions } from './types';
 import * as i0 from "@angular/core";
 interface LayoutDefaultHeaderItem {
-    host: TemplateRef<NzSafeAny>;
+    host: TemplateRef<any>;
     hidden?: LayoutDefaultHeaderItemHidden;
     direction?: LayoutDefaultHeaderItemDirection;
 }

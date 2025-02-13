@@ -1,5 +1,4 @@
 import { TemplateRef } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { DisabledDateFn, DisabledTimeFn, NzDatePickerSizeType, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzDatePickerI18nInterface } from 'ng-zorro-antd/i18n';
 import { SFUISchemaItem } from '../../schema/ui';
@@ -47,9 +46,7 @@ export interface SFDateWidgetSchema extends SFUISchemaItem {
     /**
      * To customize the style of the popup calendar
      */
-    popupStyle?: {
-        [klass: string]: NzSafeAny;
-    };
+    popupStyle?: Record<string, any>;
     /**
      * To customize the className of the popup calendar
      */
@@ -89,7 +86,7 @@ export interface SFDateWidgetSchema extends SFUISchemaItem {
     /**
      * separator
      */
-    separator?: string | TemplateRef<NzSafeAny>;
+    separator?: string | TemplateRef<any>;
     /**
      * Whether to show the week number on each row (Only supported by date picker. Week picker always shows week numbers)
      */

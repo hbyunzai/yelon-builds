@@ -1,7 +1,6 @@
 import { NzButtonType } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { SFHorizontalLayoutSchema, SFRenderSchema } from './schema/ui';
-export type SFValue = NzSafeAny;
+export type SFValue = any;
 export type SFLayout = 'horizontal' | 'vertical' | 'inline';
 export type SFMode = 'default' | 'search' | 'edit';
 export interface SFFormValueChange {

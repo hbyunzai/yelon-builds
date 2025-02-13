@@ -1,6 +1,6 @@
 import * as i0 from '@angular/core';
-import { Injectable, inject, ViewContainerRef, TemplateRef, Directive, Input, ElementRef, Renderer2, Injector, NgModule } from '@angular/core';
-import { BehaviorSubject, filter, Observable, of, map, tap } from 'rxjs';
+import { Injectable, inject, ViewContainerRef, TemplateRef, Input, Directive, ElementRef, Renderer2, Injector, NgModule } from '@angular/core';
+import { BehaviorSubject, filter, of, Observable, map, tap } from 'rxjs';
 import * as i1 from '@yelon/util/config';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
@@ -14,6 +14,11 @@ const ACL_DEFAULT_CONFIG = {
  * ACL 控制服务，[在线文档](https://ng.yunzainfo.com/acl)
  */
 class ACLService {
+    options;
+    roles = [];
+    abilities = [];
+    full = false;
+    aclChange = new BehaviorSubject(null);
     /** ACL变更通知 */
     get change() {
         return this.aclChange.asObservable();
@@ -30,10 +35,6 @@ class ACLService {
         return this.options.guard_url;
     }
     constructor(configSrv) {
-        this.roles = [];
-        this.abilities = [];
-        this.full = false;
-        this.aclChange = new BehaviorSubject(null);
         this.options = configSrv.merge('acl', ACL_DEFAULT_CONFIG);
     }
     parseACLType(val) {
@@ -191,23 +192,26 @@ class ACLService {
     canAbility(value) {
         return this.can(this.parseAbility(value));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
 
 class ACLIfDirective {
+    srv = inject(ACLService);
+    _viewContainer = inject(ViewContainerRef);
+    static ngAcceptInputType_except;
+    _value;
+    _change$;
+    _thenTemplateRef = inject((TemplateRef));
+    _elseTemplateRef = null;
+    _thenViewRef = null;
+    _elseViewRef = null;
+    _except = false;
     constructor() {
-        this.srv = inject(ACLService);
-        this._viewContainer = inject(ViewContainerRef);
-        this._thenTemplateRef = inject((TemplateRef));
-        this._elseTemplateRef = null;
-        this._thenViewRef = null;
-        this._elseViewRef = null;
-        this._except = false;
         this._change$ = this.srv.change
             .pipe(takeUntilDestroyed(), filter(r => r != null))
             .subscribe(() => this._updateView());
@@ -256,15 +260,14 @@ class ACLIfDirective {
     ngOnDestroy() {
         this._change$.unsubscribe();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLIfDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: ACLIfDirective, isStandalone: true, selector: "[aclIf]", inputs: { aclIf: "aclIf", aclIfThen: "aclIfThen", aclIfElse: "aclIfElse", except: "except" }, exportAs: ["aclIf"], ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLIfDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.5", type: ACLIfDirective, isStandalone: true, selector: "[aclIf]", inputs: { aclIf: "aclIf", aclIfThen: "aclIfThen", aclIfElse: "aclIfElse", except: "except" }, exportAs: ["aclIf"], ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLIfDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLIfDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[aclIf]',
-                    exportAs: 'aclIf',
-                    standalone: true
+                    exportAs: 'aclIf'
                 }]
         }], ctorParameters: () => [], propDecorators: { aclIf: [{
                 type: Input
@@ -277,6 +280,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
             }] } });
 
 class ACLDirective {
+    el = inject(ElementRef).nativeElement;
+    renderer = inject(Renderer2);
+    srv = inject(ACLService);
+    _value;
+    change$;
     set acl(value) {
         this.set(value);
     }
@@ -295,9 +303,6 @@ class ACLDirective {
         }
     }
     constructor() {
-        this.el = inject(ElementRef).nativeElement;
-        this.renderer = inject(Renderer2);
-        this.srv = inject(ACLService);
         this.change$ = this.srv.change
             .pipe(takeUntilDestroyed(), filter(r => r != null))
             .subscribe(() => this.set(this._value));
@@ -305,15 +310,14 @@ class ACLDirective {
     ngOnDestroy() {
         this.change$.unsubscribe();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: ACLDirective, isStandalone: true, selector: "[acl]", inputs: { acl: "acl", ability: ["acl-ability", "ability"] }, exportAs: ["acl"], ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.5", type: ACLDirective, isStandalone: true, selector: "[acl]", inputs: { acl: "acl", ability: ["acl-ability", "ability"] }, exportAs: ["acl"], ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[acl]',
-                    exportAs: 'acl',
-                    standalone: true
+                    exportAs: 'acl'
                 }]
         }], ctorParameters: () => [], propDecorators: { acl: [{
                 type: Input,
@@ -330,11 +334,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  */
 
 class ACLGuardService {
-    constructor() {
-        this.srv = inject(ACLService);
-        this.router = inject(Router);
-        this.injector = inject(Injector);
-    }
+    srv = inject(ACLService);
+    router = inject(Router);
+    injector = inject(Injector);
     process(data) {
         data = {
             guard: null,
@@ -350,10 +352,10 @@ class ACLGuardService {
             this.router.navigateByUrl(data.guard_url);
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLGuardService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLGuardService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ACLGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ACLGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -396,11 +398,11 @@ const aclCanMatch = route => inject(ACLGuardService).process(route.data);
 
 const COMPONENTS = [ACLDirective, ACLIfDirective];
 class YelonACLModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonACLModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YelonACLModule, imports: [CommonModule, ACLDirective, ACLIfDirective], exports: [ACLDirective, ACLIfDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonACLModule, imports: [CommonModule] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonACLModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YelonACLModule, imports: [CommonModule, ACLDirective, ACLIfDirective], exports: [ACLDirective, ACLIfDirective] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonACLModule, imports: [CommonModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonACLModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonACLModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, ...COMPONENTS],

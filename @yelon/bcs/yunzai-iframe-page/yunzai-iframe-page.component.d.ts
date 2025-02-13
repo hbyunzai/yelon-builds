@@ -1,6 +1,5 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class YunzaiIframePageComponent implements OnInit, OnDestroy {
     private readonly sanitizer;
@@ -9,7 +8,7 @@ export declare class YunzaiIframePageComponent implements OnInit, OnDestroy {
     iframeSafeSrc?: SafeResourceUrl;
     iframePageHeight?: string;
     hasIframe: boolean;
-    resizeHandle: NzSafeAny;
+    resizeHandle: any;
     ngOnInit(): void;
     ngOnDestroy(): void;
     getIframeUrl(): void;

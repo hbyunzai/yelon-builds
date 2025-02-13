@@ -1,7 +1,6 @@
 import { OnInit } from '@angular/core';
 import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
 import { LayoutBasicAside, LayoutBasicDisplay, NavType, YunzaiHeaderStyle } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface LayoutBasicState {
     options: LayoutDefaultOptions;
@@ -39,7 +38,7 @@ export declare class YunzaiLayoutBasicComponent implements OnInit {
     get navType(): NavType;
     get aside(): LayoutBasicAside;
     get displayReusetab(): boolean;
-    get reusetabCSS(): NzSafeAny;
+    get reusetabCSS(): any;
     ngOnInit(): void;
     initFavicon(): void;
     initAside(): void;

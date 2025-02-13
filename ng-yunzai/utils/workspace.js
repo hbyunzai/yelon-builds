@@ -46,7 +46,6 @@ function getNgYunzaiJson(tree) {
         return undefined;
     return (0, json_1.readJSON)(tree, exports.NG_YUNZAI_JSON);
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function writeNgYunzaiJson(tree, json) {
     return (0, json_1.writeJSON)(tree, exports.NG_YUNZAI_JSON, json);
 }

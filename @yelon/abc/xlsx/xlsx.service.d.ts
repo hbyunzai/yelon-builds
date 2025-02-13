@@ -1,5 +1,4 @@
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { XlsxExportOptions, XlsxExportResult } from './xlsx.types';
 import * as i0 from "@angular/core";
 export declare class XlsxService {
@@ -13,9 +12,7 @@ export declare class XlsxService {
     /**
      * 导入Excel并输出JSON，支持 `<input type="file">`、URL 形式
      */
-    import(fileOrUrl: File | string): Promise<{
-        [key: string]: NzSafeAny[][];
-    }>;
+    import(fileOrUrl: File | string): Promise<Record<string, any[][]>>;
     export(options: XlsxExportOptions): Promise<XlsxExportResult>;
     /**
      * 数据转符号名

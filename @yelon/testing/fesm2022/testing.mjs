@@ -46,6 +46,7 @@ function createKeyboardEvent(type, keyCode, target, key) {
     // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
     event.preventDefault = function () {
         Object.defineProperty(event, 'defaultPrevented', { get: () => true });
+        // eslint-disable-next-line prefer-rest-params
         return originalPreventDefault.apply(this, arguments);
     };
     return event;
@@ -104,6 +105,7 @@ function typeInElement(value, element) {
     element.focus();
     element.value = value;
     dispatchFakeEvent(element, 'input');
+    dispatchFakeEvent(element, 'change');
 }
 
 const DROPDOWN_MIN_TIME = 1000;
@@ -129,6 +131,7 @@ function dispatchDropDown(dl, trigger, allowNull = true) {
 const PageG2DataCount = 2;
 const PageG2Height = 100;
 class PageG2 {
+    fixture;
     constructor(fixture = null) {
         this.fixture = fixture;
     }
@@ -144,22 +147,11 @@ class PageG2 {
     get chart() {
         return this.comp.chart;
     }
-    genModule(module, comp) {
-        TestBed.configureTestingModule({
-            imports: [module],
-            declarations: [comp]
-        });
-        return this;
-    }
     genComp(comp, dc = false) {
         this.fixture = TestBed.createComponent(comp);
         if (dc) {
             this.dcFirst();
         }
-        return this;
-    }
-    makeModule(module, comp, options = { dc: true }) {
-        this.genModule(module, comp).genComp(comp, options.dc);
         return this;
     }
     dcFirst() {
@@ -262,9 +254,9 @@ class PageG2 {
         return this;
     }
 }
-function checkDelay(module, comp, page = null) {
+function checkDelay(comp, page = null) {
     if (page == null) {
-        page = new PageG2().makeModule(module, comp, { dc: false });
+        page = new PageG2().genComp(comp, false);
     }
     const context = page.context;
     if (typeof context.delay === 'undefined') {
@@ -280,6 +272,7 @@ function checkDelay(module, comp, page = null) {
 }
 
 class TestContext {
+    fixture;
     constructor(fixture) {
         this.fixture = fixture;
     }

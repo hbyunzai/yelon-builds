@@ -7,16 +7,12 @@ import { addSeconds } from 'date-fns';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { deepGet } from '@yelon/util/other';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 const DC_STORE_STORAGE_TOKEN = new InjectionToken('DC_STORE_STORAGE_TOKEN', {
     providedIn: 'root',
     factory: () => new LocalStorageCacheService()
 });
 class LocalStorageCacheService {
-    constructor() {
-        this.platform = inject(Platform);
-    }
+    platform = inject(Platform);
     get(key) {
         if (!this.platform.isBrowser) {
             return null;
@@ -38,22 +34,22 @@ class LocalStorageCacheService {
     }
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 class CacheService {
+    store = inject(DC_STORE_STORAGE_TOKEN);
+    http = inject(HttpClient);
+    platform = inject(Platform);
+    memory = new Map();
+    notifyBuffer = new Map();
+    meta = new Set();
+    freqTick = 3000;
+    freqTime;
+    cog = inject(YunzaiConfigService).merge('cache', {
+        mode: 'promise',
+        reName: '',
+        prefix: '',
+        meta_key: '__cache_meta'
+    });
     constructor() {
-        this.store = inject(DC_STORE_STORAGE_TOKEN);
-        this.http = inject(HttpClient);
-        this.platform = inject(Platform);
-        this.memory = new Map();
-        this.notifyBuffer = new Map();
-        this.meta = new Set();
-        this.freqTick = 3000;
-        this.cog = inject(YunzaiConfigService).merge('cache', {
-            mode: 'promise',
-            reName: '',
-            prefix: '',
-            meta_key: '__cache_meta'
-        });
         if (!this.platform.isBrowser)
             return;
         this.loadMeta();
@@ -268,10 +264,10 @@ class CacheService {
         this.abortExpireNotify();
         this.clearNotify();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: CacheService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: CacheService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: CacheService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: CacheService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: CacheService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: CacheService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -288,7 +284,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  */
 const CACHE = new HttpContextToken(() => ({}));
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Cache interceptor
  *

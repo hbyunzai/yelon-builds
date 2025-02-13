@@ -1,63 +1,52 @@
 import * as i0 from '@angular/core';
-import { Component, Input, inject, ChangeDetectorRef, NgZone, DestroyRef, isDevMode, booleanAttribute, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import { Input, Component, inject, ChangeDetectorRef, NgZone, DestroyRef, isDevMode, booleanAttribute, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import * as i1 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import * as i3 from 'ng-zorro-antd/drawer';
+import * as i2 from 'ng-zorro-antd/drawer';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import * as i3$1 from 'ng-zorro-antd/switch';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import * as i4 from 'ng-zorro-antd/input';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import * as i5 from 'ng-zorro-antd/input-number';
-import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzInputDirective } from 'ng-zorro-antd/input';
+import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
+import * as i5 from 'ng-zorro-antd/switch';
+import { NzSwitchComponent, NzSwitchModule } from 'ng-zorro-antd/switch';
 import { __decorate } from 'tslib';
 import { Directionality } from '@angular/cdk/bidi';
-import * as i1$1 from '@angular/common';
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SettingsService } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyService, deepCopy } from '@yelon/util/other';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import * as i4$1 from 'ng-zorro-antd/tooltip';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import * as i5$1 from 'ng-zorro-antd/divider';
+import { NzAlertComponent } from 'ng-zorro-antd/alert';
+import { NzButtonComponent } from 'ng-zorro-antd/button';
+import * as i3 from 'ng-zorro-antd/divider';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import * as i6 from 'ng-zorro-antd/tabs';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import * as i4 from 'ng-zorro-antd/tabs';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import * as i8 from 'ng-zorro-antd/alert';
-import { NzAlertModule } from 'ng-zorro-antd/alert';
-import * as i9 from 'ng-zorro-antd/icon';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import * as i10 from 'ng-zorro-antd/button';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import * as i11 from 'ng-zorro-antd/core/transition-patch';
-import * as i12 from 'ng-zorro-antd/core/wave';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 class SettingDrawerItemComponent {
-    constructor() {
-        this.i = {};
-        this.pxVal = 0;
-        this.format = (value) => `${value} px`;
-    }
+    i = {};
     set data(val) {
         this.i = val;
         if (val.type === 'px') {
             this.pxVal = +val.value.replace('px', '');
         }
     }
+    pxVal = 0;
     pxChange(val) {
         this.i.value = `${val}px`;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerItemComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: SettingDrawerItemComponent, selector: "setting-drawer-item", inputs: { data: "data" }, host: { properties: { "class.setting-drawer__body-item": "true" } }, ngImport: i0, template: "<span>\n  {{ i.label }}\n  <span class=\"pl-sm text-grey\">{{ i.tip }}</span>\n</span>\n@switch (i.type) {\n  @case ('color') {\n    <input nz-input type=\"color\" style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('input') {\n    <input nz-input style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('px') {\n    <nz-input-number\n      [(ngModel)]=\"pxVal\"\n      (ngModelChange)=\"pxChange($event)\"\n      [nzMin]=\"i.min\"\n      [nzMax]=\"i.max\"\n      [nzStep]=\"i.step || 2\"\n      [nzFormatter]=\"format\"\n    />\n  }\n  @case ('switch') {\n    <nz-switch nzSize=\"small\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @default {\n    <ng-template nzDrawerContent />\n  }\n}\n", dependencies: [{ kind: "directive", type: i1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i3.NzDrawerContentDirective, selector: "[nzDrawerContent]", exportAs: ["nzDrawerContent"] }, { kind: "component", type: i3$1.NzSwitchComponent, selector: "nz-switch", inputs: ["nzLoading", "nzDisabled", "nzControl", "nzCheckedChildren", "nzUnCheckedChildren", "nzSize", "nzId"], exportAs: ["nzSwitch"] }, { kind: "directive", type: i4.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: i5.NzInputNumberComponent, selector: "nz-input-number", inputs: ["nzSize", "nzMin", "nzMax", "nzParser", "nzPrecision", "nzPrecisionMode", "nzPlaceHolder", "nzStatus", "nzStep", "nzInputMode", "nzId", "nzDisabled", "nzReadOnly", "nzAutoFocus", "nzBorderless", "nzFormatter"], outputs: ["nzBlur", "nzFocus"], exportAs: ["nzInputNumber"] }] }); }
+    format = (value) => `${value} px`;
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerItemComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: SettingDrawerItemComponent, isStandalone: true, selector: "setting-drawer-item", inputs: { data: "data" }, host: { properties: { "class.setting-drawer__body-item": "true" } }, ngImport: i0, template: "<span>\n  {{ i.label }}\n  <span class=\"pl-sm text-grey\">{{ i.tip }}</span>\n</span>\n@switch (i.type) {\n  @case ('color') {\n    <input nz-input type=\"color\" style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('input') {\n    <input nz-input style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('px') {\n    <nz-input-number\n      [(ngModel)]=\"pxVal\"\n      (ngModelChange)=\"pxChange($event)\"\n      [nzMin]=\"i.min\"\n      [nzMax]=\"i.max\"\n      [nzStep]=\"i.step || 2\"\n      [nzFormatter]=\"format\"\n    />\n  }\n  @case ('switch') {\n    <nz-switch nzSize=\"small\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @default {\n    <ng-template nzDrawerContent />\n  }\n}\n", dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: NzInputNumberComponent, selector: "nz-input-number", inputs: ["nzId", "nzSize", "nzPlaceHolder", "nzStatus", "nzStep", "nzMin", "nzMax", "nzPrecision", "nzParser", "nzFormatter", "nzDisabled", "nzReadOnly", "nzAutoFocus", "nzBordered", "nzKeyboard", "nzControls"], outputs: ["nzOnStep"], exportAs: ["nzInputNumber"] }, { kind: "component", type: NzSwitchComponent, selector: "nz-switch", inputs: ["nzLoading", "nzDisabled", "nzControl", "nzCheckedChildren", "nzUnCheckedChildren", "nzSize", "nzId"], exportAs: ["nzSwitch"] }, { kind: "ngmodule", type: NzDrawerModule }, { kind: "directive", type: i2.NzDrawerContentDirective, selector: "[nzDrawerContent]", exportAs: ["nzDrawerContent"] }] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerItemComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerItemComponent, decorators: [{
             type: Component,
             args: [{ selector: 'setting-drawer-item', host: {
                         '[class.setting-drawer__body-item]': 'true'
-                    }, template: "<span>\n  {{ i.label }}\n  <span class=\"pl-sm text-grey\">{{ i.tip }}</span>\n</span>\n@switch (i.type) {\n  @case ('color') {\n    <input nz-input type=\"color\" style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('input') {\n    <input nz-input style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('px') {\n    <nz-input-number\n      [(ngModel)]=\"pxVal\"\n      (ngModelChange)=\"pxChange($event)\"\n      [nzMin]=\"i.min\"\n      [nzMax]=\"i.max\"\n      [nzStep]=\"i.step || 2\"\n      [nzFormatter]=\"format\"\n    />\n  }\n  @case ('switch') {\n    <nz-switch nzSize=\"small\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @default {\n    <ng-template nzDrawerContent />\n  }\n}\n" }]
+                    }, imports: [FormsModule, NzInputDirective, NzInputNumberComponent, NzSwitchComponent, NzDrawerModule], template: "<span>\n  {{ i.label }}\n  <span class=\"pl-sm text-grey\">{{ i.tip }}</span>\n</span>\n@switch (i.type) {\n  @case ('color') {\n    <input nz-input type=\"color\" style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('input') {\n    <input nz-input style=\"width: 88px\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @case ('px') {\n    <nz-input-number\n      [(ngModel)]=\"pxVal\"\n      (ngModelChange)=\"pxChange($event)\"\n      [nzMin]=\"i.min\"\n      [nzMax]=\"i.max\"\n      [nzStep]=\"i.step || 2\"\n      [nzFormatter]=\"format\"\n    />\n  }\n  @case ('switch') {\n    <nz-switch nzSize=\"small\" [(ngModel)]=\"i.value\" [ngModelOptions]=\"{ standalone: true }\" />\n  }\n  @default {\n    <ng-template nzDrawerContent />\n  }\n}\n" }]
         }], propDecorators: { data: [{
                 type: Input
             }] } });
@@ -256,28 +245,29 @@ const DEFAULT_VARS = {
 };
 
 class SettingDrawerComponent {
+    cdr = inject(ChangeDetectorRef);
+    msg = inject(NzMessageService);
+    settingSrv = inject(SettingsService);
+    lazy = inject(LazyService);
+    ngZone = inject(NgZone);
+    doc = inject(DOCUMENT);
+    directionality = inject(Directionality);
+    destroy$ = inject(DestroyRef);
+    autoApplyColor = true;
+    compilingText = 'Compiling...';
+    devTips = `When the color can't be switched, you need to run it once: npm run color-less`;
+    lessJs = 'https://cdn.jsdelivr.net/npm/less';
+    loadedLess = false;
+    dir = 'ltr';
+    isDev = isDevMode();
+    collapse = false;
     get layout() {
         return this.settingSrv.layout;
     }
+    data = {};
+    color;
+    colors = DEFAULT_COLORS;
     constructor() {
-        this.cdr = inject(ChangeDetectorRef);
-        this.msg = inject(NzMessageService);
-        this.settingSrv = inject(SettingsService);
-        this.lazy = inject(LazyService);
-        this.ngZone = inject(NgZone);
-        this.doc = inject(DOCUMENT);
-        this.directionality = inject(Directionality);
-        this.destroy$ = inject(DestroyRef);
-        this.autoApplyColor = true;
-        this.compilingText = 'Compiling...';
-        this.devTips = `When the color can't be switched, you need to run it once: npm run color-less`;
-        this.lessJs = 'https://cdn.jsdelivr.net/npm/less';
-        this.loadedLess = false;
-        this.dir = 'ltr';
-        this.isDev = isDevMode();
-        this.collapse = false;
-        this.data = {};
-        this.colors = DEFAULT_COLORS;
         this.color = this.cachedData['@primary-color'] || this.DEFAULT_PRIMARY;
         this.resetData(this.cachedData, false);
     }
@@ -387,8 +377,8 @@ class SettingDrawerComponent {
         copy(copyContent);
         this.msg.success('Copy success');
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: SettingDrawerComponent, selector: "setting-drawer", inputs: { autoApplyColor: ["autoApplyColor", "autoApplyColor", booleanAttribute], compilingText: "compilingText", devTips: "devTips", lessJs: "lessJs" }, host: { properties: { "class.setting-drawer": "true", "class.setting-drawer-rtl": "dir === 'rtl'" } }, ngImport: i0, template: "<nz-drawer\n  [nzVisible]=\"collapse\"\n  [nzPlacement]=\"dir === 'rtl' ? 'left' : 'right'\"\n  [nzWidth]=\"500\"\n  (nzOnClose)=\"toggle()\"\n>\n  <div *nzDrawerContent class=\"setting-drawer__content\">\n    <div class=\"setting-drawer__body setting-drawer__theme\">\n      <h3 class=\"setting-drawer__title\">\u4E3B\u9898\u8272</h3>\n      @for (c of colors; track $index) {\n        <span\n          [style]=\"{ 'background-color': c.color }\"\n          (click)=\"changeColor(c.color)\"\n          nz-tooltip\n          [nzTooltipTitle]=\"c.key\"\n          class=\"setting-drawer__theme-tag\"\n        >\n          @if (color === c.color) {\n            <i nz-icon nzType=\"check\"></i>\n          }\n        </span>\n      }\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <h3 class=\"setting-drawer__title\">\u8BBE\u7F6E</h3>\n      <nz-tabset>\n        <nz-tab nzTitle=\"\u9876\u90E8\">\n          <div class=\"setting-drawer__body\">\n            <setting-drawer-item [data]=\"data['yunzai-default-header-hg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-bg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-padding']\" />\n          </div>\n        </nz-tab>\n        <nz-tab nzTitle=\"\u4FA7\u8FB9\u680F\">\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-collapsed-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-nav-padding-top-bottom']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5185\u5BB9\">\n          <setting-drawer-item [data]=\"data['yunzai-default-content-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-border']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-padding']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5176\u5B83\">\n          <setting-drawer-item [data]=\"data['form-state-visual-feedback-enabled']\" />\n          <setting-drawer-item [data]=\"data['preserve-white-spaces-enabled']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-radius']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-margin-right']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-width']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-height']\" />\n        </nz-tab>\n      </nz-tabset>\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <div class=\"setting-drawer__body-item\">\n        \u56FA\u5B9A\u5934\u548C\u4FA7\u8FB9\u680F\n        <nz-switch nzSize=\"small\" [(ngModel)]=\"layout.fixed\" (ngModelChange)=\"setLayout('fixed', layout.fixed)\" />\n      </div>\n      <div class=\"setting-drawer__body-item\">\n        \u8272\u5F31\u6A21\u5F0F\n        <nz-switch\n          nzSize=\"small\"\n          [(ngModel)]=\"layout.colorWeak\"\n          (ngModelChange)=\"setLayout('colorWeak', layout.colorWeak)\"\n        />\n      </div>\n    </div>\n    <nz-divider />\n    <button (click)=\"apply()\" type=\"button\" nz-button nzType=\"primary\">\u9884\u89C8</button>\n    <button (click)=\"reset()\" type=\"button\" nz-button>\u91CD\u7F6E</button>\n    <button (click)=\"copyVar()\" type=\"button\" nz-button>\u62F7\u8D1D</button>\n    <nz-alert\n      class=\"mt-md\"\n      nzType=\"warning\"\n      nzMessage=\"\u914D\u7F6E\u680F\u53EA\u5728\u5F00\u53D1\u73AF\u5883\u7528\u4E8E\u9884\u89C8\uFF0C\u751F\u4EA7\u73AF\u5883\u4E0D\u4F1A\u5C55\u73B0\uFF0C\u8BF7\u62F7\u8D1D\u540E\u624B\u52A8\u4FEE\u6539\u53C2\u6570\u914D\u7F6E\u6587\u4EF6 src/styles/theme.less\"\n    />\n  </div>\n</nz-drawer>\n<div\n  class=\"setting-drawer__handle\"\n  [ngClass]=\"{ 'setting-drawer__handle-opened': collapse }\"\n  (click)=\"toggle()\"\n  nz-tooltip\n  [nzTooltipTitle]=\"isDev ? devTips : null\"\n>\n  <i nz-icon [nzType]=\"!collapse ? 'setting' : 'close'\" class=\"setting-drawer__handle-icon\"></i>\n</div>\n", dependencies: [{ kind: "directive", type: i1$1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i3.NzDrawerComponent, selector: "nz-drawer", inputs: ["nzContent", "nzCloseIcon", "nzClosable", "nzMaskClosable", "nzMask", "nzCloseOnNavigation", "nzNoAnimation", "nzKeyboard", "nzTitle", "nzExtra", "nzFooter", "nzPlacement", "nzSize", "nzMaskStyle", "nzBodyStyle", "nzWrapClassName", "nzWidth", "nzHeight", "nzZIndex", "nzOffsetX", "nzOffsetY", "nzVisible"], outputs: ["nzOnViewInit", "nzOnClose", "nzVisibleChange"], exportAs: ["nzDrawer"] }, { kind: "directive", type: i3.NzDrawerContentDirective, selector: "[nzDrawerContent]", exportAs: ["nzDrawerContent"] }, { kind: "directive", type: i4$1.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "component", type: i5$1.NzDividerComponent, selector: "nz-divider", inputs: ["nzText", "nzType", "nzOrientation", "nzDashed", "nzPlain"], exportAs: ["nzDivider"] }, { kind: "component", type: i6.NzTabSetComponent, selector: "nz-tabset", inputs: ["nzSelectedIndex", "nzTabPosition", "nzTabBarExtraContent", "nzCanDeactivate", "nzAddIcon", "nzTabBarStyle", "nzType", "nzSize", "nzAnimated", "nzTabBarGutter", "nzHideAdd", "nzCentered", "nzHideAll", "nzLinkRouter", "nzLinkExact", "nzDestroyInactiveTabPane"], outputs: ["nzSelectChange", "nzSelectedIndexChange", "nzTabListScroll", "nzClose", "nzAdd"], exportAs: ["nzTabset"] }, { kind: "component", type: i6.NzTabComponent, selector: "nz-tab", inputs: ["nzTitle", "nzClosable", "nzCloseIcon", "nzDisabled", "nzForceRender"], outputs: ["nzSelect", "nzDeselect", "nzClick", "nzContextmenu"], exportAs: ["nzTab"] }, { kind: "component", type: i3$1.NzSwitchComponent, selector: "nz-switch", inputs: ["nzLoading", "nzDisabled", "nzControl", "nzCheckedChildren", "nzUnCheckedChildren", "nzSize", "nzId"], exportAs: ["nzSwitch"] }, { kind: "component", type: i8.NzAlertComponent, selector: "nz-alert", inputs: ["nzAction", "nzCloseText", "nzIconType", "nzMessage", "nzDescription", "nzType", "nzCloseable", "nzShowIcon", "nzBanner", "nzNoAnimation", "nzIcon"], outputs: ["nzOnClose"], exportAs: ["nzAlert"] }, { kind: "directive", type: i9.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i10.NzButtonComponent, selector: "button[nz-button], a[nz-button]", inputs: ["nzBlock", "nzGhost", "nzSearch", "nzLoading", "nzDanger", "disabled", "tabIndex", "nzType", "nzShape", "nzSize"], exportAs: ["nzButton"] }, { kind: "directive", type: i11.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i12.NzWaveDirective, selector: "[nz-wave],button[nz-button]:not([nzType=\"link\"]):not([nzType=\"text\"])", inputs: ["nzWaveExtraNode"], exportAs: ["nzWave"] }, { kind: "component", type: SettingDrawerItemComponent, selector: "setting-drawer-item", inputs: ["data"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: SettingDrawerComponent, isStandalone: true, selector: "setting-drawer", inputs: { autoApplyColor: ["autoApplyColor", "autoApplyColor", booleanAttribute], compilingText: "compilingText", devTips: "devTips", lessJs: "lessJs" }, host: { properties: { "class.setting-drawer": "true", "class.setting-drawer-rtl": "dir === 'rtl'" } }, ngImport: i0, template: "<nz-drawer\n  [nzVisible]=\"collapse\"\n  [nzPlacement]=\"dir === 'rtl' ? 'left' : 'right'\"\n  [nzWidth]=\"500\"\n  (nzOnClose)=\"toggle()\"\n>\n  <div *nzDrawerContent class=\"setting-drawer__content\">\n    <div class=\"setting-drawer__body setting-drawer__theme\">\n      <h3 class=\"setting-drawer__title\">\u4E3B\u9898\u8272</h3>\n      @for (c of colors; track $index) {\n        <span\n          [style]=\"{ 'background-color': c.color }\"\n          (click)=\"changeColor(c.color)\"\n          nz-tooltip\n          [nzTooltipTitle]=\"c.key\"\n          class=\"setting-drawer__theme-tag\"\n        >\n          @if (color === c.color) {\n            <nz-icon nzType=\"check\" />\n          }\n        </span>\n      }\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <h3 class=\"setting-drawer__title\">\u8BBE\u7F6E</h3>\n      <nz-tabset>\n        <nz-tab nzTitle=\"\u9876\u90E8\">\n          <div class=\"setting-drawer__body\">\n            <setting-drawer-item [data]=\"data['yunzai-default-header-hg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-bg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-padding']\" />\n          </div>\n        </nz-tab>\n        <nz-tab nzTitle=\"\u4FA7\u8FB9\u680F\">\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-collapsed-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-nav-padding-top-bottom']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5185\u5BB9\">\n          <setting-drawer-item [data]=\"data['yunzai-default-content-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-border']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-padding']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5176\u5B83\">\n          <setting-drawer-item [data]=\"data['form-state-visual-feedback-enabled']\" />\n          <setting-drawer-item [data]=\"data['preserve-white-spaces-enabled']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-radius']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-margin-right']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-width']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-height']\" />\n        </nz-tab>\n      </nz-tabset>\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <div class=\"setting-drawer__body-item\">\n        \u56FA\u5B9A\u5934\u548C\u4FA7\u8FB9\u680F\n        <nz-switch nzSize=\"small\" [(ngModel)]=\"layout.fixed\" (ngModelChange)=\"setLayout('fixed', layout.fixed)\" />\n      </div>\n      <div class=\"setting-drawer__body-item\">\n        \u8272\u5F31\u6A21\u5F0F\n        <nz-switch\n          nzSize=\"small\"\n          [(ngModel)]=\"layout.colorWeak\"\n          (ngModelChange)=\"setLayout('colorWeak', layout.colorWeak)\"\n        />\n      </div>\n    </div>\n    <nz-divider />\n    <button (click)=\"apply()\" type=\"button\" nz-button nzType=\"primary\">\u9884\u89C8</button>\n    <button (click)=\"reset()\" type=\"button\" nz-button>\u91CD\u7F6E</button>\n    <button (click)=\"copyVar()\" type=\"button\" nz-button>\u62F7\u8D1D</button>\n    <nz-alert\n      class=\"mt-md\"\n      nzType=\"warning\"\n      nzMessage=\"\u914D\u7F6E\u680F\u53EA\u5728\u5F00\u53D1\u73AF\u5883\u7528\u4E8E\u9884\u89C8\uFF0C\u751F\u4EA7\u73AF\u5883\u4E0D\u4F1A\u5C55\u73B0\uFF0C\u8BF7\u62F7\u8D1D\u540E\u624B\u52A8\u4FEE\u6539\u53C2\u6570\u914D\u7F6E\u6587\u4EF6 src/styles/theme.less\"\n    />\n  </div>\n</nz-drawer>\n<div\n  class=\"setting-drawer__handle\"\n  [class.setting-drawer__handle-opened]=\"collapse\"\n  (click)=\"toggle()\"\n  nz-tooltip\n  [nzTooltipTitle]=\"isDev ? devTips : null\"\n>\n  <nz-icon [nzType]=\"!collapse ? 'setting' : 'close'\" class=\"setting-drawer__handle-icon\" />\n</div>\n", dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: NzDrawerModule }, { kind: "component", type: i2.NzDrawerComponent, selector: "nz-drawer", inputs: ["nzContent", "nzCloseIcon", "nzClosable", "nzMaskClosable", "nzMask", "nzCloseOnNavigation", "nzNoAnimation", "nzKeyboard", "nzTitle", "nzExtra", "nzFooter", "nzPlacement", "nzSize", "nzMaskStyle", "nzBodyStyle", "nzWrapClassName", "nzWidth", "nzHeight", "nzZIndex", "nzOffsetX", "nzOffsetY", "nzVisible"], outputs: ["nzOnViewInit", "nzOnClose", "nzVisibleChange"], exportAs: ["nzDrawer"] }, { kind: "directive", type: i2.NzDrawerContentDirective, selector: "[nzDrawerContent]", exportAs: ["nzDrawerContent"] }, { kind: "directive", type: NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "ngmodule", type: NzDividerModule }, { kind: "component", type: i3.NzDividerComponent, selector: "nz-divider", inputs: ["nzText", "nzType", "nzOrientation", "nzVariant", "nzDashed", "nzPlain"], exportAs: ["nzDivider"] }, { kind: "ngmodule", type: NzTabsModule }, { kind: "component", type: i4.NzTabSetComponent, selector: "nz-tabset", inputs: ["nzSelectedIndex", "nzTabPosition", "nzTabBarExtraContent", "nzCanDeactivate", "nzAddIcon", "nzTabBarStyle", "nzType", "nzSize", "nzAnimated", "nzTabBarGutter", "nzHideAdd", "nzCentered", "nzHideAll", "nzLinkRouter", "nzLinkExact", "nzDestroyInactiveTabPane"], outputs: ["nzSelectChange", "nzSelectedIndexChange", "nzTabListScroll", "nzClose", "nzAdd"], exportAs: ["nzTabset"] }, { kind: "component", type: i4.NzTabComponent, selector: "nz-tab", inputs: ["nzTitle", "nzClosable", "nzCloseIcon", "nzDisabled", "nzForceRender"], outputs: ["nzSelect", "nzDeselect", "nzClick", "nzContextmenu"], exportAs: ["nzTab"] }, { kind: "component", type: SettingDrawerItemComponent, selector: "setting-drawer-item", inputs: ["data"] }, { kind: "ngmodule", type: NzSwitchModule }, { kind: "component", type: i5.NzSwitchComponent, selector: "nz-switch", inputs: ["nzLoading", "nzDisabled", "nzControl", "nzCheckedChildren", "nzUnCheckedChildren", "nzSize", "nzId"], exportAs: ["nzSwitch"] }, { kind: "component", type: NzButtonComponent, selector: "button[nz-button], a[nz-button]", inputs: ["nzBlock", "nzGhost", "nzSearch", "nzLoading", "nzDanger", "disabled", "tabIndex", "nzType", "nzShape", "nzSize"], exportAs: ["nzButton"] }, { kind: "component", type: NzAlertComponent, selector: "nz-alert", inputs: ["nzAction", "nzCloseText", "nzIconType", "nzMessage", "nzDescription", "nzType", "nzCloseable", "nzShowIcon", "nzBanner", "nzNoAnimation", "nzIcon"], outputs: ["nzOnClose"], exportAs: ["nzAlert"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
 __decorate([
     ZoneOutside()
@@ -396,12 +386,23 @@ __decorate([
 __decorate([
     ZoneOutside()
 ], SettingDrawerComponent.prototype, "runLess", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerComponent, decorators: [{
             type: Component,
             args: [{ selector: 'setting-drawer', host: {
                         '[class.setting-drawer]': 'true',
                         '[class.setting-drawer-rtl]': `dir === 'rtl'`
-                    }, changeDetection: ChangeDetectionStrategy.OnPush, template: "<nz-drawer\n  [nzVisible]=\"collapse\"\n  [nzPlacement]=\"dir === 'rtl' ? 'left' : 'right'\"\n  [nzWidth]=\"500\"\n  (nzOnClose)=\"toggle()\"\n>\n  <div *nzDrawerContent class=\"setting-drawer__content\">\n    <div class=\"setting-drawer__body setting-drawer__theme\">\n      <h3 class=\"setting-drawer__title\">\u4E3B\u9898\u8272</h3>\n      @for (c of colors; track $index) {\n        <span\n          [style]=\"{ 'background-color': c.color }\"\n          (click)=\"changeColor(c.color)\"\n          nz-tooltip\n          [nzTooltipTitle]=\"c.key\"\n          class=\"setting-drawer__theme-tag\"\n        >\n          @if (color === c.color) {\n            <i nz-icon nzType=\"check\"></i>\n          }\n        </span>\n      }\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <h3 class=\"setting-drawer__title\">\u8BBE\u7F6E</h3>\n      <nz-tabset>\n        <nz-tab nzTitle=\"\u9876\u90E8\">\n          <div class=\"setting-drawer__body\">\n            <setting-drawer-item [data]=\"data['yunzai-default-header-hg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-bg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-padding']\" />\n          </div>\n        </nz-tab>\n        <nz-tab nzTitle=\"\u4FA7\u8FB9\u680F\">\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-collapsed-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-nav-padding-top-bottom']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5185\u5BB9\">\n          <setting-drawer-item [data]=\"data['yunzai-default-content-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-border']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-padding']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5176\u5B83\">\n          <setting-drawer-item [data]=\"data['form-state-visual-feedback-enabled']\" />\n          <setting-drawer-item [data]=\"data['preserve-white-spaces-enabled']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-radius']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-margin-right']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-width']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-height']\" />\n        </nz-tab>\n      </nz-tabset>\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <div class=\"setting-drawer__body-item\">\n        \u56FA\u5B9A\u5934\u548C\u4FA7\u8FB9\u680F\n        <nz-switch nzSize=\"small\" [(ngModel)]=\"layout.fixed\" (ngModelChange)=\"setLayout('fixed', layout.fixed)\" />\n      </div>\n      <div class=\"setting-drawer__body-item\">\n        \u8272\u5F31\u6A21\u5F0F\n        <nz-switch\n          nzSize=\"small\"\n          [(ngModel)]=\"layout.colorWeak\"\n          (ngModelChange)=\"setLayout('colorWeak', layout.colorWeak)\"\n        />\n      </div>\n    </div>\n    <nz-divider />\n    <button (click)=\"apply()\" type=\"button\" nz-button nzType=\"primary\">\u9884\u89C8</button>\n    <button (click)=\"reset()\" type=\"button\" nz-button>\u91CD\u7F6E</button>\n    <button (click)=\"copyVar()\" type=\"button\" nz-button>\u62F7\u8D1D</button>\n    <nz-alert\n      class=\"mt-md\"\n      nzType=\"warning\"\n      nzMessage=\"\u914D\u7F6E\u680F\u53EA\u5728\u5F00\u53D1\u73AF\u5883\u7528\u4E8E\u9884\u89C8\uFF0C\u751F\u4EA7\u73AF\u5883\u4E0D\u4F1A\u5C55\u73B0\uFF0C\u8BF7\u62F7\u8D1D\u540E\u624B\u52A8\u4FEE\u6539\u53C2\u6570\u914D\u7F6E\u6587\u4EF6 src/styles/theme.less\"\n    />\n  </div>\n</nz-drawer>\n<div\n  class=\"setting-drawer__handle\"\n  [ngClass]=\"{ 'setting-drawer__handle-opened': collapse }\"\n  (click)=\"toggle()\"\n  nz-tooltip\n  [nzTooltipTitle]=\"isDev ? devTips : null\"\n>\n  <i nz-icon [nzType]=\"!collapse ? 'setting' : 'close'\" class=\"setting-drawer__handle-icon\"></i>\n</div>\n" }]
+                    }, changeDetection: ChangeDetectionStrategy.OnPush, imports: [
+                        FormsModule,
+                        NzDrawerModule,
+                        NzTooltipDirective,
+                        NzIconDirective,
+                        NzDividerModule,
+                        NzTabsModule,
+                        SettingDrawerItemComponent,
+                        NzSwitchModule,
+                        NzButtonComponent,
+                        NzAlertComponent
+                    ], template: "<nz-drawer\n  [nzVisible]=\"collapse\"\n  [nzPlacement]=\"dir === 'rtl' ? 'left' : 'right'\"\n  [nzWidth]=\"500\"\n  (nzOnClose)=\"toggle()\"\n>\n  <div *nzDrawerContent class=\"setting-drawer__content\">\n    <div class=\"setting-drawer__body setting-drawer__theme\">\n      <h3 class=\"setting-drawer__title\">\u4E3B\u9898\u8272</h3>\n      @for (c of colors; track $index) {\n        <span\n          [style]=\"{ 'background-color': c.color }\"\n          (click)=\"changeColor(c.color)\"\n          nz-tooltip\n          [nzTooltipTitle]=\"c.key\"\n          class=\"setting-drawer__theme-tag\"\n        >\n          @if (color === c.color) {\n            <nz-icon nzType=\"check\" />\n          }\n        </span>\n      }\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <h3 class=\"setting-drawer__title\">\u8BBE\u7F6E</h3>\n      <nz-tabset>\n        <nz-tab nzTitle=\"\u9876\u90E8\">\n          <div class=\"setting-drawer__body\">\n            <setting-drawer-item [data]=\"data['yunzai-default-header-hg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-bg']\" />\n            <setting-drawer-item [data]=\"data['yunzai-default-header-padding']\" />\n          </div>\n        </nz-tab>\n        <nz-tab nzTitle=\"\u4FA7\u8FB9\u680F\">\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-collapsed-wd']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-aside-nav-padding-top-bottom']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5185\u5BB9\">\n          <setting-drawer-item [data]=\"data['yunzai-default-content-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-bg']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-heading-border']\" />\n          <setting-drawer-item [data]=\"data['yunzai-default-content-padding']\" />\n        </nz-tab>\n        <nz-tab nzTitle=\"\u5176\u5B83\">\n          <setting-drawer-item [data]=\"data['form-state-visual-feedback-enabled']\" />\n          <setting-drawer-item [data]=\"data['preserve-white-spaces-enabled']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-radius']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-margin-right']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-width']\" />\n          <setting-drawer-item [data]=\"data['nz-table-img-max-height']\" />\n        </nz-tab>\n      </nz-tabset>\n    </div>\n    <nz-divider />\n    <div class=\"setting-drawer__body\">\n      <div class=\"setting-drawer__body-item\">\n        \u56FA\u5B9A\u5934\u548C\u4FA7\u8FB9\u680F\n        <nz-switch nzSize=\"small\" [(ngModel)]=\"layout.fixed\" (ngModelChange)=\"setLayout('fixed', layout.fixed)\" />\n      </div>\n      <div class=\"setting-drawer__body-item\">\n        \u8272\u5F31\u6A21\u5F0F\n        <nz-switch\n          nzSize=\"small\"\n          [(ngModel)]=\"layout.colorWeak\"\n          (ngModelChange)=\"setLayout('colorWeak', layout.colorWeak)\"\n        />\n      </div>\n    </div>\n    <nz-divider />\n    <button (click)=\"apply()\" type=\"button\" nz-button nzType=\"primary\">\u9884\u89C8</button>\n    <button (click)=\"reset()\" type=\"button\" nz-button>\u91CD\u7F6E</button>\n    <button (click)=\"copyVar()\" type=\"button\" nz-button>\u62F7\u8D1D</button>\n    <nz-alert\n      class=\"mt-md\"\n      nzType=\"warning\"\n      nzMessage=\"\u914D\u7F6E\u680F\u53EA\u5728\u5F00\u53D1\u73AF\u5883\u7528\u4E8E\u9884\u89C8\uFF0C\u751F\u4EA7\u73AF\u5883\u4E0D\u4F1A\u5C55\u73B0\uFF0C\u8BF7\u62F7\u8D1D\u540E\u624B\u52A8\u4FEE\u6539\u53C2\u6570\u914D\u7F6E\u6587\u4EF6 src/styles/theme.less\"\n    />\n  </div>\n</nz-drawer>\n<div\n  class=\"setting-drawer__handle\"\n  [class.setting-drawer__handle-opened]=\"collapse\"\n  (click)=\"toggle()\"\n  nz-tooltip\n  [nzTooltipTitle]=\"isDev ? devTips : null\"\n>\n  <nz-icon [nzType]=\"!collapse ? 'setting' : 'close'\" class=\"setting-drawer__handle-icon\" />\n</div>\n" }]
         }], ctorParameters: () => [], propDecorators: { autoApplyColor: [{
                 type: Input,
                 args: [{ transform: booleanAttribute }]
@@ -415,50 +416,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 
 const COMPONENTS = [SettingDrawerItemComponent, SettingDrawerComponent];
 class SettingDrawerModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerModule, declarations: [SettingDrawerItemComponent, SettingDrawerComponent], imports: [CommonModule,
-            FormsModule,
-            NzDrawerModule,
-            NzToolTipModule,
-            NzDividerModule,
-            NzTabsModule,
-            NzSwitchModule,
-            NzAlertModule,
-            NzIconModule,
-            NzInputModule,
-            NzInputNumberModule,
-            NzButtonModule], exports: [SettingDrawerItemComponent, SettingDrawerComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerModule, imports: [CommonModule,
-            FormsModule,
-            NzDrawerModule,
-            NzToolTipModule,
-            NzDividerModule,
-            NzTabsModule,
-            NzSwitchModule,
-            NzAlertModule,
-            NzIconModule,
-            NzInputModule,
-            NzInputNumberModule,
-            NzButtonModule] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerModule, imports: [SettingDrawerItemComponent, SettingDrawerComponent], exports: [SettingDrawerItemComponent, SettingDrawerComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerModule, imports: [COMPONENTS] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingDrawerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingDrawerModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        CommonModule,
-                        FormsModule,
-                        NzDrawerModule,
-                        NzToolTipModule,
-                        NzDividerModule,
-                        NzTabsModule,
-                        NzSwitchModule,
-                        NzAlertModule,
-                        NzIconModule,
-                        NzInputModule,
-                        NzInputNumberModule,
-                        NzButtonModule
-                    ],
-                    declarations: COMPONENTS,
+                    imports: COMPONENTS,
                     exports: COMPONENTS
                 }]
         }] });

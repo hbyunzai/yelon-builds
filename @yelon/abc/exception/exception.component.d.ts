@@ -3,7 +3,6 @@ import { OnInit } from '@angular/core';
 import { SafeHtml, SafeUrl } from '@angular/platform-browser';
 import { LocaleData } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export type ExceptionType = 403 | 404 | 500;
 export declare class ExceptionComponent implements OnInit {
@@ -27,7 +26,7 @@ export declare class ExceptionComponent implements OnInit {
     set img(value: string);
     set title(value: string);
     set desc(value: string);
-    backRouterLink: string | NzSafeAny[];
+    backRouterLink: string | any[];
     checkContent(): void;
     constructor(configSrv: YunzaiConfigService);
     ngOnInit(): void;

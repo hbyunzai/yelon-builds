@@ -1,12 +1,11 @@
 import { G2BaseComponent } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class G2GaugeComponent extends G2BaseComponent {
     title?: string;
     height?: number;
     color: string;
     bgColor?: string;
-    format?: (text: string, item: NzSafeAny, index: number) => string;
+    format?: (text: string, item: any, index: number) => string;
     percent?: number;
     padding: number | number[] | 'auto';
     install(): void;

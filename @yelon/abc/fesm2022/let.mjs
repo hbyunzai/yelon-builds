@@ -1,7 +1,8 @@
 import * as i0 from '@angular/core';
-import { ViewContainerRef, TemplateRef, Directive, Inject, Input, NgModule } from '@angular/core';
+import { ViewContainerRef, TemplateRef, Input, Inject, Directive, NgModule } from '@angular/core';
 
 class LetContext {
+    dir;
     constructor(dir) {
         this.dir = dir;
     }
@@ -16,16 +17,17 @@ class LetContext {
  * @deprecated Will be removed in v19, Please use `@let` instead.
  */
 class LetDirective {
+    let;
     constructor(vc, ref) {
         vc.createEmbeddedView(ref, new LetContext(this));
     }
     static ngTemplateContextGuard(_dir, _ctx) {
         return true;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LetDirective, deps: [{ token: ViewContainerRef }, { token: TemplateRef }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: LetDirective, isStandalone: true, selector: "[let]", inputs: { let: "let" }, ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LetDirective, deps: [{ token: ViewContainerRef }, { token: TemplateRef }], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.5", type: LetDirective, isStandalone: true, selector: "[let]", inputs: { let: "let" }, ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LetDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LetDirective, decorators: [{
             type: Directive,
             args: [{ selector: '[let]', standalone: true }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef, decorators: [{
@@ -44,11 +46,11 @@ const DIRECTIVES = [LetDirective];
  * @deprecated Will be removed in v19, Please use `@let` instead.
  */
 class LetModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LetModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: LetModule, imports: [LetDirective], exports: [LetDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LetModule }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LetModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: LetModule, imports: [LetDirective], exports: [LetDirective] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LetModule });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LetModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LetModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: DIRECTIVES,

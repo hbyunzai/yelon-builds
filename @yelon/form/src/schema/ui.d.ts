@@ -1,5 +1,5 @@
 import type { ACLCanType } from '@yelon/acl';
-import type { NgClassType, NgStyleInterface, NzSafeAny, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import type { NgClassType, NgStyleInterface, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import type { ErrorSchema } from '../errors';
 import type { SFValue } from '../interface';
 import type { FormProperty } from '../model/form.property';
@@ -121,12 +121,10 @@ export interface SFVisibleIfReturn {
     show?: boolean;
     required?: boolean;
 }
-export interface SFVisibleIf {
-    [key: string]: NzSafeAny[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null);
-}
+export type SFVisibleIf = Record<string, any[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null)>;
 /** 指定如何渲染 `Schema` */
 export interface SFUISchemaItem extends SFRenderSchema, SFHorizontalLayoutSchema, ErrorSchema, SFSchemaI18n {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /**
      * Whether to enable the debug mode, the trust information will be printed out when the data is changed and verified, it is not recommended to use it in the production environment
      *
@@ -178,9 +176,7 @@ export interface SFUISchemaItem extends SFRenderSchema, SFHorizontalLayoutSchema
  * - 结构层级应同 `SFSchema` 一致
  * - 当KEY为 `*` 时表示对所有子表单元素都有效
  */
-export interface SFUISchema {
-    [key: string]: SFUISchemaItem | SFUISchemaItemRun;
-}
+export type SFUISchema = Record<string, SFUISchemaItem | SFUISchemaItemRun>;
 /**
  * @inner
  */

@@ -1,12 +1,11 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
 import type { Event } from '@antv/g2';
 import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface G2PieData {
-    x: NzSafeAny;
+    x: any;
     y: number;
-    [key: string]: NzSafeAny;
+    [key: string]: any;
 }
 export interface G2PieClickItem {
     item: G2PieData;
@@ -24,7 +23,7 @@ export interface G2PieRatio {
 }
 export declare class G2PieComponent extends G2BaseComponent {
     private percentColor;
-    legendData: NzSafeAny[];
+    legendData: any[];
     isPercent: boolean;
     animate: boolean;
     color: string;

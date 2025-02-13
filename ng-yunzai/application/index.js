@@ -90,12 +90,14 @@ function addRunScriptToPackageJson() {
         json.scripts[`${commandPrefix}hmr`] = `ng s${commandFragment} -o --hmr`;
         json.scripts[`${commandPrefix}build`] = `npm run ng-high-memory build${commandFragment}`;
         json.scripts[`${commandPrefix}analyze`] = `npm run ng-high-memory build${commandFragment} -- --source-map`;
-        json.scripts[`${commandPrefix}analyze:view`] = `source-map-explorer dist/${mulitProject ? `${projectName}/` : ''}**/*.js`;
+        json.scripts[`${commandPrefix}analyze:view`] =
+            `source-map-explorer dist/${mulitProject ? `${projectName}/` : ''}**/*.js`;
         json.scripts[`${commandPrefix}test-coverage`] = `ng test${commandFragment} --code-coverage --watch=false`;
         const themeCommand = mulitProject ? ` -n=${projectName}` : '';
         json.scripts[`${commandPrefix}color-less`] = `ng-yunzai-plugin-theme -t=colorLess${themeCommand}`;
         json.scripts[`${commandPrefix}theme`] = `ng-yunzai-plugin-theme -t=themeCss${themeCommand}`;
-        json.scripts[`${commandPrefix}icon`] = `ng g ng-yunzai:plugin icon${mulitProject ? ` --project ${projectName}` : ''}`;
+        json.scripts[`${commandPrefix}icon`] =
+            `ng g ng-yunzai:plugin icon${mulitProject ? ` --project ${projectName}` : ''}`;
         json.scripts.prepare = `husky install`;
         (0, utils_1.writePackage)(tree, json);
         return tree;
@@ -127,8 +129,8 @@ function addCodeStylesToPackageJson() {
         if (json == null)
             return tree;
         json.scripts.lint = `npm run lint:ts && npm run lint:style`;
-        json.scripts['lint:ts'] = `ng lint --fix`;
-        json.scripts['lint:style'] = `npx stylelint \"src/**/*.less\" --fix`;
+        json.scripts['lint:ts'] = `npx eslint --cache --fix`;
+        json.scripts['lint:style'] = `npx stylelint \\"src/**/*.less\\" --fix`;
         json.scripts['prepare'] = 'husky install';
         (0, utils_1.writePackage)(tree, json);
         // fix polyfills.ts
@@ -139,13 +141,13 @@ function addCodeStylesToPackageJson() {
         }
         // dependencies
         (0, utils_1.addPackage)(tree, [
-            `husky@^9.1.5`,
-            `lint-staged@^15.2.9`,
-            `prettier@^3.3.3`,
-            `stylelint@^16.8.2`,
-            `stylelint-config-standard@^36.0.1`,
+            `husky@^9.1.7`,
+            `lint-staged@^15.4.3`,
+            `prettier@^3.4.2`,
+            `stylelint@^16.14.1`,
+            `stylelint-config-standard@^37.0.0`,
             `stylelint-declaration-block-no-ignored-properties@^2.8.0`,
-            `stylelint-config-clean-order@^6.1.0`
+            `stylelint-config-clean-order@^7.0.0`
         ], 'devDependencies');
         return tree;
     };

@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { inject, Injectable, ElementRef, NgZone, ChangeDetectorRef, EventEmitter, booleanAttribute, numberAttribute, Directive, Input, ViewChild, Output } from '@angular/core';
+import { inject, Injectable, ElementRef, NgZone, ChangeDetectorRef, EventEmitter, numberAttribute, booleanAttribute, Output, Input, ViewChild, Directive } from '@angular/core';
 import { Subject, takeUntil, filter } from 'rxjs';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
@@ -8,6 +8,12 @@ import { Platform } from '@angular/cdk/platform';
 import { ZoneOutside } from '@yelon/util/decorator';
 
 class G2Service {
+    cogSrv = inject(YunzaiConfigService);
+    lazySrv = inject(LazyService);
+    _cog;
+    loading = false;
+    loaded = false;
+    notify$ = new Subject();
     get cog() {
         return this._cog;
     }
@@ -21,11 +27,6 @@ class G2Service {
         }, val);
     }
     constructor() {
-        this.cogSrv = inject(YunzaiConfigService);
-        this.lazySrv = inject(LazyService);
-        this.loading = false;
-        this.loaded = false;
-        this.notify$ = new Subject();
         this.cog = { theme: '' };
     }
     libLoad() {
@@ -48,15 +49,20 @@ class G2Service {
     ngOnDestroy() {
         this.notify$.unsubscribe();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: G2Service, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: G2Service, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: G2Service, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: G2Service, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: G2Service, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: G2Service, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
 
 class G2BaseComponent {
+    srv = inject(G2Service);
+    el = inject((ElementRef));
+    ngZone = inject(NgZone);
+    platform = inject(Platform);
+    cdr = inject(ChangeDetectorRef);
     get chart() {
         return this._chart;
     }
@@ -64,26 +70,28 @@ class G2BaseComponent {
         return window.G2;
     }
     constructor() {
-        this.srv = inject(G2Service);
-        this.el = inject((ElementRef));
-        this.ngZone = inject(NgZone);
-        this.platform = inject(Platform);
-        this.cdr = inject(ChangeDetectorRef);
-        this.repaint = true;
-        this.destroy$ = new Subject();
-        this.loaded = false;
-        this.delay = 0;
-        this.ready = new EventEmitter();
         this.theme = this.srv.cog.theme;
         this.srv.notify
             .pipe(takeUntil(this.destroy$), filter(() => !this.loaded))
             .subscribe(() => this.load());
     }
+    repaint = true;
+    node;
+    resize$;
+    destroy$ = new Subject();
+    _chart;
+    loaded = false;
+    delay = 0;
+    theme;
+    ready = new EventEmitter();
+    /** 检查是否只变更数据 */
+    onlyChangeData;
     /** G2数据变更 */
     changeData() { }
     /** 等同 `ngOnInit` */
     onInit() { }
     /** 等同 `ngOnChanges` */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChanges(_) { }
     load() {
         this.ngZone.run(() => {
@@ -133,8 +141,8 @@ class G2BaseComponent {
         this.destroy$.complete();
         this.destroyChart();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: G2BaseComponent, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "18.2.11", type: G2BaseComponent, inputs: { repaint: ["repaint", "repaint", booleanAttribute], delay: ["delay", "delay", numberAttribute], theme: "theme" }, outputs: { ready: "ready" }, viewQueries: [{ propertyName: "node", first: true, predicate: ["container"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: G2BaseComponent, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "16.1.0", version: "19.1.5", type: G2BaseComponent, isStandalone: true, inputs: { repaint: ["repaint", "repaint", booleanAttribute], delay: ["delay", "delay", numberAttribute], theme: "theme" }, outputs: { ready: "ready" }, viewQueries: [{ propertyName: "node", first: true, predicate: ["container"], descendants: true, static: true }], usesOnChanges: true, ngImport: i0 });
 }
 __decorate([
     ZoneOutside()
@@ -142,7 +150,7 @@ __decorate([
 __decorate([
     ZoneOutside()
 ], G2BaseComponent.prototype, "destroyChart", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: G2BaseComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: G2BaseComponent, decorators: [{
             type: Directive
         }], ctorParameters: () => [], propDecorators: { repaint: [{
                 type: Input,

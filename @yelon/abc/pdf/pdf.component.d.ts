@@ -1,13 +1,12 @@
 import { AfterViewInit, EventEmitter, OnChanges, OnDestroy, SimpleChange } from '@angular/core';
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { PdfChangeEvent, PdfExternalLinkTarget, PdfTextLayerMode, PdfZoomScale } from './pdf.types';
 import * as i0 from "@angular/core";
-type PDFDocumentProxy = NzSafeAny;
-type EventBus = NzSafeAny;
-type PDFFindController = NzSafeAny;
-type PDFLinkService = NzSafeAny;
-type PDFViewer = NzSafeAny;
+type PDFDocumentProxy = any;
+type EventBus = any;
+type PDFFindController = any;
+type PDFLinkService = any;
+type PDFViewer = any;
 export declare class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
     private readonly lazySrv;
     private readonly platform;
@@ -36,7 +35,7 @@ export declare class PdfComponent implements OnChanges, AfterViewInit, OnDestroy
     private singlePageLinkService?;
     private singlePageFindController?;
     private _eventBus?;
-    set src(dataOrBuffer: NzSafeAny);
+    set src(dataOrBuffer: any);
     set pi(val: number);
     set showAll(val: boolean);
     set renderText(val: boolean);

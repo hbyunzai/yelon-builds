@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Injector } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LocaleData } from '@yelon/theme';
-import { NgClassType, NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NgClassType } from 'ng-zorro-antd/core/types';
 import type { SFValue } from './interface';
 import { ArrayProperty } from './model/array.property';
 import { FormProperty } from './model/form.property';
@@ -31,36 +31,36 @@ export declare abstract class Widget<T extends FormProperty, UIT extends SFUISch
     get cleanValue(): boolean;
     ngAfterViewInit(): void;
     setValue(value: SFValue): void;
-    get value(): NzSafeAny;
+    get value(): any;
     detectChanges(onlySelf?: boolean): void;
     abstract reset(value: SFValue): void;
     abstract afterViewInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<Widget<any, any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<Widget<any, any>, never, never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<Widget<any, any>, never, never, {}, {}, never, never, true, never>;
 }
 export declare class ControlWidget extends Widget<FormProperty, SFUISchemaItem> {
     reset(_value: SFValue): void;
     afterViewInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ControlWidget, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ControlWidget, never, never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ControlWidget, never, never, {}, {}, never, never, true, never>;
 }
 export declare class ControlUIWidget<UIT extends SFUISchemaItem> extends Widget<FormProperty, UIT> {
     reset(_value: SFValue): void;
     afterViewInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ControlUIWidget<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ControlUIWidget<any>, never, never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ControlUIWidget<any>, never, never, {}, {}, never, never, true, never>;
 }
 export declare class ArrayLayoutWidget extends Widget<ArrayProperty, SFArrayWidgetSchema> implements AfterViewInit {
     reset(_value: SFValue): void;
     afterViewInit(): void;
     ngAfterViewInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ArrayLayoutWidget, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ArrayLayoutWidget, never, never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ArrayLayoutWidget, never, never, {}, {}, never, never, true, never>;
 }
 export declare class ObjectLayoutWidget extends Widget<ObjectProperty, SFObjectWidgetSchema> implements AfterViewInit {
     reset(_value: SFValue): void;
     afterViewInit(): void;
     ngAfterViewInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ObjectLayoutWidget, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ObjectLayoutWidget, never, never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ObjectLayoutWidget, never, never, {}, {}, never, never, true, never>;
 }

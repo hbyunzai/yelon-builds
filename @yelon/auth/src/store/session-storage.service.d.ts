@@ -1,11 +1,11 @@
-import { ITokenModel } from '../token/interface';
 import { IStore } from './interface';
+import { ITokenModel } from '../token/interface';
 /**
  * `sessionStorage` storage, **lost after closing the browser**.
  *
  * ```ts
- provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
- provideAuth(withSessionStorage()),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideAuth(withSessionStorage()),
  * ```
  */
 export declare class SessionStorageStore implements IStore {

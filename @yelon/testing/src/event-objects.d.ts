@@ -1,4 +1,3 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 /**
  * @license
  * Copyright Google LLC All Rights Reserved.
@@ -11,6 +10,6 @@ export declare function createMouseEvent(type: string, x?: number, y?: number): 
 /** Creates a browser TouchEvent with the specified pointer coordinates. */
 export declare function createTouchEvent(type: string, pageX?: number, pageY?: number): UIEvent;
 /** Dispatches a keydown event from an element. */
-export declare function createKeyboardEvent(type: string, keyCode: number, target?: Element, key?: string): NzSafeAny;
+export declare function createKeyboardEvent(type: string, keyCode: number, target?: Element, key?: string): any;
 /** Creates a fake event object with any desired event type. */
 export declare function createFakeEvent(type: string, canBubble?: boolean, cancelable?: boolean): Event;

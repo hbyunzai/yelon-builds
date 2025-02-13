@@ -1,6 +1,5 @@
 import { SafeHtml } from '@angular/platform-browser';
 import type { ACLCanType } from '@yelon/acl';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface MenuIcon {
     /**
      * Type for icon
@@ -22,7 +21,7 @@ export interface MenuIcon {
     rotate?: number;
 }
 export interface Menu {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /** Text of menu item, can be choose one of  `text` or `i18n` (Support HTML) */
     text?: string;
     /** I18n key of menu item, can be choose one of  `text` or `i18n` (Support HTML) */

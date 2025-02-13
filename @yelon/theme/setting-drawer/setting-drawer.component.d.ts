@@ -1,7 +1,6 @@
 import { Direction } from '@angular/cdk/bidi';
 import { OnInit } from '@angular/core';
 import { Layout } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class SettingDrawerComponent implements OnInit {
     private readonly cdr;
@@ -21,7 +20,7 @@ export declare class SettingDrawerComponent implements OnInit {
     isDev: boolean;
     collapse: boolean;
     get layout(): Layout;
-    data: NzSafeAny;
+    data: any;
     color: string;
     colors: {
         key: string;
@@ -36,13 +35,13 @@ export declare class SettingDrawerComponent implements OnInit {
     private runLess;
     toggle(): void;
     changeColor(color: string): void;
-    setLayout(name: string, value: NzSafeAny): void;
+    setLayout(name: string, value: any): void;
     private resetData;
     private get validKeys();
     apply(): void;
     reset(): void;
     copyVar(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<SettingDrawerComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<SettingDrawerComponent, "setting-drawer", never, { "autoApplyColor": { "alias": "autoApplyColor"; "required": false; }; "compilingText": { "alias": "compilingText"; "required": false; }; "devTips": { "alias": "devTips"; "required": false; }; "lessJs": { "alias": "lessJs"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SettingDrawerComponent, "setting-drawer", never, { "autoApplyColor": { "alias": "autoApplyColor"; "required": false; }; "compilingText": { "alias": "compilingText"; "required": false; }; "devTips": { "alias": "devTips"; "required": false; }; "lessJs": { "alias": "lessJs"; "required": false; }; }, {}, never, never, true, never>;
     static ngAcceptInputType_autoApplyColor: unknown;
 }

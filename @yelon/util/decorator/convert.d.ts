@@ -1,4 +1,3 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export type BooleanInput = boolean | string | undefined | null;
 export type NumberInput = number | string | undefined | null;
 export declare function toBoolean(value: unknown, defaultValue?: boolean | null | undefined): boolean | null | undefined;
@@ -14,7 +13,7 @@ export declare function toBoolean(value: unknown, defaultValue?: boolean | null 
  * {AT}Input() {AT}InputBoolean(null) visible: boolean = false;
  * ```
  */
-export declare function InputBoolean(defaultValue?: boolean | null): NzSafeAny;
+export declare function InputBoolean(defaultValue?: boolean | null): any;
 export declare function toNumber(value: unknown): number;
 export declare function toNumber<D>(value: unknown, fallback: D): number | D;
 /**
@@ -29,4 +28,4 @@ export declare function toNumber<D>(value: unknown, fallback: D): number | D;
  * {AT}Input() {AT}InputNumber(null) visible: number = 2;
  * ```
  */
-export declare function InputNumber(defaultValue?: number | null): NzSafeAny;
+export declare function InputNumber(defaultValue?: number | null): any;

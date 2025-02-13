@@ -33,8 +33,8 @@ function YA_STORE_TOKEN_LOCAL_FACTORY() {
  * `localStorage` storage, **not lost after closing the browser**.
  *
  * ```ts
- provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
- provideAuth(withLocalStorage()),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideAuth(withLocalStorage()),
  * ```
  */
 class LocalStorageStore {
@@ -58,12 +58,17 @@ const YA_STORE_TOKEN = new InjectionToken('AUTH_STORE_TOKEN', {
 function YA_SERVICE_TOKEN_FACTORY() {
     return new TokenService(inject(YunzaiConfigService));
 }
+/**
+ * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
+ */
 class TokenService {
+    store = inject(YA_STORE_TOKEN);
+    refresh$ = new Subject();
+    change$ = new BehaviorSubject(null);
+    interval$;
+    _referrer = {};
+    _options;
     constructor(configSrv) {
-        this.store = inject(YA_STORE_TOKEN);
-        this.refresh$ = new Subject();
-        this.change$ = new BehaviorSubject(null);
-        this._referrer = {};
         this._options = mergeConfig(configSrv);
     }
     get refresh() {
@@ -126,10 +131,10 @@ class TokenService {
     ngOnDestroy() {
         this.cleanRefresh();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TokenService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TokenService }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TokenService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TokenService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TokenService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TokenService, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
 
@@ -138,16 +143,15 @@ const YA_SERVICE_TOKEN = new InjectionToken('YA_SERVICE_TOKEN', {
     factory: YA_SERVICE_TOKEN_FACTORY
 });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const OPENTYPE = '_yelonAuthSocialType';
 const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
 class SocialService {
-    constructor() {
-        this.tokenService = inject(YA_SERVICE_TOKEN);
-        this.doc = inject(DOCUMENT);
-        this.router = inject(Router);
-        this._win = null;
-    }
+    tokenService = inject(YA_SERVICE_TOKEN);
+    doc = inject(DOCUMENT);
+    router = inject(Router);
+    _win = null;
+    _winTime;
+    observer;
     /**
      * 跳转至登录页，若为 `type=window` 时，返回值是 `Observable<ITokenModel>`
      *
@@ -225,10 +229,10 @@ class SocialService {
         clearInterval(this._winTime);
         this._winTime = null;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SocialService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SocialService }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SocialService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SocialService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SocialService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SocialService, decorators: [{
             type: Injectable
         }] });
 
@@ -236,9 +240,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  * 内存存储，关掉浏览器标签后**丢失**。
  */
 class MemoryStore {
-    constructor() {
-        this.cache = {};
-    }
+    cache = {};
     get(key) {
         return this.cache[key] || {};
     }
@@ -255,8 +257,8 @@ class MemoryStore {
  * `sessionStorage` storage, **lost after closing the browser**.
  *
  * ```ts
- provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
- provideAuth(withSessionStorage()),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideAuth(withSessionStorage()),
  * ```
  */
 class SessionStorageStore {
@@ -276,14 +278,12 @@ class SessionStorageStore {
  * `cookie` storage
  *
  * ```ts
- provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
- provideAuth(withCookie()),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideAuth(withCookie()),
  * ```
  */
 class CookieStorageStore {
-    constructor() {
-        this.srv = inject(CookieService);
-    }
+    srv = inject(CookieService);
     get(key) {
         try {
             return JSON.parse(this.srv.get(key) || '{}');
@@ -362,7 +362,6 @@ function b64decode(str) {
     str = String(str).replace(/=+$/, '');
     for (
     // initialize result and counters
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let bc = 0, bs, buffer, idx = 0; 
     // get next character
     (buffer = str.charAt(idx++)); 
@@ -389,6 +388,11 @@ function b64DecodeUnicode(str) {
 }
 
 class JWTTokenModel {
+    access_token;
+    expires_in;
+    refresh_token;
+    scope;
+    token_type;
     /**
      * 获取载荷信息
      */
@@ -424,9 +428,7 @@ class JWTTokenModel {
 }
 
 class AuthJWTGuardService {
-    constructor() {
-        this.srv = inject(YA_SERVICE_TOKEN);
-    }
+    srv = inject(YA_SERVICE_TOKEN);
     process(url) {
         const cog = this.srv.options;
         const res = CheckJwt(this.srv.get(JWTTokenModel), cog.token_exp_offset);
@@ -435,10 +437,10 @@ class AuthJWTGuardService {
         }
         return res;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AuthJWTGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AuthJWTGuardService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: AuthJWTGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: AuthJWTGuardService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AuthJWTGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: AuthJWTGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -552,9 +554,7 @@ const authJWTInterceptor = (req, next) => {
 };
 
 class AuthSimpleGuardService {
-    constructor() {
-        this.srv = inject(YA_SERVICE_TOKEN);
-    }
+    srv = inject(YA_SERVICE_TOKEN);
     process(url) {
         const res = CheckSimple(this.srv.get());
         if (!res) {
@@ -562,10 +562,10 @@ class AuthSimpleGuardService {
         }
         return res;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AuthSimpleGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AuthSimpleGuardService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: AuthSimpleGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: AuthSimpleGuardService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: AuthSimpleGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: AuthSimpleGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -611,19 +611,21 @@ function newReq(req, model, options) {
     const token = token_send_template.replace(/\$\{([\w]+)\}/g, (_, g) => model[g]);
     switch (options.token_send_place) {
         case 'header':
+            // eslint-disable-next-line no-case-declarations
             const obj = {};
             obj[token_send_key] = token;
             req = req.clone({
                 setHeaders: obj
             });
             break;
-        case 'body':
+        case 'body': {
             const body = req.body || {};
             body[token_send_key] = token;
             req = req.clone({
                 body
             });
             break;
+        }
         case 'url':
             req = req.clone({
                 params: req.params.append(token_send_key, token)
@@ -643,6 +645,11 @@ const authSimpleInterceptor = (req, next) => {
 };
 
 class SimpleTokenModel {
+    access_token;
+    expires_in;
+    refresh_token;
+    scope;
+    token_type;
 }
 
 var AuthFeatureKind;

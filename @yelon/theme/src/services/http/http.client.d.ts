@@ -1,11 +1,8 @@
 import { HttpContext, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
-export type _HttpHeaders = HttpHeaders | {
-    [header: string]: string | string[];
-};
+export type _HttpHeaders = HttpHeaders | Record<string, string | string[]>;
 export type HttpObserve = 'body' | 'events' | 'response';
 /**
  * 封装HttpClient，主要解决：
@@ -30,8 +27,8 @@ export declare class _HttpClient {
      * 获取当前加载中的数量
      */
     get loadingCount(): number;
-    parseParams(params: NzSafeAny): HttpParams;
-    appliedUrl(url: string, params?: NzSafeAny): string;
+    parseParams(params: any): HttpParams;
+    appliedUrl(url: string, params?: any): string;
     private setCount;
     private push;
     private pop;
@@ -185,7 +182,7 @@ export declare class _HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         context?: HttpContext;
-    }): Observable<HttpResponse<NzSafeAny>>;
+    }): Observable<HttpResponse<any>>;
     /**
      * **DELETE Request** Return a `any` type / 返回一个 `any` 类型
      */
@@ -237,7 +234,7 @@ export declare class _HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         context?: HttpContext;
-    }): Observable<HttpResponse<NzSafeAny>>;
+    }): Observable<HttpResponse<any>>;
     /**
      * **PATCH Request** Return a `any` type / 返回一个 `any` 类型
      */
@@ -281,7 +278,7 @@ export declare class _HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         context?: HttpContext;
-    }): Observable<HttpResponse<NzSafeAny>>;
+    }): Observable<HttpResponse<any>>;
     /**
      * **PUT Request** Return a `any` type / 返回一个 `any` 类型
      */
@@ -514,7 +511,7 @@ export declare class _HttpClient {
         responseType?: 'json';
         withCredentials?: boolean;
         context?: HttpContext;
-    }): Observable<HttpResponse<NzSafeAny>>;
+    }): Observable<HttpResponse<any>>;
     /**
      * **Request** Return a `HttpResponse<R>` type / 返回一个 `HttpResponse<R>` 类型
      */

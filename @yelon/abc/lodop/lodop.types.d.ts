@@ -1,4 +1,3 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface CLodop {
     /**
      * 判断是否支持https协议的属性
@@ -18,7 +17,7 @@ export interface CLodop {
     Create_PageSize_List(el: Element, iPrintIndex: number): void;
 }
 export interface Lodop extends CLodop {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /** 获得软件版本号 */
     VERSION: string;
     /**
@@ -66,7 +65,7 @@ export interface Lodop extends CLodop {
     /** 增加PDF */
     ADD_PRINT_PDF(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strContent: string): void;
     /** 装载文档式模板 */
-    ADD_PRINT_DATA(strDataStyle: string, varDataValue: NzSafeAny): void;
+    ADD_PRINT_DATA(strDataStyle: string, varDataValue: any): void;
     /** 设置打印项风格 */
     SET_PRINT_STYLE(strStyleName: LodopStyleValue, varStyleValue: number | string): void;
     /** 打印预览 */
@@ -120,9 +119,9 @@ export interface Lodop extends CLodop {
     /** 获得系统信息 */
     GET_SYSTEM_INFO(strInfoType: string): boolean;
     /** 获得数据值 */
-    GET_VALUE(ValueType: string, ValueIndex: number | string): NzSafeAny;
+    GET_VALUE(ValueType: string, ValueIndex: number | string): any;
     /** 数据格式转换 */
-    FORMAT(oType: string, oValue: NzSafeAny): NzSafeAny;
+    FORMAT(oType: string, oValue: any): any;
     /** 获得对话框结果值 */
     GET_DIALOG_VALUE(oType: string, oPreValue: string): string;
     /** (增强型)打印初始化 */
@@ -177,7 +176,7 @@ export interface LodopResult {
     /** 成功时携带 LODOP 对象 */
     lodop?: Lodop;
     /** 错误信息 */
-    error?: NzSafeAny;
+    error?: any;
 }
 export interface LodopPrintResult {
     /** 是否成功 */
@@ -187,7 +186,7 @@ export interface LodopPrintResult {
     /** 代码 */
     code: string;
     /** 动态参数上下文对象 */
-    item: NzSafeAny;
+    item: any;
     /** 代码解析表达式 */
     parser?: RegExp;
 }

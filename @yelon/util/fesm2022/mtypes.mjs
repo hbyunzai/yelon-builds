@@ -12,9 +12,7 @@ const YUNZAI_PAGE = {
     PAGE_SIZE: 1000
 };
 class YunzaiPageBuilder {
-    constructor() {
-        this.page = {};
-    }
+    page = {};
     pageNum(pageNum) {
         this.page.pageNum = pageNum;
         return this;
@@ -37,9 +35,10 @@ class YunzaiPageBuilder {
     }
 }
 class Page {
+    pageNum = 1;
+    pageSize = 30;
+    param;
     constructor(pageNum, pageSize, param) {
-        this.pageNum = 1;
-        this.pageSize = 30;
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.param = param;

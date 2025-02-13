@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { inject, Injectable, EventEmitter, Component, ViewChild, Input, Output, NgModule } from '@angular/core';
+import { inject, Injectable, EventEmitter, Output, Input, ViewChild, Component, NgModule } from '@angular/core';
 import { map, catchError, throwError, Subject, takeUntil, debounceTime } from 'rxjs';
 import { _HttpClient, I18nPipe } from '@yelon/theme';
 import * as i1 from '@angular/common';
@@ -26,9 +26,7 @@ import * as i7 from 'ng-zorro-antd/core/transition-patch';
 import * as i8 from 'ng-zorro-antd/core/wave';
 
 class YunzaiTableUserService {
-    constructor() {
-        this.http = inject(_HttpClient);
-    }
+    http = inject(_HttpClient);
     users(page) {
         return this.http.post(`/auth/baseUser/queryListForPage`, page).pipe(map((response) => {
             return response;
@@ -41,64 +39,65 @@ class YunzaiTableUserService {
             return response.data;
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserService }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserService, decorators: [{
             type: Injectable
         }] });
 
 class YunzaiTableUserComponent {
-    constructor() {
-        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-        this.onChecked = new EventEmitter();
-        this.service = inject(YunzaiTableUserService);
-        this.$destroy = new Subject();
-        this.state = {
-            columns: [
-                { index: 'checkbox', render: 'checkbox', renderTitle: 'checkbox_all', width: 20, fixed: 'left' },
-                { index: 'no', type: 'no', title: { i18n: 'table-user.no' }, width: 50 },
-                { index: 'realName', title: { i18n: 'table-user.realName' }, width: 100 },
-                { index: 'userCode', title: { i18n: 'table-user.usercode' }, width: 100 },
-                { index: 'dept.deptName', title: { i18n: 'table-user.deptName' }, width: 100 },
-                { index: 'rolesName', render: 'rolesName', title: { i18n: 'table-user.roleName' }, width: 100 },
-                { index: 'idCard', title: { i18n: 'table-user.idcard' }, width: 100 }
-            ],
-            data: [],
-            dataBackup: [],
-            page: {
-                pageNum: 1,
-                pageSize: 30,
-                pageParam: {}
-            },
-            schema: {
-                properties: {
-                    realName: {
-                        type: 'string',
-                        ui: {
-                            widget: 'string',
-                            i18n: 'realName'
-                        }
-                    },
-                    userCode: {
-                        type: 'string',
-                        ui: {
-                            i18n: 'userCode'
-                        }
-                    },
-                    idCard: {
-                        type: 'string',
-                        ui: {
-                            i18n: 'idCard'
-                        }
+    st;
+    sf;
+    props;
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onChecked = new EventEmitter();
+    service = inject(YunzaiTableUserService);
+    $destroy = new Subject();
+    state = {
+        columns: [
+            { index: 'checkbox', render: 'checkbox', renderTitle: 'checkbox_all', width: 20, fixed: 'left' },
+            { index: 'no', type: 'no', title: { i18n: 'table-user.no' }, width: 50 },
+            { index: 'realName', title: { i18n: 'table-user.realName' }, width: 100 },
+            { index: 'userCode', title: { i18n: 'table-user.usercode' }, width: 100 },
+            { index: 'dept.deptName', title: { i18n: 'table-user.deptName' }, width: 100 },
+            { index: 'rolesName', render: 'rolesName', title: { i18n: 'table-user.roleName' }, width: 100 },
+            { index: 'idCard', title: { i18n: 'table-user.idcard' }, width: 100 }
+        ],
+        data: [],
+        dataBackup: [],
+        page: {
+            pageNum: 1,
+            pageSize: 30,
+            pageParam: {}
+        },
+        schema: {
+            properties: {
+                realName: {
+                    type: 'string',
+                    ui: {
+                        widget: 'string',
+                        i18n: 'realName'
+                    }
+                },
+                userCode: {
+                    type: 'string',
+                    ui: {
+                        i18n: 'userCode'
+                    }
+                },
+                idCard: {
+                    type: 'string',
+                    ui: {
+                        i18n: 'idCard'
                     }
                 }
-            },
-            check: {
-                data: []
             }
-        };
-    }
+        },
+        check: {
+            data: []
+        }
+    };
     get wrapped() {
         return !!this.props?.wrap;
     }
@@ -371,8 +370,8 @@ class YunzaiTableUserComponent {
             this.setupTable();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: YunzaiTableUserComponent, isStandalone: true, selector: "yunzai-table-user", inputs: { props: "props" }, outputs: { onChecked: "onChecked" }, providers: [YunzaiTableUserService], viewQueries: [{ propertyName: "st", first: true, predicate: ["st"], descendants: true }, { propertyName: "sf", first: true, predicate: ["sf"], descendants: true }], ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: YunzaiTableUserComponent, isStandalone: true, selector: "yunzai-table-user", inputs: { props: "props" }, outputs: { onChecked: "onChecked" }, providers: [YunzaiTableUserService], viewQueries: [{ propertyName: "st", first: true, predicate: ["st"], descendants: true }, { propertyName: "sf", first: true, predicate: ["sf"], descendants: true }], ngImport: i0, template: `
     @if (wrapped) {
       <nz-card>
         <ng-container [ngTemplateOutlet]="tableTpl" />
@@ -438,9 +437,9 @@ class YunzaiTableUserComponent {
       <sf layout="inline" #sf [schema]="schema" button="none" />
       <button nz-button nzType="primary" (click)="onReset()">{{ 'reset' | i18n }}</button>
     </ng-template>
-  `, isInline: true, dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i2.SFComponent, selector: "sf, [sf]", inputs: ["layout", "schema", "ui", "formData", "button", "liveValidate", "autocomplete", "firstVisual", "onlyVisual", "compact", "mode", "loading", "disabled", "noColon", "cleanValue", "delay"], outputs: ["formValueChange", "formChange", "formSubmit", "formReset", "formError"], exportAs: ["sf"] }, { kind: "ngmodule", type: STModule }, { kind: "component", type: i3.STComponent, selector: "st", inputs: ["req", "res", "page", "data", "columns", "contextmenu", "ps", "pi", "total", "loading", "loadingDelay", "loadingIndicator", "bordered", "size", "scroll", "singleSort", "multiSort", "rowClassName", "clickRowClassName", "widthMode", "widthConfig", "resizable", "header", "showHeader", "footer", "bodyHeader", "body", "expandRowByClick", "expandAccordion", "expand", "expandIcon", "noResult", "responsive", "responsiveHideHeaderFooter", "virtualScroll", "virtualItemSize", "virtualMaxBufferPx", "virtualMinBufferPx", "customRequest", "virtualForTrackBy", "trackBy"], outputs: ["error", "change"], exportAs: ["st"] }, { kind: "directive", type: i3.STRowDirective, selector: "[st-row]", inputs: ["st-row", "type"] }, { kind: "pipe", type: I18nPipe, name: "i18n" }, { kind: "ngmodule", type: NzCheckboxModule }, { kind: "component", type: i4.NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "ngmodule", type: NzDividerModule }, { kind: "component", type: i5.NzDividerComponent, selector: "nz-divider", inputs: ["nzText", "nzType", "nzOrientation", "nzDashed", "nzPlain"], exportAs: ["nzDivider"] }, { kind: "ngmodule", type: NzButtonModule }, { kind: "component", type: i6.NzButtonComponent, selector: "button[nz-button], a[nz-button]", inputs: ["nzBlock", "nzGhost", "nzSearch", "nzLoading", "nzDanger", "disabled", "tabIndex", "nzType", "nzShape", "nzSize"], exportAs: ["nzButton"] }, { kind: "directive", type: i7.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i8.NzWaveDirective, selector: "[nz-wave],button[nz-button]:not([nzType=\"link\"]):not([nzType=\"text\"])", inputs: ["nzWaveExtraNode"], exportAs: ["nzWave"] }, { kind: "ngmodule", type: NzEmptyModule }, { kind: "component", type: i9.NzEmptyComponent, selector: "nz-empty", inputs: ["nzNotFoundImage", "nzNotFoundContent", "nzNotFoundFooter"], exportAs: ["nzEmpty"] }, { kind: "ngmodule", type: NzIconModule }, { kind: "directive", type: i10.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "ngmodule", type: NzMenuModule }, { kind: "directive", type: i11.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i11.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "ngmodule", type: NzCardModule }, { kind: "component", type: i12.NzCardComponent, selector: "nz-card", inputs: ["nzBordered", "nzBorderless", "nzLoading", "nzHoverable", "nzBodyStyle", "nzCover", "nzActions", "nzType", "nzSize", "nzTitle", "nzExtra"], exportAs: ["nzCard"] }] }); }
+  `, isInline: true, dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i2.SFComponent, selector: "sf, [sf]", inputs: ["layout", "schema", "ui", "formData", "button", "liveValidate", "autocomplete", "firstVisual", "onlyVisual", "compact", "mode", "loading", "disabled", "noColon", "cleanValue", "delay"], outputs: ["formValueChange", "formChange", "formSubmit", "formReset", "formError"], exportAs: ["sf"] }, { kind: "ngmodule", type: STModule }, { kind: "component", type: i3.STComponent, selector: "st", inputs: ["req", "res", "page", "data", "columns", "contextmenu", "ps", "pi", "total", "loading", "loadingDelay", "loadingIndicator", "bordered", "size", "scroll", "drag", "singleSort", "multiSort", "rowClassName", "clickRowClassName", "widthMode", "widthConfig", "resizable", "header", "showHeader", "footer", "bodyHeader", "body", "expandRowByClick", "expandAccordion", "expand", "expandIcon", "noResult", "responsive", "responsiveHideHeaderFooter", "virtualScroll", "virtualItemSize", "virtualMaxBufferPx", "virtualMinBufferPx", "customRequest", "virtualForTrackBy", "trackBy"], outputs: ["error", "change"], exportAs: ["st"] }, { kind: "directive", type: i3.STRowDirective, selector: "[st-row]", inputs: ["st-row", "type"] }, { kind: "pipe", type: I18nPipe, name: "i18n" }, { kind: "ngmodule", type: NzCheckboxModule }, { kind: "component", type: i4.NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId", "nzName"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "ngmodule", type: NzDividerModule }, { kind: "component", type: i5.NzDividerComponent, selector: "nz-divider", inputs: ["nzText", "nzType", "nzOrientation", "nzVariant", "nzDashed", "nzPlain"], exportAs: ["nzDivider"] }, { kind: "ngmodule", type: NzButtonModule }, { kind: "component", type: i6.NzButtonComponent, selector: "button[nz-button], a[nz-button]", inputs: ["nzBlock", "nzGhost", "nzSearch", "nzLoading", "nzDanger", "disabled", "tabIndex", "nzType", "nzShape", "nzSize"], exportAs: ["nzButton"] }, { kind: "directive", type: i7.ɵNzTransitionPatchDirective, selector: "[nz-button], nz-button-group, [nz-icon], nz-icon, [nz-menu-item], [nz-submenu], nz-select-top-control, nz-select-placeholder, nz-input-group", inputs: ["hidden"] }, { kind: "directive", type: i8.NzWaveDirective, selector: "[nz-wave],button[nz-button]:not([nzType=\"link\"]):not([nzType=\"text\"])", inputs: ["nzWaveExtraNode"], exportAs: ["nzWave"] }, { kind: "ngmodule", type: NzEmptyModule }, { kind: "component", type: i9.NzEmptyComponent, selector: "nz-empty", inputs: ["nzNotFoundImage", "nzNotFoundContent", "nzNotFoundFooter"], exportAs: ["nzEmpty"] }, { kind: "ngmodule", type: NzIconModule }, { kind: "directive", type: i10.NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "ngmodule", type: NzMenuModule }, { kind: "directive", type: i11.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i11.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "ngmodule", type: NzCardModule }, { kind: "component", type: i12.NzCardComponent, selector: "nz-card", inputs: ["nzBordered", "nzLoading", "nzHoverable", "nzBodyStyle", "nzCover", "nzActions", "nzType", "nzSize", "nzTitle", "nzExtra"], exportAs: ["nzCard"] }] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'yunzai-table-user',
@@ -541,8 +540,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 
 const COMPONENTS = [YunzaiTableUserComponent];
 class YunzaiTableUserModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserModule, imports: [CommonModule,
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserModule, imports: [CommonModule,
             YelonFormModule,
             STModule,
             I18nPipe,
@@ -552,8 +551,8 @@ class YunzaiTableUserModule {
             NzEmptyModule,
             NzIconModule,
             NzMenuModule,
-            NzCardModule, YunzaiTableUserComponent], exports: [YunzaiTableUserComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserModule, providers: [YunzaiTableUserService], imports: [CommonModule,
+            NzCardModule, YunzaiTableUserComponent], exports: [YunzaiTableUserComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserModule, providers: [YunzaiTableUserService], imports: [CommonModule,
             YelonFormModule,
             STModule,
             NzCheckboxModule,
@@ -562,9 +561,9 @@ class YunzaiTableUserModule {
             NzEmptyModule,
             NzIconModule,
             NzMenuModule,
-            NzCardModule, COMPONENTS] }); }
+            NzCardModule, COMPONENTS] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiTableUserModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiTableUserModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

@@ -1,6 +1,5 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { App, Layout, SettingsNotify, User } from './types';
 import * as i0 from "@angular/core";
 export interface SettingsKeys {
@@ -20,14 +19,14 @@ export declare class SettingsService<L extends Layout = Layout, U extends User =
     private _app;
     private _user;
     private _layout;
-    getData(key: string): NzSafeAny;
-    setData(key: string, value: NzSafeAny): void;
+    getData(key: string): any;
+    setData(key: string, value: any): void;
     get layout(): L;
     get app(): A;
     get user(): U;
     get notify(): Observable<SettingsNotify>;
-    setLayout<T extends Layout = Layout>(name: T, value?: NzSafeAny): boolean;
-    setLayout(name: string | L, value?: NzSafeAny): boolean;
+    setLayout<T extends Layout = Layout>(name: T, value?: any): boolean;
+    setLayout(name: string | L, value?: any): boolean;
     getLayout<T>(): T;
     setApp<T extends App = App>(value: T): void;
     setApp(value: A): void;

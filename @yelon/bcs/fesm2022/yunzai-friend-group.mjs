@@ -1,7 +1,7 @@
 import * as i3 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { inject, Injectable, EventEmitter, Component, Input, Output, ViewChild, NgModule } from '@angular/core';
+import { inject, Injectable, EventEmitter, ViewChild, Output, Input, Component, NgModule } from '@angular/core';
 import * as i5 from '@yelon/form';
 import { YelonFormModule } from '@yelon/form';
 import * as i2 from 'ng-zorro-antd/card';
@@ -29,36 +29,34 @@ const defaultSchema = {
 };
 
 class YunzaiFriendGroupService {
-    constructor() {
-        this.http = inject(_HttpClient);
-    }
+    http = inject(_HttpClient);
     groups() {
         return this.http.post('/contact/appcontact/findGroup', {}).pipe(map((response) => {
             return response.data;
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupService }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupService, decorators: [{
             type: Injectable
         }] });
 
 class YunzaiFriendGroupComponent {
-    constructor() {
-        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-        this.onQueryComplete = new EventEmitter();
-        // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-        this.onSelect = new EventEmitter();
-        this.$destroy = new Subject();
-        this.service = inject(YunzaiFriendGroupService);
-        this.state = {
-            loading: false,
-            schema: defaultSchema,
-            data: [],
-            dataBackup: []
-        };
-    }
+    props;
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onQueryComplete = new EventEmitter();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onSelect = new EventEmitter();
+    sf;
+    $destroy = new Subject();
+    service = inject(YunzaiFriendGroupService);
+    state = {
+        loading: false,
+        schema: defaultSchema,
+        data: [],
+        dataBackup: []
+    };
     get isWrapped() {
         return !!this.props?.wrap;
     }
@@ -112,8 +110,8 @@ class YunzaiFriendGroupComponent {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: YunzaiFriendGroupComponent, isStandalone: true, selector: "yunzai-friend-group", inputs: { props: "props" }, outputs: { onQueryComplete: "onQueryComplete", onSelect: "onSelect" }, providers: [YunzaiFriendGroupService], viewQueries: [{ propertyName: "sf", first: true, predicate: ["form"], descendants: true }], ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: YunzaiFriendGroupComponent, isStandalone: true, selector: "yunzai-friend-group", inputs: { props: "props" }, outputs: { onQueryComplete: "onQueryComplete", onSelect: "onSelect" }, providers: [YunzaiFriendGroupService], viewQueries: [{ propertyName: "sf", first: true, predicate: ["form"], descendants: true }], ngImport: i0, template: `
     <nz-spin [nzSpinning]="state.loading">
       @if (isWrapped) {
         <nz-card>
@@ -140,9 +138,9 @@ class YunzaiFriendGroupComponent {
     <ng-template #friendForm>
       <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
     </ng-template>
-  `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzSpinModule }, { kind: "component", type: i1.NzSpinComponent, selector: "nz-spin", inputs: ["nzIndicator", "nzSize", "nzTip", "nzDelay", "nzSimple", "nzSpinning"], exportAs: ["nzSpin"] }, { kind: "ngmodule", type: NzCardModule }, { kind: "component", type: i2.NzCardComponent, selector: "nz-card", inputs: ["nzBordered", "nzBorderless", "nzLoading", "nzHoverable", "nzBodyStyle", "nzCover", "nzActions", "nzType", "nzSize", "nzTitle", "nzExtra"], exportAs: ["nzCard"] }, { kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i3.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "ngmodule", type: NzEmptyModule }, { kind: "component", type: i4.NzEmptyComponent, selector: "nz-empty", inputs: ["nzNotFoundImage", "nzNotFoundContent", "nzNotFoundFooter"], exportAs: ["nzEmpty"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i5.SFComponent, selector: "sf, [sf]", inputs: ["layout", "schema", "ui", "formData", "button", "liveValidate", "autocomplete", "firstVisual", "onlyVisual", "compact", "mode", "loading", "disabled", "noColon", "cleanValue", "delay"], outputs: ["formValueChange", "formChange", "formSubmit", "formReset", "formError"], exportAs: ["sf"] }, { kind: "ngmodule", type: NzListModule }, { kind: "component", type: i6.NzListComponent, selector: "nz-list, [nz-list]", inputs: ["nzDataSource", "nzBordered", "nzGrid", "nzHeader", "nzFooter", "nzItemLayout", "nzRenderItem", "nzLoading", "nzLoadMore", "nzPagination", "nzSize", "nzSplit", "nzNoResult"], exportAs: ["nzList"] }, { kind: "component", type: i6.NzListItemComponent, selector: "nz-list-item, [nz-list-item]", inputs: ["nzActions", "nzContent", "nzExtra", "nzNoFlex"], exportAs: ["nzListItem"] }] }); }
+  `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzSpinModule }, { kind: "component", type: i1.NzSpinComponent, selector: "nz-spin", inputs: ["nzIndicator", "nzSize", "nzTip", "nzDelay", "nzSimple", "nzSpinning"], exportAs: ["nzSpin"] }, { kind: "ngmodule", type: NzCardModule }, { kind: "component", type: i2.NzCardComponent, selector: "nz-card", inputs: ["nzBordered", "nzLoading", "nzHoverable", "nzBodyStyle", "nzCover", "nzActions", "nzType", "nzSize", "nzTitle", "nzExtra"], exportAs: ["nzCard"] }, { kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i3.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "ngmodule", type: NzEmptyModule }, { kind: "component", type: i4.NzEmptyComponent, selector: "nz-empty", inputs: ["nzNotFoundImage", "nzNotFoundContent", "nzNotFoundFooter"], exportAs: ["nzEmpty"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i5.SFComponent, selector: "sf, [sf]", inputs: ["layout", "schema", "ui", "formData", "button", "liveValidate", "autocomplete", "firstVisual", "onlyVisual", "compact", "mode", "loading", "disabled", "noColon", "cleanValue", "delay"], outputs: ["formValueChange", "formChange", "formSubmit", "formReset", "formError"], exportAs: ["sf"] }, { kind: "ngmodule", type: NzListModule }, { kind: "component", type: i6.NzListComponent, selector: "nz-list, [nz-list]", inputs: ["nzDataSource", "nzBordered", "nzGrid", "nzHeader", "nzFooter", "nzItemLayout", "nzRenderItem", "nzLoading", "nzLoadMore", "nzPagination", "nzSize", "nzSplit", "nzNoResult"], exportAs: ["nzList"] }, { kind: "component", type: i6.NzListItemComponent, selector: "nz-list-item, [nz-list-item]", inputs: ["nzActions", "nzContent", "nzExtra", "nzNoFlex"], exportAs: ["nzListItem"] }] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yunzai-friend-group`,
@@ -191,11 +189,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 
 const COMPONENTS = [YunzaiFriendGroupComponent];
 class YunzaiFriendGroupModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupModule, imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule, YunzaiFriendGroupComponent], exports: [YunzaiFriendGroupComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupModule, imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule, COMPONENTS] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupModule, imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule, YunzaiFriendGroupComponent], exports: [YunzaiFriendGroupComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupModule, imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule, COMPONENTS] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiFriendGroupModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiFriendGroupModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule, ...COMPONENTS],

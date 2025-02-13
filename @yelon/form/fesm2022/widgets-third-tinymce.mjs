@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Component, ViewEncapsulation, NgModule } from '@angular/core';
+import { ViewEncapsulation, Component, NgModule } from '@angular/core';
 import * as i1 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { TinymceComponent, NgxTinymceModule } from 'ngx-tinymce';
@@ -7,7 +7,7 @@ import * as i1$1 from '@yelon/form';
 import { ControlUIWidget, YelonFormModule } from '@yelon/form';
 
 class TinymceWidget extends ControlUIWidget {
-    static { this.KEY = 'tinymce'; }
+    static KEY = 'tinymce';
     change(value) {
         this.setValue(value);
         if (this.ui.change)
@@ -17,8 +17,8 @@ class TinymceWidget extends ControlUIWidget {
         if (this.ui.ready)
             this.ui.ready(instance);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TinymceWidget, deps: null, target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.11", type: TinymceWidget, isStandalone: true, selector: "sf-widget-tinymce", usesInheritance: true, ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TinymceWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.1.5", type: TinymceWidget, isStandalone: true, selector: "sf-widget-tinymce", usesInheritance: true, ngImport: i0, template: `
     <sf-item-wrap
       [id]="id"
       [schema]="schema"
@@ -37,9 +37,9 @@ class TinymceWidget extends ControlUIWidget {
         (ready)="_ready($event)"
       />
     </sf-item-wrap>
-  `, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1$1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "component", type: TinymceComponent, selector: "tinymce", inputs: ["config", "placeholder", "inline", "disabled", "loading", "delay"], outputs: ["ready"], exportAs: ["tinymce"] }], encapsulation: i0.ViewEncapsulation.None }); }
+  `, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1$1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "component", type: TinymceComponent, selector: "tinymce", inputs: ["config", "placeholder", "inline", "disabled", "loading", "delay"], outputs: ["ready"], exportAs: ["tinymce"] }], encapsulation: i0.ViewEncapsulation.None });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TinymceWidget, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TinymceWidget, decorators: [{
             type: Component,
             args: [{
                     selector: 'sf-widget-tinymce',
@@ -65,7 +65,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
   `,
                     preserveWhitespaces: false,
                     encapsulation: ViewEncapsulation.None,
-                    standalone: true,
                     imports: [FormsModule, YelonFormModule, TinymceComponent]
                 }]
         }] });
@@ -74,11 +73,11 @@ class TinymceWidgetModule {
     constructor(widgetRegistry) {
         widgetRegistry.register(TinymceWidget.KEY, TinymceWidget);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TinymceWidgetModule, deps: [{ token: i1$1.WidgetRegistry }], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: TinymceWidgetModule, imports: [FormsModule, YelonFormModule, NgxTinymceModule, TinymceWidget] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TinymceWidgetModule, imports: [FormsModule, YelonFormModule, NgxTinymceModule, TinymceWidget] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TinymceWidgetModule, deps: [{ token: i1$1.WidgetRegistry }], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: TinymceWidgetModule, imports: [FormsModule, YelonFormModule, NgxTinymceModule, TinymceWidget] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TinymceWidgetModule, imports: [FormsModule, YelonFormModule, NgxTinymceModule, TinymceWidget] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TinymceWidgetModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TinymceWidgetModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [FormsModule, YelonFormModule, NgxTinymceModule, TinymceWidget]

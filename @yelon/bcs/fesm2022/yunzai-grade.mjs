@@ -3,9 +3,7 @@ import { map } from 'rxjs';
 import { _HttpClient } from '@yelon/theme';
 
 class YunzaiGradeService {
-    constructor() {
-        this.http = inject(_HttpClient);
-    }
+    http = inject(_HttpClient);
     grades() {
         return this.http.get(`/auth/gradeYear/queryListForPage`).pipe(map((response) => {
             return response.data;

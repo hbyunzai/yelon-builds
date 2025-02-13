@@ -1,8 +1,7 @@
 import { OnInit } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { SFDateWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
 import { ControlUIWidget } from '../../widget';
-import { SFDateWidgetSchema } from './schema';
 import * as i0 from "@angular/core";
 export declare class DateWidget extends ControlUIWidget<SFDateWidgetSchema> implements OnInit {
     private startFormat;
@@ -19,7 +18,7 @@ export declare class DateWidget extends ControlUIWidget<SFDateWidgetSchema> impl
     reset(value: SFValue): void;
     _change(value: Date | Date[] | null, emitModelChange?: boolean): void;
     _openChange(status: boolean): void;
-    _ok(value: NzSafeAny): void;
+    _ok(value: any): void;
     private get endProperty();
     private setEnd;
     static ɵfac: i0.ɵɵFactoryDeclaration<DateWidget, never>;

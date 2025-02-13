@@ -1,7 +1,6 @@
 import { EnvironmentProviders, Type } from '@angular/core';
 import type { IconDefinition } from '@ant-design/icons-angular';
 import { YunzaiConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface YunzaiProvideOptions {
     config?: YunzaiConfig;
     /**
@@ -10,14 +9,14 @@ export interface YunzaiProvideOptions {
      * 初始化默认语言
      */
     defaultLang?: YunzaiProvideLang;
-    i18nClass?: Type<NzSafeAny>;
+    i18nClass?: Type<any>;
     icons?: IconDefinition[];
 }
 export interface YunzaiProvideLang {
     abbr: string;
-    ng: NzSafeAny;
-    zorro: NzSafeAny;
-    date: NzSafeAny;
-    yelon: NzSafeAny;
+    ng: any;
+    zorro: any;
+    date: any;
+    yelon: any;
 }
 export declare function provideYunzai(options: YunzaiProvideOptions): EnvironmentProviders;

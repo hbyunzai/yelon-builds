@@ -1,5 +1,4 @@
 import type { YunzaiThemePipeDateFormatCustom } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { DateLocale } from 'ng-zorro-antd/i18n';
 /**
  * Get the time range, return `[ Date, Date]` for the start and end dates
@@ -21,7 +20,7 @@ export interface ToDateOptions {
     /** If parsing fails try to parse the date by pressing `formatString` */
     formatString?: string;
     /** If parsing fails returned default value, default: `new Date(NaN)` */
-    defaultValue?: NzSafeAny;
+    defaultValue?: any;
     timestampSecond?: boolean;
 }
 /**

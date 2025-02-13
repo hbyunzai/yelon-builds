@@ -1,7 +1,6 @@
 import { EventEmitter, SimpleChanges, TemplateRef } from '@angular/core';
 import type { Event } from '@antv/g2';
 import { G2BaseComponent, G2Time } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 /**
  * 数据
@@ -23,7 +22,7 @@ export interface G2TimelineData {
     y4?: number;
     /** 指标5数据 */
     y5?: number;
-    [key: string]: NzSafeAny;
+    [key: string]: any;
 }
 export interface G2TimelineMap {
     /** 指标1 */

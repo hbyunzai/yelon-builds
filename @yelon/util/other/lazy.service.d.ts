@@ -1,10 +1,9 @@
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface LazyResult {
     path: string;
     status: 'ok' | 'error' | 'loading';
-    error?: NzSafeAny;
+    error?: any;
 }
 export interface LazyLoadItem {
     path: string;
@@ -12,9 +11,7 @@ export interface LazyLoadItem {
 }
 export interface LazyLoadOptions {
     innerContent?: string;
-    attributes?: {
-        [qualifiedName: string]: string;
-    };
+    attributes?: Record<string, string>;
     rel?: string;
 }
 /**

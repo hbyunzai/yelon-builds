@@ -1,6 +1,5 @@
 import { SimpleChanges } from '@angular/core';
 import { G2BaseComponent } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class G2SingleBarComponent extends G2BaseComponent {
     plusColor: string;
@@ -11,11 +10,9 @@ export declare class G2SingleBarComponent extends G2BaseComponent {
     max: number;
     value: number;
     line: boolean;
-    format?: (value: number, item: NzSafeAny, index: number) => string;
+    format?: (value: number, item: any, index: number) => string;
     padding: number | number[] | 'auto';
-    textStyle: {
-        [key: string]: NzSafeAny;
-    };
+    textStyle: Record<string, any>;
     install(): void;
     onlyChangeData: (changes: SimpleChanges) => boolean;
     changeData(): void;

@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 import type { SFValue } from './interface';
 import type { FormProperty, PropertyGroup } from './model/form.property';
@@ -40,7 +39,7 @@ export declare const ERRORSDEFAULT: {
     if: string;
 };
 export interface ErrorData {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /**
      * When specifying `keyword`, you can use `sf` built-in some common types [ERRORSDEFAULT](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4) , direct conversion. Or use the `message` parameter to specify an error message.
      *
@@ -56,7 +55,7 @@ export interface ErrorData {
      *
      * 指定模板解析所需要的参数
      */
-    params?: Record<string, NzSafeAny>;
+    params?: Record<string, any>;
     /**
      * Specify error message
      *
@@ -74,9 +73,7 @@ export interface ErrorSchema {
     /**
      * 自定义错误信息文本，键名赞同 `ErrorData.keyword` 值
      */
-    errors?: {
-        [key: string]: string | ((obj: ErrorData) => string);
-    };
+    errors?: Record<string, string | ((obj: ErrorData) => string)>;
     /**
      * 是否只展示错误视觉不显示错误文本，默认：`false`
      */

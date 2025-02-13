@@ -1,11 +1,21 @@
 import * as i0 from '@angular/core';
-import { inject, ElementRef, EventEmitter, Directive, Input, Output, NgModule } from '@angular/core';
+import { inject, ElementRef, EventEmitter, Output, Input, Directive, NgModule } from '@angular/core';
 import { finalize } from 'rxjs';
 import { saveAs } from 'file-saver';
 import { _HttpClient, YunzaiThemeModule } from '@yelon/theme';
 import { CommonModule } from '@angular/common';
 
 class DownFileDirective {
+    el = inject(ElementRef).nativeElement;
+    _http = inject(_HttpClient);
+    httpData;
+    httpBody;
+    httpMethod = 'get';
+    httpUrl;
+    fileName;
+    pre;
+    success = new EventEmitter();
+    error = new EventEmitter();
     getDisposition(data) {
         const arr = (data || '')
             .split(';')
@@ -20,13 +30,8 @@ class DownFileDirective {
         });
         return arr.reduce((_o, item) => item, {});
     }
+    isFileSaverSupported = false;
     constructor() {
-        this.el = inject(ElementRef).nativeElement;
-        this._http = inject(_HttpClient);
-        this.httpMethod = 'get';
-        this.success = new EventEmitter();
-        this.error = new EventEmitter();
-        this.isFileSaverSupported = false;
         try {
             this.isFileSaverSupported = !!new Blob();
         }
@@ -77,18 +82,17 @@ class DownFileDirective {
             error: err => this.error.emit(err)
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DownFileDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: DownFileDirective, isStandalone: true, selector: "[down-file]", inputs: { httpData: ["http-data", "httpData"], httpBody: ["http-body", "httpBody"], httpMethod: ["http-method", "httpMethod"], httpUrl: ["http-url", "httpUrl"], fileName: ["file-name", "fileName"], pre: "pre" }, outputs: { success: "success", error: "error" }, host: { listeners: { "click": "_click($event)" } }, exportAs: ["downFile"], ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DownFileDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.5", type: DownFileDirective, isStandalone: true, selector: "[down-file]", inputs: { httpData: ["http-data", "httpData"], httpBody: ["http-body", "httpBody"], httpMethod: ["http-method", "httpMethod"], httpUrl: ["http-url", "httpUrl"], fileName: ["file-name", "fileName"], pre: "pre" }, outputs: { success: "success", error: "error" }, host: { listeners: { "click": "_click($event)" } }, exportAs: ["downFile"], ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DownFileDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DownFileDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[down-file]',
                     exportAs: 'downFile',
                     host: {
                         '(click)': '_click($event)'
-                    },
-                    standalone: true
+                    }
                 }]
         }], ctorParameters: () => [], propDecorators: { httpData: [{
                 type: Input,
@@ -115,11 +119,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 
 const DIRECTIVES = [DownFileDirective];
 class DownFileModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DownFileModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule, DownFileDirective], exports: [DownFileDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DownFileModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule, DownFileDirective], exports: [DownFileDirective] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DownFileModule, imports: [CommonModule, YunzaiThemeModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DownFileModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DownFileModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, YunzaiThemeModule, ...DIRECTIVES],

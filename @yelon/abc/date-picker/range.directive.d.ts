@@ -1,6 +1,5 @@
 import { AfterViewInit, EventEmitter, OnDestroy } from '@angular/core';
 import { YunzaiConfigService, YunzaiDateRangePickerShortcut } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class RangePickerDirective implements OnDestroy, AfterViewInit {
     static ngAcceptInputType_shortcut: YunzaiDateRangePickerShortcut | string | null;
@@ -14,7 +13,7 @@ export declare class RangePickerDirective implements OnDestroy, AfterViewInit {
     end: Date | null;
     set shortcut(val: YunzaiDateRangePickerShortcut | null);
     get shortcut(): YunzaiDateRangePickerShortcut | null;
-    ngModelEnd: NzSafeAny;
+    ngModelEnd: any;
     readonly ngModelEndChange: EventEmitter<any>;
     private get dp();
     private get srv();

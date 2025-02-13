@@ -1,60 +1,47 @@
 import * as i0 from '@angular/core';
-import { Injectable, inject, TemplateRef, Directive, Input, Host, Optional, Inject, ViewContainerRef, ChangeDetectorRef, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Output, booleanAttribute, ElementRef, DestroyRef, numberAttribute, ViewChild, NgModule, makeEnvironmentProviders, ENVIRONMENT_INITIALIZER } from '@angular/core';
+import { Injectable, inject, TemplateRef, Input, Directive, Host, Optional, Inject, ViewContainerRef, ChangeDetectorRef, EventEmitter, Output, ViewEncapsulation, ChangeDetectionStrategy, Component, ElementRef, DestroyRef, input, booleanAttribute, numberAttribute, ViewChild, NgModule, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 import * as i1$1 from '@yelon/theme';
-import { YUNZAI_I18N_TOKEN, YelonLocaleService, DatePipe, YNPipe, ModalHelper, DrawerHelper } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, ModalHelper, DrawerHelper, YelonLocaleService, DatePipe, YNPipe } from '@yelon/theme';
 import { warn, deepCopy, deepGet, deepMergeKey } from '@yelon/util/other';
 import * as i1 from '@angular/platform-browser';
 import * as i3 from '@yelon/acl';
-import { YelonACLModule } from '@yelon/acl';
 import { HttpParams } from '@angular/common/http';
 import { map, of, filter, finalize, catchError, throwError, isObservable, lastValueFrom } from 'rxjs';
 import * as i2 from '@angular/common';
-import { DOCUMENT, DecimalPipe, CommonModule } from '@angular/common';
+import { NgTemplateOutlet, DOCUMENT, DecimalPipe } from '@angular/common';
 import * as i3$1 from '@yelon/util/format';
 import { XlsxService } from '@yelon/abc/xlsx';
+import * as i7 from '@angular/cdk/drag-drop';
+import { moveItemInArray, DragDropModule } from '@angular/cdk/drag-drop';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
-import * as i8 from 'ng-zorro-antd/dropdown';
-import { NzContextMenuService, NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import * as i1$2 from '@yelon/util/config';
-import * as i3$2 from '@angular/forms';
+import * as i1$2 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import * as i4 from 'ng-zorro-antd/table';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import * as i5 from 'ng-zorro-antd/icon';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import * as i6 from 'ng-zorro-antd/checkbox';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import * as i7 from 'ng-zorro-antd/menu';
+import { Router } from '@angular/router';
+import { CellComponent } from '@yelon/abc/cell';
+import { NzBadgeComponent } from 'ng-zorro-antd/badge';
+import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
+import { NzDividerComponent } from 'ng-zorro-antd/divider';
+import * as i3$2 from 'ng-zorro-antd/dropdown';
+import { NzDropDownModule, NzContextMenuService } from 'ng-zorro-antd/dropdown';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+import * as i2$1 from 'ng-zorro-antd/menu';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import * as i9$1 from 'ng-zorro-antd/tooltip';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import * as i10$1 from 'ng-zorro-antd/resizable';
+import { NzPopconfirmDirective } from 'ng-zorro-antd/popconfirm';
+import { NzRadioComponent } from 'ng-zorro-antd/radio';
+import * as i6 from 'ng-zorro-antd/resizable';
 import { NzResizableModule } from 'ng-zorro-antd/resizable';
-import * as i7$1 from 'ng-zorro-antd/radio';
-import { NzRadioModule } from 'ng-zorro-antd/radio';
-import * as i8$1 from 'ng-zorro-antd/input';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import * as i9 from 'ng-zorro-antd/input-number';
-import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import * as i10 from 'ng-zorro-antd/date-picker';
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import * as i12 from '@yelon/abc/cell';
-import { CellModule } from '@yelon/abc/cell';
-import * as i13 from 'ng-zorro-antd/popconfirm';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import * as i14 from 'ng-zorro-antd/badge';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import * as i15 from 'ng-zorro-antd/divider';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import * as i17 from 'ng-zorro-antd/tag';
-import { NzTagModule } from 'ng-zorro-antd/tag';
+import * as i5 from 'ng-zorro-antd/table';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTagComponent } from 'ng-zorro-antd/tag';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
+import { NzRangePickerComponent, NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
+import { NzInputDirective } from 'ng-zorro-antd/input';
+import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
+import * as i4 from '@yelon/util/config';
 
 class STRowSource {
-    constructor() {
-        this.titles = {};
-        this.rows = {};
-    }
+    titles = {};
+    rows = {};
     add(type, path, ref) {
         this[type === 'title' ? 'titles' : 'rows'][path] = ref;
     }
@@ -64,26 +51,28 @@ class STRowSource {
     getRow(path) {
         return this.rows[path];
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STRowSource, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STRowSource }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STRowSource, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STRowSource });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STRowSource, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STRowSource, decorators: [{
             type: Injectable
         }] });
 class STRowDirective {
-    constructor() {
-        this.source = inject(STRowSource, { host: true });
-        this.ref = inject(TemplateRef);
-    }
+    source = inject(STRowSource, { host: true });
+    ref = inject(TemplateRef);
+    id;
+    type;
     ngOnInit() {
         this.source.add(this.type, this.id, this.ref);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STRowDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: STRowDirective, selector: "[st-row]", inputs: { id: ["st-row", "id"], type: "type" }, ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STRowDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.5", type: STRowDirective, isStandalone: true, selector: "[st-row]", inputs: { id: ["st-row", "id"], type: "type" }, ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STRowDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STRowDirective, decorators: [{
             type: Directive,
-            args: [{ selector: '[st-row]' }]
+            args: [{
+                    selector: '[st-row]'
+                }]
         }], propDecorators: { id: [{
                 type: Input,
                 args: ['st-row']
@@ -92,9 +81,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
             }] } });
 
 class STWidgetRegistry {
-    constructor() {
-        this._widgets = {};
-    }
+    _widgets = {};
     get widgets() {
         return this._widgets;
     }
@@ -102,20 +89,26 @@ class STWidgetRegistry {
         this._widgets[type] = widget;
     }
     has(type) {
-        return this._widgets.hasOwnProperty(type);
+        return Object.prototype.hasOwnProperty.call(this._widgets, type);
     }
     get(type) {
         return this._widgets[type];
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STWidgetRegistry, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STWidgetRegistry, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STWidgetRegistry, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STWidgetRegistry, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STWidgetRegistry, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STWidgetRegistry, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
 
 class STColumnSource {
+    dom;
+    rowSource;
+    acl;
+    i18nSrv;
+    stWidgetRegistry;
+    cog;
     constructor(dom, rowSource, acl, i18nSrv, stWidgetRegistry) {
         this.dom = dom;
         this.rowSource = rowSource;
@@ -145,6 +138,14 @@ class STColumnSource {
         }
         if (typeof pop.condition !== 'function') {
             pop.condition = () => false;
+        }
+        if (this.i18nSrv) {
+            if (pop.titleI18n)
+                pop.title = this.i18nSrv.fanyi(pop.titleI18n);
+            if (pop.okTextI18n)
+                pop.okText = this.i18nSrv.fanyi(pop.okTextI18n);
+            if (pop.cancelTextI18n)
+                pop.cancelText = this.i18nSrv.fanyi(pop.cancelTextI18n);
         }
         i.pop = pop;
     }
@@ -211,12 +212,13 @@ class STColumnSource {
             }
         }
     }
-    fixedCoerce(list) {
+    fixedCoerce(list, expand) {
         const countReduce = (a, b) => a + +b.width.toString().replace('px', '');
+        const expandWidth = expand ? 50 : 0;
         // left width
         list
             .filter(w => w.fixed && w.fixed === 'left' && w.width)
-            .forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0)}px`));
+            .forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0) + expandWidth}px`));
         // right width
         list
             .filter(w => w.fixed && w.fixed === 'right' && w.width)
@@ -443,7 +445,6 @@ class STColumnSource {
         const { noIndex } = this.cog;
         let checkboxCount = 0;
         let radioCount = 0;
-        let point = 0;
         const columns = [];
         const processItem = (item) => {
             // index
@@ -537,7 +538,6 @@ class STColumnSource {
                 ...options.resizable,
                 ...(typeof item.resizable === 'boolean' ? { disabled: !item.resizable } : item.resizable)
             };
-            item.__point = point++;
             return item;
         };
         const processList = (data) => {
@@ -556,7 +556,7 @@ class STColumnSource {
         if (radioCount > 1) {
             throw new Error(`[st]: just only one column radio`);
         }
-        this.fixedCoerce(columns);
+        this.fixedCoerce(columns, options.expand);
         return {
             columns: columns.filter(w => !Array.isArray(w.children) || w.children.length === 0),
             ...this.genHeaders(copyList)
@@ -587,10 +587,10 @@ class STColumnSource {
         }
         return this;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STColumnSource, deps: [{ token: i1.DomSanitizer }, { token: STRowSource, host: true }, { token: i3.ACLService, optional: true }, { token: YUNZAI_I18N_TOKEN, optional: true }, { token: STWidgetRegistry }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STColumnSource }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STColumnSource, deps: [{ token: i1.DomSanitizer }, { token: STRowSource, host: true }, { token: i3.ACLService, optional: true }, { token: YUNZAI_I18N_TOKEN, optional: true }, { token: STWidgetRegistry }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STColumnSource });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STColumnSource, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STColumnSource, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i1.DomSanitizer }, { type: STRowSource, decorators: [{
                     type: Host
@@ -604,6 +604,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
                 }] }, { type: STWidgetRegistry }] });
 
 class STDataSource {
+    http;
+    datePipe;
+    ynPipe;
+    numberPipe;
+    currencySrv;
+    dom;
+    cog;
+    sortTick = 0;
     constructor(http, datePipe, ynPipe, numberPipe, currencySrv, dom) {
         this.http = http;
         this.datePipe = datePipe;
@@ -611,7 +619,6 @@ class STDataSource {
         this.numberPipe = numberPipe;
         this.currencySrv = currencySrv;
         this.dom = dom;
-        this.sortTick = 0;
     }
     setCog(val) {
         this.cog = val;
@@ -771,7 +778,7 @@ class STDataSource {
                     text = col.enum[value];
                     break;
                 case 'tag':
-                case 'badge':
+                case 'badge': {
                     const data = col.type === 'tag' ? col.tag : col.badge;
                     if (data && data[text]) {
                         const dataItem = data[text];
@@ -783,6 +790,7 @@ class STDataSource {
                         text = '';
                     }
                     break;
+                }
             }
             if (text == null)
                 text = '';
@@ -805,7 +813,6 @@ class STDataSource {
     getByRemote(url, options) {
         const { req, page, paginator, pi, ps, singleSort, multiSort, columns, headers } = options;
         const method = (req.method || 'GET').toUpperCase();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let params = {};
         const reName = req.reName;
         if (paginator) {
@@ -1088,10 +1095,10 @@ class STDataSource {
     getSum(index, list) {
         return this.getValues(index, list).reduce((p, i) => (p += parseFloat(String(i))), 0);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STDataSource, deps: [{ token: i1$1._HttpClient }, { token: i1$1.DatePipe, host: true }, { token: i1$1.YNPipe, host: true }, { token: i2.DecimalPipe, host: true }, { token: i3$1.CurrencyService }, { token: i1.DomSanitizer }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STDataSource }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STDataSource, deps: [{ token: i1$1._HttpClient }, { token: i1$1.DatePipe, host: true }, { token: i1$1.YNPipe, host: true }, { token: i2.DecimalPipe, host: true }, { token: i3$1.CurrencyService }, { token: i1.DomSanitizer }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STDataSource });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STDataSource, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STDataSource, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i1$1._HttpClient }, { type: i1$1.DatePipe, decorators: [{
                     type: Host
@@ -1102,9 +1109,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
                 }] }, { type: i3$1.CurrencyService }, { type: i1.DomSanitizer }] });
 
 class STExport {
-    constructor() {
-        this.xlsxSrv = inject(XlsxService);
-    }
+    xlsxSrv = inject(XlsxService);
     _stGet(item, col, index, colIndex) {
         const ret = { t: 's', v: '' };
         if (col.format) {
@@ -1127,10 +1132,11 @@ class STExport {
                             ret.z = col.dateFormat;
                         }
                         break;
-                    case 'yn':
+                    case 'yn': {
                         const yn = col.yn;
                         ret.v = val === yn.truth ? yn.yes : yn.no;
                         break;
+                    }
                 }
             }
         }
@@ -1177,18 +1183,18 @@ class STExport {
             callback: opt.callback
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STExport, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STExport }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STExport, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STExport });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STExport, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STExport, decorators: [{
             type: Injectable
         }] });
 
 class STWidgetHostDirective {
-    constructor() {
-        this.stWidgetRegistry = inject(STWidgetRegistry);
-        this.viewContainerRef = inject(ViewContainerRef);
-    }
+    stWidgetRegistry = inject(STWidgetRegistry);
+    viewContainerRef = inject(ViewContainerRef);
+    record;
+    column;
     ngOnInit() {
         const widget = this.column.widget;
         const componentType = this.stWidgetRegistry.get(widget.type);
@@ -1200,16 +1206,312 @@ class STWidgetHostDirective {
             componentRef.instance[key] = data[key];
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STWidgetHostDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "18.2.11", type: STWidgetHostDirective, selector: "[st-widget-host]", inputs: { record: "record", column: "column" }, ngImport: i0 }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STWidgetHostDirective, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.5", type: STWidgetHostDirective, isStandalone: true, selector: "[st-widget-host]", inputs: { record: "record", column: "column" }, ngImport: i0 });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STWidgetHostDirective, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STWidgetHostDirective, decorators: [{
             type: Directive,
-            args: [{ selector: '[st-widget-host]' }]
+            args: [{
+                    selector: '[st-widget-host]'
+                }]
         }], propDecorators: { record: [{
                 type: Input
             }], column: [{
                 type: Input
+            }] } });
+
+class STFilterComponent {
+    cdr = inject(ChangeDetectorRef);
+    visible = false;
+    col;
+    locale = {};
+    f;
+    n = new EventEmitter();
+    handle = new EventEmitter();
+    get icon() {
+        return this.f.icon;
+    }
+    stopPropagation($event) {
+        $event.stopPropagation();
+    }
+    checkboxChange() {
+        this.n.emit(this.f.menus?.filter(w => w.checked));
+    }
+    radioChange(item) {
+        this.f.menus.forEach(i => (i.checked = false));
+        item.checked = !item.checked;
+        this.n.emit(item);
+    }
+    close(result) {
+        if (result != null)
+            this.handle.emit(result);
+        this.visible = false;
+        this.cdr.detectChanges();
+    }
+    confirm() {
+        this.handle.emit(true);
+        return this;
+    }
+    reset() {
+        this.handle.emit(false);
+        return this;
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STFilterComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: STFilterComponent, isStandalone: true, selector: "st-filter", inputs: { col: "col", locale: "locale", f: "f" }, outputs: { n: "n", handle: "handle" }, host: { properties: { "class.ant-table-filter-trigger-container": "true", "class.st__filter": "true", "class.ant-table-filter-trigger-container-open": "visible" } }, ngImport: i0, template: `
+    <span
+      class="ant-table-filter-trigger"
+      [class.active]="visible || f.default"
+      nz-dropdown
+      [nzDropdownMenu]="filterMenu"
+      nzTrigger="click"
+      [nzClickHide]="false"
+      [(nzVisible)]="visible"
+      nzOverlayClassName="st__filter-wrap"
+      (click)="stopPropagation($event)"
+    >
+      <nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!" />
+    </span>
+    <nz-dropdown-menu #filterMenu="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        @switch (f.type) {
+          @case ('keyword') {
+            <div class="st__filter-keyword">
+              <input
+                type="text"
+                nz-input
+                [attr.placeholder]="f.placeholder"
+                [(ngModel)]="f.menus![0]!.value"
+                (ngModelChange)="n.emit($event)"
+                (keyup.enter)="confirm()"
+              />
+            </div>
+          }
+          @case ('number') {
+            <div class="p-sm st__filter-number">
+              <nz-input-number
+                [(ngModel)]="f.menus![0]!.value"
+                (ngModelChange)="n.emit($event)"
+                [nzMin]="f.number!.min!"
+                [nzMax]="f.number!.max!"
+                [nzStep]="f.number!.step!"
+                [nzPrecision]="f.number!.precision || null"
+                [nzPlaceHolder]="f.placeholder!"
+                class="width-100"
+              />
+            </div>
+          }
+          @case ('date') {
+            <div class="p-sm st__filter-date">
+              @if (f.date!.range) {
+                <nz-range-picker
+                  nzInline
+                  [nzMode]="$any(f.date!.mode)"
+                  [(ngModel)]="f.menus![0]!.value"
+                  (ngModelChange)="n.emit($event)"
+                  [nzShowNow]="f.date!.showNow"
+                  [nzShowToday]="f.date!.showToday"
+                  [nzDisabledDate]="f.date!.disabledDate"
+                  [nzDisabledTime]="f.date!.disabledTime"
+                />
+              } @else {
+                <nz-date-picker
+                  nzInline
+                  [nzMode]="$any(f.date!.mode)"
+                  [(ngModel)]="f.menus![0]!.value"
+                  (ngModelChange)="n.emit($event)"
+                  [nzShowNow]="f.date!.showNow"
+                  [nzShowToday]="f.date!.showToday"
+                  [nzDisabledDate]="f.date!.disabledDate"
+                  [nzDisabledTime]="f.date!.disabledTime"
+                />
+              }
+            </div>
+          }
+          @case ('custom') {
+            <div class="st__filter-custom">
+              <ng-template
+                [ngTemplateOutlet]="f.custom!"
+                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
+              />
+            </div>
+          }
+          @default {
+            <ul nz-menu>
+              @for (filter of f.menus; track $index) {
+                <li nz-menu-item>
+                  @if (f.multiple) {
+                    <label nz-checkbox [(ngModel)]="filter.checked" (ngModelChange)="checkboxChange()">
+                      {{ filter.text }}
+                    </label>
+                  } @else {
+                    <label nz-radio [ngModel]="filter.checked" (ngModelChange)="radioChange(filter)">
+                      {{ filter.text }}
+                    </label>
+                  }
+                </li>
+              }
+            </ul>
+          }
+        }
+        @if (f.showOPArea) {
+          <div class="ant-table-filter-dropdown-btns">
+            <a class="ant-table-filter-dropdown-link confirm" (click)="confirm()">
+              <span>{{ f.confirmText || locale.filterConfirm }}</span>
+            </a>
+            <a class="ant-table-filter-dropdown-link clear" (click)="reset()">
+              <span>{{ f.clearText || locale.filterReset }}</span>
+            </a>
+          </div>
+        }
+      </div>
+    </nz-dropdown-menu>
+  `, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1$2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i1$2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1$2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: NzDropDownModule }, { kind: "directive", type: i2$1.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i2$1.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i3$2.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i3$2.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "directive", type: NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: NzInputNumberComponent, selector: "nz-input-number", inputs: ["nzId", "nzSize", "nzPlaceHolder", "nzStatus", "nzStep", "nzMin", "nzMax", "nzPrecision", "nzParser", "nzFormatter", "nzDisabled", "nzReadOnly", "nzAutoFocus", "nzBordered", "nzKeyboard", "nzControls"], outputs: ["nzOnStep"], exportAs: ["nzInputNumber"] }, { kind: "directive", type: NzRangePickerComponent, selector: "nz-range-picker", exportAs: ["nzRangePicker"] }, { kind: "component", type: NzDatePickerComponent, selector: "nz-date-picker,nz-week-picker,nz-month-picker,nz-quarter-picker,nz-year-picker,nz-range-picker", inputs: ["nzAllowClear", "nzAutoFocus", "nzDisabled", "nzBorderless", "nzInputReadOnly", "nzInline", "nzOpen", "nzDisabledDate", "nzLocale", "nzPlaceHolder", "nzPopupStyle", "nzDropdownClassName", "nzSize", "nzStatus", "nzFormat", "nzDateRender", "nzDisabledTime", "nzRenderExtraFooter", "nzShowToday", "nzMode", "nzShowNow", "nzRanges", "nzDefaultPickerValue", "nzSeparator", "nzSuffixIcon", "nzBackdrop", "nzId", "nzPlacement", "nzShowWeekNumber", "nzShowTime"], outputs: ["nzOnPanelChange", "nzOnCalendarChange", "nzOnOk", "nzOnOpenChange"], exportAs: ["nzDatePicker"] }, { kind: "directive", type: NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "ngmodule", type: NzMenuModule }, { kind: "component", type: NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId", "nzName"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "component", type: NzRadioComponent, selector: "[nz-radio],[nz-radio-button]", inputs: ["nzValue", "nzDisabled", "nzAutoFocus", "nz-radio-button"], exportAs: ["nzRadio"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STFilterComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'st-filter',
+                    template: `
+    <span
+      class="ant-table-filter-trigger"
+      [class.active]="visible || f.default"
+      nz-dropdown
+      [nzDropdownMenu]="filterMenu"
+      nzTrigger="click"
+      [nzClickHide]="false"
+      [(nzVisible)]="visible"
+      nzOverlayClassName="st__filter-wrap"
+      (click)="stopPropagation($event)"
+    >
+      <nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!" />
+    </span>
+    <nz-dropdown-menu #filterMenu="nzDropdownMenu">
+      <div class="ant-table-filter-dropdown">
+        @switch (f.type) {
+          @case ('keyword') {
+            <div class="st__filter-keyword">
+              <input
+                type="text"
+                nz-input
+                [attr.placeholder]="f.placeholder"
+                [(ngModel)]="f.menus![0]!.value"
+                (ngModelChange)="n.emit($event)"
+                (keyup.enter)="confirm()"
+              />
+            </div>
+          }
+          @case ('number') {
+            <div class="p-sm st__filter-number">
+              <nz-input-number
+                [(ngModel)]="f.menus![0]!.value"
+                (ngModelChange)="n.emit($event)"
+                [nzMin]="f.number!.min!"
+                [nzMax]="f.number!.max!"
+                [nzStep]="f.number!.step!"
+                [nzPrecision]="f.number!.precision || null"
+                [nzPlaceHolder]="f.placeholder!"
+                class="width-100"
+              />
+            </div>
+          }
+          @case ('date') {
+            <div class="p-sm st__filter-date">
+              @if (f.date!.range) {
+                <nz-range-picker
+                  nzInline
+                  [nzMode]="$any(f.date!.mode)"
+                  [(ngModel)]="f.menus![0]!.value"
+                  (ngModelChange)="n.emit($event)"
+                  [nzShowNow]="f.date!.showNow"
+                  [nzShowToday]="f.date!.showToday"
+                  [nzDisabledDate]="f.date!.disabledDate"
+                  [nzDisabledTime]="f.date!.disabledTime"
+                />
+              } @else {
+                <nz-date-picker
+                  nzInline
+                  [nzMode]="$any(f.date!.mode)"
+                  [(ngModel)]="f.menus![0]!.value"
+                  (ngModelChange)="n.emit($event)"
+                  [nzShowNow]="f.date!.showNow"
+                  [nzShowToday]="f.date!.showToday"
+                  [nzDisabledDate]="f.date!.disabledDate"
+                  [nzDisabledTime]="f.date!.disabledTime"
+                />
+              }
+            </div>
+          }
+          @case ('custom') {
+            <div class="st__filter-custom">
+              <ng-template
+                [ngTemplateOutlet]="f.custom!"
+                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
+              />
+            </div>
+          }
+          @default {
+            <ul nz-menu>
+              @for (filter of f.menus; track $index) {
+                <li nz-menu-item>
+                  @if (f.multiple) {
+                    <label nz-checkbox [(ngModel)]="filter.checked" (ngModelChange)="checkboxChange()">
+                      {{ filter.text }}
+                    </label>
+                  } @else {
+                    <label nz-radio [ngModel]="filter.checked" (ngModelChange)="radioChange(filter)">
+                      {{ filter.text }}
+                    </label>
+                  }
+                </li>
+              }
+            </ul>
+          }
+        }
+        @if (f.showOPArea) {
+          <div class="ant-table-filter-dropdown-btns">
+            <a class="ant-table-filter-dropdown-link confirm" (click)="confirm()">
+              <span>{{ f.confirmText || locale.filterConfirm }}</span>
+            </a>
+            <a class="ant-table-filter-dropdown-link clear" (click)="reset()">
+              <span>{{ f.clearText || locale.filterReset }}</span>
+            </a>
+          </div>
+        }
+      </div>
+    </nz-dropdown-menu>
+  `,
+                    host: {
+                        '[class.ant-table-filter-trigger-container]': `true`,
+                        '[class.st__filter]': `true`,
+                        '[class.ant-table-filter-trigger-container-open]': `visible`
+                    },
+                    preserveWhitespaces: false,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    imports: [
+                        FormsModule,
+                        NzDropDownModule,
+                        NzIconDirective,
+                        NzInputDirective,
+                        NzInputNumberComponent,
+                        NzRangePickerComponent,
+                        NzDatePickerComponent,
+                        NgTemplateOutlet,
+                        NzMenuModule,
+                        NzCheckboxComponent,
+                        NzRadioComponent
+                    ]
+                }]
+        }], propDecorators: { col: [{
+                type: Input
+            }], locale: [{
+                type: Input
+            }], f: [{
+                type: Input
+            }], n: [{
+                type: Output
+            }], handle: [{
+                type: Output
             }] } });
 
 const ST_DEFAULT_CONFIG = {
@@ -1291,288 +1593,168 @@ const ST_DEFAULT_CONFIG = {
     }
 };
 
-class STFilterComponent {
-    constructor() {
-        this.cdr = inject(ChangeDetectorRef);
-        this.visible = false;
-        this.locale = {};
-        this.n = new EventEmitter();
-        this.handle = new EventEmitter();
+class STTdComponent {
+    stComp = inject(STComponent, { host: true });
+    router = inject(Router);
+    modalHelper = inject(ModalHelper);
+    drawerHelper = inject(DrawerHelper);
+    c;
+    cIdx;
+    data;
+    i;
+    index;
+    n = new EventEmitter();
+    get routerState() {
+        const { pi, ps, total } = this.stComp;
+        return { pi, ps, total };
     }
-    get icon() {
-        return this.f.icon;
+    report(type) {
+        this.n.emit({ type, item: this.i, col: this.c });
     }
-    stopPropagation($event) {
-        $event.stopPropagation();
+    _checkbox(value) {
+        this.i.checked = value;
+        this.report('checkbox');
     }
-    checkboxChange() {
-        this.n.emit(this.f.menus?.filter(w => w.checked));
+    _radio() {
+        this.data.filter(w => !w.disabled).forEach(i => (i.checked = false));
+        this.i.checked = true;
+        this.report('radio');
     }
-    radioChange(item) {
-        this.f.menus.forEach(i => (i.checked = false));
-        item.checked = !item.checked;
-        this.n.emit(item);
-    }
-    close(result) {
-        if (result != null)
-            this.handle.emit(result);
-        this.visible = false;
-        this.cdr.detectChanges();
-    }
-    confirm() {
-        this.handle.emit(true);
-        return this;
-    }
-    reset() {
-        this.handle.emit(false);
-        return this;
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STFilterComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: STFilterComponent, selector: "st-filter", inputs: { col: "col", locale: "locale", f: "f" }, outputs: { n: "n", handle: "handle" }, host: { properties: { "class.ant-table-filter-trigger-container": "true", "class.st__filter": "true", "class.ant-table-filter-trigger-container-open": "visible" } }, ngImport: i0, template: `
-    <span
-      class="ant-table-filter-trigger"
-      [class.active]="visible || f.default"
-      nz-dropdown
-      [nzDropdownMenu]="filterMenu"
-      nzTrigger="click"
-      [nzClickHide]="false"
-      [(nzVisible)]="visible"
-      nzOverlayClassName="st__filter-wrap"
-      (click)="stopPropagation($event)"
-    >
-      <i nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!"></i>
-    </span>
-    <nz-dropdown-menu #filterMenu="nzDropdownMenu">
-      <div class="ant-table-filter-dropdown">
-        @switch (f.type) {
-          @case ('keyword') {
-            <div class="st__filter-keyword">
-              <input
-                type="text"
-                nz-input
-                [attr.placeholder]="f.placeholder"
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                (keyup.enter)="confirm()"
-              />
-            </div>
-          }
-          @case ('number') {
-            <div class="p-sm st__filter-number">
-              <nz-input-number
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                [nzMin]="f.number!.min!"
-                [nzMax]="f.number!.max!"
-                [nzStep]="f.number!.step!"
-                [nzPrecision]="f.number!.precision"
-                [nzPlaceHolder]="f.placeholder!"
-                class="width-100"
-              />
-            </div>
-          }
-          @case ('date') {
-            <div class="p-sm st__filter-date">
-              @if (f.date!.range) {
-                <nz-range-picker
-                  nzInline
-                  [nzMode]="$any(f.date!.mode)"
-                  [(ngModel)]="f.menus![0]!.value"
-                  (ngModelChange)="n.emit($event)"
-                  [nzShowNow]="f.date!.showNow"
-                  [nzShowToday]="f.date!.showToday"
-                  [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
-              } @else {
-                <nz-date-picker
-                  nzInline
-                  [nzMode]="$any(f.date!.mode)"
-                  [(ngModel)]="f.menus![0]!.value"
-                  (ngModelChange)="n.emit($event)"
-                  [nzShowNow]="f.date!.showNow"
-                  [nzShowToday]="f.date!.showToday"
-                  [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
-              }
-            </div>
-          }
-          @case ('custom') {
-            <div class="st__filter-custom">
-              <ng-template
-                [ngTemplateOutlet]="f.custom!"
-                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
-              />
-            </div>
-          }
-          @default {
-            <ul nz-menu>
-              @for (filter of f.menus; track $index) {
-                <li nz-menu-item>
-                  @if (f.multiple) {
-                    <label nz-checkbox [(ngModel)]="filter.checked" (ngModelChange)="checkboxChange()">
-                      {{ filter.text }}
-                    </label>
-                  } @else {
-                    <label nz-radio [ngModel]="filter.checked" (ngModelChange)="radioChange(filter)">
-                      {{ filter.text }}
-                    </label>
-                  }
-                </li>
-              }
-            </ul>
-          }
+    _link(e) {
+        this._stopPropagation(e);
+        const res = this.c.click(this.i, this.stComp);
+        if (typeof res === 'string') {
+            this.router.navigateByUrl(res, { state: this.routerState });
         }
-        @if (f.showOPArea) {
-          <div class="ant-table-filter-dropdown-btns">
-            <a class="ant-table-filter-dropdown-link confirm" (click)="confirm()">
-              <span>{{ f.confirmText || locale.filterConfirm }}</span>
-            </a>
-            <a class="ant-table-filter-dropdown-link clear" (click)="reset()">
-              <span>{{ f.clearText || locale.filterReset }}</span>
-            </a>
-          </div>
+        return false;
+    }
+    _client() {
+        this.c.click?.(this.i, this.stComp);
+    }
+    _stopPropagation(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+    }
+    _btn(btn, ev) {
+        ev?.stopPropagation();
+        const cog = this.stComp.cog;
+        let record = this.i;
+        if (btn.type === 'modal' || btn.type === 'static') {
+            if (cog.modal.pureRecoard === true) {
+                record = this.stComp.pureItem(record);
+            }
+            const modal = btn.modal;
+            const obj = { [modal.paramsName]: record };
+            this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'](modal.component, { ...obj, ...(modal.params && modal.params(record)) }, deepMergeKey({}, true, cog.modal, modal))
+                .pipe(filter(w => typeof w !== 'undefined'))
+                .subscribe((res) => this.btnCallback(record, btn, res));
+            return;
         }
-      </div>
-    </nz-dropdown-menu>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i2.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i3$2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i3$2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3$2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: i5.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i6.NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "directive", type: i7.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i7.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i8.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i8.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "component", type: i7$1.NzRadioComponent, selector: "[nz-radio],[nz-radio-button]", inputs: ["nzValue", "nzDisabled", "nzAutoFocus", "nz-radio-button"], exportAs: ["nzRadio"] }, { kind: "directive", type: i8$1.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "component", type: i9.NzInputNumberComponent, selector: "nz-input-number", inputs: ["nzSize", "nzMin", "nzMax", "nzParser", "nzPrecision", "nzPrecisionMode", "nzPlaceHolder", "nzStatus", "nzStep", "nzInputMode", "nzId", "nzDisabled", "nzReadOnly", "nzAutoFocus", "nzBorderless", "nzFormatter"], outputs: ["nzBlur", "nzFocus"], exportAs: ["nzInputNumber"] }, { kind: "component", type: i10.NzDatePickerComponent, selector: "nz-date-picker,nz-week-picker,nz-month-picker,nz-quarter-picker,nz-year-picker,nz-range-picker", inputs: ["nzAllowClear", "nzAutoFocus", "nzDisabled", "nzBorderless", "nzInputReadOnly", "nzInline", "nzOpen", "nzDisabledDate", "nzLocale", "nzPlaceHolder", "nzPopupStyle", "nzDropdownClassName", "nzSize", "nzStatus", "nzFormat", "nzDateRender", "nzDisabledTime", "nzRenderExtraFooter", "nzShowToday", "nzMode", "nzShowNow", "nzRanges", "nzDefaultPickerValue", "nzSeparator", "nzSuffixIcon", "nzBackdrop", "nzId", "nzPlacement", "nzShowWeekNumber", "nzShowTime"], outputs: ["nzOnPanelChange", "nzOnCalendarChange", "nzOnOk", "nzOnOpenChange"], exportAs: ["nzDatePicker"] }, { kind: "directive", type: i10.NzRangePickerComponent, selector: "nz-range-picker", exportAs: ["nzRangePicker"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+        else if (btn.type === 'drawer') {
+            if (cog.drawer.pureRecoard === true) {
+                record = this.stComp.pureItem(record);
+            }
+            const drawer = btn.drawer;
+            const obj = { [drawer.paramsName]: record };
+            this.drawerHelper
+                .create(drawer.title, drawer.component, { ...obj, ...(drawer.params && drawer.params(record)) }, deepMergeKey({}, true, cog.drawer, drawer))
+                .pipe(filter(w => typeof w !== 'undefined'))
+                .subscribe(res => this.btnCallback(record, btn, res));
+            return;
+        }
+        else if (btn.type === 'link') {
+            const clickRes = this.btnCallback(record, btn);
+            if (typeof clickRes === 'string') {
+                this.router.navigateByUrl(clickRes, { state: this.routerState });
+            }
+            return;
+        }
+        this.btnCallback(record, btn);
+    }
+    btnCallback(record, btn, modal) {
+        if (!btn.click)
+            return;
+        if (typeof btn.click === 'string') {
+            switch (btn.click) {
+                case 'load':
+                    this.stComp.load();
+                    break;
+                case 'reload':
+                    this.stComp.reload();
+                    break;
+            }
+        }
+        else {
+            return btn.click(record, modal, this.stComp);
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STTdComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: STTdComponent, isStandalone: true, selector: "st-td", inputs: { c: "c", cIdx: "cIdx", data: "data", i: "i", index: "index" }, outputs: { n: "n" }, ngImport: i0, template: "<ng-template #btnTpl let-i let-child=\"child\">\n  @if (i.tooltip) {\n    <span nz-tooltip [nzTooltipTitle]=\"i.tooltip\" [class.d-block]=\"child\" [class.width-100]=\"child\">\n      <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </span>\n  } @else {\n    <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n  }\n</ng-template>\n<ng-template #btnItemTpl let-i>\n  @if (i.pop) {\n    @let pop = i.pop;\n    <a\n      nz-popconfirm\n      [nzPopconfirmTitle]=\"pop.title\"\n      [nzIcon]=\"pop.icon\"\n      [nzCondition]=\"pop.condition(i)\"\n      [nzCancelText]=\"pop.cancelText\"\n      [nzOkText]=\"pop.okText\"\n      [nzOkType]=\"pop.okType\"\n      (nzOnConfirm)=\"_btn(i)\"\n      class=\"st__btn-text\"\n      [class]=\"i._className\"\n      (click)=\"_stopPropagation($event)\"\n    >\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  } @else {\n    <a (click)=\"_btn(i, $event)\" class=\"st__btn-text\" [class]=\"i._className\">\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  }\n</ng-template>\n<ng-template #btnTextTpl let-i>\n  @if (i._icon) {\n    @let icon = i._icon;\n    @if (icon.iconfont) {\n      <nz-icon [nzIconfont]=\"icon.iconfont\" />\n    } @else {\n      <nz-icon [nzType]=\"icon.type\" [nzTheme]=\"icon.theme\" [nzSpin]=\"icon.spin\" [nzTwotoneColor]=\"icon.twoToneColor\" />\n    }\n  }\n  <span [innerHTML]=\"i._text\" [class.pl-xs]=\"i._icon\"></span>\n</ng-template>\n@if (c.__render) {\n  <ng-template [ngTemplateOutlet]=\"c.__render!\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index, column: c }\" />\n} @else {\n  @let col = i._values[cIdx];\n  @switch (c.type) {\n    @case ('checkbox') {\n      <label nz-checkbox [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_checkbox($event)\"></label>\n    }\n    @case ('radio') {\n      <label nz-radio [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_radio()\"></label>\n    }\n    @case ('link') {\n      <a (click)=\"_link($event)\" [innerHTML]=\"col._text\" [attr.title]=\"col.text\"></a>\n    }\n    @case ('tag') {\n      <nz-tag [nzColor]=\"col.color\" [nz-tooltip]=\"col.tooltip\">\n        <span [innerHTML]=\"col._text\"></span>\n      </nz-tag>\n    }\n    @case ('badge') {\n      <nz-badge [nzStatus]=\"col.color\" [nzText]=\"col.text\" [nz-tooltip]=\"col.tooltip\" />\n    }\n    @case ('cell') {\n      <cell [value]=\"col.text\" [options]=\"col.cell ?? c.cell\" (click)=\"_client()\" />\n    }\n    @case ('widget') {\n      <ng-template st-widget-host [record]=\"i\" [column]=\"c\" />\n    }\n    @default {\n      @if (c.safeType === 'text') {\n        <span [innerText]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      } @else {\n        <span [innerHTML]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      }\n    }\n  }\n  @for (btn of col.buttons; track $index) {\n    @if (btn.children!.length > 0) {\n      <a nz-dropdown [nzDropdownMenu]=\"btnMenu\" nzOverlayClassName=\"st__btn-sub\">\n        <span [innerHTML]=\"btn._text\"></span>\n        <nz-icon nzType=\"down\" />\n      </a>\n      <nz-dropdown-menu #btnMenu=\"nzDropdownMenu\">\n        <ul nz-menu>\n          @for (subBtn of btn.children; track $index) {\n            @if (subBtn.type === 'divider') {\n              <li nz-menu-divider></li>\n            } @else {\n              <li nz-menu-item [class.st__btn-disabled]=\"subBtn._disabled\">\n                <ng-template\n                  [ngTemplateOutlet]=\"btnTpl\"\n                  [ngTemplateOutletContext]=\"{ $implicit: subBtn, child: true }\"\n                />\n              </li>\n            }\n          }\n        </ul>\n      </nz-dropdown-menu>\n    } @else {\n      <span [class.st__btn-disabled]=\"btn._disabled\">\n        <ng-template [ngTemplateOutlet]=\"btnTpl\" [ngTemplateOutletContext]=\"{ $implicit: btn, child: false }\" />\n      </span>\n    }\n    @if (!$last) {\n      <nz-divider nzType=\"vertical\" />\n    }\n  }\n}\n", dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1$2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1$2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: NzPopconfirmDirective, selector: "[nz-popconfirm]", inputs: ["nzPopconfirmArrowPointAtCenter", "nzPopconfirmTitle", "nzPopconfirmTitleContext", "nz-popconfirm", "nzPopconfirmTrigger", "nzPopconfirmPlacement", "nzPopconfirmOrigin", "nzPopconfirmMouseEnterDelay", "nzPopconfirmMouseLeaveDelay", "nzPopconfirmOverlayClassName", "nzPopconfirmOverlayStyle", "nzPopconfirmVisible", "nzOkText", "nzOkType", "nzOkDisabled", "nzOkDanger", "nzCancelText", "nzBeforeConfirm", "nzIcon", "nzCondition", "nzPopconfirmShowArrow", "nzPopconfirmBackdrop", "nzAutofocus"], outputs: ["nzPopconfirmVisibleChange", "nzOnCancel", "nzOnConfirm"], exportAs: ["nzPopconfirm"] }, { kind: "directive", type: NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId", "nzName"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "component", type: NzRadioComponent, selector: "[nz-radio],[nz-radio-button]", inputs: ["nzValue", "nzDisabled", "nzAutoFocus", "nz-radio-button"], exportAs: ["nzRadio"] }, { kind: "component", type: NzTagComponent, selector: "nz-tag", inputs: ["nzMode", "nzColor", "nzChecked", "nzBordered"], outputs: ["nzOnClose", "nzCheckedChange"], exportAs: ["nzTag"] }, { kind: "component", type: NzBadgeComponent, selector: "nz-badge", inputs: ["nzShowZero", "nzShowDot", "nzStandalone", "nzDot", "nzOverflowCount", "nzColor", "nzStyle", "nzText", "nzTitle", "nzStatus", "nzCount", "nzOffset", "nzSize"], exportAs: ["nzBadge"] }, { kind: "component", type: CellComponent, selector: "cell, [cell]", inputs: ["value", "options", "loading", "disabled"], outputs: ["valueChange"], exportAs: ["cell"] }, { kind: "directive", type: STWidgetHostDirective, selector: "[st-widget-host]", inputs: ["record", "column"] }, { kind: "ngmodule", type: NzDropDownModule }, { kind: "directive", type: i2$1.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i2$1.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i2$1.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }, { kind: "directive", type: i3$2.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i3$2.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i3$2.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "ngmodule", type: NzMenuModule }, { kind: "component", type: NzDividerComponent, selector: "nz-divider", inputs: ["nzText", "nzType", "nzOrientation", "nzVariant", "nzDashed", "nzPlain"], exportAs: ["nzDivider"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STFilterComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STTdComponent, decorators: [{
             type: Component,
-            args: [{
-                    selector: 'st-filter',
-                    template: `
-    <span
-      class="ant-table-filter-trigger"
-      [class.active]="visible || f.default"
-      nz-dropdown
-      [nzDropdownMenu]="filterMenu"
-      nzTrigger="click"
-      [nzClickHide]="false"
-      [(nzVisible)]="visible"
-      nzOverlayClassName="st__filter-wrap"
-      (click)="stopPropagation($event)"
-    >
-      <i nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!"></i>
-    </span>
-    <nz-dropdown-menu #filterMenu="nzDropdownMenu">
-      <div class="ant-table-filter-dropdown">
-        @switch (f.type) {
-          @case ('keyword') {
-            <div class="st__filter-keyword">
-              <input
-                type="text"
-                nz-input
-                [attr.placeholder]="f.placeholder"
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                (keyup.enter)="confirm()"
-              />
-            </div>
-          }
-          @case ('number') {
-            <div class="p-sm st__filter-number">
-              <nz-input-number
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                [nzMin]="f.number!.min!"
-                [nzMax]="f.number!.max!"
-                [nzStep]="f.number!.step!"
-                [nzPrecision]="f.number!.precision"
-                [nzPlaceHolder]="f.placeholder!"
-                class="width-100"
-              />
-            </div>
-          }
-          @case ('date') {
-            <div class="p-sm st__filter-date">
-              @if (f.date!.range) {
-                <nz-range-picker
-                  nzInline
-                  [nzMode]="$any(f.date!.mode)"
-                  [(ngModel)]="f.menus![0]!.value"
-                  (ngModelChange)="n.emit($event)"
-                  [nzShowNow]="f.date!.showNow"
-                  [nzShowToday]="f.date!.showToday"
-                  [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
-              } @else {
-                <nz-date-picker
-                  nzInline
-                  [nzMode]="$any(f.date!.mode)"
-                  [(ngModel)]="f.menus![0]!.value"
-                  (ngModelChange)="n.emit($event)"
-                  [nzShowNow]="f.date!.showNow"
-                  [nzShowToday]="f.date!.showToday"
-                  [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
-              }
-            </div>
-          }
-          @case ('custom') {
-            <div class="st__filter-custom">
-              <ng-template
-                [ngTemplateOutlet]="f.custom!"
-                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
-              />
-            </div>
-          }
-          @default {
-            <ul nz-menu>
-              @for (filter of f.menus; track $index) {
-                <li nz-menu-item>
-                  @if (f.multiple) {
-                    <label nz-checkbox [(ngModel)]="filter.checked" (ngModelChange)="checkboxChange()">
-                      {{ filter.text }}
-                    </label>
-                  } @else {
-                    <label nz-radio [ngModel]="filter.checked" (ngModelChange)="radioChange(filter)">
-                      {{ filter.text }}
-                    </label>
-                  }
-                </li>
-              }
-            </ul>
-          }
-        }
-        @if (f.showOPArea) {
-          <div class="ant-table-filter-dropdown-btns">
-            <a class="ant-table-filter-dropdown-link confirm" (click)="confirm()">
-              <span>{{ f.confirmText || locale.filterConfirm }}</span>
-            </a>
-            <a class="ant-table-filter-dropdown-link clear" (click)="reset()">
-              <span>{{ f.clearText || locale.filterReset }}</span>
-            </a>
-          </div>
-        }
-      </div>
-    </nz-dropdown-menu>
-  `,
-                    host: {
-                        '[class.ant-table-filter-trigger-container]': `true`,
-                        '[class.st__filter]': `true`,
-                        '[class.ant-table-filter-trigger-container-open]': `visible`
-                    },
-                    preserveWhitespaces: false,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
-                }]
-        }], propDecorators: { col: [{
+            args: [{ selector: 'st-td', preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, imports: [
+                        FormsModule,
+                        NzTooltipDirective,
+                        NgTemplateOutlet,
+                        NzPopconfirmDirective,
+                        NzIconDirective,
+                        NzCheckboxComponent,
+                        NzRadioComponent,
+                        NzTagComponent,
+                        NzBadgeComponent,
+                        CellComponent,
+                        STWidgetHostDirective,
+                        NzDropDownModule,
+                        NzMenuModule,
+                        NzDividerComponent
+                    ], template: "<ng-template #btnTpl let-i let-child=\"child\">\n  @if (i.tooltip) {\n    <span nz-tooltip [nzTooltipTitle]=\"i.tooltip\" [class.d-block]=\"child\" [class.width-100]=\"child\">\n      <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </span>\n  } @else {\n    <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n  }\n</ng-template>\n<ng-template #btnItemTpl let-i>\n  @if (i.pop) {\n    @let pop = i.pop;\n    <a\n      nz-popconfirm\n      [nzPopconfirmTitle]=\"pop.title\"\n      [nzIcon]=\"pop.icon\"\n      [nzCondition]=\"pop.condition(i)\"\n      [nzCancelText]=\"pop.cancelText\"\n      [nzOkText]=\"pop.okText\"\n      [nzOkType]=\"pop.okType\"\n      (nzOnConfirm)=\"_btn(i)\"\n      class=\"st__btn-text\"\n      [class]=\"i._className\"\n      (click)=\"_stopPropagation($event)\"\n    >\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  } @else {\n    <a (click)=\"_btn(i, $event)\" class=\"st__btn-text\" [class]=\"i._className\">\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  }\n</ng-template>\n<ng-template #btnTextTpl let-i>\n  @if (i._icon) {\n    @let icon = i._icon;\n    @if (icon.iconfont) {\n      <nz-icon [nzIconfont]=\"icon.iconfont\" />\n    } @else {\n      <nz-icon [nzType]=\"icon.type\" [nzTheme]=\"icon.theme\" [nzSpin]=\"icon.spin\" [nzTwotoneColor]=\"icon.twoToneColor\" />\n    }\n  }\n  <span [innerHTML]=\"i._text\" [class.pl-xs]=\"i._icon\"></span>\n</ng-template>\n@if (c.__render) {\n  <ng-template [ngTemplateOutlet]=\"c.__render!\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index, column: c }\" />\n} @else {\n  @let col = i._values[cIdx];\n  @switch (c.type) {\n    @case ('checkbox') {\n      <label nz-checkbox [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_checkbox($event)\"></label>\n    }\n    @case ('radio') {\n      <label nz-radio [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_radio()\"></label>\n    }\n    @case ('link') {\n      <a (click)=\"_link($event)\" [innerHTML]=\"col._text\" [attr.title]=\"col.text\"></a>\n    }\n    @case ('tag') {\n      <nz-tag [nzColor]=\"col.color\" [nz-tooltip]=\"col.tooltip\">\n        <span [innerHTML]=\"col._text\"></span>\n      </nz-tag>\n    }\n    @case ('badge') {\n      <nz-badge [nzStatus]=\"col.color\" [nzText]=\"col.text\" [nz-tooltip]=\"col.tooltip\" />\n    }\n    @case ('cell') {\n      <cell [value]=\"col.text\" [options]=\"col.cell ?? c.cell\" (click)=\"_client()\" />\n    }\n    @case ('widget') {\n      <ng-template st-widget-host [record]=\"i\" [column]=\"c\" />\n    }\n    @default {\n      @if (c.safeType === 'text') {\n        <span [innerText]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      } @else {\n        <span [innerHTML]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      }\n    }\n  }\n  @for (btn of col.buttons; track $index) {\n    @if (btn.children!.length > 0) {\n      <a nz-dropdown [nzDropdownMenu]=\"btnMenu\" nzOverlayClassName=\"st__btn-sub\">\n        <span [innerHTML]=\"btn._text\"></span>\n        <nz-icon nzType=\"down\" />\n      </a>\n      <nz-dropdown-menu #btnMenu=\"nzDropdownMenu\">\n        <ul nz-menu>\n          @for (subBtn of btn.children; track $index) {\n            @if (subBtn.type === 'divider') {\n              <li nz-menu-divider></li>\n            } @else {\n              <li nz-menu-item [class.st__btn-disabled]=\"subBtn._disabled\">\n                <ng-template\n                  [ngTemplateOutlet]=\"btnTpl\"\n                  [ngTemplateOutletContext]=\"{ $implicit: subBtn, child: true }\"\n                />\n              </li>\n            }\n          }\n        </ul>\n      </nz-dropdown-menu>\n    } @else {\n      <span [class.st__btn-disabled]=\"btn._disabled\">\n        <ng-template [ngTemplateOutlet]=\"btnTpl\" [ngTemplateOutletContext]=\"{ $implicit: btn, child: false }\" />\n      </span>\n    }\n    @if (!$last) {\n      <nz-divider nzType=\"vertical\" />\n    }\n  }\n}\n" }]
+        }], propDecorators: { c: [{
                 type: Input
-            }], locale: [{
+            }], cIdx: [{
                 type: Input
-            }], f: [{
+            }], data: [{
+                type: Input
+            }], i: [{
+                type: Input
+            }], index: [{
                 type: Input
             }], n: [{
                 type: Output
-            }], handle: [{
-                type: Output
             }] } });
-
 class STComponent {
+    i18nSrv = inject(YUNZAI_I18N_TOKEN);
+    el = inject(ElementRef).nativeElement;
+    cdr = inject(ChangeDetectorRef);
+    doc = inject(DOCUMENT);
+    exportSrv = inject(STExport);
+    columnSource = inject(STColumnSource);
+    dataSource = inject(STDataSource);
+    yunzaiI18n = inject(YelonLocaleService);
+    cms = inject(NzContextMenuService, { optional: true });
+    destroy$ = inject(DestroyRef);
+    totalTpl = ``;
+    inied = false;
+    cog;
+    _req;
+    _res;
+    _page;
+    _widthMode;
+    customWidthConfig = false;
+    _widthConfig = [];
+    locale = {};
+    _loading = false;
+    _data = [];
+    _statistical = {};
+    _isPagination = true;
+    _allChecked = false;
+    _allCheckedDisabled = false;
+    _indeterminate = false;
+    _headers = [];
+    _columns = [];
+    contextmenuList = [];
+    orgTable;
+    contextmenuTpl;
     get req() {
         return this._req;
     }
@@ -1601,6 +1783,34 @@ class STComponent {
         this._page = { ...this.cog.page, ...value };
         this.updateTotalTpl();
     }
+    data;
+    columns;
+    contextmenu;
+    ps = 10;
+    pi = 1;
+    total = 0;
+    loading = null;
+    loadingDelay = 0;
+    loadingIndicator = null;
+    bordered = false;
+    size;
+    scroll = { x: null, y: null };
+    drag = input(null, {
+        transform: v => {
+            const obj = typeof v === 'object' ? v : booleanAttribute(v) ? {} : null;
+            if (obj == null)
+                return null;
+            if (typeof obj.dropped !== 'function') {
+                obj.dropped = e => {
+                    moveItemInArray(this._data, e.previousIndex, e.currentIndex);
+                    this.cd();
+                };
+            }
+            return obj;
+        }
+    });
+    singleSort;
+    _multiSort;
     get multiSort() {
         return this._multiSort;
     }
@@ -1614,6 +1824,8 @@ class STComponent {
             ...(typeof value === 'object' ? value : {})
         };
     }
+    rowClassName;
+    clickRowClassName;
     set widthMode(value) {
         this._widthMode = { ...this.cog.widthMode, ...value };
     }
@@ -1624,9 +1836,31 @@ class STComponent {
         this._widthConfig = val;
         this.customWidthConfig = val && val.length > 0;
     }
+    _resizable;
     set resizable(val) {
         this._resizable = typeof val === 'object' ? val : { disabled: !booleanAttribute(val) };
     }
+    header;
+    showHeader = true;
+    footer;
+    bodyHeader;
+    body;
+    expandRowByClick = false;
+    expandAccordion = false;
+    expand = null;
+    expandIcon = null;
+    noResult;
+    responsive = true;
+    responsiveHideHeaderFooter;
+    error = new EventEmitter();
+    change = new EventEmitter();
+    virtualScroll = false;
+    virtualItemSize = 54;
+    virtualMaxBufferPx = 200;
+    virtualMinBufferPx = 100;
+    customRequest;
+    virtualForTrackBy = index => index;
+    trackBy = (_, item) => item;
     /**
      * Get the number of the current page
      */
@@ -1643,55 +1877,8 @@ class STComponent {
         return this.columns == null;
     }
     constructor(configSrv) {
-        this.i18nSrv = inject(YUNZAI_I18N_TOKEN);
-        this.el = inject(ElementRef).nativeElement;
-        this.cdr = inject(ChangeDetectorRef);
-        this.doc = inject(DOCUMENT);
-        this.exportSrv = inject(STExport);
-        this.columnSource = inject(STColumnSource);
-        this.dataSource = inject(STDataSource);
-        this.yelonI18n = inject(YelonLocaleService);
-        this.cms = inject(NzContextMenuService, { optional: true });
-        this.destroy$ = inject(DestroyRef);
-        this.totalTpl = ``;
-        this.inied = false;
-        this.customWidthConfig = false;
-        this._widthConfig = [];
-        this.locale = {};
-        this._loading = false;
-        this._data = [];
-        this._statistical = {};
-        this._isPagination = true;
-        this._allChecked = false;
-        this._allCheckedDisabled = false;
-        this._indeterminate = false;
-        this._headers = [];
-        this._columns = [];
-        this.contextmenuList = [];
-        this.ps = 10;
-        this.pi = 1;
-        this.total = 0;
-        this.loading = null;
-        this.loadingDelay = 0;
-        this.loadingIndicator = null;
-        this.bordered = false;
-        this.scroll = { x: null, y: null };
-        this.showHeader = true;
-        this.expandRowByClick = false;
-        this.expandAccordion = false;
-        this.expand = null;
-        this.expandIcon = null;
-        this.responsive = true;
-        this.error = new EventEmitter();
-        this.change = new EventEmitter();
-        this.virtualScroll = false;
-        this.virtualItemSize = 54;
-        this.virtualMaxBufferPx = 200;
-        this.virtualMinBufferPx = 100;
-        this.virtualForTrackBy = index => index;
-        this.trackBy = (_, item) => item;
-        this.yelonI18n.change.pipe(takeUntilDestroyed()).subscribe(() => {
-            this.locale = this.yelonI18n.getData('st');
+        this.yunzaiI18n.change.pipe(takeUntilDestroyed()).subscribe(() => {
+            this.locale = this.yunzaiI18n.getData('st');
             if (this._columns.length > 0) {
                 this.updateTotalTpl();
                 this.cd();
@@ -1810,6 +1997,7 @@ class STComponent {
             this._data = result.list ?? [];
             this._statistical = result.statistical;
             // Should be re-render in next tike when using virtual scroll
+            // https://github.com/hbyunzai/ng-yunzai/issues/1836
             if (this.cdkVirtualScrollViewport != null) {
                 Promise.resolve().then(() => this.cdkVirtualScrollViewport?.checkViewportSize());
             }
@@ -1946,19 +2134,19 @@ class STComponent {
         ev.stopPropagation();
     }
     _refColAndData() {
-        this._columns.forEach(c => {
+        this._columns.forEach((c, cIdx) => {
             this._data.forEach((i, idx) => {
                 const values = i._values;
                 if (c.type === 'no') {
                     const text = `${this.dataSource.getNoIndex(i, c, idx)}`;
-                    values[c.__point] = {
+                    values[cIdx] = {
                         text,
                         _text: text,
                         org: idx,
                         safeType: 'text'
                     };
                 }
-                values[c.__point].props = this.dataSource.getCell(c, i, idx);
+                values[cIdx].props = this.dataSource.getCell(c, i, idx);
             });
         });
         return this.refreshData();
@@ -1997,7 +2185,7 @@ class STComponent {
                 data = [data];
             }
             const curData = this._data;
-            for (var i = curData.length; i--;) {
+            for (let i = curData.length; i >= 0; i--) {
                 if (data.indexOf(curData[i]) !== -1) {
                     curData.splice(i, 1);
                 }
@@ -2022,7 +2210,7 @@ class STComponent {
         if (typeof index !== 'number') {
             index = this._data.indexOf(index);
         }
-        this._data[index] = deepMergeKey(this._data[index], false, item);
+        this._data[index] = deepMergeKey(this._data[index], options?.arrayProcessMethod ?? false, item);
         this.optimizeData();
         if (options.refreshSchema) {
             this.resetColumns({ emitReload: options.emitReload });
@@ -2222,7 +2410,8 @@ class STComponent {
         const res = this.columnSource.process(this.columns, {
             widthMode: this.widthMode,
             resizable: this._resizable,
-            safeType: this.cog.safeType
+            safeType: this.cog.safeType,
+            expand: this.expand != null
         });
         this._columns = res.columns;
         this._headers = res.headers;
@@ -2274,10 +2463,10 @@ class STComponent {
             this.loadPageData().subscribe();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STComponent, deps: [{ token: i1$2.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: STComponent, selector: "st", inputs: { req: "req", res: "res", page: "page", data: "data", columns: "columns", contextmenu: "contextmenu", ps: ["ps", "ps", (v) => numberAttribute(v, 10)], pi: ["pi", "pi", (v) => numberAttribute(v, 1)], total: ["total", "total", (v) => numberAttribute(v, 0)], loading: "loading", loadingDelay: ["loadingDelay", "loadingDelay", numberAttribute], loadingIndicator: "loadingIndicator", bordered: ["bordered", "bordered", booleanAttribute], size: "size", scroll: "scroll", singleSort: "singleSort", multiSort: "multiSort", rowClassName: "rowClassName", clickRowClassName: "clickRowClassName", widthMode: "widthMode", widthConfig: "widthConfig", resizable: "resizable", header: "header", showHeader: ["showHeader", "showHeader", booleanAttribute], footer: "footer", bodyHeader: "bodyHeader", body: "body", expandRowByClick: ["expandRowByClick", "expandRowByClick", booleanAttribute], expandAccordion: ["expandAccordion", "expandAccordion", booleanAttribute], expand: "expand", expandIcon: "expandIcon", noResult: "noResult", responsive: ["responsive", "responsive", booleanAttribute], responsiveHideHeaderFooter: ["responsiveHideHeaderFooter", "responsiveHideHeaderFooter", booleanAttribute], virtualScroll: ["virtualScroll", "virtualScroll", booleanAttribute], virtualItemSize: ["virtualItemSize", "virtualItemSize", numberAttribute], virtualMaxBufferPx: ["virtualMaxBufferPx", "virtualMaxBufferPx", numberAttribute], virtualMinBufferPx: ["virtualMinBufferPx", "virtualMinBufferPx", numberAttribute], customRequest: "customRequest", virtualForTrackBy: "virtualForTrackBy", trackBy: "trackBy" }, outputs: { error: "error", change: "change" }, host: { properties: { "class.st": "true", "class.st__p-left": "page.placement === 'left'", "class.st__p-center": "page.placement === 'center'", "class.st__width-strict": "widthMode.type === 'strict'", "class.st__row-class": "rowClassName", "class.ant-table-rep": "responsive", "class.ant-table-rep__hide-header-footer": "responsiveHideHeaderFooter" } }, providers: [STDataSource, STRowSource, STColumnSource, STExport, DatePipe, YNPipe, DecimalPipe], viewQueries: [{ propertyName: "orgTable", first: true, predicate: ["table"], descendants: true }, { propertyName: "contextmenuTpl", first: true, predicate: ["contextmenuTpl"], descendants: true }], exportAs: ["st"], usesOnChanges: true, ngImport: i0, template: "<ng-template #titleTpl let-i>\n  <span [innerHTML]=\"i._text\"></span>\n  @if (i.optional) {\n    <small class=\"st__head-optional\" [innerHTML]=\"i.optional\"></small>\n  }\n  @if (i.optionalHelp) {\n    <i class=\"st__head-tip\" nz-tooltip [nzTooltipTitle]=\"i.optionalHelp\" nz-icon nzType=\"question-circle\"></i>\n  }\n</ng-template>\n<ng-template #chkAllTpl let-custom>\n  <label\n    nz-checkbox\n    class=\"st__checkall\"\n    [nzDisabled]=\"_allCheckedDisabled\"\n    [(ngModel)]=\"_allChecked\"\n    [nzIndeterminate]=\"_indeterminate\"\n    (ngModelChange)=\"checkAll()\"\n    [class.ant-table-selection-select-all-custom]=\"custom\"\n  ></label>\n</ng-template>\n<nz-table\n  #table\n  [nzData]=\"_data\"\n  [(nzPageIndex)]=\"pi\"\n  (nzPageIndexChange)=\"_change('pi')\"\n  [(nzPageSize)]=\"ps\"\n  (nzPageSizeChange)=\"_change('ps')\"\n  [nzTotal]=\"total\"\n  [nzShowPagination]=\"_isPagination\"\n  [nzFrontPagination]=\"false\"\n  [nzBordered]=\"bordered\"\n  [nzSize]=\"size\"\n  [nzLoading]=\"noColumns || _loading\"\n  [nzLoadingDelay]=\"loadingDelay\"\n  [nzLoadingIndicator]=\"loadingIndicator\"\n  [nzTitle]=\"header!\"\n  [nzFooter]=\"footer!\"\n  [nzScroll]=\"scroll\"\n  [nzVirtualItemSize]=\"virtualItemSize\"\n  [nzVirtualMaxBufferPx]=\"virtualMaxBufferPx\"\n  [nzVirtualMinBufferPx]=\"virtualMinBufferPx\"\n  [nzVirtualForTrackBy]=\"virtualForTrackBy\"\n  [nzNoResult]=\"noResult!\"\n  [nzPageSizeOptions]=\"page.pageSizes!\"\n  [nzShowQuickJumper]=\"page.showQuickJumper\"\n  [nzShowSizeChanger]=\"page.showSize\"\n  [nzPaginationPosition]=\"page.position!\"\n  [nzPaginationType]=\"page.type!\"\n  [nzItemRender]=\"page.itemRender!\"\n  [nzSimple]=\"page.simple\"\n  [nzShowTotal]=\"totalTpl\"\n  [nzWidthConfig]=\"_widthConfig\"\n  (contextmenu)=\"onContextmenu($event)\"\n  [class.st__no-column]=\"noColumns\"\n>\n  @if (showHeader) {\n    <thead>\n      @for (row of _headers; track row) {\n        <tr>\n          @if ($first && expand) {\n            <th nzWidth=\"50px\" [rowSpan]=\"_headers.length\"></th>\n          }\n          @for (h of row; track h; let index = $index; let last = $last) {\n            @let _c = h.column;\n            <th\n              [colSpan]=\"h.colSpan\"\n              [rowSpan]=\"h.rowSpan\"\n              [nzWidth]=\"$any(_c).width\"\n              [nzLeft]=\"_c._left!\"\n              [nzRight]=\"_c._right!\"\n              [ngClass]=\"_c._className\"\n              [attr.data-col]=\"_c.indexKey\"\n              [attr.data-col-index]=\"index\"\n              [nzShowSort]=\"_c._sort.enabled\"\n              [nzSortOrder]=\"$any(_c)._sort.default\"\n              (nzSortOrderChange)=\"sort(_c, $event)\"\n              [nzCustomFilter]=\"!!_c.filter\"\n              [class.st__has-filter]=\"_c.filter\"\n              nz-resizable\n              [nzDisabled]=\"last || $any(_c).resizable.disabled\"\n              [nzMaxWidth]=\"$any(_c).resizable.maxWidth\"\n              [nzMinWidth]=\"$any(_c).resizable.minWidth\"\n              [nzBounds]=\"$any(_c).resizable.bounds\"\n              [nzPreview]=\"$any(_c).resizable.preview\"\n              (nzResizeEnd)=\"colResize($event, _c)\"\n            >\n              @if ($any(!last && !$any(_c).resizable.disabled)) {\n                <nz-resize-handle nzDirection=\"right\" (click)=\"_stopPropagation($event)\">\n                  <i></i>\n                </nz-resize-handle>\n              }\n              @if (_c.__renderTitle) {\n                <ng-template\n                  [ngTemplateOutlet]=\"_c.__renderTitle!\"\n                  [ngTemplateOutletContext]=\"{ $implicit: h.column, index: index }\"\n                />\n              } @else {\n                @switch (_c.type) {\n                  @case ('checkbox') {\n                    @if (_c.selections!.length === 0) {\n                      <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: false }\" />\n                    } @else {\n                      <div class=\"ant-table-selection\">\n                        <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: true }\" />\n                        @if (_c.selections!.length) {\n                          <div class=\"ant-table-selection-extra\">\n                            <div\n                              nz-dropdown\n                              nzPlacement=\"bottomLeft\"\n                              [nzDropdownMenu]=\"selectionMenu\"\n                              class=\"ant-table-selection-down st__checkall-selection\"\n                            >\n                              <i nz-icon nzType=\"down\"></i>\n                            </div>\n                          </div>\n                        }\n                        <nz-dropdown-menu #selectionMenu=\"nzDropdownMenu\">\n                          <ul nz-menu class=\"ant-table-selection-menu\">\n                            @for (rw of _c.selections; track $index) {\n                              <li nz-menu-item (click)=\"_rowSelection(rw)\" [innerHTML]=\"rw.text\"></li>\n                            }\n                          </ul>\n                        </nz-dropdown-menu>\n                      </div>\n                    }\n                  }\n                  @default {\n                    <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: _c.title }\" />\n                  }\n                }\n              }\n              @if (_c.filter) {\n                <st-filter\n                  nz-th-extra\n                  [col]=\"h.column\"\n                  [f]=\"_c.filter\"\n                  [locale]=\"locale\"\n                  (n)=\"handleFilterNotify($event)\"\n                  (handle)=\"_handleFilter(_c, $event)\"\n                />\n              }\n            </th>\n          }\n        </tr>\n      }\n    </thead>\n  }\n  <tbody class=\"st__body\">\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"bodyHeader!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n    <ng-template #bodyTpl let-i let-index=\"index\">\n      <tr\n        [attr.data-index]=\"index\"\n        (click)=\"_rowClick($event, i, index, false)\"\n        (dblclick)=\"_rowClick($event, i, index, true)\"\n        [ngClass]=\"i._rowClassName\"\n      >\n        @if (expand) {\n          <td\n            [nzShowExpand]=\"expand && i.showExpand !== false\"\n            [nzExpand]=\"i.expand\"\n            [nzExpandIcon]=\"expandIcon ? wrapExpandIcon : null\"\n            (nzExpandChange)=\"_expandChange(i, $event)\"\n            (click)=\"_stopPropagation($event)\"\n            nzWidth=\"50px\"\n          ></td>\n          <ng-template #wrapExpandIcon>\n            <span (click)=\"_expandChange(i, !i.expand)\">\n              <ng-template [ngTemplateOutlet]=\"expandIcon\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n            </span>\n          </ng-template>\n        }\n        @for (c of _columns; track cIdx; let cIdx = $index) {\n          @let props = i._values[cIdx].props;\n          @if (props?.colSpan > 0 && props?.rowSpan > 0) {\n            <td\n              [nzLeft]=\"!!c._left\"\n              [nzRight]=\"!!c._right\"\n              [attr.data-col-index]=\"cIdx\"\n              [ngClass]=\"c._className\"\n              [attr.colspan]=\"props?.colSpan === 1 ? null : props?.colSpan\"\n              [attr.rowspan]=\"props?.rowSpan === 1 ? null : props?.rowSpan\"\n            >\n              @if (responsive) {\n                <span class=\"ant-table-rep__title\">\n                  <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: c.title }\" />\n                </span>\n              }\n              <st-td [data]=\"_data\" [i]=\"i\" [index]=\"index\" [c]=\"c\" [cIdx]=\"cIdx\" (n)=\"_handleTd($event)\" />\n            </td>\n          }\n        }\n      </tr>\n      <tr [nzExpand]=\"i.expand\">\n        <ng-template [ngTemplateOutlet]=\"expand\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </tr>\n    </ng-template>\n    @if (virtualScroll) {\n      <ng-template nz-virtual-scroll let-i let-index=\"index\">\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </ng-template>\n    } @else {\n      @for (i of _data; track trackBy($index, i)) {\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: $index }\" />\n      }\n    }\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"body!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n  </tbody>\n  <ng-template #totalTpl let-range=\"range\" let-total>{{ renderTotal(total, range) }}</ng-template>\n</nz-table>\n<nz-dropdown-menu #contextmenuTpl=\"nzDropdownMenu\">\n  <ul nz-menu class=\"st__contextmenu\">\n    @for (i of contextmenuList; track $index) {\n      @if (i.children!.length === 0) {\n        <li nz-menu-item (click)=\"i.fn!(i)\" [innerHTML]=\"i.text\"></li>\n      } @else {\n        <li nz-submenu [nzTitle]=\"i.text\">\n          <ul>\n            @for (ci of i.children; track $index) {\n              <li nz-menu-item (click)=\"ci.fn!(ci)\" [innerHTML]=\"ci.text\"></li>\n            }\n          </ul>\n        </li>\n      }\n    }\n  </ul>\n</nz-dropdown-menu>\n", dependencies: [{ kind: "directive", type: i0.forwardRef(() => i2.NgClass), selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i0.forwardRef(() => i2.NgTemplateOutlet), selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i0.forwardRef(() => i3$2.NgControlStatus), selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i0.forwardRef(() => i3$2.NgModel), selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i0.forwardRef(() => i4.NzTableComponent), selector: "nz-table", inputs: ["nzTableLayout", "nzShowTotal", "nzItemRender", "nzTitle", "nzFooter", "nzNoResult", "nzPageSizeOptions", "nzVirtualItemSize", "nzVirtualMaxBufferPx", "nzVirtualMinBufferPx", "nzVirtualForTrackBy", "nzLoadingDelay", "nzPageIndex", "nzPageSize", "nzTotal", "nzWidthConfig", "nzData", "nzCustomColumn", "nzPaginationPosition", "nzScroll", "noDataVirtualHeight", "nzPaginationType", "nzFrontPagination", "nzTemplateMode", "nzShowPagination", "nzLoading", "nzOuterBordered", "nzLoadingIndicator", "nzBordered", "nzSize", "nzShowSizeChanger", "nzHideOnSinglePage", "nzShowQuickJumper", "nzSimple"], outputs: ["nzPageSizeChange", "nzPageIndexChange", "nzQueryParams", "nzCurrentPageDataChange", "nzCustomColumnChange"], exportAs: ["nzTable"] }, { kind: "component", type: i0.forwardRef(() => i4.NzThAddOnComponent), selector: "th[nzColumnKey], th[nzSortFn], th[nzSortOrder], th[nzFilters], th[nzShowSort], th[nzShowFilter], th[nzCustomFilter]", inputs: ["nzColumnKey", "nzFilterMultiple", "nzSortOrder", "nzSortPriority", "nzSortDirections", "nzFilters", "nzSortFn", "nzFilterFn", "nzShowSort", "nzShowFilter", "nzCustomFilter"], outputs: ["nzCheckedChange", "nzSortOrderChange", "nzFilterChange"] }, { kind: "directive", type: i0.forwardRef(() => i4.NzTableCellDirective), selector: "th:not(.nz-disable-th):not([mat-cell]), td:not(.nz-disable-td):not([mat-cell])" }, { kind: "directive", type: i0.forwardRef(() => i4.NzThMeasureDirective), selector: "th", inputs: ["nzWidth", "colspan", "colSpan", "rowspan", "rowSpan"] }, { kind: "component", type: i0.forwardRef(() => i4.NzTdAddOnComponent), selector: "td[nzChecked], td[nzDisabled], td[nzIndeterminate], td[nzIndentSize], td[nzExpand], td[nzShowExpand], td[nzShowCheckbox]", inputs: ["nzChecked", "nzDisabled", "nzIndeterminate", "nzLabel", "nzIndentSize", "nzShowExpand", "nzShowCheckbox", "nzExpand", "nzExpandIcon"], outputs: ["nzCheckedChange", "nzExpandChange"] }, { kind: "component", type: i0.forwardRef(() => i4.NzTheadComponent), selector: "thead:not(.ant-table-thead)", outputs: ["nzSortOrderChange"] }, { kind: "component", type: i0.forwardRef(() => i4.NzTbodyComponent), selector: "tbody" }, { kind: "directive", type: i0.forwardRef(() => i4.NzTrDirective), selector: "tr:not([mat-row]):not([mat-header-row]):not([nz-table-measure-row]):not([nzExpand]):not([nz-table-fixed-row])" }, { kind: "directive", type: i0.forwardRef(() => i4.NzTableVirtualScrollDirective), selector: "[nz-virtual-scroll]", exportAs: ["nzVirtualScroll"] }, { kind: "directive", type: i0.forwardRef(() => i4.NzCellFixedDirective), selector: "td[nzRight],th[nzRight],td[nzLeft],th[nzLeft]", inputs: ["nzRight", "nzLeft", "colspan", "colSpan"] }, { kind: "directive", type: i0.forwardRef(() => i4.NzTrExpandDirective), selector: "tr[nzExpand]", inputs: ["nzExpand"] }, { kind: "component", type: i0.forwardRef(() => i4.NzTableFixedRowComponent), selector: "tr[nz-table-fixed-row], tr[nzExpand]" }, { kind: "directive", type: i0.forwardRef(() => i5.NzIconDirective), selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i0.forwardRef(() => i6.NzCheckboxComponent), selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "directive", type: i0.forwardRef(() => i7.NzMenuDirective), selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i0.forwardRef(() => i7.NzMenuItemComponent), selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "component", type: i0.forwardRef(() => i7.NzSubMenuComponent), selector: "[nz-submenu]", inputs: ["nzMenuClassName", "nzPaddingLeft", "nzTitle", "nzIcon", "nzOpen", "nzDisabled", "nzPlacement"], outputs: ["nzOpenChange"], exportAs: ["nzSubmenu"] }, { kind: "directive", type: i0.forwardRef(() => i8.NzDropDownDirective), selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i0.forwardRef(() => i8.NzDropdownMenuComponent), selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: i0.forwardRef(() => i9$1.NzTooltipDirective), selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: i0.forwardRef(() => i10$1.NzResizableDirective), selector: "[nz-resizable]", inputs: ["nzBounds", "nzMaxHeight", "nzMaxWidth", "nzMinHeight", "nzMinWidth", "nzGridColumnCount", "nzMaxColumn", "nzMinColumn", "nzLockAspectRatio", "nzPreview", "nzDisabled"], outputs: ["nzResize", "nzResizeEnd", "nzResizeStart"], exportAs: ["nzResizable"] }, { kind: "component", type: i0.forwardRef(() => i10$1.NzResizeHandleComponent), selector: "nz-resize-handle, [nz-resize-handle]", inputs: ["nzDirection", "nzCursorType"], outputs: ["nzMouseDown"], exportAs: ["nzResizeHandle"] }, { kind: "component", type: i0.forwardRef(() => STFilterComponent), selector: "st-filter", inputs: ["col", "locale", "f"], outputs: ["n", "handle"] }, { kind: "component", type: i0.forwardRef(() => STTdComponent), selector: "st-td", inputs: ["c", "cIdx", "data", "i", "index"], outputs: ["n"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STComponent, deps: [{ token: i4.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: STComponent, isStandalone: true, selector: "st", inputs: { req: { classPropertyName: "req", publicName: "req", isSignal: false, isRequired: false, transformFunction: null }, res: { classPropertyName: "res", publicName: "res", isSignal: false, isRequired: false, transformFunction: null }, page: { classPropertyName: "page", publicName: "page", isSignal: false, isRequired: false, transformFunction: null }, data: { classPropertyName: "data", publicName: "data", isSignal: false, isRequired: false, transformFunction: null }, columns: { classPropertyName: "columns", publicName: "columns", isSignal: false, isRequired: false, transformFunction: null }, contextmenu: { classPropertyName: "contextmenu", publicName: "contextmenu", isSignal: false, isRequired: false, transformFunction: null }, ps: { classPropertyName: "ps", publicName: "ps", isSignal: false, isRequired: false, transformFunction: (v) => numberAttribute(v, 10) }, pi: { classPropertyName: "pi", publicName: "pi", isSignal: false, isRequired: false, transformFunction: (v) => numberAttribute(v, 1) }, total: { classPropertyName: "total", publicName: "total", isSignal: false, isRequired: false, transformFunction: (v) => numberAttribute(v, 0) }, loading: { classPropertyName: "loading", publicName: "loading", isSignal: false, isRequired: false, transformFunction: null }, loadingDelay: { classPropertyName: "loadingDelay", publicName: "loadingDelay", isSignal: false, isRequired: false, transformFunction: numberAttribute }, loadingIndicator: { classPropertyName: "loadingIndicator", publicName: "loadingIndicator", isSignal: false, isRequired: false, transformFunction: null }, bordered: { classPropertyName: "bordered", publicName: "bordered", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, size: { classPropertyName: "size", publicName: "size", isSignal: false, isRequired: false, transformFunction: null }, scroll: { classPropertyName: "scroll", publicName: "scroll", isSignal: false, isRequired: false, transformFunction: null }, drag: { classPropertyName: "drag", publicName: "drag", isSignal: true, isRequired: false, transformFunction: null }, singleSort: { classPropertyName: "singleSort", publicName: "singleSort", isSignal: false, isRequired: false, transformFunction: null }, multiSort: { classPropertyName: "multiSort", publicName: "multiSort", isSignal: false, isRequired: false, transformFunction: null }, rowClassName: { classPropertyName: "rowClassName", publicName: "rowClassName", isSignal: false, isRequired: false, transformFunction: null }, clickRowClassName: { classPropertyName: "clickRowClassName", publicName: "clickRowClassName", isSignal: false, isRequired: false, transformFunction: null }, widthMode: { classPropertyName: "widthMode", publicName: "widthMode", isSignal: false, isRequired: false, transformFunction: null }, widthConfig: { classPropertyName: "widthConfig", publicName: "widthConfig", isSignal: false, isRequired: false, transformFunction: null }, resizable: { classPropertyName: "resizable", publicName: "resizable", isSignal: false, isRequired: false, transformFunction: null }, header: { classPropertyName: "header", publicName: "header", isSignal: false, isRequired: false, transformFunction: null }, showHeader: { classPropertyName: "showHeader", publicName: "showHeader", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, footer: { classPropertyName: "footer", publicName: "footer", isSignal: false, isRequired: false, transformFunction: null }, bodyHeader: { classPropertyName: "bodyHeader", publicName: "bodyHeader", isSignal: false, isRequired: false, transformFunction: null }, body: { classPropertyName: "body", publicName: "body", isSignal: false, isRequired: false, transformFunction: null }, expandRowByClick: { classPropertyName: "expandRowByClick", publicName: "expandRowByClick", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, expandAccordion: { classPropertyName: "expandAccordion", publicName: "expandAccordion", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, expand: { classPropertyName: "expand", publicName: "expand", isSignal: false, isRequired: false, transformFunction: null }, expandIcon: { classPropertyName: "expandIcon", publicName: "expandIcon", isSignal: false, isRequired: false, transformFunction: null }, noResult: { classPropertyName: "noResult", publicName: "noResult", isSignal: false, isRequired: false, transformFunction: null }, responsive: { classPropertyName: "responsive", publicName: "responsive", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, responsiveHideHeaderFooter: { classPropertyName: "responsiveHideHeaderFooter", publicName: "responsiveHideHeaderFooter", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, virtualScroll: { classPropertyName: "virtualScroll", publicName: "virtualScroll", isSignal: false, isRequired: false, transformFunction: booleanAttribute }, virtualItemSize: { classPropertyName: "virtualItemSize", publicName: "virtualItemSize", isSignal: false, isRequired: false, transformFunction: numberAttribute }, virtualMaxBufferPx: { classPropertyName: "virtualMaxBufferPx", publicName: "virtualMaxBufferPx", isSignal: false, isRequired: false, transformFunction: numberAttribute }, virtualMinBufferPx: { classPropertyName: "virtualMinBufferPx", publicName: "virtualMinBufferPx", isSignal: false, isRequired: false, transformFunction: numberAttribute }, customRequest: { classPropertyName: "customRequest", publicName: "customRequest", isSignal: false, isRequired: false, transformFunction: null }, virtualForTrackBy: { classPropertyName: "virtualForTrackBy", publicName: "virtualForTrackBy", isSignal: false, isRequired: false, transformFunction: null }, trackBy: { classPropertyName: "trackBy", publicName: "trackBy", isSignal: false, isRequired: false, transformFunction: null } }, outputs: { error: "error", change: "change" }, host: { properties: { "class.st": "true", "class.st__p-left": "page.placement === 'left'", "class.st__p-center": "page.placement === 'center'", "class.st__width-strict": "widthMode.type === 'strict'", "class.st__row-class": "rowClassName", "class.ant-table-rep": "responsive", "class.ant-table-rep__hide-header-footer": "responsiveHideHeaderFooter" } }, providers: [STDataSource, STRowSource, STColumnSource, STExport, DatePipe, YNPipe, DecimalPipe], viewQueries: [{ propertyName: "orgTable", first: true, predicate: ["table"], descendants: true }, { propertyName: "contextmenuTpl", first: true, predicate: ["contextmenuTpl"], descendants: true }], exportAs: ["st"], usesOnChanges: true, ngImport: i0, template: "<ng-template #titleTpl let-i>\n  <span [innerHTML]=\"i._text\"></span>\n  @if (i.optional) {\n    <small class=\"st__head-optional\" [innerHTML]=\"i.optional\"></small>\n  }\n  @if (i.optionalHelp) {\n    <nz-icon class=\"st__head-tip\" nz-tooltip [nzTooltipTitle]=\"i.optionalHelp\" nzType=\"question-circle\" />\n  }\n</ng-template>\n<ng-template #chkAllTpl let-custom>\n  <label\n    nz-checkbox\n    class=\"st__checkall\"\n    [nzDisabled]=\"_allCheckedDisabled\"\n    [(ngModel)]=\"_allChecked\"\n    [nzIndeterminate]=\"_indeterminate\"\n    (ngModelChange)=\"checkAll()\"\n    [class.ant-table-selection-select-all-custom]=\"custom\"\n  ></label>\n</ng-template>\n<nz-table\n  #table\n  [nzData]=\"_data\"\n  [(nzPageIndex)]=\"pi\"\n  (nzPageIndexChange)=\"_change('pi')\"\n  [(nzPageSize)]=\"ps\"\n  (nzPageSizeChange)=\"_change('ps')\"\n  [nzTotal]=\"total\"\n  [nzShowPagination]=\"_isPagination\"\n  [nzFrontPagination]=\"false\"\n  [nzBordered]=\"bordered\"\n  [nzSize]=\"size\"\n  [nzLoading]=\"noColumns || _loading\"\n  [nzLoadingDelay]=\"loadingDelay\"\n  [nzLoadingIndicator]=\"loadingIndicator\"\n  [nzTitle]=\"header!\"\n  [nzFooter]=\"footer!\"\n  [nzScroll]=\"scroll\"\n  [nzVirtualItemSize]=\"virtualItemSize\"\n  [nzVirtualMaxBufferPx]=\"virtualMaxBufferPx\"\n  [nzVirtualMinBufferPx]=\"virtualMinBufferPx\"\n  [nzVirtualForTrackBy]=\"virtualForTrackBy\"\n  [nzNoResult]=\"noResult!\"\n  [nzPageSizeOptions]=\"page.pageSizes!\"\n  [nzShowQuickJumper]=\"page.showQuickJumper\"\n  [nzShowSizeChanger]=\"page.showSize\"\n  [nzPaginationPosition]=\"page.position!\"\n  [nzPaginationType]=\"page.type!\"\n  [nzItemRender]=\"page.itemRender!\"\n  [nzSimple]=\"page.simple\"\n  [nzShowTotal]=\"totalTpl\"\n  [nzWidthConfig]=\"_widthConfig\"\n  (contextmenu)=\"onContextmenu($event)\"\n  [class.st__no-column]=\"noColumns\"\n>\n  @if (showHeader) {\n    <thead>\n      @for (row of _headers; track row) {\n        <tr>\n          @if ($first && expand) {\n            <th nzWidth=\"50px\" [rowSpan]=\"_headers.length\" [nzLeft]=\"row[0].column._left ? true : false\"></th>\n          }\n          @for (h of row; track h; let index = $index; let last = $last) {\n            @let _c = h.column;\n            <th\n              [colSpan]=\"h.colSpan\"\n              [rowSpan]=\"h.rowSpan\"\n              [nzWidth]=\"$any(_c).width\"\n              [nzLeft]=\"_c._left\"\n              [nzRight]=\"_c._right\"\n              [class]=\"_c._className\"\n              [attr.data-col]=\"_c.indexKey\"\n              [attr.data-col-index]=\"index\"\n              [nzShowSort]=\"_c._sort.enabled\"\n              [nzSortOrder]=\"$any(_c)._sort.default\"\n              (nzSortOrderChange)=\"sort(_c, $event)\"\n              [nzCustomFilter]=\"!!_c.filter\"\n              [class.st__has-filter]=\"_c.filter\"\n              nz-resizable\n              [nzDisabled]=\"last || $any(_c).resizable.disabled\"\n              [nzMaxWidth]=\"$any(_c).resizable.maxWidth\"\n              [nzMinWidth]=\"$any(_c).resizable.minWidth\"\n              [nzBounds]=\"$any(_c).resizable.bounds\"\n              [nzPreview]=\"$any(_c).resizable.preview\"\n              (nzResizeEnd)=\"colResize($event, _c)\"\n            >\n              @if ($any(!last && !$any(_c).resizable.disabled)) {\n                <nz-resize-handle nzDirection=\"right\" (click)=\"_stopPropagation($event)\">\n                  <i></i>\n                </nz-resize-handle>\n              }\n              @if (_c.__renderTitle) {\n                <ng-template\n                  [ngTemplateOutlet]=\"_c.__renderTitle!\"\n                  [ngTemplateOutletContext]=\"{ $implicit: h.column, index: index }\"\n                />\n              } @else {\n                @switch (_c.type) {\n                  @case ('checkbox') {\n                    @if (_c.selections!.length === 0) {\n                      <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: false }\" />\n                    } @else {\n                      <div class=\"ant-table-selection\">\n                        <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: true }\" />\n                        @if (_c.selections!.length) {\n                          <div class=\"ant-table-selection-extra\">\n                            <div\n                              nz-dropdown\n                              nzPlacement=\"bottomLeft\"\n                              [nzDropdownMenu]=\"selectionMenu\"\n                              class=\"ant-table-selection-down st__checkall-selection\"\n                            >\n                              <nz-icon nzType=\"down\" />\n                            </div>\n                          </div>\n                        }\n                        <nz-dropdown-menu #selectionMenu=\"nzDropdownMenu\">\n                          <ul nz-menu class=\"ant-table-selection-menu\">\n                            @for (rw of _c.selections; track $index) {\n                              <li nz-menu-item (click)=\"_rowSelection(rw)\" [innerHTML]=\"rw.text\"></li>\n                            }\n                          </ul>\n                        </nz-dropdown-menu>\n                      </div>\n                    }\n                  }\n                  @default {\n                    <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: _c.title }\" />\n                  }\n                }\n              }\n              @if (_c.filter) {\n                <st-filter\n                  nz-th-extra\n                  [col]=\"h.column\"\n                  [f]=\"_c.filter\"\n                  [locale]=\"locale\"\n                  (n)=\"handleFilterNotify($event)\"\n                  (handle)=\"_handleFilter(_c, $event)\"\n                />\n              }\n            </th>\n          }\n        </tr>\n      }\n    </thead>\n  }\n  <tbody\n    class=\"st__body\"\n    cdkDropList\n    [cdkDropListDisabled]=\"drag() === null\"\n    (cdkDropListDropped)=\"drag()?.dropped?.($event)\"\n    (cdkDropListEntered)=\"drag()?.entered?.($event)\"\n    (cdkDropListExited)=\"drag()?.exited?.($event)\"\n    (cdkDropListSorted)=\"drag()?.sorted?.($event)\"\n  >\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"bodyHeader!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n    <ng-template #bodyTpl let-i let-index=\"index\">\n      <tr\n        [attr.data-index]=\"index\"\n        (click)=\"_rowClick($event, i, index, false)\"\n        (dblclick)=\"_rowClick($event, i, index, true)\"\n        [class]=\"i._rowClassName\"\n        cdkDrag\n      >\n        @if (expand) {\n          <td\n            [nzShowExpand]=\"expand && i.showExpand !== false\"\n            [nzExpand]=\"i.expand\"\n            [nzExpandIcon]=\"expandIcon ? wrapExpandIcon : null\"\n            (nzExpandChange)=\"_expandChange(i, $event)\"\n            (click)=\"_stopPropagation($event)\"\n            nzWidth=\"50px\"\n            [nzLeft]=\"_columns[0]._left ? true : false\"\n          ></td>\n          <ng-template #wrapExpandIcon>\n            <span (click)=\"_expandChange(i, !i.expand)\">\n              <ng-template [ngTemplateOutlet]=\"expandIcon\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n            </span>\n          </ng-template>\n        }\n        @for (c of _columns; track cIdx; let cIdx = $index) {\n          @let props = i._values[cIdx].props;\n          @if (props?.colSpan > 0 && props?.rowSpan > 0) {\n            <td\n              [nzLeft]=\"c._left\"\n              [nzRight]=\"c._right\"\n              [attr.data-col-index]=\"cIdx\"\n              [class]=\"c._className\"\n              [attr.colspan]=\"props?.colSpan === 1 ? null : props?.colSpan\"\n              [attr.rowspan]=\"props?.rowSpan === 1 ? null : props?.rowSpan\"\n            >\n              @if (responsive) {\n                <span class=\"ant-table-rep__title\">\n                  <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: c.title }\" />\n                </span>\n              }\n              <st-td [data]=\"_data\" [i]=\"i\" [index]=\"index\" [c]=\"c\" [cIdx]=\"cIdx\" (n)=\"_handleTd($event)\" />\n            </td>\n          }\n        }\n      </tr>\n      <tr [nzExpand]=\"i.expand\">\n        <ng-template [ngTemplateOutlet]=\"expand\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </tr>\n    </ng-template>\n    @if (virtualScroll) {\n      <ng-template nz-virtual-scroll let-i let-index=\"index\">\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </ng-template>\n    } @else {\n      @for (i of _data; track trackBy($index, i)) {\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: $index }\" />\n      }\n    }\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"body!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n  </tbody>\n  <ng-template #totalTpl let-range=\"range\" let-total>{{ renderTotal(total, range) }}</ng-template>\n</nz-table>\n<nz-dropdown-menu #contextmenuTpl=\"nzDropdownMenu\">\n  <ul nz-menu class=\"st__contextmenu\">\n    @for (i of contextmenuList; track $index) {\n      @if (i.children!.length === 0) {\n        <li nz-menu-item (click)=\"i.fn!(i)\" [innerHTML]=\"i.text\"></li>\n      } @else {\n        <li nz-submenu [nzTitle]=\"i.text\">\n          <ul>\n            @for (ci of i.children; track $index) {\n              <li nz-menu-item (click)=\"ci.fn!(ci)\" [innerHTML]=\"ci.text\"></li>\n            }\n          </ul>\n        </li>\n      }\n    }\n  </ul>\n</nz-dropdown-menu>\n", dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1$2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1$2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: NzTableModule }, { kind: "component", type: i5.NzTableComponent, selector: "nz-table", inputs: ["nzTableLayout", "nzShowTotal", "nzItemRender", "nzTitle", "nzFooter", "nzNoResult", "nzPageSizeOptions", "nzVirtualItemSize", "nzVirtualMaxBufferPx", "nzVirtualMinBufferPx", "nzVirtualForTrackBy", "nzLoadingDelay", "nzPageIndex", "nzPageSize", "nzTotal", "nzWidthConfig", "nzData", "nzCustomColumn", "nzPaginationPosition", "nzScroll", "noDataVirtualHeight", "nzPaginationType", "nzFrontPagination", "nzTemplateMode", "nzShowPagination", "nzLoading", "nzOuterBordered", "nzLoadingIndicator", "nzBordered", "nzSize", "nzShowSizeChanger", "nzHideOnSinglePage", "nzShowQuickJumper", "nzSimple"], outputs: ["nzPageSizeChange", "nzPageIndexChange", "nzQueryParams", "nzCurrentPageDataChange", "nzCustomColumnChange"], exportAs: ["nzTable"] }, { kind: "component", type: i5.NzThAddOnComponent, selector: "th[nzColumnKey], th[nzSortFn], th[nzSortOrder], th[nzFilters], th[nzShowSort], th[nzShowFilter], th[nzCustomFilter]", inputs: ["nzColumnKey", "nzFilterMultiple", "nzSortOrder", "nzSortPriority", "nzSortDirections", "nzFilters", "nzSortFn", "nzFilterFn", "nzShowSort", "nzShowFilter", "nzCustomFilter"], outputs: ["nzCheckedChange", "nzSortOrderChange", "nzFilterChange"] }, { kind: "directive", type: i5.NzTableCellDirective, selector: "th:not(.nz-disable-th):not([mat-cell]), td:not(.nz-disable-td):not([mat-cell])" }, { kind: "directive", type: i5.NzThMeasureDirective, selector: "th", inputs: ["nzWidth", "colspan", "colSpan", "rowspan", "rowSpan"] }, { kind: "component", type: i5.NzTdAddOnComponent, selector: "td[nzChecked], td[nzDisabled], td[nzIndeterminate], td[nzIndentSize], td[nzExpand], td[nzShowExpand], td[nzShowCheckbox]", inputs: ["nzChecked", "nzDisabled", "nzIndeterminate", "nzLabel", "nzIndentSize", "nzShowExpand", "nzShowCheckbox", "nzExpand", "nzExpandIcon"], outputs: ["nzCheckedChange", "nzExpandChange"] }, { kind: "component", type: i5.NzTheadComponent, selector: "thead:not(.ant-table-thead)", outputs: ["nzSortOrderChange"] }, { kind: "component", type: i5.NzTbodyComponent, selector: "tbody" }, { kind: "directive", type: i5.NzTrDirective, selector: "tr:not([mat-row]):not([mat-header-row]):not([nz-table-measure-row]):not([nzExpand]):not([nz-table-fixed-row])" }, { kind: "directive", type: i5.NzTableVirtualScrollDirective, selector: "[nz-virtual-scroll]", exportAs: ["nzVirtualScroll"] }, { kind: "directive", type: i5.NzCellFixedDirective, selector: "td[nzRight],th[nzRight],td[nzLeft],th[nzLeft]", inputs: ["nzRight", "nzLeft", "colspan", "colSpan"] }, { kind: "directive", type: i5.NzTrExpandDirective, selector: "tr[nzExpand]", inputs: ["nzExpand"] }, { kind: "component", type: i5.NzTableFixedRowComponent, selector: "tr[nz-table-fixed-row], tr[nzExpand]" }, { kind: "directive", type: NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "component", type: NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId", "nzName"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "ngmodule", type: NzResizableModule }, { kind: "directive", type: i6.NzResizableDirective, selector: "[nz-resizable]", inputs: ["nzBounds", "nzMaxHeight", "nzMaxWidth", "nzMinHeight", "nzMinWidth", "nzGridColumnCount", "nzMaxColumn", "nzMinColumn", "nzLockAspectRatio", "nzPreview", "nzDisabled"], outputs: ["nzResize", "nzResizeEnd", "nzResizeStart"], exportAs: ["nzResizable"] }, { kind: "component", type: i6.NzResizeHandleComponent, selector: "nz-resize-handle, [nz-resize-handle]", inputs: ["nzDirection", "nzCursorType"], outputs: ["nzMouseDown"], exportAs: ["nzResizeHandle"] }, { kind: "directive", type: NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "ngmodule", type: NzDropDownModule }, { kind: "directive", type: i2$1.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i2$1.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "component", type: i2$1.NzSubMenuComponent, selector: "[nz-submenu]", inputs: ["nzMenuClassName", "nzPaddingLeft", "nzTitle", "nzIcon", "nzTriggerSubMenuAction", "nzOpen", "nzDisabled", "nzPlacement"], outputs: ["nzOpenChange"], exportAs: ["nzSubmenu"] }, { kind: "directive", type: i3$2.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "component", type: i3$2.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "directive", type: NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "ngmodule", type: NzMenuModule }, { kind: "component", type: STFilterComponent, selector: "st-filter", inputs: ["col", "locale", "f"], outputs: ["n", "handle"] }, { kind: "component", type: STTdComponent, selector: "st-td", inputs: ["c", "cIdx", "data", "i", "index"], outputs: ["n"] }, { kind: "ngmodule", type: DragDropModule }, { kind: "directive", type: i7.CdkDropList, selector: "[cdkDropList], cdk-drop-list", inputs: ["cdkDropListConnectedTo", "cdkDropListData", "cdkDropListOrientation", "id", "cdkDropListLockAxis", "cdkDropListDisabled", "cdkDropListSortingDisabled", "cdkDropListEnterPredicate", "cdkDropListSortPredicate", "cdkDropListAutoScrollDisabled", "cdkDropListAutoScrollStep", "cdkDropListElementContainer"], outputs: ["cdkDropListDropped", "cdkDropListEntered", "cdkDropListExited", "cdkDropListSorted"], exportAs: ["cdkDropList"] }, { kind: "directive", type: i7.CdkDrag, selector: "[cdkDrag]", inputs: ["cdkDragData", "cdkDragLockAxis", "cdkDragRootElement", "cdkDragBoundary", "cdkDragStartDelay", "cdkDragFreeDragPosition", "cdkDragDisabled", "cdkDragConstrainPosition", "cdkDragPreviewClass", "cdkDragPreviewContainer", "cdkDragScale"], outputs: ["cdkDragStarted", "cdkDragReleased", "cdkDragEnded", "cdkDragEntered", "cdkDragExited", "cdkDragDropped", "cdkDragMoved"], exportAs: ["cdkDrag"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STComponent, decorators: [{
             type: Component,
             args: [{ selector: 'st', exportAs: 'st', providers: [STDataSource, STRowSource, STColumnSource, STExport, DatePipe, YNPipe, DecimalPipe], host: {
                         '[class.st]': `true`,
@@ -2287,8 +2476,21 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
                         '[class.st__row-class]': `rowClassName`,
                         '[class.ant-table-rep]': `responsive`,
                         '[class.ant-table-rep__hide-header-footer]': `responsiveHideHeaderFooter`
-                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<ng-template #titleTpl let-i>\n  <span [innerHTML]=\"i._text\"></span>\n  @if (i.optional) {\n    <small class=\"st__head-optional\" [innerHTML]=\"i.optional\"></small>\n  }\n  @if (i.optionalHelp) {\n    <i class=\"st__head-tip\" nz-tooltip [nzTooltipTitle]=\"i.optionalHelp\" nz-icon nzType=\"question-circle\"></i>\n  }\n</ng-template>\n<ng-template #chkAllTpl let-custom>\n  <label\n    nz-checkbox\n    class=\"st__checkall\"\n    [nzDisabled]=\"_allCheckedDisabled\"\n    [(ngModel)]=\"_allChecked\"\n    [nzIndeterminate]=\"_indeterminate\"\n    (ngModelChange)=\"checkAll()\"\n    [class.ant-table-selection-select-all-custom]=\"custom\"\n  ></label>\n</ng-template>\n<nz-table\n  #table\n  [nzData]=\"_data\"\n  [(nzPageIndex)]=\"pi\"\n  (nzPageIndexChange)=\"_change('pi')\"\n  [(nzPageSize)]=\"ps\"\n  (nzPageSizeChange)=\"_change('ps')\"\n  [nzTotal]=\"total\"\n  [nzShowPagination]=\"_isPagination\"\n  [nzFrontPagination]=\"false\"\n  [nzBordered]=\"bordered\"\n  [nzSize]=\"size\"\n  [nzLoading]=\"noColumns || _loading\"\n  [nzLoadingDelay]=\"loadingDelay\"\n  [nzLoadingIndicator]=\"loadingIndicator\"\n  [nzTitle]=\"header!\"\n  [nzFooter]=\"footer!\"\n  [nzScroll]=\"scroll\"\n  [nzVirtualItemSize]=\"virtualItemSize\"\n  [nzVirtualMaxBufferPx]=\"virtualMaxBufferPx\"\n  [nzVirtualMinBufferPx]=\"virtualMinBufferPx\"\n  [nzVirtualForTrackBy]=\"virtualForTrackBy\"\n  [nzNoResult]=\"noResult!\"\n  [nzPageSizeOptions]=\"page.pageSizes!\"\n  [nzShowQuickJumper]=\"page.showQuickJumper\"\n  [nzShowSizeChanger]=\"page.showSize\"\n  [nzPaginationPosition]=\"page.position!\"\n  [nzPaginationType]=\"page.type!\"\n  [nzItemRender]=\"page.itemRender!\"\n  [nzSimple]=\"page.simple\"\n  [nzShowTotal]=\"totalTpl\"\n  [nzWidthConfig]=\"_widthConfig\"\n  (contextmenu)=\"onContextmenu($event)\"\n  [class.st__no-column]=\"noColumns\"\n>\n  @if (showHeader) {\n    <thead>\n      @for (row of _headers; track row) {\n        <tr>\n          @if ($first && expand) {\n            <th nzWidth=\"50px\" [rowSpan]=\"_headers.length\"></th>\n          }\n          @for (h of row; track h; let index = $index; let last = $last) {\n            @let _c = h.column;\n            <th\n              [colSpan]=\"h.colSpan\"\n              [rowSpan]=\"h.rowSpan\"\n              [nzWidth]=\"$any(_c).width\"\n              [nzLeft]=\"_c._left!\"\n              [nzRight]=\"_c._right!\"\n              [ngClass]=\"_c._className\"\n              [attr.data-col]=\"_c.indexKey\"\n              [attr.data-col-index]=\"index\"\n              [nzShowSort]=\"_c._sort.enabled\"\n              [nzSortOrder]=\"$any(_c)._sort.default\"\n              (nzSortOrderChange)=\"sort(_c, $event)\"\n              [nzCustomFilter]=\"!!_c.filter\"\n              [class.st__has-filter]=\"_c.filter\"\n              nz-resizable\n              [nzDisabled]=\"last || $any(_c).resizable.disabled\"\n              [nzMaxWidth]=\"$any(_c).resizable.maxWidth\"\n              [nzMinWidth]=\"$any(_c).resizable.minWidth\"\n              [nzBounds]=\"$any(_c).resizable.bounds\"\n              [nzPreview]=\"$any(_c).resizable.preview\"\n              (nzResizeEnd)=\"colResize($event, _c)\"\n            >\n              @if ($any(!last && !$any(_c).resizable.disabled)) {\n                <nz-resize-handle nzDirection=\"right\" (click)=\"_stopPropagation($event)\">\n                  <i></i>\n                </nz-resize-handle>\n              }\n              @if (_c.__renderTitle) {\n                <ng-template\n                  [ngTemplateOutlet]=\"_c.__renderTitle!\"\n                  [ngTemplateOutletContext]=\"{ $implicit: h.column, index: index }\"\n                />\n              } @else {\n                @switch (_c.type) {\n                  @case ('checkbox') {\n                    @if (_c.selections!.length === 0) {\n                      <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: false }\" />\n                    } @else {\n                      <div class=\"ant-table-selection\">\n                        <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: true }\" />\n                        @if (_c.selections!.length) {\n                          <div class=\"ant-table-selection-extra\">\n                            <div\n                              nz-dropdown\n                              nzPlacement=\"bottomLeft\"\n                              [nzDropdownMenu]=\"selectionMenu\"\n                              class=\"ant-table-selection-down st__checkall-selection\"\n                            >\n                              <i nz-icon nzType=\"down\"></i>\n                            </div>\n                          </div>\n                        }\n                        <nz-dropdown-menu #selectionMenu=\"nzDropdownMenu\">\n                          <ul nz-menu class=\"ant-table-selection-menu\">\n                            @for (rw of _c.selections; track $index) {\n                              <li nz-menu-item (click)=\"_rowSelection(rw)\" [innerHTML]=\"rw.text\"></li>\n                            }\n                          </ul>\n                        </nz-dropdown-menu>\n                      </div>\n                    }\n                  }\n                  @default {\n                    <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: _c.title }\" />\n                  }\n                }\n              }\n              @if (_c.filter) {\n                <st-filter\n                  nz-th-extra\n                  [col]=\"h.column\"\n                  [f]=\"_c.filter\"\n                  [locale]=\"locale\"\n                  (n)=\"handleFilterNotify($event)\"\n                  (handle)=\"_handleFilter(_c, $event)\"\n                />\n              }\n            </th>\n          }\n        </tr>\n      }\n    </thead>\n  }\n  <tbody class=\"st__body\">\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"bodyHeader!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n    <ng-template #bodyTpl let-i let-index=\"index\">\n      <tr\n        [attr.data-index]=\"index\"\n        (click)=\"_rowClick($event, i, index, false)\"\n        (dblclick)=\"_rowClick($event, i, index, true)\"\n        [ngClass]=\"i._rowClassName\"\n      >\n        @if (expand) {\n          <td\n            [nzShowExpand]=\"expand && i.showExpand !== false\"\n            [nzExpand]=\"i.expand\"\n            [nzExpandIcon]=\"expandIcon ? wrapExpandIcon : null\"\n            (nzExpandChange)=\"_expandChange(i, $event)\"\n            (click)=\"_stopPropagation($event)\"\n            nzWidth=\"50px\"\n          ></td>\n          <ng-template #wrapExpandIcon>\n            <span (click)=\"_expandChange(i, !i.expand)\">\n              <ng-template [ngTemplateOutlet]=\"expandIcon\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n            </span>\n          </ng-template>\n        }\n        @for (c of _columns; track cIdx; let cIdx = $index) {\n          @let props = i._values[cIdx].props;\n          @if (props?.colSpan > 0 && props?.rowSpan > 0) {\n            <td\n              [nzLeft]=\"!!c._left\"\n              [nzRight]=\"!!c._right\"\n              [attr.data-col-index]=\"cIdx\"\n              [ngClass]=\"c._className\"\n              [attr.colspan]=\"props?.colSpan === 1 ? null : props?.colSpan\"\n              [attr.rowspan]=\"props?.rowSpan === 1 ? null : props?.rowSpan\"\n            >\n              @if (responsive) {\n                <span class=\"ant-table-rep__title\">\n                  <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: c.title }\" />\n                </span>\n              }\n              <st-td [data]=\"_data\" [i]=\"i\" [index]=\"index\" [c]=\"c\" [cIdx]=\"cIdx\" (n)=\"_handleTd($event)\" />\n            </td>\n          }\n        }\n      </tr>\n      <tr [nzExpand]=\"i.expand\">\n        <ng-template [ngTemplateOutlet]=\"expand\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </tr>\n    </ng-template>\n    @if (virtualScroll) {\n      <ng-template nz-virtual-scroll let-i let-index=\"index\">\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </ng-template>\n    } @else {\n      @for (i of _data; track trackBy($index, i)) {\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: $index }\" />\n      }\n    }\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"body!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n  </tbody>\n  <ng-template #totalTpl let-range=\"range\" let-total>{{ renderTotal(total, range) }}</ng-template>\n</nz-table>\n<nz-dropdown-menu #contextmenuTpl=\"nzDropdownMenu\">\n  <ul nz-menu class=\"st__contextmenu\">\n    @for (i of contextmenuList; track $index) {\n      @if (i.children!.length === 0) {\n        <li nz-menu-item (click)=\"i.fn!(i)\" [innerHTML]=\"i.text\"></li>\n      } @else {\n        <li nz-submenu [nzTitle]=\"i.text\">\n          <ul>\n            @for (ci of i.children; track $index) {\n              <li nz-menu-item (click)=\"ci.fn!(ci)\" [innerHTML]=\"ci.text\"></li>\n            }\n          </ul>\n        </li>\n      }\n    }\n  </ul>\n</nz-dropdown-menu>\n" }]
-        }], ctorParameters: () => [{ type: i1$2.YunzaiConfigService }], propDecorators: { orgTable: [{
+                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, imports: [
+                        FormsModule,
+                        NzTableModule,
+                        NzTooltipDirective,
+                        NzCheckboxComponent,
+                        NzResizableModule,
+                        NgTemplateOutlet,
+                        NzDropDownModule,
+                        NzIconDirective,
+                        NzMenuModule,
+                        STFilterComponent,
+                        STTdComponent,
+                        DragDropModule
+                    ], template: "<ng-template #titleTpl let-i>\n  <span [innerHTML]=\"i._text\"></span>\n  @if (i.optional) {\n    <small class=\"st__head-optional\" [innerHTML]=\"i.optional\"></small>\n  }\n  @if (i.optionalHelp) {\n    <nz-icon class=\"st__head-tip\" nz-tooltip [nzTooltipTitle]=\"i.optionalHelp\" nzType=\"question-circle\" />\n  }\n</ng-template>\n<ng-template #chkAllTpl let-custom>\n  <label\n    nz-checkbox\n    class=\"st__checkall\"\n    [nzDisabled]=\"_allCheckedDisabled\"\n    [(ngModel)]=\"_allChecked\"\n    [nzIndeterminate]=\"_indeterminate\"\n    (ngModelChange)=\"checkAll()\"\n    [class.ant-table-selection-select-all-custom]=\"custom\"\n  ></label>\n</ng-template>\n<nz-table\n  #table\n  [nzData]=\"_data\"\n  [(nzPageIndex)]=\"pi\"\n  (nzPageIndexChange)=\"_change('pi')\"\n  [(nzPageSize)]=\"ps\"\n  (nzPageSizeChange)=\"_change('ps')\"\n  [nzTotal]=\"total\"\n  [nzShowPagination]=\"_isPagination\"\n  [nzFrontPagination]=\"false\"\n  [nzBordered]=\"bordered\"\n  [nzSize]=\"size\"\n  [nzLoading]=\"noColumns || _loading\"\n  [nzLoadingDelay]=\"loadingDelay\"\n  [nzLoadingIndicator]=\"loadingIndicator\"\n  [nzTitle]=\"header!\"\n  [nzFooter]=\"footer!\"\n  [nzScroll]=\"scroll\"\n  [nzVirtualItemSize]=\"virtualItemSize\"\n  [nzVirtualMaxBufferPx]=\"virtualMaxBufferPx\"\n  [nzVirtualMinBufferPx]=\"virtualMinBufferPx\"\n  [nzVirtualForTrackBy]=\"virtualForTrackBy\"\n  [nzNoResult]=\"noResult!\"\n  [nzPageSizeOptions]=\"page.pageSizes!\"\n  [nzShowQuickJumper]=\"page.showQuickJumper\"\n  [nzShowSizeChanger]=\"page.showSize\"\n  [nzPaginationPosition]=\"page.position!\"\n  [nzPaginationType]=\"page.type!\"\n  [nzItemRender]=\"page.itemRender!\"\n  [nzSimple]=\"page.simple\"\n  [nzShowTotal]=\"totalTpl\"\n  [nzWidthConfig]=\"_widthConfig\"\n  (contextmenu)=\"onContextmenu($event)\"\n  [class.st__no-column]=\"noColumns\"\n>\n  @if (showHeader) {\n    <thead>\n      @for (row of _headers; track row) {\n        <tr>\n          @if ($first && expand) {\n            <th nzWidth=\"50px\" [rowSpan]=\"_headers.length\" [nzLeft]=\"row[0].column._left ? true : false\"></th>\n          }\n          @for (h of row; track h; let index = $index; let last = $last) {\n            @let _c = h.column;\n            <th\n              [colSpan]=\"h.colSpan\"\n              [rowSpan]=\"h.rowSpan\"\n              [nzWidth]=\"$any(_c).width\"\n              [nzLeft]=\"_c._left\"\n              [nzRight]=\"_c._right\"\n              [class]=\"_c._className\"\n              [attr.data-col]=\"_c.indexKey\"\n              [attr.data-col-index]=\"index\"\n              [nzShowSort]=\"_c._sort.enabled\"\n              [nzSortOrder]=\"$any(_c)._sort.default\"\n              (nzSortOrderChange)=\"sort(_c, $event)\"\n              [nzCustomFilter]=\"!!_c.filter\"\n              [class.st__has-filter]=\"_c.filter\"\n              nz-resizable\n              [nzDisabled]=\"last || $any(_c).resizable.disabled\"\n              [nzMaxWidth]=\"$any(_c).resizable.maxWidth\"\n              [nzMinWidth]=\"$any(_c).resizable.minWidth\"\n              [nzBounds]=\"$any(_c).resizable.bounds\"\n              [nzPreview]=\"$any(_c).resizable.preview\"\n              (nzResizeEnd)=\"colResize($event, _c)\"\n            >\n              @if ($any(!last && !$any(_c).resizable.disabled)) {\n                <nz-resize-handle nzDirection=\"right\" (click)=\"_stopPropagation($event)\">\n                  <i></i>\n                </nz-resize-handle>\n              }\n              @if (_c.__renderTitle) {\n                <ng-template\n                  [ngTemplateOutlet]=\"_c.__renderTitle!\"\n                  [ngTemplateOutletContext]=\"{ $implicit: h.column, index: index }\"\n                />\n              } @else {\n                @switch (_c.type) {\n                  @case ('checkbox') {\n                    @if (_c.selections!.length === 0) {\n                      <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: false }\" />\n                    } @else {\n                      <div class=\"ant-table-selection\">\n                        <ng-template [ngTemplateOutlet]=\"chkAllTpl\" [ngTemplateOutletContext]=\"{ $implicit: true }\" />\n                        @if (_c.selections!.length) {\n                          <div class=\"ant-table-selection-extra\">\n                            <div\n                              nz-dropdown\n                              nzPlacement=\"bottomLeft\"\n                              [nzDropdownMenu]=\"selectionMenu\"\n                              class=\"ant-table-selection-down st__checkall-selection\"\n                            >\n                              <nz-icon nzType=\"down\" />\n                            </div>\n                          </div>\n                        }\n                        <nz-dropdown-menu #selectionMenu=\"nzDropdownMenu\">\n                          <ul nz-menu class=\"ant-table-selection-menu\">\n                            @for (rw of _c.selections; track $index) {\n                              <li nz-menu-item (click)=\"_rowSelection(rw)\" [innerHTML]=\"rw.text\"></li>\n                            }\n                          </ul>\n                        </nz-dropdown-menu>\n                      </div>\n                    }\n                  }\n                  @default {\n                    <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: _c.title }\" />\n                  }\n                }\n              }\n              @if (_c.filter) {\n                <st-filter\n                  nz-th-extra\n                  [col]=\"h.column\"\n                  [f]=\"_c.filter\"\n                  [locale]=\"locale\"\n                  (n)=\"handleFilterNotify($event)\"\n                  (handle)=\"_handleFilter(_c, $event)\"\n                />\n              }\n            </th>\n          }\n        </tr>\n      }\n    </thead>\n  }\n  <tbody\n    class=\"st__body\"\n    cdkDropList\n    [cdkDropListDisabled]=\"drag() === null\"\n    (cdkDropListDropped)=\"drag()?.dropped?.($event)\"\n    (cdkDropListEntered)=\"drag()?.entered?.($event)\"\n    (cdkDropListExited)=\"drag()?.exited?.($event)\"\n    (cdkDropListSorted)=\"drag()?.sorted?.($event)\"\n  >\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"bodyHeader!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n    <ng-template #bodyTpl let-i let-index=\"index\">\n      <tr\n        [attr.data-index]=\"index\"\n        (click)=\"_rowClick($event, i, index, false)\"\n        (dblclick)=\"_rowClick($event, i, index, true)\"\n        [class]=\"i._rowClassName\"\n        cdkDrag\n      >\n        @if (expand) {\n          <td\n            [nzShowExpand]=\"expand && i.showExpand !== false\"\n            [nzExpand]=\"i.expand\"\n            [nzExpandIcon]=\"expandIcon ? wrapExpandIcon : null\"\n            (nzExpandChange)=\"_expandChange(i, $event)\"\n            (click)=\"_stopPropagation($event)\"\n            nzWidth=\"50px\"\n            [nzLeft]=\"_columns[0]._left ? true : false\"\n          ></td>\n          <ng-template #wrapExpandIcon>\n            <span (click)=\"_expandChange(i, !i.expand)\">\n              <ng-template [ngTemplateOutlet]=\"expandIcon\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n            </span>\n          </ng-template>\n        }\n        @for (c of _columns; track cIdx; let cIdx = $index) {\n          @let props = i._values[cIdx].props;\n          @if (props?.colSpan > 0 && props?.rowSpan > 0) {\n            <td\n              [nzLeft]=\"c._left\"\n              [nzRight]=\"c._right\"\n              [attr.data-col-index]=\"cIdx\"\n              [class]=\"c._className\"\n              [attr.colspan]=\"props?.colSpan === 1 ? null : props?.colSpan\"\n              [attr.rowspan]=\"props?.rowSpan === 1 ? null : props?.rowSpan\"\n            >\n              @if (responsive) {\n                <span class=\"ant-table-rep__title\">\n                  <ng-template [ngTemplateOutlet]=\"titleTpl\" [ngTemplateOutletContext]=\"{ $implicit: c.title }\" />\n                </span>\n              }\n              <st-td [data]=\"_data\" [i]=\"i\" [index]=\"index\" [c]=\"c\" [cIdx]=\"cIdx\" (n)=\"_handleTd($event)\" />\n            </td>\n          }\n        }\n      </tr>\n      <tr [nzExpand]=\"i.expand\">\n        <ng-template [ngTemplateOutlet]=\"expand\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </tr>\n    </ng-template>\n    @if (virtualScroll) {\n      <ng-template nz-virtual-scroll let-i let-index=\"index\">\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index }\" />\n      </ng-template>\n    } @else {\n      @for (i of _data; track trackBy($index, i)) {\n        <ng-template [ngTemplateOutlet]=\"bodyTpl\" [ngTemplateOutletContext]=\"{ $implicit: i, index: $index }\" />\n      }\n    }\n    @if (!_loading) {\n      <ng-template [ngTemplateOutlet]=\"body!\" [ngTemplateOutletContext]=\"{ $implicit: _statistical }\" />\n    }\n  </tbody>\n  <ng-template #totalTpl let-range=\"range\" let-total>{{ renderTotal(total, range) }}</ng-template>\n</nz-table>\n<nz-dropdown-menu #contextmenuTpl=\"nzDropdownMenu\">\n  <ul nz-menu class=\"st__contextmenu\">\n    @for (i of contextmenuList; track $index) {\n      @if (i.children!.length === 0) {\n        <li nz-menu-item (click)=\"i.fn!(i)\" [innerHTML]=\"i.text\"></li>\n      } @else {\n        <li nz-submenu [nzTitle]=\"i.text\">\n          <ul>\n            @for (ci of i.children; track $index) {\n              <li nz-menu-item (click)=\"ci.fn!(ci)\" [innerHTML]=\"ci.text\"></li>\n            }\n          </ul>\n        </li>\n      }\n    }\n  </ul>\n</nz-dropdown-menu>\n" }]
+        }], ctorParameters: () => [{ type: i4.YunzaiConfigService }], propDecorators: { orgTable: [{
                 type: ViewChild,
                 args: ['table']
             }], contextmenuTpl: [{
@@ -2395,182 +2597,17 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
             }], trackBy: [{
                 type: Input
             }] } });
-class STTdComponent {
-    constructor() {
-        this.stComp = inject(STComponent, { host: true });
-        this.router = inject(Router);
-        this.modalHelper = inject(ModalHelper);
-        this.drawerHelper = inject(DrawerHelper);
-        this.n = new EventEmitter();
-    }
-    get routerState() {
-        const { pi, ps, total } = this.stComp;
-        return { pi, ps, total };
-    }
-    report(type) {
-        this.n.emit({ type, item: this.i, col: this.c });
-    }
-    _checkbox(value) {
-        this.i.checked = value;
-        this.report('checkbox');
-    }
-    _radio() {
-        this.data.filter(w => !w.disabled).forEach(i => (i.checked = false));
-        this.i.checked = true;
-        this.report('radio');
-    }
-    _link(e) {
-        this._stopPropagation(e);
-        const res = this.c.click(this.i, this.stComp);
-        if (typeof res === 'string') {
-            this.router.navigateByUrl(res, { state: this.routerState });
-        }
-        return false;
-    }
-    _stopPropagation(ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-    }
-    _btn(btn, ev) {
-        ev?.stopPropagation();
-        const cog = this.stComp.cog;
-        let record = this.i;
-        if (btn.type === 'modal' || btn.type === 'static') {
-            if (cog.modal.pureRecoard === true) {
-                record = this.stComp.pureItem(record);
-            }
-            const modal = btn.modal;
-            const obj = { [modal.paramsName]: record };
-            this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'](modal.component, { ...obj, ...(modal.params && modal.params(record)) }, deepMergeKey({}, true, cog.modal, modal))
-                .pipe(filter(w => typeof w !== 'undefined'))
-                .subscribe((res) => this.btnCallback(record, btn, res));
-            return;
-        }
-        else if (btn.type === 'drawer') {
-            if (cog.drawer.pureRecoard === true) {
-                record = this.stComp.pureItem(record);
-            }
-            const drawer = btn.drawer;
-            const obj = { [drawer.paramsName]: record };
-            this.drawerHelper
-                .create(drawer.title, drawer.component, { ...obj, ...(drawer.params && drawer.params(record)) }, deepMergeKey({}, true, cog.drawer, drawer))
-                .pipe(filter(w => typeof w !== 'undefined'))
-                .subscribe(res => this.btnCallback(record, btn, res));
-            return;
-        }
-        else if (btn.type === 'link') {
-            const clickRes = this.btnCallback(record, btn);
-            if (typeof clickRes === 'string') {
-                this.router.navigateByUrl(clickRes, { state: this.routerState });
-            }
-            return;
-        }
-        this.btnCallback(record, btn);
-    }
-    btnCallback(record, btn, modal) {
-        if (!btn.click)
-            return;
-        if (typeof btn.click === 'string') {
-            switch (btn.click) {
-                case 'load':
-                    this.stComp.load();
-                    break;
-                case 'reload':
-                    this.stComp.reload();
-                    break;
-            }
-        }
-        else {
-            return btn.click(record, modal, this.stComp);
-        }
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STTdComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: STTdComponent, selector: "st-td", inputs: { c: "c", cIdx: "cIdx", data: "data", i: "i", index: "index" }, outputs: { n: "n" }, ngImport: i0, template: "<ng-template #btnTpl let-i let-child=\"child\">\n  @if (i.tooltip) {\n    <span nz-tooltip [nzTooltipTitle]=\"i.tooltip\" [class.d-block]=\"child\" [class.width-100]=\"child\">\n      <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </span>\n  } @else {\n    <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n  }\n</ng-template>\n<ng-template #btnItemTpl let-i>\n  @if (i.pop) {\n    @let pop = i.pop;\n    <a\n      nz-popconfirm\n      [nzPopconfirmTitle]=\"pop.title\"\n      [nzIcon]=\"pop.icon\"\n      [nzCondition]=\"pop.condition(i)\"\n      [nzCancelText]=\"pop.cancelText\"\n      [nzOkText]=\"pop.okText\"\n      [nzOkType]=\"pop.okType\"\n      (nzOnConfirm)=\"_btn(i)\"\n      class=\"st__btn-text\"\n      [ngClass]=\"i._className\"\n      (click)=\"_stopPropagation($event)\"\n    >\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  } @else {\n    <a (click)=\"_btn(i, $event)\" class=\"st__btn-text\" [ngClass]=\"i._className\">\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  }\n</ng-template>\n<ng-template #btnTextTpl let-i>\n  @if (i._icon) {\n    @let icon = i._icon;\n    @if (icon.iconfont) {\n      <i nz-icon [nzIconfont]=\"icon.iconfont\"></i>\n    } @else {\n      <i\n        nz-icon\n        [nzType]=\"icon.type\"\n        [nzTheme]=\"icon.theme\"\n        [nzSpin]=\"icon.spin\"\n        [nzTwotoneColor]=\"icon.twoToneColor\"\n      ></i>\n    }\n  }\n  <span [innerHTML]=\"i._text\" [ngClass]=\"{ 'pl-xs': i._icon }\"></span>\n</ng-template>\n@if (c.__render) {\n  <ng-template [ngTemplateOutlet]=\"c.__render!\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index, column: c }\" />\n} @else {\n  @let col = i._values[cIdx];\n  @switch (c.type) {\n    @case ('checkbox') {\n      <label nz-checkbox [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_checkbox($event)\"></label>\n    }\n    @case ('radio') {\n      <label nz-radio [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_radio()\"></label>\n    }\n    @case ('link') {\n      <a (click)=\"_link($event)\" [innerHTML]=\"col._text\" [attr.title]=\"col.text\"></a>\n    }\n    @case ('tag') {\n      <nz-tag [nzColor]=\"col.color\" [nz-tooltip]=\"col.tooltip\">\n        <span [innerHTML]=\"col._text\"></span>\n      </nz-tag>\n    }\n    @case ('badge') {\n      <nz-badge [nzStatus]=\"col.color\" [nzText]=\"col.text\" [nz-tooltip]=\"col.tooltip\" />\n    }\n    @case ('cell') {\n      <cell [value]=\"col.text\" [options]=\"col.cell ?? c.cell\" />\n    }\n    @case ('widget') {\n      <ng-template st-widget-host [record]=\"i\" [column]=\"c\" />\n    }\n    @default {\n      @if (c.safeType === 'text') {\n        <span [innerText]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      } @else {\n        <span [innerHTML]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      }\n    }\n  }\n  @for (btn of col.buttons; track $index) {\n    @if (btn.children!.length > 0) {\n      <a nz-dropdown [nzDropdownMenu]=\"btnMenu\" nzOverlayClassName=\"st__btn-sub\">\n        <span [innerHTML]=\"btn._text\"></span>\n        <i nz-icon nzType=\"down\"></i>\n      </a>\n      <nz-dropdown-menu #btnMenu=\"nzDropdownMenu\">\n        <ul nz-menu>\n          @for (subBtn of btn.children; track $index) {\n            @if (subBtn.type === 'divider') {\n              <li nz-menu-divider></li>\n            } @else {\n              <li nz-menu-item [class.st__btn-disabled]=\"subBtn._disabled\">\n                <ng-template\n                  [ngTemplateOutlet]=\"btnTpl\"\n                  [ngTemplateOutletContext]=\"{ $implicit: subBtn, child: true }\"\n                />\n              </li>\n            }\n          }\n        </ul>\n      </nz-dropdown-menu>\n    } @else {\n      <span [class.st__btn-disabled]=\"btn._disabled\">\n        <ng-template [ngTemplateOutlet]=\"btnTpl\" [ngTemplateOutletContext]=\"{ $implicit: btn, child: false }\" />\n      </span>\n    }\n    @if (!$last) {\n      <nz-divider nzType=\"vertical\" />\n    }\n  }\n}\n", dependencies: [{ kind: "directive", type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i2.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i3$2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3$2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i12.CellComponent, selector: "cell, [cell]", inputs: ["value", "options", "loading", "disabled"], outputs: ["valueChange"], exportAs: ["cell"] }, { kind: "directive", type: i13.NzPopconfirmDirective, selector: "[nz-popconfirm]", inputs: ["nzPopconfirmArrowPointAtCenter", "nzPopconfirmTitle", "nzPopconfirmTitleContext", "nz-popconfirm", "nzPopconfirmTrigger", "nzPopconfirmPlacement", "nzPopconfirmOrigin", "nzPopconfirmMouseEnterDelay", "nzPopconfirmMouseLeaveDelay", "nzPopconfirmOverlayClassName", "nzPopconfirmOverlayStyle", "nzPopconfirmVisible", "nzOkText", "nzOkType", "nzOkDisabled", "nzOkDanger", "nzCancelText", "nzBeforeConfirm", "nzIcon", "nzCondition", "nzPopconfirmShowArrow", "nzPopconfirmBackdrop", "nzAutofocus"], outputs: ["nzPopconfirmVisibleChange", "nzOnCancel", "nzOnConfirm"], exportAs: ["nzPopconfirm"] }, { kind: "directive", type: i5.NzIconDirective, selector: "[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "component", type: i14.NzBadgeComponent, selector: "nz-badge", inputs: ["nzShowZero", "nzShowDot", "nzStandalone", "nzDot", "nzOverflowCount", "nzColor", "nzStyle", "nzText", "nzTitle", "nzStatus", "nzCount", "nzOffset", "nzSize"], exportAs: ["nzBadge"] }, { kind: "component", type: i6.NzCheckboxComponent, selector: "[nz-checkbox]", inputs: ["nzValue", "nzAutoFocus", "nzDisabled", "nzIndeterminate", "nzChecked", "nzId"], outputs: ["nzCheckedChange"], exportAs: ["nzCheckbox"] }, { kind: "component", type: i15.NzDividerComponent, selector: "nz-divider", inputs: ["nzText", "nzType", "nzOrientation", "nzDashed", "nzPlain"], exportAs: ["nzDivider"] }, { kind: "directive", type: i7.NzMenuDirective, selector: "[nz-menu]", inputs: ["nzInlineIndent", "nzTheme", "nzMode", "nzInlineCollapsed", "nzSelectable"], outputs: ["nzClick"], exportAs: ["nzMenu"] }, { kind: "component", type: i7.NzMenuItemComponent, selector: "[nz-menu-item]", inputs: ["nzPaddingLeft", "nzDisabled", "nzSelected", "nzDanger", "nzMatchRouterExact", "nzMatchRouter"], exportAs: ["nzMenuItem"] }, { kind: "directive", type: i7.NzMenuDividerDirective, selector: "[nz-menu-divider]", exportAs: ["nzMenuDivider"] }, { kind: "directive", type: i8.NzDropDownDirective, selector: "[nz-dropdown]", inputs: ["nzDropdownMenu", "nzTrigger", "nzMatchWidthElement", "nzBackdrop", "nzClickHide", "nzDisabled", "nzVisible", "nzOverlayClassName", "nzOverlayStyle", "nzPlacement"], outputs: ["nzVisibleChange"], exportAs: ["nzDropdown"] }, { kind: "directive", type: i8.NzDropDownADirective, selector: "a[nz-dropdown]" }, { kind: "component", type: i8.NzDropdownMenuComponent, selector: "nz-dropdown-menu", exportAs: ["nzDropdownMenu"] }, { kind: "component", type: i7$1.NzRadioComponent, selector: "[nz-radio],[nz-radio-button]", inputs: ["nzValue", "nzDisabled", "nzAutoFocus", "nz-radio-button"], exportAs: ["nzRadio"] }, { kind: "component", type: i17.NzTagComponent, selector: "nz-tag", inputs: ["nzMode", "nzColor", "nzChecked", "nzBordered"], outputs: ["nzOnClose", "nzCheckedChange"], exportAs: ["nzTag"] }, { kind: "directive", type: i9$1.NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }, { kind: "directive", type: STWidgetHostDirective, selector: "[st-widget-host]", inputs: ["record", "column"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STTdComponent, decorators: [{
-            type: Component,
-            args: [{ selector: 'st-td', preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<ng-template #btnTpl let-i let-child=\"child\">\n  @if (i.tooltip) {\n    <span nz-tooltip [nzTooltipTitle]=\"i.tooltip\" [class.d-block]=\"child\" [class.width-100]=\"child\">\n      <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </span>\n  } @else {\n    <ng-template [ngTemplateOutlet]=\"btnItemTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n  }\n</ng-template>\n<ng-template #btnItemTpl let-i>\n  @if (i.pop) {\n    @let pop = i.pop;\n    <a\n      nz-popconfirm\n      [nzPopconfirmTitle]=\"pop.title\"\n      [nzIcon]=\"pop.icon\"\n      [nzCondition]=\"pop.condition(i)\"\n      [nzCancelText]=\"pop.cancelText\"\n      [nzOkText]=\"pop.okText\"\n      [nzOkType]=\"pop.okType\"\n      (nzOnConfirm)=\"_btn(i)\"\n      class=\"st__btn-text\"\n      [ngClass]=\"i._className\"\n      (click)=\"_stopPropagation($event)\"\n    >\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  } @else {\n    <a (click)=\"_btn(i, $event)\" class=\"st__btn-text\" [ngClass]=\"i._className\">\n      <ng-template [ngTemplateOutlet]=\"btnTextTpl\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n    </a>\n  }\n</ng-template>\n<ng-template #btnTextTpl let-i>\n  @if (i._icon) {\n    @let icon = i._icon;\n    @if (icon.iconfont) {\n      <i nz-icon [nzIconfont]=\"icon.iconfont\"></i>\n    } @else {\n      <i\n        nz-icon\n        [nzType]=\"icon.type\"\n        [nzTheme]=\"icon.theme\"\n        [nzSpin]=\"icon.spin\"\n        [nzTwotoneColor]=\"icon.twoToneColor\"\n      ></i>\n    }\n  }\n  <span [innerHTML]=\"i._text\" [ngClass]=\"{ 'pl-xs': i._icon }\"></span>\n</ng-template>\n@if (c.__render) {\n  <ng-template [ngTemplateOutlet]=\"c.__render!\" [ngTemplateOutletContext]=\"{ $implicit: i, index: index, column: c }\" />\n} @else {\n  @let col = i._values[cIdx];\n  @switch (c.type) {\n    @case ('checkbox') {\n      <label nz-checkbox [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_checkbox($event)\"></label>\n    }\n    @case ('radio') {\n      <label nz-radio [nzDisabled]=\"i.disabled\" [ngModel]=\"i.checked\" (ngModelChange)=\"_radio()\"></label>\n    }\n    @case ('link') {\n      <a (click)=\"_link($event)\" [innerHTML]=\"col._text\" [attr.title]=\"col.text\"></a>\n    }\n    @case ('tag') {\n      <nz-tag [nzColor]=\"col.color\" [nz-tooltip]=\"col.tooltip\">\n        <span [innerHTML]=\"col._text\"></span>\n      </nz-tag>\n    }\n    @case ('badge') {\n      <nz-badge [nzStatus]=\"col.color\" [nzText]=\"col.text\" [nz-tooltip]=\"col.tooltip\" />\n    }\n    @case ('cell') {\n      <cell [value]=\"col.text\" [options]=\"col.cell ?? c.cell\" />\n    }\n    @case ('widget') {\n      <ng-template st-widget-host [record]=\"i\" [column]=\"c\" />\n    }\n    @default {\n      @if (c.safeType === 'text') {\n        <span [innerText]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      } @else {\n        <span [innerHTML]=\"col._text\" [attr.title]=\"c._isTruncate ? col.text : null\"></span>\n      }\n    }\n  }\n  @for (btn of col.buttons; track $index) {\n    @if (btn.children!.length > 0) {\n      <a nz-dropdown [nzDropdownMenu]=\"btnMenu\" nzOverlayClassName=\"st__btn-sub\">\n        <span [innerHTML]=\"btn._text\"></span>\n        <i nz-icon nzType=\"down\"></i>\n      </a>\n      <nz-dropdown-menu #btnMenu=\"nzDropdownMenu\">\n        <ul nz-menu>\n          @for (subBtn of btn.children; track $index) {\n            @if (subBtn.type === 'divider') {\n              <li nz-menu-divider></li>\n            } @else {\n              <li nz-menu-item [class.st__btn-disabled]=\"subBtn._disabled\">\n                <ng-template\n                  [ngTemplateOutlet]=\"btnTpl\"\n                  [ngTemplateOutletContext]=\"{ $implicit: subBtn, child: true }\"\n                />\n              </li>\n            }\n          }\n        </ul>\n      </nz-dropdown-menu>\n    } @else {\n      <span [class.st__btn-disabled]=\"btn._disabled\">\n        <ng-template [ngTemplateOutlet]=\"btnTpl\" [ngTemplateOutletContext]=\"{ $implicit: btn, child: false }\" />\n      </span>\n    }\n    @if (!$last) {\n      <nz-divider nzType=\"vertical\" />\n    }\n  }\n}\n" }]
-        }], propDecorators: { c: [{
-                type: Input
-            }], cIdx: [{
-                type: Input
-            }], data: [{
-                type: Input
-            }], i: [{
-                type: Input
-            }], index: [{
-                type: Input
-            }], n: [{
-                type: Output
-            }] } });
 
 const COMPONENTS = [STComponent, STRowDirective, STWidgetHostDirective];
 class STModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: STModule, declarations: [STComponent, STRowDirective, STWidgetHostDirective, STFilterComponent, STTdComponent], imports: [CommonModule,
-            FormsModule,
-            YelonACLModule,
-            CellModule,
-            NzPopconfirmModule,
-            NzTableModule,
-            NzIconModule,
-            NzBadgeModule,
-            NzCheckboxModule,
-            NzDividerModule,
-            NzDropDownModule,
-            NzMenuModule,
-            NzRadioModule,
-            NzTagModule,
-            NzInputModule,
-            NzToolTipModule,
-            NzResizableModule,
-            NzInputNumberModule,
-            NzDatePickerModule], exports: [STComponent, STRowDirective, STWidgetHostDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STModule, imports: [CommonModule,
-            FormsModule,
-            YelonACLModule,
-            CellModule,
-            NzPopconfirmModule,
-            NzTableModule,
-            NzIconModule,
-            NzBadgeModule,
-            NzCheckboxModule,
-            NzDividerModule,
-            NzDropDownModule,
-            NzMenuModule,
-            NzRadioModule,
-            NzTagModule,
-            NzInputModule,
-            NzToolTipModule,
-            NzResizableModule,
-            NzInputNumberModule,
-            NzDatePickerModule] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: STModule, imports: [STComponent, STRowDirective, STWidgetHostDirective], exports: [STComponent, STRowDirective, STWidgetHostDirective] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STModule, imports: [STComponent] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: STModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: STModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        CommonModule,
-                        FormsModule,
-                        YelonACLModule,
-                        CellModule,
-                        NzPopconfirmModule,
-                        NzTableModule,
-                        NzIconModule,
-                        NzBadgeModule,
-                        NzCheckboxModule,
-                        NzDividerModule,
-                        NzDropDownModule,
-                        NzMenuModule,
-                        NzRadioModule,
-                        NzTagModule,
-                        NzInputModule,
-                        NzToolTipModule,
-                        NzResizableModule,
-                        NzInputNumberModule,
-                        NzDatePickerModule
-                    ],
-                    declarations: [...COMPONENTS, STFilterComponent, STTdComponent],
+                    imports: COMPONENTS,
                     exports: COMPONENTS
                 }]
         }] });
@@ -2580,14 +2617,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  */
 function provideSTWidgets(...widgets) {
     return makeEnvironmentProviders([
-        {
-            provide: ENVIRONMENT_INITIALIZER,
-            multi: true,
-            useValue: () => {
-                const srv = inject(STWidgetRegistry);
-                widgets.forEach(widget => srv.register(widget.KEY, widget.type));
-            }
-        }
+        provideEnvironmentInitializer(() => {
+            const srv = inject(STWidgetRegistry);
+            widgets.forEach(widget => srv.register(widget.KEY, widget.type));
+        })
     ]);
 }
 

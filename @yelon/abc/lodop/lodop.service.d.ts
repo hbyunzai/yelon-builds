@@ -1,7 +1,6 @@
 import { OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { LodopPrintResult, LodopResult } from './lodop.types';
 import * as i0 from "@angular/core";
 export declare class LodopService implements OnDestroy {
@@ -53,7 +52,7 @@ export declare class LodopService implements OnDestroy {
      *
      * 附加代码至 `lodop` 对象上，字符串类支持 `{{key}}` 的动态参数，**注：** 代码是指打印设计所产生字符串数据
      */
-    attachCode(code: string, contextObj?: NzSafeAny, parser?: RegExp): void;
+    attachCode(code: string, contextObj?: any, parser?: RegExp): void;
     /**
      * The code is automatically returned after opening the print design and closing,
      * **Note:** Automatically listen for the `On_Return` event, and it will be removed after running
@@ -67,7 +66,7 @@ export declare class LodopService implements OnDestroy {
      *
      * 立即打印，一般用于批量套打
      */
-    print(code: string, contextObj: NzSafeAny, parser?: RegExp): void;
+    print(code: string, contextObj: any, parser?: RegExp): void;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LodopService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<LodopService>;

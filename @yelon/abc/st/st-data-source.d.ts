@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { DatePipe, YNPipe, _HttpClient } from '@yelon/theme';
 import type { YunzaiSTConfig } from '@yelon/util/config';
 import { CurrencyService } from '@yelon/util/format';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { STColumn, STCustomRequestOptions, STData, STMultiSort, STMultiSortResultType, STOnCellResult, STPage, STReq, STRes, STRowClassName, STSingleSort, STStatisticalResults } from './st.interfaces';
 import type { _STColumn, _STHeader } from './st.types';
 import * as i0 from "@angular/core";
@@ -22,7 +21,7 @@ export interface STDataSourceOptions {
     singleSort?: STSingleSort | null;
     multiSort?: STMultiSort;
     rowClassName?: STRowClassName | null;
-    customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
+    customRequest?: (options: STCustomRequestOptions) => Observable<any>;
 }
 export interface STDataSourceResult {
     /** 是否需要显示分页器 */

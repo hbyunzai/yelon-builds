@@ -1,6 +1,5 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ReuseTabContextComponent } from './reuse-tab-context.component';
 /**
  * 复用匹配模式
@@ -55,7 +54,7 @@ export interface ReuseTabNotify {
     title?: ReuseTitle;
     item?: ReuseTabCached;
     list?: ReuseTabCached[];
-    [key: string]: NzSafeAny;
+    [key: string]: any;
 }
 export interface ReuseItem {
     url: string;

@@ -1,8 +1,7 @@
 import { EnvironmentProviders } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface SFWidgetProvideConfig {
     KEY: string;
-    type: NzSafeAny;
+    type: any;
 }
 /**
  * Just only using Standalone widgets

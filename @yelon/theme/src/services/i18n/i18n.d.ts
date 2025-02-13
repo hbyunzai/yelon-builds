@@ -1,10 +1,9 @@
 import { InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface YunzaiI18NService {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /**
      * Call `use` to trigger change notification
      *
@@ -36,7 +35,7 @@ export interface YunzaiI18NService {
      *
      * 返回当前语言列表
      */
-    getLangs(): NzSafeAny[];
+    getLangs(): any[];
     /**
      * Translate 翻译
      *
@@ -77,14 +76,14 @@ export declare abstract class YunzaiI18nBaseService implements YunzaiI18NService
      */
     flatData(data: Record<string, unknown>, parentKey: string[]): Record<string, string>;
     abstract use(lang: string, data?: Record<string, unknown>): void;
-    abstract getLangs(): NzSafeAny;
+    abstract getLangs(): any;
     fanyi(path: string, params?: unknown | unknown[]): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiI18nBaseService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<YunzaiI18nBaseService>;
 }
 export declare class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     use(lang: string, data: Record<string, unknown>): void;
-    getLangs(): NzSafeAny[];
+    getLangs(): any[];
     static ɵfac: i0.ɵɵFactoryDeclaration<YunzaiI18NServiceFake, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<YunzaiI18NServiceFake>;
 }

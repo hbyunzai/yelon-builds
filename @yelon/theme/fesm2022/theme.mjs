@@ -1,7 +1,7 @@
 import { DOCUMENT, isPlatformServer, registerLocaleData, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, Pipe, Optional, Inject, SkipSelf, NgModule, importProvidersFrom, LOCALE_ID, ENVIRONMENT_INITIALIZER, makeEnvironmentProviders, Version } from '@angular/core';
-import { filter, BehaviorSubject, share, Subject, map, of, delay, isObservable, switchMap, tap, finalize, takeUntil, catchError, Observable, take, throwError } from 'rxjs';
+import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, Pipe, Inject, Optional, SkipSelf, NgModule, importProvidersFrom, LOCALE_ID, provideEnvironmentInitializer, makeEnvironmentProviders, Version } from '@angular/core';
+import { BehaviorSubject, filter, share, Subject, map, of, delay, isObservable, switchMap, tap, finalize, takeUntil, catchError, Observable, take, throwError } from 'rxjs';
 import { ACLService } from '@yelon/acl';
 import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService, YUNZAI_CONFIG } from '@yelon/util/config';
@@ -24,9 +24,9 @@ import ngSl from '@angular/common/locales/sl';
 import ngTr from '@angular/common/locales/tr';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
-import { zhCN as zhCN$1, zhTW, enUS, el, es, fr, hr, it, ko, pl, sl, tr } from 'date-fns/locale';
+import { tr, sl, pl, ko, it, hr, fr, es, el, enUS, zhTW, zhCN as zhCN$1 } from 'date-fns/locale';
 import * as i3 from 'ng-zorro-antd/i18n';
-import { zh_CN, zh_TW, en_US, el_GR, es_ES, fr_FR, hr_HR, it_IT, ko_KR, pl_PL, sl_SI, tr_TR, NzI18nService, NzI18nModule, provideNzI18n, NZ_DATE_LOCALE } from 'ng-zorro-antd/i18n';
+import { tr_TR, sl_SI, pl_PL, ko_KR, it_IT, hr_HR, fr_FR, es_ES, el_GR, en_US, zh_TW, zh_CN, NzI18nService, NzI18nModule, provideNzI18n, NZ_DATE_LOCALE } from 'ng-zorro-antd/i18n';
 import { map as map$1 } from 'rxjs/operators';
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { HttpClient, HttpParams, HttpContextToken } from '@angular/common/http';
@@ -70,6 +70,11 @@ const YUNZAI_I18N_TOKEN = new InjectionToken('yunzaiI18nToken', {
     factory: () => new YunzaiI18NServiceFake(inject(YunzaiConfigService))
 });
 class YunzaiI18nBaseService {
+    cog;
+    _change$ = new BehaviorSubject(null);
+    _currentLang = '';
+    _defaultLang = '';
+    _data = {};
     get change() {
         return this._change$.asObservable().pipe(filter(w => w != null));
     }
@@ -83,10 +88,6 @@ class YunzaiI18nBaseService {
         return this._data;
     }
     constructor(cogSrv) {
-        this._change$ = new BehaviorSubject(null);
-        this._currentLang = '';
-        this._defaultLang = '';
-        this._data = {};
         this.cog = cogSrv.merge('themeI18n', {
             interpolation: ['{{', '}}']
         });
@@ -137,10 +138,10 @@ class YunzaiI18nBaseService {
         (Array.isArray(params) ? params : [params]).forEach((item, index) => (content = content.replace(new RegExp(`\\{\\s?${index}\\s?\\}`, 'g'), `${item}`)));
         return content;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18nBaseService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18nBaseService }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18nBaseService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18nBaseService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18nBaseService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18nBaseService, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
 class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
@@ -152,10 +153,10 @@ class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     getLangs() {
         return [];
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18NServiceFake, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18NServiceFake, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -164,16 +165,17 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
 class MenuService {
+    i18nSrv = inject(YUNZAI_I18N_TOKEN);
+    aclService = inject(ACLService);
+    _change$ = new BehaviorSubject([]);
+    i18n$;
+    data = [];
+    $routerLink = new BehaviorSubject('');
+    /**
+     * 是否完全受控菜单打开状态，默认：`false`
+     */
+    openStrictly = false;
     constructor() {
-        this.i18nSrv = inject(YUNZAI_I18N_TOKEN);
-        this.aclService = inject(ACLService);
-        this._change$ = new BehaviorSubject([]);
-        this.data = [];
-        this.$routerLink = new BehaviorSubject('');
-        /**
-         * 是否完全受控菜单打开状态，默认：`false`
-         */
-        this.openStrictly = false;
         this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
     }
     get change() {
@@ -468,10 +470,10 @@ class MenuService {
     getRouterLink() {
         return this.$routerLink.asObservable();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MenuService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MenuService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: MenuService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: MenuService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: MenuService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: MenuService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -486,14 +488,12 @@ const YUNZAI_SETTING_DEFAULT = {
     }
 };
 class SettingsService {
-    constructor() {
-        this.KEYS = inject(YUNZAI_SETTING_KEYS);
-        this.platform = inject(Platform);
-        this.notify$ = new Subject();
-        this._app = null;
-        this._user = null;
-        this._layout = null;
-    }
+    KEYS = inject(YUNZAI_SETTING_KEYS);
+    platform = inject(Platform);
+    notify$ = new Subject();
+    _app = null;
+    _user = null;
+    _layout = null;
     getData(key) {
         if (!this.platform.isBrowser) {
             return null;
@@ -569,10 +569,10 @@ class SettingsService {
     getUser() {
         return this._user;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingsService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingsService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingsService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingsService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: SettingsService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: SettingsService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -580,6 +580,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 const REP_MAX = 6;
 const SPAN_MAX = 24;
 class ResponsiveService {
+    cog;
     constructor(cogSrv) {
         this.cog = cogSrv.merge('themeResponsive', {
             rules: {
@@ -619,10 +620,10 @@ class ResponsiveService {
             clsMap.push(`${antColClass}-xxl-${paddingSpan(rule.xxl)}`);
         return clsMap;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ResponsiveService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ResponsiveService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ResponsiveService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ResponsiveService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ResponsiveService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ResponsiveService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
@@ -634,6 +635,13 @@ const RTL_YELON_COMPONENTS = ['loading', 'onboarding'];
 const LTR = 'ltr';
 const RTL = 'rtl';
 class RTLService {
+    d = inject(Directionality);
+    nz = inject(NzConfigService);
+    yelon = inject(YunzaiConfigService);
+    platform = inject(Platform);
+    doc = inject(DOCUMENT);
+    srv = inject(SettingsService);
+    _dir = LTR;
     /**
      * Get or Set the current text direction
      *
@@ -670,13 +678,6 @@ class RTLService {
         return this.srv.notify.pipe(filter(w => w.name === RTL_DIRECTION), map(v => v.value));
     }
     constructor() {
-        this.d = inject(Directionality);
-        this.nz = inject(NzConfigService);
-        this.yelon = inject(YunzaiConfigService);
-        this.platform = inject(Platform);
-        this.doc = inject(DOCUMENT);
-        this.srv = inject(SettingsService);
-        this._dir = LTR;
         this.dir = this.srv.layout.direction === RTL ? RTL : LTR;
     }
     /**
@@ -708,33 +709,28 @@ class RTLService {
             this.yelon.set(name, { direction: this.dir });
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: RTLService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: RTLService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: RTLService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: RTLService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: RTLService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: RTLService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
 
 class TitleService {
+    destroy$ = inject(DestroyRef);
+    _prefix = '';
+    _suffix = '';
+    _separator = ' - ';
+    _reverse = false;
+    tit$;
+    DELAY_TIME = 25;
+    doc = inject(DOCUMENT);
+    injector = inject(Injector);
+    title = inject(Title);
+    menuSrv = inject(MenuService);
+    i18nSrv = inject(YUNZAI_I18N_TOKEN);
     constructor() {
-        this.destroy$ = inject(DestroyRef);
-        this._prefix = '';
-        this._suffix = '';
-        this._separator = ' - ';
-        this._reverse = false;
-        this.DELAY_TIME = 25;
-        this.doc = inject(DOCUMENT);
-        this.injector = inject(Injector);
-        this.title = inject(Title);
-        this.menuSrv = inject(MenuService);
-        this.i18nSrv = inject(YUNZAI_I18N_TOKEN);
-        /**
-         * Set default title name
-         *
-         * 设置默认标题名
-         */
-        this.default = `Not Page Name`;
         this.i18nSrv.change.pipe(takeUntilDestroyed()).subscribe(() => this.setTitle());
     }
     /**
@@ -769,6 +765,18 @@ class TitleService {
     set reverse(value) {
         this._reverse = value;
     }
+    /**
+     * Set the default CSS selector string
+     *
+     * 设置默认CSS选择器字符串
+     */
+    selector;
+    /**
+     * Set default title name
+     *
+     * 设置默认标题名
+     */
+    default = `Not Page Name`;
     getByElement() {
         return of('').pipe(delay(this.DELAY_TIME), map(() => {
             const el = ((this.selector != null ? this.doc.querySelector(this.selector) : null) ||
@@ -836,53 +844,44 @@ class TitleService {
     ngOnDestroy() {
         this.tit$?.unsubscribe();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TitleService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TitleService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TitleService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TitleService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: TitleService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: TitleService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
 
 class I18nPipe {
-    constructor() {
-        this.i18n = inject(YUNZAI_I18N_TOKEN);
-    }
+    i18n = inject(YUNZAI_I18N_TOKEN);
     transform(key, params) {
         return this.i18n.fanyi(key, params);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: I18nPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: I18nPipe, isStandalone: true, name: "i18n" }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: I18nPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: I18nPipe, isStandalone: true, name: "i18n" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: I18nPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: I18nPipe, decorators: [{
             type: Pipe,
-            args: [{ name: 'i18n', standalone: true }]
+            args: [{ name: 'i18n' }]
         }] });
 
 class YunzaiI18NGuardService {
-    constructor(i18nSrv, cogSrv) {
-        this.i18nSrv = i18nSrv;
-        this.cogSrv = cogSrv;
-    }
+    i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
+    cogSrv = inject(YunzaiConfigService);
     process(route) {
         const lang = route.params && route.params[this.cogSrv.get('themeI18n')?.paramNameOfUrlGuard ?? 'i18n'];
         if (lang != null) {
-            this.i18nSrv.use(lang);
+            this.i18nSrv?.use(lang);
         }
         return of(true);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18NGuardService, deps: [{ token: YUNZAI_I18N_TOKEN, optional: true }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18NGuardService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18NGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18NGuardService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiI18NGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiI18NGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: undefined, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [YUNZAI_I18N_TOKEN]
-                }] }, { type: i1.YunzaiConfigService }] });
+        }] });
 /**
  * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
  *
@@ -1968,7 +1967,6 @@ const YUNZAI_LANGS = {
     }
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * 封装HttpClient，主要解决：
  * + 优化HttpClient在参数上便利性
@@ -1976,14 +1974,15 @@ const YUNZAI_LANGS = {
  * + 统一处理时间格式问题
  */
 class _HttpClient {
+    http = inject(HttpClient);
+    cog;
     constructor(cogSrv) {
-        this.http = inject(HttpClient);
-        this.lc = 0;
         this.cog = cogSrv.merge('themeHttp', {
             nullValueHandling: 'include',
             dateValueHandling: 'timestamp'
         });
     }
+    lc = 0;
     /**
      * Get whether it's loading
      *
@@ -2074,7 +2073,9 @@ class _HttpClient {
      * @param callbackParam CALLBACK值，默认：JSONP_CALLBACK
      */
     jsonp(url, params, callbackParam = 'JSONP_CALLBACK') {
-        return of(null).pipe(delay(0), tap(() => this.push()), switchMap(() => this.http.jsonp(this.appliedUrl(url, params), callbackParam)), finalize(() => this.pop()));
+        return of(null).pipe(
+        // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
+        delay(0), tap(() => this.push()), switchMap(() => this.http.jsonp(this.appliedUrl(url, params), callbackParam)), finalize(() => this.pop()));
     }
     patch(url, body, params, options = {}) {
         return this.request('PATCH', url, {
@@ -2103,12 +2104,14 @@ class _HttpClient {
     request(method, url, options = {}) {
         if (options.params)
             options.params = this.parseParams(options.params);
-        return of(null).pipe(delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
+        return of(null).pipe(
+        // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
+        delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: _HttpClient, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: _HttpClient, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: _HttpClient, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: _HttpClient, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: _HttpClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: _HttpClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
@@ -2116,9 +2119,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 const YELON_LOCALE = new InjectionToken('yelon-locale');
 
 class YelonLocaleService {
+    _locale = zhCN;
+    change$ = new BehaviorSubject(this._locale);
     constructor(locale) {
-        this._locale = zhCN;
-        this.change$ = new BehaviorSubject(this._locale);
         this.setLocale(locale || zhCN);
     }
     get change() {
@@ -2137,10 +2140,10 @@ class YelonLocaleService {
     getData(path) {
         return (this._locale[path] || {});
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleService }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleService, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -2157,6 +2160,14 @@ const YELON_LOCALE_SERVICE_PROVIDER = {
 
 const DEFAULT = 'zh-CN';
 class YunzaiHttpI18NService extends YunzaiI18nBaseService {
+    http;
+    settings;
+    nzI18nService;
+    yelonLocaleService;
+    platform;
+    tokenService;
+    _defaultLang = DEFAULT;
+    $destroy = new Subject();
     constructor(http, settings, nzI18nService, yelonLocaleService, platform, tokenService, cogSrv) {
         super(cogSrv);
         this.http = http;
@@ -2165,8 +2176,6 @@ class YunzaiHttpI18NService extends YunzaiI18nBaseService {
         this.yelonLocaleService = yelonLocaleService;
         this.platform = platform;
         this.tokenService = tokenService;
-        this._defaultLang = DEFAULT;
-        this.$destroy = new Subject();
         if (this.tokenService.get()?.access_token) {
             const defaultLang = this.getDefaultLang();
             this.getLangs()
@@ -2239,10 +2248,10 @@ class YunzaiHttpI18NService extends YunzaiI18nBaseService {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiHttpI18NService, deps: [{ token: _HttpClient }, { token: SettingsService }, { token: i3.NzI18nService }, { token: YelonLocaleService }, { token: i5.Platform }, { token: YA_SERVICE_TOKEN }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiHttpI18NService, deps: [{ token: _HttpClient }, { token: SettingsService }, { token: i3.NzI18nService }, { token: YelonLocaleService }, { token: i5.Platform }, { token: YA_SERVICE_TOKEN }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: _HttpClient }, { type: SettingsService }, { type: i3.NzI18nService }, { type: YelonLocaleService }, { type: i5.Platform }, { type: undefined, decorators: [{
@@ -2255,11 +2264,9 @@ const CLS_DRAG = 'MODAL-DRAG';
  * 对话框辅助类
  */
 class ModalHelper {
-    constructor() {
-        this.srv = inject(NzModalService);
-        this.drag = inject(DragDrop);
-        this.doc = inject(DOCUMENT);
-    }
+    srv = inject(NzModalService);
+    drag = inject(DragDrop);
+    doc = inject(DOCUMENT);
     createDragRef(options, wrapCls) {
         const wrapEl = this.doc.querySelector(wrapCls);
         const modalEl = wrapEl.firstChild;
@@ -2335,6 +2342,7 @@ class ModalHelper {
                 nzWidth: width ? width : undefined,
                 nzFooter: null,
                 nzData: params,
+                nzDraggable: false,
                 ...modalOptions
             });
             // 保留 nzComponentParams 原有风格，但依然可以通过 @Inject(NZ_MODAL_DATA) 获取
@@ -2402,10 +2410,10 @@ class ModalHelper {
         };
         return this.create(comp, params, { ...options, modalOptions });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ModalHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ModalHelper, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ModalHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ModalHelper, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: ModalHelper, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: ModalHelper, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -2426,11 +2434,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  * this.NzDrawerRef.close(false);
  */
 class DrawerHelper {
-    constructor() {
-        this.srv = inject(NzDrawerService);
-        this.parentDrawer = inject(DrawerHelper, { optional: true, skipSelf: true });
-        this.openDrawersAtThisLevel = [];
-    }
+    srv = inject(NzDrawerService);
+    parentDrawer = inject(DrawerHelper, { optional: true, skipSelf: true });
+    openDrawersAtThisLevel = [];
     get openDrawers() {
         return this.parentDrawer ? this.parentDrawer.openDrawers : this.openDrawersAtThisLevel;
     }
@@ -2465,7 +2471,7 @@ class DrawerHelper {
             if (footer) {
                 // The 24 value is @drawer-body-padding
                 defaultOptions.nzBodyStyle = {
-                    'padding-bottom.px': footerHeight + 24
+                    'padding-bottom': `${footerHeight + 24}px`
                 };
             }
             const ref = this.srv.create({ ...defaultOptions, ...drawerOptions });
@@ -2507,10 +2513,10 @@ class DrawerHelper {
         };
         return this.create(title, comp, params, { ...options, drawerOptions });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DrawerHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DrawerHelper, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DrawerHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DrawerHelper, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DrawerHelper, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DrawerHelper, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -2523,13 +2529,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
  * ```
  */
 class BaseApi {
-    constructor() {
-        this.injector = inject(Injector);
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: BaseApi, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: BaseApi }); }
+    injector = inject(Injector);
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: BaseApi, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: BaseApi });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: BaseApi, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: BaseApi, decorators: [{
             type: Injectable
         }] });
 const paramKey = `__api_params`;
@@ -2760,11 +2764,11 @@ const IGNORE_BASE_URL = new HttpContextToken(() => false);
 const RAW_BODY = new HttpContextToken(() => false);
 
 class YelonLocaleModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleModule, providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleModule, providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YelonLocaleModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YelonLocaleModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER]
@@ -2937,11 +2941,92 @@ var viVI = {
     }
 };
 
-class DatePipe {
-    constructor() {
-        this.nzI18n = inject(NzI18nService);
-        this.cog = inject(YunzaiConfigService).get('themePipe');
+var arSA = {
+    abbr: 'ar-SA',
+    exception: {
+        403: `عذراً، ليس لديك إذن للوصول إلى هذه الصفحة`,
+        404: `عذراً، الصفحة التي تبحث عنها غير موجودة`,
+        500: `عذراً، خطأ في الخادم`,
+        backToHome: 'العودة إلى الصفحة الرئيسية'
+    },
+    noticeIcon: {
+        emptyText: 'لا توجد بيانات',
+        clearText: 'مسح'
+    },
+    reuseTab: {
+        close: 'إغلاق العلامة',
+        closeOther: 'إغلاق العلامات الأخرى',
+        closeRight: 'إغلاق العلامات اليمنى',
+        refresh: 'تحديث'
+    },
+    tagSelect: {
+        expand: 'توسيع',
+        collapse: 'طي'
+    },
+    miniProgress: {
+        target: 'الهدف: '
+    },
+    st: {
+        total: '{{range[0]}} - {{range[1]}} من {{total}}',
+        filterConfirm: 'تأكيد',
+        filterReset: 'إعادة تعيين'
+    },
+    sf: {
+        submit: 'حفظ',
+        reset: 'إعادة تعيين',
+        search: 'بحث',
+        edit: 'تعديل',
+        addText: 'إضافة',
+        removeText: 'حذف',
+        checkAllText: 'تحديد الكل',
+        error: {
+            'false schema': `القيمة المنطقية خاطئة`,
+            $ref: `المرجع "{{ref}}" غير موجود`,
+            additionalItems: `يجب ألا يحتوي على عناصر إضافية`,
+            additionalProperties: `يجب ألا يحتوي على خصائص إضافية`,
+            anyOf: `يجب أن يتطابق مع أحد النماذج في "anyOf"`,
+            dependencies: `يجب أن يحتوي على الخصائص {{deps}} عندما تكون الخاصية {{property}} موجودة`,
+            enum: `يجب أن يكون واحدًا من القيم المحددة`,
+            format: `يجب أن يتوافق مع النمط "{{format}}"`,
+            type: `يجب أن يكون {{type}}`,
+            required: `مطلوب`,
+            maxLength: `يجب ألا يكون أطول من {limit} حرف`,
+            minLength: `يجب ألا يكون أقصر من {limit} حرف`,
+            minimum: `يجب أن يكون أكبر من أو يساوي {comparison} {limit}`,
+            formatMinimum: `يجب أن يكون أكبر من أو يساوي {comparison} {limit}`,
+            maximum: `يجب أن يكون أقل من أو يساوي {comparison} {limit}`,
+            formatMaximum: `يجب أن يكون أقل من أو يساوي {comparison} {limit}`,
+            maxItems: `يجب ألا يكون أكثر من {limit} عنصر`,
+            minItems: `يجب ألا يكون أقل من {limit} عنصر`,
+            maxProperties: `يجب ألا يكون أكثر من {limit} خاصية`,
+            minProperties: `يجب ألا يكون أقل من {limit} خاصية`,
+            multipleOf: `يجب أن يكون مضاعفًا لـ {multipleOf}`,
+            not: `لا يجب أن يتطابق مع النمط (not)`,
+            oneOf: `يجب أن يتطابق مع أحد النماذج في "oneOf"`,
+            pattern: `يجب أن يتطابق مع النمط "{pattern}"`,
+            uniqueItems: `يجب ألا يحتوي على عناصر مكررة`,
+            custom: `يجب أن يكون صالحًا`,
+            propertyNames: `يجب أن تكون الخاصية صالحة`,
+            patternRequired: `يجب أن تحتوي على خاصية تطابق النمط "{missingPattern}"`,
+            switch: `يجب أن يكون {caseIndex} صالحًا`,
+            const: `يجب أن يكون ثابتًا`,
+            contains: `يجب أن يحتوي على قيمة صالحة`,
+            formatExclusiveMaximum: `formatExclusiveMaximum يجب أن يكون قيمة منطقية`,
+            formatExclusiveMinimum: `formatExclusiveMinimum يجب أن يكون قيمة منطقية`,
+            if: `يجب أن يتوافق مع "{failingKeyword}"`
+        }
+    },
+    onboarding: {
+        skip: `تخطي`,
+        prev: `السابق`,
+        next: `التالي`,
+        done: `تم`
     }
+};
+
+class DatePipe {
+    nzI18n = inject(NzI18nService);
+    cog = inject(YunzaiConfigService).get('themePipe');
     transform(value, formatString) {
         const formatStr = formatString ?? this.cog?.dateFormat ?? 'yyyy-MM-dd HH:mm';
         return formatDate(value, formatStr, {
@@ -2949,12 +3034,12 @@ class DatePipe {
             customFormat: this.cog?.dateFormatCustom
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DatePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: DatePipe, isStandalone: true, name: "_date" }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DatePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: DatePipe, isStandalone: true, name: "_date" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: DatePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: DatePipe, decorators: [{
             type: Pipe,
-            args: [{ name: '_date', standalone: true }]
+            args: [{ name: '_date' }]
         }] });
 
 /**
@@ -2968,12 +3053,12 @@ class KeysPipe {
         });
         return ret;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: KeysPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: KeysPipe, isStandalone: true, name: "keys" }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: KeysPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: KeysPipe, isStandalone: true, name: "keys" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: KeysPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: KeysPipe, decorators: [{
             type: Pipe,
-            args: [{ name: 'keys', standalone: true }]
+            args: [{ name: 'keys' }]
         }] });
 
 const ICON_YES = `<svg viewBox="64 64 896 896" fill="currentColor" width="1em" height="1em" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>`;
@@ -3001,49 +3086,43 @@ function yn(value, opt) {
     return html;
 }
 class YNPipe {
-    constructor() {
-        this.dom = inject(DomSanitizer);
-    }
+    dom = inject(DomSanitizer);
     transform(value, yes, no, mode, isSafeHtml = true) {
         const html = yn(value, { yes, no, mode });
         return isSafeHtml ? this.dom.bypassSecurityTrustHtml(html) : html;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YNPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YNPipe, isStandalone: true, name: "yn" }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YNPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YNPipe, isStandalone: true, name: "yn" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YNPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YNPipe, decorators: [{
             type: Pipe,
-            args: [{ name: 'yn', standalone: true }]
+            args: [{ name: 'yn' }]
         }] });
 
 class HTMLPipe {
-    constructor() {
-        this.dom = inject(DomSanitizer);
-    }
+    dom = inject(DomSanitizer);
     transform(html) {
         return html ? this.dom.bypassSecurityTrustHtml(html) : '';
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: HTMLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: HTMLPipe, isStandalone: true, name: "html" }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: HTMLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: HTMLPipe, isStandalone: true, name: "html" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: HTMLPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: HTMLPipe, decorators: [{
             type: Pipe,
-            args: [{ name: 'html', standalone: true }]
+            args: [{ name: 'html' }]
         }] });
 
 class URLPipe {
-    constructor() {
-        this.dom = inject(DomSanitizer);
-    }
+    dom = inject(DomSanitizer);
     transform(url) {
         return url ? this.dom.bypassSecurityTrustUrl(url) : '';
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: URLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: URLPipe, isStandalone: true, name: "url" }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: URLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: URLPipe, isStandalone: true, name: "url" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: URLPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: URLPipe, decorators: [{
             type: Pipe,
-            args: [{ name: 'url', standalone: true }]
+            args: [{ name: 'url' }]
         }] });
 
 /*
@@ -3862,11 +3941,11 @@ class YunzaiThemeModule {
             providers: HELPERS
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiThemeModule, deps: [{ token: i1$1.NzIconService }], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YunzaiThemeModule, imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe], exports: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe, YelonLocaleModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiThemeModule, providers: [YUNZAI_SETTING_DEFAULT], imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, YelonLocaleModule] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiThemeModule, deps: [{ token: i1$1.NzIconService }], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YunzaiThemeModule, imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe], exports: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe, YelonLocaleModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiThemeModule, providers: [YUNZAI_SETTING_DEFAULT], imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, YelonLocaleModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiThemeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiThemeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, ...PIPES],
@@ -3895,14 +3974,18 @@ function provideYunzai(options) {
     if (i18nCls) {
         provides.push({ provide: YUNZAI_I18N_TOKEN, useClass: i18nCls, multi: false });
     }
-    const icons = [...ICONS, ...(options.icons ?? [])];
-    provides.push({
-        provide: ENVIRONMENT_INITIALIZER,
-        multi: true,
-        useValue: () => {
-            inject(NzIconService, { optional: true })?.addIcon(...icons);
-        }
-    });
+    const icons = [
+        BellOutline,
+        DeleteOutline,
+        PlusOutline,
+        InboxOutline,
+        MenuFoldOutline,
+        MenuUnfoldOutline,
+        ...(options.icons ?? [])
+    ];
+    provides.push(provideEnvironmentInitializer(() => {
+        inject(NzIconService, { optional: true })?.addIcon(...icons);
+    }));
     return makeEnvironmentProviders(provides);
 }
 
@@ -3926,11 +4009,11 @@ class PreloadOptionalModules {
     }
 }
 
-const VERSION = new Version('18.3.0');
+const VERSION = new Version('19.0.0');
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BaseApi, BaseHeaders, BaseUrl, Body, CUSTOM_ERROR, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, ICONS, IGNORE_BASE_URL, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, RAW_BODY, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SPAN_MAX, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_LANGS, YUNZAI_SETTING_DEFAULT, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiHttpI18NService, YunzaiI18NGuardService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, yelonElGR as el_GR, yelonEnUS as en_US, yelonEsES as es_ES, yelonFrFR as fr_FR, yelonHrHR as hr_HR, yelonItIT as it_IT, jaJP as ja_JP, yelonKoKR as ko_KR, yelonPlPL as pl_PL, provideYunzai, yelonSlSI as sl_SI, stepPreloader, yelonTrTR as tr_TR, viVI as vi_VI, yn, yunzaiI18nCanActivate, yunzaiI18nCanActivateChild, zhCN as zh_CN, yelonZhTw as zh_TW };
+export { BaseApi, BaseHeaders, BaseUrl, Body, CUSTOM_ERROR, DELETE, DatePipe, DrawerHelper, FORM, GET, HEAD, HTMLPipe, HTML_DIR, Headers, I18nPipe, ICONS, IGNORE_BASE_URL, JSONP, KeysPipe, LTR, MenuService, ModalHelper, OPTIONS, PATCH, POST, PUT, Path, Payload, PreloadOptionalModules, Query, RAW_BODY, REP_MAX, RTL, RTLService, RTL_DIRECTION, RTL_NZ_COMPONENTS, RTL_YELON_COMPONENTS, ResponsiveService, SPAN_MAX, SettingsService, TitleService, URLPipe, VERSION, YELON_LOCALE, YELON_LOCALE_SERVICE_PROVIDER, YELON_LOCALE_SERVICE_PROVIDER_FACTORY, YNPipe, YUNZAI_I18N_TOKEN, YUNZAI_LANGS, YUNZAI_SETTING_DEFAULT, YUNZAI_SETTING_KEYS, YelonLocaleModule, YelonLocaleService, YunzaiHttpI18NService, YunzaiI18NGuardService, YunzaiI18NServiceFake, YunzaiI18nBaseService, YunzaiThemeModule, _HttpClient, arSA as ar_SA, yelonElGR as el_GR, yelonEnUS as en_US, yelonEsES as es_ES, yelonFrFR as fr_FR, yelonHrHR as hr_HR, yelonItIT as it_IT, jaJP as ja_JP, yelonKoKR as ko_KR, yelonPlPL as pl_PL, provideYunzai, yelonSlSI as sl_SI, stepPreloader, yelonTrTR as tr_TR, viVI as vi_VI, yn, yunzaiI18nCanActivate, yunzaiI18nCanActivateChild, zhCN as zh_CN, yelonZhTw as zh_TW };
 //# sourceMappingURL=theme.mjs.map

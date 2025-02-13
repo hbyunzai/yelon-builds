@@ -1,12 +1,11 @@
 import { OnInit } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { ObjectLayoutWidget } from '../../widget';
 import type { SFObjectWidgetRenderType } from './schema';
+import { ObjectLayoutWidget } from '../../widget';
 import * as i0 from "@angular/core";
 export declare class ObjectWidget extends ObjectLayoutWidget implements OnInit {
-    grid: NzSafeAny;
+    grid: any;
     type: SFObjectWidgetRenderType;
-    list: NzSafeAny[];
+    list: any[];
     title?: string;
     showExpand: boolean;
     expand: boolean;

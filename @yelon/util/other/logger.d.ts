@@ -1,5 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export declare const PREFIX = "[@YELON]:";
-export declare const warn: (...args: NzSafeAny[]) => void;
-export declare const warnDeprecation: (...args: NzSafeAny[]) => NzSafeAny;
-export declare const log: (...args: NzSafeAny[]) => void;
+export declare const warn: (...args: any[]) => void;
+export declare const warnDeprecation: (...args: any[]) => any;
+export declare const log: (...args: any[]) => void;

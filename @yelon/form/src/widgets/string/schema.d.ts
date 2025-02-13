@@ -1,6 +1,5 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { SFUISchemaItem } from '../../schema/ui';
 export interface SFStringWidgetSchema extends SFUISchemaItem {
     /**
@@ -74,11 +73,11 @@ export interface SFStringWidgetSchema extends SFUISchemaItem {
      *
      * 转换数据，相当于 `switchMap` 操作
      */
-    changeMap?: (val: string) => Observable<NzSafeAny>;
+    changeMap?: (val: string) => Observable<any>;
     /**
      * 内容变更事件
      */
-    change?: (val: NzSafeAny) => void;
+    change?: (val: any) => void;
     /**
      * 焦点事件
      */

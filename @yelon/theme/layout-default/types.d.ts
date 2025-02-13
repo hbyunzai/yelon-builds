@@ -1,5 +1,4 @@
 import { TemplateRef } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export type LayoutDefaultHeaderItemHidden = 'pc' | 'mobile' | 'none';
 export type LayoutDefaultHeaderItemDirection = 'left' | 'middle' | 'right';
 export interface LayoutDefaultOptions {
@@ -8,7 +7,7 @@ export interface LayoutDefaultOptions {
      *
      * 自定义 Logo 区域
      */
-    logo?: TemplateRef<NzSafeAny> | null;
+    logo?: TemplateRef<any> | null;
     /**
      * Logo url of expanded status, default: `./assets/logo-full.svg`
      *

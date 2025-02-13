@@ -1,12 +1,11 @@
 import { OnInit } from '@angular/core';
 import { ControlUIWidget, SFValue } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import type { SFUploadWidgetSchema } from './schema';
 import * as i0 from "@angular/core";
 export declare class UploadWidget extends ControlUIWidget<SFUploadWidgetSchema> implements OnInit {
     static readonly KEY = "upload";
-    i: NzSafeAny;
+    i: any;
     fileList: NzUploadFile[];
     btnType: string;
     ngOnInit(): void;

@@ -1,6 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
 import { EventEmitter, OnChanges, OnInit, SimpleChange, SimpleChanges, TemplateRef } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ReuseCanClose, ReuseContextCloseEvent, ReuseContextI18n, ReuseCustomContextMenu, ReuseItem, ReuseTabMatchMode, ReuseTabRouteParamMatchMode } from './reuse-tab.interfaces';
 import * as i0 from "@angular/core";
 export declare class ReuseTabComponent implements OnInit, OnChanges {
@@ -34,9 +33,7 @@ export declare class ReuseTabComponent implements OnInit, OnChanges {
     customContextMenu: ReuseCustomContextMenu[];
     tabBarExtraContent?: TemplateRef<void>;
     tabBarGutter?: number;
-    tabBarStyle: {
-        [key: string]: string;
-    } | null;
+    tabBarStyle: Record<string, string> | null;
     tabType: 'line' | 'card';
     routeParamMatchMode: ReuseTabRouteParamMatchMode;
     disabled: boolean;
@@ -63,7 +60,7 @@ export declare class ReuseTabComponent implements OnInit, OnChanges {
      * <reuse-tab #reuseTab></reuse-tab>
      * <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
      */
-    activate(instance: NzSafeAny): void;
+    activate(instance: any): void;
     private updatePos;
     ngOnInit(): void;
     ngOnChanges(changes: {

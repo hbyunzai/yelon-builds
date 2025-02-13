@@ -1,7 +1,6 @@
 import { AfterViewInit, EventEmitter, OnInit } from '@angular/core';
 import { STComponent, STData } from '@yelon/abc/st';
 import { SFComponent, SFSchema, SFValue } from '@yelon/form';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { YunzaiTableUser, YunzaiTableUserParam, YunzaiTableUserProps, YunzaiTableUserRole, YunzaiTableUserState } from './yunzai-table-user.types';
 import * as i0 from "@angular/core";
 export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
@@ -42,10 +41,10 @@ export declare class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     setupTableResponse(): void;
     resetChecked(): void;
     onCheckedItem(data: YunzaiTableUser): void;
-    onCheckedAll(e: NzSafeAny): void;
+    onCheckedAll(e: any): void;
     isChecked(data: STData): boolean;
     isAllChecked(): boolean;
-    isArraySubset(subset: NzSafeAny[], superset: NzSafeAny[]): boolean;
+    isArraySubset(subset: any[], superset: any[]): boolean;
     renderRoles(roles: YunzaiTableUserRole[]): string;
     unCheck(user: YunzaiTableUser): void;
     unCheckAll(): void;

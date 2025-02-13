@@ -1,11 +1,10 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class STWidgetRegistry {
     private _widgets;
-    get widgets(): NzSafeAny;
-    register(type: string, widget: NzSafeAny): void;
+    get widgets(): any;
+    register(type: string, widget: any): void;
     has(type: string): boolean;
-    get(type: string): NzSafeAny;
+    get(type: string): any;
     static ɵfac: i0.ɵɵFactoryDeclaration<STWidgetRegistry, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<STWidgetRegistry>;
 }

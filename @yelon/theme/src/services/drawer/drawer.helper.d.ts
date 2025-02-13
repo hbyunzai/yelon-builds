@@ -1,6 +1,5 @@
 import { TemplateRef, Type } from '@angular/core';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDrawerOptions, NzDrawerRef } from 'ng-zorro-antd/drawer';
 import * as i0 from "@angular/core";
 export interface DrawerHelperOptions {
@@ -53,19 +52,19 @@ export declare class DrawerHelper {
     /**
      * 构建一个抽屉
      */
-    create(title: string | TemplateRef<NzSafeAny> | undefined | null, comp: TemplateRef<{
-        $implicit: NzSafeAny;
+    create(title: string | TemplateRef<any> | undefined | null, comp: TemplateRef<{
+        $implicit: any;
         drawerRef: NzDrawerRef;
-    }> | Type<NzSafeAny>, params?: NzSafeAny, options?: DrawerHelperOptions): Observable<NzSafeAny>;
+    }> | Type<any>, params?: any, options?: DrawerHelperOptions): Observable<any>;
     private close;
     closeAll(): void;
     /**
      * 构建一个抽屉，点击蒙层不允许关闭
      */
-    static(title: string | TemplateRef<NzSafeAny> | undefined | null, comp: TemplateRef<{
-        $implicit: NzSafeAny;
+    static(title: string | TemplateRef<any> | undefined | null, comp: TemplateRef<{
+        $implicit: any;
         drawerRef: NzDrawerRef;
-    }> | Type<NzSafeAny>, params?: NzSafeAny, options?: DrawerHelperOptions): Observable<NzSafeAny>;
+    }> | Type<any>, params?: any, options?: DrawerHelperOptions): Observable<any>;
     static ɵfac: i0.ɵɵFactoryDeclaration<DrawerHelper, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DrawerHelper>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yelon/testing",
-  "version": "18.3.0-aeb31cc",
+  "version": "19.0.0-3541f31",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -25,8 +25,6 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2022": "./esm2022/testing.mjs",
-      "esm": "./esm2022/testing.mjs",
       "default": "./fesm2022/testing.mjs"
     }
   },

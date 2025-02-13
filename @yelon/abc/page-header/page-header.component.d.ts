@@ -3,7 +3,6 @@ import { Platform } from '@angular/cdk/platform';
 import { AfterViewInit, OnChanges, OnInit, TemplateRef } from '@angular/core';
 import { SettingsService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 interface PageHeaderPath {
     title?: string;
@@ -28,7 +27,7 @@ export declare class PageHeaderComponent implements OnInit, OnChanges, AfterView
     _titleVal: string | null;
     paths: PageHeaderPath[];
     _title: string | null;
-    _titleTpl: TemplateRef<NzSafeAny> | null;
+    _titleTpl: TemplateRef<any> | null;
     set title(value: string | TemplateRef<void> | null);
     titleSub?: string | TemplateRef<void> | null;
     loading: boolean;
@@ -41,7 +40,7 @@ export declare class PageHeaderComponent implements OnInit, OnChanges, AfterView
     syncTitle: boolean;
     fixed: boolean;
     fixedOffsetTop: number;
-    breadcrumb?: TemplateRef<NzSafeAny> | null;
+    breadcrumb?: TemplateRef<any> | null;
     recursiveBreadcrumb: boolean;
     logo?: TemplateRef<void> | null;
     action?: TemplateRef<void> | null;

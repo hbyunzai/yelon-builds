@@ -1,4 +1,3 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface YunzaiACLConfig {
     /**
      * Router URL when guard fail, default: `/403`
@@ -28,5 +27,5 @@ export interface YunzaiACLType {
      * 是否取反，即结果为 `true` 时表示未授权
      */
     except?: boolean;
-    [key: string]: NzSafeAny;
+    [key: string]: any;
 }

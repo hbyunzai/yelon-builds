@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import type { SFSchemaEnum, SFSchemaEnumType, SFUISchemaItem } from '@yelon/form';
 import { NzFormatEmitEvent, NzTreeNode, NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
-import type { NgStyleInterface, NzSafeAny, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import type { NgStyleInterface, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 export interface SFTreeSelectWidgetSchema extends SFUISchemaItem {
     /**
      * 异步数据源
@@ -17,7 +17,7 @@ export interface SFTreeSelectWidgetSchema extends SFUISchemaItem {
     /**
      * 清空时默认值，默认：`undefined`
      */
-    clearValue?: NzSafeAny;
+    clearValue?: any;
     /**
      * 下拉菜单和选择器同宽，默认：`true`
      */
@@ -111,5 +111,5 @@ export interface SFTreeSelectWidgetSchema extends SFUISchemaItem {
      * 点击展开树节点图标调用
      */
     expandChange?: (e: NzFormatEmitEvent) => Observable<SFSchemaEnum[]>;
-    change?: (value: NzSafeAny[] | NzSafeAny) => void;
+    change?: (value: any[] | any) => void;
 }

@@ -1,5 +1,4 @@
 "use strict";
-/* eslint-disable @typescript-eslint/no-explicit-any */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -50,10 +49,10 @@ function addPathInTsConfig(name) {
 }
 function cleanOutput(p) {
     try {
-        (0, fs_1.rmdirSync)(p, { recursive: true });
+        (0, fs_1.rmSync)(p, { recursive: true });
         (0, fs_1.mkdirSync)(p);
     }
-    catch (e) { }
+    catch (_a) { }
 }
 function tagsMapping(res, config) {
     var _a;

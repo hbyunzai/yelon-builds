@@ -1,8 +1,7 @@
 import type { HttpInterceptorFn } from '@angular/common/http';
 import type { EnvironmentProviders, ModuleWithProviders, Provider, Type } from '@angular/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface Environment {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /**
      * Whether production environment
      *
@@ -26,7 +25,7 @@ export interface Environment {
      *
      * 定义在 `app-config.ts` 导入的模块列表
      */
-    modules?: Array<Type<NzSafeAny> | ModuleWithProviders<NzSafeAny> | NzSafeAny[]>;
+    modules?: Array<Type<any> | ModuleWithProviders<any> | any[]>;
     /**
      * Defined providers in `app-config.ts`
      *
@@ -41,7 +40,7 @@ export interface Environment {
     interceptorFns?: HttpInterceptorFn[];
 }
 export interface ApiConfig {
-    [key: string]: NzSafeAny;
+    [key: string]: any;
     /**
      * Specify API prefix
      *

@@ -1,12 +1,11 @@
 import { EventEmitter } from '@angular/core';
 import type { Event } from '@antv/g2';
 import { G2BaseComponent } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export interface G2MiniAreaData {
-    x: NzSafeAny;
-    y: NzSafeAny;
-    [key: string]: NzSafeAny;
+    x: any;
+    y: any;
+    [key: string]: any;
 }
 export interface G2MiniAreaClickItem {
     item: G2MiniAreaData;
@@ -20,8 +19,8 @@ export declare class G2MiniAreaComponent extends G2BaseComponent {
     fit: boolean;
     line: boolean;
     animate: boolean;
-    xAxis: NzSafeAny;
-    yAxis: NzSafeAny;
+    xAxis: any;
+    yAxis: any;
     padding: number | number[] | 'auto';
     data: G2MiniAreaData[];
     yTooltipSuffix: string;

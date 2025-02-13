@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import type { SFSchemaEnumType, SFUISchemaItem } from '@yelon/form';
-import { NzSafeAny, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { AutoSizeType } from 'ng-zorro-antd/input';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
 export interface SFMentionWidgetSchema extends SFUISchemaItem {
@@ -32,11 +32,11 @@ export interface SFMentionWidgetSchema extends SFUISchemaItem {
     /**
      * 建议选项的取值方法，默认：`item => item.label`
      */
-    valueWith?: (value: NzSafeAny) => string;
+    valueWith?: (value: any) => string;
     /**
      * 下拉框选择建议时回调
      */
-    select?: (value: NzSafeAny) => void;
+    select?: (value: any) => void;
     /**
      * 文本框类型，默认：`text`
      */

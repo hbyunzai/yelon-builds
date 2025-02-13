@@ -120,12 +120,10 @@ const log = (...args) => {
  * 延迟加载资源（js 或 css）服务
  */
 class LazyService {
-    constructor() {
-        this.doc = inject(DOCUMENT);
-        this.list = {};
-        this.cached = {};
-        this._notify = new BehaviorSubject([]);
-    }
+    doc = inject(DOCUMENT);
+    list = {};
+    cached = {};
+    _notify = new BehaviorSubject([]);
     get change() {
         return this._notify.asObservable().pipe(share(), filter(ls => ls.length !== 0));
     }
@@ -231,10 +229,10 @@ class LazyService {
             resolve(item);
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LazyService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LazyService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LazyService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LazyService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: LazyService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LazyService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -307,10 +305,9 @@ function assertObservable(obj, msg) {
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 class PathToRegexpService {
-    constructor() {
-        this.DEFAULT_DELIMITER = '/';
-        this.PATH_REGEXP = new RegExp(['(\\\\.)', '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'].join('|'), 'g');
-    }
+    constructor() { }
+    DEFAULT_DELIMITER = '/';
+    PATH_REGEXP = new RegExp(['(\\\\.)', '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'].join('|'), 'g');
     parse(str, options) {
         const tokens = [];
         let key = 0;
@@ -367,7 +364,7 @@ class PathToRegexpService {
                     : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
             });
         }
-        // Push NzSafeAny remaining characters.
+        // Push any remaining characters.
         if (path || index < str.length) {
             tokens.push(path + str.substr(index));
         }
@@ -532,10 +529,10 @@ class PathToRegexpService {
         }
         return this.stringToRegexp(/** @type {string} */ path, keys, options);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PathToRegexpService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PathToRegexpService, providedIn: 'root' }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: PathToRegexpService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: PathToRegexpService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: PathToRegexpService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: PathToRegexpService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'

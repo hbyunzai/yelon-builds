@@ -1,7 +1,6 @@
 import { ElementRef, QueryList, Renderer2, TemplateRef, OnInit } from '@angular/core';
 import { Router, Event } from '@angular/router';
 import { SettingsService } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { LayoutDisplayService } from './layout-display.service';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
@@ -20,7 +19,7 @@ export declare class LayoutDefaultComponent implements OnInit {
     get opt(): LayoutDefaultOptions;
     set options(value: LayoutDefaultOptions | null | undefined);
     asideUser: TemplateRef<void> | null;
-    asideBottom: TemplateRef<NzSafeAny> | null;
+    asideBottom: TemplateRef<any> | null;
     nav: TemplateRef<void> | null;
     content: TemplateRef<void> | null;
     customError?: string | null;
@@ -32,10 +31,10 @@ export declare class LayoutDefaultComponent implements OnInit {
     get showFetching(): boolean;
     get collapsed(): boolean;
     get collapsedIcon(): string;
-    get contentStyle(): NzSafeAny;
-    get asideStyle(): NzSafeAny;
+    get contentStyle(): any;
+    get asideStyle(): any;
     toggleCollapsed(): void;
-    constructor(router: Router, msgSrv: NzMessageService, settings: SettingsService, el: ElementRef, renderer: Renderer2, doc: NzSafeAny, srv: LayoutDefaultService, layoutDisplayService: LayoutDisplayService);
+    constructor(router: Router, msgSrv: NzMessageService, settings: SettingsService, el: ElementRef, renderer: Renderer2, doc: any, srv: LayoutDefaultService, layoutDisplayService: LayoutDisplayService);
     ngOnInit(): void;
     processEv(ev: Event): void;
     private setClass;

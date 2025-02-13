@@ -1,7 +1,6 @@
 import { EventEmitter, Injector, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 import type { ErrorData } from './errors';
 import type { SFButton, SFLayout, SFMode, SFValueChange } from './interface';
@@ -33,7 +32,7 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     _btn: SFButton;
     _schema: SFSchema;
     _ui: SFUISchema;
-    get btnGrid(): NzSafeAny;
+    get btnGrid(): any;
     /** 表单布局，等同 `nzLayout`，默认：horizontal */
     layout: SFLayout;
     /** JSON Schema */
@@ -41,7 +40,7 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
     /** UI Schema */
     ui: SFUISchema;
     /** 表单默认值 */
-    formData?: Record<string, NzSafeAny>;
+    formData?: Record<string, any>;
     /**
      * 按钮
      * - 值为 `null` 或 `undefined` 表示手动添加按钮，但保留容器
@@ -102,9 +101,7 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
      *
      * 表单值
      */
-    get value(): {
-        [key: string]: NzSafeAny;
-    };
+    get value(): Record<string, any>;
     /**
      * Get form element property based on [path](https://ng.yunzainfo.com/form/qa#path)
      *
@@ -116,13 +113,13 @@ export declare class SFComponent implements OnInit, OnChanges, OnDestroy {
      *
      * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素值
      */
-    getValue(path: string): NzSafeAny;
+    getValue(path: string): any;
     /**
      * Set form element new value based on [path](https://ng.yunzainfo.com/form/qa#path)
      *
      * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
      */
-    setValue(path: string, value: NzSafeAny): this;
+    setValue(path: string, value: any): this;
     /**
      * Set form element new `disabled` based on [path](https://ng.yunzainfo.com/form/qa#path)
      *

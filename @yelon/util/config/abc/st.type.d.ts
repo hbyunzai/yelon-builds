@@ -1,7 +1,6 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { NzDrawerOptions } from 'ng-zorro-antd/drawer';
 import type { ModalOptions } from 'ng-zorro-antd/modal';
 import type { PaginationItemRenderContext } from 'ng-zorro-antd/pagination';
@@ -43,11 +42,11 @@ export interface YunzaiSTConfig {
          *
          * 是否忽略参数中 `null` 或 `undefind` 值
          */
-        ignoreParamNull?: Boolean;
+        ignoreParamNull?: boolean;
         /** 请求方法，默认：`GET` */
         method?: string;
         /** 请求体 `Header` */
-        headers?: NzSafeAny;
+        headers?: any;
         /**
          * 重命名参数 `pi`、`ps`，默认：`{ pi: 'pi', ps: 'ps', skip: 'skip', limit: 'limit' }`
          * - `{ pi: 'Page' }` => `pi` 会被替换成 Page
@@ -69,7 +68,7 @@ export interface YunzaiSTConfig {
         /**
          * 请求前数据处理
          */
-        process?: (requestOptions: NzSafeAny) => NzSafeAny;
+        process?: (requestOptions: any) => any;
     };
     /** 返回体配置 */
     res?: {
@@ -80,18 +79,18 @@ export interface YunzaiSTConfig {
         reName?: {
             total?: string | string[];
             list?: string | string[];
-        } | ((result: NzSafeAny, options: {
+        } | ((result: any, options: {
             pi: number;
             ps: number;
             total: number;
         }) => {
             total: number;
-            list: NzSafeAny[];
+            list: any[];
         });
         /**
          * 数据预处理
          */
-        process?: (data: NzSafeAny[], rawData?: NzSafeAny) => NzSafeAny[];
+        process?: (data: any[], rawData?: any) => any[];
     };
     /** 返回体配置 */
     page?: {
@@ -280,9 +279,7 @@ export interface YunzaiSTConfig {
         /**
          * Style of the popover card
          */
-        overlayStyle?: {
-            [key: string]: string;
-        };
+        overlayStyle?: Record<string, string>;
         /**
          * Text of the Cancel button
          */
@@ -329,7 +326,7 @@ export interface YunzaiSTConfig {
     /**
      * 表格行的类名
      */
-    rowClassName?: (record: NzSafeAny, index: number) => string;
+    rowClassName?: (record: any, index: number) => string;
     /**
      * 通过点击行来展开子行，Default: `false`
      */
@@ -403,14 +400,10 @@ export interface YunzaiSTConfig {
         url: string;
         options: {
             body?: unknown;
-            headers?: HttpHeaders | {
-                [header: string]: string | string[];
-            };
-            params?: HttpParams | {
-                [param: string]: string | string[];
-            };
+            headers?: HttpHeaders | Record<string, string | string[]>;
+            params?: HttpParams | Record<string, string | string[]>;
         };
-    }) => Observable<NzSafeAny>;
+    }) => Observable<any>;
     /**
      * Date format
      *

@@ -1,6 +1,5 @@
 import { OnInit } from '@angular/core';
-import { ControlUIWidget, SFSchemaEnum, SFValue } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { ControlUIWidget, SFSchemaEnum } from '@yelon/form';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
 import type { SFMentionWidgetSchema } from './schema';
 import * as i0 from "@angular/core";
@@ -8,11 +7,11 @@ export declare class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema
     static readonly KEY = "mention";
     private mentionChild;
     data: SFSchemaEnum[];
-    i: NzSafeAny;
+    i: any;
     loading: boolean;
     ngOnInit(): void;
-    reset(_value: SFValue): void;
-    _select(options: NzSafeAny): void;
+    reset(): void;
+    _select(options: any): void;
     _search(option: MentionOnSearchTypes): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<MentionWidget, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<MentionWidget, "sf-mention", never, {}, {}, never, never, true, never>;

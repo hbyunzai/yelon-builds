@@ -7,12 +7,13 @@ import * as i1 from 'ng-zorro-antd/spin';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 class YunzaiIframePageComponent {
-    constructor() {
-        this.sanitizer = inject(DomSanitizer);
-        this.menuService = inject(MenuService);
-        this.layoutService = inject(LayoutDefaultService);
-        this.hasIframe = false;
-    }
+    sanitizer = inject(DomSanitizer);
+    menuService = inject(MenuService);
+    layoutService = inject(LayoutDefaultService);
+    iframeSafeSrc;
+    iframePageHeight;
+    hasIframe = false;
+    resizeHandle;
     ngOnInit() {
         this.iframePageHeight = this.layoutService.options.hideHeader
             ? `${window.innerHeight - 55}px`
@@ -46,8 +47,8 @@ class YunzaiIframePageComponent {
             }
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiIframePageComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.11", type: YunzaiIframePageComponent, isStandalone: true, selector: "yunzai-iframe-page", ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiIframePageComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: YunzaiIframePageComponent, isStandalone: true, selector: "yunzai-iframe-page", ngImport: i0, template: `
     @if (hasIframe && iframePageHeight) {
       <div class="yunzai-iframe-page" [style.height]="iframePageHeight">
         <iframe [src]="iframeSafeSrc">
@@ -57,9 +58,9 @@ class YunzaiIframePageComponent {
     } @else {
       <nz-spin nzSpinning="true" />
     }
-  `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzSpinModule }, { kind: "component", type: i1.NzSpinComponent, selector: "nz-spin", inputs: ["nzIndicator", "nzSize", "nzTip", "nzDelay", "nzSimple", "nzSpinning"], exportAs: ["nzSpin"] }] }); }
+  `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzSpinModule }, { kind: "component", type: i1.NzSpinComponent, selector: "nz-spin", inputs: ["nzIndicator", "nzSize", "nzTip", "nzDelay", "nzSimple", "nzSpinning"], exportAs: ["nzSpin"] }] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiIframePageComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiIframePageComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yunzai-iframe-page`,
@@ -81,11 +82,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImpo
 
 const COMPONENTS = [YunzaiIframePageComponent];
 class YunzaiIframePageModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiIframePageModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "18.2.11", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, YunzaiIframePageComponent], exports: [YunzaiIframePageComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, COMPONENTS] }); }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiIframePageModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.5", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, YunzaiIframePageComponent], exports: [YunzaiIframePageComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, COMPONENTS] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.11", ngImport: i0, type: YunzaiIframePageModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiIframePageModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [NzSpinModule, ...COMPONENTS],

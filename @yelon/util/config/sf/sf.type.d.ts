@@ -1,5 +1,4 @@
 import type { Options as AjvOptions } from 'ajv';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export interface YunzaiSFConfigFormatMap {
     'date-time': {
         widget?: string;
@@ -81,9 +80,7 @@ export interface YunzaiSFConfig {
     /**
      * 自定义通用错误信息，默认：`{}`
      */
-    errors?: {
-        [key: string]: string;
-    };
+    errors?: Record<string, string>;
     /**
      * 默认全局布局，类型为：`SFUISchemaItem`，使用时加上可智能提示，例如：
      *
@@ -91,7 +88,7 @@ export interface YunzaiSFConfig {
      * ui: {} as SFUISchemaItem
      * ```
      */
-    ui?: NzSafeAny;
+    ui?: any;
     /**
      * 元素组件大小，用于 `nzSize` 值
      */
@@ -103,7 +100,7 @@ export interface YunzaiSFConfig {
      * button: {} as SFButton
      * ```
      */
-    button?: NzSafeAny;
+    button?: any;
     /**
      * date小部件：`type="string"` 且不指定 `schema.format` 和 `ui.format` 时日期格式，默认：`yyyy-MM-dd HH:mm:ss`
      */

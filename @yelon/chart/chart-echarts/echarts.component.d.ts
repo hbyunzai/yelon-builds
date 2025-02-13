@@ -1,6 +1,5 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { NumberInput } from '@yelon/util/decorator';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ChartECharts, ChartEChartsEvent, ChartEChartsOn, ChartEChartsOption } from './echarts.types';
 import * as i0 from "@angular/core";
 export declare class ChartEChartsComponent implements OnInit, OnDestroy {
@@ -21,7 +20,7 @@ export declare class ChartEChartsComponent implements OnInit, OnDestroy {
     set width(val: NumberInput);
     set height(val: NumberInput);
     set theme(value: string | Record<string, unknown> | null | undefined);
-    set initOpt(value: NzSafeAny);
+    set initOpt(value: any);
     set option(value: ChartEChartsOption);
     on: ChartEChartsOn[];
     readonly events: EventEmitter<ChartEChartsEvent>;

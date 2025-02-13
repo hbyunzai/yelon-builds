@@ -2,7 +2,6 @@ import { CanActivateChildFn, CanActivateFn } from '@angular/router';
 import { ITokenService } from '@yelon/auth';
 import { Menu } from '@yelon/theme';
 import { PathToRegexpService, YunzaiConfigService } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import * as i0 from "@angular/core";
 export declare class YunzaiAnalysisAddonGuardService {
     private configService;
@@ -13,7 +12,7 @@ export declare class YunzaiAnalysisAddonGuardService {
     private menus;
     private links;
     private value;
-    constructor(configService: YunzaiConfigService, pathToRegexp: PathToRegexpService, win: NzSafeAny, tokenService: ITokenService);
+    constructor(configService: YunzaiConfigService, pathToRegexp: PathToRegexpService, win: any, tokenService: ITokenService);
     process(url: string): boolean;
     getAllLinks(menu: Menu[], links: Array<{
         title: string;

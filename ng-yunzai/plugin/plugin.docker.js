@@ -45,7 +45,7 @@ function setDockerfile(tree, options) {
         (0, utils_1.tryAddFile)(tree, filePath, `# STEP 1: Build
 FROM node:10 as builder
 
-LABEL authors="yunzai-bot <yunzai-bot@outlook.com>"
+LABEL authors="cipchk <cipchk@qq.com>"
 
 COPY package.json package-lock.json ./
 
