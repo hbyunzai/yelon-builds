@@ -897,38 +897,18 @@ class LayoutDefaultModule {
             LayoutDefaultHeaderComponent,
             LayoutDefaultHeaderItemComponent,
             LayoutDefaultHeaderItemTriggerDirective,
-            LayoutDefaultTopMenuItemComponent], imports: [CommonModule,
-            RouterModule,
-            NzToolTipModule,
-            NzIconModule,
-            NzAvatarModule,
-            NzDropDownModule,
-            NzBadgeModule], exports: [LayoutDefaultComponent,
+            LayoutDefaultTopMenuItemComponent], imports: [CommonModule, RouterModule, NzToolTipModule, NzIconModule, NzAvatarModule, NzDropDownModule, NzBadgeModule], exports: [LayoutDefaultComponent,
             LayoutDefaultNavComponent,
             LayoutDefaultHeaderComponent,
             LayoutDefaultHeaderItemComponent,
             LayoutDefaultHeaderItemTriggerDirective,
             LayoutDefaultTopMenuItemComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LayoutDefaultModule, imports: [CommonModule,
-            RouterModule,
-            NzToolTipModule,
-            NzIconModule,
-            NzAvatarModule,
-            NzDropDownModule,
-            NzBadgeModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LayoutDefaultModule, imports: [CommonModule, RouterModule, NzToolTipModule, NzIconModule, NzAvatarModule, NzDropDownModule, NzBadgeModule] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: LayoutDefaultModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        NzToolTipModule,
-                        NzIconModule,
-                        NzAvatarModule,
-                        NzDropDownModule,
-                        NzBadgeModule
-                    ],
+                    imports: [CommonModule, RouterModule, NzToolTipModule, NzIconModule, NzAvatarModule, NzDropDownModule, NzBadgeModule],
                     declarations: COMPONENTS,
                     exports: COMPONENTS
                 }]

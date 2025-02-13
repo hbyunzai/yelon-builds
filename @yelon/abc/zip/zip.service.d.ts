@@ -1,5 +1,5 @@
-import type jsZipType from 'jszip';
 import { YunzaiConfigService } from '@yelon/util/config';
+import type jsZipType from 'jszip';
 import { ZipSaveOptions } from './zip.types';
 import * as i0 from "@angular/core";
 export declare class ZipService {

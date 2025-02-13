@@ -2,9 +2,9 @@ import * as i0 from '@angular/core';
 import { ViewEncapsulation, Component, NgModule } from '@angular/core';
 import * as i1 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { TinymceComponent, NgxTinymceModule } from 'ngx-tinymce';
 import * as i1$1 from '@yelon/form';
 import { ControlUIWidget, YelonFormModule } from '@yelon/form';
+import { TinymceComponent, NgxTinymceModule } from 'ngx-tinymce';
 
 class TinymceWidget extends ControlUIWidget {
     static KEY = 'tinymce';

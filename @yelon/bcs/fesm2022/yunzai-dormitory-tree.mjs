@@ -57,9 +57,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
 class YunzaiDormitoryTreeComponent {
     sf;
     props;
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onQueryComplete = new EventEmitter();
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelect = new EventEmitter();
     service = inject(YunzaiDormitoryTreeService);
     $destroy = new Subject();

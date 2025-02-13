@@ -6,6 +6,4 @@ export interface LangConfigData {
     date: any;
     yelon: any;
 }
-export declare const YUNZAI_LANGS: {
-    [key: string]: LangConfigData;
-};
+export declare const YUNZAI_LANGS: Record<string, LangConfigData>;

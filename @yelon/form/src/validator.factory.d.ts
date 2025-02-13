@@ -1,5 +1,5 @@
-import Ajv from 'ajv';
 import { YunzaiSFConfig } from '@yelon/util/config';
+import Ajv from 'ajv';
 import { ErrorData } from './errors';
 import { SFValue } from './interface';
 import { SFSchema } from './schema';

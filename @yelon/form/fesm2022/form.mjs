@@ -10,9 +10,9 @@ import * as i1$1 from '@yelon/util/config';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
+import { REGEX } from '@yelon/util/format';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import { REGEX } from '@yelon/util/format';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i1$2 from '@angular/forms';
@@ -47,8 +47,8 @@ import * as i4$3 from 'ng-zorro-antd/select';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import * as i2$1 from 'ng-zorro-antd/switch';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { format } from 'date-fns';
 import { toDate } from '@yelon/util/date-time';
+import { format } from 'date-fns';
 import { ArrayService } from '@yelon/util/array';
 
 const SF_DEFAULT_CONFIG = {

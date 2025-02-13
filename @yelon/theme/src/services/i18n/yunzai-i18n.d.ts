@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { ITokenService } from '@yelon/auth';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
+import { YunzaiI18nBaseService } from './i18n';
 import { YelonLocaleService } from '../../locale/locale.service';
 import { _HttpClient } from '../http/http.client';
 import { SettingsService } from '../settings/settings.service';
-import { YunzaiI18nBaseService } from './i18n';
 import * as i0 from "@angular/core";
 export interface YunzaiI18NType {
     code: string;

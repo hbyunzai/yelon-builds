@@ -122,7 +122,9 @@ function reAttachToken(injector, req) {
 function refreshTokenRequest(injector) {
     const model = injector.get(YA_SERVICE_TOKEN).get();
     const form = new FormData();
-    form.set('refresh_token', model?.refresh_token);
+    if (model?.refresh_token) {
+        form.set('refresh_token', model.refresh_token);
+    }
     form.set('grant_type', 'refresh_token');
     form.set('scope', 'webapp');
     return injector.get(HttpClient).post(`/auth/oauth/getOrCreateToken/webapp`, form);
@@ -279,7 +281,9 @@ class YunzaiStartupService {
                 this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
                 this.settingService.setUser({
                     name: yunzaiUser.realname,
-                    avatar: `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}` || '',
+                    avatar: this.config.baseUrl && yunzaiUser.avatarId
+                        ? `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}`
+                        : '',
                     email: yunzaiUser.email
                 });
                 this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';
@@ -518,7 +522,6 @@ class ActGuardService {
         const [, getUser] = useLocalStorageUser();
         const user = getUser();
         log('act: user ', user);
-        // @ts-ignore
         this.menus = deepCopy(user.menu || []).filter((m) => m.systemCode && m.systemCode === this.bis.systemCode);
         log('act: menus ', this.menus);
         this.getAllLinks(this.menus, this.links);
@@ -608,15 +611,15 @@ class YunzaiLayoutWebsite01Component {
         return this.contentTpl;
     }
     get _username() {
-        const [_, getUser] = useLocalStorageUser();
+        const [, getUser] = useLocalStorageUser();
         return getUser()?.realname || '';
     }
     get isLogin() {
-        const [_, getUser] = useLocalStorageUser();
+        const [, getUser] = useLocalStorageUser();
         return !!this.tokenService.get()?.access_token && !!getUser();
     }
     get _links() {
-        const [_, getProjectInfo] = useLocalStorageProjectInfo();
+        const [, getProjectInfo] = useLocalStorageProjectInfo();
         return getProjectInfo()?.profileList || [];
     }
     login() {
@@ -771,21 +774,21 @@ class YunzaiLayoutWebsite02Component {
         return this.contentTpl;
     }
     get _username() {
-        const [_, getUser] = useLocalStorageUser();
+        const [, getUser] = useLocalStorageUser();
         return getUser()?.realname || '';
     }
     get _avatar() {
-        const [_, getUser] = useLocalStorageUser();
+        const [, getUser] = useLocalStorageUser();
         const baseUrl = this.configService.get('bis')?.baseUrl || '/backstage';
         const avatarUrl = getUser()?.avatarId ? `${baseUrl}/filecenter/file/${getUser()?.avatarId}` : undefined;
         return avatarUrl;
     }
     get isLogin() {
-        const [_, getUser] = useLocalStorageUser();
+        const [, getUser] = useLocalStorageUser();
         return !!this.tokenService.get()?.access_token && !!getUser();
     }
     get _links() {
-        const [_, getProjectInfo] = useLocalStorageProjectInfo();
+        const [, getProjectInfo] = useLocalStorageProjectInfo();
         return getProjectInfo()?.profileList || [];
     }
     login() {

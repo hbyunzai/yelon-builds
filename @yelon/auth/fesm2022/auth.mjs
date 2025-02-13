@@ -408,7 +408,7 @@ class JWTTokenModel {
      */
     get exp() {
         const decoded = this.payload;
-        if (!decoded.hasOwnProperty('exp'))
+        if (!Object.prototype.hasOwnProperty.call(decoded, 'exp'))
             return null;
         const date = new Date(0);
         date.setUTCSeconds(decoded.exp);

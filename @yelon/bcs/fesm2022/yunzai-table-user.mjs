@@ -50,7 +50,6 @@ class YunzaiTableUserComponent {
     st;
     sf;
     props;
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onChecked = new EventEmitter();
     service = inject(YunzaiTableUserService);
     $destroy = new Subject();

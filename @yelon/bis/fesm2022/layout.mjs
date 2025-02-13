@@ -706,10 +706,7 @@ class YunzaiLayoutBasicComponent {
             const name = urlArr[1].split('/')[0];
             this.applicationModal.isVisible = true;
             this.applicationModal.loading = true;
-            // eslint-disable-next-line deprecation/deprecation
-            this.httpClient.get(`/basic/api/app/aboutApp?name=${name}`).subscribe(
-            // @ts-ignore
-            (response) => {
+            this.httpClient.get(`/basic/api/app/aboutApp?name=${name}`).subscribe((response) => {
                 this.applicationModal.loading = false;
                 if (response.data) {
                     this.applicationInfo = response.data;

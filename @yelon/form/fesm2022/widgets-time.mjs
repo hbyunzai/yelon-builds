@@ -2,9 +2,9 @@ import * as i0 from '@angular/core';
 import { ViewEncapsulation, Component, NgModule } from '@angular/core';
 import * as i1 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { format } from 'date-fns';
 import * as i1$1 from '@yelon/form';
 import { ControlUIWidget, toBool, YelonFormModule } from '@yelon/form';
+import { format } from 'date-fns';
 import * as i3 from 'ng-zorro-antd/time-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 

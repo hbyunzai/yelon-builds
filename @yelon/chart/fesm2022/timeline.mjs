@@ -1,8 +1,8 @@
 import * as i0 from '@angular/core';
 import { EventEmitter, booleanAttribute, numberAttribute, Output, Input, ViewEncapsulation, ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { format } from 'date-fns';
 import { G2BaseComponent } from '@yelon/chart/core';
 import { toDate } from '@yelon/util/date-time';
+import { format } from 'date-fns';
 import { NzStringTemplateOutletDirective, NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSkeletonComponent, NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { CommonModule } from '@angular/common';

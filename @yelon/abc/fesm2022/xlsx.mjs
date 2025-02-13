@@ -2,9 +2,9 @@ import { __decorate } from 'tslib';
 import { HttpClient } from '@angular/common/http';
 import * as i0 from '@angular/core';
 import { inject, NgZone, Injectable, Input, Directive, NgModule } from '@angular/core';
-import isUtf8 from 'isutf8';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
+import isUtf8 from 'isutf8';
 import * as i1 from '@yelon/util/config';
 
 class XlsxService {
