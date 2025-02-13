@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "19.0.0-7d9b4b70",
+  "version": "19.0.0-54e6cdf",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -27,10 +27,10 @@
     "xlsx": "^0.18.5",
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
-    "ngx-countdown": "^19.0.0-7d9b4b70",
-    "@yelon/theme": "^19.0.0-7d9b4b70",
-    "@yelon/util": "^19.0.0-7d9b4b70",
-    "@yelon/acl": "^19.0.0-7d9b4b70",
+    "ngx-countdown": "^19.0.0-54e6cdf",
+    "@yelon/theme": "^19.0.0-54e6cdf",
+    "@yelon/util": "^19.0.0-54e6cdf",
+    "@yelon/acl": "^19.0.0-54e6cdf",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -119,6 +119,10 @@
       "types": "./onboarding/index.d.ts",
       "default": "./fesm2022/onboarding.mjs"
     },
+    "./page-header": {
+      "types": "./page-header/index.d.ts",
+      "default": "./fesm2022/page-header.mjs"
+    },
     "./pdf": {
       "types": "./pdf/index.d.ts",
       "default": "./fesm2022/pdf.mjs"
@@ -139,10 +143,6 @@
       "types": "./se/index.d.ts",
       "default": "./fesm2022/se.mjs"
     },
-    "./sv": {
-      "types": "./sv/index.d.ts",
-      "default": "./fesm2022/sv.mjs"
-    },
     "./sg": {
       "types": "./sg/index.d.ts",
       "default": "./fesm2022/sg.mjs"
@@ -150,6 +150,10 @@
     "./st": {
       "types": "./st/index.d.ts",
       "default": "./fesm2022/st.mjs"
+    },
+    "./sv": {
+      "types": "./sv/index.d.ts",
+      "default": "./fesm2022/sv.mjs"
     },
     "./tag-select": {
       "types": "./tag-select/index.d.ts",
@@ -162,10 +166,6 @@
     "./zip": {
       "types": "./zip/index.d.ts",
       "default": "./fesm2022/zip.mjs"
-    },
-    "./page-header": {
-      "types": "./page-header/index.d.ts",
-      "default": "./fesm2022/page-header.mjs"
     }
   },
   "sideEffects": false

@@ -1,6 +1,6 @@
 {
   "name": "@yelon/form",
-  "version": "19.0.0-7d9b4b70",
+  "version": "19.0.0-54e6cdf",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -30,9 +30,9 @@
   "dependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "@yelon/theme": "^19.0.0-7d9b4b70",
-    "@yelon/acl": "^19.0.0-7d9b4b70",
-    "@yelon/util": "^19.0.0-7d9b4b70",
+    "@yelon/theme": "^19.0.0-54e6cdf",
+    "@yelon/acl": "^19.0.0-54e6cdf",
+    "@yelon/util": "^19.0.0-54e6cdf",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/form.mjs",
@@ -53,13 +53,13 @@
       "types": "./widgets/cascader/index.d.ts",
       "default": "./fesm2022/widgets-cascader.mjs"
     },
-    "./widgets/mention": {
-      "types": "./widgets/mention/index.d.ts",
-      "default": "./fesm2022/widgets-mention.mjs"
-    },
     "./widgets/color": {
       "types": "./widgets/color/index.d.ts",
       "default": "./fesm2022/widgets-color.mjs"
+    },
+    "./widgets/mention": {
+      "types": "./widgets/mention/index.d.ts",
+      "default": "./fesm2022/widgets-mention.mjs"
     },
     "./widgets/qr-code": {
       "types": "./widgets/qr-code/index.d.ts",

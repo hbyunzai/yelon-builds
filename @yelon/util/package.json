@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "19.0.0-7d9b4b70",
+  "version": "19.0.0-54e6cdf",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -41,17 +41,17 @@
       "types": "./browser/index.d.ts",
       "default": "./fesm2022/browser.mjs"
     },
-    "./decorator": {
-      "types": "./decorator/index.d.ts",
-      "default": "./fesm2022/decorator.mjs"
+    "./config": {
+      "types": "./config/index.d.ts",
+      "default": "./fesm2022/config.mjs"
     },
     "./date-time": {
       "types": "./date-time/index.d.ts",
       "default": "./fesm2022/date-time.mjs"
     },
-    "./config": {
-      "types": "./config/index.d.ts",
-      "default": "./fesm2022/config.mjs"
+    "./decorator": {
+      "types": "./decorator/index.d.ts",
+      "default": "./fesm2022/decorator.mjs"
     },
     "./form": {
       "types": "./form/index.d.ts",
@@ -73,10 +73,6 @@
       "types": "./mtypes/index.d.ts",
       "default": "./fesm2022/mtypes.mjs"
     },
-    "./token": {
-      "types": "./token/index.d.ts",
-      "default": "./fesm2022/token.mjs"
-    },
     "./other": {
       "types": "./other/index.d.ts",
       "default": "./fesm2022/other.mjs"
@@ -84,6 +80,10 @@
     "./pipes": {
       "types": "./pipes/index.d.ts",
       "default": "./fesm2022/pipes.mjs"
+    },
+    "./token": {
+      "types": "./token/index.d.ts",
+      "default": "./fesm2022/token.mjs"
     },
     "./pipes/currency": {
       "types": "./pipes/currency/index.d.ts",

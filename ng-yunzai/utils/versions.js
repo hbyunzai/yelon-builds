@@ -19,7 +19,7 @@ const workspace_2 = require("./workspace");
  * 修复主要依赖的版本号
  */
 function UpgradeMainVersions(tree, version = lib_versions_1.VERSION) {
-    (0, package_1.addPackage)(tree, ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart'].map(name => `@yelon/${name}@${version}`));
+    (0, package_1.addPackage)(tree, ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bis', 'bcs', 'socket'].map(name => `@yelon/${name}@${version}`));
     (0, package_1.addPackage)(tree, [
         `angular-eslint@19.0.2`,
         `@typescript-eslint/eslint-plugin@^8.22.0`,
