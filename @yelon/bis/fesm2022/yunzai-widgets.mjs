@@ -36,7 +36,7 @@ class YunzaiHeaderClearStorageComponent {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiHeaderClearStorageComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.1.5", type: YunzaiHeaderClearStorageComponent, isStandalone: true, selector: "yunzai-header-clear-storage", host: { listeners: { "click": "_click()" }, properties: { "class.flex-1": "true" } }, ngImport: i0, template: `
-    <i nz-icon nzType="tool"></i>
+    <nz-icon nzType="tool"></nz-icon>
     {{ 'menu.clear.local.storage' | i18n }}
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzIconModule }, { kind: "directive", type: i1.NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
@@ -45,7 +45,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
             args: [{
                     selector: 'yunzai-header-clear-storage',
                     template: `
-    <i nz-icon nzType="tool"></i>
+    <nz-icon nzType="tool"></nz-icon>
     {{ 'menu.clear.local.storage' | i18n }}
   `,
                     host: {
@@ -71,7 +71,7 @@ class YunzaiHeaderFullScreenComponent {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiHeaderFullScreenComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.1.5", type: YunzaiHeaderFullScreenComponent, isStandalone: true, selector: "yunzai-header-fullscreen", host: { listeners: { "window:resize": "_resize()", "click": "_click()" }, properties: { "class.flex-1": "true" } }, ngImport: i0, template: `
-    <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
+    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></nz-icon>
     {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzIconModule }, { kind: "directive", type: i1.NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
@@ -80,7 +80,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
             args: [{
                     selector: 'yunzai-header-fullscreen',
                     template: `
-    <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
+    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></nz-icon>
     {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `,
                     host: {
@@ -306,9 +306,9 @@ class YunzaiHeaderI18nComponent {
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.1.5", type: YunzaiHeaderI18nComponent, isStandalone: true, selector: "yunzai-header-i18n", inputs: { showLangText: ["showLangText", "showLangText", booleanAttribute] }, host: { properties: { "class.flex-1": "true" } }, ngImport: i0, template: `
     @if (showLangText) {
       <div nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
-        <i nz-icon nzType="global"></i>
+        <nz-icon nzType="global"></nz-icon>
         {{ 'lang.nav' | i18n }}
-        <i nz-icon nzType="down"></i>
+        <nz-icon nzType="down"></nz-icon>
       </div>
     } @else {
       <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global"></i>
@@ -349,9 +349,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
                     template: `
     @if (showLangText) {
       <div nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
-        <i nz-icon nzType="global"></i>
+        <nz-icon nzType="global"></nz-icon>
         {{ 'lang.nav' | i18n }}
-        <i nz-icon nzType="down"></i>
+        <nz-icon nzType="down"></nz-icon>
       </div>
     } @else {
       <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global"></i>
@@ -446,13 +446,13 @@ class YunzaiHeaderUserComponent {
       <div nz-menu class="width-sm">
         @for (m of menus; track m) {
           <div data-event-id="_nav_user" [attr.data-name]="m.name | i18n" nz-menu-item (click)="to(m.url)">
-            <i nz-icon [nzType]="m.icon" class="mr-sm"></i>
+            <nz-icon [nzType]="m.icon" class="mr-sm"></nz-icon>
             {{ m.name | i18n }}
           </div>
         }
         <li nz-menu-divider></li>
         <div data-event-id="_nav_user" data-name="注销登录" nz-menu-item (click)="logout()">
-          <i nz-icon nzType="logout" class="mr-sm"></i>
+          <nz-icon nzType="logout" class="mr-sm"></nz-icon>
           {{ 'logout' | i18n }}
         </div>
       </div>
@@ -480,13 +480,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       <div nz-menu class="width-sm">
         @for (m of menus; track m) {
           <div data-event-id="_nav_user" [attr.data-name]="m.name | i18n" nz-menu-item (click)="to(m.url)">
-            <i nz-icon [nzType]="m.icon" class="mr-sm"></i>
+            <nz-icon [nzType]="m.icon" class="mr-sm"></nz-icon>
             {{ m.name | i18n }}
           </div>
         }
         <li nz-menu-divider></li>
         <div data-event-id="_nav_user" data-name="注销登录" nz-menu-item (click)="logout()">
-          <i nz-icon nzType="logout" class="mr-sm"></i>
+          <nz-icon nzType="logout" class="mr-sm"></nz-icon>
           {{ 'logout' | i18n }}
         </div>
       </div>

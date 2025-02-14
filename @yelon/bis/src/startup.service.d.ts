@@ -1,4 +1,4 @@
-import { Provider } from '@angular/core';
+import { EnvironmentProviders, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITokenModel } from '@yelon/auth';
 import { YunzaiMenu } from '@yelon/util';
@@ -6,7 +6,7 @@ import * as i0 from "@angular/core";
 export interface LoadParam {
     force?: boolean;
 }
-export declare function provideYunzaiStartup(): Provider[];
+export declare function provideYunzaiStartup(): Array<Provider | EnvironmentProviders>;
 export declare class YunzaiStartupService {
     private readonly config;
     private readonly menuService;

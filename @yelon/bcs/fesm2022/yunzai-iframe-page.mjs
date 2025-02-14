@@ -75,7 +75,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       <nz-spin nzSpinning="true" />
     }
   `,
-                    standalone: true,
                     imports: [NzSpinModule]
                 }]
         }] });

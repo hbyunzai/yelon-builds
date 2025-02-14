@@ -216,7 +216,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       </nz-row>
     </ng-template>
   `,
-                    standalone: true,
                     imports: [
                         FormsModule,
                         CommonModule,

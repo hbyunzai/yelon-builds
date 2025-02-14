@@ -424,7 +424,7 @@ class YunzaiTableUserComponent {
             <li nz-menu-item class="people-item">
               <div class="people-item-right">{{ item?.realName || '--' }}</div>
               <span class="del-btn" (click)="unCheck(item)">
-                <i nz-icon nzType="close" nzTheme="outline"></i>
+                <nz-icon nzType="close" nzTheme="outline"></nz-icon>
               </span>
             </li>
           }
@@ -496,7 +496,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
             <li nz-menu-item class="people-item">
               <div class="people-item-right">{{ item?.realName || '--' }}</div>
               <span class="del-btn" (click)="unCheck(item)">
-                <i nz-icon nzType="close" nzTheme="outline"></i>
+                <nz-icon nzType="close" nzTheme="outline"></nz-icon>
               </span>
             </li>
           }
@@ -509,7 +509,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       <button nz-button nzType="primary" (click)="onReset()">{{ 'reset' | i18n }}</button>
     </ng-template>
   `,
-                    standalone: true,
                     providers: [YunzaiTableUserService],
                     imports: [
                         CommonModule,

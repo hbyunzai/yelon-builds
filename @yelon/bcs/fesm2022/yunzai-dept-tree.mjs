@@ -439,7 +439,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
     </ng-template>
     <ng-template #blank />
   `,
-                    standalone: true,
                     imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule],
                     providers: [YunzaiDeptTreeService, YunzaiGradeService]
                 }]

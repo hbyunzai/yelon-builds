@@ -170,7 +170,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
     </ng-template>
   `,
-                    standalone: true,
                     imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule],
                     providers: [YunzaiFriendGroupService]
                 }]

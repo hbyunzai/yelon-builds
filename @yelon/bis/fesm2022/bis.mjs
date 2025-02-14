@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, Injector, APP_INITIALIZER, Injectable, Inject, Input, Component } from '@angular/core';
+import { NgModule, importProvidersFrom, makeEnvironmentProviders, inject, Injector, APP_INITIALIZER, provideAppInitializer, Injectable, Inject, Input, Component } from '@angular/core';
 import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { YunzaiWidgetsModule } from '@yelon/bis/yunzai-widgets';
 import * as i2 from '@angular/router';
@@ -212,16 +212,23 @@ const yunzaiDefaultInterceptor = (req, next) => {
     }), catchError((err) => handleData(injector, err, newReq, next)));
 };
 
+// export function provideYunzaiStartup(): Provider[] {
+//   return [
+//     YunzaiStartupService,
+//     {
+//       provide: APP_INITIALIZER,
+//       useFactory: (startupService: YunzaiStartupService) => () => startupService.load(),
+//       deps: [YunzaiStartupService],
+//       multi: true
+//     }
+//   ];
+// }
 function provideYunzaiStartup() {
-    return [
-        YunzaiStartupService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (startupService) => () => startupService.load(),
-            deps: [YunzaiStartupService],
-            multi: true
-        }
-    ];
+    const appInitializer = () => {
+        const startupService = inject(YunzaiStartupService);
+        return startupService.load();
+    };
+    return [YunzaiStartupService, provideAppInitializer(appInitializer)];
 }
 class YunzaiStartupService {
     config = mergeBisConfig(inject(YunzaiConfigService));
@@ -647,11 +654,11 @@ class YunzaiLayoutWebsite01Component {
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
+            <ul nz-menu [nzSelectable]="true">
               @for (link of _links; track $index) {
                 <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
               }
-              <li nz-menu-item nzDanger class="yz-layout-website-01-link__li" (click)="logout()"
+              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()"
                 >{{ 'menu.account.logout' | i18n }}
               </li>
             </ul>
@@ -700,11 +707,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
+            <ul nz-menu [nzSelectable]="true">
               @for (link of _links; track $index) {
                 <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
               }
-              <li nz-menu-item nzDanger class="yz-layout-website-01-link__li" (click)="logout()"
+              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()"
                 >{{ 'menu.account.logout' | i18n }}
               </li>
             </ul>
@@ -735,7 +742,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       </main>
     </div>
   `,
-                    standalone: true,
                     imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet]
                 }]
         }], propDecorators: { logoSrc: [{
@@ -912,7 +918,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
       </main>
     </div>
   `,
-                    standalone: true,
                     imports: [
                         RouterOutlet,
                         I18nPipe,

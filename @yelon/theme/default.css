@@ -31311,33 +31311,14 @@ fieldset {
   right: inherit;
   left: 500px;
 }
-.theme-btn {
-  cursor: pointer;
-  position: fixed;
-  z-index: 2147483640;
-  right: 32px;
-  bottom: 102px;
-  display: flex;
-  flex-direction: column;
-}
-.theme-btn-active {
-  width: 44px;
-  height: 44px;
-  font-size: 22px;
-  line-height: 44px;
-  color: #1890ff;
-}
 .theme-btn .ant-avatar {
-  color: #000;
-  background-color: #fff;
-  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  transition: color 0.3s;
-}
-.theme-btn .ant-avatar:hover {
-  color: #1890ff;
+  background: none;
+  width: 50px;
+  height: 34px;
+  padding: 5px 2px;
 }
 .theme-list li i {
-  margin-right: 1px;
+  margin-right: 2px;
 }
 .theme-btn-rtl {
   right: inherit;

@@ -45,7 +45,7 @@ export interface SFRenderSchema {
      */
     widget?: SFBuiltInWidgets | (string & {});
     /**
-     * 自定义类，等同 `[ngClass]` 值
+     * 自定义类，等同 `[class]` 值
      */
     class?: NgClassType;
     /**
