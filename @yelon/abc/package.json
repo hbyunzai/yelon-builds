@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "19.0.0-f99d260",
+  "version": "19.0.1-3f55eccc",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -27,10 +27,10 @@
     "xlsx": "^0.18.5",
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
-    "ngx-countdown": "^19.0.0-f99d260",
-    "@yelon/theme": "^19.0.0-f99d260",
-    "@yelon/util": "^19.0.0-f99d260",
-    "@yelon/acl": "^19.0.0-f99d260",
+    "ngx-countdown": "^19.0.0",
+    "@yelon/theme": "^19.0.1-3f55eccc",
+    "@yelon/util": "^19.0.1-3f55eccc",
+    "@yelon/acl": "^19.0.1-3f55eccc",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -47,10 +47,6 @@
       "types": "./auto-focus/index.d.ts",
       "default": "./fesm2022/auto-focus.mjs"
     },
-    "./avatar-list": {
-      "types": "./avatar-list/index.d.ts",
-      "default": "./fesm2022/avatar-list.mjs"
-    },
     "./cell": {
       "types": "./cell/index.d.ts",
       "default": "./fesm2022/cell.mjs"
@@ -58,6 +54,10 @@
     "./count-down": {
       "types": "./count-down/index.d.ts",
       "default": "./fesm2022/count-down.mjs"
+    },
+    "./avatar-list": {
+      "types": "./avatar-list/index.d.ts",
+      "default": "./fesm2022/avatar-list.mjs"
     },
     "./date-picker": {
       "types": "./date-picker/index.d.ts",
@@ -67,25 +67,25 @@
       "types": "./down-file/index.d.ts",
       "default": "./fesm2022/down-file.mjs"
     },
-    "./ellipsis": {
-      "types": "./ellipsis/index.d.ts",
-      "default": "./fesm2022/ellipsis.mjs"
-    },
     "./error-collect": {
       "types": "./error-collect/index.d.ts",
       "default": "./fesm2022/error-collect.mjs"
+    },
+    "./ellipsis": {
+      "types": "./ellipsis/index.d.ts",
+      "default": "./fesm2022/ellipsis.mjs"
     },
     "./exception": {
       "types": "./exception/index.d.ts",
       "default": "./fesm2022/exception.mjs"
     },
-    "./footer-toolbar": {
-      "types": "./footer-toolbar/index.d.ts",
-      "default": "./fesm2022/footer-toolbar.mjs"
-    },
     "./full-content": {
       "types": "./full-content/index.d.ts",
       "default": "./fesm2022/full-content.mjs"
+    },
+    "./footer-toolbar": {
+      "types": "./footer-toolbar/index.d.ts",
+      "default": "./fesm2022/footer-toolbar.mjs"
     },
     "./global-footer": {
       "types": "./global-footer/index.d.ts",
@@ -131,21 +131,17 @@
       "types": "./quick-menu/index.d.ts",
       "default": "./fesm2022/quick-menu.mjs"
     },
-    "./result": {
-      "types": "./result/index.d.ts",
-      "default": "./fesm2022/result.mjs"
-    },
     "./reuse-tab": {
       "types": "./reuse-tab/index.d.ts",
       "default": "./fesm2022/reuse-tab.mjs"
     },
+    "./result": {
+      "types": "./result/index.d.ts",
+      "default": "./fesm2022/result.mjs"
+    },
     "./se": {
       "types": "./se/index.d.ts",
       "default": "./fesm2022/se.mjs"
-    },
-    "./sg": {
-      "types": "./sg/index.d.ts",
-      "default": "./fesm2022/sg.mjs"
     },
     "./st": {
       "types": "./st/index.d.ts",
@@ -154,6 +150,10 @@
     "./sv": {
       "types": "./sv/index.d.ts",
       "default": "./fesm2022/sv.mjs"
+    },
+    "./sg": {
+      "types": "./sg/index.d.ts",
+      "default": "./fesm2022/sg.mjs"
     },
     "./tag-select": {
       "types": "./tag-select/index.d.ts",
