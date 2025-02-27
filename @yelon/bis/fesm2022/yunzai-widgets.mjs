@@ -418,7 +418,7 @@ class YunzaiHeaderUserComponent {
     logout() {
         localStorage.clear();
         this.tokenService.clear();
-        this.win.location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
+        this.win.location.href = `${this.config.baseUrl}/cas-proxy/app/logout?callback=` + encodeURIComponent(this.win.location.href);
     }
     to(href) {
         if (href) {
