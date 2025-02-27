@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "19.0.1-2687650",
+  "version": "19.0.2-beta.1-4c32e6f5",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^19.0.0",
-    "@yelon/theme": "^19.0.1-2687650",
-    "@yelon/util": "^19.0.1-2687650",
-    "@yelon/acl": "^19.0.1-2687650",
+    "@yelon/theme": "^19.0.2-beta.1-4c32e6f5",
+    "@yelon/util": "^19.0.2-beta.1-4c32e6f5",
+    "@yelon/acl": "^19.0.2-beta.1-4c32e6f5",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -51,29 +51,29 @@
       "types": "./avatar-list/index.d.ts",
       "default": "./fesm2022/avatar-list.mjs"
     },
-    "./cell": {
-      "types": "./cell/index.d.ts",
-      "default": "./fesm2022/cell.mjs"
+    "./date-picker": {
+      "types": "./date-picker/index.d.ts",
+      "default": "./fesm2022/date-picker.mjs"
     },
     "./count-down": {
       "types": "./count-down/index.d.ts",
       "default": "./fesm2022/count-down.mjs"
     },
-    "./date-picker": {
-      "types": "./date-picker/index.d.ts",
-      "default": "./fesm2022/date-picker.mjs"
-    },
-    "./down-file": {
-      "types": "./down-file/index.d.ts",
-      "default": "./fesm2022/down-file.mjs"
+    "./error-collect": {
+      "types": "./error-collect/index.d.ts",
+      "default": "./fesm2022/error-collect.mjs"
     },
     "./ellipsis": {
       "types": "./ellipsis/index.d.ts",
       "default": "./fesm2022/ellipsis.mjs"
     },
-    "./error-collect": {
-      "types": "./error-collect/index.d.ts",
-      "default": "./fesm2022/error-collect.mjs"
+    "./cell": {
+      "types": "./cell/index.d.ts",
+      "default": "./fesm2022/cell.mjs"
+    },
+    "./down-file": {
+      "types": "./down-file/index.d.ts",
+      "default": "./fesm2022/down-file.mjs"
     },
     "./exception": {
       "types": "./exception/index.d.ts",
@@ -115,13 +115,13 @@
       "types": "./observers/index.d.ts",
       "default": "./fesm2022/chart-observer-size.mjs"
     },
-    "./onboarding": {
-      "types": "./onboarding/index.d.ts",
-      "default": "./fesm2022/onboarding.mjs"
-    },
     "./page-header": {
       "types": "./page-header/index.d.ts",
       "default": "./fesm2022/page-header.mjs"
+    },
+    "./onboarding": {
+      "types": "./onboarding/index.d.ts",
+      "default": "./fesm2022/onboarding.mjs"
     },
     "./pdf": {
       "types": "./pdf/index.d.ts",

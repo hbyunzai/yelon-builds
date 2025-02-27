@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "19.0.1-2687650",
+  "version": "19.0.2-beta.1-4c32e6f5",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^19.0.2",
-    "@yelon/theme": "^19.0.1-2687650",
-    "@yelon/form": "^19.0.1-2687650",
-    "@yelon/abc": "^19.0.1-2687650",
-    "@yelon/util": "^19.0.1-2687650",
+    "@yelon/theme": "^19.0.2-beta.1-4c32e6f5",
+    "@yelon/form": "^19.0.2-beta.1-4c32e6f5",
+    "@yelon/abc": "^19.0.2-beta.1-4c32e6f5",
+    "@yelon/util": "^19.0.2-beta.1-4c32e6f5",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -42,21 +42,17 @@
       "types": "./yunzai-contact/index.d.ts",
       "default": "./fesm2022/yunzai-contact.mjs"
     },
-    "./yunzai-dept-tree": {
-      "types": "./yunzai-dept-tree/index.d.ts",
-      "default": "./fesm2022/yunzai-dept-tree.mjs"
-    },
-    "./yunzai-dormitory-tree": {
-      "types": "./yunzai-dormitory-tree/index.d.ts",
-      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
+    "./yunzai-grade": {
+      "types": "./yunzai-grade/index.d.ts",
+      "default": "./fesm2022/yunzai-grade.mjs"
     },
     "./yunzai-friend-group": {
       "types": "./yunzai-friend-group/index.d.ts",
       "default": "./fesm2022/yunzai-friend-group.mjs"
     },
-    "./yunzai-grade": {
-      "types": "./yunzai-grade/index.d.ts",
-      "default": "./fesm2022/yunzai-grade.mjs"
+    "./yunzai-dormitory-tree": {
+      "types": "./yunzai-dormitory-tree/index.d.ts",
+      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
     "./yunzai-iframe-page": {
       "types": "./yunzai-iframe-page/index.d.ts",
@@ -69,6 +65,10 @@
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
       "default": "./fesm2022/yunzai-table-user.mjs"
+    },
+    "./yunzai-dept-tree": {
+      "types": "./yunzai-dept-tree/index.d.ts",
+      "default": "./fesm2022/yunzai-dept-tree.mjs"
     }
   },
   "sideEffects": false

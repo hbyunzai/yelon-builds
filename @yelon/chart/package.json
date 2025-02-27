@@ -1,6 +1,6 @@
 {
   "name": "@yelon/chart",
-  "version": "19.0.1-2687650",
+  "version": "19.0.2-beta.1-4c32e6f5",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,8 +28,8 @@
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.10",
     "echarts": "^5.6.0",
-    "@yelon/util": "^19.0.1-2687650",
-    "@yelon/theme": "^19.0.1-2687650",
+    "@yelon/util": "^19.0.2-beta.1-4c32e6f5",
+    "@yelon/theme": "^19.0.2-beta.1-4c32e6f5",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/chart.mjs",
@@ -70,13 +70,13 @@
       "types": "./mini-area/index.d.ts",
       "default": "./fesm2022/mini-area.mjs"
     },
-    "./mini-bar": {
-      "types": "./mini-bar/index.d.ts",
-      "default": "./fesm2022/mini-bar.mjs"
-    },
     "./mini-progress": {
       "types": "./mini-progress/index.d.ts",
       "default": "./fesm2022/mini-progress.mjs"
+    },
+    "./mini-bar": {
+      "types": "./mini-bar/index.d.ts",
+      "default": "./fesm2022/mini-bar.mjs"
     },
     "./number-info": {
       "types": "./number-info/index.d.ts",
