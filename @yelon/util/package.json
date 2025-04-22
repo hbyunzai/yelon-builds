@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "19.2.0-1a916d5",
+  "version": "19.2.0-a6dc100",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -53,13 +53,13 @@
       "types": "./decorator/index.d.ts",
       "default": "./fesm2022/decorator.mjs"
     },
-    "./format": {
-      "types": "./format/index.d.ts",
-      "default": "./fesm2022/format.mjs"
-    },
     "./form": {
       "types": "./form/index.d.ts",
       "default": "./fesm2022/form.mjs"
+    },
+    "./format": {
+      "types": "./format/index.d.ts",
+      "default": "./fesm2022/format.mjs"
     },
     "./math": {
       "types": "./math/index.d.ts",

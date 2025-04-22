@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "19.2.0-1a916d5",
+  "version": "19.2.0-a6dc100",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^19.0.0",
-    "@yelon/theme": "^19.2.0-1a916d5",
-    "@yelon/util": "^19.2.0-1a916d5",
-    "@yelon/acl": "^19.2.0-1a916d5",
+    "@yelon/theme": "^19.2.0-a6dc100",
+    "@yelon/util": "^19.2.0-a6dc100",
+    "@yelon/acl": "^19.2.0-a6dc100",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -67,13 +67,13 @@
       "types": "./down-file/index.d.ts",
       "default": "./fesm2022/down-file.mjs"
     },
-    "./error-collect": {
-      "types": "./error-collect/index.d.ts",
-      "default": "./fesm2022/error-collect.mjs"
-    },
     "./ellipsis": {
       "types": "./ellipsis/index.d.ts",
       "default": "./fesm2022/ellipsis.mjs"
+    },
+    "./error-collect": {
+      "types": "./error-collect/index.d.ts",
+      "default": "./fesm2022/error-collect.mjs"
     },
     "./exception": {
       "types": "./exception/index.d.ts",
