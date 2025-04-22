@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
 import { ControlWidget, YelonFormModule } from '@yelon/form';
 
 @Component({

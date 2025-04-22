@@ -1,10 +1,8 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpResponseBase } from '@angular/common/http';
 import { Injector, inject } from '@angular/core';
-import { Observable, of, throwError, mergeMap } from 'rxjs';
-
-import { IGNORE_BASE_URL } from '@yelon/theme';
-
 import { environment } from '@env/environment';
+import { IGNORE_BASE_URL } from '@yelon/theme';
+import { Observable, of, throwError, mergeMap } from 'rxjs';
 
 import { ReThrowHttpError, checkStatus, getAdditionalHeaders, toLogin } from './helper';
 import { tryRefreshToken } from './refresh-token';

@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { I18nPipe, SettingsService, User } from '@yelon/theme';
-
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';

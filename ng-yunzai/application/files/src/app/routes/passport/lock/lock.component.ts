@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { I18nPipe, SettingsService, User } from '@yelon/theme';
-
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';

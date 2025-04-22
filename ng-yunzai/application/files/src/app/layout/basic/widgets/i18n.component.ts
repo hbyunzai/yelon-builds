@@ -1,14 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, booleanAttribute, inject, OnInit, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-
+import { I18NService } from '@core';
 import { YUNZAI_I18N_TOKEN, I18nPipe, SettingsService, YunzaiI18NType } from '@yelon/theme';
-
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-
-import { I18NService } from '@core';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'header-i18n',

@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "19.1.0-ecedee8e",
+  "version": "19.1.0-310f6bc",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^19.0.0",
-    "@yelon/theme": "^19.1.0-ecedee8e",
-    "@yelon/util": "^19.1.0-ecedee8e",
-    "@yelon/acl": "^19.1.0-ecedee8e",
+    "@yelon/theme": "^19.1.0-310f6bc",
+    "@yelon/util": "^19.1.0-310f6bc",
+    "@yelon/acl": "^19.1.0-310f6bc",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -43,13 +43,13 @@
       "types": "./index.d.ts",
       "default": "./fesm2022/abc.mjs"
     },
-    "./avatar-list": {
-      "types": "./avatar-list/index.d.ts",
-      "default": "./fesm2022/avatar-list.mjs"
-    },
     "./auto-focus": {
       "types": "./auto-focus/index.d.ts",
       "default": "./fesm2022/auto-focus.mjs"
+    },
+    "./avatar-list": {
+      "types": "./avatar-list/index.d.ts",
+      "default": "./fesm2022/avatar-list.mjs"
     },
     "./cell": {
       "types": "./cell/index.d.ts",
@@ -67,13 +67,13 @@
       "types": "./down-file/index.d.ts",
       "default": "./fesm2022/down-file.mjs"
     },
-    "./ellipsis": {
-      "types": "./ellipsis/index.d.ts",
-      "default": "./fesm2022/ellipsis.mjs"
-    },
     "./error-collect": {
       "types": "./error-collect/index.d.ts",
       "default": "./fesm2022/error-collect.mjs"
+    },
+    "./ellipsis": {
+      "types": "./ellipsis/index.d.ts",
+      "default": "./fesm2022/ellipsis.mjs"
     },
     "./exception": {
       "types": "./exception/index.d.ts",

@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
-
 import { I18nPipe } from '@yelon/theme';
-import screenfull from 'screenfull';
-
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import screenfull from 'screenfull';
 
 @Component({
   selector: 'header-fullscreen',

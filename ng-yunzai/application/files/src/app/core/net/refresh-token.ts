@@ -1,8 +1,7 @@
 import { HttpClient, HttpHandlerFn, HttpRequest, HttpResponseBase } from '@angular/common/http';
 import { EnvironmentProviders, Injector, inject, provideAppInitializer } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, filter, switchMap, take, throwError } from 'rxjs';
-
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
+import { BehaviorSubject, Observable, catchError, filter, switchMap, take, throwError } from 'rxjs';
 
 import { toLogin } from './helper';
 

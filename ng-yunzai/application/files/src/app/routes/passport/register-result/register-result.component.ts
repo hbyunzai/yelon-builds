@@ -1,8 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
 import { I18nPipe } from '@yelon/theme';
-
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzResultModule } from 'ng-zorro-antd/result';

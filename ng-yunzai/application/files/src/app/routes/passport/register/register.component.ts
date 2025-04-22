@@ -2,12 +2,9 @@ import { HttpContext } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { finalize } from 'rxjs';
-
 import { ALLOW_ANONYMOUS } from '@yelon/auth';
 import { I18nPipe, _HttpClient } from '@yelon/theme';
 import { MatchControl } from '@yelon/util/form';
-
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -17,6 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'passport-register',

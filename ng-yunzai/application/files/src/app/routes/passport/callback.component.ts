@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-
 import { SocialService } from '@yelon/auth';
 import { SettingsService } from '@yelon/theme';
 

@@ -12,13 +12,11 @@ import {
   inject
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
-
 import { I18nPipe } from '@yelon/theme';
-
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
 
 @Component({
   selector: 'header-search',

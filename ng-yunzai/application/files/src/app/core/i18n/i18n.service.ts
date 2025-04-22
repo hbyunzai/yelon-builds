@@ -2,13 +2,11 @@
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, of, takeUntil } from 'rxjs';
-
 import { YelonLocaleService, SettingsService, _HttpClient, YunzaiI18nBaseService, YunzaiI18NType, YUNZAI_LANGS } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
+import { Observable, Subject, of, takeUntil } from 'rxjs';
 
 const DEFAULT = 'zh-CN';
 
