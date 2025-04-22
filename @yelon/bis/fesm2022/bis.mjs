@@ -634,7 +634,7 @@ class YunzaiLayoutWebsite01Component {
     }
     logout() {
         const baseUrl = this.configService.get('bis')?.baseUrl || '/backstage';
-        this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=` + encodeURIComponent(this.win.location.href);
+        this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=${encodeURIComponent(this.win.location.href)}`;
     }
     to(url) {
         if (url)
@@ -802,7 +802,7 @@ class YunzaiLayoutWebsite02Component {
     }
     logout() {
         const baseUrl = this.configService.get('bis')?.baseUrl || '/backstage';
-        this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=` + encodeURIComponent(this.win.location.href);
+        this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=${encodeURIComponent(this.win.location.href)}`;
     }
     to(url) {
         if (url)

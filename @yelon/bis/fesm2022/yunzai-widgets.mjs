@@ -71,7 +71,7 @@ class YunzaiHeaderFullScreenComponent {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.5", ngImport: i0, type: YunzaiHeaderFullScreenComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.1.5", type: YunzaiHeaderFullScreenComponent, isStandalone: true, selector: "yunzai-header-fullscreen", host: { listeners: { "window:resize": "_resize()", "click": "_click()" }, properties: { "class.flex-1": "true" } }, ngImport: i0, template: `
-    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"  nzTheme="outline"></nz-icon>
+    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'" nzTheme="outline"></nz-icon>
     {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzIconModule }, { kind: "directive", type: i1.NzIconDirective, selector: "nz-icon,[nz-icon]", inputs: ["nzSpin", "nzRotate", "nzType", "nzTheme", "nzTwotoneColor", "nzIconfont"], exportAs: ["nzIcon"] }, { kind: "pipe", type: I18nPipe, name: "i18n" }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
@@ -80,7 +80,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.5", ngImpor
             args: [{
                     selector: 'yunzai-header-fullscreen',
                     template: `
-    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"  nzTheme="outline"></nz-icon>
+    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'" nzTheme="outline"></nz-icon>
     {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `,
                     host: {
@@ -432,7 +432,7 @@ class YunzaiHeaderUserComponent {
     logout() {
         localStorage.clear();
         this.tokenService.clear();
-        this.win.location.href = `${this.config.baseUrl}/cas-proxy/app/logout?callback=` + encodeURIComponent(this.win.location.href);
+        this.win.location.href = `${this.config.baseUrl}/cas-proxy/app/logout?callback=${encodeURIComponent(this.win.location.href)}`;
     }
     to(href) {
         if (href) {

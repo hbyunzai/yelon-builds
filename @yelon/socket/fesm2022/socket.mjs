@@ -95,7 +95,7 @@ class StompService {
             this.notifyService.notify(body);
             setTimeout(() => {
                 localStorage.clear();
-                this.win.location.href = `${this.config?.baseUrl}/cas-proxy/app/logout?callback=` + encodeURIComponent(this.win.location.href);
+                this.win.location.href = `${this.config?.baseUrl}/cas-proxy/app/logout?callback=${encodeURIComponent(this.win.location.href)}`;
             }, 5000);
         });
     }
