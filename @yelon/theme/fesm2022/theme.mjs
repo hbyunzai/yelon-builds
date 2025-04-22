@@ -4009,7 +4009,7 @@ class PreloadOptionalModules {
     }
 }
 
-const VERSION = new Version('19.0.2-beta.1');
+const VERSION = new Version('19.1.0');
 
 /**
  * Generated bundle index. Do not edit.
