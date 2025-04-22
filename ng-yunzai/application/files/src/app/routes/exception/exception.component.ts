@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { ExceptionModule, ExceptionType } from '@yelon/abc/exception';
 
 @Component({

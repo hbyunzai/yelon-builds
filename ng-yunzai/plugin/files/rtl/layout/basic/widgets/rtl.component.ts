@@ -1,6 +1,8 @@
 import { UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
+
 import { RTLService } from '@yelon/theme';
+
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({

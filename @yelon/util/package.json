@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "19.1.0",
+  "version": "19.1.0-ecedee8e",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -37,13 +37,13 @@
       "types": "./array/index.d.ts",
       "default": "./fesm2022/array.mjs"
     },
-    "./browser": {
-      "types": "./browser/index.d.ts",
-      "default": "./fesm2022/browser.mjs"
-    },
     "./config": {
       "types": "./config/index.d.ts",
       "default": "./fesm2022/config.mjs"
+    },
+    "./browser": {
+      "types": "./browser/index.d.ts",
+      "default": "./fesm2022/browser.mjs"
     },
     "./date-time": {
       "types": "./date-time/index.d.ts",
@@ -53,37 +53,37 @@
       "types": "./decorator/index.d.ts",
       "default": "./fesm2022/decorator.mjs"
     },
-    "./form": {
-      "types": "./form/index.d.ts",
-      "default": "./fesm2022/form.mjs"
-    },
     "./format": {
       "types": "./format/index.d.ts",
       "default": "./fesm2022/format.mjs"
+    },
+    "./form": {
+      "types": "./form/index.d.ts",
+      "default": "./fesm2022/form.mjs"
     },
     "./math": {
       "types": "./math/index.d.ts",
       "default": "./fesm2022/math.mjs"
     },
-    "./mcache": {
-      "types": "./mcache/index.d.ts",
-      "default": "./fesm2022/mcache.mjs"
-    },
     "./mtypes": {
       "types": "./mtypes/index.d.ts",
       "default": "./fesm2022/mtypes.mjs"
+    },
+    "./mcache": {
+      "types": "./mcache/index.d.ts",
+      "default": "./fesm2022/mcache.mjs"
     },
     "./other": {
       "types": "./other/index.d.ts",
       "default": "./fesm2022/other.mjs"
     },
-    "./pipes": {
-      "types": "./pipes/index.d.ts",
-      "default": "./fesm2022/pipes.mjs"
-    },
     "./token": {
       "types": "./token/index.d.ts",
       "default": "./fesm2022/token.mjs"
+    },
+    "./pipes": {
+      "types": "./pipes/index.d.ts",
+      "default": "./fesm2022/pipes.mjs"
     },
     "./pipes/currency": {
       "types": "./pipes/currency/index.d.ts",

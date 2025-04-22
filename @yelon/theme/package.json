@@ -1,6 +1,6 @@
 {
   "name": "@yelon/theme",
-  "version": "19.1.0",
+  "version": "19.1.0-ecedee8e",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^19.0.2",
-    "@yelon/acl": "^19.1.0",
-    "@yelon/abc": "^19.1.0",
-    "@yelon/form": "^19.1.0",
-    "@yelon/util": "^19.1.0",
+    "@yelon/acl": "^19.1.0-ecedee8e",
+    "@yelon/abc": "^19.1.0-ecedee8e",
+    "@yelon/form": "^19.1.0-ecedee8e",
+    "@yelon/util": "^19.1.0-ecedee8e",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/theme.mjs",
@@ -38,13 +38,13 @@
       "types": "./index.d.ts",
       "default": "./fesm2022/theme.mjs"
     },
-    "./layout-blank": {
-      "types": "./layout-blank/index.d.ts",
-      "default": "./fesm2022/layout-blank.mjs"
-    },
     "./layout-default": {
       "types": "./layout-default/index.d.ts",
       "default": "./fesm2022/layout-default.mjs"
+    },
+    "./layout-blank": {
+      "types": "./layout-blank/index.d.ts",
+      "default": "./fesm2022/layout-blank.mjs"
     },
     "./setting-drawer": {
       "types": "./setting-drawer/index.d.ts",

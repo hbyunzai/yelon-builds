@@ -2,11 +2,12 @@ import { HttpContext } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { StartupService } from '@core';
-import { environment } from '@env/environment';
+import { finalize } from 'rxjs';
+
 import { ReuseTabService } from '@yelon/abc/reuse-tab';
 import { ALLOW_ANONYMOUS, YA_SERVICE_TOKEN, SocialOpenType, SocialService } from '@yelon/auth';
 import { I18nPipe, SettingsService, _HttpClient } from '@yelon/theme';
+
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -15,7 +16,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabChangeEvent, NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { finalize } from 'rxjs';
+
+import { StartupService } from '@core';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'passport-login',

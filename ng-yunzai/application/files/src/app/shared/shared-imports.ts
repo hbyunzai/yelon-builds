@@ -1,6 +1,7 @@
 import { AsyncPipe, JsonPipe, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet, RouterLink } from '@angular/router';
+
 import { DatePipe, I18nPipe } from '@yelon/theme';
 
 import { SHARED_YELON_MODULES } from './shared-yelon.module';
