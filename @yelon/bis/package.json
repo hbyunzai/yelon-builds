@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bis",
-  "version": "19.1.0-4469791",
+  "version": "19.1.0-6c83ee5",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -21,17 +21,17 @@
     "component"
   ],
   "dependencies": {
-    "ng-zorro-antd": "^19.0.2",
-    "@yelon/acl": "^19.1.0-4469791",
-    "@yelon/auth": "^19.1.0-4469791",
-    "@yelon/theme": "^19.1.0-4469791",
-    "@yelon/mock": "^19.1.0-4469791",
-    "@yelon/cache": "^19.1.0-4469791",
-    "@yelon/chart": "^19.1.0-4469791",
-    "@yelon/form": "^19.1.0-4469791",
-    "@yelon/testing": "^19.1.0-4469791",
-    "@yelon/util": "^19.1.0-4469791",
-    "@yelon/bcs": "^19.1.0-4469791",
+    "ng-zorro-antd": "^19.2.1",
+    "@yelon/acl": "^19.1.0-6c83ee5",
+    "@yelon/auth": "^19.1.0-6c83ee5",
+    "@yelon/theme": "^19.1.0-6c83ee5",
+    "@yelon/mock": "^19.1.0-6c83ee5",
+    "@yelon/cache": "^19.1.0-6c83ee5",
+    "@yelon/chart": "^19.1.0-6c83ee5",
+    "@yelon/form": "^19.1.0-6c83ee5",
+    "@yelon/testing": "^19.1.0-6c83ee5",
+    "@yelon/util": "^19.1.0-6c83ee5",
+    "@yelon/bcs": "^19.1.0-6c83ee5",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bis.mjs",
