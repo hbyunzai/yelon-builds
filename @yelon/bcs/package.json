@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "19.1.0-ecedee8e",
+  "version": "19.1.0",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -22,10 +22,10 @@
   ],
   "dependencies": {
     "ng-zorro-antd": "^19.0.2",
-    "@yelon/theme": "^19.1.0-ecedee8e",
-    "@yelon/form": "^19.1.0-ecedee8e",
-    "@yelon/abc": "^19.1.0-ecedee8e",
-    "@yelon/util": "^19.1.0-ecedee8e",
+    "@yelon/theme": "^19.1.0",
+    "@yelon/form": "^19.1.0",
+    "@yelon/abc": "^19.1.0",
+    "@yelon/util": "^19.1.0",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -46,13 +46,17 @@
       "types": "./yunzai-dept-tree/index.d.ts",
       "default": "./fesm2022/yunzai-dept-tree.mjs"
     },
-    "./yunzai-grade": {
-      "types": "./yunzai-grade/index.d.ts",
-      "default": "./fesm2022/yunzai-grade.mjs"
+    "./yunzai-dormitory-tree": {
+      "types": "./yunzai-dormitory-tree/index.d.ts",
+      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
     "./yunzai-friend-group": {
       "types": "./yunzai-friend-group/index.d.ts",
       "default": "./fesm2022/yunzai-friend-group.mjs"
+    },
+    "./yunzai-grade": {
+      "types": "./yunzai-grade/index.d.ts",
+      "default": "./fesm2022/yunzai-grade.mjs"
     },
     "./yunzai-iframe-page": {
       "types": "./yunzai-iframe-page/index.d.ts",
@@ -61,10 +65,6 @@
     "./yunzai-role-tree": {
       "types": "./yunzai-role-tree/index.d.ts",
       "default": "./fesm2022/yunzai-role-tree.mjs"
-    },
-    "./yunzai-dormitory-tree": {
-      "types": "./yunzai-dormitory-tree/index.d.ts",
-      "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
     "./yunzai-table-user": {
       "types": "./yunzai-table-user/index.d.ts",
