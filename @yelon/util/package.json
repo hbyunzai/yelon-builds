@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "19.2.0-52bcdb3",
+  "version": "19.2.0-6925b73",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -77,13 +77,13 @@
       "types": "./other/index.d.ts",
       "default": "./fesm2022/other.mjs"
     },
-    "./token": {
-      "types": "./token/index.d.ts",
-      "default": "./fesm2022/token.mjs"
-    },
     "./pipes": {
       "types": "./pipes/index.d.ts",
       "default": "./fesm2022/pipes.mjs"
+    },
+    "./token": {
+      "types": "./token/index.d.ts",
+      "default": "./fesm2022/token.mjs"
     },
     "./pipes/currency": {
       "types": "./pipes/currency/index.d.ts",
