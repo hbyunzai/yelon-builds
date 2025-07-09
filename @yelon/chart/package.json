@@ -1,6 +1,6 @@
 {
   "name": "@yelon/chart",
-  "version": "19.2.0-569945be",
+  "version": "19.2.0-52bcdb3",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,8 +28,8 @@
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.11",
     "echarts": "^5.6.0",
-    "@yelon/util": "^19.2.0-569945be",
-    "@yelon/theme": "^19.2.0-569945be",
+    "@yelon/util": "^19.2.0-52bcdb3",
+    "@yelon/theme": "^19.2.0-52bcdb3",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/chart.mjs",
@@ -42,6 +42,10 @@
       "types": "./index.d.ts",
       "default": "./fesm2022/chart.mjs"
     },
+    "./card": {
+      "types": "./card/index.d.ts",
+      "default": "./fesm2022/card.mjs"
+    },
     "./bar": {
       "types": "./bar/index.d.ts",
       "default": "./fesm2022/bar.mjs"
@@ -50,17 +54,13 @@
       "types": "./chart-echarts/index.d.ts",
       "default": "./fesm2022/chart-echarts.mjs"
     },
-    "./card": {
-      "types": "./card/index.d.ts",
-      "default": "./fesm2022/card.mjs"
+    "./core": {
+      "types": "./core/index.d.ts",
+      "default": "./fesm2022/core.mjs"
     },
     "./custom": {
       "types": "./custom/index.d.ts",
       "default": "./fesm2022/custom.mjs"
-    },
-    "./core": {
-      "types": "./core/index.d.ts",
-      "default": "./fesm2022/core.mjs"
     },
     "./gauge": {
       "types": "./gauge/index.d.ts",
