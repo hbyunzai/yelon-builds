@@ -1,11 +1,10 @@
-import * as i1$1 from '@yelon/util';
-import { log, useLocalStorageUser, WINDOW } from '@yelon/util';
+import { log, YunzaiConfigService, WINDOW, useLocalStorageUser } from '@yelon/util';
 import { DOCUMENT } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Injectable, isDevMode, Inject } from '@angular/core';
+import { inject, Injectable, isDevMode } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { RxStomp } from '@stomp/rx-stomp';
-import * as i1 from 'ng-zorro-antd/notification';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 const SOCKET_DEFAULT_CONFIG = {
     baseUrl: '/backstage',
@@ -26,38 +25,31 @@ function mergeSocketConfig(srv) {
 }
 
 class NotificationService {
-    notifyService;
-    constructor(notifyService) {
-        this.notifyService = notifyService;
-    }
+    notifyService = inject(NzNotificationService);
     notify(message) {
         this.notifyService.create(message.type, message.title, message.content);
     }
     notifyWithHtml(message) {
         this.notifyService.create(message.type, message.title, `<a href=${message.href}>${message.content}</a>`);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: NotificationService, deps: [{ token: i1.NzNotificationService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: NotificationService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: NotificationService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: NotificationService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: NotificationService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: NotificationService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1.NzNotificationService }] });
+        }] });
 
 class StompService {
-    configService;
-    injector;
-    notifyService;
-    win;
     config = SOCKET_DEFAULT_CONFIG;
     rxStomp;
     user;
     destroy$ = new Subject();
-    constructor(configService, injector, notifyService, win) {
-        this.configService = configService;
-        this.injector = injector;
-        this.notifyService = notifyService;
-        this.win = win;
+    configService = inject(YunzaiConfigService);
+    notifyService = inject(NotificationService);
+    win = inject(WINDOW);
+    document = inject(DOCUMENT);
+    constructor() {
         const [, getUser] = useLocalStorageUser();
         if (!this.user) {
             this.user = getUser();
@@ -70,7 +62,7 @@ class StompService {
             this.rxStomp.configure(this.config);
             return;
         }
-        const { location } = this.injector.get(DOCUMENT);
+        const { location } = this.document;
         const { protocol, host } = location;
         log('stomp.service: ', `protocol is ${protocol},host is ${host}`);
         if (protocol.includes('http') && !protocol.includes('https')) {
@@ -115,16 +107,13 @@ class StompService {
     watch(destination, headers) {
         return this.rxStomp.watch(destination, headers);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: StompService, deps: [{ token: i1$1.YunzaiConfigService }, { token: i0.Injector }, { token: NotificationService }, { token: WINDOW }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: StompService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: StompService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: StompService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: StompService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: StompService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1$1.YunzaiConfigService }, { type: i0.Injector }, { type: NotificationService }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [WINDOW]
-                }] }] });
+        }], ctorParameters: () => [] });
 
 /**
  * Generated bundle index. Do not edit.

@@ -1,8 +1,8 @@
 import * as i0 from '@angular/core';
 import { EventEmitter, booleanAttribute, numberAttribute, Output, Input, ViewEncapsulation, ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { format } from 'date-fns';
 import { G2BaseComponent } from '@yelon/chart/core';
 import { toDate } from '@yelon/util/date-time';
-import { format } from 'date-fns';
 import { NzStringTemplateOutletDirective, NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSkeletonComponent, NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { CommonModule } from '@angular/common';
@@ -137,8 +137,8 @@ class G2TimelineComponent extends G2BaseComponent {
         const filterData = data.filter(val => val._time >= initialRange.start && val._time <= initialRange.end);
         _chart.changeData(filterData);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2TimelineComponent, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.2.7", type: G2TimelineComponent, isStandalone: true, selector: "g2-timeline", inputs: { title: "title", maxAxis: ["maxAxis", "maxAxis", numberAttribute], data: "data", titleMap: "titleMap", colorMap: "colorMap", mask: "mask", maskSlider: "maskSlider", position: "position", height: ["height", "height", numberAttribute], padding: "padding", borderWidth: ["borderWidth", "borderWidth", numberAttribute], slider: ["slider", "slider", booleanAttribute] }, outputs: { clickItem: "clickItem" }, exportAs: ["g2Timeline"], usesInheritance: true, ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2TimelineComponent, deps: null, target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.0.6", type: G2TimelineComponent, isStandalone: true, selector: "g2-timeline", inputs: { title: "title", maxAxis: ["maxAxis", "maxAxis", numberAttribute], data: "data", titleMap: "titleMap", colorMap: "colorMap", mask: "mask", maskSlider: "maskSlider", position: "position", height: ["height", "height", numberAttribute], padding: "padding", borderWidth: ["borderWidth", "borderWidth", numberAttribute], slider: ["slider", "slider", booleanAttribute] }, outputs: { clickItem: "clickItem" }, exportAs: ["g2Timeline"], usesInheritance: true, ngImport: i0, template: `
     <ng-container *nzStringTemplateOutlet="title">
       <h4>{{ title }}</h4>
     </ng-container>
@@ -148,7 +148,7 @@ class G2TimelineComponent extends G2BaseComponent {
     <div #container></div>
   `, isInline: true, dependencies: [{ kind: "directive", type: NzStringTemplateOutletDirective, selector: "[nzStringTemplateOutlet]", inputs: ["nzStringTemplateOutletContext", "nzStringTemplateOutlet"], exportAs: ["nzStringTemplateOutlet"] }, { kind: "component", type: NzSkeletonComponent, selector: "nz-skeleton", inputs: ["nzActive", "nzLoading", "nzRound", "nzTitle", "nzAvatar", "nzParagraph"], exportAs: ["nzSkeleton"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2TimelineComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2TimelineComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'g2-timeline',
@@ -162,7 +162,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
     }
     <div #container></div>
   `,
-                    preserveWhitespaces: false,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
                     imports: [NzStringTemplateOutletDirective, NzSkeletonComponent]
@@ -201,11 +200,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
 
 const COMPONENTS = [G2TimelineComponent];
 class G2TimelineModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2TimelineModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: G2TimelineModule, imports: [CommonModule, NzOutletModule, NzSkeletonModule, G2TimelineComponent], exports: [G2TimelineComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2TimelineModule, imports: [CommonModule, NzOutletModule, NzSkeletonModule, COMPONENTS] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2TimelineModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: G2TimelineModule, imports: [CommonModule, NzOutletModule, NzSkeletonModule, G2TimelineComponent], exports: [G2TimelineComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2TimelineModule, imports: [CommonModule, NzOutletModule, NzSkeletonModule, COMPONENTS] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2TimelineModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2TimelineModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, NzOutletModule, NzSkeletonModule, ...COMPONENTS],

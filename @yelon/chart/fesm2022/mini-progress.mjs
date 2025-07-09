@@ -5,7 +5,7 @@ import { NzTooltipDirective, NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { CommonModule } from '@angular/common';
 
 class G2MiniProgressComponent {
-    targetSuffix = inject(YelonLocaleService).getData('miniProgress').target;
+    locale = inject(YelonLocaleService).valueSignal('miniProgress');
     cdr = inject(ChangeDetectorRef);
     color = '#1890FF';
     target;
@@ -19,11 +19,11 @@ class G2MiniProgressComponent {
         this.percent = this.fixNum(this.percent);
         this.cdr.detectChanges();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2MiniProgressComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "16.1.0", version: "19.2.7", type: G2MiniProgressComponent, isStandalone: true, selector: "g2-mini-progress", inputs: { color: "color", target: ["target", "target", numberAttribute], percent: ["percent", "percent", numberAttribute], strokeWidth: ["strokeWidth", "strokeWidth", numberAttribute] }, host: { properties: { "class.g2-mini-progress": "true" } }, exportAs: ["g2MiniProgress"], usesOnChanges: true, ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2MiniProgressComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "16.1.0", version: "20.0.6", type: G2MiniProgressComponent, isStandalone: true, selector: "g2-mini-progress", inputs: { color: "color", target: ["target", "target", numberAttribute], percent: ["percent", "percent", numberAttribute], strokeWidth: ["strokeWidth", "strokeWidth", numberAttribute] }, host: { properties: { "class.g2-mini-progress": "true" } }, exportAs: ["g2MiniProgress"], usesOnChanges: true, ngImport: i0, template: `
     <div
       nz-tooltip
-      [nzTooltipTitle]="targetSuffix + target + '%'"
+      [nzTooltipTitle]="locale().targetSuffix + target + '%'"
       class="g2-mini-progress__target"
       [style]="{ left: target + '%' }"
     >
@@ -38,7 +38,7 @@ class G2MiniProgressComponent {
     </div>
   `, isInline: true, dependencies: [{ kind: "directive", type: NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2MiniProgressComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2MiniProgressComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'g2-mini-progress',
@@ -46,7 +46,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
                     template: `
     <div
       nz-tooltip
-      [nzTooltipTitle]="targetSuffix + target + '%'"
+      [nzTooltipTitle]="locale().targetSuffix + target + '%'"
       class="g2-mini-progress__target"
       [style]="{ left: target + '%' }"
     >
@@ -61,7 +61,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
     </div>
   `,
                     host: { '[class.g2-mini-progress]': 'true' },
-                    preserveWhitespaces: false,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
                     imports: [NzTooltipDirective]
@@ -81,11 +80,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
 
 const COMPONENTS = [G2MiniProgressComponent];
 class G2MiniProgressModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2MiniProgressModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: G2MiniProgressModule, imports: [CommonModule, YelonLocaleModule, NzToolTipModule, G2MiniProgressComponent], exports: [G2MiniProgressComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2MiniProgressModule, imports: [CommonModule, YelonLocaleModule, NzToolTipModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2MiniProgressModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: G2MiniProgressModule, imports: [CommonModule, YelonLocaleModule, NzToolTipModule, G2MiniProgressComponent], exports: [G2MiniProgressComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2MiniProgressModule, imports: [CommonModule, YelonLocaleModule, NzToolTipModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: G2MiniProgressModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: G2MiniProgressModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, YelonLocaleModule, NzToolTipModule, ...COMPONENTS],

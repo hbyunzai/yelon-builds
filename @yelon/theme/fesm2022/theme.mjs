@@ -1,15 +1,13 @@
 import { DOCUMENT, isPlatformServer, registerLocaleData, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, Pipe, Inject, Optional, SkipSelf, NgModule, importProvidersFrom, LOCALE_ID, provideEnvironmentInitializer, makeEnvironmentProviders, Version } from '@angular/core';
+import { inject, PLATFORM_ID, InjectionToken, Injectable, DestroyRef, Injector, Pipe, Optional, SkipSelf, NgModule, importProvidersFrom, LOCALE_ID, provideEnvironmentInitializer, makeEnvironmentProviders, Version } from '@angular/core';
 import { BehaviorSubject, filter, share, Subject, map, of, delay, isObservable, switchMap, tap, finalize, takeUntil, catchError, Observable, take, throwError } from 'rxjs';
 import { ACLService } from '@yelon/acl';
-import * as i1 from '@yelon/util/config';
 import { YunzaiConfigService, YUNZAI_CONFIG } from '@yelon/util/config';
-import * as i5 from '@angular/cdk/platform';
 import { Platform } from '@angular/cdk/platform';
 import { Directionality } from '@angular/cdk/bidi';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Title, DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import ngElGr from '@angular/common/locales/el';
@@ -25,19 +23,19 @@ import ngTr from '@angular/common/locales/tr';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
 import { tr, sl, pl, ko, it, hr, fr, es, el, enUS, zhTW, zhCN as zhCN$1 } from 'date-fns/locale';
-import * as i3 from 'ng-zorro-antd/i18n';
 import { tr_TR, sl_SI, pl_PL, ko_KR, it_IT, hr_HR, fr_FR, es_ES, el_GR, en_US, zh_TW, zh_CN, NzI18nService, NzI18nModule, provideNzI18n, NZ_DATE_LOCALE } from 'ng-zorro-antd/i18n';
-import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { map as map$1 } from 'rxjs/operators';
+import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { HttpClient, HttpParams, HttpContextToken } from '@angular/common/http';
 import { DragDrop } from '@angular/cdk/drag-drop';
+import { SIGNAL } from '@angular/core/primitives/signals';
 import { deepMerge } from '@yelon/util/other';
 import { NzModalService, NzModalModule } from 'ng-zorro-antd/modal';
 import { NzDrawerService, NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { formatDate } from '@yelon/util/date-time';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AccountBookTwoTone, AccountBookFill, AccountBookOutline, AlertTwoTone, AlertFill, AlibabaOutline, AimOutline, AlipayCircleFill, AlertOutline, AlignCenterOutline, AlipayCircleOutline, AlipayOutline, AlignLeftOutline, AlignRightOutline, AmazonOutline, AliwangwangOutline, AliyunOutline, AlipaySquareFill, AmazonCircleFill, AndroidFill, AliwangwangFill, AntCloudOutline, AmazonSquareFill, AndroidOutline, ApartmentOutline, ApiTwoTone, ApiFill, ApiOutline, AntDesignOutline, AppstoreAddOutline, AppstoreFill, AppleOutline, AppstoreOutline, ArrowDownOutline, AppleFill, ArrowsAltOutline, AppstoreTwoTone, ArrowUpOutline, AreaChartOutline, ArrowLeftOutline, AudioFill, ArrowRightOutline, AudioTwoTone, AuditOutline, AudioMutedOutline, BackwardFill, AudioOutline, BackwardOutline, BankFill, BarcodeOutline, BellFill, BankTwoTone, BarsOutline, BankOutline, BehanceCircleFill, BehanceSquareFill, BoldOutline, BellOutline, BehanceOutline, BlockOutline, BehanceSquareOutline, BgColorsOutline, BellTwoTone, BarChartOutline, BookTwoTone, BookFill, BorderOuterOutline, BorderLeftOutline, BorderBottomOutline, BorderHorizontalOutline, BorderTopOutline, BorderOutline, BorderInnerOutline, BorderRightOutline, BoxPlotOutline, BoxPlotFill, BoxPlotTwoTone, BookOutline, BorderlessTableOutline, BorderVerticleOutline, BuildTwoTone, BuildOutline, BugFill, BugOutline, BugTwoTone, BulbFill, BulbTwoTone, BuildFill, BulbOutline, CalculatorFill, CalculatorTwoTone, CalendarFill, CalendarOutline, CalculatorOutline, CalendarTwoTone, CameraOutline, CameraFill, CameraTwoTone, CarTwoTone, CaretDownOutline, CarOutline, CaretLeftFill, CarFill, CaretRightOutline, CaretDownFill, CaretUpOutline, CaretRightFill, CarryOutFill, CarryOutOutline, CaretLeftOutline, CaretUpFill, BranchesOutline, CarryOutTwoTone, CheckCircleFill, CheckCircleOutline, CheckSquareOutline, CheckCircleTwoTone, CiCircleTwoTone, CheckOutline, CheckSquareTwoTone, CiOutline, CheckSquareFill, CiTwoTone, ChromeOutline, ClockCircleOutline, CiCircleOutline, ChromeFill, ClearOutline, CloseCircleTwoTone, CiCircleFill, CloseCircleOutline, ClockCircleFill, CloseCircleFill, ClockCircleTwoTone, CloseOutline, CloseSquareOutline, CloseSquareFill, CloudFill, CloseSquareTwoTone, CloudDownloadOutline, CloudTwoTone, CloudServerOutline, CloudUploadOutline, CloudSyncOutline, ClusterOutline, CodeSandboxCircleFill, CodeFill, CodepenCircleOutline, CloudOutline, CodeSandboxOutline, CodeOutline, CodeSandboxSquareFill, CodeTwoTone, CodepenSquareFill, CodepenOutline, CoffeeOutline, ColumnWidthOutline, CompressOutline, ColumnHeightOutline, CodepenCircleFill, CompassTwoTone, CommentOutline, ContainerFill, CompassOutline, ConsoleSqlOutline, ContactsOutline, ContainerTwoTone, ContactsFill, ContactsTwoTone, ContainerOutline, ControlFill, CopyFill, CopyOutline, CompassFill, CopyTwoTone, CopyrightOutline, CopyrightCircleOutline, ControlTwoTone, ControlOutline, CreditCardFill, CopyrightTwoTone, CrownFill, CopyrightCircleFill, CrownOutline, CustomerServiceTwoTone, CreditCardOutline, CustomerServiceOutline, DashboardTwoTone, CrownTwoTone, CreditCardTwoTone, CustomerServiceFill, DashboardFill, DashOutline, DatabaseOutline, DatabaseTwoTone, DatabaseFill, DashboardOutline, DeleteTwoTone, DeleteRowOutline, DeleteColumnOutline, DeliveredProcedureOutline, DeleteOutline, CopyrightCircleTwoTone, DesktopOutline, DeleteFill, DiffOutline, DiffFill, DeploymentUnitOutline, DiffTwoTone, DingtalkOutline, DollarCircleFill, DislikeFill, DingtalkSquareFill, DisconnectOutline, DollarCircleTwoTone, DollarOutline, DingtalkCircleFill, DislikeTwoTone, DollarTwoTone, DownCircleFill, DislikeOutline, DollarCircleOutline, DoubleLeftOutline, DownSquareFill, DownOutline, DownSquareOutline, DownSquareTwoTone, DownCircleTwoTone, DoubleRightOutline, DownCircleOutline, DownloadOutline, DotChartOutline, DribbbleCircleFill, DribbbleOutline, DribbbleSquareOutline, DropboxCircleFill, DingdingOutline, EditOutline, DribbbleSquareFill, DropboxSquareFill, EllipsisOutline, EnvironmentFill, EditFill, EnterOutline, EuroCircleFill, EuroTwoTone, EuroCircleOutline, EditTwoTone, EuroOutline, EnvironmentTwoTone, ExclamationCircleFill, ExpandAltOutline, EuroCircleTwoTone, ExclamationCircleTwoTone, EnvironmentOutline, ExperimentOutline, ExperimentFill, ExpandOutline, ExceptionOutline, ExportOutline, ExperimentTwoTone, ExclamationCircleOutline, ExclamationOutline, EyeFill, EyeInvisibleFill, EyeInvisibleTwoTone, DropboxOutline, DragOutline, FacebookOutline, FacebookFill, EyeTwoTone, EyeOutline, FastForwardFill, FieldBinaryOutline, FieldNumberOutline, FastBackwardOutline, FileAddFill, FastBackwardFill, FileExcelFill, FastForwardOutline, FieldStringOutline, FileDoneOutline, FileAddTwoTone, FileExcelTwoTone, FileExclamationFill, FileAddOutline, FileExclamationOutline, FieldTimeOutline, FileImageTwoTone, FileExcelOutline, FileExclamationTwoTone, FileImageFill, FileGifOutline, FileFill, FileMarkdownTwoTone, FileMarkdownOutline, FallOutline, FileImageOutline, EyeInvisibleOutline, FilePdfOutline, FileSearchOutline, FilePptTwoTone, FilePdfTwoTone, FileJpgOutline, FileTextFill, FilePptOutline, FileSyncOutline, FilePptFill, FileUnknownOutline, FileProtectOutline, FileTextTwoTone, FileWordFill, FileUnknownTwoTone, FileWordTwoTone, FileUnknownFill, FileTextOutline, FileZipFill, FilterTwoTone, FilterFill, FileWordOutline, FireOutline, FireTwoTone, FileZipOutline, FilterOutline, FlagTwoTone, FileTwoTone, FilePdfFill, FileOutline, FileMarkdownFill, FileZipTwoTone, FlagOutline, FolderAddTwoTone, FolderOpenFill, FireFill, FlagFill, FolderOutline, FolderViewOutline, FolderTwoTone, FontColorsOutline, FolderOpenTwoTone, FolderFill, ForwardOutline, FolderOpenOutline, ForkOutline, ForwardFill, FormatPainterOutline, FormatPainterFill, FormOutline, FrownFill, FrownTwoTone, FullscreenOutline, FontSizeOutline, FundFill, FunctionOutline, FundViewOutline, FullscreenExitOutline, GifOutline, FundProjectionScreenOutline, FundTwoTone, FolderAddFill, FunnelPlotTwoTone, GiftOutline, FunnelPlotFill, FundOutline, FrownOutline, GithubOutline, GoldFill, FolderAddOutline, GitlabFill, GiftFill, GitlabOutline, GoldTwoTone, GoogleCircleFill, GiftTwoTone, GooglePlusCircleFill, GoldOutline, GithubFill, GoogleOutline, GooglePlusOutline, GoogleSquareFill, GoldenFill, HddTwoTone, GooglePlusSquareFill, GlobalOutline, HeartOutline, HeartTwoTone, GroupOutline, HeartFill, HeatMapOutline, GatewayOutline, FunnelPlotOutline, HddFill, HomeFill, HighlightFill, HomeOutline, HistoryOutline, HighlightOutline, HddOutline, HourglassFill, HomeTwoTone, HourglassTwoTone, Html5Outline, Html5Fill, IdcardFill, Html5TwoTone, HourglassOutline, IdcardTwoTone, IdcardOutline, IeOutline, IeCircleFill, IeSquareFill, InboxOutline, ImportOutline, InfoCircleOutline, InfoCircleTwoTone, InsertRowAboveOutline, InsertRowRightOutline, InfoCircleFill, InfoOutline, InsertRowBelowOutline, HighlightTwoTone, InsuranceFill, InstagramFill, InteractionFill, InsertRowLeftOutline, InstagramOutline, InteractionOutline, ItalicOutline, InteractionTwoTone, LayoutOutline, IssuesCloseOutline, LayoutFill, LaptopOutline, LeftCircleFill, LayoutTwoTone, KeyOutline, LeftOutline, LeftCircleOutline, LeftSquareOutline, LeftSquareFill, LeftCircleTwoTone, LikeFill, LeftSquareTwoTone, LineOutline, LikeTwoTone, LinkedinOutline, LineChartOutline, LineHeightOutline, LinkedinFill, LinkOutline, LikeOutline, InsuranceOutline, Loading3QuartersOutline, LockFill, InsuranceTwoTone, MacCommandOutline, LockTwoTone, LoadingOutline, MailOutline, LoginOutline, MedicineBoxOutline, MailFill, MailTwoTone, MacCommandFill, ManOutline, MedicineBoxFill, MedicineBoxTwoTone, MediumCircleFill, MediumOutline, MehFill, MediumWorkmarkOutline, MenuFoldOutline, MehOutline, MediumSquareFill, MessageTwoTone, MehTwoTone, MergeCellsOutline, MinusCircleFill, MenuOutline, MenuUnfoldOutline, MessageFill, MinusCircleTwoTone, LockOutline, MinusOutline, MinusCircleOutline, LogoutOutline, MessageOutline, MoneyCollectFill, MinusSquareOutline, MinusSquareTwoTone, MobileOutline, MobileTwoTone, MoneyCollectOutline, MoreOutline, NotificationFill, NotificationOutline, MoneyCollectTwoTone, NodeIndexOutline, NodeExpandOutline, MonitorOutline, OrderedListOutline, NodeCollapseOutline, NumberOutline, PaperClipOutline, NotificationTwoTone, PauseCircleFill, PartitionOutline, PauseOutline, OneToOneOutline, PayCircleOutline, PayCircleFill, MinusSquareFill, PauseCircleOutline, PauseCircleTwoTone, PicCenterOutline, PicRightOutline, PercentageOutline, MobileFill, PictureOutline, PictureFill, PhoneTwoTone, PhoneFill, PieChartFill, PictureTwoTone, PieChartOutline, PlaySquareFill, PlayCircleTwoTone, PlayCircleFill, PlusCircleFill, PlaySquareTwoTone, PlaySquareOutline, PlayCircleOutline, PieChartTwoTone, PlusCircleOutline, PlusSquareFill, PoundCircleFill, PlusSquareOutline, PlusOutline, PoundOutline, PoundCircleOutline, PlusSquareTwoTone, PlusCircleTwoTone, PoweroffOutline, PoundCircleTwoTone, PhoneOutline, PrinterFill, PicLeftOutline, ProjectTwoTone, PrinterOutline, ProjectFill, ProfileOutline, ProfileTwoTone, ProjectOutline, PropertySafetyFill, PullRequestOutline, PropertySafetyOutline, PushpinOutline, PushpinTwoTone, PropertySafetyTwoTone, PushpinFill, QqOutline, QqCircleFill, QrcodeOutline, QqSquareFill, QuestionCircleTwoTone, QuestionCircleFill, RadarChartOutline, RadiusUprightOutline, QuestionCircleOutline, QuestionOutline, ReadFill, RadiusUpleftOutline, RadiusBottomleftOutline, RadiusSettingOutline, RadiusBottomrightOutline, ProfileFill, PrinterTwoTone, ReadOutline, ReconciliationFill, ReloadOutline, ReconciliationOutline, RedEnvelopeTwoTone, RedditCircleFill, RedoOutline, RedEnvelopeFill, RedditOutline, RestTwoTone, RightCircleOutline, RestOutline, RedditSquareFill, RestFill, RightCircleTwoTone, RightOutline, RightSquareFill, RightCircleFill, RightSquareOutline, RetweetOutline, RiseOutline, RightSquareTwoTone, RobotFill, RocketOutline, RobotOutline, RocketTwoTone, RocketFill, RedEnvelopeOutline, RollbackOutline, RotateRightOutline, RotateLeftOutline, ReconciliationTwoTone, SafetyCertificateTwoTone, SaveOutline, SafetyOutline, SaveFill, SaveTwoTone, ScheduleFill, SafetyCertificateOutline, ScanOutline, ScheduleTwoTone, SearchOutline, ScheduleOutline, SecurityScanTwoTone, SecurityScanOutline, ScissorOutline, SelectOutline, SecurityScanFill, SendOutline, SettingOutline, SettingTwoTone, SettingFill, ShareAltOutline, ShopOutline, ShopFill, ShopTwoTone, ShrinkOutline, ShakeOutline, ShoppingOutline, ShoppingCartOutline, ShoppingFill, SisternodeOutline, ShoppingTwoTone, SafetyCertificateFill, SkinOutline, SignalFill, SketchOutline, SkinTwoTone, SketchSquareFill, SkypeFill, SkinFill, SlackCircleFill, SlackSquareFill, SlidersTwoTone, SkypeOutline, SlidersFill, SlackSquareOutline, SmallDashOutline, SmileTwoTone, SlidersOutline, SnippetsFill, SnippetsOutline, SmileOutline, SolutionOutline, SlackOutline, SnippetsTwoTone, SoundTwoTone, SortAscendingOutline, SoundFill, SortDescendingOutline, SmileFill, SoundOutline, SplitCellsOutline, SketchCircleFill, StarOutline, StockOutline, StarTwoTone, StepForwardFill, StarFill, StepBackwardFill, StepForwardOutline, StopFill, SubnodeOutline, SwapLeftOutline, StopOutline, StopTwoTone, SwapRightOutline, SwapOutline, SwitcherTwoTone, SwitcherOutline, SyncOutline, StrikethroughOutline, SwitcherFill, TagOutline, TabletTwoTone, TabletOutline, TabletFill, TableOutline, TagsFill, TagFill, TagsTwoTone, TaobaoCircleOutline, StepBackwardOutline, TagsOutline, TagTwoTone, TaobaoOutline, ThunderboltOutline, TaobaoSquareFill, TeamOutline, TaobaoCircleFill, ThunderboltTwoTone, ToolFill, ThunderboltFill, ToTopOutline, ToolOutline, ToolTwoTone, TrademarkCircleFill, TrophyFill, TrademarkCircleTwoTone, TransactionOutline, TrademarkCircleOutline, TranslationOutline, TwitterCircleFill, TrophyOutline, TrademarkOutline, TrophyTwoTone, TwitterSquareFill, UnlockFill, TwitterOutline, UnderlineOutline, UndoOutline, UpCircleFill, UngroupOutline, UnlockTwoTone, UnlockOutline, UpOutline, UsbFill, UpCircleOutline, UnorderedListOutline, UpCircleTwoTone, UpSquareFill, UpSquareOutline, UserAddOutline, UsbTwoTone, UsergroupDeleteOutline, UpSquareTwoTone, UserOutline, UsbOutline, UserDeleteOutline, UserSwitchOutline, VerticalLeftOutline, VerticalAlignBottomOutline, VerifiedOutline, UsergroupAddOutline, UploadOutline, VerticalAlignMiddleOutline, VerticalAlignTopOutline, VerticalRightOutline, VideoCameraOutline, VideoCameraAddOutline, VideoCameraTwoTone, VideoCameraFill, WalletOutline, WalletFill, WarningFill, WarningOutline, WechatOutline, WalletTwoTone, WeiboCircleFill, WarningTwoTone, WeiboSquareFill, WeiboOutline, WeiboSquareOutline, WeiboCircleOutline, WechatFill, WhatsAppOutline, WifiOutline, WomanOutline, YoutubeFill, YahooOutline, WindowsFill, WindowsOutline, YoutubeOutline, YuqueOutline, ZhihuCircleFill, YuqueFill, ZhihuOutline, ZhihuSquareFill, ZoomInOutline, ZoomOutOutline, YahooFill } from '@ant-design/icons-angular/icons';
-import * as i1$1 from 'ng-zorro-antd/icon';
+import * as i1 from 'ng-zorro-antd/icon';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 function stepPreloader() {
@@ -67,9 +65,10 @@ function stepPreloader() {
 
 const YUNZAI_I18N_TOKEN = new InjectionToken('yunzaiI18nToken', {
     providedIn: 'root',
-    factory: () => new YunzaiI18NServiceFake(inject(YunzaiConfigService))
+    factory: () => new YunzaiI18NServiceFake()
 });
 class YunzaiI18nBaseService {
+    cogSrv = inject(YunzaiConfigService);
     cog;
     _change$ = new BehaviorSubject(null);
     _currentLang = '';
@@ -87,8 +86,8 @@ class YunzaiI18nBaseService {
     get data() {
         return this._data;
     }
-    constructor(cogSrv) {
-        this.cog = cogSrv.merge('themeI18n', {
+    constructor() {
+        this.cog = this.cogSrv.merge('themeI18n', {
             interpolation: ['{{', '}}']
         });
     }
@@ -133,17 +132,19 @@ class YunzaiI18nBaseService {
         if (typeof params === 'object') {
             const interpolation = this.cog.interpolation;
             const objParams = params;
-            Object.keys(objParams).forEach(key => (content = content.replace(new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'), `${objParams[key]}`)));
+            Object.keys(objParams).forEach(key => {
+                content = content.replace(new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'), `${objParams[key]}`);
+            });
         }
         (Array.isArray(params) ? params : [params]).forEach((item, index) => (content = content.replace(new RegExp(`\\{\\s?${index}\\s?\\}`, 'g'), `${item}`)));
         return content;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18nBaseService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18nBaseService });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18nBaseService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18nBaseService });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18nBaseService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18nBaseService, decorators: [{
             type: Injectable
-        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
+        }], ctorParameters: () => [] });
 class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     use(lang, data) {
         this._data = this.flatData(data ?? {}, []);
@@ -153,10 +154,10 @@ class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     getLangs() {
         return [];
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18NServiceFake, deps: null, target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18NServiceFake, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18NServiceFake, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18NServiceFake, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -221,6 +222,8 @@ class MenuService {
     }
     fixItem(item) {
         item._aclResult = true;
+        if (!item.render_type)
+            item.render_type = 'item';
         if (!item.link)
             item.link = '';
         if (!item.externalLink)
@@ -470,10 +473,10 @@ class MenuService {
     getRouterLink() {
         return this.$routerLink.asObservable();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: MenuService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: MenuService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: MenuService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: MenuService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: MenuService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: MenuService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -569,10 +572,10 @@ class SettingsService {
     getUser() {
         return this._user;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: SettingsService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: SettingsService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: SettingsService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: SettingsService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: SettingsService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: SettingsService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -580,9 +583,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
 const REP_MAX = 6;
 const SPAN_MAX = 24;
 class ResponsiveService {
+    cogSrv = inject(YunzaiConfigService);
     cog;
-    constructor(cogSrv) {
-        this.cog = cogSrv.merge('themeResponsive', {
+    constructor() {
+        this.cog = this.cogSrv.merge('themeResponsive', {
             rules: {
                 1: { xs: 24 },
                 2: { xs: 24, sm: 12 },
@@ -620,13 +624,13 @@ class ResponsiveService {
             clsMap.push(`${antColClass}-xxl-${paddingSpan(rule.xxl)}`);
         return clsMap;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ResponsiveService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ResponsiveService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ResponsiveService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ResponsiveService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ResponsiveService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ResponsiveService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
+        }], ctorParameters: () => [] });
 
 const HTML_DIR = 'dir';
 const RTL_DIRECTION = 'direction';
@@ -656,7 +660,7 @@ class RTLService {
         this.updateHtml();
         // Should be wait inited
         Promise.resolve().then(() => {
-            this.d.value = value;
+            this.d.valueSignal.set(value);
             this.d.change.emit(value);
             this.srv.setLayout(RTL_DIRECTION, value);
         });
@@ -709,10 +713,10 @@ class RTLService {
             this.yelon.set(name, { direction: this.dir });
         });
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: RTLService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: RTLService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: RTLService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: RTLService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: RTLService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: RTLService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -844,10 +848,10 @@ class TitleService {
     ngOnDestroy() {
         this.tit$?.unsubscribe();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: TitleService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: TitleService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: TitleService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: TitleService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: TitleService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: TitleService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [] });
@@ -857,10 +861,10 @@ class I18nPipe {
     transform(key, params) {
         return this.i18n.fanyi(key, params);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: I18nPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: I18nPipe, isStandalone: true, name: "i18n" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: I18nPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: I18nPipe, isStandalone: true, name: "i18n" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: I18nPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: I18nPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'i18n' }]
         }] });
@@ -875,10 +879,10 @@ class YunzaiI18NGuardService {
         }
         return of(true);
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18NGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18NGuardService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18NGuardService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18NGuardService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiI18NGuardService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiI18NGuardService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -1967,6 +1971,52 @@ const YUNZAI_LANGS = {
     }
 };
 
+const YELON_LOCALE = new InjectionToken('yelon-locale');
+
+class YelonLocaleService {
+    defLocale = inject(YELON_LOCALE, { optional: true });
+    _locale = zhCN;
+    change$ = new BehaviorSubject(this._locale);
+    constructor() {
+        this.setLocale(this.defLocale || zhCN);
+    }
+    get change() {
+        return this.change$.asObservable();
+    }
+    setLocale(locale) {
+        if (this._locale && this._locale.abbr === locale.abbr) {
+            return;
+        }
+        this._locale = locale;
+        this.change$.next(locale);
+    }
+    valueSignal(key) {
+        const ret = toSignal(this.change.pipe(map(() => this.getData(key))), {
+            initialValue: this._locale[key]
+        });
+        return ret;
+    }
+    get locale() {
+        return this._locale;
+    }
+    getData(key) {
+        return (this._locale[key] || {});
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleService });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleService, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [] });
+function YELON_LOCALE_SERVICE_PROVIDER_FACTORY(exist) {
+    return exist || new YelonLocaleService();
+}
+const YELON_LOCALE_SERVICE_PROVIDER = {
+    provide: YelonLocaleService,
+    useFactory: YELON_LOCALE_SERVICE_PROVIDER_FACTORY,
+    deps: [[new Optional(), new SkipSelf(), YelonLocaleService]]
+};
+
 /**
  * 封装HttpClient，主要解决：
  * + 优化HttpClient在参数上便利性
@@ -1975,9 +2025,10 @@ const YUNZAI_LANGS = {
  */
 class _HttpClient {
     http = inject(HttpClient);
+    cogSrv = inject(YunzaiConfigService);
     cog;
-    constructor(cogSrv) {
-        this.cog = cogSrv.merge('themeHttp', {
+    constructor() {
+        this.cog = this.cogSrv.merge('themeHttp', {
             nullValueHandling: 'include',
             dateValueHandling: 'timestamp'
         });
@@ -2108,74 +2159,26 @@ class _HttpClient {
         // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
         delay(0), tap(() => this.push()), switchMap(() => this.http.request(method, url, options)), finalize(() => this.pop()));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: _HttpClient, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: _HttpClient, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: _HttpClient, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: _HttpClient, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: _HttpClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: _HttpClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
-
-const YELON_LOCALE = new InjectionToken('yelon-locale');
-
-class YelonLocaleService {
-    _locale = zhCN;
-    change$ = new BehaviorSubject(this._locale);
-    constructor(locale) {
-        this.setLocale(locale || zhCN);
-    }
-    get change() {
-        return this.change$.asObservable();
-    }
-    setLocale(locale) {
-        if (this._locale && this._locale.abbr === locale.abbr) {
-            return;
-        }
-        this._locale = locale;
-        this.change$.next(locale);
-    }
-    get locale() {
-        return this._locale;
-    }
-    getData(path) {
-        return (this._locale[path] || {});
-    }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleService, deps: [{ token: YELON_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleService });
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleService, decorators: [{
-            type: Injectable
-        }], ctorParameters: () => [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YELON_LOCALE]
-                }] }] });
-function YELON_LOCALE_SERVICE_PROVIDER_FACTORY(exist, locale) {
-    return exist || new YelonLocaleService(locale);
-}
-const YELON_LOCALE_SERVICE_PROVIDER = {
-    provide: YelonLocaleService,
-    useFactory: YELON_LOCALE_SERVICE_PROVIDER_FACTORY,
-    deps: [[new Optional(), new SkipSelf(), YelonLocaleService], YELON_LOCALE]
-};
+        }], ctorParameters: () => [] });
 
 const DEFAULT = 'zh-CN';
 class YunzaiHttpI18NService extends YunzaiI18nBaseService {
-    http;
-    settings;
-    nzI18nService;
-    yelonLocaleService;
-    platform;
-    tokenService;
     _defaultLang = DEFAULT;
     $destroy = new Subject();
-    constructor(http, settings, nzI18nService, yelonLocaleService, platform, tokenService, cogSrv) {
-        super(cogSrv);
-        this.http = http;
-        this.settings = settings;
-        this.nzI18nService = nzI18nService;
-        this.yelonLocaleService = yelonLocaleService;
-        this.platform = platform;
-        this.tokenService = tokenService;
+    http = inject(_HttpClient);
+    settings = inject(SettingsService);
+    nzI18nService = inject(NzI18nService);
+    yelonLocaleService = inject(YelonLocaleService);
+    platform = inject(Platform);
+    tokenService = inject(YA_SERVICE_TOKEN);
+    constructor() {
+        super();
         if (this.tokenService.get()?.access_token) {
             const defaultLang = this.getDefaultLang();
             this.getLangs()
@@ -2248,16 +2251,13 @@ class YunzaiHttpI18NService extends YunzaiI18nBaseService {
     ngOnDestroy() {
         this.$destroy.complete();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiHttpI18NService, deps: [{ token: _HttpClient }, { token: SettingsService }, { token: i3.NzI18nService }, { token: YelonLocaleService }, { token: i5.Platform }, { token: YA_SERVICE_TOKEN }, { token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiHttpI18NService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiHttpI18NService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiHttpI18NService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: _HttpClient }, { type: SettingsService }, { type: i3.NzI18nService }, { type: YelonLocaleService }, { type: i5.Platform }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [YA_SERVICE_TOKEN]
-                }] }, { type: i1.YunzaiConfigService }] });
+        }], ctorParameters: () => [] });
 
 const CLS_DRAG = 'MODAL-DRAG';
 /**
@@ -2347,7 +2347,16 @@ class ModalHelper {
             });
             // 保留 nzComponentParams 原有风格，但依然可以通过 @Inject(NZ_MODAL_DATA) 获取
             if (subject.componentInstance != null && useNzData !== true) {
-                Object.assign(subject.componentInstance, params);
+                Object.entries(params).forEach(([key, value]) => {
+                    const t = subject.componentInstance;
+                    const s = t[key]?.[SIGNAL];
+                    if (s != null) {
+                        s.value = value;
+                    }
+                    else {
+                        t[key] = value;
+                    }
+                });
             }
             subject.afterOpen
                 .pipe(take(1), tap(() => {
@@ -2410,10 +2419,10 @@ class ModalHelper {
         };
         return this.create(comp, params, { ...options, modalOptions });
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ModalHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ModalHelper, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ModalHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ModalHelper, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ModalHelper, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ModalHelper, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -2513,10 +2522,10 @@ class DrawerHelper {
         };
         return this.create(title, comp, params, { ...options, drawerOptions });
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrawerHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrawerHelper, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: DrawerHelper, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: DrawerHelper, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrawerHelper, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: DrawerHelper, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -2530,10 +2539,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
  */
 class BaseApi {
     injector = inject(Injector);
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: BaseApi, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: BaseApi });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: BaseApi, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: BaseApi });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: BaseApi, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: BaseApi, decorators: [{
             type: Injectable
         }] });
 const paramKey = `__api_params`;
@@ -2764,11 +2773,11 @@ const IGNORE_BASE_URL = new HttpContextToken(() => false);
 const RAW_BODY = new HttpContextToken(() => false);
 
 class YelonLocaleModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleModule, providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleModule, providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YelonLocaleModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YelonLocaleModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [{ provide: YELON_LOCALE, useValue: zhCN }, YELON_LOCALE_SERVICE_PROVIDER]
@@ -3034,10 +3043,10 @@ class DatePipe {
             customFormat: this.cog?.dateFormatCustom
         });
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DatePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: DatePipe, isStandalone: true, name: "_date" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: DatePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: DatePipe, isStandalone: true, name: "_date" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DatePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: DatePipe, decorators: [{
             type: Pipe,
             args: [{ name: '_date' }]
         }] });
@@ -3053,10 +3062,10 @@ class KeysPipe {
         });
         return ret;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: KeysPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: KeysPipe, isStandalone: true, name: "keys" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: KeysPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: KeysPipe, isStandalone: true, name: "keys" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: KeysPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: KeysPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'keys' }]
         }] });
@@ -3091,10 +3100,10 @@ class YNPipe {
         const html = yn(value, { yes, no, mode });
         return isSafeHtml ? this.dom.bypassSecurityTrustHtml(html) : html;
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YNPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: YNPipe, isStandalone: true, name: "yn" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YNPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: YNPipe, isStandalone: true, name: "yn" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YNPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YNPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'yn' }]
         }] });
@@ -3104,10 +3113,10 @@ class HTMLPipe {
     transform(html) {
         return html ? this.dom.bypassSecurityTrustHtml(html) : '';
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: HTMLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: HTMLPipe, isStandalone: true, name: "html" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: HTMLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: HTMLPipe, isStandalone: true, name: "html" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: HTMLPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: HTMLPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'html' }]
         }] });
@@ -3117,10 +3126,10 @@ class URLPipe {
     transform(url) {
         return url ? this.dom.bypassSecurityTrustUrl(url) : '';
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: URLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: URLPipe, isStandalone: true, name: "url" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: URLPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+    static ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: URLPipe, isStandalone: true, name: "url" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: URLPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: URLPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'url' }]
         }] });
@@ -3941,18 +3950,18 @@ class YunzaiThemeModule {
             providers: HELPERS
         };
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiThemeModule, deps: [{ token: i1$1.NzIconService }], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: YunzaiThemeModule, imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe], exports: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe, YelonLocaleModule] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiThemeModule, providers: [YUNZAI_SETTING_DEFAULT], imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, YelonLocaleModule] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiThemeModule, deps: [{ token: i1.NzIconService }], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: YunzaiThemeModule, imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe], exports: [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe, YelonLocaleModule] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiThemeModule, providers: [YUNZAI_SETTING_DEFAULT], imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, YelonLocaleModule] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiThemeModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiThemeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, ...PIPES],
                     providers: [YUNZAI_SETTING_DEFAULT],
                     exports: [...PIPES, YelonLocaleModule]
                 }]
-        }], ctorParameters: () => [{ type: i1$1.NzIconService }] });
+        }], ctorParameters: () => [{ type: i1.NzIconService }] });
 
 function provideYunzai(options) {
     const lang = options?.defaultLang;

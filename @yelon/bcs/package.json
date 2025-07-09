@@ -1,6 +1,6 @@
 {
   "name": "@yelon/bcs",
-  "version": "19.2.0-a6dc100",
+  "version": "19.2.0-569945be",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -21,11 +21,11 @@
     "component"
   ],
   "dependencies": {
-    "ng-zorro-antd": "^19.2.1",
-    "@yelon/theme": "^19.2.0-a6dc100",
-    "@yelon/form": "^19.2.0-a6dc100",
-    "@yelon/abc": "^19.2.0-a6dc100",
-    "@yelon/util": "^19.2.0-a6dc100",
+    "ng-zorro-antd": "^20.0.0",
+    "@yelon/theme": "^19.2.0-569945be",
+    "@yelon/form": "^19.2.0-569945be",
+    "@yelon/abc": "^19.2.0-569945be",
+    "@yelon/util": "^19.2.0-569945be",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/bcs.mjs",
@@ -50,13 +50,13 @@
       "types": "./yunzai-dormitory-tree/index.d.ts",
       "default": "./fesm2022/yunzai-dormitory-tree.mjs"
     },
-    "./yunzai-friend-group": {
-      "types": "./yunzai-friend-group/index.d.ts",
-      "default": "./fesm2022/yunzai-friend-group.mjs"
-    },
     "./yunzai-grade": {
       "types": "./yunzai-grade/index.d.ts",
       "default": "./fesm2022/yunzai-grade.mjs"
+    },
+    "./yunzai-friend-group": {
+      "types": "./yunzai-friend-group/index.d.ts",
+      "default": "./fesm2022/yunzai-friend-group.mjs"
     },
     "./yunzai-iframe-page": {
       "types": "./yunzai-iframe-page/index.d.ts",

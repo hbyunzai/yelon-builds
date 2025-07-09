@@ -47,8 +47,8 @@ class YunzaiIframePageComponent {
             }
         });
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiIframePageComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.2.7", type: YunzaiIframePageComponent, isStandalone: true, selector: "yunzai-iframe-page", ngImport: i0, template: `
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiIframePageComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.0.6", type: YunzaiIframePageComponent, isStandalone: true, selector: "yunzai-iframe-page", ngImport: i0, template: `
     @if (hasIframe && iframePageHeight) {
       <div class="yunzai-iframe-page" [style.height]="iframePageHeight">
         <iframe [src]="iframeSafeSrc">
@@ -60,7 +60,7 @@ class YunzaiIframePageComponent {
     }
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: NzSpinModule }, { kind: "component", type: i1.NzSpinComponent, selector: "nz-spin", inputs: ["nzIndicator", "nzSize", "nzTip", "nzDelay", "nzSimple", "nzSpinning"], exportAs: ["nzSpin"] }] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiIframePageComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiIframePageComponent, decorators: [{
             type: Component,
             args: [{
                     selector: `yunzai-iframe-page`,
@@ -81,11 +81,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
 
 const COMPONENTS = [YunzaiIframePageComponent];
 class YunzaiIframePageModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiIframePageModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, YunzaiIframePageComponent], exports: [YunzaiIframePageComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, COMPONENTS] });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiIframePageModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, YunzaiIframePageComponent], exports: [YunzaiIframePageComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiIframePageModule, imports: [NzSpinModule, COMPONENTS] });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: YunzaiIframePageModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: YunzaiIframePageModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [NzSpinModule, ...COMPONENTS],

@@ -1,8 +1,8 @@
 import * as i0 from '@angular/core';
 import { inject, Injectable, NgModule } from '@angular/core';
 import { Subject, of } from 'rxjs';
+import { YunzaiConfigService } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
-import * as i1 from '@yelon/util/config';
 
 class LodopService {
     scriptSrv = inject(LazyService);
@@ -13,8 +13,9 @@ class LodopService {
     _init = new Subject();
     _events = new Subject();
     printBuffer = [];
-    constructor(configSrv) {
-        this.defaultConfig = configSrv.merge('lodop', {
+    cogSrv = inject(YunzaiConfigService);
+    constructor() {
+        this.defaultConfig = this.cogSrv.merge('lodop', {
             url: 'http://localhost:8443/CLodopfuncs.js',
             name: 'CLODOP',
             companyName: '',
@@ -217,20 +218,20 @@ class LodopService {
         this._init.unsubscribe();
         this._events.unsubscribe();
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: LodopService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: LodopService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: LodopService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: LodopService, providedIn: 'root' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: LodopService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: LodopService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }] });
+        }], ctorParameters: () => [] });
 
 class LodopModule {
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: LodopModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.7", ngImport: i0, type: LodopModule });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: LodopModule });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: LodopModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.0.6", ngImport: i0, type: LodopModule });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: LodopModule });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: LodopModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: LodopModule, decorators: [{
             type: NgModule,
             args: [{}]
         }] });

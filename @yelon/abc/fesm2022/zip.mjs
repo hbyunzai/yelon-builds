@@ -2,18 +2,19 @@ import { __decorate } from 'tslib';
 import { HttpClient } from '@angular/common/http';
 import * as i0 from '@angular/core';
 import { inject, NgZone, Injectable } from '@angular/core';
+import { saveAs } from 'file-saver';
+import { YunzaiConfigService } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
-import { saveAs } from 'file-saver';
-import * as i1 from '@yelon/util/config';
 
 class ZipService {
     http = inject(HttpClient);
     lazy = inject(LazyService);
     ngZone = inject(NgZone);
+    cogSrv = inject(YunzaiConfigService);
     cog;
-    constructor(configSrv) {
-        this.cog = configSrv.merge('zip', {
+    constructor() {
+        this.cog = this.cogSrv.merge('zip', {
             url: 'https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js',
             utils: []
         });
@@ -105,16 +106,16 @@ class ZipService {
             });
         });
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ZipService, deps: [{ token: i1.YunzaiConfigService }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ZipService, providedIn: 'root' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ZipService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ZipService, providedIn: 'root' });
 }
 __decorate([
     ZoneOutside()
 ], ZipService.prototype, "read", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ZipService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.0.6", ngImport: i0, type: ZipService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i1.YunzaiConfigService }], propDecorators: { read: [] } });
+        }], ctorParameters: () => [], propDecorators: { read: [] } });
 
 /**
  * Generated bundle index. Do not edit.

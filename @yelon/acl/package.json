@@ -1,6 +1,6 @@
 {
   "name": "@yelon/acl",
-  "version": "19.2.0-a6dc100",
+  "version": "19.2.0-569945be",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -26,7 +26,7 @@
     "component"
   ],
   "dependencies": {
-    "@yelon/util": "^19.2.0-a6dc100",
+    "@yelon/util": "^19.2.0-569945be",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/acl.mjs",
