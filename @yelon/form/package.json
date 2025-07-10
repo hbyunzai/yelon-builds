@@ -1,6 +1,6 @@
 {
   "name": "@yelon/form",
-  "version": "20.0.0-beta.0-522dcca",
+  "version": "20.0.0-beta.0-522dccac",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -30,9 +30,9 @@
   "dependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "@yelon/theme": "^20.0.0-beta.0-522dcca",
-    "@yelon/acl": "^20.0.0-beta.0-522dcca",
-    "@yelon/util": "^20.0.0-beta.0-522dcca",
+    "@yelon/theme": "^20.0.0-beta.0-522dccac",
+    "@yelon/acl": "^20.0.0-beta.0-522dccac",
+    "@yelon/util": "^20.0.0-beta.0-522dccac",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/form.mjs",
@@ -49,21 +49,21 @@
       "types": "./widgets/autocomplete/index.d.ts",
       "default": "./fesm2022/widgets-auto-complete.mjs"
     },
-    "./widgets/cascader": {
-      "types": "./widgets/cascader/index.d.ts",
-      "default": "./fesm2022/widgets-cascader.mjs"
-    },
-    "./widgets/color": {
-      "types": "./widgets/color/index.d.ts",
-      "default": "./fesm2022/widgets-color.mjs"
-    },
     "./widgets/mention": {
       "types": "./widgets/mention/index.d.ts",
       "default": "./fesm2022/widgets-mention.mjs"
     },
+    "./widgets/cascader": {
+      "types": "./widgets/cascader/index.d.ts",
+      "default": "./fesm2022/widgets-cascader.mjs"
+    },
     "./widgets/qr-code": {
       "types": "./widgets/qr-code/index.d.ts",
       "default": "./fesm2022/widgets-qr-code.mjs"
+    },
+    "./widgets/color": {
+      "types": "./widgets/color/index.d.ts",
+      "default": "./fesm2022/widgets-color.mjs"
     },
     "./widgets/rate": {
       "types": "./widgets/rate/index.d.ts",
@@ -93,10 +93,6 @@
       "types": "./widgets/tree-select/index.d.ts",
       "default": "./fesm2022/widgets-tree-select.mjs"
     },
-    "./widgets/upload": {
-      "types": "./widgets/upload/index.d.ts",
-      "default": "./fesm2022/widgets-upload.mjs"
-    },
     "./widgets-third/monaco-editor": {
       "types": "./widgets-third/monaco-editor/index.d.ts",
       "default": "./fesm2022/widgets-third-monaco-editor.mjs"
@@ -104,6 +100,10 @@
     "./widgets-third/tinymce": {
       "types": "./widgets-third/tinymce/index.d.ts",
       "default": "./fesm2022/widgets-third-tinymce.mjs"
+    },
+    "./widgets/upload": {
+      "types": "./widgets/upload/index.d.ts",
+      "default": "./fesm2022/widgets-upload.mjs"
     }
   },
   "sideEffects": false

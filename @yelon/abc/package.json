@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "20.0.0-beta.0-522dcca",
+  "version": "20.0.0-beta.0-522dccac",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^20.0.0",
-    "@yelon/theme": "^20.0.0-beta.0-522dcca",
-    "@yelon/util": "^20.0.0-beta.0-522dcca",
-    "@yelon/acl": "^20.0.0-beta.0-522dcca",
+    "@yelon/theme": "^20.0.0-beta.0-522dccac",
+    "@yelon/util": "^20.0.0-beta.0-522dccac",
+    "@yelon/acl": "^20.0.0-beta.0-522dccac",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -43,6 +43,10 @@
       "types": "./index.d.ts",
       "default": "./fesm2022/abc.mjs"
     },
+    "./count-down": {
+      "types": "./count-down/index.d.ts",
+      "default": "./fesm2022/count-down.mjs"
+    },
     "./auto-focus": {
       "types": "./auto-focus/index.d.ts",
       "default": "./fesm2022/auto-focus.mjs"
@@ -50,10 +54,6 @@
     "./cell": {
       "types": "./cell/index.d.ts",
       "default": "./fesm2022/cell.mjs"
-    },
-    "./count-down": {
-      "types": "./count-down/index.d.ts",
-      "default": "./fesm2022/count-down.mjs"
     },
     "./date-picker": {
       "types": "./date-picker/index.d.ts",
@@ -71,13 +71,13 @@
       "types": "./error-collect/index.d.ts",
       "default": "./fesm2022/error-collect.mjs"
     },
-    "./exception": {
-      "types": "./exception/index.d.ts",
-      "default": "./fesm2022/exception.mjs"
-    },
     "./footer-toolbar": {
       "types": "./footer-toolbar/index.d.ts",
       "default": "./fesm2022/footer-toolbar.mjs"
+    },
+    "./exception": {
+      "types": "./exception/index.d.ts",
+      "default": "./fesm2022/exception.mjs"
     },
     "./full-content": {
       "types": "./full-content/index.d.ts",
