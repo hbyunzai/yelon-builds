@@ -35,7 +35,6 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
       `ng-yunzai@${version}`,
       `ng-yunzai-plugin-theme@latest`,
       `source-map-explorer@^2.5.3`,
-      `@angular/language-service@^19.2.0`,
       `ngx-tinymce@^20.0.0`,
       `@ng-util/monaco-editor@^20.0.0`,
       `@yelon/testing@${version}`

@@ -38,7 +38,6 @@ function UpgradeMainVersions(tree, version = lib_versions_1.VERSION) {
         `ng-yunzai@${version}`,
         `ng-yunzai-plugin-theme@latest`,
         `source-map-explorer@^2.5.3`,
-        `@angular/language-service@^19.2.0`,
         `ngx-tinymce@^20.0.0`,
         `@ng-util/monaco-editor@^20.0.0`,
         `@yelon/testing@${version}`
