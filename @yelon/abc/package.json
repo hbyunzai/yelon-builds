@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "20.0.0-beta.0-91393d2",
+  "version": "20.0.0",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^20.0.0",
-    "@yelon/theme": "^20.0.0-beta.0-91393d2",
-    "@yelon/util": "^20.0.0-beta.0-91393d2",
-    "@yelon/acl": "^20.0.0-beta.0-91393d2",
+    "@yelon/theme": "^20.0.0",
+    "@yelon/util": "^20.0.0",
+    "@yelon/acl": "^20.0.0",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -127,6 +127,10 @@
       "types": "./quick-menu/index.d.ts",
       "default": "./fesm2022/quick-menu.mjs"
     },
+    "./reuse-tab": {
+      "types": "./reuse-tab/index.d.ts",
+      "default": "./fesm2022/reuse-tab.mjs"
+    },
     "./se": {
       "types": "./se/index.d.ts",
       "default": "./fesm2022/se.mjs"
@@ -134,10 +138,6 @@
     "./sg": {
       "types": "./sg/index.d.ts",
       "default": "./fesm2022/sg.mjs"
-    },
-    "./reuse-tab": {
-      "types": "./reuse-tab/index.d.ts",
-      "default": "./fesm2022/reuse-tab.mjs"
     },
     "./st": {
       "types": "./st/index.d.ts",
