@@ -359,9 +359,7 @@ class PathToRegexpService {
                 delimiter: delimiter,
                 optional: optional,
                 repeat: repeat,
-                pattern: pattern
-                    ? this.escapeGroup(pattern)
-                    : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
+                pattern: pattern ? this.escapeGroup(pattern) : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
             });
         }
         // Push any remaining characters.
@@ -482,9 +480,7 @@ class PathToRegexpService {
                 route += this.escapeString(token);
             }
             else {
-                const capture = token.repeat
-                    ? `(?:${token.pattern})(?:${this.escapeString(token.delimiter)}(?:${token.pattern}))*`
-                    : token.pattern;
+                const capture = token.repeat ? `(?:${token.pattern})(?:${this.escapeString(token.delimiter)}(?:${token.pattern}))*` : token.pattern;
                 if (keys) {
                     keys.push(token);
                 }

@@ -51,14 +51,7 @@ class CascaderWidget extends ControlUIWidget {
             this.ui.clear();
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CascaderWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: CascaderWidget, isStandalone: true, selector: "sf-cascader", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: CascaderWidget, isStandalone: true, selector: "sf-cascader", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-cascader
       [nzDisabled]="disabled"
       [nzSize]="ui.size!"
@@ -85,22 +78,14 @@ class CascaderWidget extends ControlUIWidget {
       [nzMultiple]="ui.multiple"
       (nzClear)="_clear()"
       (nzVisibleChange)="_visibleChange($event)"
-      (nzSelectionChange)="_selectionChange($event)"
-    />
+      (nzSelectionChange)="_selectionChange($event)" />
   </sf-item-wrap>`, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1$1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "ngmodule", type: NzCascaderModule }, { kind: "component", type: i3.NzCascaderComponent, selector: "nz-cascader, [nz-cascader]", inputs: ["nzOptionRender", "nzShowInput", "nzShowArrow", "nzAllowClear", "nzAutoFocus", "nzChangeOnSelect", "nzDisabled", "nzColumnClassName", "nzExpandTrigger", "nzValueProperty", "nzLabelProperty", "nzLabelRender", "nzVariant", "nzNotFoundContent", "nzSize", "nzBackdrop", "nzShowSearch", "nzPlaceHolder", "nzMenuClassName", "nzMenuStyle", "nzMouseLeaveDelay", "nzMouseEnterDelay", "nzStatus", "nzMultiple", "nzMaxTagCount", "nzPlacement", "nzTriggerAction", "nzChangeOn", "nzLoadData", "nzDisplayWith", "nzSuffixIcon", "nzExpandIcon", "nzOptions"], outputs: ["nzVisibleChange", "nzSelectionChange", "nzRemoved", "nzClear"], exportAs: ["nzCascader"] }], encapsulation: i0.ViewEncapsulation.None });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CascaderWidget, decorators: [{
             type: Component,
             args: [{
                     selector: 'sf-cascader',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-cascader
       [nzDisabled]="disabled"
       [nzSize]="ui.size!"
@@ -127,8 +112,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzMultiple]="ui.multiple"
       (nzClear)="_clear()"
       (nzVisibleChange)="_visibleChange($event)"
-      (nzSelectionChange)="_selectionChange($event)"
-    />
+      (nzSelectionChange)="_selectionChange($event)" />
   </sf-item-wrap>`,
                     encapsulation: ViewEncapsulation.None,
                     imports: [FormsModule, YelonFormModule, NzCascaderModule]

@@ -457,9 +457,7 @@ class FormProperty {
         if (emitFormat && arrErrs && !this.ui.onlyVisual) {
             const l = (this.widget && this.widget.l.error) || {};
             arrErrs = arrErrs.map((err) => {
-                let message = err.keyword == null && err.message
-                    ? err.message
-                    : (this.ui.errors || {})[err.keyword] || this._options.errors[err.keyword] || l[err.keyword] || ``;
+                let message = err.keyword == null && err.message ? err.message : (this.ui.errors || {})[err.keyword] || this._options.errors[err.keyword] || l[err.keyword] || ``;
                 if (message && typeof message === 'function') {
                     message = message(err);
                 }
@@ -855,8 +853,7 @@ class FormPropertyFactory {
         }
         else {
             // fix required
-            if ((propertyId && parent.schema.required.indexOf(propertyId.split(SF_SEQ).pop()) !== -1) ||
-                ui.showRequired === true) {
+            if ((propertyId && parent.schema.required.indexOf(propertyId.split(SF_SEQ).pop()) !== -1) || ui.showRequired === true) {
                 ui._required = true;
             }
             // fix title
@@ -952,10 +949,7 @@ class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
         });
     }
     createValidatorFn(schema, extraOptions) {
-        const ignoreKeywords = [
-            ...this.options.ignoreKeywords,
-            ...(extraOptions.ignoreKeywords || [])
-        ];
+        const ignoreKeywords = [...this.options.ignoreKeywords, ...(extraOptions.ignoreKeywords || [])];
         return (value) => {
             try {
                 this.ngZone.runOutsideAngular(() => this.ajv.validate(schema, value));
@@ -1402,9 +1396,7 @@ class SFComponent {
                     widget: property.type,
                     ...(property.format && this.options.formatMap[property.format]),
                     ...(typeof property.ui === 'string' ? { widget: property.ui } : null),
-                    ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
-                        ? { widget: 'select' }
-                        : null),
+                    ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0 ? { widget: 'select' } : null),
                     ...curUi
                 };
                 Object.keys(ui)
@@ -1423,8 +1415,7 @@ class SFComponent {
                         if (!ui.spanControl)
                             ui.spanControl = typeof parentUiSchema.spanControl === 'undefined' ? 19 : parentUiSchema.spanControl;
                         if (!ui.offsetControl)
-                            ui.offsetControl =
-                                typeof parentUiSchema.offsetControl === 'undefined' ? null : parentUiSchema.offsetControl;
+                            ui.offsetControl = typeof parentUiSchema.offsetControl === 'undefined' ? null : parentUiSchema.offsetControl;
                     }
                 }
                 else {
@@ -1920,9 +1911,7 @@ class Widget {
         return this.sfComp.cleanValue;
     }
     ngAfterViewInit() {
-        this.formProperty.errorsChanges
-            .pipe(takeUntil(this.sfItemComp.destroy$))
-            .subscribe((errors) => {
+        this.formProperty.errorsChanges.pipe(takeUntil(this.sfItemComp.destroy$)).subscribe((errors) => {
             if (errors == null)
                 return;
             di(this.ui, 'errorsChanges', this.formProperty.path, errors);
@@ -2013,14 +2002,12 @@ class ArrayWidget extends ArrayLayoutWidget {
     removeTitle;
     arraySpan = 8;
     get addDisabled() {
-        return (this.disabled ||
-            (this.schema.maxItems != null && this.formProperty.properties.length >= this.schema.maxItems));
+        return this.disabled || (this.schema.maxItems != null && this.formProperty.properties.length >= this.schema.maxItems);
     }
     get showRemove() {
         if (this.disabled || !this.removeTitle)
             return false;
-        if (this.schema.minItems != null &&
-            this.formProperty.properties.length <= this.schema.minItems)
+        if (this.schema.minItems != null && this.formProperty.properties.length <= this.schema.minItems)
             return false;
         return true;
     }
@@ -2070,20 +2057,12 @@ class ArrayWidget extends ArrayLayoutWidget {
                 [nzTooltipOverlayStyle]="oh.overlayStyle"
                 [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                 [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                [nzType]="oh.icon!"
-              />
+                [nzType]="oh.icon!" />
             }
           </span>
         </label>
         <div class="sf__array-add">
-          <button
-            type="button"
-            nz-button
-            [nzType]="addType"
-            [disabled]="addDisabled"
-            (click)="addItem()"
-            [innerHTML]="addTitle"
-          ></button>
+          <button type="button" nz-button [nzType]="addType" [disabled]="addDisabled" (click)="addItem()" [innerHTML]="addTitle"></button>
         </div>
       </div>
     }
@@ -2136,20 +2115,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                 [nzTooltipOverlayStyle]="oh.overlayStyle"
                 [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                 [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                [nzType]="oh.icon!"
-              />
+                [nzType]="oh.icon!" />
             }
           </span>
         </label>
         <div class="sf__array-add">
-          <button
-            type="button"
-            nz-button
-            [nzType]="addType"
-            [disabled]="addDisabled"
-            (click)="addItem()"
-            [innerHTML]="addTitle"
-          ></button>
+          <button type="button" nz-button [nzType]="addType" [disabled]="addDisabled" (click)="addItem()" [innerHTML]="addTitle"></button>
         </div>
       </div>
     }
@@ -2189,14 +2160,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
 
 class BooleanWidget extends ControlUIWidget {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: BooleanWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: BooleanWidget, isStandalone: false, selector: "sf-boolean", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: BooleanWidget, isStandalone: false, selector: "sf-boolean", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-switch
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -2204,22 +2168,14 @@ class BooleanWidget extends ControlUIWidget {
       [nzSize]="ui.size!"
       [nzCheckedChildren]="ui.checkedChildren!"
       [nzUnCheckedChildren]="ui.unCheckedChildren!"
-      [nzLoading]="ui.loading"
-    />
+      [nzLoading]="ui.loading" />
   </sf-item-wrap>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i2$2.NzSwitchComponent, selector: "nz-switch", inputs: ["nzLoading", "nzDisabled", "nzControl", "nzCheckedChildren", "nzUnCheckedChildren", "nzSize", "nzId"], exportAs: ["nzSwitch"] }, { kind: "component", type: SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }], encapsulation: i0.ViewEncapsulation.None });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: BooleanWidget, decorators: [{
             type: Component,
             args: [{
                     selector: 'sf-boolean',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-switch
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -2227,8 +2183,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzSize]="ui.size!"
       [nzCheckedChildren]="ui.checkedChildren!"
       [nzUnCheckedChildren]="ui.unCheckedChildren!"
-      [nzLoading]="ui.loading"
-    />
+      [nzLoading]="ui.loading" />
   </sf-item-wrap>`,
                     encapsulation: ViewEncapsulation.None,
                     // eslint-disable-next-line @angular-eslint/prefer-standalone
@@ -2319,8 +2274,7 @@ class CheckboxWidget extends ControlUIWidget {
                   [nzTooltipOverlayStyle]="oh.overlayStyle"
                   [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                   [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                  [nzType]="oh.icon!"
-                />
+                  [nzType]="oh.icon!" />
               }
             </span>
           </label>
@@ -2378,8 +2332,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                   [nzTooltipOverlayStyle]="oh.overlayStyle"
                   [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                   [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                  [nzType]="oh.icon!"
-                />
+                  [nzType]="oh.icon!" />
               }
             </span>
           </label>
@@ -2417,18 +2370,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
 class CustomWidget extends ControlUIWidget {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CustomWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: CustomWidget, isStandalone: false, selector: "sf-custom", usesInheritance: true, ngImport: i0, template: `
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="schema.title"
-    >
-      <ng-template
-        [ngTemplateOutlet]="$any(ui)._render"
-        [ngTemplateOutletContext]="{ $implicit: this, schema: schema, ui: ui }"
-      />
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+      <ng-template [ngTemplateOutlet]="$any(ui)._render" [ngTemplateOutletContext]="{ $implicit: this, schema: schema, ui: ui }" />
     </sf-item-wrap>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "component", type: SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }], encapsulation: i0.ViewEncapsulation.None });
 }
@@ -2437,18 +2380,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             args: [{
                     selector: 'sf-custom',
                     template: `
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="schema.title"
-    >
-      <ng-template
-        [ngTemplateOutlet]="$any(ui)._render"
-        [ngTemplateOutletContext]="{ $implicit: this, schema: schema, ui: ui }"
-      />
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+      <ng-template [ngTemplateOutlet]="$any(ui)._render" [ngTemplateOutletContext]="{ $implicit: this, schema: schema, ui: ui }" />
     </sf-item-wrap>
   `,
                     encapsulation: ViewEncapsulation.None,
@@ -2531,9 +2464,7 @@ class DateWidget extends ControlUIWidget {
             this.setEnd(null);
             return;
         }
-        const res = Array.isArray(value)
-            ? [format(value[0], this.startFormat), format(value[1], this.endFormat || this.startFormat)]
-            : format(value, this.startFormat);
+        const res = Array.isArray(value) ? [format(value[0], this.startFormat), format(value[1], this.endFormat || this.startFormat)] : format(value, this.startFormat);
         if (this.flatRange) {
             this.setValue(res[0]);
             this.setEnd(res[1]);
@@ -2560,14 +2491,7 @@ class DateWidget extends ControlUIWidget {
         this.endProperty.updateValueAndValidity();
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: DateWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: DateWidget, isStandalone: false, selector: "sf-date", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: DateWidget, isStandalone: false, selector: "sf-date", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     @switch (mode) {
       @case ('year') {
         <nz-year-picker
@@ -2587,8 +2511,7 @@ class DateWidget extends ControlUIWidget {
           (nzOnOpenChange)="_openChange($event)"
           [nzRenderExtraFooter]="ui.renderExtraFooter"
           [nzInputReadOnly]="ui.inputReadOnly"
-          [nzInline]="ui.inline!"
-        />
+          [nzInline]="ui.inline!" />
       }
       @case ('month') {
         <nz-month-picker
@@ -2608,8 +2531,7 @@ class DateWidget extends ControlUIWidget {
           (nzOnOpenChange)="_openChange($event)"
           [nzRenderExtraFooter]="ui.renderExtraFooter"
           [nzInputReadOnly]="ui.inputReadOnly"
-          [nzInline]="ui.inline!"
-        />
+          [nzInline]="ui.inline!" />
       }
       @case ('week') {
         <nz-week-picker
@@ -2628,8 +2550,7 @@ class DateWidget extends ControlUIWidget {
           [nzDropdownClassName]="ui.dropdownClassName"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOpenChange)="_openChange($event)"
-        />
+          (nzOnOpenChange)="_openChange($event)" />
       }
       @case ('range') {
         <nz-range-picker
@@ -2656,8 +2577,7 @@ class DateWidget extends ControlUIWidget {
           [nzMode]="$any(ui.rangeMode)"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOk)="_ok($event)"
-        />
+          (nzOnOk)="_ok($event)" />
       }
       @default {
         <nz-date-picker
@@ -2682,8 +2602,7 @@ class DateWidget extends ControlUIWidget {
           [nzShowWeekNumber]="ui.showWeekNumber || false"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOk)="_ok($event)"
-        />
+          (nzOnOk)="_ok($event)" />
       }
     }
   </sf-item-wrap>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i2$3.NzDatePickerComponent, selector: "nz-date-picker,nz-week-picker,nz-month-picker,nz-quarter-picker,nz-year-picker,nz-range-picker", inputs: ["nzAllowClear", "nzAutoFocus", "nzDisabled", "nzBorderless", "nzInputReadOnly", "nzInline", "nzOpen", "nzDisabledDate", "nzLocale", "nzPlaceHolder", "nzPopupStyle", "nzDropdownClassName", "nzSize", "nzStatus", "nzFormat", "nzVariant", "nzDateRender", "nzDisabledTime", "nzRenderExtraFooter", "nzShowToday", "nzMode", "nzShowNow", "nzRanges", "nzDefaultPickerValue", "nzSeparator", "nzSuffixIcon", "nzBackdrop", "nzId", "nzPlacement", "nzShowWeekNumber", "nzShowTime"], outputs: ["nzOnPanelChange", "nzOnCalendarChange", "nzOnOk", "nzOnOpenChange"], exportAs: ["nzDatePicker"] }, { kind: "directive", type: i2$3.NzRangePickerComponent, selector: "nz-range-picker", exportAs: ["nzRangePicker"] }, { kind: "directive", type: i2$3.NzMonthPickerComponent, selector: "nz-month-picker", exportAs: ["nzMonthPicker"] }, { kind: "directive", type: i2$3.NzYearPickerComponent, selector: "nz-year-picker", exportAs: ["nzYearPicker"] }, { kind: "directive", type: i2$3.NzWeekPickerComponent, selector: "nz-week-picker", exportAs: ["nzWeekPicker"] }, { kind: "component", type: SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }], encapsulation: i0.ViewEncapsulation.None });
@@ -2692,14 +2611,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-date',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     @switch (mode) {
       @case ('year') {
         <nz-year-picker
@@ -2719,8 +2631,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           (nzOnOpenChange)="_openChange($event)"
           [nzRenderExtraFooter]="ui.renderExtraFooter"
           [nzInputReadOnly]="ui.inputReadOnly"
-          [nzInline]="ui.inline!"
-        />
+          [nzInline]="ui.inline!" />
       }
       @case ('month') {
         <nz-month-picker
@@ -2740,8 +2651,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           (nzOnOpenChange)="_openChange($event)"
           [nzRenderExtraFooter]="ui.renderExtraFooter"
           [nzInputReadOnly]="ui.inputReadOnly"
-          [nzInline]="ui.inline!"
-        />
+          [nzInline]="ui.inline!" />
       }
       @case ('week') {
         <nz-week-picker
@@ -2760,8 +2670,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzDropdownClassName]="ui.dropdownClassName"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOpenChange)="_openChange($event)"
-        />
+          (nzOnOpenChange)="_openChange($event)" />
       }
       @case ('range') {
         <nz-range-picker
@@ -2788,8 +2697,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzMode]="$any(ui.rangeMode)"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOk)="_ok($event)"
-        />
+          (nzOnOk)="_ok($event)" />
       }
       @default {
         <nz-date-picker
@@ -2814,8 +2722,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzShowWeekNumber]="ui.showWeekNumber || false"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOk)="_ok($event)"
-        />
+          (nzOnOk)="_ok($event)" />
       }
     }
   </sf-item-wrap>`,
@@ -2866,14 +2773,7 @@ class NumberWidget extends ControlUIWidget {
         this.ui.change?.(this.value);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: NumberWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: NumberWidget, isStandalone: false, selector: "sf-number", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: NumberWidget, isStandalone: false, selector: "sf-number", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-input-number
       [nzId]="id"
       [ngModel]="value"
@@ -2888,22 +2788,14 @@ class NumberWidget extends ControlUIWidget {
       [nzPrecision]="ui.precision || null"
       [nzPlaceHolder]="ui.placeholder || ''"
       [style.width]="width"
-      [class.ant-input-number__hide-step]="ui.hideStep"
-    />
+      [class.ant-input-number__hide-step]="ui.hideStep" />
   </sf-item-wrap>`, isInline: true, dependencies: [{ kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i2$4.NzInputNumberComponent, selector: "nz-input-number", inputs: ["nzId", "nzSize", "nzPlaceHolder", "nzStatus", "nzVariant", "nzStep", "nzMin", "nzMax", "nzPrecision", "nzParser", "nzFormatter", "nzDisabled", "nzReadOnly", "nzAutoFocus", "nzBordered", "nzKeyboard", "nzControls"], outputs: ["nzBlur", "nzFocus", "nzOnStep"], exportAs: ["nzInputNumber"] }, { kind: "component", type: SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }], encapsulation: i0.ViewEncapsulation.None });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: NumberWidget, decorators: [{
             type: Component,
             args: [{
                     selector: 'sf-number',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-input-number
       [nzId]="id"
       [ngModel]="value"
@@ -2918,8 +2810,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzPrecision]="ui.precision || null"
       [nzPlaceHolder]="ui.placeholder || ''"
       [style.width]="width"
-      [class.ant-input-number__hide-step]="ui.hideStep"
-    />
+      [class.ant-input-number__hide-step]="ui.hideStep" />
   </sf-item-wrap>`,
                     encapsulation: ViewEncapsulation.None,
                     // eslint-disable-next-line @angular-eslint/prefer-standalone
@@ -2940,8 +2831,7 @@ class ObjectWidget extends ObjectLayoutWidget {
         this.showExpand = toBool(ui.showExpand, true);
         this.expand = toBool(ui.expand, true);
         this.type = type ?? 'default';
-        if (this.type === 'card' ||
-            (!formProperty.isRoot() && !(formProperty.parent instanceof ArrayProperty) && showTitle === true)) {
+        if (this.type === 'card' || (!formProperty.isRoot() && !(formProperty.parent instanceof ArrayProperty) && showTitle === true)) {
             this.title = this.schema.title;
         }
         this.grid = grid;
@@ -2974,17 +2864,7 @@ class ObjectWidget extends ObjectLayoutWidget {
         <div nz-row [nzGutter]="grid.gutter">
           @for (i of list; track $index) {
             @if (i.property.visible && i.show) {
-              <div
-                nz-col
-                [nzSpan]="i.grid.span"
-                [nzOffset]="i.grid.offset"
-                [nzXs]="i.grid.xs"
-                [nzSm]="i.grid.sm"
-                [nzMd]="i.grid.md"
-                [nzLg]="i.grid.lg"
-                [nzXl]="i.grid.xl"
-                [nzXXl]="i.grid.xxl"
-              >
+              <div nz-col [nzSpan]="i.grid.span" [nzOffset]="i.grid.offset" [nzXs]="i.grid.xs" [nzSm]="i.grid.sm" [nzMd]="i.grid.md" [nzLg]="i.grid.lg" [nzXl]="i.grid.xl" [nzXXl]="i.grid.xxl">
                 <sf-item [formProperty]="i.property" [fixed-label]="i.spanLabelFixed" />
               </div>
             }
@@ -3007,8 +2887,7 @@ class ObjectWidget extends ObjectLayoutWidget {
         [nzBodyStyle]="ui.cardBodyStyle!"
         [nzBordered]="ui.cardBordered || true"
         class="sf__object-card"
-        [class.sf__object-card-fold]="!expand"
-      >
+        [class.sf__object-card-fold]="!expand">
         <ng-template #cardTitleTpl>
           <div [class.point]="showExpand" (click)="changeExpand()">
             @if (showExpand) {
@@ -3029,8 +2908,7 @@ class ObjectWidget extends ObjectLayoutWidget {
                     [nzTooltipOverlayStyle]="oh.overlayStyle"
                     [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                     [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                    [nzType]="oh.icon!"
-                  />
+                    [nzType]="oh.icon!" />
                 }
               </span>
             }
@@ -3054,17 +2932,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         <div nz-row [nzGutter]="grid.gutter">
           @for (i of list; track $index) {
             @if (i.property.visible && i.show) {
-              <div
-                nz-col
-                [nzSpan]="i.grid.span"
-                [nzOffset]="i.grid.offset"
-                [nzXs]="i.grid.xs"
-                [nzSm]="i.grid.sm"
-                [nzMd]="i.grid.md"
-                [nzLg]="i.grid.lg"
-                [nzXl]="i.grid.xl"
-                [nzXXl]="i.grid.xxl"
-              >
+              <div nz-col [nzSpan]="i.grid.span" [nzOffset]="i.grid.offset" [nzXs]="i.grid.xs" [nzSm]="i.grid.sm" [nzMd]="i.grid.md" [nzLg]="i.grid.lg" [nzXl]="i.grid.xl" [nzXXl]="i.grid.xxl">
                 <sf-item [formProperty]="i.property" [fixed-label]="i.spanLabelFixed" />
               </div>
             }
@@ -3087,8 +2955,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         [nzBodyStyle]="ui.cardBodyStyle!"
         [nzBordered]="ui.cardBordered || true"
         class="sf__object-card"
-        [class.sf__object-card-fold]="!expand"
-      >
+        [class.sf__object-card-fold]="!expand">
         <ng-template #cardTitleTpl>
           <div [class.point]="showExpand" (click)="changeExpand()">
             @if (showExpand) {
@@ -3109,8 +2976,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                     [nzTooltipOverlayStyle]="oh.overlayStyle"
                     [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                     [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                    [nzType]="oh.icon!"
-                  />
+                    [nzType]="oh.icon!" />
                 }
               </span>
             }
@@ -3143,21 +3009,8 @@ class RadioWidget extends ControlUIWidget {
             this.ui.change(value);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: RadioWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: RadioWidget, isStandalone: false, selector: "sf-radio", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
-    <nz-radio-group
-      [nzSize]="ui.size!"
-      [nzName]="id"
-      [ngModel]="value"
-      (ngModelChange)="_setValue($event)"
-      [nzButtonStyle]="ui.buttonStyle || 'outline'"
-    >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: RadioWidget, isStandalone: false, selector: "sf-radio", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+    <nz-radio-group [nzSize]="ui.size!" [nzName]="id" [ngModel]="value" (ngModelChange)="_setValue($event)" [nzButtonStyle]="ui.buttonStyle || 'outline'">
       @if (styleType) {
         @for (option of data; track $index) {
           <label nz-radio [nzValue]="option.value" [nzDisabled]="disabled || option.disabled">
@@ -3178,21 +3031,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-radio',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
-    <nz-radio-group
-      [nzSize]="ui.size!"
-      [nzName]="id"
-      [ngModel]="value"
-      (ngModelChange)="_setValue($event)"
-      [nzButtonStyle]="ui.buttonStyle || 'outline'"
-    >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+    <nz-radio-group [nzSize]="ui.size!" [nzName]="id" [ngModel]="value" (ngModelChange)="_setValue($event)" [nzButtonStyle]="ui.buttonStyle || 'outline'">
       @if (styleType) {
         @for (option of data; track $index) {
           <label nz-radio [nzValue]="option.value" [nzDisabled]="disabled || option.disabled">
@@ -3296,14 +3136,7 @@ class SelectWidget extends ControlUIWidget {
         }
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: SelectWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: SelectWidget, isStandalone: false, selector: "sf-select", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: SelectWidget, isStandalone: false, selector: "sf-select", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-select
       [nzId]="id"
       [nzDisabled]="disabled"
@@ -3338,8 +3171,7 @@ class SelectWidget extends ControlUIWidget {
       [nzOptionOverflowSize]="i.optionOverflowSize!"
       (nzOpenChange)="openChange($event)"
       (nzOnSearch)="onSearch($event)"
-      (nzScrollToBottom)="scrollToBottom()"
-    >
+      (nzScrollToBottom)="scrollToBottom()">
       @if (!loading && !hasGroup) {
         @for (o of data; track $index) {
           <nz-option [nzLabel]="o.label" [nzValue]="o.value" [nzHide]="o.hide" [nzDisabled]="o.disabled" />
@@ -3367,14 +3199,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-select',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-select
       [nzId]="id"
       [nzDisabled]="disabled"
@@ -3409,8 +3234,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzOptionOverflowSize]="i.optionOverflowSize!"
       (nzOpenChange)="openChange($event)"
       (nzOnSearch)="onSearch($event)"
-      (nzScrollToBottom)="scrollToBottom()"
-    >
+      (nzScrollToBottom)="scrollToBottom()">
       @if (!loading && !hasGroup) {
         @for (o of data; track $index) {
           <nz-option [nzLabel]="o.label" [nzValue]="o.value" [nzHide]="o.hide" [nzDisabled]="o.disabled" />
@@ -3509,8 +3333,7 @@ class StringWidget extends ControlUIWidget {
         [attr.autoFocus]="ui.autofocus"
         (keyup.enter)="enter($event)"
         (focus)="focus($event)"
-        (blur)="blur($event)"
-      />
+        (blur)="blur($event)" />
     </ng-template>
 
     @if (type === 'addon') {
@@ -3522,8 +3345,7 @@ class StringWidget extends ControlUIWidget {
         [nzPrefix]="ui.prefix"
         [nzPrefixIcon]="ui.prefixIcon"
         [nzSuffix]="ui.suffix"
-        [nzSuffixIcon]="ui.suffixIcon"
-      >
+        [nzSuffixIcon]="ui.suffixIcon">
         <ng-template [ngTemplateOutlet]="ipt" />
       </nz-input-group>
     } @else {
@@ -3553,8 +3375,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         [attr.autoFocus]="ui.autofocus"
         (keyup.enter)="enter($event)"
         (focus)="focus($event)"
-        (blur)="blur($event)"
-      />
+        (blur)="blur($event)" />
     </ng-template>
 
     @if (type === 'addon') {
@@ -3566,8 +3387,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         [nzPrefix]="ui.prefix"
         [nzPrefixIcon]="ui.prefixIcon"
         [nzSuffix]="ui.suffix"
-        [nzSuffixIcon]="ui.suffixIcon"
-      >
+        [nzSuffixIcon]="ui.suffixIcon">
         <ng-template [ngTemplateOutlet]="ipt" />
       </nz-input-group>
     } @else {
@@ -3590,15 +3410,7 @@ class TextWidget extends ControlUIWidget {
         this.text = value || this.ui.defaultText || '-';
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: TextWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: TextWidget, isStandalone: false, selector: "sf-text", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-    [class.sf__text-html]="ui.html"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: TextWidget, isStandalone: false, selector: "sf-text", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title" [class.sf__text-html]="ui.html">
     @if (ui.html) {
       <span [innerHTML]="text"></span>
     } @else {
@@ -3610,15 +3422,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-text',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-    [class.sf__text-html]="ui.html"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title" [class.sf__text-html]="ui.html">
     @if (ui.html) {
       <span [innerHTML]="text"></span>
     } @else {
@@ -3655,14 +3459,7 @@ class TextareaWidget extends ControlUIWidget {
             this.ui.blur(e);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: TextareaWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: TextareaWidget, isStandalone: false, selector: "sf-textarea", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: TextareaWidget, isStandalone: false, selector: "sf-textarea", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #ipt>
       <textarea
         nz-input
@@ -3677,16 +3474,12 @@ class TextareaWidget extends ControlUIWidget {
         [nzAutosize]="autosize"
         [nzBorderless]="ui.borderless"
         (focus)="focus($event)"
-        (blur)="blur($event)"
-      >
+        (blur)="blur($event)">
       </textarea>
     </ng-template>
 
     @if (ui.maxCharacterCount) {
-      <nz-textarea-count
-        [nzMaxCharacterCount]="ui.maxCharacterCount"
-        [nzComputeCharacterCount]="ui.computeCharacterCount!"
-      >
+      <nz-textarea-count [nzMaxCharacterCount]="ui.maxCharacterCount" [nzComputeCharacterCount]="ui.computeCharacterCount!">
         <textarea
           nz-input
           [attr.id]="id"
@@ -3700,8 +3493,7 @@ class TextareaWidget extends ControlUIWidget {
           [nzAutosize]="autosize"
           [nzBorderless]="ui.borderless"
           (focus)="focus($event)"
-          (blur)="blur($event)"
-        >
+          (blur)="blur($event)">
         </textarea>
       </nz-textarea-count>
     } @else {
@@ -3713,14 +3505,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-textarea',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #ipt>
       <textarea
         nz-input
@@ -3735,16 +3520,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         [nzAutosize]="autosize"
         [nzBorderless]="ui.borderless"
         (focus)="focus($event)"
-        (blur)="blur($event)"
-      >
+        (blur)="blur($event)">
       </textarea>
     </ng-template>
 
     @if (ui.maxCharacterCount) {
-      <nz-textarea-count
-        [nzMaxCharacterCount]="ui.maxCharacterCount"
-        [nzComputeCharacterCount]="ui.computeCharacterCount!"
-      >
+      <nz-textarea-count [nzMaxCharacterCount]="ui.maxCharacterCount" [nzComputeCharacterCount]="ui.computeCharacterCount!">
         <textarea
           nz-input
           [attr.id]="id"
@@ -3758,8 +3539,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzAutosize]="autosize"
           [nzBorderless]="ui.borderless"
           (focus)="focus($event)"
-          (blur)="blur($event)"
-        >
+          (blur)="blur($event)">
         </textarea>
       </nz-textarea-count>
     } @else {
@@ -3810,20 +3590,7 @@ const ZORROS = [
     NzTooltipModule
 ];
 const COMPONENTS = [SFComponent, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SFFixedDirective];
-const WIDGETS = [
-    ObjectWidget,
-    ArrayWidget,
-    StringWidget,
-    NumberWidget,
-    DateWidget,
-    RadioWidget,
-    CheckboxWidget,
-    BooleanWidget,
-    TextareaWidget,
-    SelectWidget,
-    CustomWidget,
-    TextWidget
-];
+const WIDGETS = [ObjectWidget, ArrayWidget, StringWidget, NumberWidget, DateWidget, RadioWidget, CheckboxWidget, BooleanWidget, TextareaWidget, SelectWidget, CustomWidget, TextWidget];
 // #endregion
 class YelonFormModule {
     static forRoot() {
@@ -3840,18 +3607,7 @@ class YelonFormModule {
         };
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YelonFormModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YelonFormModule, declarations: [SFComponent, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SFFixedDirective, ObjectWidget,
-            ArrayWidget,
-            StringWidget,
-            NumberWidget,
-            DateWidget,
-            RadioWidget,
-            CheckboxWidget,
-            BooleanWidget,
-            TextareaWidget,
-            SelectWidget,
-            CustomWidget,
-            TextWidget], imports: [CommonModule, FormsModule, YelonLocaleModule, NzButtonModule,
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YelonFormModule, declarations: [SFComponent, SFItemComponent, SFItemWrapComponent, SFTemplateDirective, SFFixedDirective, ObjectWidget, ArrayWidget, StringWidget, NumberWidget, DateWidget, RadioWidget, CheckboxWidget, BooleanWidget, TextareaWidget, SelectWidget, CustomWidget, TextWidget], imports: [CommonModule, FormsModule, YelonLocaleModule, NzButtonModule,
             NzCardModule,
             NzCheckboxModule,
             NzDatePickerModule,

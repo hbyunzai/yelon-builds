@@ -10,11 +10,7 @@ import { parse, addDays, startOfYear, endOfYear, subYears, startOfMonth, endOfMo
  * @param ignoreMaxTime 忽略追加结束日期的最大时间值
  */
 function getTimeDistance(type, time, options) {
-    time = time
-        ? typeof time === 'string'
-            ? parse(time, 'yyyy-MM-dd HH:mm:ss', new Date())
-            : new Date(time)
-        : new Date();
+    time = time ? (typeof time === 'string' ? parse(time, 'yyyy-MM-dd HH:mm:ss', new Date()) : new Date(time)) : new Date();
     const opt = { weekStartsOn: 1 };
     let res;
     switch (type) {
@@ -97,9 +93,7 @@ function formatDate(value, formatString, options) {
     if (isNaN(value))
         return '';
     const langOpt = { locale: options?.locale };
-    return formatString === 'fn'
-        ? formatDistanceToNow(value, langOpt)
-        : (options?.customFormat ?? format)(value, formatString, langOpt);
+    return formatString === 'fn' ? formatDistanceToNow(value, langOpt) : (options?.customFormat ?? format)(value, formatString, langOpt);
 }
 
 // TODO: timezone process

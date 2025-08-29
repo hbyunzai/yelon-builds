@@ -247,8 +247,7 @@ class YunzaiDormitoryTreeComponent {
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }
@@ -301,8 +300,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }

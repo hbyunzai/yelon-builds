@@ -349,8 +349,7 @@ class YunzaiDeptTreeComponent {
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }
@@ -403,8 +402,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }
@@ -446,34 +444,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
 const COMPONENTS = [YunzaiDeptTreeComponent];
 class YunzaiDeptTreeModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiDeptTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiDeptTreeModule, imports: [NzSpinModule,
-            NzCardModule,
-            CommonModule,
-            YelonFormModule,
-            NzIconModule,
-            NzEmptyModule,
-            NzTreeModule, YunzaiDeptTreeComponent], exports: [YunzaiDeptTreeComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiDeptTreeModule, providers: [YunzaiDeptTreeService, YunzaiGradeService], imports: [NzSpinModule,
-            NzCardModule,
-            CommonModule,
-            YelonFormModule,
-            NzIconModule,
-            NzEmptyModule,
-            NzTreeModule, COMPONENTS] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiDeptTreeModule, imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule, YunzaiDeptTreeComponent], exports: [YunzaiDeptTreeComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiDeptTreeModule, providers: [YunzaiDeptTreeService, YunzaiGradeService], imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule, COMPONENTS] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiDeptTreeModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        NzSpinModule,
-                        NzCardModule,
-                        CommonModule,
-                        YelonFormModule,
-                        NzIconModule,
-                        NzEmptyModule,
-                        NzTreeModule,
-                        ...COMPONENTS
-                    ],
+                    imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule, ...COMPONENTS],
                     providers: [YunzaiDeptTreeService, YunzaiGradeService],
                     exports: COMPONENTS
                 }]

@@ -21,20 +21,12 @@ class G2MiniProgressComponent {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: G2MiniProgressComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "16.1.0", version: "20.1.3", type: G2MiniProgressComponent, isStandalone: true, selector: "g2-mini-progress", inputs: { color: "color", target: ["target", "target", numberAttribute], percent: ["percent", "percent", numberAttribute], strokeWidth: ["strokeWidth", "strokeWidth", numberAttribute] }, host: { properties: { "class.g2-mini-progress": "true" } }, exportAs: ["g2MiniProgress"], usesOnChanges: true, ngImport: i0, template: `
-    <div
-      nz-tooltip
-      [nzTooltipTitle]="locale().targetSuffix + target + '%'"
-      class="g2-mini-progress__target"
-      [style]="{ left: target + '%' }"
-    >
+    <div nz-tooltip [nzTooltipTitle]="locale().targetSuffix + target + '%'" class="g2-mini-progress__target" [style]="{ left: target + '%' }">
       <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
       <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
     </div>
     <div class="g2-mini-progress__wrap">
-      <div
-        class="g2-mini-progress__value"
-        [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"
-      ></div>
+      <div class="g2-mini-progress__value" [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"></div>
     </div>
   `, isInline: true, dependencies: [{ kind: "directive", type: NzTooltipDirective, selector: "[nz-tooltip]", inputs: ["nzTooltipTitle", "nzTooltipTitleContext", "nz-tooltip", "nzTooltipTrigger", "nzTooltipPlacement", "nzTooltipOrigin", "nzTooltipVisible", "nzTooltipMouseEnterDelay", "nzTooltipMouseLeaveDelay", "nzTooltipOverlayClassName", "nzTooltipOverlayStyle", "nzTooltipArrowPointAtCenter", "cdkConnectedOverlayPush", "nzTooltipColor"], outputs: ["nzTooltipVisibleChange"], exportAs: ["nzTooltip"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 }
@@ -44,20 +36,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                     selector: 'g2-mini-progress',
                     exportAs: 'g2MiniProgress',
                     template: `
-    <div
-      nz-tooltip
-      [nzTooltipTitle]="locale().targetSuffix + target + '%'"
-      class="g2-mini-progress__target"
-      [style]="{ left: target + '%' }"
-    >
+    <div nz-tooltip [nzTooltipTitle]="locale().targetSuffix + target + '%'" class="g2-mini-progress__target" [style]="{ left: target + '%' }">
       <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
       <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
     </div>
     <div class="g2-mini-progress__wrap">
-      <div
-        class="g2-mini-progress__value"
-        [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"
-      ></div>
+      <div class="g2-mini-progress__value" [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"></div>
     </div>
   `,
                     host: { '[class.g2-mini-progress]': 'true' },

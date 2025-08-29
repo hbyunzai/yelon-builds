@@ -35,14 +35,7 @@ class SliderWidget extends ControlUIWidget {
             return afterChange(value);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: SliderWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: SliderWidget, isStandalone: true, selector: "sf-slider", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: SliderWidget, isStandalone: true, selector: "sf-slider", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-slider
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -56,22 +49,14 @@ class SliderWidget extends ControlUIWidget {
       [nzIncluded]="included"
       [nzVertical]="ui.vertical"
       [nzTipFormatter]="_formatter"
-      (nzOnAfterChange)="_afterChange($event)"
-    />
+      (nzOnAfterChange)="_afterChange($event)" />
   </sf-item-wrap>`, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1$1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "ngmodule", type: NzSliderModule }, { kind: "component", type: i3.NzSliderComponent, selector: "nz-slider", inputs: ["nzDisabled", "nzDots", "nzIncluded", "nzRange", "nzVertical", "nzReverse", "nzDefaultValue", "nzMarks", "nzMax", "nzMin", "nzStep", "nzTooltipVisible", "nzTooltipPlacement", "nzTipFormatter"], outputs: ["nzOnAfterChange"], exportAs: ["nzSlider"] }], encapsulation: i0.ViewEncapsulation.None });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: SliderWidget, decorators: [{
             type: Component,
             args: [{
                     selector: 'sf-slider',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-slider
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -85,8 +70,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzIncluded]="included"
       [nzVertical]="ui.vertical"
       [nzTipFormatter]="_formatter"
-      (nzOnAfterChange)="_afterChange($event)"
-    />
+      (nzOnAfterChange)="_afterChange($event)" />
   </sf-item-wrap>`,
                     encapsulation: ViewEncapsulation.None,
                     imports: [FormsModule, YelonFormModule, NzSliderModule]

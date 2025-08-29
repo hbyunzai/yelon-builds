@@ -2062,8 +2062,7 @@ class _HttpClient {
             if (nullValueHandling === 'ignore' && paramValue == null)
                 return;
             // 将时间转化为：时间戳 (秒)
-            if (paramValue instanceof Date &&
-                (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')) {
+            if (paramValue instanceof Date && (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')) {
                 paramValue = dateValueHandling === 'timestamp' ? paramValue.valueOf() : Math.trunc(paramValue.valueOf() / 1000);
             }
             newParams[key] = paramValue;
@@ -2204,9 +2203,7 @@ class YunzaiHttpI18NService extends YunzaiI18nBaseService {
             return this.http.get(`./assets/tmp/i18n/${lang}.json`);
         }
         else {
-            return this.http
-                .get(`/i18n/api/v2/language/${lang}`)
-                .pipe(catchError(() => this.http.get(`./assets/tmp/i18n/${lang}.json`)));
+            return this.http.get(`/i18n/api/v2/language/${lang}`).pipe(catchError(() => this.http.get(`./assets/tmp/i18n/${lang}.json`)));
         }
     }
     loadLocaleData(lang) {
@@ -2365,10 +2362,7 @@ class ModalHelper {
                 }
             }), filter(() => focus != null), delay(modalOptions?.nzNoAnimation ? 10 : 241))
                 .subscribe(() => {
-                const btns = subject
-                    .getElement()
-                    .querySelector('.ant-modal-confirm-btns, .modal-footer')
-                    ?.querySelectorAll('.ant-btn');
+                const btns = subject.getElement().querySelector('.ant-modal-confirm-btns, .modal-footer')?.querySelectorAll('.ant-btn');
                 const btnSize = btns?.length ?? 0;
                 let el = null;
                 if (btnSize === 1) {
@@ -3081,9 +3075,7 @@ function yn(value, opt) {
     no = no || '否';
     switch (mode) {
         case 'full':
-            html = value
-                ? `<i ${CLS_YES}>${ICON_YES}<span>${yes}</span></i>`
-                : `<i ${CLS_NO}>${ICON_NO}<span>${no}</span></i>`;
+            html = value ? `<i ${CLS_YES}>${ICON_YES}<span>${yes}</span></i>` : `<i ${CLS_NO}>${ICON_NO}<span>${no}</span></i>`;
             break;
         case 'text':
             html = value ? `<i ${CLS_YES}>${yes}</i>` : `<i ${CLS_NO}>${no}</i>`;
@@ -3983,15 +3975,7 @@ function provideYunzai(options) {
     if (i18nCls) {
         provides.push({ provide: YUNZAI_I18N_TOKEN, useClass: i18nCls, multi: false });
     }
-    const icons = [
-        BellOutline,
-        DeleteOutline,
-        PlusOutline,
-        InboxOutline,
-        MenuFoldOutline,
-        MenuUnfoldOutline,
-        ...(options.icons ?? [])
-    ];
+    const icons = [BellOutline, DeleteOutline, PlusOutline, InboxOutline, MenuFoldOutline, MenuUnfoldOutline, ...(options.icons ?? [])];
     provides.push(provideEnvironmentInitializer(() => {
         inject(NzIconService, { optional: true })?.addIcon(...icons);
     }));

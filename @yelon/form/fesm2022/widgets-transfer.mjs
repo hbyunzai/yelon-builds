@@ -66,14 +66,7 @@ class TransferWidget extends ControlUIWidget {
         this.detectChanges();
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: TransferWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: TransferWidget, isStandalone: true, selector: "sf-transfer", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: TransferWidget, isStandalone: true, selector: "sf-transfer", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-transfer
       [nzDataSource]="$any(list)"
       [nzTitles]="i.titles"
@@ -89,22 +82,14 @@ class TransferWidget extends ControlUIWidget {
       [nzCanMove]="_canMove"
       (nzChange)="_change($event)"
       (nzSearchChange)="_searchChange($event)"
-      (nzSelectChange)="_selectChange($event)"
-    />
+      (nzSelectChange)="_selectChange($event)" />
   </sf-item-wrap> `, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "ngmodule", type: NzTransferModule }, { kind: "component", type: i2.NzTransferComponent, selector: "nz-transfer", inputs: ["nzDisabled", "nzDataSource", "nzTitles", "nzOperations", "nzListStyle", "nzShowSelectAll", "nzItemUnit", "nzItemsUnit", "nzCanMove", "nzRenderList", "nzRender", "nzFooter", "nzShowSearch", "nzFilterOption", "nzSearchPlaceholder", "nzNotFoundContent", "nzTargetKeys", "nzSelectedKeys", "nzStatus", "nzOneWay"], outputs: ["nzChange", "nzSearchChange", "nzSelectChange"], exportAs: ["nzTransfer"] }], encapsulation: i0.ViewEncapsulation.None });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: TransferWidget, decorators: [{
             type: Component,
             args: [{
                     selector: 'sf-transfer',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-transfer
       [nzDataSource]="$any(list)"
       [nzTitles]="i.titles"
@@ -120,8 +105,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzCanMove]="_canMove"
       (nzChange)="_change($event)"
       (nzSearchChange)="_searchChange($event)"
-      (nzSelectChange)="_selectChange($event)"
-    />
+      (nzSelectChange)="_selectChange($event)" />
   </sf-item-wrap> `,
                     encapsulation: ViewEncapsulation.None,
                     imports: [FormsModule, YelonFormModule, NzTransferModule]

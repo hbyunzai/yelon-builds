@@ -65,14 +65,7 @@ class MentionWidget extends ControlUIWidget {
         });
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: MentionWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: MentionWidget, isStandalone: true, selector: "sf-mention", viewQueries: [{ propertyName: "mentionChild", first: true, predicate: ["mentions"], descendants: true, static: true }], usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: MentionWidget, isStandalone: true, selector: "sf-mention", viewQueries: [{ propertyName: "mentionChild", first: true, predicate: ["mentions"], descendants: true, static: true }], usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-mention
       #mentions
       [nzSuggestions]="data"
@@ -82,8 +75,7 @@ class MentionWidget extends ControlUIWidget {
       [nzPlacement]="i.placement"
       [nzPrefix]="i.prefix"
       (nzOnSelect)="_select($event)"
-      (nzOnSearchChange)="_search($event)"
-    >
+      (nzOnSearchChange)="_search($event)">
       @if (ui.inputStyle === 'textarea') {
         <textarea
           nzMentionTrigger
@@ -96,8 +88,7 @@ class MentionWidget extends ControlUIWidget {
           (ngModelChange)="setValue($event)"
           [attr.maxLength]="schema.maxLength || null"
           [attr.placeholder]="ui.placeholder"
-          [nzAutosize]="i.autosize"
-        >
+          [nzAutosize]="i.autosize">
         </textarea>
       } @else {
         <input
@@ -111,8 +102,7 @@ class MentionWidget extends ControlUIWidget {
           (ngModelChange)="setValue($event)"
           [attr.maxLength]="schema.maxLength || null"
           [attr.placeholder]="ui.placeholder"
-          autocomplete="off"
-        />
+          autocomplete="off" />
       }
     </nz-mention>
   </sf-item-wrap>`, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1$1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "ngmodule", type: NzInputModule }, { kind: "directive", type: i3.NzInputDirective, selector: "input[nz-input],textarea[nz-input]", inputs: ["nzBorderless", "nzVariant", "nzSize", "nzStepperless", "nzStatus", "disabled"], exportAs: ["nzInput"] }, { kind: "directive", type: i3.NzAutosizeDirective, selector: "textarea[nzAutosize]", inputs: ["nzAutosize"], exportAs: ["nzAutosize"] }, { kind: "ngmodule", type: NzMentionModule }, { kind: "component", type: i4.NzMentionComponent, selector: "nz-mention", inputs: ["nzValueWith", "nzPrefix", "nzLoading", "nzNotFoundContent", "nzPlacement", "nzSuggestions", "nzStatus"], outputs: ["nzOnSelect", "nzOnSearchChange"], exportAs: ["nzMention"] }, { kind: "directive", type: i4.NzMentionTriggerDirective, selector: "input[nzMentionTrigger], textarea[nzMentionTrigger]", outputs: ["onFocusin", "onBlur", "onInput", "onKeydown", "onClick"], exportAs: ["nzMentionTrigger"] }], encapsulation: i0.ViewEncapsulation.None });
@@ -121,14 +111,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-mention',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-mention
       #mentions
       [nzSuggestions]="data"
@@ -138,8 +121,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzPlacement]="i.placement"
       [nzPrefix]="i.prefix"
       (nzOnSelect)="_select($event)"
-      (nzOnSearchChange)="_search($event)"
-    >
+      (nzOnSearchChange)="_search($event)">
       @if (ui.inputStyle === 'textarea') {
         <textarea
           nzMentionTrigger
@@ -152,8 +134,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           (ngModelChange)="setValue($event)"
           [attr.maxLength]="schema.maxLength || null"
           [attr.placeholder]="ui.placeholder"
-          [nzAutosize]="i.autosize"
-        >
+          [nzAutosize]="i.autosize">
         </textarea>
       } @else {
         <input
@@ -167,8 +148,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           (ngModelChange)="setValue($event)"
           [attr.maxLength]="schema.maxLength || null"
           [attr.placeholder]="ui.placeholder"
-          autocomplete="off"
-        />
+          autocomplete="off" />
       }
     </nz-mention>
   </sf-item-wrap>`,

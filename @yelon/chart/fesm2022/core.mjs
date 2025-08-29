@@ -20,10 +20,7 @@ class G2Service {
     set cog(val) {
         this._cog = this.cogSrv.merge('chart', {
             theme: '',
-            libs: [
-                'https://gw.alipayobjects.com/os/lib/antv/g2/4.1.46/dist/g2.min.js',
-                'https://gw.alipayobjects.com/os/lib/antv/data-set/0.11.8/dist/data-set.js'
-            ]
+            libs: ['https://gw.alipayobjects.com/os/lib/antv/g2/4.1.46/dist/g2.min.js', 'https://gw.alipayobjects.com/os/lib/antv/data-set/0.11.8/dist/data-set.js']
         }, val);
     }
     constructor() {
@@ -114,9 +111,7 @@ class G2BaseComponent {
     }
     ngOnChanges(changes) {
         this.onChanges(changes);
-        const isOnlyChangeData = this.onlyChangeData
-            ? this.onlyChangeData(changes)
-            : Object.keys(changes).length === 1 && !!changes.data;
+        const isOnlyChangeData = this.onlyChangeData ? this.onlyChangeData(changes) : Object.keys(changes).length === 1 && !!changes.data;
         if (isOnlyChangeData) {
             this.changeData();
             return;

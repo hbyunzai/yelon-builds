@@ -132,13 +132,9 @@ class CellService {
         const type = this.genType(value, { ...options });
         const opt = this.fixOptions(options);
         opt.type = type;
-        const isSafeHtml = typeof value === 'object' &&
-            typeof value?.getTypeName === 'function' &&
-            value?.getTypeName() != null;
+        const isSafeHtml = typeof value === 'object' && typeof value?.getTypeName === 'function' && value?.getTypeName() != null;
         let res = {
-            result: typeof value === 'object' && !isSafeHtml
-                ? value
-                : { text: value == null ? '' : isSafeHtml ? value : `${value}` },
+            result: typeof value === 'object' && !isSafeHtml ? value : { text: value == null ? '' : isSafeHtml ? value : `${value}` },
             options: opt
         };
         const widget = this.widgets[type];
@@ -335,14 +331,7 @@ class CellComponent {
         @case ('img') {
           @for (i of $any(text); track $index) {
             @let img = safeOpt.img;
-            <img
-              [attr.src]="i"
-              [attr.height]="img?.size"
-              [attr.width]="img?.size"
-              (click)="_showImg(i)"
-              class="img"
-              [class.point]="img?.big"
-            />
+            <img [attr.src]="i" [attr.height]="img?.size" [attr.width]="img?.size" (click)="_showImg(i)" class="img" [class.point]="img?.big" />
           }
         }
         @default {
@@ -415,14 +404,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         @case ('img') {
           @for (i of $any(text); track $index) {
             @let img = safeOpt.img;
-            <img
-              [attr.src]="i"
-              [attr.height]="img?.size"
-              [attr.width]="img?.size"
-              (click)="_showImg(i)"
-              class="img"
-              [class.point]="img?.big"
-            />
+            <img [attr.src]="i" [attr.height]="img?.size" [attr.width]="img?.size" (click)="_showImg(i)" class="img" [class.point]="img?.big" />
           }
         }
         @default {
@@ -459,59 +441,20 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                     exportAs: 'cell',
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
-                    imports: [
-                        FormsModule,
-                        NgTemplateOutlet,
-                        NzCheckboxComponent,
-                        NzRadioComponent,
-                        NzIconDirective,
-                        NzTagComponent,
-                        NzBadgeComponent,
-                        NzTooltipDirective,
-                        NzImageModule,
-                        CellHostDirective
-                    ]
+                    imports: [FormsModule, NgTemplateOutlet, NzCheckboxComponent, NzRadioComponent, NzIconDirective, NzTagComponent, NzBadgeComponent, NzTooltipDirective, NzImageModule, CellHostDirective]
                 }]
         }], ctorParameters: () => [] });
 
 const COMPS = [CellComponent];
 class CellModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CellModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: CellModule, imports: [CommonModule,
-            FormsModule,
-            NzCheckboxModule,
-            NzRadioModule,
-            NzBadgeModule,
-            NzTagModule,
-            NzTooltipModule,
-            NzIconModule,
-            NzImageModule$1, CellComponent, CellHostDirective], exports: [CellComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CellModule, imports: [CommonModule,
-            FormsModule,
-            NzCheckboxModule,
-            NzRadioModule,
-            NzBadgeModule,
-            NzTagModule,
-            NzTooltipModule,
-            NzIconModule,
-            NzImageModule$1, COMPS] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: CellModule, imports: [CommonModule, FormsModule, NzCheckboxModule, NzRadioModule, NzBadgeModule, NzTagModule, NzTooltipModule, NzIconModule, NzImageModule$1, CellComponent, CellHostDirective], exports: [CellComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CellModule, imports: [CommonModule, FormsModule, NzCheckboxModule, NzRadioModule, NzBadgeModule, NzTagModule, NzTooltipModule, NzIconModule, NzImageModule$1, COMPS] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CellModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        CommonModule,
-                        FormsModule,
-                        NzCheckboxModule,
-                        NzRadioModule,
-                        NzBadgeModule,
-                        NzTagModule,
-                        NzTooltipModule,
-                        NzIconModule,
-                        NzImageModule$1,
-                        ...COMPS,
-                        CellHostDirective
-                    ],
+                    imports: [CommonModule, FormsModule, NzCheckboxModule, NzRadioModule, NzBadgeModule, NzTagModule, NzTooltipModule, NzIconModule, NzImageModule$1, ...COMPS, CellHostDirective],
                     exports: COMPS
                 }]
         }] });

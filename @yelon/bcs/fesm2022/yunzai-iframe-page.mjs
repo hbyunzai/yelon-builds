@@ -15,13 +15,9 @@ class YunzaiIframePageComponent {
     hasIframe = false;
     resizeHandle;
     ngOnInit() {
-        this.iframePageHeight = this.layoutService.options.hideHeader
-            ? `${window.innerHeight - 55}px`
-            : `${window.innerHeight - 64 - 55}px`;
+        this.iframePageHeight = this.layoutService.options.hideHeader ? `${window.innerHeight - 55}px` : `${window.innerHeight - 64 - 55}px`;
         this.resizeHandle = () => {
-            this.iframePageHeight = this.layoutService.options.hideHeader
-                ? `${window.innerHeight - 55}px`
-                : `${window.innerHeight - 64 - 55}px`;
+            this.iframePageHeight = this.layoutService.options.hideHeader ? `${window.innerHeight - 55}px` : `${window.innerHeight - 64 - 55}px`;
         };
         window.addEventListener('resize', this.resizeHandle);
         this.getIframeUrl();

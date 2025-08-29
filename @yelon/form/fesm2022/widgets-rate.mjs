@@ -27,14 +27,7 @@ class RateWidget extends ControlUIWidget {
         this.hasText = !!ui.text;
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: RateWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: RateWidget, isStandalone: true, selector: "sf-rate", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: RateWidget, isStandalone: true, selector: "sf-rate", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-rate
       [nzDisabled]="disabled"
       [ngModel]="value"
@@ -43,8 +36,7 @@ class RateWidget extends ControlUIWidget {
       [nzAllowHalf]="allowHalf"
       [nzTooltips]="ui.tooltips || []"
       [nzAutoFocus]="autoFocus"
-      [nzCount]="$any(count)"
-    />
+      [nzCount]="$any(count)" />
     @if (hasText && formProperty.value) {
       <span class="ant-rate-text">{{ text }}</span>
     }
@@ -54,14 +46,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-rate',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-rate
       [nzDisabled]="disabled"
       [ngModel]="value"
@@ -70,8 +55,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzAllowHalf]="allowHalf"
       [nzTooltips]="ui.tooltips || []"
       [nzAutoFocus]="autoFocus"
-      [nzCount]="$any(count)"
-    />
+      [nzCount]="$any(count)" />
     @if (hasText && formProperty.value) {
       <span class="ant-rate-text">{{ text }}</span>
     }

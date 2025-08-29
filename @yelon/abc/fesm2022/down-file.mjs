@@ -70,12 +70,7 @@ class DownFileDirective {
                 let fileName = this.fileName;
                 if (typeof fileName === 'function')
                     fileName = fileName(res);
-                fileName =
-                    fileName ||
-                        disposition[`filename*`] ||
-                        disposition[`filename`] ||
-                        res.headers.get('filename') ||
-                        res.headers.get('x-filename');
+                fileName = fileName || disposition[`filename*`] || disposition[`filename`] || res.headers.get('filename') || res.headers.get('x-filename');
                 saveAs(res.body, decodeURI(fileName));
                 this.success.emit(res);
             },

@@ -674,9 +674,7 @@ function provideAuth(store) {
 }
 /** `cookie` storage */
 function withCookie() {
-    return makeAuthFeature(AuthFeatureKind.Store, [
-        { provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }
-    ]);
+    return makeAuthFeature(AuthFeatureKind.Store, [{ provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }]);
 }
 /** `localStorage` storage, **not lost after closing the browser**. */
 function withLocalStorage() {

@@ -29,8 +29,7 @@ class EllipsisComponent {
     tail = '...';
     get linsWord() {
         const { targetCount, text, tail } = this;
-        return ((targetCount > 0 ? text.substring(0, targetCount) : '') +
-            (targetCount > 0 && targetCount < text.length ? tail : ''));
+        return (targetCount > 0 ? text.substring(0, targetCount) : '') + (targetCount > 0 && targetCount < text.length ? tail : '');
     }
     get win() {
         return this.doc.defaultView || window;
@@ -124,9 +123,7 @@ class EllipsisComponent {
                     displayText = '';
                 }
                 else {
-                    displayText = fullWidthRecognition
-                        ? this.cutStrByFullLength(lengthText, length)
-                        : lengthText.slice(0, length);
+                    displayText = fullWidthRecognition ? this.cutStrByFullLength(lengthText, length) : lengthText.slice(0, length);
                 }
                 this.text = displayText + tail;
             }

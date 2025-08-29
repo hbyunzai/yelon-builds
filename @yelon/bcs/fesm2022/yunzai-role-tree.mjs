@@ -239,8 +239,7 @@ class YunzaiRoleTreeComponent {
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }
@@ -293,8 +292,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }
@@ -336,37 +334,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
 const COMPONENTS = [YunzaiRoleTreeComponent];
 class YunzaiRoleTreeModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiRoleTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiRoleTreeModule, imports: [NzSpinModule,
-            YelonFormModule,
-            NzButtonModule,
-            NzIconModule,
-            NzEmptyModule,
-            NzTreeModule,
-            CommonModule,
-            NzCardModule, YunzaiRoleTreeComponent], exports: [YunzaiRoleTreeComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiRoleTreeModule, providers: [YunzaiRoleTreeService], imports: [NzSpinModule,
-            YelonFormModule,
-            NzButtonModule,
-            NzIconModule,
-            NzEmptyModule,
-            NzTreeModule,
-            CommonModule,
-            NzCardModule, COMPONENTS] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiRoleTreeModule, imports: [NzSpinModule, YelonFormModule, NzButtonModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule, NzCardModule, YunzaiRoleTreeComponent], exports: [YunzaiRoleTreeComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiRoleTreeModule, providers: [YunzaiRoleTreeService], imports: [NzSpinModule, YelonFormModule, NzButtonModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule, NzCardModule, COMPONENTS] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiRoleTreeModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        NzSpinModule,
-                        YelonFormModule,
-                        NzButtonModule,
-                        NzIconModule,
-                        NzEmptyModule,
-                        NzTreeModule,
-                        CommonModule,
-                        NzCardModule,
-                        ...COMPONENTS
-                    ],
+                    imports: [NzSpinModule, YelonFormModule, NzButtonModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule, NzCardModule, ...COMPONENTS],
                     providers: [YunzaiRoleTreeService],
                     exports: COMPONENTS
                 }]

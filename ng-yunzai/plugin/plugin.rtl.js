@@ -47,10 +47,7 @@ function pluginRTL(options) {
         project = res.project;
         if (options.project == null)
             options.project = res.name;
-        return (0, schematics_2.chain)([
-            (0, schematics_2.mergeWith)((0, schematics_2.apply)((0, schematics_2.url)('./files/rtl'), [(0, schematics_2.move)(`${project.sourceRoot}/app`), (0, utils_1.overwriteIfExists)(tree)])),
-            fixImport(options)
-        ]);
+        return (0, schematics_2.chain)([(0, schematics_2.mergeWith)((0, schematics_2.apply)((0, schematics_2.url)('./files/rtl'), [(0, schematics_2.move)(`${project.sourceRoot}/app`), (0, utils_1.overwriteIfExists)(tree)])), fixImport(options)]);
     });
 }
 //# sourceMappingURL=plugin.rtl.js.map

@@ -262,11 +262,7 @@ class YunzaiStartupService {
             this.tokenService.set(token);
             return of(void 0);
         }), mergeMap(() => {
-            return combineLatest([
-                this.httpClient.get(`/auth/user`),
-                this.httpClient.get(`/auth/allheader/v2`),
-                this.httpClient.get(`/app-manager/project/info`)
-            ]).pipe(map(([user, header, project]) => {
+            return combineLatest([this.httpClient.get(`/auth/user`), this.httpClient.get(`/auth/allheader/v2`), this.httpClient.get(`/app-manager/project/info`)]).pipe(map(([user, header, project]) => {
                 setUser(user.principal);
                 setTenant(user.tenantId);
                 setHeader(header.data);
@@ -286,9 +282,7 @@ class YunzaiStartupService {
                 this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
                 this.settingService.setUser({
                     name: yunzaiUser.realname,
-                    avatar: this.config.baseUrl && yunzaiUser.avatarId
-                        ? `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}`
-                        : '',
+                    avatar: this.config.baseUrl && yunzaiUser.avatarId ? `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}` : '',
                     email: yunzaiUser.email
                 });
                 this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';
@@ -340,9 +334,7 @@ class YunzaiStartupService {
         }
         else {
             const uri = encodeURIComponent(this.win.location.href);
-            return this.httpClient
-                .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
-                .pipe(map((response) => {
+            return this.httpClient.get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`).pipe(map((response) => {
                 switch (response.errcode) {
                     case 2000:
                         return response.data;
@@ -553,13 +545,7 @@ class ActGuardService {
         }
     }
     preHandle(url) {
-        return (url.includes('error') ||
-            url.includes('exception') ||
-            url.includes('displayIndex') ||
-            url === '' ||
-            url === null ||
-            url === '/' ||
-            url.includes('iframePage'));
+        return url.includes('error') || url.includes('exception') || url.includes('displayIndex') || url === '' || url === null || url === '/' || url.includes('iframePage');
     }
     getAllLinks(menu, links) {
         menu.forEach((sider) => {

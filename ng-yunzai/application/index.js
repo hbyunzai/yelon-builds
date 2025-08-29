@@ -90,14 +90,12 @@ function addRunScriptToPackageJson() {
         json.scripts[`${commandPrefix}hmr`] = `ng s${commandFragment} -o --hmr`;
         json.scripts[`${commandPrefix}build`] = `npm run ng-high-memory build${commandFragment}`;
         json.scripts[`${commandPrefix}analyze`] = `npm run ng-high-memory build${commandFragment} -- --source-map`;
-        json.scripts[`${commandPrefix}analyze:view`] =
-            `source-map-explorer dist/${mulitProject ? `${projectName}/` : ''}**/*.js`;
+        json.scripts[`${commandPrefix}analyze:view`] = `source-map-explorer dist/${mulitProject ? `${projectName}/` : ''}**/*.js`;
         json.scripts[`${commandPrefix}test-coverage`] = `ng test${commandFragment} --code-coverage --watch=false`;
         const themeCommand = mulitProject ? ` -n=${projectName}` : '';
         json.scripts[`${commandPrefix}color-less`] = `ng-yunzai-plugin-theme -t=colorLess${themeCommand}`;
         json.scripts[`${commandPrefix}theme`] = `ng-yunzai-plugin-theme -t=themeCss${themeCommand}`;
-        json.scripts[`${commandPrefix}icon`] =
-            `ng g ng-yunzai:plugin icon${mulitProject ? ` --project ${projectName}` : ''}`;
+        json.scripts[`${commandPrefix}icon`] = `ng g ng-yunzai:plugin icon${mulitProject ? ` --project ${projectName}` : ''}`;
         json.scripts.prepare = `husky install`;
         (0, utils_1.writePackage)(tree, json);
         return tree;

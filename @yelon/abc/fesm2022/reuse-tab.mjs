@@ -1076,14 +1076,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                         '[class.reuse-tab__card]': `tabType === 'card'`,
                         '[class.reuse-tab__disabled]': `disabled`,
                         '[class.reuse-tab-rtl]': `dir() === 'rtl'`
-                    }, providers: [ReuseTabContextService], changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, imports: [
-                        NgTemplateOutlet,
-                        NzTabsComponent,
-                        NzTabComponent,
-                        ReuseTabContextDirective,
-                        ReuseTabContextComponent,
-                        NzIconDirective
-                    ], template: "<nz-tabs\n  #tabset\n  [nzSelectedIndex]=\"pos\"\n  [nzAnimated]=\"false\"\n  [nzType]=\"tabType\"\n  [nzTabBarExtraContent]=\"tabBarExtraContent\"\n  [nzTabBarGutter]=\"tabBarGutter\"\n  [nzTabBarStyle]=\"tabBarStyle\"\n>\n  @for (i of list; track $index) {\n    <nz-tab [nzTitle]=\"titleTemplate\" (nzClick)=\"_to($index)\">\n      <ng-template #titleTemplate>\n        <div\n          [reuse-tab-context-menu]=\"i\"\n          [customContextMenu]=\"customContextMenu\"\n          class=\"reuse-tab__name\"\n          [attr.title]=\"i.title\"\n        >\n          <span [class.reuse-tab__name-width]=\"tabMaxWidth\" [style.max-width.px]=\"tabMaxWidth\">\n            @if (titleRender) {\n              <ng-template [ngTemplateOutlet]=\"titleRender\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n            } @else {\n              {{ i.title }}\n            }\n          </span>\n        </div>\n        @if (i.closable) {\n          <nz-icon nzType=\"close\" class=\"reuse-tab__op\" (click)=\"_close($event, $index, false)\" />\n        }\n      </ng-template>\n    </nz-tab>\n  }\n</nz-tabs>\n<reuse-tab-context [i18n]=\"i18n\" (change)=\"contextMenuChange($event)\" />\n" }]
+                    }, providers: [ReuseTabContextService], changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, imports: [NgTemplateOutlet, NzTabsComponent, NzTabComponent, ReuseTabContextDirective, ReuseTabContextComponent, NzIconDirective], template: "<nz-tabs\n  #tabset\n  [nzSelectedIndex]=\"pos\"\n  [nzAnimated]=\"false\"\n  [nzType]=\"tabType\"\n  [nzTabBarExtraContent]=\"tabBarExtraContent\"\n  [nzTabBarGutter]=\"tabBarGutter\"\n  [nzTabBarStyle]=\"tabBarStyle\"\n>\n  @for (i of list; track $index) {\n    <nz-tab [nzTitle]=\"titleTemplate\" (nzClick)=\"_to($index)\">\n      <ng-template #titleTemplate>\n        <div\n          [reuse-tab-context-menu]=\"i\"\n          [customContextMenu]=\"customContextMenu\"\n          class=\"reuse-tab__name\"\n          [attr.title]=\"i.title\"\n        >\n          <span [class.reuse-tab__name-width]=\"tabMaxWidth\" [style.max-width.px]=\"tabMaxWidth\">\n            @if (titleRender) {\n              <ng-template [ngTemplateOutlet]=\"titleRender\" [ngTemplateOutletContext]=\"{ $implicit: i }\" />\n            } @else {\n              {{ i.title }}\n            }\n          </span>\n        </div>\n        @if (i.closable) {\n          <nz-icon nzType=\"close\" class=\"reuse-tab__op\" (click)=\"_close($event, $index, false)\" />\n        }\n      </ng-template>\n    </nz-tab>\n  }\n</nz-tabs>\n<reuse-tab-context [i18n]=\"i18n\" (change)=\"contextMenuChange($event)\" />\n" }]
         }], propDecorators: { tabset: [{
                 type: ViewChild,
                 args: ['tabset']
@@ -1161,13 +1154,7 @@ const COMPONENTS = [ReuseTabComponent];
 const NOEXPORTS = [ReuseTabContextMenuComponent, ReuseTabContextComponent, ReuseTabContextDirective];
 class ReuseTabModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: ReuseTabModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: ReuseTabModule, imports: [CommonModule,
-            RouterModule,
-            YelonLocaleModule,
-            NzMenuModule,
-            NzTabsModule,
-            NzIconModule,
-            OverlayModule, ReuseTabComponent, ReuseTabContextMenuComponent, ReuseTabContextComponent, ReuseTabContextDirective], exports: [ReuseTabComponent] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: ReuseTabModule, imports: [CommonModule, RouterModule, YelonLocaleModule, NzMenuModule, NzTabsModule, NzIconModule, OverlayModule, ReuseTabComponent, ReuseTabContextMenuComponent, ReuseTabContextComponent, ReuseTabContextDirective], exports: [ReuseTabComponent] });
     static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: ReuseTabModule, providers: [
             {
                 provide: REUSE_TAB_STORAGE_KEY,
@@ -1181,28 +1168,12 @@ class ReuseTabModule {
                 provide: REUSE_TAB_CACHED_MANAGER,
                 useFactory: () => new ReuseTabCachedManagerFactory()
             }
-        ], imports: [CommonModule,
-            RouterModule,
-            YelonLocaleModule,
-            NzMenuModule,
-            NzTabsModule,
-            NzIconModule,
-            OverlayModule, COMPONENTS, ReuseTabContextMenuComponent] });
+        ], imports: [CommonModule, RouterModule, YelonLocaleModule, NzMenuModule, NzTabsModule, NzIconModule, OverlayModule, COMPONENTS, ReuseTabContextMenuComponent] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: ReuseTabModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        YelonLocaleModule,
-                        NzMenuModule,
-                        NzTabsModule,
-                        NzIconModule,
-                        OverlayModule,
-                        ...COMPONENTS,
-                        ...NOEXPORTS
-                    ],
+                    imports: [CommonModule, RouterModule, YelonLocaleModule, NzMenuModule, NzTabsModule, NzIconModule, OverlayModule, ...COMPONENTS, ...NOEXPORTS],
                     providers: [
                         {
                             provide: REUSE_TAB_STORAGE_KEY,

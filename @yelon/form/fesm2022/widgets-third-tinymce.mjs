@@ -19,14 +19,7 @@ class TinymceWidget extends ControlUIWidget {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: TinymceWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: TinymceWidget, isStandalone: true, selector: "sf-widget-tinymce", usesInheritance: true, ngImport: i0, template: `
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="schema.title"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
       <tinymce
         [ngModel]="value"
         (ngModelChange)="change($event)"
@@ -34,8 +27,7 @@ class TinymceWidget extends ControlUIWidget {
         [inline]="ui.inline ?? false"
         [delay]="ui.delay ?? 0"
         [loading]="ui.loading ?? 'Loading...'"
-        (ready)="_ready($event)"
-      />
+        (ready)="_ready($event)" />
     </sf-item-wrap>
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i1.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i1.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "ngmodule", type: YelonFormModule }, { kind: "component", type: i1$1.SFItemWrapComponent, selector: "sf-item-wrap", inputs: ["id", "schema", "ui", "showError", "error", "showTitle", "title"] }, { kind: "component", type: TinymceComponent, selector: "tinymce", inputs: ["config", "placeholder", "inline", "disabled", "loading", "delay"], outputs: ["ready"], exportAs: ["tinymce"] }], encapsulation: i0.ViewEncapsulation.None });
 }
@@ -44,14 +36,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             args: [{
                     selector: 'sf-widget-tinymce',
                     template: `
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="schema.title"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
       <tinymce
         [ngModel]="value"
         (ngModelChange)="change($event)"
@@ -59,8 +44,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         [inline]="ui.inline ?? false"
         [delay]="ui.delay ?? 0"
         [loading]="ui.loading ?? 'Loading...'"
-        (ready)="_ready($event)"
-      />
+        (ready)="_ready($event)" />
     </sf-item-wrap>
   `,
                     encapsulation: ViewEncapsulation.None,

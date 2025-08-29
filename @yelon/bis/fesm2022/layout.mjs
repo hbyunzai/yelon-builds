@@ -907,39 +907,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
 const COMPONENTS = [YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent];
 class YunzaiLayoutModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiLayoutModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiLayoutModule, imports: [I18nPipe,
-            FormsModule,
-            NzFormModule,
-            NzInputModule,
-            CommonModule,
-            NzGridModule,
-            NzIconModule,
-            NzDropDownModule,
-            NzTabsModule, YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent], exports: [YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiLayoutModule, imports: [FormsModule,
-            NzFormModule,
-            NzInputModule,
-            CommonModule,
-            NzGridModule,
-            NzIconModule,
-            NzDropDownModule,
-            NzTabsModule, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiLayoutModule, imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule, NzDropDownModule, NzTabsModule, YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent], exports: [YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiLayoutModule, imports: [FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule, NzDropDownModule, NzTabsModule, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiLayoutModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        I18nPipe,
-                        FormsModule,
-                        NzFormModule,
-                        NzInputModule,
-                        CommonModule,
-                        NzGridModule,
-                        NzIconModule,
-                        NzDropDownModule,
-                        NzTabsModule,
-                        ...COMPONENTS
-                    ],
+                    imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule, NzDropDownModule, NzTabsModule, ...COMPONENTS],
                     exports: COMPONENTS
                 }]
         }] });

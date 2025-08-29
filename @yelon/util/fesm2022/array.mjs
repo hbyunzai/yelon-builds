@@ -258,11 +258,7 @@ class ArrayService {
     uniq(array, predicate) {
         return Array.from(array
             .reduce((map, value) => {
-            const key = predicate
-                ? typeof predicate === 'string'
-                    ? value[predicate]
-                    : predicate(value)
-                : value;
+            const key = predicate ? (typeof predicate === 'string' ? value[predicate] : predicate(value)) : value;
             if (!map.has(key)) {
                 map.set(key, value);
             }

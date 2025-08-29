@@ -61,8 +61,7 @@ function addRoutingModuleToTop(options) {
             return tree;
         }
         const parentNode = routesNode.parent;
-        if (parentNode.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression ||
-            parentNode.initializer.getChildCount() === 0) {
+        if (parentNode.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression || parentNode.initializer.getChildCount() === 0) {
             return tree;
         }
         let childrenNode = (0, ast_utils_1.findNode)(parentNode.initializer, ts.SyntaxKind.Identifier, 'children');
@@ -96,9 +95,7 @@ function addServiceToNgModule(options) {
         const basePath = `/${options.path}/${options.flat ? '' : `${core_1.strings.dasherize(options.name)}/`}`;
         const servicePath = (0, core_1.normalize)(`${basePath}${core_1.strings.dasherize(options.name)}.service`);
         const serviceName = core_1.strings.classify(`${options.name}Service`);
-        const importModulePath = (0, core_1.normalize)(options.standalone
-            ? `${basePath}${utils_1.ROUTINS_FILENAME.split('.')[0]}`
-            : `${basePath}${core_1.strings.dasherize(options.name)}.module`);
+        const importModulePath = (0, core_1.normalize)(options.standalone ? `${basePath}${utils_1.ROUTINS_FILENAME.split('.')[0]}` : `${basePath}${core_1.strings.dasherize(options.name)}.module`);
         const importServicePath = (0, find_module_1.buildRelativePath)(importModulePath, servicePath);
         (0, utils_1.addServiceToModuleOrStandalone)(tree, options.standalone, `${importModulePath}.ts`, serviceName, importServicePath);
         return tree;
@@ -125,14 +122,7 @@ function default_1(schema) {
             (0, schematics_1.applyTemplates)(Object.assign(Object.assign(Object.assign({}, core_1.strings), { 'if-flat': (s) => (schema.flat ? '' : s) }), schema)),
             (0, schematics_1.move)(parsedPath.path)
         ]);
-        return (0, schematics_1.chain)([
-            (0, schematics_1.branchAndMerge)((0, schematics_1.chain)([
-                (0, schematics_1.mergeWith)(templateSource),
-                addDeclarationToNgModule(schema),
-                addRoutingModuleToTop(schema),
-                addServiceToNgModule(schema)
-            ]))
-        ]);
+        return (0, schematics_1.chain)([(0, schematics_1.branchAndMerge)((0, schematics_1.chain)([(0, schematics_1.mergeWith)(templateSource), addDeclarationToNgModule(schema), addRoutingModuleToTop(schema), addServiceToNgModule(schema)]))]);
     });
 }
 //# sourceMappingURL=index.js.map

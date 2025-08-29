@@ -81,20 +81,11 @@ class AutoCompleteWidget extends ControlUIWidget {
         }
     }
     addEmailSuffix(value) {
-        const res = !value || typeof value !== 'string' || value?.indexOf('@') !== -1
-            ? []
-            : this.fixData.map(domain => `${value}@${domain.label}`);
+        const res = !value || typeof value !== 'string' || value?.indexOf('@') !== -1 ? [] : this.fixData.map(domain => `${value}@${domain.label}`);
         return of(res);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: AutoCompleteWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: AutoCompleteWidget, isStandalone: true, selector: "sf-autocomplete", viewQueries: [{ propertyName: "ngModel", first: true, predicate: NgModel, descendants: true }], usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: AutoCompleteWidget, isStandalone: true, selector: "sf-autocomplete", viewQueries: [{ propertyName: "ngModel", first: true, predicate: NgModel, descendants: true }], usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <input
       nz-input
       [nzAutocomplete]="auto"
@@ -106,8 +97,7 @@ class AutoCompleteWidget extends ControlUIWidget {
       (ngModelChange)="_setValue($event)"
       [attr.maxLength]="schema.maxLength || null"
       [attr.placeholder]="ui.placeholder"
-      autocomplete="off"
-    />
+      autocomplete="off" />
     <nz-autocomplete
       #auto
       [nzBackfill]="i.backfill"
@@ -116,8 +106,7 @@ class AutoCompleteWidget extends ControlUIWidget {
       [nzOverlayStyle]="ui.overlayStyle || {}"
       [nzOverlayClassName]="ui.overlayClassName || ''"
       [compareWith]="i.compareWith"
-      (selectionChange)="updateValue($event)"
-    >
+      (selectionChange)="updateValue($event)">
       @for (i of list | async; track i) {
         <nz-auto-option [nzValue]="i" [nzLabel]="i.label"> {{ i.label }} </nz-auto-option>
       }
@@ -128,14 +117,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-autocomplete',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <input
       nz-input
       [nzAutocomplete]="auto"
@@ -147,8 +129,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       (ngModelChange)="_setValue($event)"
       [attr.maxLength]="schema.maxLength || null"
       [attr.placeholder]="ui.placeholder"
-      autocomplete="off"
-    />
+      autocomplete="off" />
     <nz-autocomplete
       #auto
       [nzBackfill]="i.backfill"
@@ -157,8 +138,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzOverlayStyle]="ui.overlayStyle || {}"
       [nzOverlayClassName]="ui.overlayClassName || ''"
       [compareWith]="i.compareWith"
-      (selectionChange)="updateValue($event)"
-    >
+      (selectionChange)="updateValue($event)">
       @for (i of list | async; track i) {
         <nz-auto-option [nzValue]="i" [nzLabel]="i.label"> {{ i.label }} </nz-auto-option>
       }

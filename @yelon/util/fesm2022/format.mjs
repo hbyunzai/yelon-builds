@@ -16,7 +16,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
  * ```
  */
 function format(str, obj, needDeepGet = false) {
-    return (str || '').replace(/\${([^}]+)}/g, (_work, key) => needDeepGet ? deepGet(obj, key.split('.'), '') : (obj || {})[key] || '');
+    return (str || '').replace(/\${([^}]+)}/g, (_work, key) => (needDeepGet ? deepGet(obj, key.split('.'), '') : (obj || {})[key] || ''));
 }
 /**
  * Format mask
@@ -306,54 +306,10 @@ class CurrencyService {
         integer = (+integer).toString();
         const inWords = options.inWords;
         const unit = {
-            num: inWords
-                ? ['', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '点']
-                : ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '点'],
+            num: inWords ? ['', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '点'] : ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '点'],
             radice: inWords
-                ? [
-                    '',
-                    '拾',
-                    '佰',
-                    '仟',
-                    '万',
-                    '拾',
-                    '佰',
-                    '仟',
-                    '亿',
-                    '拾',
-                    '佰',
-                    '仟',
-                    '万亿',
-                    '拾',
-                    '佰',
-                    '仟',
-                    '兆',
-                    '拾',
-                    '佰',
-                    '仟'
-                ]
-                : [
-                    '',
-                    '十',
-                    '百',
-                    '千',
-                    '万',
-                    '十',
-                    '百',
-                    '千',
-                    '亿',
-                    '十',
-                    '百',
-                    '千',
-                    '万亿',
-                    '十',
-                    '百',
-                    '千',
-                    '兆',
-                    '十',
-                    '百',
-                    '千'
-                ],
+                ? ['', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿', '拾', '佰', '仟', '万亿', '拾', '佰', '仟', '兆', '拾', '佰', '仟']
+                : ['', '十', '百', '千', '万', '十', '百', '千', '亿', '十', '百', '千', '万亿', '十', '百', '千', '兆', '十', '百', '千'],
             dec: ['角', '分', '厘', '毫']
         };
         if (inWords) {
@@ -407,10 +363,7 @@ class CurrencyService {
                 decimalRes += cnZero + cnNum + cnDesc;
             }
         }
-        const ret = symbol +
-            (inWords
-                ? integerRes + (decimalRes === '零' ? '元整' : `元${decimalRes}`)
-                : integerRes + (decimalRes === '' ? '' : `点${decimalRes}`));
+        const ret = symbol + (inWords ? integerRes + (decimalRes === '零' ? '元整' : `元${decimalRes}`) : integerRes + (decimalRes === '' ? '' : `点${decimalRes}`));
         return ret;
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CurrencyService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });

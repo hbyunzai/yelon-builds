@@ -510,19 +510,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
     </ng-template>
   `,
                     providers: [YunzaiTableUserService],
-                    imports: [
-                        CommonModule,
-                        YelonFormModule,
-                        STModule,
-                        I18nPipe,
-                        NzCheckboxModule,
-                        NzDividerModule,
-                        NzButtonModule,
-                        NzEmptyModule,
-                        NzIconModule,
-                        NzMenuModule,
-                        NzCardModule
-                    ]
+                    imports: [CommonModule, YelonFormModule, STModule, I18nPipe, NzCheckboxModule, NzDividerModule, NzButtonModule, NzEmptyModule, NzIconModule, NzMenuModule, NzCardModule]
                 }]
         }], propDecorators: { st: [{
                 type: ViewChild,
@@ -539,45 +527,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
 const COMPONENTS = [YunzaiTableUserComponent];
 class YunzaiTableUserModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiTableUserModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiTableUserModule, imports: [CommonModule,
-            YelonFormModule,
-            STModule,
-            I18nPipe,
-            NzCheckboxModule,
-            NzDividerModule,
-            NzButtonModule,
-            NzEmptyModule,
-            NzIconModule,
-            NzMenuModule,
-            NzCardModule, YunzaiTableUserComponent], exports: [YunzaiTableUserComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiTableUserModule, providers: [YunzaiTableUserService], imports: [CommonModule,
-            YelonFormModule,
-            STModule,
-            NzCheckboxModule,
-            NzDividerModule,
-            NzButtonModule,
-            NzEmptyModule,
-            NzIconModule,
-            NzMenuModule,
-            NzCardModule, COMPONENTS] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiTableUserModule, imports: [CommonModule, YelonFormModule, STModule, I18nPipe, NzCheckboxModule, NzDividerModule, NzButtonModule, NzEmptyModule, NzIconModule, NzMenuModule, NzCardModule, YunzaiTableUserComponent], exports: [YunzaiTableUserComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiTableUserModule, providers: [YunzaiTableUserService], imports: [CommonModule, YelonFormModule, STModule, NzCheckboxModule, NzDividerModule, NzButtonModule, NzEmptyModule, NzIconModule, NzMenuModule, NzCardModule, COMPONENTS] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiTableUserModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        CommonModule,
-                        YelonFormModule,
-                        STModule,
-                        I18nPipe,
-                        NzCheckboxModule,
-                        NzDividerModule,
-                        NzButtonModule,
-                        NzEmptyModule,
-                        NzIconModule,
-                        NzMenuModule,
-                        NzCardModule,
-                        ...COMPONENTS
-                    ],
+                    imports: [CommonModule, YelonFormModule, STModule, I18nPipe, NzCheckboxModule, NzDividerModule, NzButtonModule, NzEmptyModule, NzIconModule, NzMenuModule, NzCardModule, ...COMPONENTS],
                     providers: [YunzaiTableUserService],
                     exports: COMPONENTS
                 }]

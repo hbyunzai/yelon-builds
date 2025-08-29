@@ -262,9 +262,7 @@ class SEComponent {
         if (!this.ngControl || this.isBindModel)
             return;
         this.isBindModel = true;
-        this.ngControl
-            .statusChanges.pipe(takeUntilDestroyed(this.destroy$))
-            .subscribe(res => this.updateStatus(res === 'INVALID'));
+        this.ngControl.statusChanges.pipe(takeUntilDestroyed(this.destroy$)).subscribe(res => this.updateStatus(res === 'INVALID'));
         if (this._autoId) {
             const controlAccessor = this.ngControl.valueAccessor;
             const control = (controlAccessor?.elementRef || controlAccessor?._elementRef)?.nativeElement;
@@ -292,8 +290,7 @@ class SEComponent {
         if (this.ngControl?.disabled || this.ngControl?.isDisabled) {
             return;
         }
-        this.invalid =
-            !this.onceFlag && invalid && this.parentComp.ignoreDirty === false && !this.ngControl?.dirty ? false : invalid;
+        this.invalid = !this.onceFlag && invalid && this.parentComp.ignoreDirty === false && !this.ngControl?.dirty ? false : invalid;
         const errors = this.ngControl?.errors;
         if (errors != null && Object.keys(errors).length > 0) {
             const key = Object.keys(errors)[0] || '';

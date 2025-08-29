@@ -33,31 +33,12 @@ class TagWidget extends ControlUIWidget {
         this.formProperty.setValue(this.data.filter(w => w.checked).map(i => i.value), false);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: TagWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: TagWidget, isStandalone: true, selector: "sf-tag", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: TagWidget, isStandalone: true, selector: "sf-tag", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #icon let-i>
-      <nz-icon
-        [nzType]="i.type"
-        [nzTheme]="i.theme"
-        [nzTwotoneColor]="i.twotoneColor"
-        [nzRotate]="i.rotate"
-        [nzIconfont]="i.iconfont"
-        [nzSpin]="i.spin"
-      />
+      <nz-icon [nzType]="i.type" [nzTheme]="i.theme" [nzTwotoneColor]="i.twotoneColor" [nzRotate]="i.rotate" [nzIconfont]="i.iconfont" [nzSpin]="i.spin" />
     </ng-template>
     @for (i of data; track $index) {
-      <nz-tag
-        [nzMode]="ui.mode || 'checkable'"
-        [nzChecked]="i.checked"
-        (nzOnClose)="_close($event)"
-        (nzCheckedChange)="onChange(i)"
-      >
+      <nz-tag [nzMode]="ui.mode || 'checkable'" [nzChecked]="i.checked" (nzOnClose)="_close($event)" (nzCheckedChange)="onChange(i)">
         @if (i.prefixIcon) {
           <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: i.prefixIcon }" />
         }
@@ -73,31 +54,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-tag',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #icon let-i>
-      <nz-icon
-        [nzType]="i.type"
-        [nzTheme]="i.theme"
-        [nzTwotoneColor]="i.twotoneColor"
-        [nzRotate]="i.rotate"
-        [nzIconfont]="i.iconfont"
-        [nzSpin]="i.spin"
-      />
+      <nz-icon [nzType]="i.type" [nzTheme]="i.theme" [nzTwotoneColor]="i.twotoneColor" [nzRotate]="i.rotate" [nzIconfont]="i.iconfont" [nzSpin]="i.spin" />
     </ng-template>
     @for (i of data; track $index) {
-      <nz-tag
-        [nzMode]="ui.mode || 'checkable'"
-        [nzChecked]="i.checked"
-        (nzOnClose)="_close($event)"
-        (nzCheckedChange)="onChange(i)"
-      >
+      <nz-tag [nzMode]="ui.mode || 'checkable'" [nzChecked]="i.checked" (nzOnClose)="_close($event)" (nzCheckedChange)="onChange(i)">
         @if (i.prefixIcon) {
           <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: i.prefixIcon }" />
         }

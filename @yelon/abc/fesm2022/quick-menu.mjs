@@ -28,11 +28,7 @@ class QuickMenuComponent {
             'background-color': this.bgColor,
             'border-color': this.borderColor
         };
-        const res = [
-            `top:${this.top}px`,
-            `width:${this.width}px`,
-            `margin-right:-${this.show ? 0 : this.width}px`
-        ];
+        const res = [`top:${this.top}px`, `width:${this.width}px`, `margin-right:-${this.show ? 0 : this.width}px`];
         if (this.bgColor) {
             res.push(`background-color:${this.bgColor}`);
         }

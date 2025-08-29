@@ -16,8 +16,7 @@ function postUpdate(context, targetVersion, hasFailures) {
     context.logger.info(`✓  Updated NG-YUNZAI to ${targetVersion}`);
     context.logger.info('');
     if (hasFailures) {
-        context.logger.warn('  ⚠  Some issues were detected but could not be fixed automatically. Please check the ' +
-            'output above and fix these issues manually.');
+        context.logger.warn('  ⚠  Some issues were detected but could not be fixed automatically. Please check the ' + 'output above and fix these issues manually.');
     }
 }
 //# sourceMappingURL=index.js.map

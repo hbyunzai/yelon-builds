@@ -103,14 +103,7 @@ class UploadWidget extends ControlUIWidget {
         this.injector.get(NzImageService, null)?.preview([{ src: _url }]);
     };
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: UploadWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: UploadWidget, isStandalone: true, selector: "sf-upload", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: UploadWidget, isStandalone: true, selector: "sf-upload", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-upload
       [nzType]="i.type"
       [(nzFileList)]="fileList"
@@ -138,8 +131,7 @@ class UploadWidget extends ControlUIWidget {
       [nzDownload]="ui.download"
       [nzTransformFile]="ui.transformFile"
       (nzChange)="change($event)"
-      [nzShowButton]="fileList.length < i.limitFileCount"
-    >
+      [nzShowButton]="fileList.length < i.limitFileCount">
       @switch (btnType) {
         @case ('plus') {
           <nz-icon nzType="plus" />
@@ -161,14 +153,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-upload',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-upload
       [nzType]="i.type"
       [(nzFileList)]="fileList"
@@ -196,8 +181,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzDownload]="ui.download"
       [nzTransformFile]="ui.transformFile"
       (nzChange)="change($event)"
-      [nzShowButton]="fileList.length < i.limitFileCount"
-    >
+      [nzShowButton]="fileList.length < i.limitFileCount">
       @switch (btnType) {
         @case ('plus') {
           <nz-icon nzType="plus" />

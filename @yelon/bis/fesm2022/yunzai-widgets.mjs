@@ -238,15 +238,7 @@ class YunzaiHeaderNotifyComponent {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiHeaderNotifyComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.1.3", type: YunzaiHeaderNotifyComponent, isStandalone: true, selector: "yunzai-header-notify", ngImport: i0, template: `
-    <notice-icon
-      [data]="data"
-      [count]="count"
-      [loading]="loading"
-      btnClass="yunzai-default__nav-item"
-      btnIconClass="yunzai-default__nav-item-icon"
-      (select)="select($event)"
-      (clear)="clear($event)"
-    />
+    <notice-icon [data]="data" [count]="count" [loading]="loading" btnClass="yunzai-default__nav-item" btnIconClass="yunzai-default__nav-item-icon" (select)="select($event)" (clear)="clear($event)" />
   `, isInline: true, dependencies: [{ kind: "ngmodule", type: NoticeIconModule }, { kind: "component", type: i1$1.NoticeIconComponent, selector: "notice-icon", inputs: ["data", "count", "loading", "popoverVisible", "btnClass", "btnIconClass", "centered"], outputs: ["select", "clear", "popoverVisibleChange"], exportAs: ["noticeIcon"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiHeaderNotifyComponent, decorators: [{
@@ -254,15 +246,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             args: [{
                     selector: `yunzai-header-notify`,
                     template: `
-    <notice-icon
-      [data]="data"
-      [count]="count"
-      [loading]="loading"
-      btnClass="yunzai-default__nav-item"
-      btnIconClass="yunzai-default__nav-item-icon"
-      (select)="select($event)"
-      (clear)="clear($event)"
-    />
+    <notice-icon [data]="data" [count]="count" [loading]="loading" btnClass="yunzai-default__nav-item" btnIconClass="yunzai-default__nav-item-icon" (select)="select($event)" (clear)="clear($event)" />
   `,
                     imports: [NoticeIconModule],
                     changeDetection: ChangeDetectionStrategy.OnPush
@@ -311,36 +295,16 @@ class YunzaiHeaderI18nComponent {
         <nz-icon nzType="down" nzTheme="outline"></nz-icon>
       </div>
     } @else {
-      <i
-        nz-dropdown
-        [nzDropdownMenu]="langMenu"
-        nzPlacement="bottomRight"
-        nz-icon
-        nzType="global"
-        nzTheme="outline"
-      ></i>
+      <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global" nzTheme="outline"></i>
     }
     <nz-dropdown-menu data-event-id="_nav_lang" #langMenu="nzDropdownMenu">
       <ul nz-menu>
         @for (item of langs; track item) {
-          <li
-            data-event-id="_nav_lang"
-            [attr.data-text]="item.text"
-            nz-menu-item
-            [nzSelected]="item.code === curLangCode"
-            (click)="change(item.code)"
-          >
+          <li data-event-id="_nav_lang" [attr.data-text]="item.text" nz-menu-item [nzSelected]="item.code === curLangCode" (click)="change(item.code)">
             @if (!item.icon) {
               <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
             } @else {
-              <img
-                style="margin-right:4px"
-                width="50px"
-                height="30px"
-                [src]="'data:image/png;base64,' + item.icon"
-                [alt]="item.abbr"
-                class="pr-xs"
-              />
+              <img style="margin-right:4px" width="50px" height="30px" [src]="'data:image/png;base64,' + item.icon" [alt]="item.abbr" class="pr-xs" />
             }
             {{ item.text }}
           </li>
@@ -361,36 +325,16 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         <nz-icon nzType="down" nzTheme="outline"></nz-icon>
       </div>
     } @else {
-      <i
-        nz-dropdown
-        [nzDropdownMenu]="langMenu"
-        nzPlacement="bottomRight"
-        nz-icon
-        nzType="global"
-        nzTheme="outline"
-      ></i>
+      <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global" nzTheme="outline"></i>
     }
     <nz-dropdown-menu data-event-id="_nav_lang" #langMenu="nzDropdownMenu">
       <ul nz-menu>
         @for (item of langs; track item) {
-          <li
-            data-event-id="_nav_lang"
-            [attr.data-text]="item.text"
-            nz-menu-item
-            [nzSelected]="item.code === curLangCode"
-            (click)="change(item.code)"
-          >
+          <li data-event-id="_nav_lang" [attr.data-text]="item.text" nz-menu-item [nzSelected]="item.code === curLangCode" (click)="change(item.code)">
             @if (!item.icon) {
               <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
             } @else {
-              <img
-                style="margin-right:4px"
-                width="50px"
-                height="30px"
-                [src]="'data:image/png;base64,' + item.icon"
-                [alt]="item.abbr"
-                class="pr-xs"
-              />
+              <img style="margin-right:4px" width="50px" height="30px" [src]="'data:image/png;base64,' + item.icon" [alt]="item.abbr" class="pr-xs" />
             }
             {{ item.text }}
           </li>
@@ -424,9 +368,7 @@ class YunzaiHeaderUserComponent {
         const projectInfo = getProjectInfo();
         const user = getUser();
         this.username = user.realname ? user.realname : '未命名';
-        this.icon = user.avatarId
-            ? `${this.config.baseUrl}/filecenter/file/${user.avatarId}`
-            : `./assets/tmp/img/avatar.jpg`;
+        this.icon = user.avatarId ? `${this.config.baseUrl}/filecenter/file/${user.avatarId}` : `./assets/tmp/img/avatar.jpg`;
         this.menus = projectInfo.profileList;
     }
     logout() {
@@ -444,13 +386,7 @@ class YunzaiHeaderUserComponent {
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiHeaderUserComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: YunzaiHeaderUserComponent, isStandalone: true, selector: "yunzai-header-user", ngImport: i0, template: `
-    <div
-      class="yunzai-default__nav-item d-flex align-items-center px-sm"
-      data-event-id="_nav_user"
-      nz-dropdown
-      nzPlacement="bottomRight"
-      [nzDropdownMenu]="userMenu"
-    >
+    <div class="yunzai-default__nav-item d-flex align-items-center px-sm" data-event-id="_nav_user" nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="userMenu">
       <div class="yz-user-name">
         <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm" />
         {{ username }}
@@ -478,13 +414,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             args: [{
                     selector: `yunzai-header-user`,
                     template: `
-    <div
-      class="yunzai-default__nav-item d-flex align-items-center px-sm"
-      data-event-id="_nav_user"
-      nz-dropdown
-      nzPlacement="bottomRight"
-      [nzDropdownMenu]="userMenu"
-    >
+    <div class="yunzai-default__nav-item d-flex align-items-center px-sm" data-event-id="_nav_user" nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="userMenu">
       <div class="yz-user-name">
         <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm" />
         {{ username }}
@@ -511,50 +441,16 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                 }]
         }] });
 
-const COMPONENTS = [
-    YunzaiHeaderClearStorageComponent,
-    YunzaiHeaderFullScreenComponent,
-    YunzaiHeaderNotifyComponent,
-    YunzaiHeaderI18nComponent,
-    YunzaiHeaderUserComponent
-];
+const COMPONENTS = [YunzaiHeaderClearStorageComponent, YunzaiHeaderFullScreenComponent, YunzaiHeaderNotifyComponent, YunzaiHeaderI18nComponent, YunzaiHeaderUserComponent];
 class YunzaiWidgetsModule {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiWidgetsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule,
-            RouterModule,
-            NoticeIconModule,
-            NzDropDownModule,
-            CommonModule,
-            NzIconModule,
-            I18nPipe, YunzaiHeaderClearStorageComponent,
-            YunzaiHeaderFullScreenComponent,
-            YunzaiHeaderNotifyComponent,
-            YunzaiHeaderI18nComponent,
-            YunzaiHeaderUserComponent], exports: [YunzaiHeaderClearStorageComponent,
-            YunzaiHeaderFullScreenComponent,
-            YunzaiHeaderNotifyComponent,
-            YunzaiHeaderI18nComponent,
-            YunzaiHeaderUserComponent] });
-    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule,
-            RouterModule,
-            NoticeIconModule,
-            NzDropDownModule,
-            CommonModule,
-            NzIconModule, COMPONENTS] });
+    static ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.1.3", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule, RouterModule, NoticeIconModule, NzDropDownModule, CommonModule, NzIconModule, I18nPipe, YunzaiHeaderClearStorageComponent, YunzaiHeaderFullScreenComponent, YunzaiHeaderNotifyComponent, YunzaiHeaderI18nComponent, YunzaiHeaderUserComponent], exports: [YunzaiHeaderClearStorageComponent, YunzaiHeaderFullScreenComponent, YunzaiHeaderNotifyComponent, YunzaiHeaderI18nComponent, YunzaiHeaderUserComponent] });
+    static ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiWidgetsModule, imports: [NzAvatarModule, RouterModule, NoticeIconModule, NzDropDownModule, CommonModule, NzIconModule, COMPONENTS] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: YunzaiWidgetsModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [
-                        NzAvatarModule,
-                        RouterModule,
-                        NoticeIconModule,
-                        NzDropDownModule,
-                        CommonModule,
-                        NzIconModule,
-                        I18nPipe,
-                        ...COMPONENTS
-                    ],
+                    imports: [NzAvatarModule, RouterModule, NoticeIconModule, NzDropDownModule, CommonModule, NzIconModule, I18nPipe, ...COMPONENTS],
                     exports: COMPONENTS
                 }]
         }] });

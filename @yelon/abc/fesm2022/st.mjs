@@ -211,9 +211,7 @@ class STColumnSource {
         const countReduce = (a, b) => a + +b.width.toString().replace('px', '');
         const expandWidth = expand ? 50 : 0;
         // left width
-        list
-            .filter(w => w.fixed && w.fixed === 'left' && w.width)
-            .forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0) + expandWidth}px`));
+        list.filter(w => w.fixed && w.fixed === 'left' && w.width).forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0) + expandWidth}px`));
         // right width
         list
             .filter(w => w.fixed && w.fixed === 'right' && w.width)
@@ -327,14 +325,10 @@ class STColumnSource {
     }
     restoreRender(item) {
         if (item.renderTitle) {
-            item.__renderTitle =
-                typeof item.renderTitle === 'string'
-                    ? this.rowSource.getTitle(item.renderTitle)
-                    : item.renderTitle;
+            item.__renderTitle = typeof item.renderTitle === 'string' ? this.rowSource.getTitle(item.renderTitle) : item.renderTitle;
         }
         if (item.render) {
-            item.__render =
-                typeof item.render === 'string' ? this.rowSource.getRow(item.render) : item.render;
+            item.__render = typeof item.render === 'string' ? this.rowSource.getRow(item.render) : item.render;
         }
     }
     widgetCoerce(item) {
@@ -760,10 +754,7 @@ class STDataSource {
                     text = this.currencySrv.format(value, col.currency?.format);
                     break;
                 case 'date':
-                    text =
-                        value == null || value === col.default || (typeof value === 'number' && value <= 0)
-                            ? col.default
-                            : this.datePipe.transform(value, col.dateFormat);
+                    text = value == null || value === col.default || (typeof value === 'number' && value <= 0) ? col.default : this.datePipe.transform(value, col.dateFormat);
                     break;
                 case 'yn':
                     text = this.ynPipe.transform(value === col.yn.truth, col.yn.yes, col.yn.no, col.yn.mode, false);
@@ -880,9 +871,7 @@ class STDataSource {
                 }
                 return { ...this.get(result[i], c, i), props, cell };
             });
-            result[i]._rowClassName = [rowClassName ? rowClassName(result[i], i) : null, result[i].className]
-                .filter(w => !!w)
-                .join(' ');
+            result[i]._rowClassName = [rowClassName ? rowClassName(result[i], i) : null, result[i].className].filter(w => !!w).join(' ');
         }
         return result;
     }
@@ -979,9 +968,7 @@ class STDataSource {
                 arrayParam: false,
                 ...multiSort
             };
-            const sortMap = sortList
-                .sort((a, b) => a.tick - b.tick)
-                .map(item => item.key + ms.nameSeparator + ((item.reName || {})[item.default] || item.default));
+            const sortMap = sortList.sort((a, b) => a.tick - b.tick).map(item => item.key + ms.nameSeparator + ((item.reName || {})[item.default] || item.default));
             ret = { [ms.key]: ms.arrayParam ? sortMap : sortMap.join(ms.separator) };
             return sortMap.length === 0 && ms.keepEmptyKey === false ? {} : ret;
         }
@@ -1025,8 +1012,7 @@ class STDataSource {
     genStatistical(columns, list, rawData) {
         const res = {};
         columns.forEach((col, index) => {
-            res[col.key || col.indexKey || index] =
-                col.statistical == null ? {} : this.getStatistical(col, index, list, rawData);
+            res[col.key || col.indexKey || index] = col.statistical == null ? {} : this.getStatistical(col, index, list, rawData);
         });
         return res;
     }
@@ -1261,8 +1247,7 @@ class STFilterComponent {
       [nzClickHide]="false"
       [(nzVisible)]="visible"
       nzOverlayClassName="st__filter-wrap"
-      (click)="stopPropagation($event)"
-    >
+      (click)="stopPropagation($event)">
       <nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!" />
     </span>
     <nz-dropdown-menu #filterMenu="nzDropdownMenu">
@@ -1270,14 +1255,7 @@ class STFilterComponent {
         @switch (f.type) {
           @case ('keyword') {
             <div class="st__filter-keyword">
-              <input
-                type="text"
-                nz-input
-                [attr.placeholder]="f.placeholder"
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                (keyup.enter)="confirm()"
-              />
+              <input type="text" nz-input [attr.placeholder]="f.placeholder" [(ngModel)]="f.menus![0]!.value" (ngModelChange)="n.emit($event)" (keyup.enter)="confirm()" />
             </div>
           }
           @case ('number') {
@@ -1290,8 +1268,7 @@ class STFilterComponent {
                 [nzStep]="f.number!.step!"
                 [nzPrecision]="f.number!.precision || null"
                 [nzPlaceHolder]="f.placeholder!"
-                class="width-100"
-              />
+                class="width-100" />
             </div>
           }
           @case ('date') {
@@ -1305,8 +1282,7 @@ class STFilterComponent {
                   [nzShowNow]="f.date!.showNow"
                   [nzShowToday]="f.date!.showToday"
                   [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
+                  [nzDisabledTime]="f.date!.disabledTime" />
               } @else {
                 <nz-date-picker
                   nzInline
@@ -1316,17 +1292,13 @@ class STFilterComponent {
                   [nzShowNow]="f.date!.showNow"
                   [nzShowToday]="f.date!.showToday"
                   [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
+                  [nzDisabledTime]="f.date!.disabledTime" />
               }
             </div>
           }
           @case ('custom') {
             <div class="st__filter-custom">
-              <ng-template
-                [ngTemplateOutlet]="f.custom!"
-                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
-              />
+              <ng-template [ngTemplateOutlet]="f.custom!" [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }" />
             </div>
           }
           @default {
@@ -1375,8 +1347,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       [nzClickHide]="false"
       [(nzVisible)]="visible"
       nzOverlayClassName="st__filter-wrap"
-      (click)="stopPropagation($event)"
-    >
+      (click)="stopPropagation($event)">
       <nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!" />
     </span>
     <nz-dropdown-menu #filterMenu="nzDropdownMenu">
@@ -1384,14 +1355,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
         @switch (f.type) {
           @case ('keyword') {
             <div class="st__filter-keyword">
-              <input
-                type="text"
-                nz-input
-                [attr.placeholder]="f.placeholder"
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                (keyup.enter)="confirm()"
-              />
+              <input type="text" nz-input [attr.placeholder]="f.placeholder" [(ngModel)]="f.menus![0]!.value" (ngModelChange)="n.emit($event)" (keyup.enter)="confirm()" />
             </div>
           }
           @case ('number') {
@@ -1404,8 +1368,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                 [nzStep]="f.number!.step!"
                 [nzPrecision]="f.number!.precision || null"
                 [nzPlaceHolder]="f.placeholder!"
-                class="width-100"
-              />
+                class="width-100" />
             </div>
           }
           @case ('date') {
@@ -1419,8 +1382,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                   [nzShowNow]="f.date!.showNow"
                   [nzShowToday]="f.date!.showToday"
                   [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
+                  [nzDisabledTime]="f.date!.disabledTime" />
               } @else {
                 <nz-date-picker
                   nzInline
@@ -1430,17 +1392,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                   [nzShowNow]="f.date!.showNow"
                   [nzShowToday]="f.date!.showToday"
                   [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
+                  [nzDisabledTime]="f.date!.disabledTime" />
               }
             </div>
           }
           @case ('custom') {
             <div class="st__filter-custom">
-              <ng-template
-                [ngTemplateOutlet]="f.custom!"
-                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
-              />
+              <ng-template [ngTemplateOutlet]="f.custom!" [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }" />
             </div>
           }
           @default {
@@ -1820,8 +1778,7 @@ class STComponent {
         return this._multiSort;
     }
     set multiSort(value) {
-        if ((typeof value === 'boolean' && !booleanAttribute(value)) ||
-            (typeof value === 'object' && Object.keys(value).length === 0)) {
+        if ((typeof value === 'boolean' && !booleanAttribute(value)) || (typeof value === 'object' && Object.keys(value).length === 0)) {
             this._multiSort = undefined;
             return;
         }
@@ -1915,9 +1872,7 @@ class STComponent {
         return this.cd();
     }
     renderTotal(total, range) {
-        return this.totalTpl
-            ? this.totalTpl.replace('{{total}}', total).replace('{{range[0]}}', range[0]).replace('{{range[1]}}', range[1])
-            : '';
+        return this.totalTpl ? this.totalTpl.replace('{{total}}', total).replace('{{range[0]}}', range[0]).replace('{{range[1]}}', range[1]) : '';
     }
     changeEmit(type, data) {
         const res = {
@@ -2325,9 +2280,7 @@ class STComponent {
      * @param opt 额外参数
      */
     export(newData, opt) {
-        const data = Array.isArray(newData)
-            ? this.dataSource.optimizeData({ columns: this._columns, result: newData })
-            : this._data;
+        const data = Array.isArray(newData) ? this.dataSource.optimizeData({ columns: this._columns, result: newData }) : this._data;
         (newData === true ? this.filteredData : of(data)).subscribe((res) => this.exportSrv.export({
             columens: this._columns,
             ...opt,

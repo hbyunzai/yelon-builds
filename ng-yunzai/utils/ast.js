@@ -37,7 +37,7 @@ function getComponentMetadata(source) {
     const identifier = 'Component';
     return allNodes
         .filter(node => {
-        return (node.kind == ts.SyntaxKind.Decorator && node.expression.kind == ts.SyntaxKind.CallExpression);
+        return node.kind == ts.SyntaxKind.Decorator && node.expression.kind == ts.SyntaxKind.CallExpression;
     })
         .map(node => node.expression)
         .filter(expr => {
@@ -75,9 +75,7 @@ function addSymbolToComponentMetadata(source, filePath, symbolName, metadataFiel
             const text = childNode.getFullText(source);
             const matches = text.match(/^(\r?\n)(\s*)/);
             if (matches) {
-                toInsert =
-                    `,${matches[0]}${metadataField}: [${matches[1]}` +
-                        `${core_1.tags.indentBy(matches[2].length + 2) `${symbolName}`}${matches[0]}]`;
+                toInsert = `,${matches[0]}${metadataField}: [${matches[1]}` + `${core_1.tags.indentBy(matches[2].length + 2) `${symbolName}`}${matches[0]}]`;
             }
             else {
                 toInsert = `, ${metadataField}: [${symbolName}]`;

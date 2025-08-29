@@ -20,9 +20,7 @@ class XlsxService {
         });
     }
     init() {
-        return typeof XLSX !== 'undefined'
-            ? Promise.resolve([])
-            : this.lazy.load([this.cog.url].concat(this.cog.modules));
+        return typeof XLSX !== 'undefined' ? Promise.resolve([]) : this.lazy.load([this.cog.url].concat(this.cog.modules));
     }
     read(data) {
         const { read, utils: { sheet_to_json } } = XLSX;
