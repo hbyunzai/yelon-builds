@@ -1,6 +1,6 @@
 {
   "name": "@yelon/util",
-  "version": "20.0.0-8d615ad",
+  "version": "20.0.1-ac10e40",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -45,10 +45,6 @@
       "types": "./config/index.d.ts",
       "default": "./fesm2022/config.mjs"
     },
-    "./date-time": {
-      "types": "./date-time/index.d.ts",
-      "default": "./fesm2022/date-time.mjs"
-    },
     "./decorator": {
       "types": "./decorator/index.d.ts",
       "default": "./fesm2022/decorator.mjs"
@@ -69,9 +65,9 @@
       "types": "./mcache/index.d.ts",
       "default": "./fesm2022/mcache.mjs"
     },
-    "./mtypes": {
-      "types": "./mtypes/index.d.ts",
-      "default": "./fesm2022/mtypes.mjs"
+    "./date-time": {
+      "types": "./date-time/index.d.ts",
+      "default": "./fesm2022/date-time.mjs"
     },
     "./other": {
       "types": "./other/index.d.ts",
@@ -84,6 +80,10 @@
     "./token": {
       "types": "./token/index.d.ts",
       "default": "./fesm2022/token.mjs"
+    },
+    "./mtypes": {
+      "types": "./mtypes/index.d.ts",
+      "default": "./fesm2022/mtypes.mjs"
     },
     "./pipes/currency": {
       "types": "./pipes/currency/index.d.ts",

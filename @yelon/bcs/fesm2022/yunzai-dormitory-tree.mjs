@@ -257,12 +257,7 @@ class YunzaiDormitoryTreeComponent {
     <ng-template #treeTemplate let-node let-origin="origin">
       @if (!node.isLeaf) {
         <span [title]="node.title">
-          <i
-            nz-icon
-            nzTheme="twotone"
-            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-            (click)="open(node)"
-          ></i>
+          <i nz-icon nzTheme="twotone" [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'" (click)="open(node)"></i>
           <span class="leaf-name">{{ node.title }}</span>
         </span>
       } @else {
@@ -316,12 +311,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
     <ng-template #treeTemplate let-node let-origin="origin">
       @if (!node.isLeaf) {
         <span [title]="node.title">
-          <i
-            nz-icon
-            nzTheme="twotone"
-            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-            (click)="open(node)"
-          ></i>
+          <i nz-icon nzTheme="twotone" [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'" (click)="open(node)"></i>
           <span class="leaf-name">{{ node.title }}</span>
         </span>
       } @else {

@@ -2297,26 +2297,12 @@ class CheckboxWidget extends ControlUIWidget {
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: CheckboxWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: CheckboxWidget, isStandalone: false, selector: "sf-checkbox", usesInheritance: true, ngImport: i0, template: `<ng-template #all>
       @if (ui.checkAll) {
-        <label
-          nz-checkbox
-          class="sf__checkbox-all mr-sm"
-          [(ngModel)]="allChecked"
-          (ngModelChange)="onAllChecked()"
-          [nzIndeterminate]="indeterminate"
-        >
+        <label nz-checkbox class="sf__checkbox-all mr-sm" [(ngModel)]="allChecked" (ngModelChange)="onAllChecked()" [nzIndeterminate]="indeterminate">
           {{ ui.checkAllText || l.checkAllText }}
         </label>
       }
     </ng-template>
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="true"
-      [title]="labelTitle"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="true" [title]="labelTitle">
       @if (inited) {
         @if (data.length === 0) {
           <label nz-checkbox [nzDisabled]="disabled" [ngModel]="value" (ngModelChange)="_setValue($event)">
@@ -2370,26 +2356,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                     selector: 'sf-checkbox',
                     template: `<ng-template #all>
       @if (ui.checkAll) {
-        <label
-          nz-checkbox
-          class="sf__checkbox-all mr-sm"
-          [(ngModel)]="allChecked"
-          (ngModelChange)="onAllChecked()"
-          [nzIndeterminate]="indeterminate"
-        >
+        <label nz-checkbox class="sf__checkbox-all mr-sm" [(ngModel)]="allChecked" (ngModelChange)="onAllChecked()" [nzIndeterminate]="indeterminate">
           {{ ui.checkAllText || l.checkAllText }}
         </label>
       }
     </ng-template>
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="true"
-      [title]="labelTitle"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="true" [title]="labelTitle">
       @if (inited) {
         @if (data.length === 0) {
           <label nz-checkbox [nzDisabled]="disabled" [ngModel]="value" (ngModelChange)="_setValue($event)">
@@ -3472,10 +3444,7 @@ class StringWidget extends ControlUIWidget {
     change$ = null;
     ngOnInit() {
         const { addOnAfter, addOnAfterIcon, addOnBefore, addOnBeforeIcon, prefix, prefixIcon, suffix, suffixIcon, autofocus } = this.ui;
-        this.type =
-            addOnAfter || addOnBefore || addOnAfterIcon || addOnBeforeIcon || prefix || prefixIcon || suffix || suffixIcon
-                ? 'addon'
-                : '';
+        this.type = addOnAfter || addOnBefore || addOnAfterIcon || addOnBeforeIcon || prefix || prefixIcon || suffix || suffixIcon ? 'addon' : '';
         if (autofocus === true) {
             setTimeout(() => {
                 this.injector.get(ElementRef).nativeElement.querySelector(`#${this.id}`).focus();
@@ -3522,14 +3491,7 @@ class StringWidget extends ControlUIWidget {
             this.ui.enter(e);
     }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.1.3", ngImport: i0, type: StringWidget, deps: null, target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: StringWidget, isStandalone: false, selector: "sf-string", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.1.3", type: StringWidget, isStandalone: false, selector: "sf-string", usesInheritance: true, ngImport: i0, template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #ipt>
       <input
         nz-input
@@ -3573,14 +3535,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
             type: Component,
             args: [{
                     selector: 'sf-string',
-                    template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+                    template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #ipt>
       <input
         nz-input

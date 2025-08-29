@@ -18,9 +18,10 @@ declare class YunzaiLayoutNavTileComponent {
 }
 
 declare class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
-    private $destroy;
+    private readonly http;
+    private destroy$;
+    private readonly win;
     state: LayoutNavGroupState;
-    private http;
     ngOnInit(): void;
     open(topic: YunzaiNavTopic): void;
     ngOnDestroy(): void;
@@ -85,15 +86,14 @@ declare class YunzaiLayoutModule {
 }
 
 declare class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
-    private $destroy;
+    private readonly config;
+    private readonly http;
+    private readonly win;
+    private readonly i18n;
+    private readonly destroy$;
     state: LayoutNavApplicationState;
     get showAllMenu(): boolean;
     get showMineMenu(): boolean;
-    private i18n;
-    private http;
-    private win;
-    private conf;
-    private bis;
     ngOnInit(): void;
     fetchAllTopic(): void;
     attachNav(type: 'all' | 'mine' | 'other', topic?: YunzaiNavTopic): void;

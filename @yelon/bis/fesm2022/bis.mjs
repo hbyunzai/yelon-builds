@@ -630,12 +630,7 @@ class YunzaiLayoutWebsite01Component {
     <div class="yz-layout-website-01">
       <div class="yz-layout-website-01-nav__user">
         @if (isLogin) {
-          <a
-            class="yz-layout-website-01-link"
-            nz-dropdown
-            [nzDropdownMenu]="menu"
-            [nzOverlayStyle]="{ width: '120px' }"
-          >
+          <a class="yz-layout-website-01-link" nz-dropdown [nzDropdownMenu]="menu" [nzOverlayStyle]="{ width: '120px' }">
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -643,15 +638,11 @@ class YunzaiLayoutWebsite01Component {
               @for (link of _links; track $index) {
                 <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
               }
-              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()"
-                >{{ 'menu.account.logout' | i18n }}
-              </li>
+              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()">{{ 'menu.account.logout' | i18n }} </li>
             </ul>
           </nz-dropdown-menu>
         } @else {
-          <a class="yz-layout-website-01-link" (click)="login()">
-            <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
-          >
+          <a class="yz-layout-website-01-link" (click)="login()"> <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a>
         }
       </div>
 
@@ -683,12 +674,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
     <div class="yz-layout-website-01">
       <div class="yz-layout-website-01-nav__user">
         @if (isLogin) {
-          <a
-            class="yz-layout-website-01-link"
-            nz-dropdown
-            [nzDropdownMenu]="menu"
-            [nzOverlayStyle]="{ width: '120px' }"
-          >
+          <a class="yz-layout-website-01-link" nz-dropdown [nzDropdownMenu]="menu" [nzOverlayStyle]="{ width: '120px' }">
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -696,15 +682,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
               @for (link of _links; track $index) {
                 <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
               }
-              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()"
-                >{{ 'menu.account.logout' | i18n }}
-              </li>
+              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()">{{ 'menu.account.logout' | i18n }} </li>
             </ul>
           </nz-dropdown-menu>
         } @else {
-          <a class="yz-layout-website-01-link" (click)="login()">
-            <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
-          >
+          <a class="yz-layout-website-01-link" (click)="login()"> <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a>
         }
       </div>
 
@@ -813,13 +795,7 @@ class YunzaiLayoutWebsite02Component {
               <ng-template *ngTemplateOutlet="_slogan" />
             </div>
             @if (isLogin) {
-              <a
-                class="yz-layout-website-02-link"
-                nz-dropdown
-                [nzDropdownMenu]="menu"
-                [nzDisabled]="!_userMenuShow"
-                [nzPlacement]="'bottomRight'"
-              >
+              <a class="yz-layout-website-02-link" nz-dropdown [nzDropdownMenu]="menu" [nzDisabled]="!_userMenuShow" [nzPlacement]="'bottomRight'">
                 <nz-avatar nzIcon="user" [nzSrc]="_avatar" /><b>欢迎访问：{{ _username }}</b>
                 <span nz-icon nzType="down" *ngIf="_userMenuShow"></span>
               </a>
@@ -828,15 +804,11 @@ class YunzaiLayoutWebsite02Component {
                   @for (link of _links; track $index) {
                     <li nz-menu-item class="yz-layout-website-02-link__li" (click)="to(link.url)">{{ link.name }}</li>
                   }
-                  <li nz-menu-item nzDanger class="yz-layout-website-02-link__li" (click)="logout()">{{
-                    'menu.account.logout' | i18n
-                  }}</li>
+                  <li nz-menu-item nzDanger class="yz-layout-website-02-link__li" (click)="logout()">{{ 'menu.account.logout' | i18n }}</li>
                 </ul>
               </nz-dropdown-menu>
             } @else {
-              <a class="yz-layout-website-02-link" (click)="login()">
-                <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
-              >
+              <a class="yz-layout-website-02-link" (click)="login()"> <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a>
             }
           </div>
         </div>
@@ -870,13 +842,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
               <ng-template *ngTemplateOutlet="_slogan" />
             </div>
             @if (isLogin) {
-              <a
-                class="yz-layout-website-02-link"
-                nz-dropdown
-                [nzDropdownMenu]="menu"
-                [nzDisabled]="!_userMenuShow"
-                [nzPlacement]="'bottomRight'"
-              >
+              <a class="yz-layout-website-02-link" nz-dropdown [nzDropdownMenu]="menu" [nzDisabled]="!_userMenuShow" [nzPlacement]="'bottomRight'">
                 <nz-avatar nzIcon="user" [nzSrc]="_avatar" /><b>欢迎访问：{{ _username }}</b>
                 <span nz-icon nzType="down" *ngIf="_userMenuShow"></span>
               </a>
@@ -885,15 +851,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
                   @for (link of _links; track $index) {
                     <li nz-menu-item class="yz-layout-website-02-link__li" (click)="to(link.url)">{{ link.name }}</li>
                   }
-                  <li nz-menu-item nzDanger class="yz-layout-website-02-link__li" (click)="logout()">{{
-                    'menu.account.logout' | i18n
-                  }}</li>
+                  <li nz-menu-item nzDanger class="yz-layout-website-02-link__li" (click)="logout()">{{ 'menu.account.logout' | i18n }}</li>
                 </ul>
               </nz-dropdown-menu>
             } @else {
-              <a class="yz-layout-website-02-link" (click)="login()">
-                <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
-              >
+              <a class="yz-layout-website-02-link" (click)="login()"> <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a>
             }
           </div>
         </div>
@@ -903,17 +865,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.1.3", ngImpor
       </main>
     </div>
   `,
-                    imports: [
-                        RouterOutlet,
-                        I18nPipe,
-                        NzI18nModule,
-                        NgFor,
-                        NgIf,
-                        NzDropDownModule,
-                        NzIconModule,
-                        NgTemplateOutlet,
-                        NzAvatarModule
-                    ]
+                    imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet, NzAvatarModule]
                 }]
         }], propDecorators: { logoSrc: [{
                 type: Input
