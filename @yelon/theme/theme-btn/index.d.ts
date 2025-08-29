@@ -27,7 +27,13 @@ declare class ThemeBtnComponent implements OnInit, OnDestroy {
     ngOnInit(): void;
     private initTheme;
     private updateChartTheme;
-    onThemeChange(theme: string): void;
+    onThemeChange(theme: any): void;
+    /**
+     * 十六进制颜色值减淡
+     * @param value 颜色值
+     * @param transparency 透明度<=1
+     */
+    fadeColorRgba(value: string, transparency: number): string;
     ngOnDestroy(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<ThemeBtnComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ThemeBtnComponent, "theme-btn", never, { "types": { "alias": "types"; "required": false; }; "devTips": { "alias": "devTips"; "required": false; }; "deployUrl": { "alias": "deployUrl"; "required": false; }; }, { "themeChange": "themeChange"; }, never, never, true, never>;

@@ -1,6 +1,6 @@
 {
   "name": "@yelon/mock",
-  "version": "20.0.0-2d0f24ac",
+  "version": "20.0.0-8d615ad",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,7 +28,7 @@
   "dependencies": {
     "mockjs": "^1.1.0",
     "@types/mockjs": "^1.0.10",
-    "@yelon/util": "^20.0.0-2d0f24ac",
+    "@yelon/util": "^20.0.0-8d615ad",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/mock.mjs",
