@@ -1,6 +1,6 @@
 {
   "name": "@yelon/abc",
-  "version": "20.0.1-93648ca",
+  "version": "20.0.2",
   "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -28,9 +28,9 @@
     "plyr": "^3.7.8",
     "@github/hotkey": "^3.1.1",
     "ngx-countdown": "^20.0.0",
-    "@yelon/theme": "^20.0.1-93648ca",
-    "@yelon/util": "^20.0.1-93648ca",
-    "@yelon/acl": "^20.0.1-93648ca",
+    "@yelon/theme": "^20.0.2",
+    "@yelon/util": "^20.0.2",
+    "@yelon/acl": "^20.0.2",
     "tslib": "^2.3.0"
   },
   "module": "fesm2022/abc.mjs",
@@ -43,13 +43,13 @@
       "types": "./index.d.ts",
       "default": "./fesm2022/abc.mjs"
     },
-    "./cell": {
-      "types": "./cell/index.d.ts",
-      "default": "./fesm2022/cell.mjs"
-    },
     "./auto-focus": {
       "types": "./auto-focus/index.d.ts",
       "default": "./fesm2022/auto-focus.mjs"
+    },
+    "./cell": {
+      "types": "./cell/index.d.ts",
+      "default": "./fesm2022/cell.mjs"
     },
     "./count-down": {
       "types": "./count-down/index.d.ts",
